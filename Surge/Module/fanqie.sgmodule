@@ -1,0 +1,39 @@
+#!name = Block ads | 番茄小说
+#!desc = 名称： 番茄小说 拦截广告 \n作者： 可莉🅥 app2smile \n说明： 开屏广告、移除文章底部和章末广告、移除听书页面广告
+#!author = 可莉🅥 app2smile EAlyce
+#!category = 🚫 Block ads
+#!date= 2024-06-19 15:50
+
+[Rule]
+URL-REGEX,^http:\/\/sf3-be-pack\.pglstatp-toutiao\.com\/obj\/ad-app-package\/,REJECT,extended-matching
+URL-REGEX,^https:\/\/sf3-fe-tos\.pglstatp-toutiao\.com\/obj\/ad-pattern\/,REJECT,extended-matching
+URL-REGEX,^https:\/\/lf-cdn-tos\.bytescm\.com\/obj\/static\/ad\/,REJECT,extended-matching
+URL-REGEX,^https:\/\/tnc3-alisc1\.zijieapi\.com\/get_domains\/,REJECT,extended-matching
+DOMAIN-KEYWORD,zjurl,REJECT,extended-matching
+DOMAIN-KEYWORD,bdurl,REJECT,extended-matching
+DOMAIN-KEYWORD,365yg,REJECT,extended-matching
+DOMAIN-KEYWORD,misc-l,REJECT,extended-matching
+DOMAIN-KEYWORD,mssdk,REJECT,extended-matching
+DOMAIN-KEYWORD,snssdk,REJECT,extended-matching
+DOMAIN-KEYWORD,zijieapi,REJECT,extended-matching
+DOMAIN-KEYWORD,-ad-sign.byteimg.com,REJECT,extended-matching
+DOMAIN-KEYWORD,-misc,REJECT,extended-matching
+DOMAIN-KEYWORD,-aliec,REJECT,extended-matching
+DOMAIN-KEYWORD,-alisc,REJECT,extended-matching
+DOMAIN-KEYWORD,-applog.fqnovel,REJECT,extended-matching
+DOMAIN-KEYWORD,-bjlgy,REJECT,extended-matching
+AND,((DOMAIN-KEYWORD,zijie),(DOMAIN-KEYWORD,ad)),REJECT,extended-matching
+AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com)),REJECT,extended-matching
+AND,((DOMAIN-KEYWORD,gecko),(DOMAIN-SUFFIX,zijieapi.com)),REJECT,extended-matching
+AND,((DOMAIN-KEYWORD,minigame),(DOMAIN-SUFFIX,zijieapi.com)),REJECT,extended-matching
+AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,normal),(DOMAIN-SUFFIX,zijieapi.com)),REJECT,extended-matching
+AND,((DOMAIN-KEYWORD,tnc),(AND,((OR,((DOMAIN-KEYWORD,-bjlgy),(DOMAIN-KEYWORD,-alisc),(DOMAIN-KEYWORD,-aliec))),(OR,((DOMAIN-SUFFIX,snssdk.com),(DOMAIN-SUFFIX,toutiaoapi.com),(DOMAIN-SUFFIX,bytedance.com),(DOMAIN-SUFFIX,zijieapi.com)))))),REJECT,extended-matching
+
+[URL Rewrite]
+^https:\/\/sf3-fe-tos\.pglstatp-toutiao\.com\/obj\/ad-pattern\/ - reject
+^https:\/\/lf-cdn-tos\.bytescm\.com\/obj\/static\/ad\/ - reject
+# 域名解析
+^https:\/\/tnc3-alisc1\.zijieapi\.com\/get_domains\/ - reject
+
+[MITM]
+hostname = %APPEND% sf3-fe-tos.pglstatp-toutiao.com, tnc3-alisc1.zijieapi.com, api-access.pangolin-sdk-toutiao*.com, lf-cdn-tos.bytescm.com, is.snssdk.com
