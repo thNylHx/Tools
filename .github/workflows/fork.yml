@@ -19,7 +19,7 @@ jobs:
         repository: thNylHx/Tools
         path: Tools-repo
 
-    - name: Fork
+    - name: 复刻
       run: |
         curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/fork.sh | sh
 
@@ -78,7 +78,7 @@ jobs:
     - name: Copy custom rules
       run: |
         if [ -f "Tools-repo/Ruleset/Block/Reject.list" ] ; then
-          cat Tools-repo/Ruleset/Block/Ads_RuCu6.list >> Tools-repo/Ruleset/Block/Reject.list
+          cat Tools-repo/Ruleset/Block/AdsBlock.list >> Tools-repo/Ruleset/Block/Reject.list
         else
           echo "$file not found."
         fi
