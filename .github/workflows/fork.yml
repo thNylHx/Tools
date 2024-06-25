@@ -1,5 +1,5 @@
 # 2024-06-10 21:05
-name: Fork & Edit
+name: Fork  & Edit
 
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ jobs:
         repository: thNylHx/Tools
         path: Tools-repo
 
-    - name: Fork
+    - name: 复刻
       run: |
         curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/fork.sh | sh
 
