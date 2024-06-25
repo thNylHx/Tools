@@ -1,5 +1,5 @@
 # 2024-06-10 21:05
-name: Fork  & Edit
+name: Fork & Edit
 
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ jobs:
         repository: thNylHx/Tools
         path: Tools-repo
 
-    - name: 复刻
+    - name: Fork
       run: |
         curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/fork.sh | sh
 
@@ -78,7 +78,7 @@ jobs:
     - name: Copy custom rules
       run: |
         if [ -f "Tools-repo/Ruleset/Block/Reject.list" ] ; then
-          cat Tools-repo/Ruleset/Block/AdsBlock.list >> Tools-repo/Ruleset/Block/Reject.list
+          cat Tools-repo/Ruleset/Block/Ads_RuCu6.list >> Tools-repo/Ruleset/Block/Reject.list
         else
           echo "$file not found."
         fi
@@ -98,9 +98,8 @@ jobs:
             echo "$file not found."
           fi
         done
-      shell: bash         
-            
-master
+      shell: bash
+
 ###### Commit
     - name: Add and Commits
       run: |
