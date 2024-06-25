@@ -77,8 +77,8 @@ jobs:
       # 追加规则
     - name: Copy custom rules
       run: |
-        if [ -f "Tools-repo/Ruleset/Block/Reject.list" ] ; then
-          cat Tools-repo/Ruleset/Block/AdsBlock.list >> Tools-repo/Ruleset/Block/Reject.list
+        if [ -f "Tools-repo/Ruleset/Block/BlockAds.list" ] ; then
+          cat Tools-repo/Ruleset/Block/BlockAds.list >> Tools-repo/Ruleset/Block/BlockAds.list
         else
           echo "$file not found."
         fi
@@ -88,7 +88,7 @@ jobs:
       run: |
         cd Tools-repo/Ruleset/Block
         shopt -s nullglob  # 避免没有匹配的文件时保留原始通配符
-        for file in Reject.list; do
+        for file in BlockAds.list; do
           if [ -f "$file" ]; then
             sorted_file="sorted_${file}"
             # 使用 grep 去掉包含 # 的行
