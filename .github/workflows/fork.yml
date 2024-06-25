@@ -32,13 +32,10 @@ jobs:
           if [ "$file" != "Lan.list" ] ; then
             sed -i -e 's/, /,/g' \
                    -e 's/;/# /g' \
-                   -e 's/host,/HOST,/g' \
-                   -e 's/host-/HOST-/g' \
                    -e 's/-suffix/-SUFFIX/g' \
                    -e 's/-keyword/-KEYWORD/g' \
                    -e 's/ip-cidr/IP-CIDR/g' \
                    -e 's/-wildcard/-WILDCARD/g' \
-                   -e 's/geoip/GEOIP/g' \
                    -e 's/HOST,/DOMAIN,/g' \
                    -e 's/HOST-/DOMAIN-/g' \
                    -e 's/IP6-CIDR,/IP-CIDR6,/g' \
