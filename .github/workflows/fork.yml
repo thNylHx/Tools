@@ -77,8 +77,8 @@ jobs:
       # 追加规则
     - name: Copy custom rules
       run: |
-        if [ -f "Tools-repo/Ruleset/Block/BlockAds.list" ] ; then
-          cat Tools-repo/Ruleset/Block/BlockAds.list >> Tools-repo/Ruleset/Block/BlockAds.list
+        if [ -f "Tools-repo/Ruleset/Block/Ads.list" ] ; then
+          cat Tools-repo/Ruleset/Block/BlockAds.list >> Tools-repo/Ruleset/Block/Ads.list
         else
           echo "$file not found."
         fi
