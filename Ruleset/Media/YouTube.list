@@ -1,5 +1,38 @@
-# 内容：YouTubeMusic
-# 数量：5条
+#!name = YouTube & YouTube Music
+#!desc = 分流规则
+#!date = 2024-06-08 10:30
+#!author = ACL4SSR
+
+
+# YouTube
+USER-AGENT,*youtube*
+USER-AGENT,YouTube*
+USER-AGENT,com.google.ios.youtube*
+DOMAIN,yt3.ggpht.com
+DOMAIN-SUFFIX,youtubei.googleapis.com
+DOMAIN-SUFFIX,ggpht.cn
+DOMAIN-SUFFIX,ggpht.com
+DOMAIN-SUFFIX,gvt1.com
+DOMAIN-SUFFIX,gvt2.com
+DOMAIN-SUFFIX,video.google.com
+DOMAIN-SUFFIX,googlevideo.com
+DOMAIN-SUFFIX,withyoutube.com
+DOMAIN-SUFFIX,youtu.be
+DOMAIN-SUFFIX,youtube.com
+DOMAIN-SUFFIX,youtubeeducation.com
+DOMAIN-SUFFIX,youtubegaming.com
+DOMAIN-SUFFIX,youtubekids.com
+DOMAIN-SUFFIX,youtube-nocookie.com
+DOMAIN-SUFFIX,yt.be
+DOMAIN-SUFFIX,ytimg.com
+DOMAIN-SUFFIX,wide-youtube.l.google.com
+DOMAIN-SUFFIX,youtube-ui.l.google.com
+DOMAIN-KEYWORD,youtube
+IP-CIDR,172.110.32.0/21,no-resolve
+IP-CIDR,216.73.80.0/20,no-resolve
+IP-CIDR6,2620:120:e000::/40,no-resolve
+
+# YouTube Music
 USER-AGENT,*YouTubeMusic*
 USER-AGENT,*com.google.ios.youtubemusic*
 USER-AGENT,YouTubeMusic*
