@@ -8,4 +8,4 @@ mkdir -p Tools/Ruleset/{Block,MediaOther}
 #--- Surge ---#
 
 # 广告规则 
-curl -L -o Tools-repo/Ruleset/Block/AdsBlock.list "https://raw.githubusercontent.com/RuCu6/QuanX/main/Rules/MyBlockAds.list"
+curl -L -o Tools-repo/Ruleset/Block/BlockAds.list "https://raw.githubusercontent.com/RuCu6/QuanX/main/Rules/MyBlockAds.list"
