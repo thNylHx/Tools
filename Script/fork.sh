@@ -3,7 +3,7 @@
 #!/bin/bash
 
 # 创建规则目录
-mkdir -p Tools/Ruleset/{Block,MediaOther}
+mkdir -p Tools/Ruleset/{Block,Media,Other}
 
 #--- Surge ---#
 
