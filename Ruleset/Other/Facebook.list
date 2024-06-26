@@ -1,10 +1,5 @@
-#!name = Facebook & Instagram
-#!desc = 分流规则
-#!date = 2024-06-08 10:30
-#!author = ACL4SSR
-
-
-# Facebook
+# 内容：Facebook
+# 数量：21条
 DOMAIN-KEYWORD,facebook
 DOMAIN-KEYWORD,fbcdn
 DOMAIN-SUFFIX,facebook.com
@@ -27,7 +22,8 @@ IP-CIDR,179.60.192.0/22,no-resolve
 IP-CIDR,185.60.216.0/22,no-resolve
 IP-CIDR,204.15.20.0/22,no-resolve
 
-# Instagram
+# 内容：Instagram
+# 数量：4条
 DOMAIN-KEYWORD,instagram
 DOMAIN-SUFFIX,cdninstagram.com
 DOMAIN-SUFFIX,instagr.am
