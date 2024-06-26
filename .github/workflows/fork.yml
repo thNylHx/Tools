@@ -25,9 +25,9 @@ jobs:
 
 ###### Surge
       # 适配规则
-    - name: Edit Ruleset
+    - name: Edit Ruleset/Block
       run: |
-        cd Tools-repo/Ruleset
+        cd Tools-repo/Ruleset/Block
         for file in *.list; do
           if [ "$file" != "Lan.list" ] ; then
             sed -i -e 's/, /,/g' \
