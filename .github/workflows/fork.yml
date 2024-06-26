@@ -94,7 +94,7 @@ jobs:
       run: |
         cd Tools-repo/Ruleset/Media
         shopt -s nullglob  # 避免没有匹配的文件时保留原始通配符
-        for file in YouTube.list; do
+        for file in Y.list; do
           if [ -f "$file" ]; then
             sorted_file="sorted_${file}"
             # 使用 grep 去掉包含 # 的行
