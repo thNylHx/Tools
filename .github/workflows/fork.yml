@@ -49,6 +49,7 @@ jobs:
                    -e '/# UPDATED:/d' \
                    -e '/# 数目: /d' \
                    -e '/# 规则: /d' \
+                   -e '/# 内容: /d' \
                    -e '/404: Not Found/d' \
                    "$file"
             # 如果为IP规则且不包含no-resolve 则添加no-resolve
