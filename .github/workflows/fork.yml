@@ -74,9 +74,8 @@ jobs:
       # 追加规则
     - name: Copy custom rules
       run: |
-        if [ -f "Tools-repo/Ruleset/Ads.list" ] ; then
+        if [ -f "Tools-repo/Ruleset/Block/Ads.list" ] ; then
           cat Tools-repo/Ruleset/Block/BlockAds.list >> Tools-repo/Ruleset/Ads.list
-          cat Tools-repo/Ruleset/Other/ChinaIP.list >> Tools-repo/Ruleset/Other/IP.list
         else
           echo "$file not found."
         fi
@@ -91,7 +90,7 @@ jobs:
       # 去重排序
     - name: Remove duplicates and lines 
       run: |
-        cd Tools-repo/Ruleset
+        cd Tools-repo/Ruleset/Block
         shopt -s nullglob  # 避免没有匹配的文件时保留原始通配符
         for file in Ads.list; do
           if [ -f "$file" ]; then
