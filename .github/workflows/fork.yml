@@ -75,11 +75,11 @@ jobs:
       # 追加规则
     - name: Copy custom rules
       run: |
-        if [ -f "Tools-repo/Ruleset/Ads.list" ] ; then
-          cat Tools-repo/Ruleset/Block/BlockAds.list >> Tools-repo/Ruleset/Ads.list
-        else
-          echo "$file not found."
-        fi
+        # if [ -f "Tools-repo/Ruleset/Ads.list" ] ; then
+        #   cat Tools-repo/Ruleset/Block/BlockAds.list >> Tools-repo/Ruleset/Ads.list
+        # else
+        #   echo "$file not found."
+        # fi
 
         if [ -f "Tools-repo/Ruleset/Media/YouTube.list" ] ; then
          cat Tools-repo/Ruleset/Media/YouTubeMusic.list >> Tools-repo/Ruleset/Media/YouTube.list
