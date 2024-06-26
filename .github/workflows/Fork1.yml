@@ -21,7 +21,7 @@ jobs:
 
     - name: 复刻
       run: |
-        curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/fork.sh | sh
+        curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/fork1.sh | sh
 
 ###### Surge
       # 适配规则
@@ -61,7 +61,7 @@ jobs:
         done
 
         # 转换 domain-set 为 rule-set
-        for file in ChinaIP.list; do
+        for file in I.list; do
           if [ -f "$file" ]; then
             # 将以.开头的行的第一个.替换为 DOMAIN-SUFFIX,
             sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
