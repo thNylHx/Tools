@@ -83,6 +83,7 @@ jobs:
 
         if [ -f "Tools-repo/Ruleset/Media/YouTube.list" ] ; then
          echo "" >> Tools-repo/Ruleset/Media/YouTube.list
+         echo "" >> Tools-repo/Ruleset/Media/YouTube.list
          cat Tools-repo/Ruleset/Media/YouTubeMusic.list >> Tools-repo/Ruleset/Media/YouTube.list
          rm -rf Tools-repo/Ruleset/Media/YouTubeMusic.list
         else
