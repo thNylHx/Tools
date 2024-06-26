@@ -76,7 +76,14 @@ jobs:
       run: |
         if [ -f "Tools-repo/Ruleset/Ads.list" ] ; then
           cat Tools-repo/Ruleset/Block/BlockAds.list >> Tools-repo/Ruleset/Ads.list
-          cat Tools-repo/Ruleset/Other/ChinaIP.list >> Tools-repo/Ruleset/Ads.list
+          cat Tools-repo/Ruleset/Other/ChinaIP.list >> Tools-repo/Ruleset/Other/IP.list
+        else
+          echo "$file not found."
+        fi
+
+        if [ -f "Tools-repo/Ruleset/Media/YouTube.list" ] ; then
+          cat Tools-repo/Ruleset/Media/YouTubeMusic.list >> Tool-repo/Ruleset/Media/YouTube.list
+          rm -rf Tools-repo/Ruleset/Media/YouTubeMusic.list
         else
           echo "$file not found."
         fi
