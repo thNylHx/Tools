@@ -27,8 +27,10 @@ jobs:
       # 适配规则
     - name: Edit Ruleset
       run: |
-        cd Tools-repo/Ruleset/Block
-        for file in BlockAds.list; do
+        TARGET_DIRS=("Ruleset/Block" "Ruleset/Media" "Ruleset/Other")
+        for DIR in "${TARGET_DIRS[@]}"; do
+        cd "Tools-repo/$DIR"
+        for file in BlockAds.list ChinaIP.list; do
           if [ "$file" != "Lan.list" ] ; then
             sed -i -e 's/, /,/g' \
                    -e 's/;/# /g' \
