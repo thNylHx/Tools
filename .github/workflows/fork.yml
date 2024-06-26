@@ -61,7 +61,7 @@ jobs:
         done
 
         # 转换 domain-set 为 rule-set
-        for file in IP.list; do
+        for file in ChinaIP.list; do
           if [ -f "$file" ]; then
             # 将以.开头的行的第一个.替换为 DOMAIN-SUFFIX,
             sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
@@ -95,6 +95,36 @@ jobs:
          echo "" >> Tools-repo/Ruleset/Media/Netflix.list
          cat Tools-repo/Ruleset/Media/NetflixIP.list >> Tools-repo/Ruleset/Media/Netflix.list
          rm -rf Tools-repo/Ruleset/Media/NetflixIP.list
+        else
+         echo "$file not found."
+        fi
+
+        if [ -f "Tools-repo/Ruleset/Other/Facebook.list" ] ; then
+         echo "" >> Tools-repo/Ruleset/Other/Facebook.list
+         echo "" >> Tools-repo/Ruleset/Other/Facebook.list
+         cat Tools-repo/Ruleset/Other/Instagram.list >> Tools-repo/Ruleset/Other/Facebook.list
+         rm -rf Tools-repo/Ruleset/Other/Instagram.list
+        else
+         echo "$file not found."
+        fi
+
+        if [ -f "Tools-repo/Ruleset/Other/Google.list" ] ; then
+         echo "" >> Tools-repo/Ruleset/Other/Google.list
+         echo "" >> Tools-repo/Ruleset/Other/Google.list
+         cat Tools-repo/Ruleset/Other/GoogleCN.list >> Tools-repo/Ruleset/Other/Google.list
+         echo "" >> Tools-repo/Ruleset/Other/Google.list
+         echo "" >> Tools-repo/Ruleset/Other/Google.list
+         cat Tools-repo/Ruleset/Other/GoogleCNProxyIP.list >> Tools-repo/Ruleset/Other/Google.list
+         echo "" >> Tools-repo/Ruleset/Other/Google.list
+         echo "" >> Tools-repo/Ruleset/Other/Google.list
+         cat Tools-repo/Ruleset/Other/GoogleEarth.list >> Tools-repo/Ruleset/Other/Google.list
+         echo "" >> Tools-repo/Ruleset/Other/Google.list
+         echo "" >> Tools-repo/Ruleset/Other/Google.list
+         cat Tools-repo/Ruleset/Other/GoogleFCM.list >> Tools-repo/Ruleset/Other/Google.list
+         rm -rf Tools-repo/Ruleset/Other/GoogleCN.list
+         rm -rf Tools-repo/Ruleset/Other/GoogleCNProxyIP.list
+         rm -rf Tools-repo/Ruleset/Other/GoogleEarth.list
+         rm -rf Tools-repo/Ruleset/Other/GoogleFCM.list
         else
          echo "$file not found."
         fi
