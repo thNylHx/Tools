@@ -28,8 +28,8 @@ jobs:
     - name: Edit Ruleset/Block
       run: |
         cd Tools-repo/Ruleset/Block
-        for file in *.list; do
-          if [ "$file" != "Lan.list" ] ; then
+        for file in BlockAds.list; do
+          # if [ "$file" != "Lan.list" ] ; then
             sed -i -e 's/, /,/g' \
                    -e 's/;/# /g' \
                    -e 's/-suffix/-SUFFIX/g' \
@@ -86,6 +86,15 @@ jobs:
          echo "" >> Tools-repo/Ruleset/Media/YouTube.list
          cat Tools-repo/Ruleset/Media/YouTubeMusic.list >> Tools-repo/Ruleset/Media/YouTube.list
          rm -rf Tools-repo/Ruleset/Media/YouTubeMusic.list
+        else
+         echo "$file not found."
+        fi
+
+        if [ -f "Tools-repo/Ruleset/Media/Netflix.list" ] ; then
+         echo "" >> Tools-repo/Ruleset/Media/Netflix.list
+         echo "" >> Tools-repo/Ruleset/Media/Netflix.list
+         cat Tools-repo/Ruleset/Media/NetflixIP.list >> Tools-repo/Ruleset/Media/Netflix.list
+         rm -rf Tools-repo/Ruleset/Media/NetflixIP.list
         else
          echo "$file not found."
         fi
