@@ -81,12 +81,12 @@ jobs:
           echo "$file not found."
         fi
 
-        if [ -f "Tools-repo/Ruleset/Media/YouTube.list" ] ; then
-          cat Tools-repo/Ruleset/Media/YouTubeMusic.list >> Tools-repo/Ruleset/Media/YouTube.list
-          rm -rf Tools-repo/Ruleset/Media/YouTubeMusic.list
-        else
-          echo "$file not found."
-        fi
+       # if [ -f "Tools-repo/Ruleset/Media/YouTube.list" ] ; then
+       #   cat Tools-repo/Ruleset/Media/YouTubeMusic.list >> Tools-repo/Ruleset/Media/YouTube.list
+       #   rm -rf Tools-repo/Ruleset/Media/YouTubeMusic.list
+       # else
+       #   echo "$file not found."
+       # fi
 
       # 去重排序
     - name: Remove duplicates and lines 
