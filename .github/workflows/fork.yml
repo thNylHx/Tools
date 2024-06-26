@@ -73,27 +73,27 @@ jobs:
         done
 
       # 追加规则
-    # - name: Copy custom rules
-    #   run: |
-    #     if [ -f "Tools-repo/Ruleset/Ads.list" ] ; then
-    #       cat Tools-repo/Ruleset/Block/BlockAds.list >> Tools-repo/Ruleset/Ads.list
-    #     else
-    #       echo "$file not found."
-    #     fi
+    - name: Copy custom rules
+      run: |
+        # if [ -f "Tools-repo/Ruleset/Ads.list" ] ; then
+        #   cat Tools-repo/Ruleset/Block/BlockAds.list >> Tools-repo/Ruleset/Ads.list
+        # else
+        #   echo "$file not found."
+        # fi
 
-       # if [ -f "Tools-repo/Ruleset/Media/YouTube.list" ] ; then
-       #   cat Tools-repo/Ruleset/Media/YouTubeMusic.list >> Tools-repo/Ruleset/Media/YouTube.list
-       #   rm -rf Tools-repo/Ruleset/Media/YouTubeMusic.list
-       # else
-       #   echo "$file not found."
-       # fi
+        if [ -f "Tools-repo/Ruleset/Media/YouTube.list" ] ; then
+         cat Tools-repo/Ruleset/Media/YouTubeMusic.list >> Tools-repo/Ruleset/Media/YouTube.list
+         rm -rf Tools-repo/Ruleset/Media/YouTubeMusic.list
+        else
+         echo "$file not found."
+        fi
 
       # 去重排序
     - name: Remove duplicates and lines 
       run: |
-        cd Tools-repo/Ruleset/Block
+        cd Tools-repo/Ruleset/Media
         shopt -s nullglob  # 避免没有匹配的文件时保留原始通配符
-        for file in Ads.list; do
+        for file in YouTube.list; do
           if [ -f "$file" ]; then
             sorted_file="sorted_${file}"
             # 使用 grep 去掉包含 # 的行
