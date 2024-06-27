@@ -21,7 +21,7 @@ curl -L -o Tools-repo/Ruleset/Other/GoogleCN.list "https://raw.githubusercontent
 curl -L -o Tools-repo/Ruleset/Other/GoogleCNProxyIP.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleCNProxyIP.list"
 curl -L -o Tools-repo/Ruleset/Other/GoogleEarth.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleEarth.list"
 curl -L -o Tools-repo/Ruleset/Other/GoogleFCM.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list"
-curl -L -o Tools-repo/Ruleset/Other/GoogleIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
+curl -L -o Tools-repo/Ruleset/Other/GoogleIP.list "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/GoogleIP.list"
 
 # Media
 curl -L -o Tools-repo/Ruleset/Media/Bilibili.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bilibili.list"
