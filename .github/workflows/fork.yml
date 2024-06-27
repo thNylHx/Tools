@@ -153,7 +153,6 @@ jobs:
          rm -rf Tools-repo/Ruleset/Other/GoogleCNProxyIP.list
          rm -rf Tools-repo/Ruleset/Other/GoogleEarth.list
          rm -rf Tools-repo/Ruleset/Other/GoogleFCM.list
-         rm -rf Tools-repo/Ruleset/Other/GoogleIP.list
         else
          echo "$file not found."
         fi
