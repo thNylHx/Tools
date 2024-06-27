@@ -30,7 +30,7 @@ jobs:
         for dir in Tools-repo/Ruleset/Block Tools-repo/Ruleset/Media Tools-repo/Ruleset/Other; do
           if [ -d "$dir" ]; then
             cd "$dir"
-            file="BlockAds.list"
+            file="BlockAds.list Google.list"
             if [ -f "$file" ]; then
               if [ "$file" != "Lan.list" ]; then
                 sed -i -e 's/, /,/g' \
@@ -71,8 +71,8 @@ jobs:
               if [ -f "$file" ]; then
 
                 # 识别并转换 IPv4 和 IPv6 CIDR 并在末尾添加 no-resolve
-                sed -i  's|^(([0-9]{1,3}\.){3}[0-9]{1,3}/[0-9]+)$|IP-CIDR,\1,no-resolve|' "$file"
-                sed -i  's|^([0-9a-fA-F:]+/[0-9]+)$|IP-CIDR6,\1,no-resolve|' "$file"
+                sed -i -E 's|^(([0-9]{1,3}\.){3}[0-9]{1,3}/[0-9]+)$|IP-CIDR,\1,no-resolve|' "$file"
+                sed -i -E 's|^([0-9a-fA-F:]+/[0-9]+)$|IP-CIDR6,\1,no-resolve|' "$file"
 
                 # 转换 domain-set 为 rule-set
                 # 将以.开头的行的第一个.替换为 DOMAIN-SUFFIX,
