@@ -95,7 +95,7 @@ jobs:
     - name: Copy custom rules
       run: |
         
-        # 同步 BlockAd, 如果 BlockAd 存在
+        # 把 BlockAd 同步到 BlockAd 存在
         if [ -f "Tools-repo/Ruleset/Block/BlockAd.list" ] ; then
           cat Tools-repo/Ruleset/Block/BlockAdb.list >> Tools-repo/Ruleset/Block/BlockAd.list
           cat Tools-repo/Ruleset/Block/BlockAdg.list >> Tools-repo/Ruleset/Block/BlockAd.list
@@ -108,7 +108,7 @@ jobs:
           echo "$file not found."
         fi
         
-        # 同步 TwitterIP 到 Twitter
+        # 把 TwitterIP 同步到 Twitter
         if [ -f "Tools-repo/Ruleset/Other/Twitter.list" ] ; then
          echo "" >> Tools-repo/Ruleset/Other/Twitter.list
          echo "" >> Tools-repo/Ruleset/Other/Twitter.list
