@@ -70,18 +70,16 @@ jobs:
             for file in ChinaIP.list Google.list; do
               if [ -f "$file" ]; then
 
-                # 如果文件中包含 IP- 则跳过该行
-                awk '/IP-/{print; next} !/IP-/{print $0",no-resolve"}' "$file" > tmpfile && mv tmpfile "$file"
-                
+                # 识别并转换 IPv4 和 IPv6 CIDR 并在末尾添加 no-resolve
+                sed -i -E 's|^(([0-9]{1,3}\.){3}[0-9]{1,3}/[0-9]+)$|IP-CIDR,\1,no-resolve|' "$file"
+                sed -i -E 's|^([0-9a-fA-F:]+/[0-9]+)$|IP-CIDR6,\1,no-resolve|' "$file"
+
                 # 转换 domain-set 为 rule-set
                 # 将以.开头的行的第一个.替换为 DOMAIN-SUFFIX,
                 # sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
                 # 将除了以#开头、空行和以DOMAIN-SUFFIX开头之外的行 在行首添加 DOMAIN,
                 # sed -i '/^\s*$/b; /^\s*#/b; /^DOMAIN-SUFFIX,/b; s/^\([^#]\)/DOMAIN,\1/' "$file"
                 
-                # 识别并转换 IPv4 和 IPv6 CIDR 并在末尾添加 no-resolve
-                sed -i -E 's|^(([0-9]{1,3}\.){3}[0-9]{1,3}/[0-9]+)$|IP-CIDR,\1,no-resolve|' "$file"
-                sed -i -E 's|^([0-9a-fA-F:]+/[0-9]+)$|IP-CIDR6,\1,no-resolve|' "$file"
               else
                 echo "$file not found."
               fi
