@@ -1,224 +1,53 @@
-#!name = 广告拦截 & 补充版
-#!desc = 分流规则
-#!date = 2024-06-19 10:30
-#!author = 可莉🅥
-
-
-# ===== A =====
-# 艾狄墨搏 - 广告服务商
-DOMAIN,monitor.ssp.admobile.top
-DOMAIN,sdk.ssp.admobile.top
-DOMAIN-SUFFIX,admobile.top
-
-# ===== B =====
-# 百度联盟 - 广告服务商
-DOMAIN-SUFFIX,union.baidu.cn
-DOMAIN-SUFFIX,union.baidu.com
-
-# ===== D =====
-# 豆瓣
-AND,((USER-AGENT,Frodo*),(DOMAIN,119.29.29.29))
-# 达佳互联 - 广告服务商
-DOMAIN-SUFFIX,adukwai.com
-
-# ===== F =====
-# 番茄小说
-DOMAIN-KEYWORD,zjurl
-DOMAIN-KEYWORD,bdurl
-DOMAIN-KEYWORD,365yg
-DOMAIN-KEYWORD,misc-l
-DOMAIN-KEYWORD,mssdk
-DOMAIN-KEYWORD,snssdk
-DOMAIN-KEYWORD,zijieapi
-DOMAIN-KEYWORD,-ad-sign.byteimg.com
-DOMAIN-KEYWORD,-misc
-DOMAIN-KEYWORD,-aliec
-DOMAIN-KEYWORD,-alisc
-DOMAIN-KEYWORD,-applog.fqnovel
-DOMAIN-KEYWORD,-bjlgy
-AND,((DOMAIN-KEYWORD,zijie),(DOMAIN-KEYWORD,ad))
 AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com))
+AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,normal),(DOMAIN-SUFFIX,zijieapi.com))
 AND,((DOMAIN-KEYWORD,gecko),(DOMAIN-SUFFIX,zijieapi.com))
 AND,((DOMAIN-KEYWORD,minigame),(DOMAIN-SUFFIX,zijieapi.com))
-AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,normal),(DOMAIN-SUFFIX,zijieapi.com))
 AND,((DOMAIN-KEYWORD,tnc),(AND,((OR,((DOMAIN-KEYWORD,-bjlgy),(DOMAIN-KEYWORD,-alisc),(DOMAIN-KEYWORD,-aliec))),(OR,((DOMAIN-SUFFIX,snssdk.com),(DOMAIN-SUFFIX,toutiaoapi.com),(DOMAIN-SUFFIX,bytedance.com),(DOMAIN-SUFFIX,zijieapi.com))))))
-URL-REGEX,^http:\/\/sf3-be-pack\.pglstatp-toutiao\.com\/obj\/ad-app-package\/
-URL-REGEX,^https:\/\/sf3-fe-tos\.pglstatp-toutiao\.com\/obj\/ad-pattern\/
-URL-REGEX,^https:\/\/lf-cdn-tos\.bytescm\.com\/obj\/static\/ad\/
-URL-REGEX,^https:\/\/tnc3-alisc1\.zijieapi\.com\/get_domains\/
-
-# ===== G =====
-# 广发银行 - 内页广告
-URL-REGEX,^http:\/\/mps\.95508\.com\/mps\/icppweb\/images\/mps\/migration\/mpspics\/
-
-# ===== J =====
-# 京东 - 弃用地址
-DOMAIN,waapdg.jd.com
-# 极光 - 广告服务商
-DOMAIN-SUFFIX,jiguang.cn
-# 今日头条
-DOMAIN,dm.toutiao.com
-DOMAIN-KEYWORD,ad.toutiao.com
-DOMAIN-KEYWORD,clk.gentags.net
-DOMAIN-KEYWORD,dm.toutiao.com
-DOMAIN-KEYWORD,dm.pstatp.com
-DOMAIN-KEYWORD,dm.bytedance.com
-DOMAIN-KEYWORD,uop.umeng.com
-DOMAIN-KEYWORD,m.suning.com
-DOMAIN-KEYWORD,adshare.toutiao.com
-DOMAIN-KEYWORD,tunion-api.m.taobao.com
-DOMAIN-KEYWORD,s1.pstatp.com
-DOMAIN-KEYWORD,s2.pstatp.com
-DOMAIN-KEYWORD,s3.pstatp.com
-DOMAIN-KEYWORD,a3.pstatp.com
-DOMAIN-KEYWORD,a3.bytecdn.cn
+AND,((DOMAIN-KEYWORD,zijie),(DOMAIN-KEYWORD,ad))
+AND,((USER-AGENT,Frodo*),(DOMAIN,119.29.29.29))
+DOMAIN,4lke.online
+DOMAIN,a-remad.qm989.com
+DOMAIN,a.adtng.com
+DOMAIN,a.labadena.com
+DOMAIN,a.magsrv.com
+DOMAIN,a.orbsrv.com
+DOMAIN,a.shukriya90.com
+DOMAIN,ad-cdn. qingting.fm
+DOMAIN,ad.21cn.com
+DOMAIN,ad.k.21cn.com
+DOMAIN,ad.qingting.fm
 DOMAIN,ad.toutiao.com
-DOMAIN,dsp.toutiao.com
-
-# ===== H =====
-# 虎牙直播开屏广告
+DOMAIN,adashx.m.taobao.com
+DOMAIN,adcdn.tencentmusic.com
+DOMAIN,adclick.tencentmusic.com
+DOMAIN,adexpo.tencentmusic.com
+DOMAIN,adlaunch.qingting.fm
+DOMAIN,admarket.21cn.com
+DOMAIN,ads-shopping.shouqianba.com
+DOMAIN,ads.exoclick.com
+DOMAIN,adshows.21cn.com
+DOMAIN,adstats.tencentmusic.com
+DOMAIN,aff-partners-io.ck-cdn.com
+DOMAIN,aff.partners.io
+DOMAIN,al-log.d.meituan.net
+DOMAIN,babel-statistics-android.d.meituan.net
 DOMAIN,business.msstatic.com
-DOMAIN-SUFFIX,v1d.szbdyd.com
-URL-REGEX,^http:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns$
-
-# ===== K =====
-# 酷我音乐去广告
-DOMAIN,splashimgbssdl.yun.kugou.com
-DOMAIN,report.tencentmusic.co
-URL-REGEX,^http:\/\/wapi\.kuwo\.cn\/openapi\/v1\/album\/adBar
-URL-REGEX,^http:\/\/wapi\.kuwo\.cn\/openapi\/v1\/app\/pasterAdvert
-URL-REGEX,^http:\/\/mobilead\.kuwo\.cn\/MobileAdServer
-URL-REGEX,^http:\/\/mobilead\.kuwo\.cn\/EcomResourceServer
-URL-REGEX,^http:\/\/wapi\.kuwo\.cn\/openapi\/v1\/app\/startup
-URL-REGEX,^http:\/\/rich\.kuwo\.cn\/AdService
-
-# ===== M =====
-# 咪咕视频
-DOMAIN-SUFFIX,ad.cmvideo.cn
+DOMAIN,cdn-new-ad.wtzw.com
+DOMAIN,creative.bbrdbr.com
+DOMAIN,creative.myavlive.com
+DOMAIN,creative.rmhfrtnd.com
+DOMAIN,data.mistat.xiaomi.com
+DOMAIN,dm.toutiao.com
+DOMAIN,dsp.toutiao.com
+DOMAIN,etahub.com
+DOMAIN,evtubescms.phncdn.com
+DOMAIN,ezozojawg.com
 DOMAIN,ggc.cmvideo.cn
 DOMAIN,ggic03.miguvideo.com
 DOMAIN,ggmk.miguvideo.com
 DOMAIN,ggv.cmvideo.cn
 DOMAIN,ggx.cmvideo.cn
 DOMAIN,ggx03.miguvideo.com
-# 美团
-DOMAIN,al-log.d.meituan.net
-DOMAIN,babel-statistics-android.d.meituan.net
-DOMAIN,route-stats.d.meituan.net
-
-# ===== Q =====
-# qq音乐
-DOMAIN,adstats.tencentmusic.com
-DOMAIN,adcdn.tencentmusic.com
-DOMAIN,adexpo.tencentmusic.com
-DOMAIN,adclick.tencentmusic.com
-DOMAIN,monitor.music.qq.com
-DOMAIN,stat.y.qq.com
-DOMAIN,oth.str.mdt.qq.com
-DOMAIN,h.trace.qq.com
-DOMAIN,p.l.qq.com
-DOMAIN,tangram.e.qq.com
-DOMAIN-SUFFIX,imtmp.net
-# 蜻蜓FM
-DOMAIN,ad.qingting.fm
-DOMAIN,adlaunch.qingting.fm
-DOMAIN,ad-cdn. qingting.fm
-DOMAIN-SUFFIX,admgr.qingting.fm
-DOMAIN-SUFFIX,dload.qd.qingting.fm
-DOMAIN-SUFFIX,logger.qingting.fm
-DOMAIN-SUFFIX,s.qd.qingting.fm
-DOMAIN-SUFFIX,s.qd.qingtingfm.com
-# 七猫小说
-DOMAIN,cdn-new-ad.wtzw.com
-DOMAIN,a-remad.qm989.com
-DOMAIN,qzs.gdtimg.com
-DOMAIN,mobads-pre-config.cdn.bcebos.com
-DOMAIN,pgdt.ugdtimg.com
-# 全民K歌
-DOMAIN,ii.gdt.qq.com
-DOMAIN,us.l.qq.com
-DOMAIN,tmeadkg.y.qq.com-NO-DROP
-URL-REGEX,^http:\/\/y\.gtimg\.cn\/music\/common\/upload\/t_k_main_page_banner\/
-# 青龙
-DOMAIN-SUFFIX,o1098464.ingest.sentry.io
-
-# ===== S =====
-# 收钱吧 - 买单小程序去广告
-DOMAIN,ads-shopping.shouqianba.com
-
-# ===== T =====
-# 天目 - 广告服务商
-DOMAIN,sdk.tianmu.mobi
-# 腾讯优量汇 - 广告服务商
-DOMAIN,mazu.m.qq.com
-DOMAIN,sdk.e.qq.com
-# 淘宝去广告
-DOMAIN,adashx.m.taobao.com
-DOMAIN,h-adashx.ut.taobao.com
-DOMAIN,ut.taobao.com
-# 通用广告
-DOMAIN-SUFFIX,doubleclick-cn.net
-DOMAIN-SUFFIX,doubleclick.net
-
-# ===== W =====
-# 微信小程序通用
-DOMAIN,wxsmsdy.video.qq.com
-
-# ===== X =====
-# 小象买菜 - 兜底TCP请求下发广告
-IP-CIDR,101.50.8.64/32,no-resolve
-IP-CIDR,101.50.8.75/32,no-resolve
-IP-CIDR,103.37.152.161/32,no-resolve
-IP-CIDR,103.37.152.162/32,no-resolve
-IP-CIDR,103.63.160.64/32,no-resolve
-IP-CIDR,119.29.48.215/32,no-resolve
-IP-CIDR,202.90.110.8/32,no-resolve
-IP-CIDR,203.76.217.241/32,no-resolve
-IP-CIDR,203.76.217.243/32,no-resolve
-IP-CIDR,203.76.217.37/32,no-resolve
-IP-CIDR6,2405:1480:3000:303f::303f/128,no-resolve
-# 小米
-DOMAIN,sdkconfig.ad.xiaomi.com
-DOMAIN,data.mistat.xiaomi.com
-DOMAIN,tracking.intl.miui.com
-
-# ===== Z =====
-# 中国移动
-IP-CIDR,120.240.95.37/32,no-resolve
-# 中国联通
-DOMAIN-SUFFIX,m1.ad.10010.com
-# 中国电信
-DOMAIN,ad.21cn.com
-DOMAIN,ad.k.21cn.com
-DOMAIN,admarket.21cn.com
-DOMAIN,adshows.21cn.com
-IP-CIDR,122.229.8.47/32,no-resolve
-IP-CIDR,122.229.29.89/32,no-resolve
-# 字节跳动 - 广告服务商
-DOMAIN-KEYWORD,-tos.pstatp.com
-DOMAIN,toblog.ctobsnssdk.com
-DOMAIN,mssdk-bu.bytedance.com
-DOMAIN-KEYWORD,-be-pack-sign.pglstatp-toutiao.com
-
-# ===== other =====
-IP-CIDR,5.5.5.5/32,no-resolve
-
-# ===== PornAds =====
-DOMAIN,4lke.online
-DOMAIN,a.adtng.com
-DOMAIN,a.labadena.com
-DOMAIN,a.magsrv.com
-DOMAIN,a.orbsrv.com
-DOMAIN,a.shukriya90.com
-DOMAIN,ads.exoclick.com
-DOMAIN,aff-partners-io.ck-cdn.com
-DOMAIN,aff.partners.io
-DOMAIN,creative.bbrdbr.com
-DOMAIN,creative.myavlive.com
-DOMAIN,creative.rmhfrtnd.com
-DOMAIN,etahub.com
-DOMAIN,evtubescms.phncdn.com
-DOMAIN,ezozojawg.com
 DOMAIN,go.aoalmfwinbsstec23.com
 DOMAIN,go.bbrdbr.com
 DOMAIN,go.go-srv.com
@@ -231,31 +60,133 @@ DOMAIN,go.xlivrdr.com
 DOMAIN,go.xxxjmp.com
 DOMAIN,go.xxxviijmp.com
 DOMAIN,go.xxxvjmp.com
+DOMAIN,h-adashx.ut.taobao.com
+DOMAIN,h.trace.qq.com
 DOMAIN,hhbypdoecp.com
 DOMAIN,ht.youporn.com
+DOMAIN,ii.gdt.qq.com
 DOMAIN,mail.kguapp.com
 DOMAIN,marine.xhamster.com
+DOMAIN,mazu.m.qq.com
+DOMAIN,mobads-pre-config.cdn.bcebos.com
+DOMAIN,monitor.music.qq.com
+DOMAIN,monitor.ssp.admobile.top
+DOMAIN,mssdk-bu.bytedance.com
+DOMAIN,oth.str.mdt.qq.com
+DOMAIN,p.l.qq.com
 DOMAIN,partwithner.com
+DOMAIN,pgdt.ugdtimg.com
 DOMAIN,pv.vipads.cc
+DOMAIN,qzs.gdtimg.com
 DOMAIN,r.trackwilltrk.com
 DOMAIN,reactads.engine.adglare.net
+DOMAIN,report.tencentmusic.co
 DOMAIN,rockpoint.xhamster.com
+DOMAIN,route-stats.d.meituan.net
 DOMAIN,s.magsrv.com
 DOMAIN,s.orbsrv.com
+DOMAIN,sdk.e.qq.com
+DOMAIN,sdk.ssp.admobile.top
+DOMAIN,sdk.tianmu.mobi
+DOMAIN,sdkconfig.ad.xiaomi.com
+DOMAIN,splashimgbssdl.yun.kugou.com
+DOMAIN,stat.y.qq.com
+DOMAIN,tangram.e.qq.com
+DOMAIN,tmeadkg.y.qq.com-NO-DROP
+DOMAIN,toblog.ctobsnssdk.com
+DOMAIN,tracking.intl.miui.com
+DOMAIN,us.l.qq.com
+DOMAIN,ut.taobao.com
 DOMAIN,uug27.com
+DOMAIN,waapdg.jd.com
 DOMAIN,www.traforama.com
 DOMAIN,www.vipads.live
+DOMAIN,wxsmsdy.video.qq.com
 DOMAIN,x.eccorp.cc
+DOMAIN-KEYWORD,-ad-sign.byteimg.com
+DOMAIN-KEYWORD,-aliec
+DOMAIN-KEYWORD,-alisc
+DOMAIN-KEYWORD,-applog.fqnovel
+DOMAIN-KEYWORD,-be-pack-sign.pglstatp-toutiao.com
+DOMAIN-KEYWORD,-bjlgy
+DOMAIN-KEYWORD,-cdn2.adtng.com
+DOMAIN-KEYWORD,-misc
+DOMAIN-KEYWORD,-tos.pstatp.com
+DOMAIN-KEYWORD,365yg
+DOMAIN-KEYWORD,a3.bytecdn.cn
+DOMAIN-KEYWORD,a3.pstatp.com
+DOMAIN-KEYWORD,ad.toutiao.com
+DOMAIN-KEYWORD,adshare.toutiao.com
+DOMAIN-KEYWORD,bdurl
+DOMAIN-KEYWORD,clk.gentags.net
+DOMAIN-KEYWORD,dm.bytedance.com
+DOMAIN-KEYWORD,dm.pstatp.com
+DOMAIN-KEYWORD,dm.toutiao.com
+DOMAIN-KEYWORD,m.suning.com
+DOMAIN-KEYWORD,misc-l
+DOMAIN-KEYWORD,mssdk
+DOMAIN-KEYWORD,s1.pstatp.com
+DOMAIN-KEYWORD,s2.pstatp.com
+DOMAIN-KEYWORD,s3.pstatp.com
+DOMAIN-KEYWORD,snssdk
+DOMAIN-KEYWORD,tunion-api.m.taobao.com
+DOMAIN-KEYWORD,uop.umeng.com
+DOMAIN-KEYWORD,zijieapi
+DOMAIN-KEYWORD,zjurl
+DOMAIN-SUFFIX,ad.cmvideo.cn
+DOMAIN-SUFFIX,admgr.qingting.fm
+DOMAIN-SUFFIX,admobile.top
+DOMAIN-SUFFIX,adukwai.com
 DOMAIN-SUFFIX,adxadserv.com
 DOMAIN-SUFFIX,chaturbate.com
 DOMAIN-SUFFIX,clarity.ms
+DOMAIN-SUFFIX,dload.qd.qingting.fm
 DOMAIN-SUFFIX,doppiocdn.live
+DOMAIN-SUFFIX,doubleclick-cn.net
+DOMAIN-SUFFIX,doubleclick.net
 DOMAIN-SUFFIX,faphouse.com
+DOMAIN-SUFFIX,imtmp.net
 DOMAIN-SUFFIX,jads.co
+DOMAIN-SUFFIX,jiguang.cn
 DOMAIN-SUFFIX,juicyads.com
+DOMAIN-SUFFIX,logger.qingting.fm
+DOMAIN-SUFFIX,m1.ad.10010.com
 DOMAIN-SUFFIX,mnaspm.com
+DOMAIN-SUFFIX,o1098464.ingest.sentry.io
+DOMAIN-SUFFIX,s.qd.qingting.fm
+DOMAIN-SUFFIX,s.qd.qingtingfm.com
 DOMAIN-SUFFIX,stripchat.com
 DOMAIN-SUFFIX,stripchat.ooo
 DOMAIN-SUFFIX,trafficjunky.com
 DOMAIN-SUFFIX,trafficjunky.net
-DOMAIN-KEYWORD,-cdn2.adtng.com
+DOMAIN-SUFFIX,union.baidu.cn
+DOMAIN-SUFFIX,union.baidu.com
+DOMAIN-SUFFIX,v1d.szbdyd.com
+IP-CIDR,101.50.8.64/32,no-resolve
+IP-CIDR,101.50.8.75/32,no-resolve
+IP-CIDR,103.37.152.161/32,no-resolve
+IP-CIDR,103.37.152.162/32,no-resolve
+IP-CIDR,103.63.160.64/32,no-resolve
+IP-CIDR,119.29.48.215/32,no-resolve
+IP-CIDR,120.240.95.37/32,no-resolve
+IP-CIDR,122.229.29.89/32,no-resolve
+IP-CIDR,122.229.8.47/32,no-resolve
+IP-CIDR,202.90.110.8/32,no-resolve
+IP-CIDR,203.76.217.241/32,no-resolve
+IP-CIDR,203.76.217.243/32,no-resolve
+IP-CIDR,203.76.217.37/32,no-resolve
+IP-CIDR,5.5.5.5/32,no-resolve
+IP-CIDR6,2405:1480:3000:303f::303f/128,no-resolve
+URL-REGEX,^http:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns$
+URL-REGEX,^http:\/\/mobilead\.kuwo\.cn\/EcomResourceServer
+URL-REGEX,^http:\/\/mobilead\.kuwo\.cn\/MobileAdServer
+URL-REGEX,^http:\/\/mps\.95508\.com\/mps\/icppweb\/images\/mps\/migration\/mpspics\/
+URL-REGEX,^http:\/\/rich\.kuwo\.cn\/AdService
+URL-REGEX,^http:\/\/sf3-be-pack\.pglstatp-toutiao\.com\/obj\/ad-app-package\/
+URL-REGEX,^http:\/\/wapi\.kuwo\.cn\/openapi\/v1\/album\/adBar
+URL-REGEX,^http:\/\/wapi\.kuwo\.cn\/openapi\/v1\/app\/pasterAdvert
+URL-REGEX,^http:\/\/wapi\.kuwo\.cn\/openapi\/v1\/app\/startup
+URL-REGEX,^http:\/\/y\.gtimg\.cn\/music\/common\/upload\/t_k_main_page_banner\/
+URL-REGEX,^https:\/\/lf-cdn-tos\.bytescm\.com\/obj\/static\/ad\/
+URL-REGEX,^https:\/\/sf3-fe-tos\.pglstatp-toutiao\.com\/obj\/ad-pattern\/
+URL-REGEX,^https:\/\/tnc3-alisc1\.zijieapi\.com\/get_domains\/
