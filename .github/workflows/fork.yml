@@ -1,5 +1,4 @@
 # 2024-06-10 21:05
-
 name: Fork & Edit
 
 on:
@@ -68,8 +67,15 @@ jobs:
             fi
 
             # 格式转换 domain-set 为 rule-set
-            for file in ChinaIP.list; do
+            for file in ChinaIP.list Google.list; do
               if [ -f "$file" ]; then
+
+                # 如果文件中包含 IP- 则跳过该文件
+                if grep -q "IP-" "$file"; then
+                  echo "Skipping file $file because it contains IP-"
+                  continue
+                fi
+                
                 # 转换 domain-set 为 rule-set
                 # 将以.开头的行的第一个.替换为 DOMAIN-SUFFIX,
                 # sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
@@ -144,10 +150,14 @@ jobs:
          echo "" >> Tools-repo/Ruleset/Other/Google.list
          echo "" >> Tools-repo/Ruleset/Other/Google.list
          cat Tools-repo/Ruleset/Other/GoogleFCM.list >> Tools-repo/Ruleset/Other/Google.list
+         echo "" >> Tools-repo/Ruleset/Other/Google.list
+         echo "" >> Tools-repo/Ruleset/Other/Google.list
+         cat Tools-repo/Ruleset/Other/GoogleIP.list >> Tools-repo/Ruleset/Other/Google.list
          rm -rf Tools-repo/Ruleset/Other/GoogleCN.list
          rm -rf Tools-repo/Ruleset/Other/GoogleCNProxyIP.list
          rm -rf Tools-repo/Ruleset/Other/GoogleEarth.list
          rm -rf Tools-repo/Ruleset/Other/GoogleFCM.list
+         rm -rf Tools-repo/Ruleset/Other/GoogleIP.list
         else
          echo "$file not found."
         fi
