@@ -4,7 +4,7 @@ name: Fork & Edit
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 8 * * *"
+    - cron: "0 */12 * * *"
   
 jobs:
   Fork-FLITER-list:
@@ -54,6 +54,7 @@ jobs:
                    -e '/# 规则: /d' \
                    -e '/404: Not Found/d' \
                    "$file"
+                   
             # 如果为IP规则且不包含no-resolve 则添加no-resolve
             awk '/^IP-/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile
             mv tmpfile "$file"
@@ -62,13 +63,19 @@ jobs:
           fi
         done
 
-        # 转换 domain-set 为 rule-set
+        # 格式转换 domain-set 为 rule-set
         for file in IP.list; do
           if [ -f "$file" ]; then
-            # 将以.开头的行的第一个.替换为 DOMAIN-SUFFIX,
-            sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
-            # 将除了以#开头、空行和以DOMAIN-SUFFIX开头之外的行，在行首添加 DOMAIN,
-            sed -i '/^\s*$/b; /^\s*#/b; /^DOMAIN-SUFFIX,/b; s/^\([^#]\)/DOMAIN,\1/' "$file"
+          
+            # 转换 domain-set 为 rule-set
+            # # 将以.开头的行的第一个.替换为 DOMAIN-SUFFIX,
+            # sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
+            # # 将除了以#开头、空行和以DOMAIN-SUFFIX开头之外的行，在行首添加 DOMAIN,
+            # sed -i '/^\s*$/b; /^\s*#/b; /^DOMAIN-SUFFIX,/b; s/^\([^#]\)/DOMAIN,\1/' "$file"
+            
+            # 识别并转换 IPv4 和 IPv6 CIDR，并在末尾添加 no-resolve
+            sed -i -E 's|^(([0-9]{1,3}\.){3}[0-9]{1,3}/[0-9]+)$|IP-CIDR,\1,no-resolve|' "$file"
+            sed -i -E 's|^([0-9a-fA-F:]+/[0-9]+)$|IP-CIDR6,\1,no-resolve|' "$file"
           else
             echo "$file not found."
           fi
@@ -77,12 +84,14 @@ jobs:
       # 追加规则
     - name: Copy custom rules
       run: |
+      
         # if [ -f "Tools-repo/Ruleset/Ads.list" ] ; then
         #   cat Tools-repo/Ruleset/Block/BlockAds.list >> Tools-repo/Ruleset/Ads.list
         # else
         #   echo "$file not found."
         # fi
 
+        # 合并 YouTubeMusic 到 YouTube
         if [ -f "Tools-repo/Ruleset/Media/YouTube.list" ] ; then
          echo "" >> Tools-repo/Ruleset/Media/YouTube.list
          echo "" >> Tools-repo/Ruleset/Media/YouTube.list
@@ -91,7 +100,8 @@ jobs:
         else
          echo "$file not found."
         fi
-
+        
+        # 合并 NetflixIP 到 Netflix
         if [ -f "Tools-repo/Ruleset/Media/Netflix.list" ] ; then
          echo "" >> Tools-repo/Ruleset/Media/Netflix.list
          echo "" >> Tools-repo/Ruleset/Media/Netflix.list
@@ -100,7 +110,8 @@ jobs:
         else
          echo "$file not found."
         fi
-
+        
+        # 合并 Instagram 到 Facebook
         if [ -f "Tools-repo/Ruleset/Other/Facebook.list" ] ; then
          echo "" >> Tools-repo/Ruleset/Other/Facebook.list
          echo "" >> Tools-repo/Ruleset/Other/Facebook.list
@@ -109,7 +120,8 @@ jobs:
         else
          echo "$file not found."
         fi
-
+        
+        # 合并 GoogleCN & GoogleCNProxyIP & GoogleEarth & GoogleFCM 到 Google
         if [ -f "Tools-repo/Ruleset/Other/Google.list" ] ; then
          echo "" >> Tools-repo/Ruleset/Other/Google.list
          echo "" >> Tools-repo/Ruleset/Other/Google.list
@@ -156,7 +168,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
-          git commit -m "Auto Update $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M')"
+          git commit -m "Auto Update $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
           git push origin HEAD
         else
           echo "No changes to commit."
