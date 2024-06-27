@@ -8,4 +8,4 @@ mkdir -p Tools/Ruleset/{Block,Media,Other}
 #--- Surge ---#
 
 # Other
-curl -L -o Tools-repo/Ruleset/Other/ChinaIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
+curl -L -o Tools-repo/Ruleset/ChinaIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
