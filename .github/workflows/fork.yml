@@ -94,7 +94,13 @@ jobs:
       # 追加规则
     - name: Copy custom rules
       run: |
-      
+        
+        # 检查并更新 Google.list 中的 IP 规则
+        if [ -f "Tools-repo/Ruleset/Other/Google.list" ]; then
+        sed -i -E '/^IP-/! s|^([0-9.:/]+)$|IP-CIDR,\1,no-resolve|' Tools-repo/Ruleset/Other/Google.list
+        fi
+
+        # 
         # if [ -f "Tools-repo/Ruleset/Ads.list" ] ; then
         #   cat Tools-repo/Ruleset/Block/BlockAds.list >> Tools-repo/Ruleset/Ads.list
         # else
