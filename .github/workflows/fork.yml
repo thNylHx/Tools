@@ -95,12 +95,18 @@ jobs:
     - name: Copy custom rules
       run: |
         
-        # 同步 BlockAds 到 Ads, 如果 Ads 存在
-        # if [ -f "Tools-repo/Ruleset/Ads.list" ] ; then
-        #   cat Tools-repo/Ruleset/Block/BlockAds.list >> Tools-repo/Ruleset/Ads.list
-        # else
-        #   echo "$file not found."
-        # fi
+        # 同步到 BlockAd, 如果 BlockAd 存在
+        if [ -f "Tools-repo/Ruleset/BlockAd.list" ] ; then
+          cat Tools-repo/Ruleset/Block/BlockAdb.list >> Tools-repo/Ruleset/BlockAd.list
+          cat Tools-repo/Ruleset/Block/BlockAdg.list >> Tools-repo/Ruleset/BlockAd.list
+          cat Tools-repo/Ruleset/Block/BlockAds.list >> Tools-repo/Ruleset/BlockAd.list
+          cat Tools-repo/Ruleset/Block/BlockEasyListChina.list >> Tools-repo/Ruleset/BlockAd.list
+          cat Tools-repo/Ruleset/Block/BlockAdvertising.list >> Tools-repo/Ruleset/BlockAd.list
+          cat Tools-repo/Ruleset/Block/BlockHijacking.list >> Tools-repo/Ruleset/BlockAd.list
+          cat Tools-repo/Ruleset/Block/BlockTracking.list >> Tools-repo/Ruleset/BlockAd.list
+        else
+          echo "$file not found."
+        fi
 
         # 合并 YouTubeMusic 到 YouTube
         if [ -f "Tools-repo/Ruleset/Media/YouTube.list" ] ; then
@@ -160,9 +166,9 @@ jobs:
       # 去重排序
     - name: Remove duplicates and lines 
       run: |
-        cd Tools-repo/Ruleset/Other
+        cd Tools-repo/Ruleset/Block
         shopt -s nullglob  # 避免没有匹配的文件时保留原始通配符
-        for file in Go.list; do
+        for file in BlockAd.list; do
           if [ -f "$file" ]; then
             sorted_file="sorted_${file}"
             # 使用 grep 去掉包含 # 的行
