@@ -27,7 +27,9 @@ jobs:
       # 适配规则
     - name: Edit Ruleset
       run: |
-        cd Tools-repo/Ruleset/Block
+        for dir in Tools-repo/Ruleset Tools-repo/Ruleset/Block Tools-repo/Ruleset/Media Tools-repo/Ruleset/Other; do
+        if [ -d "$dir" ]; then
+        cd "$dir"
         for file in BlockAds.list; do
           if [ "$file" != "Lan.list" ] ; then
             sed -i -e 's/, /,/g' \
