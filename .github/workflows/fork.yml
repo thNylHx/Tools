@@ -166,8 +166,8 @@ jobs:
           if [ -f "$file" ]; then
             sorted_file="sorted_${file}"
             # 使用 grep 去掉包含 # 的行
-            grep -v '^\s*#' "$file" | grep -v '^\s*$' | sort | uniq > "$sorted_file"
-            mv "$sorted_file" "$file"
+            # grep -v '^\s*#' "$file" | grep -v '^\s*$' | sort | uniq > "$sorted_file"
+            # mv "$sorted_file" "$file"
           else
             echo "$file not found."
           fi
