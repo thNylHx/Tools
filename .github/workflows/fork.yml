@@ -32,10 +32,13 @@ jobs:
           if [ "$file" != "Lan.list" ] ; then
             sed -i -e 's/, /,/g' \
                    -e 's/;/# /g' \
+                   -e 's/host,/HOST,/g' \
+                   -e 's/host-/HOST-/g' \
                    -e 's/-suffix/-SUFFIX/g' \
                    -e 's/-keyword/-KEYWORD/g' \
                    -e 's/ip-cidr/IP-CIDR/g' \
                    -e 's/-wildcard/-WILDCARD/g' \
+                   -e 's/geoip/GEOIP/g' \
                    -e 's/HOST,/DOMAIN,/g' \
                    -e 's/HOST-/DOMAIN-/g' \
                    -e 's/IP6-CIDR,/IP-CIDR6,/g' \
@@ -49,7 +52,6 @@ jobs:
                    -e '/# UPDATED:/d' \
                    -e '/# 数目: /d' \
                    -e '/# 规则: /d' \
-                   -e '/# 内容: /d' \
                    -e '/404: Not Found/d' \
                    "$file"
             # 如果为IP规则且不包含no-resolve 则添加no-resolve
@@ -61,7 +63,7 @@ jobs:
         done
 
         # 转换 domain-set 为 rule-set
-        for file in ChinaIP.list; do
+        for file in IP.list; do
           if [ -f "$file" ]; then
             # 将以.开头的行的第一个.替换为 DOMAIN-SUFFIX,
             sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
