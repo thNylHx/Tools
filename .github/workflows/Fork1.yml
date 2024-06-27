@@ -30,7 +30,7 @@ jobs:
         cd Tools-repo/Ruleset/Other
 
         # 格式转换 domain-set 为 rule-set
-        for file in GoogleIP.list TwitterIP; do
+        for file in GoogleIP.list TwitterIP.list; do
           if [ -f "$file" ]; then
             
             # 识别并转换 IPv4 和 IPv6 CIDR, 并在末尾添加 no-resolve
