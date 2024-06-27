@@ -83,6 +83,12 @@ jobs:
           fi
         done
 
+        cd - > /dev/null  # 返回到上一级目录，并抑制输出
+          else
+            echo "Directory $dir not found."
+         fi
+        done
+
       # 追加规则
     - name: Copy custom rules
       run: |
