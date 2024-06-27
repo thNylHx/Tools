@@ -71,7 +71,7 @@ jobs:
               if [ -f "$file" ]; then
 
                 # 如果文件中包含 IP- 则跳过该行
-                awk '!/IP-/' "$file" > tmpfile && mv tmpfile "$file"
+                awk '/IP-/{print; next} !/IP-/{print $0",no-resolve"}' "$file" > tmpfile && mv tmpfile "$file"
                 
                 # 转换 domain-set 为 rule-set
                 # 将以.开头的行的第一个.替换为 DOMAIN-SUFFIX,
