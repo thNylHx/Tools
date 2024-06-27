@@ -30,7 +30,7 @@ jobs:
         for dir in Tools-repo/Ruleset/Block Tools-repo/Ruleset/Media Tools-repo/Ruleset/Other; do
           if [ -d "$dir" ]; then
             cd "$dir"
-            file="BlockAds.list Google.list"
+            file="BlockAds.list"
             if [ -f "$file" ]; then
               if [ "$file" != "Lan.list" ]; then
                 sed -i -e 's/, /,/g' \
