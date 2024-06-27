@@ -9,3 +9,4 @@ mkdir -p Tools/Ruleset/{Block,Media,Other}
 
 # Other
 curl -L -o Tools-repo/Ruleset/ChinaIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
+curl -L -o Tools-repo/Ruleset/Other/GoogleIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
