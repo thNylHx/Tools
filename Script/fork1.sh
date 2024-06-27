@@ -21,6 +21,8 @@ curl -L -o Tools-repo/Ruleset/Meta/Google.list "https://raw.githubusercontent.co
 curl -L -o Tools-repo/Ruleset/Meta/YouTube.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.list"
 curl -L -o Tools-repo/Ruleset/Meta/Twitter.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.list"
 curl -L -o Tools-repo/Ruleset/Meta/Netflix.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.list"
+curl -L -o Tools-repo/Ruleset/Meta/Bilibili.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.list"
+curl -L -o Tools-repo/Ruleset/Meta/GitHub.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.list"
 
 # ipcidr
 curl -L -o Tools-repo/Ruleset/Meta/ChinaIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
