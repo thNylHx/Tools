@@ -67,7 +67,7 @@ jobs:
             fi
 
             # 格式转换 domain-set 为 rule-set
-            for file in ChinaIP.list Google.list; do
+            for file in ChinaIP.list; do
               if [ -f "$file" ]; then
 
                 # 识别并转换 IPv4 和 IPv6 CIDR 并在末尾添加 no-resolve
@@ -163,7 +163,7 @@ jobs:
       run: |
         cd Tools-repo/Ruleset/Media
         shopt -s nullglob  # 避免没有匹配的文件时保留原始通配符
-        for file in Y.list; do
+        for file in Google.list; do
           if [ -f "$file" ]; then
             sorted_file="sorted_${file}"
             # 使用 grep 去掉包含 # 的行
