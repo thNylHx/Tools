@@ -62,9 +62,10 @@ jobs:
           fi
         done
 
-        # 转换 domain-set 为 rule-set
+        # 格式转换 domain-set 为 rule-set
         for file in ChinaIP.list; do
           if [ -f "$file" ]; then
+            # 转换 domain-set 为 rule-set
             # # 将以.开头的行的第一个.替换为 DOMAIN-SUFFIX,
             # sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
             # # 将除了以#开头、空行和以DOMAIN-SUFFIX开头之外的行，在行首添加 DOMAIN,
