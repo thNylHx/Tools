@@ -97,7 +97,8 @@ jobs:
         
         # 检查并更新 Google.list 中的 IP 规则
         if [ -f "Tools-repo/Ruleset/Other/Google.list" ]; then
-        sed -i -E '/^IP-/! s|^([0-9.:/]+)$|IP-CIDR,\1,no-resolve|' Tools-repo/Ruleset/Other/Google.list
+        sed -i -E 's|^(([0-9]{1,3}\.){3}[0-9]{1,3}/[0-9]+)$|IP-CIDR,\1,no-resolve|' Tools-repo/Ruleset/Other/Google.list
+        sed -i -E 's|^([0-9a-fA-F:]+/[0-9]+)$|IP-CIDR6,\1,no-resolve|' Tools-repo/Ruleset/Other/Google.list
         fi
 
         # 
