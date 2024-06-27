@@ -30,8 +30,9 @@ jobs:
         for dir in Tools-repo/Ruleset Tools-repo/Ruleset/Block Tools-repo/Ruleset/Media Tools-repo/Ruleset/Other; do
         if [ -d "$dir" ]; then
         cd "$dir"
-        for file in BlockAds.list; do
-          if [ "$file" != "Lan.list" ] ; then
+        file="BlockAds.list"
+        if [ -f "$file" ]; then
+          if [ "$file" != "Lan.list" ]; then
             sed -i -e 's/, /,/g' \
                    -e 's/;/# /g' \
                    -e 's/host,/HOST,/g' \
