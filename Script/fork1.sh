@@ -17,7 +17,7 @@ curl -L -o Tools-repo/Ruleset/Other/TwitterIP.list "https://raw.githubuserconten
 
 # domain
 curl -L -o Tools-repo/Ruleset/Meta/China.list  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list"
-curl -L -o Tools-repo/Ruleset/Meta/GoogleIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.list"
+curl -L -o Tools-repo/Ruleset/Meta/Google.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.list"
 curl -L -o Tools-repo/Ruleset/Meta/YouTube.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.list"
 curl -L -o Tools-repo/Ruleset/Meta/Twitter.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.list"
 curl -L -o Tools-repo/Ruleset/Meta/Netflix.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.list"
