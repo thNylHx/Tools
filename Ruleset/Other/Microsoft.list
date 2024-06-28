@@ -481,7 +481,6 @@ DOMAIN-SUFFIX,microsoftstore.com.hk
 DOMAIN-SUFFIX,visualstudio.co.uk
 DOMAIN-SUFFIX,skype-edf.akadns.net
 DOMAIN-SUFFIX,skypedata.akadns.net
-DOMAIN-REGEX,^github-production-release-asset-[0-9a-zA-Z]{6}\.s3\.amazonaws\.com$
 DOMAIN-KEYWORD,1drv
 DOMAIN-KEYWORD,onedrive
 DOMAIN-KEYWORD,skydrive
@@ -613,9 +612,7 @@ DOMAIN-SUFFIX,trustcenter.cn
 DOMAIN-SUFFIX,unity3dcloud.cn
 DOMAIN-SUFFIX,windowsazure.cn
 DOMAIN-SUFFIX,windowsazurestatus.cn
-DOMAIN-REGEX,.+\.azchcdn[a-s]\.com$
 DOMAIN-SUFFIX,azure-dns.cn
-DOMAIN-REGEX,.+\.azure-dns-([1-9]|10)\.cn$
 DOMAIN-SUFFIX,bing.com.cn
 DOMAIN-SUFFIX,cn.bing.com
 DOMAIN-SUFFIX,cn.bing.net

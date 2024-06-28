@@ -22,10 +22,6 @@ DOMAIN-SUFFIX,netflixdnstest7.com
 DOMAIN-SUFFIX,netflixdnstest8.com
 DOMAIN-SUFFIX,netflixdnstest9.com
 DOMAIN-SUFFIX,netflixdnstest10.com
-DOMAIN-REGEX,(^|\.)apiproxy-device-prod-nlb-.+\.amazonaws\.com$
-DOMAIN-REGEX,(^|\.)apiproxy-website-nlb-prod-.+\.amazonaws\.com$
-DOMAIN-REGEX,(^|\.)dualstack\.apiproxy-.+\.amazonaws\.com$
-DOMAIN-REGEX,(^|\.)dualstack\.ichnaea-web-.+\.amazonaws\.com$
 
 IP-CIDR,23.246.0.0/18,no-resolve
 IP-CIDR,37.77.184.0/21,no-resolve
@@ -40,8 +36,8 @@ IP-CIDR,192.173.64.0/18,no-resolve
 IP-CIDR,198.38.96.0/19,no-resolve
 IP-CIDR,198.45.48.0/20,no-resolve
 IP-CIDR,208.75.76.0/22,no-resolve
-IP-CIDR,2607:fb10::/32,no-resolve
-IP-CIDR,2620:0:ef0::/48,no-resolve
-IP-CIDR,2620:10c:7000::/44,no-resolve
-IP-CIDR,2a00:86c0::/32,no-resolve
-IP-CIDR,2a03:5640::/32,no-resolve
+IP-CIDR6,2607:fb10::/32,no-resolve
+IP-CIDR6,2620:0:ef0::/48,no-resolve
+IP-CIDR6,2620:10c:7000::/44,no-resolve
+IP-CIDR6,2a00:86c0::/32,no-resolve
+IP-CIDR6,2a03:5640::/32,no-resolve
