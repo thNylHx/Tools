@@ -4,7 +4,7 @@ name: Fork & Edit
 on:
   workflow_dispatch:
   schedule:
-    - cron: "30 * * * *"
+    - cron: "35 * * * *"
   
 jobs:
   Fork-FLITER-list:
@@ -21,14 +21,14 @@ jobs:
 
     - name: Fork
       run: |
-        curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/fork1.sh | sh
+        curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/fork.sh | sh
 
 ###### Surge ######
       # 适配规则
-    - name: Edit Ruleset/Block
+    - name: Edit Transfer
       run: |
-        cd Tools-repo/Ruleset/Block
-        for file in *.list; do
+        cd Tools-repo/Transfer
+        for file in BlockAds.list; do
           if [ "$file" != "Lan.list" ] ; then
             sed -i -e 's/, /,/g' \
                    -e 's/;/# /g' \
@@ -57,136 +57,6 @@ jobs:
             # 如果为IP规则且不包含no-resolve 则添加no-resolve
             awk '/^IP-/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile
             mv tmpfile "$file"
-          else
-            echo "$file not found."
-          fi
-        done
-
-        # 转换 domain-set 为 rule-set
-        for file in *.list; do
-          if [ -f "$file" ]; then
-
-            # 识别 IPv4 在开头添加 IP-CIDR, 并在末尾添加 no-resolve
-            sed -i -E 's|^(([0-9]{1,3}\.){3}[0-9]{1,3}/[0-9]+)$|IP-CIDR,\1,no-resolve|' "$file"
-            # 识别 IPv6 在开头添加 IP-CIDR6, 并在末尾添加 no-resolve
-            sed -i -E 's|^([0-9a-fA-F:]+/[0-9]+)$|IP-CIDR6,\1,no-resolve|' "$file"
-
-            # 将以+.开头的行的第一个.替换为 DOMAIN-SUFFIX,
-            sed -i '/^\+./s/^\+./DOMAIN-SUFFIX,/' "$file"
-            # 将除了以#开头、空行和以DOMAIN-SUFFIX开头之外的行, 在行首添加 DOMAIN,
-            sed -i '/^\s*$/b; /^\s*#/b; /^DOMAIN-SUFFIX,/b; s/^\([^#]\)/DOMAIN,\1/' "$file"
-          else
-            echo "$file not found."
-          fi
-        done
-
-      # 适配规则
-    - name: Edit Ruleset/Media
-      run: |
-        cd Tools-repo/Ruleset/Media
-        for file in *.list; do
-          if [ "$file" != "Lan.list" ] ; then
-            sed -i -e 's/, /,/g' \
-                   -e 's/;/# /g' \
-                   -e 's/host,/HOST,/g' \
-                   -e 's/host-/HOST-/g' \
-                   -e 's/-suffix/-SUFFIX/g' \
-                   -e 's/-keyword/-KEYWORD/g' \
-                   -e 's/ip-cidr/IP-CIDR/g' \
-                   -e 's/-wildcard/-WILDCARD/g' \
-                   -e 's/geoip/GEOIP/g' \
-                   -e 's/HOST,/DOMAIN,/g' \
-                   -e 's/HOST-/DOMAIN-/g' \
-                   -e 's/IP6-CIDR,/IP-CIDR6,/g' \
-                   -e 's/,REJECT$//g' \
-                   -e 's/,DIRECT$//g' \
-                   -e 's/,reject$//g' \
-                   -e 's/,direct$//g' \
-                   -e '/# 更新：/d' \
-                   -e '/# AUTHOR:/d' \
-                   -e '/# REPO:/d' \
-                   -e '/# UPDATED:/d' \
-                   -e '/# 数目: /d' \
-                   -e '/# 规则: /d' \
-                   -e '/404: Not Found/d' \
-                   "$file"
-            # 如果为IP规则且不包含no-resolve 则添加no-resolve
-            awk '/^IP-/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile
-            mv tmpfile "$file"
-          else
-            echo "$file not found."
-          fi
-        done
-
-        # 转换 domain-set 为 rule-set
-        for file in *.list; do
-          if [ -f "$file" ]; then
-
-            # 识别 IPv4 在开头添加 IP-CIDR, 并在末尾添加 no-resolve
-            sed -i -E 's|^(([0-9]{1,3}\.){3}[0-9]{1,3}/[0-9]+)$|IP-CIDR,\1,no-resolve|' "$file"
-            # 识别 IPv6 在开头添加 IP-CIDR6, 并在末尾添加 no-resolve
-            sed -i -E 's|^([0-9a-fA-F:]+/[0-9]+)$|IP-CIDR6,\1,no-resolve|' "$file"
-
-            # 将以+.开头的行的第一个.替换为 DOMAIN-SUFFIX,
-            sed -i '/^\+./s/^\+./DOMAIN-SUFFIX,/' "$file"
-            # 将除了以#开头、空行和以DOMAIN-SUFFIX开头之外的行, 在行首添加 DOMAIN,
-            sed -i '/^\s*$/b; /^\s*#/b; /^DOMAIN-SUFFIX,/b; s/^\([^#]\)/DOMAIN,\1/' "$file"
-          else
-            echo "$file not found."
-          fi
-        done
-
-      # 适配规则
-    - name: Edit Ruleset/Other
-      run: |
-        cd Tools-repo/Ruleset/Other
-        for file in *.list; do
-          if [ "$file" != "Lan.list" ] ; then
-            sed -i -e 's/, /,/g' \
-                   -e 's/;/# /g' \
-                   -e 's/host,/HOST,/g' \
-                   -e 's/host-/HOST-/g' \
-                   -e 's/-suffix/-SUFFIX/g' \
-                   -e 's/-keyword/-KEYWORD/g' \
-                   -e 's/ip-cidr/IP-CIDR/g' \
-                   -e 's/-wildcard/-WILDCARD/g' \
-                   -e 's/geoip/GEOIP/g' \
-                   -e 's/HOST,/DOMAIN,/g' \
-                   -e 's/HOST-/DOMAIN-/g' \
-                   -e 's/IP6-CIDR,/IP-CIDR6,/g' \
-                   -e 's/,REJECT$//g' \
-                   -e 's/,DIRECT$//g' \
-                   -e 's/,reject$//g' \
-                   -e 's/,direct$//g' \
-                   -e '/# 更新：/d' \
-                   -e '/# AUTHOR:/d' \
-                   -e '/# REPO:/d' \
-                   -e '/# UPDATED:/d' \
-                   -e '/# 数目: /d' \
-                   -e '/# 规则: /d' \
-                   -e '/404: Not Found/d' \
-                   "$file"
-            # 如果为IP规则且不包含no-resolve 则添加no-resolve
-            awk '/^IP-/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile
-            mv tmpfile "$file"
-          else
-            echo "$file not found."
-          fi
-        done
-
-        # 转换 domain-set 为 rule-set
-        for file in *.list; do
-          if [ -f "$file" ]; then
-
-            # 识别 IPv4 在开头添加 IP-CIDR, 并在末尾添加 no-resolve
-            sed -i -E 's|^(([0-9]{1,3}\.){3}[0-9]{1,3}/[0-9]+)$|IP-CIDR,\1,no-resolve|' "$file"
-            # 识别 IPv6 在开头添加 IP-CIDR6, 并在末尾添加 no-resolve
-            sed -i -E 's|^([0-9a-fA-F:]+/[0-9]+)$|IP-CIDR6,\1,no-resolve|' "$file"
-
-            # 将以+.开头的行的第一个.替换为 DOMAIN-SUFFIX,
-            sed -i '/^\+./s/^\+./DOMAIN-SUFFIX,/' "$file"
-            # 将除了以#开头、空行和以DOMAIN-SUFFIX开头之外的行, 在行首添加 DOMAIN,
-            sed -i '/^\s*$/b; /^\s*#/b; /^DOMAIN-SUFFIX,/b; s/^\([^#]\)/DOMAIN,\1/' "$file"
           else
             echo "$file not found."
           fi
@@ -195,31 +65,36 @@ jobs:
       # 追加规则
     - name: Copy custom rules
       run: |
+        # 获取当前时间
+        current_date=$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')
+
         # 把 BlockAd 同步到 BlockAd 存在
-        if [ -f "Tools-repo/Ruleset/Block/BlockAd.list" ] ; then
-          cat Tools-repo/Ruleset/Block/BlockAdb.list >> Tools-repo/Ruleset/Block/BlockAd.list
-          cat Tools-repo/Ruleset/Block/BlockAdg.list >> Tools-repo/Ruleset/Block/BlockAd.list
-          cat Tools-repo/Ruleset/Block/BlockAds.list >> Tools-repo/Ruleset/Block/BlockAd.list
-          cat Tools-repo/Ruleset/Block/BlockEasyListChina.list >> Tools-repo/Ruleset/Block/BlockAd.list
-          cat Tools-repo/Ruleset/Block/BlockAdvertising.list >> Tools-repo/Ruleset/Block/BlockAd.list
-          cat Tools-repo/Ruleset/Block/BlockHijacking.list >> Tools-repo/Ruleset/Block/BlockAd.list
-          cat Tools-repo/Ruleset/Block/BlockTracking.list >> Tools-repo/Ruleset/Block/BlockAd.list
+        if [ -f "Tools-repo/Ruleset/Block/BlockAdG.list" ] ; then
+          cat Tools-repo/Transfer/BlockAd.list >> Tools-repo/Ruleset/Block/BlockAdG.list
+          cat Tools-repo/Transfer/BlockAdb.list >> Tools-repo/Ruleset/Block/BlockAdG.list
+          cat Tools-repo/Transfer/BlockAdg.list >> Tools-repo/Ruleset/Block/BlockAdG.list
+          cat Tools-repo/Transfer/BlockAds.list >> Tools-repo/Ruleset/Block/BlockAdG.list
+          cat Tools-repo/Transfer/BlockEasyListChina.list >> Tools-repo/Ruleset/Block/BlockAdG.list
+          cat Tools-repo/Transfer/BlockAdvertising.list >> Tools-repo/Ruleset/Block/BlockAdG.list
+          cat Tools-repo/Transfer/BlockHijacking.list >> Tools-repo/Ruleset/Block/BlockAdG.list
+          cat Tools-repo/Transfer/BlockTracking.list >> Tools-repo/Ruleset/Block/BlockAdG.list
         else
           echo "$file not found."
         fi
 
         # 把 TwitterIP 同步到 Twitter
-        if [ -f "Tools-repo/Ruleset/Other/Twitter1.list" ] ; then
-         echo "#!name = Twitter" >> Tools-repo/Ruleset/Other/Twitter.list
-         echo "#!desc = 分流规则" >> Tools-repo/Ruleset/Other/Twitter.list
-         echo "#!date = $current_date" >> Tools-repo/Ruleset/Other/Twitter.list
-         echo "#!author = " >> Tools-repo/Ruleset/Other/Twitter.list
-         echo "" >> Tools-repo/Ruleset/Other/Twitter.list
-         echo "" >> Tools-repo/Ruleset/Other/Twitter.list
-         cat Tools-repo/Ruleset/Other/Twitter.list >> Tools-repo/Ruleset/Other/Twitter1.list
-         echo "" >> Tools-repo/Ruleset/Other/Twitter.list
-         echo "" >> Tools-repo/Ruleset/Other/Twitter.list
-         cat Tools-repo/Ruleset/Other/TwitterIP.list >> Tools-repo/Ruleset/Other/Twitter1.list
+        if [ -f "Tools-repo/Ruleset/Media/Twitter.list" ] ; then
+         echo "#!name = Twitter" >> Tools-repo/Ruleset/Media/Twitter.list
+         echo "#!desc = 分流规则" >> Tools-repo/Ruleset/Media/Twitter.list
+         echo "#!date = $current_date" >> Tools-repo/Ruleset/Media/Twitter.list
+         echo "#!author = " >> Tools-repo/Ruleset/Media/Twitter.list
+         echo "" >> Tools-repo/Ruleset/Media/Twitter.list
+         echo "" >> Tools-repo/Ruleset/Media/Twitter.list
+         echo "" >> Tools-repo/Ruleset/Media/Twitter.list
+         cat Tools-repo/Transfer/Twitter.list >> Tools-repo/Ruleset/Block/Twitter.list
+         echo "" >> Tools-repo/Ruleset/Media/Twitter.list
+         echo "" >> Tools-repo/Ruleset/Media/Twitter.list
+         cat Tools-repo/Transfer/TwitterIP.list >> Tools-repo/Ruleset/Block/Twitter.list
         else
           echo "$file not found."
         fi
@@ -229,7 +104,7 @@ jobs:
       run: |
         cd Tools-repo/Ruleset/Block
         shopt -s nullglob  # 避免没有匹配的文件时保留原始通配符
-        for file in BlockAd.list; do
+        for file in BlockAdG.list; do
           if [ -f "$file" ]; then
             sorted_file="sorted_${file}"
             # 使用 grep 去掉包含 # 的行
