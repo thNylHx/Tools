@@ -18,7 +18,7 @@ jobs:
         repository: thNylHx/Tools
         path: Tools-repo
 
-    - name: Fork
+    - name: 复刻
       run: |
         curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/fork.sh | sh
 
@@ -41,7 +41,7 @@ jobs:
               if [ -f "$file" ]; then
                 sed -i -e 's/, /,/g' \
                        -e 's/;/# /g' \
-                       -e 's////#/g' \
+                       -e 's|//|#|g' \
                        -e 's/host,/HOST,/g' \
                        -e 's/host-/HOST-/g' \
                        -e 's/-suffix/-SUFFIX/g' \
