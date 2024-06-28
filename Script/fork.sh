@@ -3,7 +3,7 @@
 #!/bin/bash
 
 # 创建规则目录
-mkdir -p Tools/Transfer/{Transfer}
+mkdir -p Tools/Transfer/{ClashMeta}
 
 #--- Surge ---#
 # Other
@@ -49,16 +49,16 @@ curl -L -o Tools-repo/Transfer/BlockTracking.list "https://raw.githubusercontent
 #classical
 
 # domain
-curl -L -o Tools-repo/Transfer/Transfer/Bilibili.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.list"
-curl -L -o Tools-repo/Transfer/Transfer/China.list  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list"
-curl -L -o Tools-repo/Transfer/Transfer/GitHub.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.list"
-curl -L -o Tools-repo/Transfer/Transfer/Google.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.list"
-curl -L -o Tools-repo/Transfer/Transfer/Netflix.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.list"
-curl -L -o Tools-repo/Transfer/Transfer/Twitter.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.list"
-curl -L -o Tools-repo/Transfer/Transfer/YouTube.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.list"
+curl -L -o Tools-repo/Transfer/ClashMeta/Bilibili.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.list"
+curl -L -o Tools-repo/Transfer/ClashMeta/China.list  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list"
+curl -L -o Tools-repo/Transfer/ClashMeta/GitHub.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.list"
+curl -L -o Tools-repo/Transfer/ClashMeta/Google.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.list"
+curl -L -o Tools-repo/Transfer/ClashMeta/Netflix.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.list"
+curl -L -o Tools-repo/Transfer/ClashMeta/Twitter.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.list"
+curl -L -o Tools-repo/Transfer/ClashMeta/YouTube.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.list"
 
 # ipcidr
-curl -L -o Tools-repo/Transfer/Transfer/ChinaIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
-curl -L -o Tools-repo/Transfer/Transfer/GoogleIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
-curl -L -o Tools-repo/Transfer/Transfer/NetflixIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
-curl -L -o Tools-repo/Transfer/Transfer/TwitterIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
+curl -L -o Tools-repo/Transfer/ClashMeta/ChinaIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
+curl -L -o Tools-repo/Transfer/ClashMeta/GoogleIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
+curl -L -o Tools-repo/Transfer/ClashMeta/NetflixIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
+curl -L -o Tools-repo/Transfer/ClashMeta/TwitterIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
