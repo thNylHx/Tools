@@ -1,9 +1,9 @@
-name: Fork1 & Edit
+name: Fork & Edit & 1
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0/12 * * *"
+    - cron: "30 * * * *"
   
 jobs:
   Fork-FLITER-list:
@@ -18,9 +18,48 @@ jobs:
         repository: thNylHx/Tools
         path: Tools-repo
 
-    - name: 复刻
+    - name: Fork
       run: |
-        curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/fork1.sh | sh
+        curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/fork.sh | sh
+
+###### Surge ######
+      # 适配规则
+    - name: Edit Transfer
+      run: |
+        cd Tools-repo/Transfer
+        for file in BlockAds.list; do
+          if [ "$file" != "Lan.list" ] ; then
+            sed -i -e 's/, /,/g' \
+                   -e 's/;/# /g' \
+                   -e 's/host,/HOST,/g' \
+                   -e 's/host-/HOST-/g' \
+                   -e 's/-suffix/-SUFFIX/g' \
+                   -e 's/-keyword/-KEYWORD/g' \
+                   -e 's/ip-cidr/IP-CIDR/g' \
+                   -e 's/-wildcard/-WILDCARD/g' \
+                   -e 's/geoip/GEOIP/g' \
+                   -e 's/HOST,/DOMAIN,/g' \
+                   -e 's/HOST-/DOMAIN-/g' \
+                   -e 's/IP6-CIDR,/IP-CIDR6,/g' \
+                   -e 's/,REJECT$//g' \
+                   -e 's/,DIRECT$//g' \
+                   -e 's/,reject$//g' \
+                   -e 's/,direct$//g' \
+                   -e '/# 更新：/d' \
+                   -e '/# AUTHOR:/d' \
+                   -e '/# REPO:/d' \
+                   -e '/# UPDATED:/d' \
+                   -e '/# 数目: /d' \
+                   -e '/# 规则: /d' \
+                   -e '/404: Not Found/d' \
+                   "$file"
+            # 如果为IP规则且不包含no-resolve 则添加no-resolve
+            awk '/^IP-/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile
+            mv tmpfile "$file"
+          else
+            echo "$file not found."
+          fi
+        done
 
 ###### Commit
     - name: Add and Commits
