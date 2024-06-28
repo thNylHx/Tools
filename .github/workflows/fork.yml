@@ -98,12 +98,14 @@ jobs:
           echo "BlockAdG.list not found."
         fi
 
-        # 把 Instagram 同步到 Facebook
+        # 把 FacebookIP & Instagram 同步到 Facebook
         if [ -f "Tools-repo/Ruleset/Media/Facebook.list" ] ; then
+         echo "" >> Tools-repo/Ruleset/Media/Facebook.list
+         cat Tools-repo/Ruleset/Media/FacebookIP.list >> Tools-repo/Ruleset/Media/Facebook.list
          echo "" >> Tools-repo/Ruleset/Media/Facebook.list
          cat Tools-repo/Ruleset/Media/Instagram.list >> Tools-repo/Ruleset/Media/Facebook.list
         else
-          echo "Netflix.list not found."
+          echo "Facebook.list not found."
         fi
 
         # 把 NetflixIP 同步到 Netflix
