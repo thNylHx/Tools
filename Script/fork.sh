@@ -29,7 +29,7 @@ curl -L -o Tools-repo/Transfer/Transfer/NetflixIP.list "https://raw.githubuserco
 curl -L -o Tools-repo/Transfer/Spotify.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Spotify.list"
 curl -L -o Tools-repo/Transfer/TikTok.list "https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/TikTok.list"
 curl -L -o Tools-repo/Transfer/Twitter.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
-curl -L -o Tools-repo//TwitterIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/twitter.list"
+curl -L -o Tools-repo/Transfer/TwitterIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/twitter.list"
 curl -L -o Tools-repo/Transfer/Facebook.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Facebook.list"
 curl -L -o Tools-repo/Transfer/Instagram.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Instagram.list"
 curl -L -o Tools-repo/Transfer/YouTube.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list"
