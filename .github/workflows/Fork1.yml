@@ -41,6 +41,20 @@ jobs:
           fi
         done
 
+      # 追加规则
+    - name: Copy custom rules
+      run: |
+        
+        # 把 TwitterIP 同步到 Twitter
+        if [ -f "Tools-repo/Ruleset/Other/Twitter.list" ] ; then
+         echo "" >> Tools-repo/Ruleset/Other/Twitter.list
+         echo "" >> Tools-repo/Ruleset/Other/Twitter.list
+         echo "# TwitterIP" >> Tools-repo/Ruleset/Other/Twitter.list
+         cat Tools-repo/Ruleset/Other/TwitterIP.list >> Tools-repo/Ruleset/Other/Twitter.list
+        else
+         echo "$file not found."
+        fi
+
 ###### Commit
     - name: Add and Commits
       run: |
