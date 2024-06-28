@@ -65,15 +65,11 @@ jobs:
       # 追加规则
     - name: Copy custom rules
       run: |
-        # 获取当前时间
-        current_date=$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')
+        # # 获取当前时间
+        # current_date=$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')
 
         # 把 BlockAd 同步到 BlockAdG 存在
         if [ -f "Tools-repo/Ruleset/Block/BlockAdG.list" ] ; then
-          echo "#!name = Twitter" >> Tools-repo/Ruleset/Block/BlockAdG.list
-          echo "#!desc = 分流规则" >> Tools-repo/Ruleset/Block/BlockAdG.list
-          echo "#!date = $current_date" >> Tools-repo/Ruleset/Block/BlockAdG.list
-          echo "#!author = " >> Tools-repo/Ruleset/Block/BlockAdG.list
           cat Tools-repo/Transfer/BlockAd.list >> Tools-repo/Ruleset/Block/BlockAdG.list
           cat Tools-repo/Transfer/BlockAdb.list >> Tools-repo/Ruleset/Block/BlockAdG.list
           cat Tools-repo/Transfer/BlockAdg.list >> Tools-repo/Ruleset/Block/BlockAdG.list
@@ -88,16 +84,8 @@ jobs:
 
         # 把 TwitterIP 同步到 Twitter
         if [ -f "Tools-repo/Ruleset/Media/Twitter.list" ] ; then
-         echo "#!name = Twitter" >> Tools-repo/Ruleset/Media/Twitter.list
-         echo "#!desc = 分流规则" >> Tools-repo/Ruleset/Media/Twitter.list
-         echo "#!date = $current_date" >> Tools-repo/Ruleset/Media/Twitter.list
-         echo "#!author = " >> Tools-repo/Ruleset/Media/Twitter.list
-         echo "" >> Tools-repo/Ruleset/Media/Twitter.list
-         echo "" >> Tools-repo/Ruleset/Media/Twitter.list
          cat Tools-repo/Transfer/Twitter.list >> Tools-repo/Ruleset/Media/Twitter.list
          echo "" >> Tools-repo/Ruleset/Media/Twitter.list
-         echo "" >> Tools-repo/Ruleset/Media/Twitter.list
-         echo "#!name = TwitterIP" >> Tools-repo/Ruleset/Media/Twitter.list
          cat Tools-repo/Transfer/TwitterIP.list >> Tools-repo/Ruleset/Media/Twitter.list
         else
           echo "$file not found."
