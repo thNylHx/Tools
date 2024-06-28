@@ -84,18 +84,18 @@ jobs:
         # # 获取当前时间
         # current_date=$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')
 
-        # 把 BlockAd 同步到 BlockAdG
-        if [ -f "Tools-repo/Ruleset/Block/BlockAdG.list" ] ; then
-          cat Tools-repo/Ruleset/Block/BlockAdT.list >> Tools-repo/Ruleset/Block/BlockAdG.list
-          cat Tools-repo/Ruleset/Block/BlockAdA.list >> Tools-repo/Ruleset/Block/BlockAdG.list
-          cat Tools-repo/Ruleset/Block/BlockAdL.list >> Tools-repo/Ruleset/Block/BlockAdG.list
-          cat Tools-repo/Ruleset/Block/BlockAdR.list >> Tools-repo/Ruleset/Block/BlockAdG.list
-          cat Tools-repo/Ruleset/Block/BlockEasyListChina.list >> Tools-repo/Ruleset/Block/BlockAdG.list
-          cat Tools-repo/Ruleset/Block/BlockAdvertising.list >> Tools-repo/Ruleset/Block/BlockAdG.list
-          cat Tools-repo/Ruleset/Block/BlockHijacking.list >> Tools-repo/Ruleset/Block/BlockAdG.list
-          cat Tools-repo/Ruleset/Block/BlockTracking.list >> Tools-repo/Ruleset/Block/BlockAdG.list
+        # 把 BlockAd 同步到 BlockAds
+        if [ -f "Tools-repo/Ruleset/Block/BlockAds.list" ] ; then
+          cat Tools-repo/Ruleset/Block/BlockAdthNylHx.list >> Tools-repo/Ruleset/Block/BlockAds.list
+          cat Tools-repo/Ruleset/Block/BlockAdRuCu6.list >> Tools-repo/Ruleset/Block/BlockAds.list
+          cat Tools-repo/Ruleset/Block/BlockAdACL4SSR.list >> Tools-repo/Ruleset/Block/BlockAds.list
+          cat Tools-repo/Ruleset/Block/BlockAdlimbopro.list >> Tools-repo/Ruleset/Block/BlockAds.list
+          cat Tools-repo/Ruleset/Block/BlockEasyListChina.list >> Tools-repo/Ruleset/Block/BlockAds.list
+          cat Tools-repo/Ruleset/Block/BlockAdvertising.list >> Tools-repo/Ruleset/Block/BlockAds.list
+          cat Tools-repo/Ruleset/Block/BlockHijacking.list >> Tools-repo/Ruleset/Block/BlockAds.list
+          cat Tools-repo/Ruleset/Block/BlockTracking.list >> Tools-repo/Ruleset/Block/BlockAds.list
         else
-          echo "BlockAdG.list not found."
+          echo "BlockAds.list not found."
         fi
 
         # 把 FacebookIP & Instagram 同步到 Facebook
@@ -145,7 +145,7 @@ jobs:
       run: |
         cd Tools-repo/Ruleset/Block
         shopt -s nullglob  # 避免没有匹配的文件时保留原始通配符
-        for file in BlockAdG.list; do
+        for file in BlockAds.list; do
           if [ -f "$file" ]; then
             sorted_file="sorted_${file}"
             # 使用 grep 去掉包含 # 的行
