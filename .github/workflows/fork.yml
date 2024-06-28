@@ -18,7 +18,7 @@ jobs:
         repository: thNylHx/Tools
         path: Tools-repo
 
-    - name: 复刻
+    - name: Fork
       run: |
         curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/fork.sh | sh
 
@@ -63,11 +63,24 @@ jobs:
                        -e '/# 数目: /d' \
                        -e '/# 规则: /d' \
                        -e '/404: Not Found/d' \
+                       -e '/DOMAIN-REGEX,/d' \
                        "$file"
                        
                 # 如果为IP规则且不包含no-resolve 则添加no-resolve
                 awk '/^IP-/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile
                 mv tmpfile "$file"
+              else
+                echo "$file not found."
+              fi
+            done
+
+            # 格式转换 domain-set 为 rule-set
+            for file in *IP*.list; do
+              if [ -f "$file" ]; then
+                # 查找符合 IPv4 CIDR 格式的行，并将其转换为 IP-CIDR,<IPv4 CIDR>,no-resolve 格式
+                sed -i -E 's|^(([0-9]{1,3}\.){3}[0-9]{1,3}/[0-9]+)$|IP-CIDR,\1,no-resolve|' "$file"
+                # 查找符合 IPv6 CIDR 格式的行，并将其转换为 IP-CIDR6,<IPv6 CIDR>,no-resolve 格式
+                sed -i -E 's|^([0-9a-fA-F:]+/[0-9]+)$|IP-CIDR6,\1,no-resolve|' "$file"
               else
                 echo "$file not found."
               fi
