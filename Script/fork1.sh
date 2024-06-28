@@ -11,7 +11,7 @@ mkdir -p Tools/Ruleset/{Block,Media,Other,Meta}
 curl -L -o Tools-repo/Ruleset/ChinaIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
 curl -L -o Tools-repo/Ruleset/Other/GoogleIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
 curl -L -o Tools-repo/Ruleset/Other/TwitterIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
-
+curl -L -o Tools-repo/Ruleset/Other/Twitter.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.list"
 
 #--- Meta ---#
 
