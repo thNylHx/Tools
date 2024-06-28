@@ -19,7 +19,7 @@ jobs:
         repository: thNylHx/Tools
         path: Tools-repo
 
-    - name: Fork
+    - name: 复刻
       run: |
         curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/fork.sh | sh
 
@@ -28,7 +28,7 @@ jobs:
     - name: Edit Transfer
       run: |
         cd Tools-repo/Transfer
-        for file in BlockAds.list; do
+        for file in *.list; do
           if [ "$file" != "Lan.list" ] ; then
             sed -i -e 's/, /,/g' \
                    -e 's/;/# /g' \
