@@ -171,9 +171,9 @@ jobs:
       # 去重排序
     - name: Remove duplicates and lines 
       run: |
-        cd Tool-repo/Surge/Rules
+        cd Tools-repo/Ruleset/Block
         shopt -s nullglob  # 避免没有匹配的文件时保留原始通配符
-        for file in Reject.list; do
+        for file in BlockAd.list; do
           if [ -f "$file" ]; then
             sorted_file="sorted_${file}"
             # 使用 grep 去掉包含 # 的行
