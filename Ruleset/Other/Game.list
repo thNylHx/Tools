@@ -5,16 +5,16 @@
 
 
 # Steam
-DOMAIN,steambroadcast.akamaized.net
-DOMAIN,steamcdn-a.akamaihd.net
-DOMAIN,steamcommunity-a.akamaihd.net
-DOMAIN,steamstore-a.akamaihd.net
-DOMAIN,steamusercontent-a.akamaihd.net
-DOMAIN,steamuserimages-a.akamaihd.net
-DOMAIN,f3b7q2p3.ssl.hwcdn.net
-DOMAIN,steammobile.akamaized.net
-DOMAIN,steampipe-kr.akamaized.net
-DOMAIN,steampipe-partner.akamaized.net
+DOMAIN,DOMAIN,steambroadcast.akamaized.net
+DOMAIN,DOMAIN,steamcdn-a.akamaihd.net
+DOMAIN,DOMAIN,steamcommunity-a.akamaihd.net
+DOMAIN,DOMAIN,steamstore-a.akamaihd.net
+DOMAIN,DOMAIN,steamusercontent-a.akamaihd.net
+DOMAIN,DOMAIN,steamuserimages-a.akamaihd.net
+DOMAIN,DOMAIN,f3b7q2p3.ssl.hwcdn.net
+DOMAIN,DOMAIN,steammobile.akamaized.net
+DOMAIN,DOMAIN,steampipe-kr.akamaized.net
+DOMAIN,DOMAIN,steampipe-partner.akamaized.net
 DOMAIN-SUFFIX,cdn-ali.content.steamchina.com
 DOMAIN-SUFFIX,cdn-qc.content.steamchina.com
 DOMAIN-SUFFIX,cdn-ws.content.steamchina.com
@@ -61,9 +61,9 @@ DOMAIN-SUFFIX,steamvideo-a.akamaihd.net
 DOMAIN-SUFFIX,underlords.com
 DOMAIN-SUFFIX,valvesoftware.com
 DOMAIN-SUFFIX,wmsjsteam.com
-DOMAIN-KEYWORD,steambroadcast
-DOMAIN-KEYWORD,steamstore
-DOMAIN-KEYWORD,steamuserimages
+DOMAIN,DOMAIN-KEYWORD,steambroadcast
+DOMAIN,DOMAIN-KEYWORD,steamstore
+DOMAIN,DOMAIN-KEYWORD,steamuserimages
 DOMAIN-SUFFIX,steamcontent.com
 DOMAIN-SUFFIX,steamusercontent.com
 
@@ -83,4 +83,4 @@ DOMAIN-SUFFIX,shadowcomplex.com
 DOMAIN-SUFFIX,spyjinx.com
 DOMAIN-SUFFIX,unrealengine.com
 DOMAIN-SUFFIX,unrealtournament.com
-DOMAIN-KEYWORD,epicgames
+DOMAIN,DOMAIN-KEYWORD,epicgames

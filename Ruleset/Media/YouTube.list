@@ -1,11 +1,11 @@
 # 内容：YouTube
 # 数量：17条
-DOMAIN,USER-AGENT,*youtube*
-DOMAIN,USER-AGENT,YouTube*
-DOMAIN,USER-AGENT,com.google.ios.youtube*
-DOMAIN,DOMAIN-KEYWORD,youtube
-DOMAIN,DOMAIN,youtubei.googleapis.com
-DOMAIN,DOMAIN,yt3.ggpht.com
+DOMAIN,DOMAIN,USER-AGENT,*youtube*
+DOMAIN,DOMAIN,USER-AGENT,YouTube*
+DOMAIN,DOMAIN,USER-AGENT,com.google.ios.youtube*
+DOMAIN,DOMAIN,DOMAIN-KEYWORD,youtube
+DOMAIN,DOMAIN,DOMAIN,youtubei.googleapis.com
+DOMAIN,DOMAIN,DOMAIN,yt3.ggpht.com
 DOMAIN-SUFFIX,googlevideo.com
 DOMAIN-SUFFIX,gvt2.com
 DOMAIN-SUFFIX,withyoutube.com
@@ -20,8 +20,8 @@ DOMAIN-SUFFIX,ytimg.com
 
 # 内容：YouTubeMusic
 # 数量：5条
-DOMAIN,USER-AGENT,*YouTubeMusic*
-DOMAIN,USER-AGENT,*com.google.ios.youtubemusic*
-DOMAIN,USER-AGENT,YouTubeMusic*
-DOMAIN,USER-AGENT,com.google.ios.youtubemusic*
-DOMAIN,DOMAIN,music.youtube.com
+DOMAIN,DOMAIN,USER-AGENT,*YouTubeMusic*
+DOMAIN,DOMAIN,USER-AGENT,*com.google.ios.youtubemusic*
+DOMAIN,DOMAIN,USER-AGENT,YouTubeMusic*
+DOMAIN,DOMAIN,USER-AGENT,com.google.ios.youtubemusic*
+DOMAIN,DOMAIN,DOMAIN,music.youtube.com
