@@ -30,9 +30,11 @@ jobs:
         for dir in Tools-repo/Ruleset/Block Tools-repo/Ruleset/Media Tools-repo/Ruleset/Other; do
           if [ -d "$dir" ]; then
             cd "$dir"
-            file="BlockAds.list"
+            # 指定多个文件
+            for file in BlockAds.list; do
             if [ -f "$file" ]; then
               if [ "$file" != "Lan.list" ]; then
+                # 修改文件内容
                 sed -i -e 's/, /,/g' \
                        -e 's/;/# /g' \
                        -e 's/host,/HOST,/g' \
