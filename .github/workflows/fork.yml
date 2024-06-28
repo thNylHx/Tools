@@ -32,7 +32,7 @@ jobs:
           if [ -d "$dir" ]; then
             cd "$dir"
             # 指定多个文件
-            file="BlockAds.list *IP*.list"
+            for file in BlockAds.list *IP*.list; do
             if [ -f "$file" ]; then
               if [ "$file" != "Lan.list" ]; then
                 sed -i -e 's/, /,/g' \
@@ -126,7 +126,7 @@ jobs:
         else
           echo "$file not found."
         fi
-        
+
       # 去重排序
     - name: Remove duplicates and lines 
       run: |
