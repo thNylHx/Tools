@@ -41,7 +41,6 @@ jobs:
               if [ -f "$file" ]; then
                 sed -i -e 's/, /,/g' \
                        -e 's/;/# /g' \
-                       -e 's|//|#|g' \
                        -e 's/host,/HOST,/g' \
                        -e 's/host-/HOST-/g' \
                        -e 's/-suffix/-SUFFIX/g' \
@@ -69,6 +68,10 @@ jobs:
                 # 如果为IP规则且不包含no-resolve 则添加no-resolve
                 awk '/^IP-/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile
                 mv tmpfile "$file"
+
+                # 删除 // 及其后面的内容
+                sed -i -E 's|//.*||' "$file"
+                
               else
                 echo "$file not found."
               fi
