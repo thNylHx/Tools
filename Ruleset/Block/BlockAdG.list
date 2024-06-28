@@ -1,3 +1,7 @@
+;HOST, acs.youku.com, REJECT
+;HOST, hub5btmain.v6.shub.sandai.net, REJECT
+;HOST, hub5emu.v6.shub.sandai.net, REJECT
+;HOST, hub5idx.v6.shub.sandai.net, REJECT
 AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com))
 AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,normal),(DOMAIN-SUFFIX,zijieapi.com))
 AND,((DOMAIN-KEYWORD,gecko),(DOMAIN-SUFFIX,zijieapi.com))
@@ -400,6 +404,7 @@ DOMAIN,pl.cp31.ott.cibntv.net
 DOMAIN,pre-acs.youku.com
 DOMAIN,pv.vipads.cc
 DOMAIN,pvnapp.zol.com.cn
+DOMAIN,pvnapp.zol.com.cn# 2024-06-22 13:00
 DOMAIN,pvnapp.zol.com.cn# Internet Service Providers Hijacking
 DOMAIN,pvnapp.zol.com.cn# 本碎片只包含常见广告关键字、广告联盟。无副作用，放心使用
 DOMAIN,qa.viglink.com
@@ -8124,6 +8129,187 @@ DOMAIN-SUFFIX,zzyy17.top
 DOMAIN-SUFFIX,zzyy18.top
 DOMAIN-SUFFIX,zzyy19.top
 DOMAIN-SUFFIX,zzyy20.top
+HOST, a.cpic.com.cn, REJECT
+HOST, aaid.uyunad.com, REJECT
+HOST, acdn.adnxs.com, REJECT
+HOST, acs4baichuan.m.taobao.com, REJECT
+HOST, ad-h5-cdn.soulapp.cn, REJECT
+HOST, ad-h5-station-cdn.soulapp.cn, REJECT
+HOST, ad-r.soulapp.cn, REJECT
+HOST, ad.cyapi.cn, REJECT
+HOST, ad.tencentmusic.com, REJECT
+HOST, ad.zijieapi.com, REJECT
+HOST, ads.95516.com, REJECT
+HOST, ads.pubmatic.com, REJECT
+HOST, adservice.sigmob.cn, REJECT
+HOST, adsmind.gdtimg.com, REJECT
+HOST, adsmind.ugdtimg.com, REJECT
+HOST, adtracker.adfunlink.com, REJECT
+HOST, adttrackingprd.hwwt8.com, REJECT
+HOST, adui.tg.meitu.com, REJECT
+HOST, advertising.apple.com, REJECT
+HOST, afd.baidu.com, REJECT
+HOST, afdconf.baidu.com, REJECT
+HOST, amap-aos-info-nogw.amap.com, REJECT
+HOST, amdc.m.youku.com, REJECT
+HOST, api-adservices.apple.com, REJECT
+HOST, api.helloclue.com, REJECT
+HOST, api.iqiyi.com, REJECT
+HOST, api.liquidlink.cn, REJECT
+HOST, api.sm.cn, REJECT
+HOST, api.zuihuimai.com, REJECT
+HOST, apiv4-iyes.youku.com, REJECT
+HOST, appcloud.zhihu.com, REJECT
+HOST, appcloud2.in.zhihu.com, REJECT
+HOST, apple.comscoreresearch.com, REJECT
+HOST, baichuan-sdk.alicdn.com, REJECT
+HOST, banners.itunes.apple.com, REJECT
+HOST, brahe.apptimize.com, REJECT
+HOST, cad.youku.com, REJECT
+HOST, collector.clue.run, REJECT
+HOST, crash2.zhihu.com, REJECT
+HOST, credits.bz.mgtv.com, REJECT
+HOST, credits2.bz.mgtv.com, REJECT
+HOST, credits3.bz.mgtv.com, REJECT
+HOST, dflow.bz.mgtv.com, REJECT
+HOST, dns.alidns.com, REJECT
+HOST, dns.jd.com, REJECT
+HOST, ems.youku.com, REJECT
+HOST, encounter.bz.mgtv.com, REJECT
+HOST, floor.bz.mgtv.com, REJECT
+HOST, g.koowo.com, REJECT
+HOST, hdns.ksyun.com, REJECT
+HOST, hudong.alicdn.com, REJECT
+HOST, huichuan-mc.sm.cn, REJECT
+HOST, huichuan.sm.cn, REJECT
+HOST, huodong.weibo.cn, REJECT
+HOST, iad.apple.com, REJECT
+HOST, iadcontent.apple.com, REJECT
+HOST, iadctest.qwapi.com, REJECT
+HOST, iadmat.nosdn.127.net, REJECT
+HOST, iadmatapk.nosdn.127.net, REJECT
+HOST, iadmoo.apple.com, REJECT
+HOST, iadmusicmat.music.126.net, REJECT
+HOST, iadmusicmatvideo.music.126.net, REJECT
+HOST, iadworkbench.apple.com, REJECT
+HOST, id.hadron.ad.gt, REJECT
+HOST, images.ctfassets.net, REJECT
+HOST, info4.video.qq.com, REJECT
+HOST, info6.video.qq.com, REJECT
+HOST, init.supersonicads.com, REJECT
+HOST, ios.video.mpush.qq.com, REJECT
+HOST, ipv4.music.163.com, REJECT
+HOST, ipv6.music.163.com, REJECT
+HOST, is.snssdk.com, REJECT
+HOST, iyes.youku.com, REJECT
+HOST, launch.apple.com, REJECT
+HOST, layer.bz.mgtv.com, REJECT
+HOST, lc.map.baidu.com, REJECT
+HOST, lookup.api.bsb.baidu.com, REJECT
+HOST, m-vali.cp31.ott.cibntv.net, REJECT
+HOST, m.adyounger.com, REJECT
+HOST, mapi.apptimize.com, REJECT
+HOST, maplocatesdksnapshot.d.meituan.net, REJECT
+HOST, mc.atm.youku.com, REJECT
+HOST, md-i-s.apptimize.com, REJECT
+HOST, mediation.adnxs.com, REJECT
+HOST, metrics-picture.d.meituan.net, REJECT
+HOST, mob.bz.mgtv.com, REJECT
+HOST, mobads.baidu.com, REJECT
+HOST, mobilead.kuwo.cn, REJECT
+HOST, mqtt.zhihu.com, REJECT
+HOST, nbsdk-baichuan.alicdn.com, REJECT
+HOST, open.e.kuaishou.com, REJECT
+HOST, open.kuaishou.com, REJECT
+HOST, ossgw.alicdn.com, REJECT
+HOST, otheve.beacon.qq.com, REJECT
+HOST, pagead2.googlesyndication-cn.com, REJECT
+HOST, pagead2.googlesyndication.com, REJECT
+HOST, pageviewp.icbc.com.cn, REJECT
+HOST, pgdt.gtimg.cn, REJECT
+HOST, pre-acs.youku.com, REJECT
+HOST, qwapi.apple.com, REJECT
+HOST, rc-topic-api.bz.mgtv.com, REJECT
+HOST, rich.kuwo.cn, REJECT
+HOST, rprain.bz.mgtv.com, REJECT
+HOST, rprain.log.mgtv.com, REJECT
+HOST, sdkconfig.ad.xiaomi.com, REJECT
+HOST, sin3-ib.adnxs.com, REJECT
+HOST, soul-ad.soulapp.cn, REJECT
+HOST, statics.woozooo.com, REJECT
+HOST, sugar.zhihu.com, REJECT
+HOST, switch.cup.com.cn, REJECT
+HOST, tmead.y.qq.com, REJECT
+HOST, tmeadbak.y.qq.com, REJECT
+HOST, tmeadcomm.y.qq.com, REJECT
+HOST, tong.8888888888.bid, REJECT
+HOST, tpns.qq.com, REJECT
+HOST, vali-g1.cp31.ott.cibntv.net, REJECT
+HOST, vali-ugc.cp31.ott.cibntv.net, REJECT
+HOST, vip.bz.mgtv.com, REJECT
+HOST, ws.tapjoyads.com, REJECT
+HOST, www.googleadservices.com, REJECT
+HOST, wxsnsdy.wxs.qq.com, REJECT
+HOST, wxsnsdythumb.wxs.qq.com, REJECT
+HOST, yandexmetrica.com, REJECT
+HOST, yk-ssp.ad.youku.com, REJECT
+HOST, ykad-data.youku.com, REJECT
+HOST, youku-acs.m.taobao.com, REJECT
+HOST, zxid-m.mobileservice.cn, REJECT
+HOST-KEYWORD, -ad-sign.byteimg.com, REJECT
+HOST-KEYWORD, -adsystem.com, REJECT
+HOST-KEYWORD, ads.g.doubleclick, REJECT
+HOST-KEYWORD, adv.ccb.com, REJECT
+HOST-KEYWORD, asiad.byteactivity, REJECT
+HOST-KEYWORD, httpdns-, REJECT
+HOST-KEYWORD, httpdns., REJECT
+HOST-KEYWORD, kc.saigmpl.com, REJECT
+HOST-KEYWORD, kcc.fwxhvvd.com, REJECT
+HOST-KEYWORD, kg.oiocklg.com, REJECT
+HOST-KEYWORD, pangolin-sdk-toutiao, REJECT
+HOST-KEYWORD, pangolin.snssdk.com, REJECT
+HOST-KEYWORD, pglstatp-toutiao, REJECT
+HOST-KEYWORD, safebrowsing., REJECT
+HOST-KEYWORD, trace.qq.com, REJECT
+HOST-KEYWORD, trace.video.qq.com, REJECT
+HOST-KEYWORD, video-cn.snssdk.com, REJECT
+HOST-SUFFIX, 163jiasu.com, REJECT
+HOST-SUFFIX, ads.linkedin.com, REJECT
+HOST-SUFFIX, ads.vungle.com, REJECT
+HOST-SUFFIX, adservice.google.com, REJECT
+HOST-SUFFIX, advp.apple.com, REJECT
+HOST-SUFFIX, applovin.com, REJECT
+HOST-SUFFIX, applvn.com, REJECT
+HOST-SUFFIX, appsflyer.com, REJECT
+HOST-SUFFIX, appsflyersdk.com, REJECT
+HOST-SUFFIX, biz.weibo.com, REJECT
+HOST-SUFFIX, da.mgtv.com, REJECT
+HOST-SUFFIX, ehaier.com, REJECT
+HOST-SUFFIX, gdt.qq.com, REJECT
+HOST-SUFFIX, iad-apple.com, REJECT
+HOST-SUFFIX, iadsdk.apple.com, REJECT
+HOST-SUFFIX, kuaishouzt.com, REJECT
+HOST-SUFFIX, l.qq.com, REJECT
+HOST-SUFFIX, mall.icbc.com.cn, REJECT
+HOST-SUFFIX, miaozhen.com, REJECT
+HOST-SUFFIX, pos.baidu.com, REJECT
+HOST-SUFFIX, shuzilm.cn, REJECT
+HOST-SUFFIX, u3.ucweb.com, REJECT
+HOST-SUFFIX, unityads.unity3d.com, REJECT
+HOST-SUFFIX, ut.taobao.com, REJECT
+IP-CIDR, 101.124.19.122/32, REJECT
+IP-CIDR, 103.37.155.60/32, REJECT
+IP-CIDR, 103.41.167.237/32, REJECT
+IP-CIDR, 118.89.204.198/32, REJECT
+IP-CIDR, 120.27.235.201/32, REJECT
+IP-CIDR, 121.196.197.147/32, REJECT
+IP-CIDR, 180.76.76.112/32, REJECT
+IP-CIDR, 180.76.76.200/32, REJECT
+IP-CIDR, 203.107.1.1/24, REJECT
+IP-CIDR, 47.110.187.87/32, REJECT
+IP-CIDR, 47.56.131.76/32, REJECT
+IP-CIDR, 47.97.215.55/32, REJECT
+IP-CIDR, 47.99.42.29/32, REJECT
 IP-CIDR,101.124.19.122/32,no-resolve
 IP-CIDR,101.227.200.11/32,no-resolve
 IP-CIDR,101.227.200.28/32,no-resolve
@@ -8198,6 +8384,8 @@ IP-CIDR,61.174.50.214/32,no-resolve
 IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,no-resolve
 IP-CIDR6,2402:db40:5100:1011::5/128,no-resolve
 IP-CIDR6,2405:1480:3000:303f::303f/128,no-resolve
+IP6-CIDR, 2402:4e00:1200:ed00:0:9089:6dac:96b6/128, REJECT
+IP6-CIDR, 2402:db40:5100:1011::5/128, REJECT
 URL-REGEX,^http:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns$
 URL-REGEX,^http:\/\/mobilead\.kuwo\.cn\/EcomResourceServer
 URL-REGEX,^http:\/\/mobilead\.kuwo\.cn\/MobileAdServer
