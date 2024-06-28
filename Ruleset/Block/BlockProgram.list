@@ -589,17 +589,17 @@ DOMAIN-SUFFIX,s.qd.qingting.fm
 DOMAIN-SUFFIX,s.qd.qingtingfm.com
 
 # QQ
-DOMAIN-KEYWORD,omgmtaw
-DOMAIN,adsmind.apdcdn.tc.qq.com
-DOMAIN,adsmind.gdtimg.com
-DOMAIN,adsmind.tc.qq.com
-DOMAIN,pgdt.gtimg.cn
-DOMAIN,pgdt.gtimg.com
-DOMAIN,pgdt.ugdtimg.com
-DOMAIN,splashqqlive.gtimg.com
-DOMAIN,wa.gtimg.com
-DOMAIN,wxsnsdy.wxs.qq.com
-DOMAIN,wxsnsdythumb.wxs.qq.com
+DOMAIN,DOMAIN-KEYWORD,omgmtaw
+DOMAIN,DOMAIN,adsmind.apdcdn.tc.qq.com
+DOMAIN,DOMAIN,adsmind.gdtimg.com
+DOMAIN,DOMAIN,adsmind.tc.qq.com
+DOMAIN,DOMAIN,pgdt.gtimg.cn
+DOMAIN,DOMAIN,pgdt.gtimg.com
+DOMAIN,DOMAIN,pgdt.ugdtimg.com
+DOMAIN,DOMAIN,splashqqlive.gtimg.com
+DOMAIN,DOMAIN,wa.gtimg.com
+DOMAIN,DOMAIN,wxsnsdy.wxs.qq.com
+DOMAIN,DOMAIN,wxsnsdythumb.wxs.qq.com
 DOMAIN-SUFFIX,act.qq.com
 DOMAIN-SUFFIX,ad.qun.qq.com
 DOMAIN-SUFFIX,adsfile.qq.com
@@ -845,11 +845,11 @@ DOMAIN-SUFFIX,paopao.iqiyi.com
 DOMAIN-SUFFIX,paopaod.qiyipic.com
 DOMAIN-SUFFIX,policy.video.iqiyi.com
 DOMAIN-SUFFIX,yuedu.iqiyi.com
-IP-CIDR,101.227.200.0/24,no-resolve
-IP-CIDR,101.227.200.11/32,no-resolve
-IP-CIDR,101.227.200.28/32,no-resolve
-IP-CIDR,101.227.97.240/32,no-resolve
-IP-CIDR,124.192.153.42/32,no-resolve
+DOMAIN,IP-CIDR,101.227.200.0/24,no-resolve
+DOMAIN,IP-CIDR,101.227.200.11/32,no-resolve
+DOMAIN,IP-CIDR,101.227.200.28/32,no-resolve
+DOMAIN,IP-CIDR,101.227.97.240/32,no-resolve
+DOMAIN,IP-CIDR,124.192.153.42/32,no-resolve
 
 # Ku6 酷6
 DOMAIN-SUFFIX,gug.ku6cdn.com
@@ -992,20 +992,20 @@ DOMAIN-SUFFIX,wan.youku.com
 DOMAIN-SUFFIX,ykatr.youku.com
 DOMAIN-SUFFIX,ykrec.youku.com
 DOMAIN-SUFFIX,ykrectab.youku.com
-IP-CIDR,117.177.248.17/32,no-resolve
-IP-CIDR,117.177.248.41/32,no-resolve
-IP-CIDR,223.87.176.139/32,no-resolve
-IP-CIDR,223.87.176.176/32,no-resolve
-IP-CIDR,223.87.177.180/32,no-resolve
-IP-CIDR,223.87.177.182/32,no-resolve
-IP-CIDR,223.87.177.184/32,no-resolve
-IP-CIDR,223.87.177.43/32,no-resolve
-IP-CIDR,223.87.177.47/32,no-resolve
-IP-CIDR,223.87.177.80/32,no-resolve
-IP-CIDR,223.87.182.101/32,no-resolve
-IP-CIDR,223.87.182.102/32,no-resolve
-IP-CIDR,223.87.182.11/32,no-resolve
-IP-CIDR,223.87.182.52/32,no-resolve
+DOMAIN,IP-CIDR,117.177.248.17/32,no-resolve
+DOMAIN,IP-CIDR,117.177.248.41/32,no-resolve
+DOMAIN,IP-CIDR,223.87.176.139/32,no-resolve
+DOMAIN,IP-CIDR,223.87.176.176/32,no-resolve
+DOMAIN,IP-CIDR,223.87.177.180/32,no-resolve
+DOMAIN,IP-CIDR,223.87.177.182/32,no-resolve
+DOMAIN,IP-CIDR,223.87.177.184/32,no-resolve
+DOMAIN,IP-CIDR,223.87.177.43/32,no-resolve
+DOMAIN,IP-CIDR,223.87.177.47/32,no-resolve
+DOMAIN,IP-CIDR,223.87.177.80/32,no-resolve
+DOMAIN,IP-CIDR,223.87.182.101/32,no-resolve
+DOMAIN,IP-CIDR,223.87.182.102/32,no-resolve
+DOMAIN,IP-CIDR,223.87.182.11/32,no-resolve
+DOMAIN,IP-CIDR,223.87.182.52/32,no-resolve
 
 # Youtube
 DOMAIN-SUFFIX,azabu-u.ac.jp

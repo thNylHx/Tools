@@ -3,11 +3,11 @@
 
 
 # Bilibili
-USER-AGENT,Bilibili*
-USER-AGENT,bili*
-USER-AGENT,bili-inter*
-DOMAIN,apiintl.biliapi.net
-DOMAIN,upos-hz-mirrorakam.akamaized.net
+DOMAIN,USER-AGENT,Bilibili*
+DOMAIN,USER-AGENT,bili*
+DOMAIN,USER-AGENT,bili-inter*
+DOMAIN,DOMAIN,apiintl.biliapi.net
+DOMAIN,DOMAIN,upos-hz-mirrorakam.akamaized.net
 DOMAIN-SUFFIX,acg.tv
 DOMAIN-SUFFIX,acgvideo.com
 DOMAIN-SUFFIX,b23.tv
@@ -24,27 +24,27 @@ DOMAIN-SUFFIX,bilivideo.com
 DOMAIN-SUFFIX,hdslb.com
 DOMAIN-SUFFIX,im9.com
 DOMAIN-SUFFIX,smtcdns.net
-DOMAIN,p-bstarstatic.akamaized.net
-DOMAIN,p.bstarstatic.com
-DOMAIN,upos-bstar-mirrorakam.akamaized.net
-DOMAIN,upos-bstar1-mirrorakam.akamaized.net
-IP-CIDR,45.43.32.234/32,no-resolve
-IP-CIDR,103.151.150.0/23,no-resolve
-IP-CIDR,119.29.29.29/32,no-resolve
-IP-CIDR,128.1.62.200/32,no-resolve
-IP-CIDR,128.1.62.201/32,no-resolve
-IP-CIDR,150.116.92.250/32,no-resolve
-IP-CIDR,164.52.33.178/32,no-resolve
-IP-CIDR,164.52.33.182/32,no-resolve
-IP-CIDR,164.52.76.18/32,no-resolve
-IP-CIDR,203.107.1.33/32,no-resolve
-IP-CIDR,203.107.1.34/32,no-resolve
-IP-CIDR,203.107.1.65/32,no-resolve
-IP-CIDR,203.107.1.66/32,no-resolve
+DOMAIN,DOMAIN,p-bstarstatic.akamaized.net
+DOMAIN,DOMAIN,p.bstarstatic.com
+DOMAIN,DOMAIN,upos-bstar-mirrorakam.akamaized.net
+DOMAIN,DOMAIN,upos-bstar1-mirrorakam.akamaized.net
+DOMAIN,IP-CIDR,45.43.32.234/32,no-resolve
+DOMAIN,IP-CIDR,103.151.150.0/23,no-resolve
+DOMAIN,IP-CIDR,119.29.29.29/32,no-resolve
+DOMAIN,IP-CIDR,128.1.62.200/32,no-resolve
+DOMAIN,IP-CIDR,128.1.62.201/32,no-resolve
+DOMAIN,IP-CIDR,150.116.92.250/32,no-resolve
+DOMAIN,IP-CIDR,164.52.33.178/32,no-resolve
+DOMAIN,IP-CIDR,164.52.33.182/32,no-resolve
+DOMAIN,IP-CIDR,164.52.76.18/32,no-resolve
+DOMAIN,IP-CIDR,203.107.1.33/32,no-resolve
+DOMAIN,IP-CIDR,203.107.1.34/32,no-resolve
+DOMAIN,IP-CIDR,203.107.1.65/32,no-resolve
+DOMAIN,IP-CIDR,203.107.1.66/32,no-resolve
 
 # 抖音
-DOMAIN,sso.douyin.com
-DOMAIN,www.douyin.com
+DOMAIN,DOMAIN,sso.douyin.com
+DOMAIN,DOMAIN,www.douyin.com
 DOMAIN-SUFFIX,zijieapi.com
 DOMAIN-SUFFIX,ecombdapi.com
 DOMAIN-SUFFIX,snssdk.com
@@ -59,27 +59,27 @@ DOMAIN-SUFFIX,ixigua.com
 DOMAIN-SUFFIX,ixiguavideo.com
 DOMAIN-SUFFIX,pstatp.com
 DOMAIN-SUFFIX,toutiao.com
-DOMAIN-KEYWORD,core-c-lq
-DOMAIN-KEYWORD,core-lq
-DOMAIN-KEYWORD,normal-c-lq
-DOMAIN-KEYWORD,normal-lq
-DOMAIN-KEYWORD,search-quic-lq
-DOMAIN-KEYWORD,search-lq
-DOMAIN-KEYWORD,-normal-hl
-DOMAIN-KEYWORD,-normal-c-hl
-DOMAIN-KEYWORD,-core-c-hl
-DOMAIN-KEYWORD,-normal-lf
-DOMAIN-KEYWORD,-normal-c-lf
-DOMAIN-KEYWORD,-core-c-lf
-DOMAIN-KEYWORD,zjurl
-DOMAIN-KEYWORD,douyin
-DOMAIN-KEYWORD,zjcdn
+DOMAIN,DOMAIN-KEYWORD,core-c-lq
+DOMAIN,DOMAIN-KEYWORD,core-lq
+DOMAIN,DOMAIN-KEYWORD,normal-c-lq
+DOMAIN,DOMAIN-KEYWORD,normal-lq
+DOMAIN,DOMAIN-KEYWORD,search-quic-lq
+DOMAIN,DOMAIN-KEYWORD,search-lq
+DOMAIN,DOMAIN-KEYWORD,-normal-hl
+DOMAIN,DOMAIN-KEYWORD,-normal-c-hl
+DOMAIN,DOMAIN-KEYWORD,-core-c-hl
+DOMAIN,DOMAIN-KEYWORD,-normal-lf
+DOMAIN,DOMAIN-KEYWORD,-normal-c-lf
+DOMAIN,DOMAIN-KEYWORD,-core-c-lf
+DOMAIN,DOMAIN-KEYWORD,zjurl
+DOMAIN,DOMAIN-KEYWORD,douyin
+DOMAIN,DOMAIN-KEYWORD,zjcdn
 
 # 微博
 DOMAIN-SUFFIX,weibo.cn
 DOMAIN-SUFFIX,weibo.com
 DOMAIN-SUFFIX,weibocdn.com
-DOMAIN-KEYWORD,weibo
+DOMAIN,DOMAIN-KEYWORD,weibo
 
 # 知乎
 DOMAIN-SUFFIX,zhihu.com
