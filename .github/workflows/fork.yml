@@ -1,4 +1,3 @@
-# 2024-06-28 12:00
 name: Fork & Edit
 
 on:
@@ -33,8 +32,7 @@ jobs:
             cd "$dir"
             # 指定多个文件
             for file in BlockAds.list *IP*.list; do
-            if [ -f "$file" ]; then
-              if [ "$file" != "Lan.list" ]; then
+              if [ -f "$file" ]; then
                 sed -i -e 's/, /,/g' \
                        -e 's/;/# /g' \
                        -e 's/host,/HOST,/g' \
@@ -66,10 +64,9 @@ jobs:
               else
                 echo "$file not found."
               fi
-            fi
+            done
 
-            # 返回到上一级目录，并抑制输出
-            cd - > /dev/null
+            cd - > /dev/null  # 返回到上一级目录，并抑制输出
           else
             echo "Directory $dir not found."
           fi
@@ -92,7 +89,7 @@ jobs:
           cat Tools-repo/Ruleset/Block/BlockHijacking.list >> Tools-repo/Ruleset/Block/BlockAdG.list
           cat Tools-repo/Ruleset/Block/BlockTracking.list >> Tools-repo/Ruleset/Block/BlockAdG.list
         else
-          echo "$file not found."
+          echo "BlockAdG.list not found."
         fi
 
         # 把 NetflixIP 同步到 Netflix
@@ -100,7 +97,7 @@ jobs:
          echo "" >> Tools-repo/Ruleset/Media/Netflix.list
          cat Tools-repo/Ruleset/Media/NetflixIP.list >> Tools-repo/Ruleset/Media/Netflix.list
         else
-          echo "$file not found."
+          echo "Netflix.list not found."
         fi
 
         # 把 TwitterIP 同步到 Twitter
@@ -108,7 +105,7 @@ jobs:
          echo "" >> Tools-repo/Ruleset/Media/Twitter.list
          cat Tools-repo/Ruleset/Media/TwitterIP.list >> Tools-repo/Ruleset/Media/Twitter.list
         else
-          echo "$file not found."
+          echo "Twitter.list not found."
         fi
 
         # 把 YouTubeMusic 同步到 YouTube
@@ -116,7 +113,7 @@ jobs:
          echo "" >> Tools-repo/Ruleset/Media/YouTube.list
          cat Tools-repo/Ruleset/Media/YouTubeMusic.list >> Tools-repo/Ruleset/Media/YouTube.list
         else
-          echo "$file not found."
+          echo "YouTube.list not found."
         fi
 
         # 把 GoogleIP 同步到 Google
@@ -124,7 +121,7 @@ jobs:
          echo "" >> Tools-repo/Ruleset/Other/Google.list
          cat Tools-repo/Ruleset/Other/GoogleIP.list >> Tools-repo/Ruleset/Other/Google.list
         else
-          echo "$file not found."
+          echo "Google.list not found."
         fi
 
       # 去重排序
