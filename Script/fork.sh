@@ -87,8 +87,8 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/YouTube.list "https://raw.githubusercont
 
 # 微软平台
 curl -L -o Tools-repo/Ruleset/ClashMeta/GitHub.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.list"
-curl -L -o Tools-repo/Ruleset/Other/OneDrive.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.list"
-curl -L -o Tools-repo/Ruleset/Other/Microsoft.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.list"
+curl -L -o Tools-repo/Ruleset/ClashMeta/OneDrive.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.list"
+curl -L -o Tools-repo/Ruleset/ClashMeta/Microsoft.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.list"
 
 # 国内直连
 curl -L -o Tools-repo/Ruleset/ClashMeta/China.list  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list"
