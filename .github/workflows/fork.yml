@@ -32,7 +32,8 @@ jobs:
 
         # 修改 TikTok.list 文件
         sed -i -e 's/^DOMAIN,//g' \
-               -e 's/^DOMAIN-SUFFIX,/+. /g' \
+               -e 's/^DOMAIN-SUFFIX,/+./g' \
+               -e 's/^DOMAIN-KEYWORD,/+./g' \
                Tools-repo/Ruleset/ClashMeta/TikTok.list
 
         # 指定多个文件夹
