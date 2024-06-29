@@ -26,19 +26,6 @@ jobs:
       # 适配规则
     - name: Edit Ruleset
       run: |
-        # 保留原文件，复制并转换 TikTok.list 文件
-        mkdir -p Tools-repo/Ruleset/ClashMeta
-        cp Tools-repo/Ruleset/Media/TikTok.list Tools-repo/Ruleset/ClashMeta/TikTok.list
-
-        # 修改 TikTok.list 文件
-        sed -i -e 's/^DOMAIN,//g' \
-               -e 's/^DOMAIN-SUFFIX,/+. /g' \
-               -e 's/^DOMAIN-KEYWORD,/+. /g' \
-               Tools-repo/Ruleset/ClashMeta/TikTok.list
-        
-        # 删除 +. 后面的空格
-        sed -i -e 's/+\. /+./g' Tools-repo/Ruleset/ClashMeta/TikTok.list
-
         # 指定多个文件夹
         for dir in Tools-repo/Ruleset/Block Tools-repo/Ruleset/Media Tools-repo/Ruleset/Other; do
           if [ -d "$dir" ]; then
