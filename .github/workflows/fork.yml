@@ -18,7 +18,7 @@ jobs:
         repository: thNylHx/Tools
         path: Tools-repo
 
-    - name: Fork
+    - name: 复刻
       run: |
         curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/fork.sh | sh
 
@@ -145,6 +145,7 @@ jobs:
         if [ -f "Tools-repo/Ruleset/Media/YouTube.list" ] ; then
          echo "" >> Tools-repo/Ruleset/Media/YouTube.list
          cat Tools-repo/Ruleset/Media/YouTubeMusic.list >> Tools-repo/Ruleset/Media/YouTube.list
+         sed -i "1s|^|#!name = YouTube\n#!desc = 分流规则\n#!date = $(date '+%Y-%m-%d %H:%M:%S')\n|" Tools-repo/Ruleset/Media/YouTube.list
         else
           echo "YouTube.list not found."
         fi
