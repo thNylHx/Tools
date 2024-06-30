@@ -20,9 +20,9 @@ VERSION=$(curl -L "https://github.com/MetaCubeX/mihomo/releases/download/Prerele
 
 echo  "获取到的最新版本: ${VERSION}"
 
-echo  "开始下载: ${VERSION}" 
+echo  "开始下载: mihomo" 
 wget "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/mihomo-linux-${ARCH}-compatible-${VERSION}.gz"
-echo "${VERSION}下载完成, 开始部署"
+echo "mihomo 下载完成, 开始部署"
 
 echo "开始创建 mihomo 文件夹"
 # 创建 mihomo 文件夹
