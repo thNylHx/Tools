@@ -28,7 +28,7 @@ echo "开始创建 mihomo 文件夹"
 # 创建 mihomo 文件夹
 mkdir -p /root/mihomo
 
-echo "开始解压: mihomo "
+echo "开始解压 "
 # 解压
 gzip -d mihomo-linux-${ARCH}-compatible-${VERSION}.gz
 
