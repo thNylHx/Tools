@@ -23,7 +23,7 @@ echo  "获取到的版本:${VERSION}"
 curl -Lo mihomo.deb "https://github.com/SagerNet/mihomo/releases/download/Prerelease-Alpha/mihomo-linux-${VERSION}-compatible-alpha-${ARCH}.deb"
 echo "${VERSION}下载完成,开始安装"
 
-sudo dpkg -i mihomo.deb
+sudo apt install ./mihomo.deb
 
 echo "安装完成,清理安装包"
 
