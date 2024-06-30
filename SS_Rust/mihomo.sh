@@ -11,27 +11,30 @@ case "${ARCH_RAW}" in
     's390x')    ARCH='s390x';;
     *)          echo "Unsupported architecture: ${ARCH_RAW}"; exit 1;;
 esac
-echo  "当前设备架构${ARCH_RAW}"
 
-VERSION=$(curl -s https://api.github.com/repos/MetaCubeX/mihomo/releases | grep "tag_name" | cut -d'"' -f4)
+echo "当前设备架构: ${ARCH_RAW}"
 
-echo  "获取到的版本:${VERSION}"
-#ARCH
+# 获取最新版本号
+VERSION=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases/latest" | jq -r '.tag_name' | sed 's/v//')
 
-wget "https://github.com/SagerNet/mihomo/releases/download/Prerelease-Alpha/mihomo-linux-${ARCH}-compatible-alpha-${VERSION}.gz"
+echo "获取到的版本号: ${VERSION}"
 
 # 创建 mihomo 文件夹
 mkdir -p /root/mihomo
 
+# 下载并解压 mihomo
+wget "https://github.com/SagerNet/mihomo/releases/download/Prerelease-Alpha/mihomo-linux-${ARCH}-compatible-alpha-${VERSION}.gz"
+
 # 解压文件
-gzip -d mihomo-linux-${ARCH}-compatible-${VERSION}.gz
+gzip -d mihomo-linux-${ARCH}-compatible-alpha-${VERSION}.gz
 
 # 授权最高权限
-chmod 777 mihomo-linux-${ARCH}-compatible-${VERSION}
+chmod 777 mihomo-linux-${ARCH}-compatible-alpha-${VERSION}
 
 # 重命名并移动到 /root/mihomo/
-mv mihomo-linux-${ARCH}-compatible-${VERSION} /root/mihomo/mihomo
+mv mihomo-linux-${ARCH}-compatible-alpha-${VERSION} /root/mihomo/mihomo
 
+# 下载并安装 mihomo UI 界面
 git clone https://github.com/metacubex/metacubexd.git -b gh-pages /root/mihomo/ui
 
 # 创建 systemd 配置文件
@@ -55,7 +58,10 @@ ExecReload=/bin/kill -HUP $MAINPID
 WantedBy=multi-user.target
 EOF
 
-
+# 重新加载 systemd
 systemctl daemon-reload
+
+# 启动 mihomo 服务
 systemctl restart mihomo
-echo "重启服务完成"
+
+echo "mihomo安装和配置完成，服务已重启。"
