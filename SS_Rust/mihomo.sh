@@ -14,69 +14,27 @@ esac
 
 echo "当前设备架构: ${ARCH_RAW}"
 
-# Ensure jq is installed
-if ! command -v jq &> /dev/null; then
-    echo "jq could not be found, installing..."
-    apt-get update && apt-get install -y jq
-fi
-
 # 获取最新版本
 RESPONSE=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases?per_page=1&page=0")
-echo "GitHub API Response: $RESPONSE"
-
-# Attempt to get the version from the `tag_name`, fall back to `commit`
-VERSION=$(echo "$RESPONSE" | jq -r '.[0].tag_name // .[0].commit.sha' | sed 's/Prerelease-Alpha//')
-
-echo "获取到的最新版本: ${VERSION}"
+VERSION=$(echo $RESPONSE | grep -oP '"tag_name":\s*"\K[^"]+')
 
 if [ -z "$VERSION" ]; then
-    echo "Error: Failed to retrieve the version number."
+    echo "未能获取最新版本"
     exit 1
 fi
+
+echo "获取到的最新版本: ${VERSION}"
 
 # 创建 mihomo 文件夹
 mkdir -p /root/mihomo
 
 # 下载并解压 mihomo
-wget "https://github.com/SagerNet/mihomo/releases/download/Prerelease-Alpha/mihomo-linux-${ARCH}-compatible-alpha-${VERSION}.gz"
+URL="https://github.com/SagerNet/mihomo/releases/download/${VERSION}/mihomo-linux-${ARCH}-compatible-alpha-${VERSION}.gz"
+wget -O /root/mihomo/mihomo.gz "$URL"
 
-# 解压文件
-gzip -d mihomo-linux-${ARCH}-compatible-alpha-${VERSION}.gz
+gunzip /root/mihomo/mihomo.gz
 
-# 授权最高权限
-chmod 777 mihomo-linux-${ARCH}-compatible-alpha-${VERSION}
+echo "下载并解压完成"
 
-# 重命名并移动到 /root/mihomo/
-mv mihomo-linux-${ARCH}-compatible-alpha-${VERSION} /root/mihomo/mihomo
-
-# 下载并安装 mihomo UI 界面
-git clone https://github.com/metacubex/metacubexd.git -b gh-pages /root/mihomo/ui
-
-# 创建 systemd 配置文件
-cat << EOF > /etc/systemd/system/mihomo.service
-[Unit]
-Description=mihomo Daemon, Another Clash Kernel.
-After=network.target NetworkManager.service systemd-networkd.service iwd.service
-
-[Service]
-Type=simple
-LimitNPROC=500
-LimitNOFILE=1000000
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_RAW CAP_NET_BIND_SERVICE CAP_SYS_TIME CAP_SYS_PTRACE CAP_DAC_READ_SEARCH CAP_DAC_OVERRIDE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_RAW CAP_NET_BIND_SERVICE CAP_SYS_TIME CAP_SYS_PTRACE CAP_DAC_READ_SEARCH CAP_DAC_OVERRIDE
-Restart=always
-ExecStartPre=/usr/bin/sleep 1s
-ExecStart=/root/mihomo/mihomo -d /root/mihomo
-ExecReload=/bin/kill -HUP $MAINPID
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-# 重新加载 systemd
-systemctl daemon-reload
-
-# 启动 mihomo 服务
-systemctl restart mihomo
-
-echo "mihomo 安装和配置完成，服务已重启。"
+# 后续操作，例如运行 mihomo
+# /root/mihomo/mihomo
