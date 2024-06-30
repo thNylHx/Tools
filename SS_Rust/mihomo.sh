@@ -33,6 +33,9 @@ echo "下载链接: ${DOWNLOAD_URL}"
 wget -O /root/mihomo.gz "$DOWNLOAD_URL"
 gunzip /root/mihomo.gz
 
+# 创建 mihomo 文件夹
+mkdir -p /root/mihomo
+
 # 获取下载的文件名并重命名为 mihomo
 mv /root/mihomo /root/mihomo/mihomo
 
