@@ -27,24 +27,29 @@ echo "${VERSION}下载完成, 开始部署"
 echo "开始创建 mihomo 文件夹"
 # 创建 mihomo 文件夹
 mkdir -p /root/mihomo
+echo "创建完成"
 
 echo "开始解压 "
 # 解压
 gzip -d mihomo-linux-${ARCH}-compatible-${VERSION}.gz
+echo "解压完成"
 
-echo "开始授权最高权限 "
+echo "开始授权最高权限"
 # 授权
 chmod 777 mihomo-linux-${ARCH}-compatible-${VERSION}
+echo "授权完成"
 
 echo "开始重名名为 mihomo 并移动到 /root/mihomo/ "
 # 移动
 mv mihomo-linux-${ARCH}-compatible-${VERSION} /root/mihomo/mihomo
+echo "重命名并移动完成"
 
-echo "开始安装 mihomo UI "
+echo "开始安装 UI "
 # 安装UI
 git clone https://github.com/metacubex/metacubexd.git -b gh-pages /root/mihomo/ui
+echo "UI 安装完成"
 
-echo "开始安装系统服务 "
+echo "开始安装系统服务"
 # 安装服务
 cat << EOF > /etc/systemd/system/mihomo.service
 [Unit]
@@ -65,6 +70,6 @@ ExecReload=/bin/kill -HUP $MAINPID
 [Install]
 WantedBy=multi-user.target
 EOF
-
+echo "开始安装系统服务"
 
 echo "恭喜你，已安装完成，上传你的config.ymal 文件，就可以使用"
