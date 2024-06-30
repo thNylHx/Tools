@@ -34,8 +34,7 @@ wget -O /root/mihomo.gz "$DOWNLOAD_URL"
 gunzip /root/mihomo.gz
 
 # 获取下载的文件名并重命名为 mihomo
-DOWNLOADED_FILE=$(basename ${DOWNLOAD_URL%.gz})
-mv /root/$DOWNLOADED_FILE /root/mihomo/mihomo
+mv /root/mihomo /root/mihomo/mihomo
 
 # 授权最高权限
 chmod 777 /root/mihomo/mihomo
