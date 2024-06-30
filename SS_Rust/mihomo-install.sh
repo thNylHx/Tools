@@ -49,7 +49,7 @@ echo "开始安装 UI "
 git clone https://github.com/metacubex/metacubexd.git -b gh-pages /root/mihomo/ui
 echo "UI 安装完成"
 
-echo "开始安装系统服务"
+echo "开始创建 systemd 配置文件并拷贝文件"
 # 安装服务
 cat << EOF > /etc/systemd/system/mihomo.service
 [Unit]
@@ -70,6 +70,7 @@ ExecReload=/bin/kill -HUP $MAINPID
 [Install]
 WantedBy=multi-user.target
 EOF
-echo "开始安装系统服务"
+echo "已经完成配置文件创建拷贝"
+
 
 echo "恭喜你，已安装完成，上传你的config.ymal 文件，就可以使用"
