@@ -15,7 +15,7 @@ esac
 echo "当前设备架构: ${ARCH_RAW}"
 
 # 获取最新版本号
-VERSION=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases/latest" | jq -r '.tag_name' | sed 's/v//')
+VERSION=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases?per_page=1&page=0" | jq -r '.tag_name' | sed 's/v//')
 
 echo "获取到的版本号: ${VERSION}"
 
