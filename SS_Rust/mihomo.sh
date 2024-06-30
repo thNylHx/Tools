@@ -14,10 +14,15 @@ esac
 
 echo "当前设备架构: ${ARCH_RAW}"
 
+# Ensure jq is installed
+if ! command -v jq &> /dev/null; then
+    echo "jq could not be found, installing..."
+    apt-get update && apt-get install -y jq
+fi
+
 # 获取最新版本
 VERSION=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases?per_page=1&page=0" \
-    | awk -F'[":,]' '/tag_name/{print $5}' \
-    | tr -d ' "' \
+    | jq -r '.[0].tag_name' \
     | sed 's/Prerelease-Alpha//')
 
 echo "获取到的最新版本: ${VERSION}"
