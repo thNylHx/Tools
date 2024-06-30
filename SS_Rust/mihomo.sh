@@ -21,10 +21,11 @@ VERSION=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases?per_pa
 echo  "获取到的版本:${VERSION}"
 #ARCH
 
-wget "https://github.com/SagerNet/mihomo/releases/download/Prerelease-Alpha/mihomo-linux-${ARCH}-compatible-alpha-${VERSION}.gz"
-
 # 创建 mihomo 文件夹
 mkdir -p /root/mihomo
+
+# 下载 mihomo
+wget "https://github.com/SagerNet/mihomo/releases/download/Prerelease-Alpha/mihomo-linux-${ARCH}-compatible-alpha-${VERSION}.gz"
 
 # 解压文件
 gzip -d mihomo-linux-${ARCH}-compatible-${VERSION}.gz
