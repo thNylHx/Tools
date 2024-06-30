@@ -16,11 +16,9 @@ echo "当前设备架构: ${ARCH_RAW}"
 
 # 获取最新版本
 VERSION=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases?per_page=1&page=0" \
-    | grep tag_name \
-    | cut -d ":" -f2 \
-    | tr '[:upper:]' '[:lower:]' \
-    | sed 's/\"//g;s/\,//g;s/\ //g;s/v//' \
-    | sed 's/prerelease-alpha //')
+    | awk -F'[":,]' '/tag_name/{print $5}' \
+    | tr -d ' "' \
+    | sed 's/Prerelease-Alpha//')
 
 echo "获取到的最新版本: ${VERSION}"
 
