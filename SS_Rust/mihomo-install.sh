@@ -44,11 +44,6 @@ echo "开始重名名为 mihomo 并移动到 /root/mihomo/ "
 mv mihomo-linux-${ARCH}-compatible-${VERSION} /root/mihomo/mihomo
 echo "重命名并移动完成"
 
-echo "开始安装 UI "
-# 安装UI
-git clone https://github.com/metacubex/metacubexd.git -b gh-pages /root/mihomo/ui
-echo "UI 安装完成"
-
 echo "开始创建 systemd 配置文件并拷贝文件"
 # 安装服务
 cat << EOF > /etc/systemd/system/mihomo.service
@@ -71,6 +66,11 @@ ExecReload=/bin/kill -HUP $MAINPID
 WantedBy=multi-user.target
 EOF
 echo "已经完成配置文件创建拷贝"
+
+echo "开始下载并安装 UI "
+# 安装UI
+git clone https://github.com/metacubex/metacubexd.git -b gh-pages /root/mihomo/ui
+echo "UI 安装完成"
 
 
 echo "恭喜你，已安装完成，上传你的config.ymal 文件，就可以使用"
