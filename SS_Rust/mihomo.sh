@@ -18,7 +18,7 @@ echo "当前设备架构: ${ARCH_RAW}"
 RESPONSE=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases?per_page=1&page=0")
 
 # 获取下载链接并解析版本号
-DOWNLOAD_URL=$(echo $RESPONSE | grep -oP "https://mirror.ghproxy.com/https://github.com/MetaCubeX/mihomo/releases/download/[^/]+/mihomo-linux-${ARCH}-compatible-alpha-[^\" ]+.gz" | head -1)
+DOWNLOAD_URL=$(echo $RESPONSE | grep -oP "https://github.com/MetaCubeX/mihomo/releases/download/[^/]+/mihomo-linux-${ARCH}-compatible-alpha-[^\" ]+.gz" | head -1)
 VERSION=$(echo $DOWNLOAD_URL | grep -oP "alpha-\K[^-]+(?=.gz)")
 
 if [ -z "$VERSION" ]; then
@@ -44,7 +44,7 @@ mv /root/mihomo/$DOWNLOADED_FILE /root/mihomo/mihomo
 chmod 777 /root/mihomo/mihomo
 
 # 安装UI
-git clone https://mirror.ghproxy.com/https://github.com/metacubex/metacubexd.git -b gh-pages /root/mihomo/ui
+git clone https://github.com/metacubex/metacubexd.git -b gh-pages /root/mihomo/ui
 
 # 创建 systemd 配置文件
 cat << EOF > /etc/systemd/system/mihomo.service
