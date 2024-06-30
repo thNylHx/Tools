@@ -18,7 +18,8 @@ echo "当前设备架构: ${ARCH_RAW}"
 VERSION=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases?per_page=1&page=0" \
     | grep tag_name \
     | cut -d ":" -f2 \
-    | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')  
+    | sed 's/\"//g;s/\,//g;s/\ //g;s/v//' \
+    | sed 's/Prerelease-Alpha //')
 
 echo "获取到的版本号: ${VERSION}"
 
@@ -67,4 +68,4 @@ systemctl daemon-reload
 # 启动 mihomo 服务
 systemctl restart mihomo
 
-echo "mihomo安装和配置完成，服务已重启。"
+echo "mihomo 安装和配置完成，服务已重启。"
