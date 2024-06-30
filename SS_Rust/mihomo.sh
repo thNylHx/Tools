@@ -21,11 +21,17 @@ if ! command -v jq &> /dev/null; then
 fi
 
 # 获取最新版本
-VERSION=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases?per_page=1&page=0" \
-    | jq -r '.[0].tag_name' \
-    | sed 's/Prerelease-Alpha//')
+RESPONSE=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases?per_page=1&page=0")
+echo "GitHub API Response: $RESPONSE"
+
+VERSION=$(echo "$RESPONSE" | jq -r '.[0].tag_name' | sed 's/Prerelease-Alpha//')
 
 echo "获取到的最新版本: ${VERSION}"
+
+if [ -z "$VERSION" ]; then
+    echo "Error: Failed to retrieve the version number."
+    exit 1
+fi
 
 # 创建 mihomo 文件夹
 mkdir -p /root/mihomo
