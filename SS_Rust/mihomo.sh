@@ -19,11 +19,12 @@ VERSION=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases?per_pa
     | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
 
 echo  "获取到的版本:${VERSION}"
+#ARCH
 
-curl -Lo mihomo.deb "https://github.com/SagerNet/mihomo/releases/download/Prerelease-Alpha/mihomo-linux-${VERSION}-compatible-alpha-${ARCH}.deb"
+curl -Lo mihomo.deb "https://github.com/SagerNet/mihomo/releases/download/Prerelease-Alpha/mihomo-linux-${ARCH}-compatible-alpha-${VERSION}.deb"
 echo "${VERSION}下载完成,开始安装"
 
-sudo apt install ./mihomo.deb
+sudo dpkg-i mihomo.deb
 
 echo "安装完成,清理安装包"
 
