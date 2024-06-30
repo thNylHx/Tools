@@ -24,7 +24,8 @@ fi
 RESPONSE=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases?per_page=1&page=0")
 echo "GitHub API Response: $RESPONSE"
 
-VERSION=$(echo "$RESPONSE" | jq -r '.[0].tag_name' | sed 's/Prerelease-Alpha//')
+# Attempt to get the version from the `tag_name`, fall back to `commit`
+VERSION=$(echo "$RESPONSE" | jq -r '.[0].tag_name // .[0].commit.sha' | sed 's/Prerelease-Alpha//')
 
 echo "获取到的最新版本: ${VERSION}"
 
