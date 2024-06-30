@@ -13,19 +13,15 @@ case "${ARCH_RAW}" in
 esac
 echo  "当前设备架构${ARCH_RAW}"
 
-VERSION=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases?per_page=1&page=0" \
-    | grep tag_name \
-    | cut -d ":" -f2 \
-    | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
+VERSION=$(curl -s https://api.github.com/repos/MetaCubeX/mihomo/releases | grep "tag_name" | cut -d'"' -f4)
 
 echo  "获取到的版本:${VERSION}"
 #ARCH
 
+wget "https://github.com/SagerNet/mihomo/releases/download/Prerelease-Alpha/mihomo-linux-${ARCH}-compatible-alpha-${VERSION}.gz"
+
 # 创建 mihomo 文件夹
 mkdir -p /root/mihomo
-
-# 下载 mihomo
-wget "https://github.com/SagerNet/mihomo/releases/download/Prerelease-Alpha/mihomo-linux-${ARCH}-compatible-alpha-${VERSION}.gz"
 
 # 解压文件
 gzip -d mihomo-linux-${ARCH}-compatible-${VERSION}.gz
