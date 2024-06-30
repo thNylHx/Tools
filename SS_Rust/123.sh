@@ -2,6 +2,7 @@
 
 ## bash <(curl -fsSL https://raw.githubusercontent.com/cooip-jm/About-openwrt/main/mihomo-deb-install.sh)
 
+#!/bin/bash
 set -e -o pipefail
 
 ARCH_RAW=$(uname -m)
@@ -13,14 +14,14 @@ case "${ARCH_RAW}" in
     's390x')    ARCH='s390x';;
     *)          echo "Unsupported architecture: ${ARCH_RAW}"; exit 1;;
 esac
-echo  "当前设备架构${ARCH_RAW}"
+echo  "当前设备架构: ${ARCH_RAW}"
 
-VERSION=$(curl -L "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt")
+VERSION=$(curl -L "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt" || { echo "Failed to fetch version"; exit 1; })
 
-echo  "获取到的版本:${VERSION}"
+echo  "获取到的版本: ${VERSION}"
 
 wget "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/mihomo-linux-${ARCH}-compatible-${VERSION}.gz"
-echo "${VERSION}下载完成,开始安装"
+echo "${VERSION}下载完成, 开始部署"
 
 echo "开始创建 mihomo 文件夹"
 # 创建 mihomo 文件夹
