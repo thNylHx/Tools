@@ -29,9 +29,6 @@ fi
 echo "获取到的最新版本: ${VERSION}"
 echo "下载链接: ${DOWNLOAD_URL}"
 
-# 创建 mihomo 文件夹
-mkdir -p /root/mihomo
-
 # 下载并解压 mihomo
 wget -O /root/mihomo.gz "$DOWNLOAD_URL"
 gunzip /root/mihomo.gz
