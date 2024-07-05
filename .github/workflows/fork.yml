@@ -18,7 +18,7 @@ jobs:
         repository: thNylHx/Tools
         path: Tools-repo
 
-    - name: Fork
+    - name: 复刻
       run: |
         curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/fork.sh | sh
 
@@ -107,7 +107,7 @@ jobs:
           cat Tools-repo/Ruleset/Block/BlockAdlimbopro.list >> Tools-repo/Ruleset/Block/BlockAds.list
           cat Tools-repo/Ruleset/Block/BlockEasyListChina.list >> Tools-repo/Ruleset/Block/BlockAds.list
           cat Tools-repo/Ruleset/Block/BlockAdvertising.list >> Tools-repo/Ruleset/Block/BlockAds.list
-          cat Tools-repo/Ruleset/Block/BlockHijacking.list >> Tools-repo/Ruleset/Block/BlockAds.list
+          cat Tools-repo/Ruleset/Block/BlockMalicious.list >> Tools-repo/Ruleset/Block/BlockAds.list
           cat Tools-repo/Ruleset/Block/BlockTracking.list >> Tools-repo/Ruleset/Block/BlockAds.list
         else
           echo "BlockAds.list not found."
