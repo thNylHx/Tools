@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+## bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Install/mihomo-install.sh)
+
+
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
