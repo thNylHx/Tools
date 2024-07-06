@@ -41,7 +41,7 @@ jobs:
               if [ -f "$file" ]; then
                 sed -i -e 's/, /,/g' \
                        -e 's/;/# /g' \
-                       -e '|//|#|g' \
+                       -e 's|//|#|g' \
                        -e 's/host,/HOST,/g' \
                        -e 's/host-/HOST-/g' \
                        -e 's/-suffix/-SUFFIX/g' \
