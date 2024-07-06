@@ -1,29 +1,29 @@
 ## /*
 ## Written by limbopro
-## 原文参阅 https:
-## 电报群组 https:
-## Repo: https:
-## Adblock4limbo: 521 Domains/IP/Others From https:
+## 原文参阅 https:#limbopro.com/archives/12904.html
+## 电报群组 https:#t.me/Adblock4limbo  
+## Repo: https:#github.com/limbopro/Adblock4limbo  
+## Adblock4limbo: 521 Domains/IP/Others From https:#github.com/limbopro/Adblock4limbo
 ## EasyList/EasylistChina/EasyPrivacy 隐私追踪器/去广告分流规则请在Github仓库 Adblock4limbo -> rule 文件夹下查找，按需添加...
-## 仓库地址：https:
-## Peter Lowe’s Ad and tracking server list: 3543 Domains/IP/Others From https:
-## EasyList: 39487 Domains/IP/Others From https:
-## EasyPrivacy: 39653 Domains/IP/Others From https:
-## EasyList China: 6175 Domains/IP/Others From https:
-## ACL4SSR BadAD: 592 Domains/IP/Others From https:
+## 仓库地址：https:#github.com/limbopro/Adblock4limbo/tree/main/rule
+## Peter Lowe’s Ad and tracking server list: 3543 Domains/IP/Others From https:#pgl.yoyo.org/adservers/serverlist.php
+## EasyList: 39487 Domains/IP/Others From https:#easylist.to/easylist/easylist.txt
+## EasyPrivacy: 39653 Domains/IP/Others From https:#easylist.to/easylist/easyprivacy.txt
+## EasyList China: 6175 Domains/IP/Others From https:#raw.githubusercontent.com/easylist/easylistchina/master/easylistchina.txt
+## ACL4SSR BadAD: 592 Domains/IP/Others From https:#raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list
 ## 以上共计: 89971 Domains/IP/Others (非去重统计)
 ## Last updated at  1/7月/2024/00:00
 ## */
 
 
 #### 毒奶去广告计划
-## 如需完整配置，参阅请原文 https:
+## 如需完整配置，参阅请原文 https:#limbopro.com/archives/12904.html
 
 ##### m.po18vip.com 
 DOMAIN-SUFFIX,histats.com
 DOMAIN-SUFFIX,kkjhgfds.top
 
-##### https:
+##### https:#m.diyibanzhu.me/ 第一版主小说网
 DOMAIN,25e87c0802f91cf8cgg.6uzxtlv.cn
 DOMAIN-SUFFIX,5mgrgsc.cn
 DOMAIN-SUFFIX,2700.5mgrgsc.cn
@@ -34,7 +34,7 @@ DOMAIN-SUFFIX,clarity.ms
 DOMAIN-SUFFIX,histats.com
 DOMAIN-SUFFIX,5e87c0802f91cf8cgg.6uzxtlv.cn
 
-##### https:
+##### https:#www.novel543.com/ 小说网
 DOMAIN-SUFFIX,popin.cc
 DOMAIN-SUFFIX,double.net
 DOMAIN-SUFFIX,spotxchange.com
@@ -45,11 +45,11 @@ DOMAIN-SUFFIX,pagead2.googlesyndication.com
 DOMAIN-SUFFIX,gn01.top
 DOMAIN-SUFFIX,b1sync.zemanta.com
 
-##### https:
+##### https:#www.lyxsjmm.com/
 DOMAIN-SUFFIX,tu.xasnjafnvn.com
 DOMAIN-SUFFIX,bn.ufitjvn.com
 
-##### https:
+##### https:#javmost.xyz/  
 #DOMAIN,delivery-node-aziz.voe-network.net
 #DOMAIN,inspiringaccurate.com
 #DOMAIN,track.aso1.net
@@ -70,13 +70,13 @@ DOMAIN-SUFFIX,9e77b6e6e2.2e3f31faae.com
 DOMAIN-SUFFIX,playersb.com
 #DOMAIN-SUFFIX,dood.la
 
-##### https:
+##### https:#www.tvc.cc/  
 DOMAIN-SUFFIX,42yenxh.cn
 DOMAIN-SUFFIX,dwyhup.cn
 DOMAIN-SUFFIX,netdjs.net
 DOMAIN-SUFFIX,pc.stgowan.com
 
-##### https:
+##### https:#avple.tv/  
 DOMAIN-SUFFIX,tapioni.com
 #DOMAIN-SUFFIX,107iwh.cn:4032
 #DOMAIN-SUFFIX,qinhemuye.com:443
@@ -89,7 +89,7 @@ DOMAIN-SUFFIX,trafforsrv.com
 DOMAIN-SUFFIX,trafficforce.com
 DOMAIN-SUFFIX,s.csyfe.com
 
-##### https:
+##### https:#www.tvn.cc/ 韩剧TV  
 DOMAIN-SUFFIX,qw2v.changshuohr.net
 DOMAIN-SUFFIX,wss.haoyundmn.com
 
@@ -199,7 +199,7 @@ DOMAIN-SUFFIX,pu0glv.cn
 ##### www.porntrex.com/  
 #DOMAIN-SUFFIX,ads.bullionyield.com
 
-##### https:
+##### https:#www.zhenbuka.com/  
 DOMAIN-KEYWORD,dlads
 DOMAIN,dagonghuzhu.com
 #DOMAIN-SUFFIX,byteimg.com
@@ -232,7 +232,7 @@ DOMAIN-SUFFIX,js.users.51.la
 DOMAIN-SUFFIX,maxwellsery.com
 DOMAIN-SUFFIX,annabelleabe.com
 
-##### https:
+##### https:#91mjw.com/  
 DOMAIN-SUFFIX,jidukeji.com
 DOMAIN-SUFFIX,atmib.com
 DOMAIN-SUFFIX,bjzysd.net
@@ -249,14 +249,14 @@ DOMAIN-SUFFIX,bhichong.com
 DOMAIN-SUFFIX,tskdfjksldk.sdhsgcj.com
 DOMAIN-SUFFIX,haoyuntj.com
 
-##### https:
+##### https:#m.biquge.com.cn/  
 DOMAIN-SUFFIX,bizhixiang.cn
 DOMAIN-SUFFIX,jspassport.ssl.qhimg.com
 
-##### https:
+##### https:#gimy.tv/ 剧迷tv  
 DOMAIN-SUFFIX,ads.superad.cc
 
-##### https:
+##### https:#hpjav.tv/ JAVFAN #NSFW  
 DOMAIN-SUFFIX,wpncdn.com
 DOMAIN-SUFFIX,exosrv.com
 DOMAIN-SUFFIX,jads.co
@@ -271,12 +271,12 @@ DOMAIN-KEYWORD,trwl1
 DOMAIN-KEYWORD,o333o
 DOMAIN-SUFFIX,ad.pornimg.xyz
 
-##### https:
+##### https:#javgg.net/  
 DOMAIN-SUFFIX,x2sfa.javgg.eu
 DOMAIN-SUFFIX,xd3r.javgg.eu
 DOMAIN-SUFFIX,p242.plainwrk.name
 
-##### https:
+##### https:#www5.javmost.com/  
 DOMAIN-KEYWORD,histats
 DOMAIN-KEYWORD,dtscout
 DOMAIN-KEYWORD,adform
@@ -284,13 +284,13 @@ DOMAIN-KEYWORD,mathtag
 DOMAIN-KEYWORD,pagespeed-mod
 DOMAIN-KEYWORD,in-page-push
 
-##### https:
+##### https:#hanime1.me/
 DOMAIN-SUFFIX,impactserving.com
 DOMAIN-SUFFIX,addthis.com
 DOMAIN-SUFFIX,magsrv.com
 DOMAIN-SUFFIX,creative.kbnmnl.com
 
-##### https:
+##### https:#supjav.com/
 DOMAIN-SUFFIX,adxadserv.com
 DOMAIN-SUFFIX,xlivrdr.com
 DOMAIN-SUFFIX,fanza.cc
@@ -352,7 +352,7 @@ DOMAIN-SUFFIX,server.mch3.com
 
 
 #### Guard Advertising.list 神机规则
-## 参阅 https:
+## 参阅 https:#raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Guard/Advertising.list
 
 # Advertising
 # > General
