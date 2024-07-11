@@ -1,6 +1,6 @@
-#!name = mihomo 配置文件
+#!name = mihomo TUN 配置文件
 #!desc = 说明：理论上适用于所有的 Meta 内核，已测试的有 Clash Verg Rev、Openclash、mihomo 
-#!date = 2024-05-19 10:00
+#!date = 2024-07-11 15:00
 #!source = https://wiki.metacubex.one/example/conf/#__tabbed_1_3
 
 
@@ -36,6 +36,13 @@ mixed-port: 56789
 unified-delay: false
 # TCP 并发连接所有 IP, 将使用最快握手的 TCP
 tcp-concurrent: true
+
+# Tproxy 端口
+# tproxy-port: 5678
+# 自动配置 iptables
+# iptables: 
+#   enable: true
+#   inbound-interface: eth0
 
 # 配置 WEB UI
 # UI 名字
@@ -197,86 +204,86 @@ rule-providers:
 # 谷歌服务
   YouTube:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Media/YouTube.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/YouTube.list"
   Google:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Other/Google.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/Google.list"
 # 微软服务
   GitHub:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Other/GitHub.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/GitHub.list"
   OneDrive:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Other/OneDrive.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/OneDrive.list"
   Microsoft:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Other/Microsoft.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/Microsoft.list"
 # 电报服务
   Telegram:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Other/Telegram.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/Telegram.list"
 # ChatGPT
   OpenAI:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Other/OpenAI.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/OpenAI.list"
 # 贝宝支付
   PayPal:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Other/PayPal.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/PayPal.list"
 # 推特加速
   Twitter:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Other/Twitter.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/Twitter.list"
 # 脸书加速
   Facebook:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Other/Facebook.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/Facebook.list"
 # 海外抖音
   TikTok:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Media/TikTok.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/TikTok.list"
 # 奈飞影视
   Netflix:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Media/Netflix.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/Netflix.list"
 # 迪士尼+
   DisneyPlus:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Media/DisneyPlus.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/DisneyPlus.list"
 # Spotify
   Spotify:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Media/Spotify.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/Spotify.list"
 # 海外媒体
   GlobalMedia:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Media/GlobalMedia.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/GlobalMedia.list"
 # 海外服务
   GlobalGFW:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/GlobalGFW.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/GlobalGFW.list"
 # 苹果服务
   Apple:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Other/Apple.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/Apple.list"
 # 哔哩哔哩
   Bilibili:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Media/Bilibili.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/Bilibili.list"
 # 国内服务
   WeChat:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Other/WeChat.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/WeChat.list"
   ChinaMedia:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Media/ChinaMedia.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/ChinaMedia.list"
   China:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Direct.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/China.list"
 # 局域网
   Lan:
     <<: *classical
-    url: "https://raw.githubusercontent.com/axcsz/Collect/master/Ruleset/Local.list"
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/Local.list"
 
 # 屏蔽 443
 script:
