@@ -1,6 +1,6 @@
 #!name = mihomo TUN 配置文件
 #!desc = 说明：理论上适用于所有的 Meta 内核，已测试的有 Clash Verg Rev、Openclash、mihomo 
-#!date = 2024-07-11 15:00
+#!date = 2024-07-13 20:30
 #!source = https://wiki.metacubex.one/example/conf/#__tabbed_1_3
 
 
@@ -36,13 +36,6 @@ mixed-port: 56789
 unified-delay: false
 # TCP 并发连接所有 IP, 将使用最快握手的 TCP
 tcp-concurrent: true
-
-# Tproxy 端口
-# tproxy-port: 5678
-# 自动配置 iptables
-# iptables: 
-#   enable: true
-#   inbound-interface: eth0
 
 # 配置 WEB UI
 # UI 名字
@@ -87,17 +80,21 @@ sniffer:
     - "dlg.io.mi.com"
     - "+.apple.com"     # 苹果域名，建议加
 
-# TUN 配置
+# TUN配置  false
 tun:
   enable: true
-# 可选： gvisor/mixed
+  # 可选： system/gvisor/mixed
   stack: mixed
-# DNS 劫持，一般设置为 any:53 即可, 即劫持所有53端口的 udp 流量
+  # 需要劫持的 DNS
   dns-hijack:
     - "any:53"
-# 自动设置全局路由表，可以自动将全局流量路由进入 TUN 网卡。
+  # 指定 tun 网卡名称
+  device: Network
+  # 仅支持 Linux，自动设置全局路由，可以自动将全局流量路由进入 tun 网卡
   auto-route: true
-# 自动识别出口网卡
+  # 自动配置 iptables/nftables 以重定向 TCP 连接，需要auto-route已启用
+  auto-redirect: true
+  # 自动选择流量出口接口，多出口网卡同时连接的设备建议手动指定出口网卡
   auto-detect-interface: true
 
 # DNS 配置
