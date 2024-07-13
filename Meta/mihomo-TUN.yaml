@@ -97,27 +97,28 @@ tun:
   # 自动选择流量出口接口，多出口网卡同时连接的设备建议手动指定出口网卡
   auto-detect-interface: true
 
-# DNS 配置
+# DNS配置
 dns:
-# 关闭将使用系统 DNS
+  # 关闭将使用系统 DNS
   enable: true
-# 开启 DNS 服务器监听
-  listen: :53
-# IPV6解析开关；如果为false，将返回ipv6结果为空
+  # 开启 DNS 服务器监听
+  listen: 0.0.0.0:1053
+  # DNS false
   ipv6: true
-# 模式：redir-host 或 fake-ip （默认使用 fake-ip 模式）
+  # 模式：redir-host 或 fake-ip
   enhanced-mode: fake-ip
-# Fake-IP解析地址池
+  # Fake-IP解析地址池
   fake-ip-range: 28.0.0.1/8
+  # fake ip 白名单列表'以下地址不会下发fakeip映射用于连接
   fake-ip-filter:
     - "*"
     - "+.lan"
     - "+.local"
-# 解析非 IP 的 DNS 用的 DNS 服务器，只支持纯 IP
+  # 只能使用纯 IP 地址，可使用加密 DNS
   default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
-# 这部分为主要 DNS 配置，支持udp/tcp/dot/doh/doq，影响所有直连，确保使用对大陆解析精准的 DNS
+  # 这部分为主要 DNS 配置，影响所有直连，确保使用对大陆解析精准的 DNS
   nameserver:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
