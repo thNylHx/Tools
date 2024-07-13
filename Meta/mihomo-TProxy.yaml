@@ -87,25 +87,12 @@ sniffer:
     - "dlg.io.mi.com"
     - "+.apple.com"     # 苹果域名，建议加
 
-# TUN 配置
-tun:
-  enable: false
-# 可选： gvisor/mixed
-  stack: mixed
-# DNS 劫持，一般设置为 any:53 即可, 即劫持所有53端口的 udp 流量
-  dns-hijack:
-    - "any:53"
-# 自动设置全局路由表，可以自动将全局流量路由进入 TUN 网卡。
-  auto-route: true
-# 自动识别出口网卡
-  auto-detect-interface: true
-
 # DNS 配置
 dns:
 # 关闭将使用系统 DNS
   enable: true
 # 开启 DNS 服务器监听
-  listen: :53
+  listen: 0.0.0.0:1053
 # IPV6解析开关；如果为false，将返回ipv6结果为空
   ipv6: true
 # 模式：redir-host 或 fake-ip （默认使用 fake-ip 模式）
