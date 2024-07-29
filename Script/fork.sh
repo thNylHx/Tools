@@ -1,4 +1,4 @@
-# 2024-07-29 13:30
+# 2024-06-28 17:30
 
 #!/bin/bash
 
@@ -66,7 +66,7 @@ curl -L -o Tools-repo/Ruleset/Other/Microsoft.list "https://raw.githubuserconten
 
 # 海外代理
 curl -L -o Tools-repo/Ruleset/Other/GlobalGFW.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
-curl -L -o Tools-repo/Ruleset/Other/Global.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.list"
+curl -L -o Tools-repo/Ruleset/Other/Global.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
 
 # 国内直连
 curl -L -o Tools-repo/Ruleset/Other/China.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/cn.list"
