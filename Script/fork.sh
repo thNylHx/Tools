@@ -80,7 +80,6 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/PayPal.list "https://raw.githubuserconte
 
 # 海外代理
 curl -L -o Tools-repo/Ruleset/ClashMeta/Global.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.list"
-curl -L -o Tools-repo/Ruleset/ClashMeta/Global.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
 
 # 影视媒体
 curl -L -o Tools-repo/Ruleset/ClashMeta/Bilibili.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.list"
@@ -94,12 +93,12 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/FacebookIP.list "https://raw.githubuserc
 curl -L -o Tools-repo/Ruleset/ClashMeta/Instagram.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/Twitter.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/TwitterIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
+curl -L -o Tools-repo/Ruleset/ClashMeta/telegramIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.list"
 
 # 谷歌平台
 curl -L -o Tools-repo/Ruleset/ClashMeta/Google.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/GoogleIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/YouTube.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.list"
-
 # 微软平台
 curl -L -o Tools-repo/Ruleset/ClashMeta/GitHub.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/OneDrive.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.list"
@@ -108,3 +107,39 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/Microsoft.list "https://raw.githubuserco
 # 国内直连
 curl -L -o Tools-repo/Ruleset/ClashMeta/China.list  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/ChinaIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
+
+
+#--- ClashMeta mrs ---#
+# PayPal
+curl -L -o Tools-repo/Ruleset/ClashMeta/PayPal.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs"
+
+# 海外代理
+curl -L -o Tools-repo/Ruleset/ClashMeta/Global.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
+
+# 影视媒体
+curl -L -o Tools-repo/Ruleset/ClashMeta/Bilibili.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/Disney.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/Netflix.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/NetflixIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"
+
+# 社交平台
+curl -L -o Tools-repo/Ruleset/ClashMeta/Facebook.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/FacebookIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/Instagram.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/Twitter.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/TwitterIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/telegramIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
+
+# 谷歌平台
+curl -L -o Tools-repo/Ruleset/ClashMeta/Google.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/GoogleIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/YouTube.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
+
+# 微软平台
+curl -L -o Tools-repo/Ruleset/ClashMeta/GitHub.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/OneDrive.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/Microsoft.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
+
+# 国内直连
+curl -L -o Tools-repo/Ruleset/ClashMeta/China.mrs  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/ChinaIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
