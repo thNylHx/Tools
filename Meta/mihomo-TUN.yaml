@@ -1,37 +1,34 @@
 #!name = mihomo TUN 配置文件
 #!desc = 说明：理论上适用于所有的 Meta 内核，已测试的有 Clash Verg Rev、Openclash、mihomo 
-#!date = 2024-07-13 20:30
+#!date = 2024-07-29 17:30
 #!source = https://wiki.metacubex.one/example/conf/#__tabbed_1_3
 
 
-######### 锚点 start #######
-# 策略组相关锚点
-pr: &pr {type: select, proxies: [手动选择, 自动选择, 香港节点, 台湾节点, 美国节点, 狮城节点, 日本节点, 韩国节点]}
-
 # 这里是机场订阅更新和延迟测试相关锚点
-p: &p {type: http, interval: 1800, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}, proxy: DIRECT}
-######### 锚点 end #######
+pr: &pr {type: http, interval: 1800, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}}
 
-# 机场订阅，名称不能重复
+# url 里填写自己的机场订阅，名称不能重复
 proxy-providers:
+  # 机场1
   Airport_01:
-    <<: *p
-    url: "此处填写机场订阅地址"
+    <<: *pr
+    url: "此处填写机场订阅连接"
     override:
-      additional-prefix: "[此处填写机场名字]"
+      additional-prefix: "[此处填写机场名称]"
+  # 机场2
   Airport_02:
-    <<: *p
-    url: "此处填写机场订阅地址"
+    <<: *pr
+    url: "此处填写机场订阅连接"
     override:
-      additional-prefix: "[此处填写机场名字]"
+      additional-prefix: "[此处填写机场名称]"
 
 # 全局配置
-# # 开启 IPv6 总开关，关闭阻断所有 IPv6 链接和屏蔽 DNS 请求 AAAA 记录 true/false
+# # 开启 IPv6 总开关： true/false
 ipv6: true
 # 允许局域网连接
 allow-lan: true
 # HTTP(S) 和 SOCKS 代理混合端口
-mixed-port: 56789
+mixed-port: 7890
 # 更换延迟计算方式,去除握手等额外延迟
 unified-delay: false
 # TCP 并发连接所有 IP, 将使用最快握手的 TCP
@@ -75,19 +72,18 @@ sniffer:
     QUIC:
       ports: [443, 8443]
 # 需要跳过嗅探的域名
-  skip-classical:
-    - "Mijia Cloud"     # 米家设备，建议加
-    - "dlg.io.mi.com"
-    - "+.apple.com"     # 苹果域名，建议加
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
 
-# TUN配置  false
+# TUN配置
 tun:
   enable: true
-  # 可选： system/gvisor/mixed
   stack: mixed
-  # 需要劫持的 DNS
+  # 劫持所有53端口的DNS请求
   dns-hijack:
     - "any:53"
+    - "tcp://any:53"
   # 指定 tun 网卡名称
   device: Network
   # 仅支持 Linux，自动设置全局路由，可以自动将全局流量路由进入 tun 网卡
@@ -101,64 +97,73 @@ tun:
 dns:
   # 关闭将使用系统 DNS
   enable: true
-  # 开启 DNS 服务器监听
-  listen: 0.0.0.0:1053
-  # DNS false
+  # DNS
   ipv6: true
+  # 遵循规则
+  respect-rules: true
   # 模式：redir-host 或 fake-ip
   enhanced-mode: fake-ip
-  # Fake-IP解析地址池
-  fake-ip-range: 28.0.0.1/8
   # fake ip 白名单列表'以下地址不会下发fakeip映射用于连接
   fake-ip-filter:
     - "*"
     - "+.lan"
     - "+.local"
-  # 只能使用纯 IP 地址，可使用加密 DNS
-  default-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
-  # 这部分为主要 DNS 配置，影响所有直连，确保使用对大陆解析精准的 DNS
+    - "+.market.xiaomi.com"
+   # 使用的DNS服务器
   nameserver:
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
+    - https://120.53.53.53/dns-query
+    - https://223.5.5.5/dns-query
+  # 代理服务器使用的DNS服务器
+  proxy-server-nameserver:
+    - https://dns.google/dns-query
+    - https://dns.cloudflare.com/dns-query
 
 # 单个出站代理节点
 proxies:
-# 直连节点
-- name: "国内直连"
-  type: direct
-  udp: true
+  # 直连节点
+  - name: "国内直连"
+    type: direct
+    udp: true
+    tfo: true
+    mptcp: true
+    ip-version: ipv6-prefer
+
+# 策略组相关
+pg: &pg {type: select, proxies: [手动选择, 自动选择, 香港节点, 台湾节点, 美国节点, 狮城节点, 日本节点, 韩国节点]}
+# 手动选择策略
+mt: &mt {type: select, include-all-providers: true}
+# 自动优选策略
+at: &at {type: url-test, include-all-providers: true, url: https://www.gstatic.com/generate_204, tolerance: 10, interval: 300}
 
 # 策略组
 proxy-groups:
   # 策略分组
   - {name: 手动选择, type: select, proxies: [自动选择, 香港节点, 台湾节点, 美国节点, 狮城节点, 日本节点, 韩国节点]}
-  - {name: YouTube, <<: *pr}
-  - {name: Google, <<: *pr}
-  - {name: Microsoft, <<: *pr}
-  - {name: TikTok, <<: *pr}
-  - {name: Netflix, <<: *pr}
-  - {name: DisneyPlus, <<: *pr}
-  - {name: Spotify, <<: *pr}
-  - {name: Telegram, <<: *pr}
-  - {name: ChatGPT, <<: *pr}
-  - {name: PayPal, <<: *pr}
-  - {name: Twitter, <<: *pr}
-  - {name: Facebook, <<: *pr}
-  - {name: GlobalGFW, <<: *pr}
+  - {name: YouTube, <<: *pg}
+  - {name: Google, <<: *pg}
+  - {name: Microsoft, <<: *pg}
+  - {name: TikTok, <<: *pg}
+  - {name: Netflix, <<: *pg}
+  - {name: DisneyPlus, <<: *pg}
+  - {name: Spotify, <<: *pg}
+  - {name: Telegram, <<: *pg}
+  - {name: ChatGPT, <<: *pg}
+  - {name: PayPal, <<: *pg}
+  - {name: Twitter, <<: *pg}
+  - {name: Facebook, <<: *pg}
+  - {name: GlobalGFW, <<: *pg}
   - {name: Apple, type: select, proxies: [国内直连, 手动选择, 自动选择, 香港节点, 台湾节点, 美国节点, 狮城节点, 日本节点, 韩国节点]}
   - {name: Bilibili, type: select, proxies: [国内直连, 手动选择, 自动选择, 香港节点, 台湾节点, 美国节点, 狮城节点, 日本节点, 韩国节点]}
   - {name: China, type: select, proxies: [国内直连, 手动选择, 自动选择, 香港节点, 台湾节点, 美国节点, 狮城节点, 日本节点, 韩国节点]}
-  - {name: 兜底规则, <<: *pr}
+  - {name: 兜底规则, <<: *pg}
   # 地区分组
-  - {name: 香港节点, type: url-test, include-all-providers: true, url: https://www.gstatic.com/generate_204, tolerance: 10, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
-  - {name: 台湾节点, type: url-test, include-all-providers: true, url: https://www.gstatic.com/generate_204, tolerance: 10, interval: 300, filter: "(?=.*(台|TW|(?i)Taiwan))^((?!(港|日|韩|新|美)).)*$" }
-  - {name: 美国节点, type: url-test, include-all-providers: true, url: https://www.gstatic.com/generate_204, tolerance: 10, interval: 300, filter: "(?=.*(美|US|(?i)States|America))^((?!(港|台|日|韩|新)).)*$"}
-  - {name: 狮城节点, type: url-test, include-all-providers: true, url: https://www.gstatic.com/generate_204, tolerance: 10, interval: 300, filter: "(?=.*(新|狮|獅|SG|(?i)Singapore))^((?!(港|台|日|韩|美|西)).)*$"}
-  - {name: 日本节点, type: url-test, include-all-providers: true, url: https://www.gstatic.com/generate_204, tolerance: 10, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$" }
-  - {name: 韩国节点, type: url-test, include-all-providers: true, url: https://www.gstatic.com/generate_204, tolerance: 10, interval: 300, filter: "(?=.*(韩|KR|(?i)Korea))^((?!(台|日|港|新|美)).)*$"}
-  - {name: 自动选择, type: url-test, include-all-providers: true, url: https://www.gstatic.com/generate_204, tolerance: 10, interval: 300}
+  - {name: 香港节点, <<: *at, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
+  - {name: 台湾节点, <<: *at, filter: "(?=.*(台|TW|(?i)Taiwan))^((?!(港|日|韩|新|美)).)*$" }
+  - {name: 美国节点, <<: *at, filter: "(?=.*(美|US|(?i)States|America))^((?!(港|台|日|韩|新)).)*$"}
+  - {name: 狮城节点, <<: *at, filter: "(?=.*(新|狮|獅|SG|(?i)Singapore))^((?!(港|台|日|韩|美|西)).)*$"}
+  - {name: 日本节点, <<: *at, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$" }
+  - {name: 韩国节点, <<: *at, filter: "(?=.*(韩|KR|(?i)Korea))^((?!(台|日|港|新|美)).)*$"}
+  - {name: 自动选择, <<: *at}
 
 # 分流策略
 rules:
@@ -191,22 +196,22 @@ rules:
 # 规则集锚点
 rule-anchor:
   # classical 规则相关
-  classical: &classical {type: http, interval: 43200, behavior: classical, format: text, proxy: GlobalGFW}
+  classical: &classical {type: http, interval: 43200, behavior: classical, format: text}
 
 # 订阅规则集
 rule-providers:
-# 广告拦截
+  # 广告拦截
   Adrules:
     <<: *classical
     url: "https://adrules.top/adrules.list"
-# 谷歌服务
+  # 谷歌服务
   YouTube:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/YouTube.list"
   Google:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/Google.list"
-# 微软服务
+  # 微软服务
   GitHub:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/GitHub.list"
@@ -216,59 +221,59 @@ rule-providers:
   Microsoft:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/Microsoft.list"
-# 电报服务
+  # 电报服务
   Telegram:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/Telegram.list"
-# ChatGPT
+  # ChatGPT
   OpenAI:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/OpenAI.list"
-# 贝宝支付
+  # 贝宝支付
   PayPal:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/PayPal.list"
-# 推特加速
+  # 推特加速
   Twitter:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/Twitter.list"
-# 脸书加速
+  # 脸书加速
   Facebook:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/Facebook.list"
-# 海外抖音
+  # 海外抖音
   TikTok:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/TikTok.list"
-# 奈飞影视
+  # 奈飞影视
   Netflix:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/Netflix.list"
-# 迪士尼+
+  # 迪士尼+
   DisneyPlus:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/DisneyPlus.list"
-# Spotify
+  # Spotify
   Spotify:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/Spotify.list"
-# 海外媒体
+  # 海外媒体
   GlobalMedia:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/GlobalMedia.list"
-# 海外服务
+  # 海外服务
   GlobalGFW:
     <<: *classical
-    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/GlobalGFW.list"
-# 苹果服务
+    url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/Global.list"
+  # 苹果服务
   Apple:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/Apple.list"
-# 哔哩哔哩
+  # 哔哩哔哩
   Bilibili:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Media/Bilibili.list"
-# 国内服务
+  # 国内服务
   WeChat:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/WeChat.list"
@@ -278,12 +283,7 @@ rule-providers:
   China:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/China.list"
-# 局域网
+  # 本地/局域网
   Lan:
     <<: *classical
     url: "https://raw.githubusercontent.com/thNylHx/Tools/main/Ruleset/Other/Local.list"
-
-# 屏蔽 443
-script:
-  shortcuts:
-    quic: network == 'udp' and dst_port == 443
