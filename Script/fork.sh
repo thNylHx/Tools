@@ -1,4 +1,4 @@
-# 2024-06-28 17:30
+# 2024-07-29 13:30
 
 #!/bin/bash
 
@@ -93,6 +93,7 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/FacebookIP.list "https://raw.githubuserc
 curl -L -o Tools-repo/Ruleset/ClashMeta/Instagram.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/Twitter.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/TwitterIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
+curl -L -o Tools-repo/Ruleset/ClashMeta/telegram.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/telegramIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.list"
 
 # 谷歌平台
@@ -107,6 +108,8 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/Microsoft.list "https://raw.githubuserco
 # 国内直连
 curl -L -o Tools-repo/Ruleset/ClashMeta/China.list  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/ChinaIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
+curl -L -o Tools-repo/Ruleset/ClashMeta/Local.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.list"
+curl -L -o Tools-repo/Ruleset/ClashMeta/LocalIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
 
 
 #--- ClashMeta mrs ---#
@@ -128,6 +131,7 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/FacebookIP.mrs "https://raw.githubuserco
 curl -L -o Tools-repo/Ruleset/ClashMeta/Instagram.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs"
 curl -L -o Tools-repo/Ruleset/ClashMeta/Twitter.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
 curl -L -o Tools-repo/Ruleset/ClashMeta/TwitterIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/telegram.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
 curl -L -o Tools-repo/Ruleset/ClashMeta/telegramIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
 
 # 谷歌平台
@@ -143,3 +147,5 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/Microsoft.mrs "https://raw.githubusercon
 # 国内直连
 curl -L -o Tools-repo/Ruleset/ClashMeta/China.mrs  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
 curl -L -o Tools-repo/Ruleset/ClashMeta/ChinaIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/Local.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/LocalIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
