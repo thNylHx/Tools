@@ -74,7 +74,7 @@ curl -L -o Tools-repo/Ruleset/Other/ChinaIP.list "https://raw.githubusercontent.
 curl -L -o Tools-repo/Ruleset/Other/ChinaASN.list "https://raw.githubusercontent.com/missuo/ASN-China/main/ASN.China.list"
 
 # 本地/局域网
-curl -L -o Tools-repo/Ruleset/Other/Private.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
+curl -L -o Tools-repo/Ruleset/Other/PrivateIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
 
 
 #--- ClashMeta ---#
