@@ -1,4 +1,4 @@
-# 2024-07-29 15:30
+# 2024-07-30 10:30
 
 #!/bin/bash
 
@@ -75,13 +75,20 @@ curl -L -o Tools-repo/Ruleset/Other/ChinaASN.list "https://raw.githubusercontent
 
 
 #--- ClashMeta ---#
+# AI
+curl -L -o Tools-repo/Ruleset/ClashMeta/Openai.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.list"
+
 # PayPal
 curl -L -o Tools-repo/Ruleset/ClashMeta/PayPal.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.list"
+
+# 苹果
+curl -L -o Tools-repo/Ruleset/ClashMeta/Apple.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.list"
 
 # 海外代理
 curl -L -o Tools-repo/Ruleset/ClashMeta/Global.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.list"
 
 # 影视媒体
+curl -L -o Tools-repo/Ruleset/ClashMeta/tiktok.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/Bilibili.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/Disney.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/Netflix.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.list"
@@ -113,13 +120,20 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/LocalIP.list "https://raw.githubusercont
 
 
 #--- ClashMeta mrs ---#
+# AI
+curl -L -o Tools-repo/Ruleset/ClashMeta/Openai.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs"
+
 # PayPal
 curl -L -o Tools-repo/Ruleset/ClashMeta/PayPal.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs"
+
+# 苹果
+curl -L -o Tools-repo/Ruleset/ClashMeta/Apple.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
 
 # 海外代理
 curl -L -o Tools-repo/Ruleset/ClashMeta/Global.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
 
 # 影视媒体
+curl -L -o Tools-repo/Ruleset/ClashMeta/tiktok.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"
 curl -L -o Tools-repo/Ruleset/ClashMeta/Bilibili.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs"
 curl -L -o Tools-repo/Ruleset/ClashMeta/Disney.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs"
 curl -L -o Tools-repo/Ruleset/ClashMeta/Netflix.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
