@@ -73,6 +73,9 @@ curl -L -o Tools-repo/Ruleset/Other/China.list "https://raw.githubusercontent.co
 curl -L -o Tools-repo/Ruleset/Other/ChinaIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
 curl -L -o Tools-repo/Ruleset/Other/ChinaASN.list "https://raw.githubusercontent.com/missuo/ASN-China/main/ASN.China.list"
 
+# 本地/局域网
+curl -L -o Tools-repo/Ruleset/Other/Private.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
+
 
 #--- ClashMeta ---#
 # AI
@@ -115,6 +118,8 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/Microsoft.list "https://raw.githubuserco
 # 国内直连
 curl -L -o Tools-repo/Ruleset/ClashMeta/China.list  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/ChinaIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
+
+# 本地/局域网
 curl -L -o Tools-repo/Ruleset/ClashMeta/Local.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/LocalIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
 
@@ -161,5 +166,7 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/Microsoft.mrs "https://raw.githubusercon
 # 国内直连
 curl -L -o Tools-repo/Ruleset/ClashMeta/China.mrs  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
 curl -L -o Tools-repo/Ruleset/ClashMeta/ChinaIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
+
+# 本地/局域网
 curl -L -o Tools-repo/Ruleset/ClashMeta/Local.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
 curl -L -o Tools-repo/Ruleset/ClashMeta/LocalIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
