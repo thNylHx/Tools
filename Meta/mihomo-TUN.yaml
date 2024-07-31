@@ -1,8 +1,8 @@
 #!name = mihomo TUN 配置文件
 #!desc = 说明：理论上适用于所有的 Meta 内核，已测试的有 Clash Verg Rev、Openclash、mihomo 
-#!date = 2024-07-31 17:30
+#!date = 2024-07-31 17:00
 #!source = https://wiki.metacubex.one/example/conf/#__tabbed_1_3
-
+#!author = thNylHx
 
 # 这里是机场订阅更新和延迟测试相关锚点
 pr: &pr {type: http, interval: 3600, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}}
