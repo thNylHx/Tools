@@ -1,11 +1,11 @@
 #!name = mihomo TUN 配置文件
 #!desc = 说明：理论上适用于所有的 Meta 内核，已测试的有 Clash Verg Rev、Openclash、mihomo 
-#!date = 2024-07-29 17:30
+#!date = 2024-07-31 17:30
 #!source = https://wiki.metacubex.one/example/conf/#__tabbed_1_3
 
 
 # 这里是机场订阅更新和延迟测试相关锚点
-pr: &pr {type: http, interval: 1800, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}}
+pr: &pr {type: http, interval: 3600, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}}
 
 # url 里填写自己的机场订阅，名称不能重复
 proxy-providers:
@@ -23,33 +23,28 @@ proxy-providers:
       additional-prefix: "[此处填写机场名称]"
 
 # 全局配置
-# # 开启 IPv6 总开关： true/false
+# 开启 IPv6 总开关，可选：true/false
 ipv6: true
 # 允许局域网连接
 allow-lan: true
 # HTTP(S) 和 SOCKS 代理混合端口
 mixed-port: 7890
 # 更换延迟计算方式,去除握手等额外延迟
-unified-delay: false
+unified-delay: true
 # TCP 并发连接所有 IP, 将使用最快握手的 TCP
 tcp-concurrent: true
 
 # 配置 WEB UI
 # UI 名字
 external-ui: ui
-# 外部控制器，可以使用 RESTful API 来控制你的 Clash 内核
+# UI 地址
 external-controller: 0.0.0.0:9090
-# 自定义外部用户界面下载地址
+# 自定义 UI 下载地址
 external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
 
-# 匹配所有进程 always/strict/off
-##  - always, 开启，强制匹配所有进程
-##  - strict, 默认，由 mihomo 判断是否开启
-##  - off, 不匹配进程，推荐在路由器上使用此模式
+# 匹配所有进程
 find-process-mode: strict
-# 全局 TLS 指纹，优先低于 proxy 内的 client-fingerprint
-##  - 可选： "chrome","firefox","safari","ios","random","none" options.
-##  - Utls is currently support TLS transport in TCP/grpc/WS/HTTP for VLESS/Vmess and trojan.
+# 全局 TLS 指纹
 global-client-fingerprint: chrome
 
 # profile 应为扩展配置，但在 mihomo, 仅作为缓存项使用
@@ -62,7 +57,6 @@ profile:
 # 嗅探域名 可选配置
 sniffer:
   enable: true
-# TLS 和 QUIC 默认如果不配置 ports 默认嗅探 443
   sniff:
     HTTP:
       ports: [80, 8080-8880]
@@ -71,7 +65,6 @@ sniffer:
       ports: [443, 8443]
     QUIC:
       ports: [443, 8443]
-# 需要跳过嗅探的域名
   skip-domain:
     - "Mijia Cloud"
     - "+.push.apple.com"
@@ -121,12 +114,7 @@ dns:
 # 单个出站代理节点
 proxies:
   # 直连节点
-  - name: "国内直连"
-    type: direct
-    udp: true
-    tfo: true
-    mptcp: true
-    ip-version: ipv6-prefer
+  - {name: 国内直连, type: direct, tfo: true, udp: true, mptcp: true, ip-version: ipv6-prefer}
 
 # 策略组相关
 pg: &pg {type: select, proxies: [手动选择, 自动选择, 香港节点, 台湾节点, 美国节点, 狮城节点, 日本节点, 韩国节点]}
@@ -134,6 +122,8 @@ pg: &pg {type: select, proxies: [手动选择, 自动选择, 香港节点, 台�
 mt: &mt {type: select, include-all-providers: true}
 # 自动优选策略
 at: &at {type: url-test, include-all-providers: true, url: https://www.gstatic.com/generate_204, tolerance: 10, interval: 300}
+# 负载均衡策略
+lb: &lb {type: load-balance, include-all: true, interval: 300, url: https://www.gstatic.com/generate_204}
 
 # 策略组
 proxy-groups:
