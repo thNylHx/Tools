@@ -1,4 +1,4 @@
-# 2024-07-30 10:30
+# 2024-08-01 20:00
 
 #!/bin/bash
 
@@ -110,6 +110,7 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/Bilibili.list "https://raw.githubusercon
 curl -L -o Tools-repo/Ruleset/ClashMeta/Disney.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/Netflix.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/NetflixIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
+curl -L -o Tools-repo/Ruleset/ClashMeta/Spotify.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.list"
 
 # 社交平台
 curl -L -o Tools-repo/Ruleset/ClashMeta/Facebook.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.list"
@@ -161,6 +162,7 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/Bilibili.mrs "https://raw.githubusercont
 curl -L -o Tools-repo/Ruleset/ClashMeta/Disney.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs"
 curl -L -o Tools-repo/Ruleset/ClashMeta/Netflix.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
 curl -L -o Tools-repo/Ruleset/ClashMeta/NetflixIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/Spotify.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs"
 
 # 社交平台
 curl -L -o Tools-repo/Ruleset/ClashMeta/Facebook.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs"
