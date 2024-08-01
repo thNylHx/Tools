@@ -20,6 +20,42 @@ curl -L -o Tools-repo/Ruleset/Block/BlockAdvertising.list "https://raw.githubuse
 curl -L -o Tools-repo/Ruleset/Block/BlockMalicious.list "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Malicious.list"
 curl -L -o Tools-repo/Ruleset/Block/BlockTracking.list "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Tracking.list"
 
+# 本地/局域网
+curl -L -o Tools-repo/Ruleset/Other/PrivateIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
+
+# 1Password
+curl -L -o Tools-repo/Ruleset/Other/1Password.list "https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/1PasswordUS.list"
+
+# PayPal
+curl -L -o Tools-repo/Ruleset/Media/PayPal.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/paypal.list"
+
+# AI
+curl -L -o Tools-repo/Ruleset/Other/AI.list "https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list"
+
+# 游戏平台
+curl -L -o Tools-repo/Ruleset/Other/Steam.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list"
+curl -L -o Tools-repo/Ruleset/Other/Epic.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.list"
+
+# 谷歌平台
+curl -L -o Tools-repo/Ruleset/Media/YouTube.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
+#curl -L -o Tools-repo/Ruleset/Media/YouTube.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list"
+curl -L -o Tools-repo/Ruleset/Media/YouTubeMusic.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
+curl -L -o Tools-repo/Ruleset/Other/Google.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
+curl -L -o Tools-repo/Ruleset/Other/GoogleIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
+
+# 微软平台
+curl -L -o Tools-repo/Ruleset/Other/GitHub.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/github.list"
+curl -L -o Tools-repo/Ruleset/Other/OneDrive.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/onedrive.list"
+curl -L -o Tools-repo/Ruleset/Other/Microsoft.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/microsoft.list"
+
+# 社交平台
+curl -L -o Tools-repo/Ruleset/Media/Telegram.list "https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
+curl -L -o Tools-repo/Ruleset/Media/Twitter.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
+curl -L -o Tools-repo/Ruleset/Media/TwitterIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
+curl -L -o Tools-repo/Ruleset/Media/Facebook.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
+curl -L -o Tools-repo/Ruleset/Media/FacebookIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
+curl -L -o Tools-repo/Ruleset/Media/Instagram.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
+
 # 影视媒体
 curl -L -o Tools-repo/Ruleset/Media/TikTok.list "https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/TikTok.list"
 curl -L -o Tools-repo/Ruleset/Media/GlobalMedia.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
@@ -31,53 +67,27 @@ curl -L -o Tools-repo/Ruleset/Media/Netflix.list "https://raw.githubusercontent.
 curl -L -o Tools-repo/Ruleset/Media/NetflixIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
 curl -L -o Tools-repo/Ruleset/Media/Spotify.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.list"
 
-# 社交平台
-curl -L -o Tools-repo/Ruleset/Media/Telegram.list "https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
-curl -L -o Tools-repo/Ruleset/Media/Twitter.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
-curl -L -o Tools-repo/Ruleset/Media/TwitterIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
-curl -L -o Tools-repo/Ruleset/Media/Facebook.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
-curl -L -o Tools-repo/Ruleset/Media/FacebookIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
-curl -L -o Tools-repo/Ruleset/Media/Instagram.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
-
-# 谷歌平台
-curl -L -o Tools-repo/Ruleset/Media/YouTube.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
-#curl -L -o Tools-repo/Ruleset/Media/YouTube.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list"
-curl -L -o Tools-repo/Ruleset/Media/YouTubeMusic.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
-curl -L -o Tools-repo/Ruleset/Other/Google.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
-curl -L -o Tools-repo/Ruleset/Other/GoogleIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
-
-# 1Password
-curl -L -o Tools-repo/Ruleset/Other/1Password.list "https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/1PasswordUS.list"
-
-# PayPal
-curl -L -o Tools-repo/Ruleset/Media/PayPal.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/paypal.list"
-
-# AI
-curl -L -o Tools-repo/Ruleset/Other/AI.list "https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list"
-
-# 苹果
-curl -L -o Tools-repo/Ruleset/Other/Apple.list "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Apple/Apple.list"
-curl -L -o Tools-repo/Ruleset/Other/AppStore.list "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Apple/AppStore.list"
-
-# 微软平台
-curl -L -o Tools-repo/Ruleset/Other/GitHub.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/github.list"
-curl -L -o Tools-repo/Ruleset/Other/OneDrive.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/onedrive.list"
-curl -L -o Tools-repo/Ruleset/Other/Microsoft.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/microsoft.list"
-
 # 海外代理
 curl -L -o Tools-repo/Ruleset/Other/GlobalGFW.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
 curl -L -o Tools-repo/Ruleset/Other/Global.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
+
+# 苹果
+curl -L -o Tools-repo/Ruleset/Other/Apple.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
+# curl -L -o Tools-repo/Ruleset/Other/Apple.list "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Apple/Apple.list"
+# curl -L -o Tools-repo/Ruleset/Other/AppStore.list "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Apple/AppStore.list"
 
 # 国内直连
 curl -L -o Tools-repo/Ruleset/Other/China.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/cn.list"
 curl -L -o Tools-repo/Ruleset/Other/ChinaIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
 curl -L -o Tools-repo/Ruleset/Other/ChinaASN.list "https://raw.githubusercontent.com/missuo/ASN-China/main/ASN.China.list"
 
-# 本地/局域网
-curl -L -o Tools-repo/Ruleset/Other/PrivateIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
 
 
 #--- ClashMeta ---#
+# 本地/局域网
+curl -L -o Tools-repo/Ruleset/ClashMeta/Local.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.list"
+curl -L -o Tools-repo/Ruleset/ClashMeta/LocalIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
+
 # AI
 curl -L -o Tools-repo/Ruleset/ClashMeta/Openai.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.list"
 
@@ -89,6 +99,10 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/Apple.list "https://raw.githubuserconten
 
 # 海外代理
 curl -L -o Tools-repo/Ruleset/ClashMeta/Global.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.list"
+
+# 游戏平台
+curl -L -o Tools-repo/Ruleset/ClashMeta/Steam.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.list"
+curl -L -o Tools-repo/Ruleset/ClashMeta/Epic.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/epicgames.list"
 
 # 影视媒体
 curl -L -o Tools-repo/Ruleset/ClashMeta/tiktok.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.list"
@@ -119,12 +133,12 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/Microsoft.list "https://raw.githubuserco
 curl -L -o Tools-repo/Ruleset/ClashMeta/China.list  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.list"
 curl -L -o Tools-repo/Ruleset/ClashMeta/ChinaIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
 
-# 本地/局域网
-curl -L -o Tools-repo/Ruleset/ClashMeta/Local.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.list"
-curl -L -o Tools-repo/Ruleset/ClashMeta/LocalIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
-
 
 #--- ClashMeta mrs ---#
+# 本地/局域网
+curl -L -o Tools-repo/Ruleset/ClashMeta/Local.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/LocalIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
+
 # AI
 curl -L -o Tools-repo/Ruleset/ClashMeta/Openai.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs"
 
@@ -136,6 +150,10 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/Apple.mrs "https://raw.githubusercontent
 
 # 海外代理
 curl -L -o Tools-repo/Ruleset/ClashMeta/Global.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
+
+# 游戏平台
+curl -L -o Tools-repo/Ruleset/ClashMeta/Steam.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/Epic.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/epicgames.mrs"
 
 # 影视媒体
 curl -L -o Tools-repo/Ruleset/ClashMeta/tiktok.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"
@@ -166,7 +184,3 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/Microsoft.mrs "https://raw.githubusercon
 # 国内直连
 curl -L -o Tools-repo/Ruleset/ClashMeta/China.mrs  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
 curl -L -o Tools-repo/Ruleset/ClashMeta/ChinaIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
-
-# 本地/局域网
-curl -L -o Tools-repo/Ruleset/ClashMeta/Local.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
-curl -L -o Tools-repo/Ruleset/ClashMeta/LocalIP.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
