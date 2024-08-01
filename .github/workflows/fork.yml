@@ -3,7 +3,7 @@ name: Fork & Edit
 on:
   workflow_dispatch:
   schedule:
-    - cron: "35 */6 * * *"
+    - cron: "15 */6 * * *"
   
 jobs:
   Fork-FLITER-list:
@@ -150,12 +150,12 @@ jobs:
         fi
 
         # 同步 AppStore 到 Apple
-        if [ -f "Tools-repo/Ruleset/Other/Apple.list" ] ; then
-         echo "" >> Tools-repo/Ruleset/Other/Apple.list
-         cat Tools-repo/Ruleset/Other/AppStore.list >> Tools-repo/Ruleset/Other/Apple.list
-        else
-          echo "Apple.list not found."
-        fi
+        # if [ -f "Tools-repo/Ruleset/Other/Apple.list" ] ; then
+        #  echo "" >> Tools-repo/Ruleset/Other/Apple.list
+        #  cat Tools-repo/Ruleset/Other/AppStore.list >> Tools-repo/Ruleset/Other/Apple.list
+        # else
+        #   echo "Apple.list not found."
+        # fi
 
         # 同步 GoogleIP 到 Google
         if [ -f "Tools-repo/Ruleset/Other/Google.list" ] ; then
