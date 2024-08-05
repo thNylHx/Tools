@@ -112,10 +112,11 @@ dns:
     - https://dns.cloudflare.com/dns-query
 
 # 单个出站代理节点
-proxies:
-  # 直连节点
-  - {name: 国内直连, type: direct, tfo: true, udp: true, mptcp: true, ip-version: ipv6-prefer}
-
+proxies: 
+  - name: "国内直连"
+    type: direct
+    udp: true
+    
 # 策略组相关
 pg: &pg {type: select, proxies: [手动选择, 自动选择, 香港节点, 台湾节点, 美国节点, 狮城节点, 日本节点, 韩国节点]}
 # 手动选择策略
