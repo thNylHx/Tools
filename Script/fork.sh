@@ -183,7 +183,7 @@ curl -L -o Tools-repo/Ruleset/ClashMeta/GoogleIP.mrs "https://raw.githubusercont
 curl -L -o Tools-repo/Ruleset/ClashMeta/YouTube.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
 
 # 微软平台
-curl -L -o Tools-repo/Ruleset/ClashMeta/Line.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/line.mrs"
+curl -L -o Tools-repo/Ruleset/ClashMeta/Line.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/line.mrs"
 curl -L -o Tools-repo/Ruleset/ClashMeta/GitHub.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
 curl -L -o Tools-repo/Ruleset/ClashMeta/OneDrive.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs"
 curl -L -o Tools-repo/Ruleset/ClashMeta/Microsoft.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
