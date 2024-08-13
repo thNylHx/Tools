@@ -17,12 +17,6 @@ echo "请保证科学上网已经开启"
 echo "安装过程中可以按 ctrl+c 强制退出"
 echo "================================="
 
-# 更新系统和安装必要工具
-echo "正在更新系统和安装必要工具..."
-apt update && apt dist-upgrade -y
-apt install -y curl git wget nano
-echo "系统更新和工具安装完成"
-
 # 检查 Docker 环境
 check_docker() {
     if ! command -v docker &> /dev/null; then
