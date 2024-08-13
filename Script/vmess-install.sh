@@ -27,10 +27,8 @@ wget "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-li
 echo "v2ray-core 下载完成, 开始部署"
 
 # 解压下载的 zip 文件
-unzip "v2ray-linux-${ARCH}.zip" -d /usr/local/bin/v2ray
+unzip "v2ray-linux-${ARCH}.zip" -d /root/cesi/v2ray
 
-# 赋予可执行权限
-chmod +x /usr/local/bin/v2ray/v2ray
-chmod +x /usr/local/bin/v2ray/v2ctl
+
 
 echo "部署完成"
