@@ -1,4 +1,7 @@
 #!/bin/bash
+
+## bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Script/vmess-install.sh)
+
 set -e -o pipefail
 
 ARCH_RAW=$(uname -m)
