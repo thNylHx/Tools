@@ -21,10 +21,13 @@ read -p "输入数字选择 (1/2/3): " action
 
 case $action in
     1)
-
     echo "开始安装 V2ray"
+    
+    echo "创建 V2ray 文件夹"
     mkdir -p /root/V2ray
+    
     cd /root/V2ray
+    echo "创建完成"
 
     ARCH_RAW=$(uname -m)
     case "${ARCH_RAW}" in
@@ -76,7 +79,7 @@ EOF
     echo "请输入以下配置信息："
     
     # 端口处理
-    read -p "请输入监听端口 (留空以生成随机端口): " PORT
+    read -p "请输入监听端口 (10000-65000之间, 留空以生成随机端口): " PORT
     if [[ -z "$PORT" ]]; then
         PORT=$(shuf -i 10000-65000 -n 1)
         echo "随机生成的监听端口: $PORT"
@@ -85,16 +88,17 @@ EOF
     # UUID处理
     read -p "请输入 V2Ray UUID (留空以生成随机UUID): " UUID
     if [[ -z "$UUID" ]]; then
-        if command -v uuidgen > /dev/null 2>&1; then
-            UUID=$(uuidgen | tr -d '-')
+        if command -v uuidgen >/dev/null 2>&1; then
+            UUID=$(uuidgen)
         else
-            UUID=$(openssl rand -hex 16)
+            UUID=$(cat /proc/sys/kernel/random/uuid)
         fi
         echo "随机生成的UUID: $UUID"
     fi
 
-    # 询问是否启用 WebSocket
-    read -p "是否启用 WebSocket (y/n)? " ENABLE_WS
+    echo "是否启用 WebSocket (y/n)?"
+    read -p "输入 (y/n): " ENABLE_WS
+
     if [[ "$ENABLE_WS" == "y" ]]; then
         RANDOM_PATH=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 6)
         read -p "WebSocket 路径 (默认: /$RANDOM_PATH): " WS_PATH
@@ -102,8 +106,8 @@ EOF
         echo "WebSocket 路径设置为: $WS_PATH"
     fi
 
-    # 询问是否启用 TLS
-    read -p "是否启用 TLS (y/n)? " ENABLE_TLS
+    echo "是否启用 TLS (y/n)?"
+    read -p "输入 (y/n): " ENABLE_TLS
 
     # 生成配置文件
     cat << EOF > /root/V2ray/config.json
@@ -116,7 +120,7 @@ EOF
         "clients": [
           {
             "id": "$UUID",
-            "alterId": 0
+            "alterId": 64
           }
         ]
       }
