@@ -2,8 +2,6 @@
 
 ## bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Script/vmess-install.sh)
 
-#!/bin/bash
-
 set -e -o pipefail
 
 echo "开始创建 V2ray 文件夹"
@@ -63,9 +61,17 @@ RestartPreventExitStatus=23
 WantedBy=multi-user.target
 EOF
 
-echo "服务端配置文件 vmess+tcp"
+# 选择配置文件
+echo "请选择配置文件类型："
+echo "1) vmess+tcp"
+echo "2) vmess+ws"
+echo "3) vmess+ws+tls"
+echo "4) vmess+tcp+tls"
+read -p "输入数字选择 (1/2/3/4): " config_choice
 
-cat << EOF > /root/V2ray/config.json
+case $config_choice in
+    1)
+    cat << EOF > /root/V2ray/config.json
 {
   "inbounds": [
     {
@@ -90,5 +96,125 @@ cat << EOF > /root/V2ray/config.json
   "vmess-aead": true
 }
 EOF
+    ;;
+    2)
+    cat << EOF > /root/V2ray/config.json
+{
+  "inbounds": [
+    {
+      "port": 443, 
+      "protocol": "vmess",    
+      "settings": {
+        "clients": [
+          {
+            "id": "af41686b-cb85-494a-a554-eeaa1514bca7",  
+            "alterId": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/v2ray"
+          }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ],
+  "vmess-aead": true
+}
+EOF
+    ;;
+    3)
+    cat << EOF > /root/V2ray/config.json
+{
+  "inbounds": [
+    {
+      "port": 443, 
+      "protocol": "vmess",    
+      "settings": {
+        "clients": [
+          {
+            "id": "af41686b-cb85-494a-a554-eeaa1514bca7",  
+            "alterId": 0
+          }
+        ]
+      },
+        "streamSettings": {
+          "network": "ws",
+          "wsSettings": {
+            "path": "/v2ray"
+            },
+          "security": "tls",
+          "tlsSettings": {
+            "certificates": [
+              {
+                "certificateFile": "/root/V2ray/server.crt", 
+                "keyFile": "/root/V2ray/server.key" 
+              }
+            ]
+          }
+        }
+      }
+    ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ],
+  "vmess-aead": true
+}
+EOF
+    ;;
+    4)
+    cat << EOF > /root/V2ray/config.json
+{
+  "inbounds": [
+    {
+      "port": 443, 
+      "protocol": "vmess",    
+      "settings": {
+        "clients": [
+          {
+            "id": "af41686b-cb85-494a-a554-eeaa1514bca7",  
+            "alterId": 0
+          }
+        ]
+      },
+        "streamSettings": {
+          "network": "tcp",
+          "security": "tls",
+          "tlsSettings": {
+            "certificates": [
+              {
+                "certificateFile": "/root/V2ray/server.crt", 
+                "keyFile": "/root/V2ray/server.key" 
+              }
+            ]
+          }
+        }
+      }
+    ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ],
+  "vmess-aead": true
+}
+EOF
+    ;;
+    *)
+    echo "无效选择，退出脚本"
+    exit 1
+    ;;
+esac
 
 echo "V2ray 部署完成"
