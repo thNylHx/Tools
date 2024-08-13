@@ -140,4 +140,7 @@ while true; do
         echo "无效选择，请输入 [0-9] 之间的数字。"
         ;;
     esac
+
+    echo "请按 Enter 键返回主菜单..."
+    read -r
 done
