@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-## bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Install/ss-install.sh)
+## bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Script/ss-install.sh)
 
 
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
