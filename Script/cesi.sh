@@ -88,9 +88,14 @@ EOF
     # UUID处理
     read -p "请输入 V2Ray UUID (留空以生成随机UUID): " UUID
     if [[ -z "$UUID" ]]; then
-        UUID=$(uuidgen)
+        if command -v uuidgen > /dev/null 2>&1; then
+            UUID=$(uuidgen)
+        else
+            UUID=$(openssl rand -hex 16 | sed 's/\(..\)/\1-/g' | cut -c1-36)
+        fi
         echo "随机生成的UUID: $UUID"
     fi
+
 
     echo "是否启用 WebSocket (y/n)?"
     read -p "输入 (y/n): " ENABLE_WS
