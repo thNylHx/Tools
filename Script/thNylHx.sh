@@ -98,7 +98,7 @@ while true; do
 
         5)
         echo "开始安装 VMESS"
-        # 这里应该插入安装 VMESS 的命令
+        bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Script/vmess-install.sh)
         echo "VMESS 安装完成!"
         ;;
 
