@@ -2,6 +2,8 @@
 
 ## bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Script/vmess-install.sh)
 
+#!/bin/bash
+
 set -e -o pipefail
 
 echo "开始创建 V2ray 文件夹"
