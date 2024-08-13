@@ -31,16 +31,17 @@ echo "获取到的最新版本: ${VERSION}"
 echo "开始下载 v2ray-core"
 
 # 根据设备架构下载对应的版本到指定文件夹
-wget -P /root/v2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip"
+wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip"
 
 echo "v2ray-core 下载完成, 开始部署"
 
-
 echo "解压 V2ray"
 
-unzip v2ray-linux-64.zip && rm v2ray-linux-64.zip
+# 使用 ${ARCH} 来匹配正确的文件名
+unzip "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip"
 
 echo "配置 V2ray"
+
 cat << EOF > /etc/systemd/system/v2ray.service
 [Unit]
 Description=V2Ray Service
@@ -61,6 +62,7 @@ WantedBy=multi-user.target
 EOF
 
 echo "服务端配置文件 vmess+tcp"
+
 cat << EOF > /root/V2ray/config.json
 {
   "inbounds": [
@@ -86,3 +88,5 @@ cat << EOF > /root/V2ray/config.json
   "vmess-aead": true
 }
 EOF
+
+echo "V2ray 部署完成"
