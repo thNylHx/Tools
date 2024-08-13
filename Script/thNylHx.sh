@@ -6,8 +6,8 @@ set -e -o pipefail
 
 # 检查 root 权限
 if [[ $EUID -ne 0 ]]; then
-   echo "请以 root 权限运行此脚本。" 
-   exit 1
+    echo "请以 root 权限运行此脚本。"
+    exit 1
 fi
 
 echo "================================="
@@ -104,7 +104,7 @@ while true; do
             echo "VMESS 安装失败，请检查脚本链接或网络连接。"
         }
         echo "VMESS 安装完成!"
-;;
+        ;;
 
         6)
         echo "开始安装 Trojan-go"
@@ -127,11 +127,11 @@ while true; do
         9)
         echo "开始一键更换软件源（Debian 12）"
         cat << EOF > /etc/apt/sources.list
-        deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib non-free non-free-firmware
-        deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware
-        deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-backports main contrib non-free non-free-firmware
-        deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main contrib non-free non-free-firmware
-        EOF
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib non-free non-free-firmware
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-backports main contrib non-free non-free-firmware
+deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main contrib non-free non-free-firmware
+EOF
         echo "软件源更换完成!"
         ;;
 
