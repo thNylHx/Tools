@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## bash <(curl -fsSL )
+## bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Script/th-install.sh)
 
 echo "================================="
 echo "欢迎使用一键脚本"
