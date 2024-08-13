@@ -98,9 +98,13 @@ while true; do
 
         5)
         echo "开始安装 VMESS"
-        bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Script/vmess-install.sh)
+        {
+            curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Script/vmess-install.sh | bash
+        } || {
+            echo "VMESS 安装失败，请检查脚本链接或网络连接。"
+        }
         echo "VMESS 安装完成!"
-        ;;
+;;
 
         6)
         echo "开始安装 Trojan-go"
