@@ -17,6 +17,25 @@ echo "请保证科学上网已经开启"
 echo "安装过程中可以按 ctrl+c 强制退出"
 echo "================================="
 
+# 更新系统和安装必要工具
+echo "正在更新系统和安装必要工具..."
+apt update && apt dist-upgrade -y
+apt install -y curl git wget nano
+echo "系统更新和工具安装完成"
+
+# 检查 Docker 环境
+check_docker() {
+    if ! command -v docker &> /dev/null; then
+        echo "Docker 未安装。请先安装 Docker。"
+        exit 1
+    fi
+
+    if ! systemctl is-active --quiet docker; then
+        echo "Docker 服务未运行。请启动 Docker 服务。"
+        exit 1
+    fi
+}
+
 echo " 1. 安装 docker 和 docker-compose"
 echo " 2. 安装 青龙面板"
 echo " 3. 安装 AdGuardHome"
@@ -42,7 +61,22 @@ case $action in
 
     2)
     echo "开始安装 青龙面板"
-    # 这里应该插入安装青龙面板的命令
+    
+    # 检查 Docker 环境
+    check_docker
+    
+    # 执行安装青龙面板的命令
+    docker run -dit \
+    -v $PWD/ql:/ql/data \
+    -p 5700:5700 \
+    -e TZ=Asia/Shanghai \
+    -e ENABLE_HANGUP=true \
+    -e ENABLE_WEB_PANEL=true \
+    --name qinglong \
+    --hostname qinglong \
+    --restart always \
+    whyour/qinglong:latest
+
     echo "青龙面板 安装完成，请返回上级菜单!"
     ;;
 
