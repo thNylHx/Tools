@@ -7,9 +7,9 @@ set -e -o pipefail
 ARCH_RAW=$(uname -m)
 case "${ARCH_RAW}" in
     'x86_64')    ARCH='64';;
-    'x86' | 'i686' | 'i386')     ARCH='86';;
-    'aarch64' | 'arm64') ARCH='arm64';;
-    'armv7l')   ARCH='armv7';;
+    'x86' | 'i686' | 'i386')     ARCH='32';;
+    'aarch64' | 'arm64') ARCH='arm64-v8a';;
+    'armv7' | 'armv7l')   ARCH='arm32-v7a';;
     's390x')    ARCH='s390x';;
     *)          echo "Unsupported architecture: ${ARCH_RAW}"; exit 1;;
 esac
