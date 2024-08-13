@@ -6,8 +6,8 @@ set -e -o pipefail
 
 ARCH_RAW=$(uname -m)
 case "${ARCH_RAW}" in
-    'x86_64')    ARCH='amd64';;
-    'x86' | 'i686' | 'i386')     ARCH='386';;
+    'x86_64')    ARCH='x64';;
+    'x86' | 'i686' | 'i386')     ARCH='x86';;
     'aarch64' | 'arm64') ARCH='arm64';;
     'armv7l')   ARCH='armv7';;
     's390x')    ARCH='s390x';;
@@ -24,14 +24,7 @@ echo "获取到的最新版本: ${VERSION}"
 
 echo "开始下载 v2ray-core"
 
-# 注意这里使用 ${ARCH} 而不是 ${ARCH_RAW}
+# 根据设备架构下载对应的版本
 wget "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip"
 
 echo "v2ray-core 下载完成, 开始部署"
-
-# 解压下载的 zip 文件
-unzip "v2ray-linux-${ARCH}.zip" -d /root/cesi/v2ray
-
-
-
-echo "部署完成"
