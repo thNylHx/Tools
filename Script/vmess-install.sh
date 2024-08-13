@@ -12,11 +12,11 @@ fi
 
 echo "V2ray 一键安装管理脚本"
 echo "请选择操作："
-echo "===================="
+echo "=============================="
 echo " 1、 安装 V2ray"
 echo " 2、 升级 V2ray"
 echo " 3、 卸载 V2ray"
-echo "===================="
+echo "=============================="
 read -p "输入数字选择 (1/2/3): " action
 
 case $action in
@@ -77,12 +77,12 @@ WantedBy=multi-user.target
 EOF
 
     echo "请选择配置文件类型："
-    echo "--------------------"
+    echo "=============================="
     echo " 1、 vmess+tcp"
     echo " 2、 vmess+ws"
     echo " 3、 vmess+tcp+tls（需要域名）"
     echo " 4、 vmess+ws+tls（需要域名）"
-    echo "--------------------"
+    echo "=============================="
     read -p "输入数字选择 (1/2/3/4): " config_choice
 
     case $config_choice in
