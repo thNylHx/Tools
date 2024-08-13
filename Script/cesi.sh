@@ -21,13 +21,10 @@ read -p "输入数字选择 (1/2/3): " action
 
 case $action in
     1)
+
     echo "开始安装 V2ray"
-    
-    echo "创建 V2ray 文件夹"
     mkdir -p /root/V2ray
-    
     cd /root/V2ray
-    echo "创建完成"
 
     ARCH_RAW=$(uname -m)
     case "${ARCH_RAW}" in
@@ -79,7 +76,7 @@ EOF
     echo "请输入以下配置信息："
     
     # 端口处理
-    read -p "请输入监听端口 (10000-65000之间, 留空以生成随机端口): " PORT
+    read -p "请输入监听端口 (留空以生成随机端口): " PORT
     if [[ -z "$PORT" ]]; then
         PORT=$(shuf -i 10000-65000 -n 1)
         echo "随机生成的监听端口: $PORT"
@@ -89,7 +86,7 @@ EOF
     read -p "请输入 V2Ray UUID (留空以生成随机UUID): " UUID
     if [[ -z "$UUID" ]]; then
         if command -v uuidgen > /dev/null 2>&1; then
-            UUID=$(uuidgen)
+            UUID=$(uuidgen | tr -d '-')
         else
             UUID=$(openssl rand -hex 16)
         fi
