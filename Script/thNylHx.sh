@@ -38,7 +38,7 @@ read -p "输入数字选择[0-8]: " action
 case $action in
     1)
     echo "开始安装 docker 和 docker-compose"
-     bash <(curl -sSL https://gitee.com/SuperManito/LinuxMirrors/raw/main/DockerInstallation.sh)
+    bash <(curl -sSL https://gitee.com/SuperManito/LinuxMirrors/raw/main/DockerInstallation.sh)
 
 
 
