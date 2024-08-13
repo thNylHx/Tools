@@ -17,17 +17,18 @@ echo " 1、 安装 V2ray"
 echo " 2、 升级 V2ray"
 echo " 3、 卸载 V2ray"
 echo "=============================="
-read -p "输入数字选择 (1/2/3): " action
+echo " 4、 重新启动 V2ray"
+echo " 5、 重新加载 V2ray"
+echo " 6、 开机启动 V2ray"
+echo "=============================="
+echo " 0、 退出一键安装脚本"
+read -p "输入数字选择 [0-6]: " action
 
 case $action in
     1)
-    echo "开始安装 V2ray"
-    
-    echo "创建 V2ray 文件夹"
+    echo " 开始安装 V2ray 请稍后 "
     mkdir -p /root/V2ray
-    
     cd /root/V2ray
-    echo "创建完成"
 
     ARCH_RAW=$(uname -m)
     case "${ARCH_RAW}" in
@@ -110,22 +111,35 @@ EOF
     read -p "输入 (y/n): " ENABLE_TLS
 
     # 生成配置文件
-    cat << EOF > /root/V2ray/config.json
+cat << EOF > /root/V2ray/config.json
 {
   "inbounds": [
     {
       "port": $PORT,
-      "protocol": "vmess",
+      "protocol": "vmess",    
       "settings": {
         "clients": [
           {
             "id": "$UUID",
-            "alterId": 64
+            "alterId": 0
           }
         ]
+      },
+      "streamSettings": {
+        "network": "${ENABLE_WS:+ws}",
+        "wsSettings": {
+          "path": "${WS_PATH:-/}"
+        },
+        "security": "${ENABLE_TLS:+tls}",
+        "tlsSettings": {
+          "certificates": [
+            {
+              "certificateFile": "/root/V2ray/server.crt",
+              "keyFile": "/root/V2ray/server.key"
+            }
+          ]
+        }
       }
-      $(if [[ "$ENABLE_WS" == "y" ]]; then echo ',"streamSettings": {"network": "ws", "wsSettings": {"path": "'$WS_PATH'"}}'; fi)
-      $(if [[ "$ENABLE_TLS" == "y" ]]; then echo ',"streamSettings": {"network": "ws", "security": "tls", "tlsSettings": {"certificates": [{"certificateFile": "/root/V2ray/server.crt", "keyFile": "/root/V2ray/server.key"}]}}'; fi)
     }
   ],
   "outbounds": [
@@ -195,6 +209,26 @@ EOF
     rm -rf /root/V2ray
 
     echo "V2ray 卸载完成"
+    ;;
+
+    4)
+    echo "重新启动 V2ray"
+    systemctl restart v2ray
+    ;;
+
+    5)
+    echo "重新加载 V2ray"
+    systemctl reload v2ray
+    ;;
+
+    6)
+    echo "设置 V2ray 开机启动"
+    systemctl enable v2ray
+    ;;
+
+    0)
+    echo "退出脚本"
+    exit 0
     ;;
 
     *)
