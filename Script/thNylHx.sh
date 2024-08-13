@@ -30,98 +30,109 @@ check_docker() {
     fi
 }
 
-echo " 1. 安装 docker 和 docker-compose"
-echo " 2. 安装 青龙面板"
-echo " 3. 安装 AdGuardHome"
-echo "---------------------------------"
-echo " 4. 安装 mihomo"
-echo " 5. 安装 VMESS"
-echo " 6. 安装 Trojan-go"
-echo " 7. 安装 Shadowsocks-Rust"
-echo "---------------------------------"
-echo " 8. 一键开启 ROOT 权限"
-echo " 9. 一键更换软件源（Debian 12）"
-echo "---------------------------------"
-echo " 0. 退出一键安装脚本"
-echo "================================="
-read -p "输入数字选择[0-9]: " action
+# 显示主菜单
+show_menu() {
+    echo " 1. 安装 docker 和 docker-compose"
+    echo " 2. 安装 青龙面板"
+    echo " 3. 安装 AdGuardHome"
+    echo "---------------------------------"
+    echo " 4. 安装 mihomo"
+    echo " 5. 安装 VMESS"
+    echo " 6. 安装 Trojan-go"
+    echo " 7. 安装 Shadowsocks-Rust"
+    echo "---------------------------------"
+    echo " 8. 一键开启 ROOT 权限"
+    echo " 9. 一键更换软件源（Debian 12）"
+    echo "---------------------------------"
+    echo " 0. 退出一键安装脚本"
+    echo "================================="
+}
 
-case $action in
-    1)
-    echo "开始安装 docker 和 docker-compose"
-    bash <(curl -sSL https://gitee.com/SuperManito/LinuxMirrors/raw/main/DockerInstallation.sh)
-    echo "docker 和 docker-compose 安装完成，请返回上级菜单!"
-    ;;
-
-    2)
-    echo "开始安装 青龙面板"
+# 主菜单循环
+while true; do
+    # 显示主菜单
+    show_menu
     
-    # 检查 Docker 环境
-    check_docker
-    
-    # 执行安装青龙面板的命令
-    docker run -dit \
-    -v $PWD/ql:/ql/data \
-    -p 5700:5700 \
-    -e TZ=Asia/Shanghai \
-    -e ENABLE_HANGUP=true \
-    -e ENABLE_WEB_PANEL=true \
-    --name qinglong \
-    --hostname qinglong \
-    --restart always \
-    whyour/qinglong:latest
+    # 读取用户输入
+    read -p "输入数字选择[0-9]: " action
 
-    echo "青龙面板 安装完成，请返回上级菜单!"
-    ;;
+    case $action in
+        1)
+        echo "开始安装 docker 和 docker-compose"
+        bash <(curl -sSL https://gitee.com/SuperManito/LinuxMirrors/raw/main/DockerInstallation.sh)
+        echo "docker 和 docker-compose 安装完成!"
+        ;;
 
-    3)
-    echo "开始安装 AdGuardHome"
-    # 这里应该插入安装 AdGuardHome 的命令
-    echo "AdGuardHome 安装完成，请返回上级菜单!"
-    ;;
+        2)
+        echo "开始安装 青龙面板"
+        
+        # 检查 Docker 环境
+        check_docker
+        
+        # 执行安装青龙面板的命令
+        docker run -dit \
+        -v $PWD/ql:/ql/data \
+        -p 5700:5700 \
+        -e TZ=Asia/Shanghai \
+        -e ENABLE_HANGUP=true \
+        -e ENABLE_WEB_PANEL=true \
+        --name qinglong \
+        --hostname qinglong \
+        --restart always \
+        whyour/qinglong:latest
 
-    4)
-    echo "开始安装 mihomo"
-    # 这里应该插入安装 mihomo 的命令
-    echo "mihomo 安装完成，请返回上级菜单!"
-    ;;
+        echo "青龙面板 安装完成!"
+        ;;
 
-    5)
-    echo "开始安装 VMESS"
-    # 这里应该插入安装 VMESS 的命令
-    echo "VMESS 安装完成，请返回上级菜单!"
-    ;;
+        3)
+        echo "开始安装 AdGuardHome"
+        curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
+        echo "AdGuardHome 安装完成!"
+        ;;
 
-    6)
-    echo "开始安装 Trojan-go"
-    # 这里应该插入安装 Trojan-go 的命令
-    echo "Trojan-go 安装完成，请返回上级菜单!"
-    ;;
+        4)
+        echo "开始安装 mihomo"
+        # 这里应该插入安装 mihomo 的命令
+        echo "mihomo 安装完成!"
+        ;;
 
-    7)
-    echo "开始安装 Shadowsocks-Rust"
-    # 这里应该插入安装 Shadowsocks-Rust 的命令
-    echo "Shadowsocks-Rust 安装完成，请返回上级菜单!"
-    ;;
+        5)
+        echo "开始安装 VMESS"
+        # 这里应该插入安装 VMESS 的命令
+        echo "VMESS 安装完成!"
+        ;;
 
-    8)
-    echo "开始一键开启 ROOT 权限"
-    # 这里应该插入开启 ROOT 权限的命令
-    echo "ROOT 权限开启完成，请返回上级菜单!"
-    ;;
+        6)
+        echo "开始安装 Trojan-go"
+        # 这里应该插入安装 Trojan-go 的命令
+        echo "Trojan-go 安装完成!"
+        ;;
 
-    9)
-    echo "开始一键更换软件源（Debian 12）"
-    # 这里应该插入更换软件源的命令
-    echo "软件源更换完成，请返回上级菜单!"
-    ;;
+        7)
+        echo "开始安装 Shadowsocks-Rust"
+        # 这里应该插入安装 Shadowsocks-Rust 的命令
+        echo "Shadowsocks-Rust 安装完成!"
+        ;;
 
-    0)
-    echo "退出一键安装脚本"
-    exit 0
-    ;;
+        8)
+        echo "开始一键开启 ROOT 权限"
+        echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && systemctl restart sshd
+        echo "ROOT 权限开启完成!"
+        ;;
 
-    *)
-    echo "无效选择，请输入 [0-9] 之间的数字。"
-    ;;
-esac
+        9)
+        echo "开始一键更换软件源（Debian 12）"
+        # 这里应该插入更换软件源的命令
+        echo "软件源更换完成!"
+        ;;
+
+        0)
+        echo "退出一键安装脚本"
+        exit 0
+        ;;
+
+        *)
+        echo "无效选择，请输入 [0-9] 之间的数字。"
+        ;;
+    esac
+done
