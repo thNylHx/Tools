@@ -91,15 +91,13 @@ EOF
         if command -v uuidgen > /dev/null 2>&1; then
             UUID=$(uuidgen)
         else
-            UUID=$(openssl rand -hex 16 | sed 's/\(..\)/\1-/g' | cut -c1-36)
+            UUID=$(openssl rand -hex 16)
         fi
         echo "随机生成的UUID: $UUID"
     fi
 
-
-    echo "是否启用 WebSocket (y/n)?"
-    read -p "输入 (y/n): " ENABLE_WS
-
+    # 询问是否启用 WebSocket
+    read -p "是否启用 WebSocket (y/n)? " ENABLE_WS
     if [[ "$ENABLE_WS" == "y" ]]; then
         RANDOM_PATH=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 6)
         read -p "WebSocket 路径 (默认: /$RANDOM_PATH): " WS_PATH
@@ -107,8 +105,8 @@ EOF
         echo "WebSocket 路径设置为: $WS_PATH"
     fi
 
-    echo "是否启用 TLS (y/n)?"
-    read -p "输入 (y/n): " ENABLE_TLS
+    # 询问是否启用 TLS
+    read -p "是否启用 TLS (y/n)? " ENABLE_TLS
 
     # 生成配置文件
     cat << EOF > /root/V2ray/config.json
@@ -121,7 +119,7 @@ EOF
         "clients": [
           {
             "id": "$UUID",
-            "alterId": 64
+            "alterId": 0
           }
         ]
       }
