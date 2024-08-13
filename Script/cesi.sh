@@ -97,18 +97,23 @@ EOF
         echo "随机生成的UUID: $UUID"
     fi
 
-    echo "是否启用 WebSocket (y/n)?"
-    read -p "输入 (y/n): " ENABLE_WS
+    read -p "是否启用 WebSocket，输入 (y/n): " ENABLE_WS
 
-    if [[ "$ENABLE_WS" == "y" ]]; then
+    if [[ "$ENABLE_WS" == "y" || "$ENABLE_WS" == "Y" ]]; then
         RANDOM_PATH=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 6)
         read -p "WebSocket 路径 (默认: /$RANDOM_PATH): " WS_PATH
         WS_PATH=${WS_PATH:-/$RANDOM_PATH}
         echo "WebSocket 路径设置为: $WS_PATH"
+    else
+        ENABLE_WS=""
+        WS_PATH=""
     fi
 
-    echo "是否启用 TLS (y/n)?"
-    read -p "输入 (y/n): " ENABLE_TLS
+    read -p "是否启用 TLS， 输入 (y/n): " ENABLE_TLS
+
+    if [[ "$ENABLE_TLS" != "y" && "$ENABLE_TLS" != "Y" ]]; then
+        ENABLE_TLS=""
+    fi
 
     # 生成配置文件
 cat << EOF > /root/V2ray/config.json
@@ -126,11 +131,11 @@ cat << EOF > /root/V2ray/config.json
         ]
       },
       "streamSettings": {
-        "network": "${ENABLE_WS:+ws}",
+        "network": "${ENABLE_WS:-tcp}",
         "wsSettings": {
-          "path": "${WS_PATH:-/}"
+          "path": "$WS_PATH"
         },
-        "security": "${ENABLE_TLS:+tls}",
+        "security": "${ENABLE_TLS:-none}",
         "tlsSettings": {
           "certificates": [
             {
@@ -218,7 +223,7 @@ EOF
 
     5)
     echo "重新加载 V2ray"
-    systemctl reload v2ray
+    systemctl daemon-reload v2ray
     ;;
 
     6)
