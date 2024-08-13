@@ -10,11 +10,11 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-echo "V2ray 管理脚本"
+echo "V2ray 一键安装管理脚本"
 echo "请选择操作："
-echo "1) 安装 V2ray"
-echo "2) 升级 V2ray"
-echo "3) 卸载 V2ray"
+echo "1、 安装 V2ray"
+echo "2、 升级 V2ray"
+echo "3、 卸载 V2ray"
 read -p "输入数字选择 (1/2/3): " action
 
 case $action in
@@ -75,10 +75,10 @@ WantedBy=multi-user.target
 EOF
 
     echo "请选择配置文件类型："
-    echo "1) vmess+tcp"
-    echo "2) vmess+ws"
-    echo "3) vmess+tcp+tls"
-    echo "4) vmess+ws+tls"
+    echo "1、 vmess+tcp"
+    echo "2、 vmess+ws"
+    echo "3、 vmess+tcp+tls"
+    echo "4、 vmess+ws+tls"
     read -p "输入数字选择 (1/2/3/4): " config_choice
 
     case $config_choice in
@@ -230,7 +230,8 @@ EOF
     esac
 
     echo "V2ray 安装完成"
-    systemctl enable v2ray
+    systemctl daemon-reload
+
     systemctl start v2ray
     ;;
 
