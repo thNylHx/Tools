@@ -109,7 +109,7 @@ EOF
           "wsSettings": {
             "path": "'"${WS_PATH}"'"
             }
-        },'
+        }'
         echo "WebSocket 路径设置为: $WS_PATH"
     else
         WS_CONFIG=''
@@ -127,7 +127,7 @@ EOF
               "keyFile": "/root/V2ray/server.key" 
             }
           ]
-        },'
+        }'
         if [[ -z "$WS_CONFIG" ]]; then
             NETWORK_CONFIG='
             "streamSettings": {
@@ -155,10 +155,10 @@ EOF
             "alterId": 0
           }
         ]
-      },
-      $WS_CONFIG
-      $NETWORK_CONFIG
-      $TLS_CONFIG
+      }
+      ${WS_CONFIG:+,$WS_CONFIG}  # 仅在 $WS_CONFIG 不为空时插入，并且前面加上逗号
+      ${NETWORK_CONFIG:+,$NETWORK_CONFIG}  # 仅在 $NETWORK_CONFIG 不为空时插入，并且前面加上逗号
+      ${TLS_CONFIG:+,$TLS_CONFIG}  # 仅在 $TLS_CONFIG 不为空时插入，并且前面加上逗号
     }
   ],
   "outbounds": [
@@ -205,11 +205,11 @@ EOF
 
     echo "开始下载 v2ray-core"
 
-    wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo "下载失败"; exit 1; }
+    wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip"
 
     echo "v2ray-core 下载完成, 开始部署"
 
-    unzip -o "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo "解压失败"; exit 1; }
+    unzip -o "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip"
 
     echo "V2ray 升级完成"
     systemctl daemon-reload
@@ -236,8 +236,7 @@ EOF
     ;;
 
     5)
-    echo "重新加载 V2ray"
-    systemctl daemon-reload
+    echo "重新加载 V2ray 配置"
     systemctl reload v2ray
     ;;
 
@@ -252,7 +251,7 @@ EOF
     ;;
 
     *)
-    echo "无效选择，退出脚本"
+    echo "无效选项"
     exit 1
     ;;
 esac
