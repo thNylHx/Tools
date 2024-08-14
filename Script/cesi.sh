@@ -8,6 +8,24 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+# 检查 V2ray 服务状态
+check_v2ray_status() {
+    if systemctl is-active --quiet v2ray; then
+        echo "V2ray 服务正在运行。"
+    else
+        echo "V2ray 服务未运行。"
+    fi
+}
+
+# 检查 V2ray 是否设置为开机启动
+check_v2ray_enable() {
+    if systemctl is-enabled --quiet v2ray; then
+        echo "V2ray 已设置为开机启动。"
+    else
+        echo "V2ray 未设置为开机启动。"
+    fi
+}
+
 echo "V2ray 一键安装管理脚本"
 echo "请选择操作："
 echo "=============================="
@@ -17,11 +35,12 @@ echo " 3、 卸载 V2ray"
 echo "=============================="
 echo " 4、 重新启动 V2ray"
 echo " 5、 重新加载 V2ray"
-echo " 6、 开机启动 V2ray"
+echo " 6、 设置开机启动 V2ray"
+echo " 7、 查看 V2ray 启动状态"
+echo " 8、 查看 V2ray 开机启动设置"
 echo "=============================="
-echo " 7、 申请证书"
 echo " 0、 退出一键安装脚本"
-read -p "输入数字选择 [0-7]: " action
+read -p "输入数字选择 [0-8]: " action
 
 case $action in
     1)
@@ -338,6 +357,16 @@ EOF
     6)
     echo "设置 V2ray 开机启动"
     systemctl enable v2ray
+    ;;
+
+    7)
+    echo "查看 V2ray 启动状态"
+    check_v2ray_status
+    ;;
+
+    8)
+    echo "查看 V2ray 开机启动设置"
+    check_v2ray_enable
     ;;
 
     0)
