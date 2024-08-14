@@ -321,8 +321,17 @@ EOF
     esac
 
     echo -e "${Green_font_prefix}配置文件已生成。如果你选择带有 TLS 的选项，请申请证书！${Font_color_suffix}"
+    # 设置开机启动
+    systemctl enable v2ray
+
+    # 重新加载
     systemctl daemon-reload
+
+    # 启动 V2Ray 服务
     systemctl start v2ray
+
+    # 检查 V2Ray 服务状态
+    systemctl status v2ray
 }
 
 # 启动V2Ray
