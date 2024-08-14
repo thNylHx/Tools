@@ -263,9 +263,12 @@ echo -e " ${GREEN}10${NC}、 查看 V2ray 配置信息"
 echo "=============================="
 echo -e " ${GREEN}0${NC}、 退出一键安装脚本"
 echo ""
-echo -e " 运行状态："
-echo -e " 开机自启："
+
+# 显示 V2ray 的当前运行状态和开机自启状态
+echo -e " 运行状态：$(check_v2ray_status)"
+echo -e " 开机自启：$(check_v2ray_enable)"
 echo ""
+
 read -p "输入数字选择 [0-10]: " action
 
 case $action in
@@ -406,3 +409,7 @@ case $action in
     exit 1
     ;;
 esac
+
+# 显示 V2ray 的当前运行状态和开机自启状态
+echo -e " 运行状态：$(check_v2ray_status)"
+echo -e " 开机自启：$(check_v2ray_enable)"
