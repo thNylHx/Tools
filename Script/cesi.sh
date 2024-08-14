@@ -156,9 +156,9 @@ EOF
           }
         ]
       }
-      ${WS_CONFIG:+,$WS_CONFIG}  # 仅在 $WS_CONFIG 不为空时插入，并且前面加上逗号
-      ${NETWORK_CONFIG:+,$NETWORK_CONFIG}  # 仅在 $NETWORK_CONFIG 不为空时插入，并且前面加上逗号
-      ${TLS_CONFIG:+,$TLS_CONFIG}  # 仅在 $TLS_CONFIG 不为空时插入，并且前面加上逗号
+      ${WS_CONFIG:+,$WS_CONFIG}
+      ${NETWORK_CONFIG:+,$NETWORK_CONFIG}
+      ${TLS_CONFIG:+,$TLS_CONFIG}
     }
   ],
   "outbounds": [
