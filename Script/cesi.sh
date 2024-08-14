@@ -6,7 +6,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.0.8"
+sh_ver="1.0.2"
 
 # V2Ray 可执行文件的路径
 FILE="/root/V2ray/v2ray"
@@ -305,6 +305,27 @@ EOF
     echo -e "${Green_font_prefix}配置文件已生成。${Font_color_suffix}"
 }
 
+# 启动V2Ray
+Start() {
+    systemctl start v2ray
+    check_status
+    echo -e "${Green_font_prefix}V2Ray 服务已启动，当前状态: ${status}${Font_color_suffix}"
+}
+
+# 停止V2Ray
+Stop() {
+    systemctl stop v2ray
+    check_status
+    echo -e "${Green_font_prefix}V2Ray 服务已停止，当前状态: ${status}${Font_color_suffix}"
+}
+
+# 重启V2Ray
+Restart() {
+    systemctl restart v2ray
+    check_status
+    echo -e "${Green_font_prefix}V2Ray 服务已重启，当前状态: ${status}${Font_color_suffix}"
+}
+
 # 查看配置
 View() {
     if [ -f "/root/V2ray/config.json" ]; then
@@ -384,8 +405,11 @@ Main() {
         echo -e " ${Green_font_prefix}1${Font_color_suffix}、 安装 V2Ray"
         echo -e " ${Green_font_prefix}2${Font_color_suffix}、 更新 V2Ray"
         echo -e " ${Green_font_prefix}3${Font_color_suffix}、 配置 V2Ray"
-        echo -e " ${Green_font_prefix}4${Font_color_suffix}、 查看配置"
-        echo -e " ${Green_font_prefix}5${Font_color_suffix}、 申请证书"
+        echo -e " ${Green_font_prefix}4${Font_color_suffix}、 启动 V2Ray"
+        echo -e " ${Green_font_prefix}5${Font_color_suffix}、 停止 V2Ray"
+        echo -e " ${Green_font_prefix}6${Font_color_suffix}、 重启 V2Ray"        
+        echo -e " ${Green_font_prefix}7${Font_color_suffix}、 查看配置"
+        echo -e " ${Green_font_prefix}8${Font_color_suffix}、 申请证书"
         echo -e " ${Green_font_prefix}0${Font_color_suffix}、 退出"
         echo "=============================="
         read -p "请输入数字选择: " num
@@ -400,9 +424,18 @@ Main() {
                 Set
                 ;;
             4)
-                View
+                Start
                 ;;
             5)
+                Stop
+                ;;
+            6)
+                Restart
+                ;;
+            7)
+                View
+                ;;
+            8)
                 Request_Cert
                 ;;
             0)
