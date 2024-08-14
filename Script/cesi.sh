@@ -32,7 +32,7 @@ Install() {
         'aarch64' | 'arm64') ARCH='arm64-v8a';;
         'armv7' | 'armv7l')   ARCH='arm32-v7a';;
         's390x')    ARCH='s390x';;
-        *)          echo -e "${RED}不支持的架构: ${ARCH_RAW}${NC}"; exit 1;;
+        *)          echo -e "${Red_font_prefix}不支持的架构: ${ARCH_RAW}${Font_color_suffix}"; exit 1;;
     esac
     echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
 
@@ -52,6 +52,10 @@ Install() {
     echo -e "${Green_font_prefix}V2ray 安装完成${Font_color_suffix}"
     systemctl daemon-reload
     systemctl start v2ray
+
+    # 提示用户选择配置
+    echo -e "${Green_font_prefix}V2Ray 安装成功，请选择配置文件类型。${Font_color_suffix}"
+    Set
 }
 
 # 更新V2Ray
@@ -175,9 +179,12 @@ Set() {
         "clients": [
           {
             "id": "$UUID",
-            "alterId": 0
+            "alterId": 64
           }
         ]
+      },
+      "streamSettings": {
+        "network": "tcp"
       }
     }
   ],
@@ -201,7 +208,7 @@ EOF
         "clients": [
           {
             "id": "$UUID",
-            "alterId": 0
+            "alterId": 64
           }
         ]
       },
@@ -223,11 +230,7 @@ EOF
 EOF
         ;;
         3)
-        read -p "请输入域名: " DOMAIN
-        if [[ -z "$DOMAIN" ]]; then
-            echo -e "${Red_font_prefix}域名不能为空。${Font_color_suffix}"
-            exit 1
-        fi
+        read -p "请输入域名（需要TLS证书）： " DOMAIN
         cat << EOF > /root/V2ray/config.json
 {
   "inbounds": [
@@ -238,16 +241,13 @@ EOF
         "clients": [
           {
             "id": "$UUID",
-            "alterId": 0
+            "alterId": 64
           }
         ]
       },
       "streamSettings": {
         "network": "tcp",
-        "security": "tls",
-        "tlsSettings": {
-          "serverName": "$DOMAIN"
-        }
+        "security": "tls"
       }
     }
   ],
@@ -261,11 +261,7 @@ EOF
 EOF
         ;;
         4)
-        read -p "请输入域名: " DOMAIN
-        if [[ -z "$DOMAIN" ]]; then
-            echo -e "${Red_font_prefix}域名不能为空。${Font_color_suffix}"
-            exit 1
-        fi
+        read -p "请输入域名（需要TLS证书）： " DOMAIN
         cat << EOF > /root/V2ray/config.json
 {
   "inbounds": [
@@ -276,19 +272,16 @@ EOF
         "clients": [
           {
             "id": "$UUID",
-            "alterId": 0
+            "alterId": 64
           }
         ]
       },
       "streamSettings": {
         "network": "ws",
-        "security": "tls",
-        "tlsSettings": {
-          "serverName": "$DOMAIN"
-        },
         "wsSettings": {
           "path": "/$WS_PATH"
-        }
+        },
+        "security": "tls"
       }
     }
   ],
@@ -302,61 +295,44 @@ EOF
 EOF
         ;;
         *)
-        echo -e "${Red_font_prefix}无效的选择，请重试。${Font_color_suffix}"
+        echo -e "${Red_font_prefix}无效的选择。${Font_color_suffix}"
         exit 1
         ;;
     esac
 
-    echo -e "${Green_font_prefix}配置已更新。${Font_color_suffix}"
-    systemctl restart v2ray
+    echo -e "${Green_font_prefix}配置文件已创建在 /root/V2ray/config.json${Font_color_suffix}"
 }
 
 # 查看配置信息
 View() {
-    if [[ -e "/root/V2ray/config.json" ]]; then
-        echo -e "${Green_font_prefix}当前配置信息:${Font_color_suffix}"
-        cat /root/V2ray/config.json
-    else
-        echo -e "${Red_font_prefix}配置文件不存在。${Font_color_suffix}"
-    fi
+    echo -e "${Green_font_prefix}当前配置文件内容:${Font_color_suffix}"
+    cat /root/V2ray/config.json
 }
 
-# 检查V2Ray版本
-Check_Version() {
-    CURRENT_VERSION=$($FILE -version 2>&1 | head -n 1 | awk '{print $2}')
-    LATEST_VERSION=$(curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" \
-        | grep tag_name \
-        | cut -d ":" -f2 \
-        | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
-
-    echo -e "当前 V2Ray 版本: ${Green_font_prefix}$CURRENT_VERSION${Font_color_suffix}"
-    echo -e "最新 V2Ray 版本: ${Green_font_prefix}$LATEST_VERSION${Font_color_suffix}"
-
-    if [[ "$CURRENT_VERSION" != "$LATEST_VERSION" ]]; then
-        echo -e "${Red_font_prefix}当前版本不是最新版本，请考虑更新。${Font_color_suffix}"
-    else
-        echo -e "${Green_font_prefix}已是最新版本。${Font_color_suffix}"
-    fi
+# 检查版本
+Check_version() {
+    echo -e "${Green_font_prefix}当前脚本版本: ${sh_ver}${Font_color_suffix}"
 }
 
-# 脚本主菜单
+# 菜单
 menu() {
-    echo && echo -e "  V2Ray 一键管理脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
-  ---- By ChatGPT ----
-  ${Green_font_prefix}0.${Font_color_suffix} 退出脚本
-  ${Green_font_prefix}1.${Font_color_suffix} 安装 V2Ray
-  ${Green_font_prefix}2.${Font_color_suffix} 更新 V2Ray
-  ${Green_font_prefix}3.${Font_color_suffix} 卸载 V2Ray
-  ${Green_font_prefix}4.${Font_color_suffix} 启动 V2Ray
-  ${Green_font_prefix}5.${Font_color_suffix} 停止 V2Ray
-  ${Green_font_prefix}6.${Font_color_suffix} 重启 V2Ray
-  ${Green_font_prefix}7.${Font_color_suffix} 设置 V2Ray 配置
-  ${Green_font_prefix}8.${Font_color_suffix} 查看 V2Ray 配置信息
-  ${Green_font_prefix}9.${Font_color_suffix} 检查 V2Ray 版本
-  "
-    echo && read -e -p "请输入数字 [0-9]: " num
+    echo -e "-----------------------------"
+    echo -e " ${Green_font_prefix}V2Ray 管理脚本 ${Font_color_suffix}(${sh_ver})"
+    echo -e "-----------------------------"
+    echo -e " ${Green_font_prefix}1${Font_color_suffix}、安装 V2Ray"
+    echo -e " ${Green_font_prefix}2${Font_color_suffix}、更新 V2Ray"
+    echo -e " ${Green_font_prefix}3${Font_color_suffix}、卸载 V2Ray"
+    echo -e " ${Green_font_prefix}4${Font_color_suffix}、启动 V2Ray"
+    echo -e " ${Green_font_prefix}5${Font_color_suffix}、停止 V2Ray"
+    echo -e " ${Green_font_prefix}6${Font_color_suffix}、重启 V2Ray"
+    echo -e " ${Green_font_prefix}7${Font_color_suffix}、设置配置"
+    echo -e " ${Green_font_prefix}8${Font_color_suffix}、查看配置"
+    echo -e " ${Green_font_prefix}9${Font_color_suffix}、检查版本"
+    echo -e " ${Green_font_prefix}0${Font_color_suffix}、退出"
+    echo -e "-----------------------------"
+
+    read -p "请输入选项: " num
     case "$num" in
-        0) exit 0 ;;
         1) Install ;;
         2) Update ;;
         3) Uninstall ;;
@@ -365,8 +341,9 @@ menu() {
         6) Restart ;;
         7) Set ;;
         8) View ;;
-        9) Check_Version ;;
-        *) echo -e "${Red_font_prefix}请输入正确的数字 [0-9]。${Font_color_suffix}" ;;
+        9) Check_version ;;
+        0) exit ;;
+        *) echo -e "${Red_font_prefix}无效选项，请重新输入！${Font_color_suffix}" ; sleep 2s ; menu ;;
     esac
 }
 
