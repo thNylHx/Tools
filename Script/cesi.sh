@@ -80,7 +80,7 @@ EOF
     echo "请输入以下配置信息："
     
     # 端口处理
-    read -p "请输入监听端口 (10000-65000之间, 留空以生成随机端口): " PORT
+    read -p "请输入监听端口 (留空以生成随机端口): " PORT
     if [[ -z "$PORT" ]]; then
         PORT=$(shuf -i 10000-65000 -n 1)
         echo "随机生成的监听端口: $PORT"
@@ -103,18 +103,33 @@ EOF
         RANDOM_PATH=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 6)
         read -p "WebSocket 路径 (默认: /$RANDOM_PATH): " WS_PATH
         WS_PATH=${WS_PATH:-/$RANDOM_PATH}
+        WS_CONFIG='
+        "streamSettings": {
+          "network": "ws",
+          "wsSettings": {
+            "path": "'"${WS_PATH}"'"
+            }
+        },'
         echo "WebSocket 路径设置为: $WS_PATH"
     else
-        ENABLE_WS="false"
-        WS_PATH=""
+        WS_CONFIG=""
     fi
 
     read -p "是否启用 TLS (y/n): " ENABLE_TLS
 
     if [[ "$ENABLE_TLS" == "y" || "$ENABLE_TLS" == "Y" ]]; then
-        ENABLE_TLS="true"
+        TLS_CONFIG='
+        "security": "tls",
+        "tlsSettings": {
+          "certificates": [
+            {
+              "certificateFile": "/root/V2ray/server.crt", 
+              "keyFile": "/root/V2ray/server.key" 
+            }
+          ]
+        },'
     else
-        ENABLE_TLS="false"
+        TLS_CONFIG=""
     fi
 
     # 生成配置文件
@@ -132,19 +147,12 @@ EOF
           }
         ]
       },
+      $WS_CONFIG
+      $TLS_CONFIG
       "streamSettings": {
-        "network": "${ENABLE_WS:-tcp}",
+        "network": "${ENABLE_WS:+ws}",
         "wsSettings": {
-          "path": "${WS_PATH:-/}"
-        },
-        "security": "${ENABLE_TLS:-none}",
-        "tlsSettings": {
-          "certificates": [
-            {
-              "certificateFile": "/root/V2ray/server.crt",
-              "keyFile": "/root/V2ray/server.key"
-            }
-          ]
+          "path": "$WS_PATH"
         }
       }
     }
