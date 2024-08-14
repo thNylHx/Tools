@@ -6,7 +6,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.0.1"
+sh_ver="1.0.3"
 
 # V2Ray 可执行文件的路径
 FILE="/root/V2ray/v2ray"
@@ -27,6 +27,25 @@ get_current_version() {
     else
         echo "未安装"
     fi
+}
+
+# 自签证书生成
+generate_self_signed_cert() {
+    echo -e "${Green_font_prefix}生成自签名证书中...${Font_color_suffix}"
+    mkdir -p /root/V2ray/ssl
+    openssl req -newkey rsa:2048 -nodes -keyout /root/V2ray/ssl/server.key -x509 -days 365 -out /root/V2ray/ssl/server.crt -subj "/C=CN/ST=Province/L=City/O=Organization/OU=Department/CN=$DOMAIN"
+    echo -e "${Green_font_prefix}自签名证书生成完成！${Font_color_suffix}"
+}
+
+# 申请证书（假设使用 Let's Encrypt）
+request_cert() {
+    echo -e "${Green_font_prefix}申请证书中...${Font_color_suffix}"
+    apt-get install -y certbot
+    read -p "请输入域名（用于证书申请）： " DOMAIN
+    certbot certonly --standalone --preferred-challenges http -d "$DOMAIN"
+    cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem /root/V2ray/ssl/server.crt
+    cp /etc/letsencrypt/live/$DOMAIN/privkey.pem /root/V2ray/ssl/server.key
+    echo -e "${Green_font_prefix}证书申请完成！${Font_color_suffix}"
 }
 
 # 安装V2Ray
@@ -148,7 +167,7 @@ Set() {
     echo -e " ${Green_font_prefix}4${Font_color_suffix}、 vmess+ws+tls（需要域名）"
     echo "=============================="
     read -p "输入数字选择 (1-4，默认1): " config_choice
-    config_choice=${config_choice:-1}  # 如果用户没有输入，默认为1
+    config_choice=${config_choice:-1}
 
     # 端口处理
     read -p "请输入监听端口 (留空以生成随机端口): " PORT
@@ -180,6 +199,18 @@ Set() {
         else
             WS_PATH="${WS_PATH#/}"  # 移除前导斜杠
             echo -e "WebSocket 路径: ${Green_font_prefix}/$WS_PATH${Font_color_suffix}"
+        fi
+    fi
+
+    # 选择证书
+    read -p "是否使用自签证书 (y/n, 默认n): " use_self_signed
+    use_self_signed=${use_self_signed:-n}
+
+    if [[ "$config_choice" == "3" || "$config_choice" == "4" ]]; then
+        if [[ "$use_self_signed" == "y" ]]; then
+            generate_self_signed_cert
+        else
+            request_cert
         fi
     fi
 
@@ -265,8 +296,8 @@ EOF
           "tlsSettings": {
             "certificates": [
               {
-                "certificateFile": "/root/V2ray/server.crt", 
-                "keyFile": "/root/V2ray/server.key" 
+                "certificateFile": "/root/V2ray/ssl/server.crt", 
+                "keyFile": "/root/V2ray/ssl/server.key" 
               }
             ]
           }
@@ -307,8 +338,8 @@ EOF
           "tlsSettings": {
             "certificates": [
               {
-                "certificateFile": "/root/V2ray/server.crt", 
-                "keyFile": "/root/V2ray/server.key" 
+                "certificateFile": "/root/V2ray/ssl/server.crt", 
+                "keyFile": "/root/V2ray/ssl/server.key" 
               }
             ]
           }
