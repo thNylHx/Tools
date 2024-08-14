@@ -6,7 +6,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.0.4"
+sh_ver="1.0.8"
 
 # V2Ray 可执行文件的路径
 FILE="/root/V2ray/v2ray"
@@ -27,31 +27,6 @@ get_current_version() {
     else
         echo "未安装"
     fi
-}
-
-# 自签证书生成
-generate_self_signed_cert() {
-    echo -e "${Green_font_prefix}生成自签名证书中...${Font_color_suffix}"
-    read -p "请输入伪装域名（例如：example.com）： " DOMAIN
-    mkdir -p /root/V2ray/ssl
-    openssl req -newkey rsa:2048 -nodes -keyout /root/V2ray/ssl/server.key -x509 -days 365 -out /root/V2ray/ssl/server.crt -subj "/C=CN/ST=Province/L=City/O=Organization/OU=Department/CN=$DOMAIN"
-    echo -e "${Green_font_prefix}自签名证书生成完成！${Font_color_suffix}"
-}
-
-# 申请证书（假设使用 Cloudflare）
-request_cert() {
-    echo -e "${Green_font_prefix}申请证书中...${Font_color_suffix}"
-    apt-get install -y certbot python3-certbot-dns-cloudflare
-    read -p "请输入域名（用于证书申请）： " DOMAIN
-    read -p "请输入 Cloudflare API 密钥： " CF_API_KEY
-    cat <<EOF > /root/cloudflare.ini
-dns_cloudflare_api_key = $CF_API_KEY
-EOF
-    chmod 600 /root/cloudflare.ini
-    certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/cloudflare.ini -d "$DOMAIN"
-    cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem /root/V2ray/ssl/server.crt
-    cp /etc/letsencrypt/live/$DOMAIN/privkey.pem /root/V2ray/ssl/server.key
-    echo -e "${Green_font_prefix}证书申请完成！${Font_color_suffix}"
 }
 
 # 安装V2Ray
@@ -133,158 +108,312 @@ Update() {
     fi
 }
 
-# 卸载V2Ray
-Uninstall() {
-    echo -e "${Red_font_prefix}卸载 V2Ray 中...${Font_color_suffix}"
-    systemctl stop v2ray
-    systemctl disable v2ray
-    rm -rf /root/V2ray
-    echo -e "${Red_font_prefix}V2Ray 已卸载。${Font_color_suffix}"
-}
-
-# 启动V2Ray
-Start() {
-    echo -e "${Green_font_prefix}启动 V2Ray...${Font_color_suffix}"
-    systemctl start v2ray
-    echo -e "${Green_font_prefix}V2Ray 已启动。${Font_color_suffix}"
-}
-
-# 停止V2Ray
-Stop() {
-    echo -e "${Red_font_prefix}停止 V2Ray...${Font_color_suffix}"
-    systemctl stop v2ray
-    echo -e "${Red_font_prefix}V2Ray 已停止。${Font_color_suffix}"
-}
-
-# 重启V2Ray
-Restart() {
-    echo -e "${Green_font_prefix}重启 V2Ray...${Font_color_suffix}"
-    systemctl restart v2ray
-    echo -e "${Green_font_prefix}V2Ray 重启完毕！${Font_color_suffix}"
-}
-
 # 设置配置信息
 Set() {
+    echo "=============================="
     echo "请选择配置文件类型（默认选择 vmess+tcp）："
     echo "=============================="
     echo -e " ${Green_font_prefix}1${Font_color_suffix}、 vmess+tcp"
     echo -e " ${Green_font_prefix}2${Font_color_suffix}、 vmess+ws"
-    echo -e " ${Green_font_prefix}3${Font_color_suffix}、 vmess+tcp+tls"
-    echo -e " ${Green_font_prefix}4${Font_color_suffix}、 vmess+ws+tls"
-    echo -e " ${Green_font_prefix}5${Font_color_suffix}、 退出"
+    echo -e " ${Green_font_prefix}3${Font_color_suffix}、 vmess+tcp+tls（需要域名）"
+    echo -e " ${Green_font_prefix}4${Font_color_suffix}、 vmess+ws+tls（需要域名）"
     echo "=============================="
-    read -p "请选择[1-5]: " num
-    case "$num" in
+    read -p "输入数字选择 (1-4，默认1): " config_choice
+    config_choice=${config_choice:-1}  # 如果用户没有输入，默认为1
+
+    # 端口处理
+    read -p "请输入监听端口 (留空以生成随机端口): " PORT
+    if [[ -z "$PORT" ]]; then
+        PORT=$(shuf -i 10000-65000 -n 1)
+        echo -e "随机生成的监听端口: ${Green_font_prefix}$PORT${Font_color_suffix}"
+    elif [[ "$PORT" -lt 10000 || "$PORT" -gt 65000 ]]; then
+        echo -e "${Red_font_prefix}端口号必须在10000到65000之间。${Font_color_suffix}"
+        exit 1
+    fi
+
+    # UUID处理
+    read -p "请输入 V2Ray UUID (留空以生成随机UUID): " UUID
+    if [[ -z "$UUID" ]]; then
+        if command -v uuidgen >/dev/null 2>&1; then
+            UUID=$(uuidgen)
+        else
+            UUID=$(cat /proc/sys/kernel/random/uuid)
+        fi
+        echo -e "随机生成的UUID: ${Green_font_prefix}$UUID${Font_color_suffix}"
+    fi
+
+    # WebSocket路径处理
+    if [[ "$config_choice" == "2" || "$config_choice" == "4" ]]; then
+        read -p "请输入 WebSocket 路径 (留空以生成随机路径): " WS_PATH
+        if [[ -z "$WS_PATH" ]]; then
+            WS_PATH=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 8)
+            echo -e "随机生成的 WebSocket 路径: ${Green_font_prefix}/$WS_PATH${Font_color_suffix}"
+        else
+            WS_PATH="${WS_PATH#/}"  # 移除前导斜杠
+            echo -e "WebSocket 路径: ${Green_font_prefix}/$WS_PATH${Font_color_suffix}"
+        fi
+    fi
+
+    # 创建配置文件
+    case $config_choice in
         1)
-            echo -e "${Green_font_prefix}选择了 vmess+tcp${Font_color_suffix}"
-            # 在这里添加 vmess+tcp 配置代码
-            ;;
+        cat << EOF > /root/V2ray/config.json
+{
+  "inbounds": [
+    {
+      "port": $PORT,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID",
+            "alterId": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}
+EOF
+        ;;
         2)
-            echo -e "${Green_font_prefix}选择了 vmess+ws${Font_color_suffix}"
-            # 在这里添加 vmess+ws 配置代码
-            ;;
+        cat << EOF > /root/V2ray/config.json
+{
+  "inbounds": [
+    {
+      "port": $PORT,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID",
+            "alterId": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/$WS_PATH"
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}
+EOF
+        ;;
         3)
-            echo -e "${Green_font_prefix}选择了 vmess+tcp+tls${Font_color_suffix}"
-            # 在这里添加 vmess+tcp+tls 配置代码
-            ;;
+        cat << EOF > /root/V2ray/config.json
+{
+  "inbounds": [
+    {
+      "port": $PORT,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID",
+            "alterId": 0
+          }
+        ]
+      },
+        "streamSettings": {
+          "network": "tcp",
+          "security": "tls",
+          "tlsSettings": {
+            "certificates": [
+              {
+                "certificateFile": "/root/V2ray/ssl/server.crt", 
+                "keyFile": "/root/V2ray/ssl/server.key" 
+              }
+            ]
+          }
+        }
+      }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}
+EOF
+        ;;
         4)
-            echo -e "${Green_font_prefix}选择了 vmess+ws+tls${Font_color_suffix}"
-            # 在这里添加 vmess+ws+tls 配置代码
-            ;;
-        5)
-            echo -e "${Green_font_prefix}退出设置${Font_color_suffix}"
-            exit 0
-            ;;
+        cat << EOF > /root/V2ray/config.json
+{
+  "inbounds": [
+    {
+      "port": $PORT,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID",
+            "alterId": 0
+          }
+        ]
+      },
+        "streamSettings": {
+          "network": "ws",
+          "wsSettings": {
+            "path": "/$WS_PATH"
+            },
+          "security": "tls",
+          "tlsSettings": {
+            "certificates": [
+              {
+                "certificateFile": "/root/V2ray/ssl/server.crt", 
+                "keyFile": "/root/V2ray/ssl/server.key" 
+              }
+            ]
+          }
+        }
+      }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}
+EOF
+        ;;
         *)
-            echo -e "${Red_font_prefix}无效的选项，请重新选择${Font_color_suffix}"
-            Set
-            ;;
+        echo -e "${Red_font_prefix}无效的选项。${Font_color_suffix}"
+        exit 1
+        ;;
     esac
+
+    echo -e "${Green_font_prefix}配置文件已生成。${Font_color_suffix}"
 }
 
-# 显示 V2Ray 状态
-Status() {
-    check_status
-    echo -e "${Green_font_prefix}V2Ray 当前状态: ${status}${Font_color_suffix}"
-    if [ "$status" == "running" ]; then
-        echo -e "${Green_font_prefix}V2Ray 设置为开机自启${Font_color_suffix}"
+# 查看配置
+View() {
+    if [ -f "/root/V2ray/config.json" ]; then
+        cat /root/V2ray/config.json
     else
-        echo -e "${Red_font_prefix}V2Ray 未设置为开机自启${Font_color_suffix}"
+        echo -e "${Red_font_prefix}配置文件不存在。${Font_color_suffix}"
     fi
 }
 
-# 更新脚本
-update_script() {
-    echo -e "${Green_font_prefix}更新脚本中...${Font_color_suffix}"
-    curl -s https://raw.githubusercontent.com/your-repo/your-script/main/v2ray-install.sh -o /root/V2ray/v2ray-install.sh
-    chmod +x /root/V2ray/v2ray-install.sh
-    echo -e "${Green_font_prefix}脚本更新完成！${Font_color_suffix}"
-}
+# 申请证书
+Request_Cert() {
+    echo "=============================="
+    echo "请选择证书申请方式："
+    echo "=============================="
+    echo -e " ${Green_font_prefix}1${Font_color_suffix}、 自签名证书"
+    echo -e " ${Green_font_prefix}2${Font_color_suffix}、 Cloudflare 证书"
+    echo -e " ${Green_font_prefix}3${Font_color_suffix}、 ACME 证书"
+    echo "=============================="
+    read -p "输入数字选择 (1-3): " cert_choice
 
-# 菜单
-menu() {
-    echo "=============================="
-    echo -e " ${Green_font_prefix}1${Font_color_suffix}、 安装 V2Ray"
-    echo -e " ${Green_font_prefix}2${Font_color_suffix}、 更新 V2Ray"
-    echo -e " ${Green_font_prefix}3${Font_color_suffix}、 卸载 V2Ray"
-    echo -e " ${Green_font_prefix}4${Font_color_suffix}、 启动 V2Ray"
-    echo -e " ${Green_font_prefix}5${Font_color_suffix}、 停止 V2Ray"
-    echo -e " ${Green_font_prefix}6${Font_color_suffix}、 重启 V2Ray"
-    echo -e " ${Green_font_prefix}7${Font_color_suffix}、 查看 V2Ray 状态"
-    echo -e " ${Green_font_prefix}8${Font_color_suffix}、 申请证书"
-    echo -e " ${Green_font_prefix}9${Font_color_suffix}、 更新脚本"
-    echo -e " ${Green_font_prefix}10${Font_color_suffix}、 退出"
-    echo "=============================="
-    read -p "请选择[1-10]: " num
-    case "$num" in
+    case $cert_choice in
         1)
-            Install
-            ;;
+        generate_self_signed_cert
+        ;;
         2)
-            Update
-            ;;
+        request_cf_cert
+        ;;
         3)
-            Uninstall
-            ;;
-        4)
-            Start
-            ;;
-        5)
-            Stop
-            ;;
-        6)
-            Restart
-            ;;
-        7)
-            Status
-            ;;
-        8)
-            echo "请选择证书申请方式："
-            echo -e " ${Green_font_prefix}1${Font_color_suffix}、 Cloudflare 证书"
-            echo -e " ${Green_font_prefix}2${Font_color_suffix}、 自签名证书"
-            read -p "请选择[1-2]: " cert_option
-            case "$cert_option" in
-                1)
-                    request_cert
-                    ;;
-                2)
-                    generate_self_signed_cert
-                    ;;
-                *)
-                    echo -e "${Red_font_prefix}无效选项，请重新选择。${Font_color_suffix}"
-                    ;;
-            esac
-            ;;
-        9)
-            update_script
-            ;;
-        10)
-            exit 0
-            ;;
+        request_acme_cert
+        ;;
         *)
-            echo -e "${Red_font_prefix}无效选项，请重新选择。${Font_color_suffix}"
-            ;;
+        echo -e "${Red_font_prefix}无效的选项。${Font_color_suffix}"
+        exit 1
+        ;;
     esac
 }
 
-menu
+generate_self_signed_cert() {
+    echo -e "${Green_font_prefix}生成自签名证书中...${Font_color_suffix}"
+    read -p "请输入伪装域名（例如：example.com）： " DOMAIN
+    mkdir -p /root/V2ray/ssl
+    openssl req -newkey rsa:2048 -nodes -keyout /root/V2ray/ssl/server.key -x509 -days 365 -out /root/V2ray/ssl/server.crt -subj "/C=CN/ST=Province/L=City/O=Organization/OU=Department/CN=$DOMAIN"
+    echo -e "${Green_font_prefix}自签名证书生成完成！${Font_color_suffix}"
+}
+
+request_acme_cert() {
+    echo -e "${Green_font_prefix}申请 ACME 证书中...${Font_color_suffix}"
+    apt-get install -y certbot
+    read -p "请输入域名（用于证书申请）： " DOMAIN
+    read -p "请输入电子邮件（用于接收通知）： " EMAIL
+    certbot certonly --standalone -d "$DOMAIN" -m "$EMAIL" --agree-tos --non-interactive
+    cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem /root/V2ray/ssl/server.crt
+    cp /etc/letsencrypt/live/$DOMAIN/privkey.pem /root/V2ray/ssl/server.key
+    echo -e "${Green_font_prefix}ACME 证书申请完成！${Font_color_suffix}"
+}
+
+request_cf_cert() {
+    echo -e "${Green_font_prefix}申请 Cloudflare 证书中...${Font_color_suffix}"
+    read -p "请输入 Cloudflare API 密钥（可以从 Cloudflare 控制面板获取）： " CF_API_KEY
+    read -p "请输入 Cloudflare 账户邮箱： " CF_EMAIL
+    read -p "请输入域名（用于证书申请）： " DOMAIN
+
+    mkdir -p /root/V2ray/ssl
+    # 使用 Cloudflare API 获取证书（具体命令视 Cloudflare API 提供的功能而定，这里假设有一个用于获取证书的命令）
+    cfssl gencert -ca /root/V2ray/ssl/ca.pem -ca-key /root/V2ray/ssl/ca-key.pem -config /root/V2ray/ssl/ca-config.json -profile client /root/V2ray/ssl/$DOMAIN.csr | cfssljson -bare /root/V2ray/ssl/$DOMAIN
+    cp /root/V2ray/ssl/$DOMAIN.pem /root/V2ray/ssl/server.crt
+    cp /root/V2ray/ssl/$DOMAIN-key.pem /root/V2ray/ssl/server.key
+    echo -e "${Green_font_prefix}Cloudflare 证书申请完成！${Font_color_suffix}"
+}
+
+# 主菜单
+Main() {
+    while true; do
+        echo "=============================="
+        echo "V2Ray 管理脚本 ${sh_ver}"
+        echo "=============================="
+        echo -e " ${Green_font_prefix}1${Font_color_suffix}、 安装 V2Ray"
+        echo -e " ${Green_font_prefix}2${Font_color_suffix}、 更新 V2Ray"
+        echo -e " ${Green_font_prefix}3${Font_color_suffix}、 配置 V2Ray"
+        echo -e " ${Green_font_prefix}4${Font_color_suffix}、 查看配置"
+        echo -e " ${Green_font_prefix}5${Font_color_suffix}、 申请证书"
+        echo -e " ${Green_font_prefix}0${Font_color_suffix}、 退出"
+        echo "=============================="
+        read -p "请输入数字选择: " num
+        case "$num" in
+            1)
+                Install
+                ;;
+            2)
+                Update
+                ;;
+            3)
+                Set
+                ;;
+            4)
+                View
+                ;;
+            5)
+                Request_Cert
+                ;;
+            0)
+                exit 0
+                ;;
+            *)
+                echo -e "${Red_font_prefix}无效的选项。${Font_color_suffix}"
+                ;;
+        esac
+    done
+}
+
+# 执行主菜单
+Main
