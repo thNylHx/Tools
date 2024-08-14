@@ -1,7 +1,5 @@
 #!/bin/bash
 
-## bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Script/vmess-install.sh)
-
 set -e -o pipefail
 
 # 检查 root 权限
@@ -77,8 +75,15 @@ RestartPreventExitStatus=23
 WantedBy=multi-user.target
 EOF
 
-    echo "请输入以下配置信息："
-    
+    echo "请选择配置文件类型："
+    echo "=============================="
+    echo " 1、 vmess+tcp"
+    echo " 2、 vmess+ws"
+    echo " 3、 vmess+tcp+tls（需要域名）"
+    echo " 4、 vmess+ws+tls（需要域名）"
+    echo "=============================="
+    read -p "输入数字选择 (1-4): " config_choice
+
     # 端口处理
     read -p "请输入监听端口 (10000-65000之间, 留空以生成随机端口): " PORT
     if [[ -z "$PORT" ]]; then
@@ -97,68 +102,69 @@ EOF
         echo "随机生成的UUID: $UUID"
     fi
 
-    read -p "是否启用 WebSocket (y/n): " ENABLE_WS
-
-    if [[ "$ENABLE_WS" == "y" || "$ENABLE_WS" == "Y" ]]; then
-        RANDOM_PATH=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 6)
-        read -p "WebSocket 路径 (默认: /$RANDOM_PATH): " WS_PATH
-        WS_PATH=${WS_PATH:-/$RANDOM_PATH}
-        WS_CONFIG='
-        "streamSettings": {
-          "network": "ws",
-          "wsSettings": {
-            "path": "'"${WS_PATH}"'"
-            }
-        }'
-        echo "WebSocket 路径设置为: $WS_PATH"
-    else
-        WS_CONFIG=''
-    fi
-
-    read -p "是否启用 TLS (y/n): " ENABLE_TLS
-
-    if [[ "$ENABLE_TLS" == "y" || "$ENABLE_TLS" == "Y" ]]; then
-        TLS_CONFIG='
-        "security": "tls",
-        "tlsSettings": {
-          "certificates": [
-            {
-              "certificateFile": "/root/V2ray/server.crt", 
-              "keyFile": "/root/V2ray/server.key" 
-            }
-          ]
-        }'
-        if [[ -z "$WS_CONFIG" ]]; then
-            NETWORK_CONFIG='
-            "streamSettings": {
-              "network": "tcp"
-            }'
+    # WebSocket 路径处理
+    WS_PATH=""
+    if [[ $config_choice == 2 || $config_choice == 4 ]]; then
+        echo "是否需要自定义 WebSocket 路径？（y/n）"
+        read -p "输入选择 [y/n]: " custom_path
+        if [[ $custom_path == "y" ]]; then
+            read -p "请输入 WebSocket 路径（例如 /v2ray）: " WS_PATH
         else
-            NETWORK_CONFIG=''
+            WS_PATH=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)
+            echo "生成的 WebSocket 路径: /${WS_PATH}"
+            WS_PATH="/${WS_PATH}"
         fi
-    else
-        TLS_CONFIG=''
-        NETWORK_CONFIG=''
     fi
 
-    # 生成配置文件
-    cat << EOF > /root/V2ray/config.json
+    case $config_choice in
+        1)
+        cat << EOF > /root/V2ray/config.json
 {
   "inbounds": [
     {
-      "port": $PORT,
-      "protocol": "vmess",
+      "port": $PORT, 
+      "protocol": "vmess",    
       "settings": {
         "clients": [
           {
-            "id": "$UUID",
+            "id": "$UUID",  
             "alterId": 0
           }
         ]
       }
-      ${WS_CONFIG:+,$WS_CONFIG}
-      ${NETWORK_CONFIG:+,$NETWORK_CONFIG}
-      ${TLS_CONFIG:+,$TLS_CONFIG}
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",  
+      "settings": {}
+    }
+  ],
+  "vmess-aead": true
+}
+EOF
+        ;;
+        2)
+        cat << EOF > /root/V2ray/config.json
+{
+  "inbounds": [
+    {
+      "port": $PORT, 
+      "protocol": "vmess",    
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID",  
+            "alterId": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "$WS_PATH"
+        }
+      }
     }
   ],
   "outbounds": [
@@ -170,6 +176,98 @@ EOF
   "vmess-aead": true
 }
 EOF
+        ;;
+        3)
+        if [[ ! -f /root/V2ray/server.crt || ! -f /root/V2ray/server.key ]]; then
+            echo "TLS 配置文件 server.crt 或 server.key 不存在，请先生成或上传证书文件。"
+            exit 1
+        fi
+
+        cat << EOF > /root/V2ray/config.json
+{
+  "inbounds": [
+    {
+      "port": $PORT, 
+      "protocol": "vmess",    
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID",  
+            "alterId": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "tls",
+        "tlsSettings": {
+          "certificates": [
+            {
+              "certificateFile": "/root/V2ray/server.crt", 
+              "keyFile": "/root/V2ray/server.key" 
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ],
+  "vmess-aead": true
+}
+EOF
+        ;;
+        4)
+        if [[ ! -f /root/V2ray/server.crt || ! -f /root/V2ray/server.key ]]; then
+            echo "TLS 配置文件 server.crt 或 server.key 不存在，请先生成或上传证书文件。"
+            exit 1
+        fi
+
+        cat << EOF > /root/V2ray/config.json
+{
+  "inbounds": [
+    {
+      "port": $PORT, 
+      "protocol": "vmess",    
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID",  
+            "alterId": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "$WS_PATH"
+        },
+        "security": "tls",
+        "tlsSettings": {
+          "certificates": [
+            {
+              "certificateFile": "/root/V2ray/server.crt", 
+              "keyFile": "/root/V2ray/server.key" 
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ],
+  "vmess-aead": true
+}
+EOF
+    esac
 
     echo "V2ray 安装完成"
     systemctl daemon-reload
