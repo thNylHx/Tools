@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Install/mihomo-install.sh)
+## bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo-install.sh)
 
 #!/bin/bash
 set -e -o pipefail
