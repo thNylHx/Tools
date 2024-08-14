@@ -6,7 +6,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.0.0"
+sh_ver="1.0.1"
 
 # V2Ray 可执行文件的路径
 FILE="/root/V2ray/v2ray"
@@ -140,14 +140,15 @@ Restart() {
 
 # 设置配置信息
 Set() {
-    echo "请选择配置文件类型："
+    echo "请选择配置文件类型（默认选择 vmess+tcp）："
     echo "=============================="
     echo -e " ${Green_font_prefix}1${Font_color_suffix}、 vmess+tcp"
     echo -e " ${Green_font_prefix}2${Font_color_suffix}、 vmess+ws"
     echo -e " ${Green_font_prefix}3${Font_color_suffix}、 vmess+tcp+tls（需要域名）"
     echo -e " ${Green_font_prefix}4${Font_color_suffix}、 vmess+ws+tls（需要域名）"
     echo "=============================="
-    read -p "输入数字选择 (1-4): " config_choice
+    read -p "输入数字选择 (1-4，默认1): " config_choice
+    config_choice=${config_choice:-1}  # 如果用户没有输入，默认为1
 
     # 端口处理
     read -p "请输入监听端口 (10000-65000之间, 留空以生成随机端口): " PORT
@@ -175,10 +176,10 @@ Set() {
         read -p "请输入 WebSocket 路径 (留空以生成随机路径): " WS_PATH
         if [[ -z "$WS_PATH" ]]; then
             WS_PATH=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 8)
-            echo -e "随机生成的WebSocket路径: ${Green_font_prefix}/$WS_PATH${Font_color_suffix}"
+            echo -e "随机生成的 WebSocket 路径: ${Green_font_prefix}/$WS_PATH${Font_color_suffix}"
         else
             WS_PATH="${WS_PATH#/}"  # 移除前导斜杠
-            echo -e "WebSocket路径: ${Green_font_prefix}/$WS_PATH${Font_color_suffix}"
+            echo -e "WebSocket 路径: ${Green_font_prefix}/$WS_PATH${Font_color_suffix}"
         fi
     fi
 
@@ -360,6 +361,8 @@ menu() {
     echo -e " ${Green_font_prefix}7${Font_color_suffix}、设置配置"
     echo -e " ${Green_font_prefix}8${Font_color_suffix}、查看配置"
     echo -e " ${Green_font_prefix}9${Font_color_suffix}、检查版本"
+    echo -e " ${Green_font_prefix}10${Font_color_suffix}、下载脚本"
+    echo -e " ${Green_font_prefix}11${Font_color_suffix}、启动脚本"
     echo -e " ${Green_font_prefix}0${Font_color_suffix}、退出"
     echo -e "-----------------------------"
 
@@ -374,6 +377,8 @@ menu() {
         7) Set ;;
         8) View ;;
         9) Check_version ;;
+        10) Download_script ;;
+        11) Run_script ;;
         0) exit ;;
         *) echo -e "${Red_font_prefix}无效选项，请重新输入！${Font_color_suffix}" ; sleep 2s ; menu ;;
     esac
