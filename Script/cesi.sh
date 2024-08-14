@@ -26,7 +26,7 @@ read -p "输入数字选择 [0-6]: " action
 
 case $action in
     1)
-    echo " 开始安装 V2ray 请稍后 "
+    echo "开始安装 V2ray，请稍后..."
     mkdir -p /root/V2ray
     cd /root/V2ray
 
@@ -97,7 +97,7 @@ EOF
         echo "随机生成的UUID: $UUID"
     fi
 
-    read -p "是否启用 WebSocket，输入 (y/n): " ENABLE_WS
+    read -p "是否启用 WebSocket (y/n): " ENABLE_WS
 
     if [[ "$ENABLE_WS" == "y" || "$ENABLE_WS" == "Y" ]]; then
         RANDOM_PATH=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 6)
@@ -105,18 +105,20 @@ EOF
         WS_PATH=${WS_PATH:-/$RANDOM_PATH}
         echo "WebSocket 路径设置为: $WS_PATH"
     else
-        ENABLE_WS=""
+        ENABLE_WS="false"
         WS_PATH=""
     fi
 
-    read -p "是否启用 TLS， 输入 (y/n): " ENABLE_TLS
+    read -p "是否启用 TLS (y/n): " ENABLE_TLS
 
-    if [[ "$ENABLE_TLS" != "y" && "$ENABLE_TLS" != "Y" ]]; then
-        ENABLE_TLS=""
+    if [[ "$ENABLE_TLS" == "y" || "$ENABLE_TLS" == "Y" ]]; then
+        ENABLE_TLS="true"
+    else
+        ENABLE_TLS="false"
     fi
 
     # 生成配置文件
-cat << EOF > /root/V2ray/config.json
+    cat << EOF > /root/V2ray/config.json
 {
   "inbounds": [
     {
@@ -133,7 +135,7 @@ cat << EOF > /root/V2ray/config.json
       "streamSettings": {
         "network": "${ENABLE_WS:-tcp}",
         "wsSettings": {
-          "path": "$WS_PATH"
+          "path": "${WS_PATH:-/}"
         },
         "security": "${ENABLE_TLS:-none}",
         "tlsSettings": {
@@ -223,7 +225,8 @@ EOF
 
     5)
     echo "重新加载 V2ray"
-    systemctl daemon-reload v2ray
+    systemctl daemon-reload
+    systemctl reload v2ray
     ;;
 
     6)
