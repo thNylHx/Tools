@@ -112,7 +112,7 @@ EOF
         },'
         echo "WebSocket 路径设置为: $WS_PATH"
     else
-        WS_CONFIG=""
+        WS_CONFIG=''
     fi
 
     read -p "是否启用 TLS (y/n): " ENABLE_TLS
@@ -128,8 +128,13 @@ EOF
             }
           ]
         },'
+        NETWORK_CONFIG='
+        "streamSettings": {
+          "network": "tcp"
+        }'
     else
-        TLS_CONFIG=""
+        TLS_CONFIG=''
+        NETWORK_CONFIG=''
     fi
 
     # 生成配置文件
@@ -147,14 +152,9 @@ EOF
           }
         ]
       },
-      $WS_CONFIG
       $TLS_CONFIG
-      "streamSettings": {
-        "network": "${ENABLE_WS:+ws}",
-        "wsSettings": {
-          "path": "$WS_PATH"
-        }
-      }
+      $NETWORK_CONFIG
+      $WS_CONFIG
     }
   ],
   "outbounds": [
