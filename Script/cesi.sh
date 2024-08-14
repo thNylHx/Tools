@@ -19,8 +19,9 @@ echo " 4、 重新启动 V2ray"
 echo " 5、 重新加载 V2ray"
 echo " 6、 开机启动 V2ray"
 echo "=============================="
+echo " 7、 申请证书"
 echo " 0、 退出一键安装脚本"
-read -p "输入数字选择 [0-6]: " action
+read -p "输入数字选择 [0-7]: " action
 
 case $action in
     1)
@@ -103,13 +104,9 @@ EOF
     fi
 
     # WebSocket 路径处理
-    WS_PATH=""
     if [[ $config_choice == 2 || $config_choice == 4 ]]; then
-        echo "是否需要自定义 WebSocket 路径？（y/n）"
-        read -p "输入选择 [y/n]: " custom_path
-        if [[ $custom_path == "y" ]]; then
-            read -p "请输入 WebSocket 路径（例如 /v2ray）: " WS_PATH
-        else
+        read -p "请输入 WebSocket 路径（例如 /v2ray，留空以生成随机路径）: " WS_PATH
+        if [[ -z "$WS_PATH" ]]; then
             WS_PATH=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)
             echo "生成的 WebSocket 路径: /${WS_PATH}"
             WS_PATH="/${WS_PATH}"
