@@ -36,7 +36,7 @@ case $action in
         'aarch64' | 'arm64') ARCH='arm64-v8a';;
         'armv7' | 'armv7l')   ARCH='arm32-v7a';;
         's390x')    ARCH='s390x';;
-        *)          echo "Unsupported architecture: ${ARCH_RAW}"; exit 1;;
+        *)          echo "不支持的架构: ${ARCH_RAW}"; exit 1;;
     esac
     echo "当前设备架构: ${ARCH_RAW}"
 
@@ -285,7 +285,7 @@ EOF
         'aarch64' | 'arm64') ARCH='arm64-v8a';;
         'armv7' | 'armv7l')   ARCH='arm32-v7a';;
         's390x')    ARCH='s390x';;
-        *)          echo "Unsupported architecture: ${ARCH_RAW}"; exit 1;;
+        *)          echo "不支持的架构: ${ARCH_RAW}"; exit 1;;
     esac
 
     echo "当前设备架构: ${ARCH_RAW}"
