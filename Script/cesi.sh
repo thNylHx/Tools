@@ -20,6 +20,15 @@ check_status() {
     fi
 }
 
+# 获取当前版本
+get_current_version() {
+    if [ -f "/root/V2ray/version.txt" ]; then
+        cat /root/V2ray/version.txt
+    else
+        echo "未安装"
+    fi
+}
+
 # 安装V2Ray
 Install() {
     echo -e "${Green_font_prefix}安装 V2Ray 中...${Font_color_suffix}"
@@ -50,6 +59,7 @@ Install() {
     unzip "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
 
     echo -e "${Green_font_prefix}V2ray 安装完成${Font_color_suffix}"
+    echo "$VERSION" > /root/V2ray/version.txt
     systemctl daemon-reload
     systemctl start v2ray
 
@@ -61,7 +71,8 @@ Install() {
 # 更新V2Ray
 Update() {
     echo -e "${Green_font_prefix}更新 V2Ray 中...${Font_color_suffix}"
-    systemctl stop v2ray
+    current_version=$(get_current_version)
+    echo -e "${Green_font_prefix}当前安装版本: ${current_version}${Font_color_suffix}"
 
     ARCH_RAW=$(uname -m)
     case "${ARCH_RAW}" in
@@ -79,17 +90,22 @@ Update() {
         | cut -d ":" -f2 \
         | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
 
-    echo -e "${Green_font_prefix}获取到的最新版本: ${VERSION}${Font_color_suffix}"
+    if [ "$VERSION" != "$current_version" ]; then
+        echo -e "${Green_font_prefix}获取到的最新版本: ${VERSION}${Font_color_suffix}"
 
-    echo -e "${Green_font_prefix}开始下载 v2ray-core${Font_color_suffix}"
-    wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
+        echo -e "${Green_font_prefix}开始下载 v2ray-core${Font_color_suffix}"
+        wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
 
-    echo -e "${Green_font_prefix}v2ray-core 下载完成, 开始部署${Font_color_suffix}"
-    unzip -o "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
+        echo -e "${Green_font_prefix}v2ray-core 下载完成, 开始部署${Font_color_suffix}"
+        unzip -o "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
 
-    echo -e "${Green_font_prefix}V2ray 升级完成${Font_color_suffix}"
-    systemctl daemon-reload
-    systemctl start v2ray
+        echo -e "${Green_font_prefix}V2ray 升级完成${Font_color_suffix}"
+        echo "$VERSION" > /root/V2ray/version.txt
+        systemctl daemon-reload
+        systemctl start v2ray
+    else
+        echo -e "${Green_font_prefix}当前已是最新版本，无需更新。${Font_color_suffix}"
+    fi
 }
 
 # 卸载V2Ray
@@ -245,11 +261,19 @@ EOF
           }
         ]
       },
-      "streamSettings": {
-        "network": "tcp",
-        "security": "tls"
+        "streamSettings": {
+          "network": "tcp",
+          "security": "tls",
+          "tlsSettings": {
+            "certificates": [
+              {
+                "certificateFile": "/root/V2ray/server.crt", 
+                "keyFile": "/root/V2ray/server.key" 
+              }
+            ]
+          }
+        }
       }
-    }
   ],
   "outbounds": [
     {
@@ -276,14 +300,22 @@ EOF
           }
         ]
       },
-      "streamSettings": {
-        "network": "ws",
-        "wsSettings": {
-          "path": "/$WS_PATH"
-        },
-        "security": "tls"
+        "streamSettings": {
+          "network": "ws",
+          "wsSettings": {
+            "path": "/$WS_PATH"
+            },
+          "security": "tls",
+          "tlsSettings": {
+            "certificates": [
+              {
+                "certificateFile": "/root/V2ray/server.crt", 
+                "keyFile": "/root/V2ray/server.key" 
+              }
+            ]
+          }
+        }
       }
-    }
   ],
   "outbounds": [
     {
