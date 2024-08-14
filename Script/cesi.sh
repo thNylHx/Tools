@@ -151,7 +151,7 @@ Set() {
     config_choice=${config_choice:-1}  # 如果用户没有输入，默认为1
 
     # 端口处理
-    read -p "请输入监听端口 (10000-65000之间, 留空以生成随机端口): " PORT
+    read -p "请输入监听端口 (留空以生成随机端口): " PORT
     if [[ -z "$PORT" ]]; then
         PORT=$(shuf -i 10000-65000 -n 1)
         echo -e "随机生成的监听端口: ${Green_font_prefix}$PORT${Font_color_suffix}"
