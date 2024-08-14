@@ -156,9 +156,9 @@ EOF
           }
         ]
       },
-      $TLS_CONFIG
-      $NETWORK_CONFIG
       $WS_CONFIG
+      $NETWORK_CONFIG
+      $TLS_CONFIG
     }
   ],
   "outbounds": [
