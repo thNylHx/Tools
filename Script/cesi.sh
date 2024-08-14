@@ -128,10 +128,14 @@ EOF
             }
           ]
         },'
-        NETWORK_CONFIG='
-        "streamSettings": {
-          "network": "tcp"
-        }'
+        if [[ -z "$WS_CONFIG" ]]; then
+            NETWORK_CONFIG='
+            "streamSettings": {
+              "network": "tcp"
+            }'
+        else
+            NETWORK_CONFIG=''
+        fi
     else
         TLS_CONFIG=''
         NETWORK_CONFIG=''
