@@ -6,7 +6,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.0.1"
+sh_ver="1.0.2"
 
 # V2Ray 可执行文件的路径
 FILE="/root/V2ray/v2ray"
@@ -57,11 +57,27 @@ Install() {
 
     echo -e "${Green_font_prefix}v2ray-core 下载完成, 开始部署${Font_color_suffix}"
     unzip "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
-
-    echo -e "${Green_font_prefix}V2ray 安装完成${Font_color_suffix}"
     echo "$VERSION" > /root/V2ray/version.txt
-    systemctl daemon-reload
-    systemctl start v2ray
+
+# 系统配置文件
+cat << EOF > /etc/systemd/system/v2ray.service
+[Unit]
+Description=V2Ray Service
+Documentation=https://www.v2fly.org/
+After=network.target nss-lookup.target
+
+[Service]
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/root/V2ray/v2ray run -config /root/V2ray/config.json
+Restart=on-failure
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target
+EOF
 
     # 提示用户选择配置
     echo -e "${Green_font_prefix}V2Ray 安装成功，请选择配置文件类型。${Font_color_suffix}"
@@ -108,39 +124,10 @@ Update() {
     fi
 }
 
-# 卸载V2Ray
-Uninstall() {
-    echo -e "${Red_font_prefix}卸载 V2Ray 中...${Font_color_suffix}"
-    systemctl stop v2ray
-    systemctl disable v2ray
-    rm -rf /root/V2ray
-    echo -e "${Red_font_prefix}V2Ray 已卸载。${Font_color_suffix}"
-}
-
-# 启动V2Ray
-Start() {
-    echo -e "${Green_font_prefix}启动 V2Ray...${Font_color_suffix}"
-    systemctl start v2ray
-    echo -e "${Green_font_prefix}V2Ray 已启动。${Font_color_suffix}"
-}
-
-# 停止V2Ray
-Stop() {
-    echo -e "${Red_font_prefix}停止 V2Ray...${Font_color_suffix}"
-    systemctl stop v2ray
-    echo -e "${Red_font_prefix}V2Ray 已停止。${Font_color_suffix}"
-}
-
-# 重启V2Ray
-Restart() {
-    echo -e "${Green_font_prefix}重启 V2Ray...${Font_color_suffix}"
-    systemctl restart v2ray
-    echo -e "${Green_font_prefix}V2Ray 重启完毕！${Font_color_suffix}"
-}
-
 # 设置配置信息
 Set() {
-    echo "请选择配置文件类型（默认选择 vmess+tcp）："
+    echo "=============================="
+    echo "请选择配置文件类型："
     echo "=============================="
     echo -e " ${Green_font_prefix}1${Font_color_suffix}、 vmess+tcp"
     echo -e " ${Green_font_prefix}2${Font_color_suffix}、 vmess+ws"
@@ -199,6 +186,9 @@ Set() {
             "alterId": 0
           }
         ]
+      },
+      "streamSettings": {
+        "network": "tcp"
       }
     }
   ],
@@ -244,7 +234,6 @@ EOF
 EOF
         ;;
         3)
-        read -p "请输入域名（需要TLS证书）： " DOMAIN
         cat << EOF > /root/V2ray/config.json
 {
   "inbounds": [
@@ -265,8 +254,8 @@ EOF
           "tlsSettings": {
             "certificates": [
               {
-                "certificateFile": "/root/V2ray/server.crt", 
-                "keyFile": "/root/V2ray/server.key" 
+                "certificateFile": "/root/V2ray/ssl/server.crt", 
+                "keyFile": "/root/V2ray/ssl/server.key" 
               }
             ]
           }
@@ -283,7 +272,6 @@ EOF
 EOF
         ;;
         4)
-        read -p "请输入域名（需要TLS证书）： " DOMAIN
         cat << EOF > /root/V2ray/config.json
 {
   "inbounds": [
@@ -307,8 +295,8 @@ EOF
           "tlsSettings": {
             "certificates": [
               {
-                "certificateFile": "/root/V2ray/server.crt", 
-                "keyFile": "/root/V2ray/server.key" 
+                "certificateFile": "/root/V2ray/ssl/server.crt", 
+                "keyFile": "/root/V2ray/ssl/server.key" 
               }
             ]
           }
@@ -325,56 +313,178 @@ EOF
 EOF
         ;;
         *)
-        echo -e "${Red_font_prefix}无效的选择。${Font_color_suffix}"
+        echo -e "${Red_font_prefix}无效的选项。${Font_color_suffix}"
         exit 1
         ;;
     esac
 
-    echo -e "${Green_font_prefix}配置文件已创建在 /root/V2ray/config.json${Font_color_suffix}"
+    echo -e "${Green_font_prefix}配置文件已生成。如果你选择带有 TLS 的选项，请申请证书！${Font_color_suffix}"
+    systemctl daemon-reload
+    systemctl start v2ray
 }
 
-# 查看配置信息
+# 启动V2Ray
+Start() {
+    systemctl start v2ray
+    check_status
+    echo -e "${Green_font_prefix}V2Ray 服务已启动，当前状态: ${status}${Font_color_suffix}"
+}
+
+# 停止V2Ray
+Stop() {
+    systemctl stop v2ray
+    check_status
+    echo -e "${Green_font_prefix}V2Ray 服务已停止，当前状态: ${status}${Font_color_suffix}"
+}
+
+# 重启V2Ray
+Restart() {
+    systemctl restart v2ray
+    check_status
+    echo -e "${Green_font_prefix}V2Ray 服务已重启，当前状态: ${status}${Font_color_suffix}"
+}
+
+# 卸载 V2Ray
+Uninstall() {
+    echo -e "${Green_font_prefix}正在卸载 V2Ray...${Font_color_suffix}"
+
+    # 停止并删除 V2Ray 服务
+    systemctl stop v2ray
+    systemctl disable v2ray
+    rm /etc/systemd/system/v2ray.service
+
+    # 删除 V2Ray 文件
+    rm -rf /root/V2ray
+
+    # 删除 V2Ray 的相关用户（如果有）
+    userdel -r v2ray 2>/dev/null
+
+    echo -e "${Green_font_prefix}V2Ray 已成功卸载。${Font_color_suffix}"
+}
+
+# 查看配置
 View() {
-    echo -e "${Green_font_prefix}当前配置文件内容:${Font_color_suffix}"
-    cat /root/V2ray/config.json
+    if [ -f "/root/V2ray/config.json" ]; then
+        cat /root/V2ray/config.json
+    else
+        echo -e "${Red_font_prefix}配置文件不存在。${Font_color_suffix}"
+    fi
 }
 
-# 检查版本
-Check_version() {
-    echo -e "${Green_font_prefix}当前脚本版本: ${sh_ver}${Font_color_suffix}"
-}
+# 申请证书
+Request_Cert() {
+    echo "=============================="
+    echo "请选择证书申请方式："
+    echo "=============================="
+    echo -e " ${Green_font_prefix}1${Font_color_suffix}、 自签名证书"
+    echo -e " ${Green_font_prefix}2${Font_color_suffix}、 Cloudflare 证书"
+    echo -e " ${Green_font_prefix}3${Font_color_suffix}、 ACME 证书"
+    echo "=============================="
+    read -p "输入数字选择 (1-3): " cert_choice
 
-# 菜单
-menu() {
-    echo -e "-----------------------------"
-    echo -e " ${Green_font_prefix}V2Ray 管理脚本 ${Font_color_suffix}(${sh_ver})"
-    echo -e "-----------------------------"
-    echo -e " ${Green_font_prefix}1${Font_color_suffix}、安装 V2Ray"
-    echo -e " ${Green_font_prefix}2${Font_color_suffix}、更新 V2Ray"
-    echo -e " ${Green_font_prefix}3${Font_color_suffix}、卸载 V2Ray"
-    echo -e " ${Green_font_prefix}4${Font_color_suffix}、启动 V2Ray"
-    echo -e " ${Green_font_prefix}5${Font_color_suffix}、停止 V2Ray"
-    echo -e " ${Green_font_prefix}6${Font_color_suffix}、重启 V2Ray"
-    echo -e " ${Green_font_prefix}7${Font_color_suffix}、设置配置"
-    echo -e " ${Green_font_prefix}8${Font_color_suffix}、查看配置"
-    echo -e " ${Green_font_prefix}9${Font_color_suffix}、检查版本"
-    echo -e " ${Green_font_prefix}0${Font_color_suffix}、退出"
-    echo -e "-----------------------------"
-
-    read -p "请输入选项: " num
-    case "$num" in
-        1) Install ;;
-        2) Update ;;
-        3) Uninstall ;;
-        4) Start ;;
-        5) Stop ;;
-        6) Restart ;;
-        7) Set ;;
-        8) View ;;
-        9) Check_version ;;
-        0) exit ;;
-        *) echo -e "${Red_font_prefix}无效选项，请重新输入！${Font_color_suffix}" ; sleep 2s ; menu ;;
+    case $cert_choice in
+        1)
+        generate_self_signed_cert
+        ;;
+        2)
+        request_cf_cert
+        ;;
+        3)
+        request_acme_cert
+        ;;
+        *)
+        echo -e "${Red_font_prefix}无效的选项。${Font_color_suffix}"
+        exit 1
+        ;;
     esac
 }
 
-menu
+generate_self_signed_cert() {
+    echo -e "${Green_font_prefix}生成自签名证书中...${Font_color_suffix}"
+    read -p "请输入伪装域名（例如：example.com）： " DOMAIN
+    mkdir -p /root/V2ray/ssl
+    openssl req -newkey rsa:2048 -nodes -keyout /root/V2ray/ssl/server.key -x509 -days 365 -out /root/V2ray/ssl/server.crt -subj "/C=CN/ST=Province/L=City/O=Organization/OU=Department/CN=$DOMAIN"
+    echo -e "${Green_font_prefix}自签名证书生成完成！${Font_color_suffix}"
+}
+
+request_acme_cert() {
+    echo -e "${Green_font_prefix}申请 ACME 证书中...${Font_color_suffix}"
+    apt-get install -y certbot
+    read -p "请输入域名（用于证书申请）： " DOMAIN
+    read -p "请输入电子邮件（用于接收通知）： " EMAIL
+    certbot certonly --standalone -d "$DOMAIN" -m "$EMAIL" --agree-tos --non-interactive
+    cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem /root/V2ray/ssl/server.crt
+    cp /etc/letsencrypt/live/$DOMAIN/privkey.pem /root/V2ray/ssl/server.key
+    echo -e "${Green_font_prefix}ACME 证书申请完成！${Font_color_suffix}"
+}
+
+request_cf_cert() {
+    echo -e "${Green_font_prefix}申请 Cloudflare 证书中...${Font_color_suffix}"
+    read -p "请输入 Cloudflare API 密钥（可以从 Cloudflare 控制面板获取）： " CF_API_KEY
+    read -p "请输入 Cloudflare 账户邮箱： " CF_EMAIL
+    read -p "请输入域名（用于证书申请）： " DOMAIN
+
+    mkdir -p /root/V2ray/ssl
+    # 使用 Cloudflare API 获取证书（具体命令视 Cloudflare API 提供的功能而定，这里假设有一个用于获取证书的命令）
+    cfssl gencert -ca /root/V2ray/ssl/ca.pem -ca-key /root/V2ray/ssl/ca-key.pem -config /root/V2ray/ssl/ca-config.json -profile client /root/V2ray/ssl/$DOMAIN.csr | cfssljson -bare /root/V2ray/ssl/$DOMAIN
+    cp /root/V2ray/ssl/$DOMAIN.pem /root/V2ray/ssl/server.crt
+    cp /root/V2ray/ssl/$DOMAIN-key.pem /root/V2ray/ssl/server.key
+    echo -e "${Green_font_prefix}Cloudflare 证书申请完成！${Font_color_suffix}"
+}
+
+# 主菜单
+Main() {
+        echo "=============================="
+        echo "V2Ray 管理脚本 ${sh_ver}"
+        echo "=============================="
+        echo -e " ${Green_font_prefix}1${Font_color_suffix}、 安装 V2Ray"
+        echo -e " ${Green_font_prefix}2${Font_color_suffix}、 更新 V2Ray"
+        echo -e " ${Green_font_prefix}3${Font_color_suffix}、 配置 V2Ray"
+        echo -e " ${Green_font_prefix}4${Font_color_suffix}、 卸载 V2Ray"
+        echo -e " ${Green_font_prefix}5${Font_color_suffix}、 启动 V2Ray"
+        echo -e " ${Green_font_prefix}6${Font_color_suffix}、 停止 V2Ray"
+        echo -e " ${Green_font_prefix}7${Font_color_suffix}、 重启 V2Ray"        
+        echo -e " ${Green_font_prefix}8${Font_color_suffix}、 查看配置"
+        echo -e " ${Green_font_prefix}9${Font_color_suffix}、 申请证书"
+        echo -e " ${Green_font_prefix}0${Font_color_suffix}、 退出"
+        echo "=============================="
+        read -p "请输入数字选择: " num
+        case "$num" in
+            1)
+                Install
+                ;;
+            2)
+                Update
+                ;;
+            3)
+                Set
+                ;;
+            4)
+                Uninstall
+                ;;
+            5)
+                Start
+                ;;
+            6)
+                Stop
+                ;;
+            7)
+                Restart
+                ;;
+            8)
+                View
+                ;;
+            9)
+                Request_Cert
+                ;;
+            0)
+                exit 0
+                ;;
+            *)
+                echo -e "${Red_font_prefix}无效的选项。${Font_color_suffix}"
+                ;;
+    esac
+}
+
+# 执行主菜单
+Main
