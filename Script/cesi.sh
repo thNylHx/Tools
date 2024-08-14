@@ -16,18 +16,18 @@ fi
 # 检查 V2ray 服务状态
 check_v2ray_status() {
     if systemctl is-active --quiet v2ray; then
-        echo -e "${GREEN}V2ray 服务正在运行。${NC}"
+        echo -e "${GREEN}正在运行。${NC}"
     else
-        echo -e "${RED}V2ray 服务未运行。${NC}"
+        echo -e "${RED}未运行。${NC}"
     fi
 }
 
 # 检查 V2ray 是否设置为开机启动
 check_v2ray_enable() {
     if systemctl is-enabled --quiet v2ray; then
-        echo -e "${GREEN}V2ray 已设置为开机启动。${NC}"
+        echo -e "${GREEN}已设置。${NC}"
     else
-        echo -e "${RED}V2ray 未设置为开机启动。${NC}"
+        echo -e "${RED}未设置。${NC}"
     fi
 }
 
