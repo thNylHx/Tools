@@ -2,10 +2,10 @@
 
 set -e -o pipefail
 
-# Define color codes
+# 定义颜色代码
 GREEN='\033[0;32m'
 RED='\033[0;31m'
-NC='\033[0m' # No Color
+NC='\033[0m' # 无颜色
 
 # 检查 root 权限
 if [[ $EUID -ne 0 ]]; then
@@ -73,6 +73,12 @@ set_config() {
         fi
         WS_PATH="/$WS_PATH"
     fi
+
+    # 调试输出
+    echo -e "配置类型: $config_choice"
+    echo -e "端口: $PORT"
+    echo -e "UUID: $UUID"
+    echo -e "WebSocket 路径: $WS_PATH"
 
     # 创建配置文件
     case $config_choice in
@@ -257,10 +263,9 @@ echo -e " ${GREEN}10${NC}、 查看 V2ray 配置信息"
 echo "=============================="
 echo -e " ${GREEN}0${NC}、 退出一键安装脚本"
 echo ""
-echo ""
 echo -e " 运行状态："
 echo -e " 开机自启："
-
+echo ""
 read -p "输入数字选择 [0-10]: " action
 
 case $action in
