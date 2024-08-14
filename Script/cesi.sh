@@ -196,12 +196,9 @@ Set() {
         "clients": [
           {
             "id": "$UUID",
-            "alterId": 64
+            "alterId": 0
           }
         ]
-      },
-      "streamSettings": {
-        "network": "tcp"
       }
     }
   ],
@@ -225,7 +222,7 @@ EOF
         "clients": [
           {
             "id": "$UUID",
-            "alterId": 64
+            "alterId": 0
           }
         ]
       },
@@ -258,7 +255,7 @@ EOF
         "clients": [
           {
             "id": "$UUID",
-            "alterId": 64
+            "alterId": 0
           }
         ]
       },
@@ -297,7 +294,7 @@ EOF
         "clients": [
           {
             "id": "$UUID",
-            "alterId": 64
+            "alterId": 0
           }
         ]
       },
@@ -361,8 +358,6 @@ menu() {
     echo -e " ${Green_font_prefix}7${Font_color_suffix}、设置配置"
     echo -e " ${Green_font_prefix}8${Font_color_suffix}、查看配置"
     echo -e " ${Green_font_prefix}9${Font_color_suffix}、检查版本"
-    echo -e " ${Green_font_prefix}10${Font_color_suffix}、下载脚本"
-    echo -e " ${Green_font_prefix}11${Font_color_suffix}、启动脚本"
     echo -e " ${Green_font_prefix}0${Font_color_suffix}、退出"
     echo -e "-----------------------------"
 
@@ -377,8 +372,6 @@ menu() {
         7) Set ;;
         8) View ;;
         9) Check_version ;;
-        10) Download_script ;;
-        11) Run_script ;;
         0) exit ;;
         *) echo -e "${Red_font_prefix}无效选项，请重新输入！${Font_color_suffix}" ; sleep 2s ; menu ;;
     esac
