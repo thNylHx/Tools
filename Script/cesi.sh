@@ -17,17 +17,18 @@ echo " 1、 安装 V2ray"
 echo " 2、 升级 V2ray"
 echo " 3、 卸载 V2ray"
 echo "=============================="
-read -p "输入数字选择 (1/2/3): " action
+echo " 4、 重新启动 V2ray"
+echo " 5、 重新加载 V2ray"
+echo " 6、 开机启动 V2ray"
+echo "=============================="
+echo " 0、 退出一键安装脚本"
+read -p "输入数字选择 [0-6]: " action
 
 case $action in
     1)
-    echo "开始安装 V2ray"
-    
-    echo "创建 V2ray 文件夹"
+    echo "开始安装 V2ray，请稍后..."
     mkdir -p /root/V2ray
-    
     cd /root/V2ray
-    echo "创建完成"
 
     ARCH_RAW=$(uname -m)
     case "${ARCH_RAW}" in
@@ -49,11 +50,11 @@ case $action in
 
     echo "开始下载 v2ray-core"
 
-    wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip"
+    wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo "下载失败"; exit 1; }
 
     echo "v2ray-core 下载完成, 开始部署"
 
-    unzip "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip"
+    unzip "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo "解压失败"; exit 1; }
 
     echo "配置 V2ray"
 
@@ -96,26 +97,48 @@ EOF
         echo "随机生成的UUID: $UUID"
     fi
 
-    echo "是否启用 WebSocket (y/n)?"
-    read -p "输入 (y/n): " ENABLE_WS
+    read -p "是否启用 WebSocket (y/n): " ENABLE_WS
 
-    if [[ "$ENABLE_WS" == "y" ]]; then
+    if [[ "$ENABLE_WS" == "y" || "$ENABLE_WS" == "Y" ]]; then
         RANDOM_PATH=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 6)
         read -p "WebSocket 路径 (默认: /$RANDOM_PATH): " WS_PATH
         WS_PATH=${WS_PATH:-/$RANDOM_PATH}
+        WS_CONFIG='
+        "streamSettings": {
+          "network": "ws",
+          "wsSettings": {
+            "path": "'"${WS_PATH}"'"
+            }
+        },'
         echo "WebSocket 路径设置为: $WS_PATH"
-        WS_CONFIG='"streamSettings": {"network": "ws", "wsSettings": {"path": "'$WS_PATH'"}}'
     else
-        WS_CONFIG=""
+        WS_CONFIG=''
     fi
 
-    echo "是否启用 TLS (y/n)?"
-    read -p "输入 (y/n): " ENABLE_TLS
+    read -p "是否启用 TLS (y/n): " ENABLE_TLS
 
-    if [[ "$ENABLE_TLS" == "y" ]]; then
-        TLS_CONFIG='"streamSettings": {"network": "ws", "security": "tls", "tlsSettings": {"certificates": [{"certificateFile": "/root/V2ray/server.crt", "keyFile": "/root/V2ray/server.key"}]}}'
+    if [[ "$ENABLE_TLS" == "y" || "$ENABLE_TLS" == "Y" ]]; then
+        TLS_CONFIG='
+        "security": "tls",
+        "tlsSettings": {
+          "certificates": [
+            {
+              "certificateFile": "/root/V2ray/server.crt", 
+              "keyFile": "/root/V2ray/server.key" 
+            }
+          ]
+        },'
+        if [[ -z "$WS_CONFIG" ]]; then
+            NETWORK_CONFIG='
+            "streamSettings": {
+              "network": "tcp"
+            }'
+        else
+            NETWORK_CONFIG=''
+        fi
     else
-        TLS_CONFIG=""
+        TLS_CONFIG=''
+        NETWORK_CONFIG=''
     fi
 
     # 生成配置文件
@@ -129,12 +152,13 @@ EOF
         "clients": [
           {
             "id": "$UUID",
-            "alterId": 64
+            "alterId": 0
           }
         ]
-      }
-      ${WS_CONFIG:+,$WS_CONFIG}
-      ${TLS_CONFIG:+,$TLS_CONFIG}
+      },
+      $WS_CONFIG
+      $NETWORK_CONFIG
+      $TLS_CONFIG
     }
   ],
   "outbounds": [
@@ -181,11 +205,11 @@ EOF
 
     echo "开始下载 v2ray-core"
 
-    wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip"
+    wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo "下载失败"; exit 1; }
 
     echo "v2ray-core 下载完成, 开始部署"
 
-    unzip -o "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip"
+    unzip -o "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo "解压失败"; exit 1; }
 
     echo "V2ray 升级完成"
     systemctl daemon-reload
@@ -204,6 +228,27 @@ EOF
     rm -rf /root/V2ray
 
     echo "V2ray 卸载完成"
+    ;;
+
+    4)
+    echo "重新启动 V2ray"
+    systemctl restart v2ray
+    ;;
+
+    5)
+    echo "重新加载 V2ray"
+    systemctl daemon-reload
+    systemctl reload v2ray
+    ;;
+
+    6)
+    echo "设置 V2ray 开机启动"
+    systemctl enable v2ray
+    ;;
+
+    0)
+    echo "退出脚本"
+    exit 0
     ;;
 
     *)
