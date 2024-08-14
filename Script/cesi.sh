@@ -1,44 +1,131 @@
 #!/bin/bash
 
-set -e -o pipefail
-
 # 定义颜色代码
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-NC='\033[0m' # 无颜色
+Green_font_prefix="\033[32m"
+Red_font_prefix="\033[31m"
+Font_color_suffix="\033[0m"
 
-# 检查 root 权限
-if [[ $EUID -ne 0 ]]; then
-   echo -e "${RED}请以 root 权限运行此脚本。${NC}" 
-   exit 1
-fi
+# 定义脚本版本
+sh_ver="1.0.0"
 
-# 检查 V2ray 服务状态
-check_v2ray_status() {
-    if systemctl is-active --quiet v2ray; then
-        echo -e "${GREEN}正在运行。${NC}"
+# V2Ray 可执行文件的路径
+FILE="/root/V2ray/v2ray"
+
+# 检查V2Ray服务状态
+check_status() {
+    if pgrep -x "v2ray" > /dev/null; then
+        status="running"
     else
-        echo -e "${RED}未运行。${NC}"
+        status="stopped"
     fi
 }
 
-# 检查 V2ray 是否设置为开机启动
-check_v2ray_enable() {
-    if systemctl is-enabled --quiet v2ray; then
-        echo -e "${GREEN}已设置。${NC}"
-    else
-        echo -e "${RED}未设置。${NC}"
-    fi
+# 安装V2Ray
+Install() {
+    echo -e "${Green_font_prefix}安装 V2Ray 中...${Font_color_suffix}"
+    mkdir -p /root/V2ray
+    cd /root/V2ray
+    ARCH_RAW=$(uname -m)
+    case "${ARCH_RAW}" in
+        'x86_64')    ARCH='64';;
+        'x86' | 'i686' | 'i386')     ARCH='32';;
+        'aarch64' | 'arm64') ARCH='arm64-v8a';;
+        'armv7' | 'armv7l')   ARCH='arm32-v7a';;
+        's390x')    ARCH='s390x';;
+        *)          echo -e "${RED}不支持的架构: ${ARCH_RAW}${NC}"; exit 1;;
+    esac
+    echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
+
+    VERSION=$(curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" \
+        | grep tag_name \
+        | cut -d ":" -f2 \
+        | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
+
+    echo -e "${Green_font_prefix}获取到的最新版本: ${VERSION}${Font_color_suffix}"
+
+    echo -e "${Green_font_prefix}开始下载 v2ray-core${Font_color_suffix}"
+    wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
+
+    echo -e "${Green_font_prefix}v2ray-core 下载完成, 开始部署${Font_color_suffix}"
+    unzip "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
+
+    echo -e "${Green_font_prefix}V2ray 安装完成${Font_color_suffix}"
+    systemctl daemon-reload
+    systemctl start v2ray
 }
 
-# 设置 V2ray 配置信息
-set_config() {
+# 更新V2Ray
+Update() {
+    echo -e "${Green_font_prefix}更新 V2Ray 中...${Font_color_suffix}"
+    systemctl stop v2ray
+
+    ARCH_RAW=$(uname -m)
+    case "${ARCH_RAW}" in
+        'x86_64')    ARCH='64';;
+        'x86' | 'i686' | 'i386')     ARCH='32';;
+        'aarch64' | 'arm64') ARCH='arm64-v8a';;
+        'armv7' | 'armv7l')   ARCH='arm32-v7a';;
+        's390x')    ARCH='s390x';;
+        *)          echo -e "${Red_font_prefix}不支持的架构: ${ARCH_RAW}${Font_color_suffix}"; exit 1;;
+    esac
+    echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
+
+    VERSION=$(curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" \
+        | grep tag_name \
+        | cut -d ":" -f2 \
+        | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
+
+    echo -e "${Green_font_prefix}获取到的最新版本: ${VERSION}${Font_color_suffix}"
+
+    echo -e "${Green_font_prefix}开始下载 v2ray-core${Font_color_suffix}"
+    wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
+
+    echo -e "${Green_font_prefix}v2ray-core 下载完成, 开始部署${Font_color_suffix}"
+    unzip -o "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
+
+    echo -e "${Green_font_prefix}V2ray 升级完成${Font_color_suffix}"
+    systemctl daemon-reload
+    systemctl start v2ray
+}
+
+# 卸载V2Ray
+Uninstall() {
+    echo -e "${Red_font_prefix}卸载 V2Ray 中...${Font_color_suffix}"
+    systemctl stop v2ray
+    systemctl disable v2ray
+    rm -rf /root/V2ray
+    echo -e "${Red_font_prefix}V2Ray 已卸载。${Font_color_suffix}"
+}
+
+# 启动V2Ray
+Start() {
+    echo -e "${Green_font_prefix}启动 V2Ray...${Font_color_suffix}"
+    systemctl start v2ray
+    echo -e "${Green_font_prefix}V2Ray 已启动。${Font_color_suffix}"
+}
+
+# 停止V2Ray
+Stop() {
+    echo -e "${Red_font_prefix}停止 V2Ray...${Font_color_suffix}"
+    systemctl stop v2ray
+    echo -e "${Red_font_prefix}V2Ray 已停止。${Font_color_suffix}"
+}
+
+# 重启V2Ray
+Restart() {
+    echo -e "${Green_font_prefix}重启 V2Ray...${Font_color_suffix}"
+    systemctl restart v2ray
+    echo -e "${Green_font_prefix}V2Ray 重启完毕！${Font_color_suffix}"
+}
+
+# 设置配置信息
+Set() {
     echo "请选择配置文件类型："
     echo "=============================="
-    echo -e " ${GREEN}1${NC}、 vmess+tcp"
-    echo -e " ${GREEN}2${NC}、 vmess+ws"
-    echo -e " ${GREEN}3${NC}、 vmess+tcp+tls（需要域名）"
-    echo -e " ${GREEN}4${NC}、 vmess+ws+tls（需要域名）"
+    echo -e " ${Green_font_prefix}1${Font_color_suffix}、 vmess+tcp"
+    echo -e " ${Green_font_prefix}2${Font_color_suffix}、 vmess+ws"
+    echo -e " ${Green_font_prefix}3${Font_color_suffix}、 vmess+tcp+tls（需要域名）"
+    echo -e " ${Green_font_prefix}4${Font_color_suffix}、 vmess+ws+tls（需要域名）"
     echo "=============================="
     read -p "输入数字选择 (1-4): " config_choice
 
@@ -46,9 +133,9 @@ set_config() {
     read -p "请输入监听端口 (10000-65000之间, 留空以生成随机端口): " PORT
     if [[ -z "$PORT" ]]; then
         PORT=$(shuf -i 10000-65000 -n 1)
-        echo -e "随机生成的监听端口: ${GREEN}$PORT${NC}"
+        echo -e "随机生成的监听端口: ${Green_font_prefix}$PORT${Font_color_suffix}"
     elif [[ "$PORT" -lt 10000 || "$PORT" -gt 65000 ]]; then
-        echo -e "${RED}端口号必须在10000到65000之间。${NC}"
+        echo -e "${Red_font_prefix}端口号必须在10000到65000之间。${Font_color_suffix}"
         exit 1
     fi
 
@@ -60,28 +147,20 @@ set_config() {
         else
             UUID=$(cat /proc/sys/kernel/random/uuid)
         fi
-        echo -e "随机生成的UUID: ${GREEN}$UUID${NC}"
+        echo -e "随机生成的UUID: ${Green_font_prefix}$UUID${Font_color_suffix}"
     fi
 
-    # WebSocket 路径处理
-    WS_PATH=""
-    if [[ $config_choice == 2 || $config_choice == 4 ]]; then
-        read -p "请输入 WebSocket 路径（例如 v2ray，留空以生成随机路径）: " WS_PATH
+    # WebSocket路径处理
+    if [[ "$config_choice" == "2" || "$config_choice" == "4" ]]; then
+        read -p "请输入 WebSocket 路径 (留空以生成随机路径): " WS_PATH
         if [[ -z "$WS_PATH" ]]; then
-            WS_PATH=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)
-            echo -e "生成的 WebSocket 路径: ${GREEN}${WS_PATH}${NC}"
+            WS_PATH=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 8)
+            echo -e "随机生成的WebSocket路径: ${Green_font_prefix}/$WS_PATH${Font_color_suffix}"
+        else
+            WS_PATH="${WS_PATH#/}"  # 移除前导斜杠
+            echo -e "WebSocket路径: ${Green_font_prefix}/$WS_PATH${Font_color_suffix}"
         fi
-    
-        # 确保路径以 "/" 开头
-        WS_PATH="${WS_PATH#/}"  # 移除可能存在的开头斜杠
-        WS_PATH="/$WS_PATH"     # 确保路径以斜杠开头
     fi
-
-    # 调试输出
-    echo -e "配置类型: $config_choice"
-    echo -e "端口: $PORT"
-    echo -e "UUID: $UUID"
-    echo -e "WebSocket 路径: $WS_PATH"
 
     # 创建配置文件
     case $config_choice in
@@ -90,12 +169,12 @@ set_config() {
 {
   "inbounds": [
     {
-      "port": $PORT, 
-      "protocol": "vmess",    
+      "port": $PORT,
+      "protocol": "vmess",
       "settings": {
         "clients": [
           {
-            "id": "$UUID",  
+            "id": "$UUID",
             "alterId": 0
           }
         ]
@@ -104,11 +183,10 @@ set_config() {
   ],
   "outbounds": [
     {
-      "protocol": "freedom",  
+      "protocol": "freedom",
       "settings": {}
     }
-  ],
-  "vmess-aead": true
+  ]
 }
 EOF
         ;;
@@ -117,12 +195,12 @@ EOF
 {
   "inbounds": [
     {
-      "port": $PORT, 
-      "protocol": "vmess",    
+      "port": $PORT,
+      "protocol": "vmess",
       "settings": {
         "clients": [
           {
-            "id": "$UUID",  
+            "id": "$UUID",
             "alterId": 0
           }
         ]
@@ -130,7 +208,7 @@ EOF
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "$WS_PATH"
+          "path": "/$WS_PATH"
         }
       }
     }
@@ -140,27 +218,26 @@ EOF
       "protocol": "freedom",
       "settings": {}
     }
-  ],
-  "vmess-aead": true
+  ]
 }
 EOF
         ;;
         3)
-        if [[ ! -f /root/V2ray/server.crt || ! -f /root/V2ray/server.key ]]; then
-            echo -e "${RED}TLS 配置文件 server.crt 或 server.key 不存在，请先生成或上传证书文件。${NC}"
+        read -p "请输入域名: " DOMAIN
+        if [[ -z "$DOMAIN" ]]; then
+            echo -e "${Red_font_prefix}域名不能为空。${Font_color_suffix}"
             exit 1
         fi
-
         cat << EOF > /root/V2ray/config.json
 {
   "inbounds": [
     {
-      "port": $PORT, 
-      "protocol": "vmess",    
+      "port": $PORT,
+      "protocol": "vmess",
       "settings": {
         "clients": [
           {
-            "id": "$UUID",  
+            "id": "$UUID",
             "alterId": 0
           }
         ]
@@ -169,12 +246,7 @@ EOF
         "network": "tcp",
         "security": "tls",
         "tlsSettings": {
-          "certificates": [
-            {
-              "certificateFile": "/root/V2ray/server.crt", 
-              "keyFile": "/root/V2ray/server.key" 
-            }
-          ]
+          "serverName": "$DOMAIN"
         }
       }
     }
@@ -184,44 +256,38 @@ EOF
       "protocol": "freedom",
       "settings": {}
     }
-  ],
-  "vmess-aead": true
+  ]
 }
 EOF
         ;;
         4)
-        if [[ ! -f /root/V2ray/server.crt || ! -f /root/V2ray/server.key ]]; then
-            echo -e "${RED}TLS 配置文件 server.crt 或 server.key 不存在，请先生成或上传证书文件。${NC}"
+        read -p "请输入域名: " DOMAIN
+        if [[ -z "$DOMAIN" ]]; then
+            echo -e "${Red_font_prefix}域名不能为空。${Font_color_suffix}"
             exit 1
         fi
-
         cat << EOF > /root/V2ray/config.json
 {
   "inbounds": [
     {
-      "port": $PORT, 
-      "protocol": "vmess",    
+      "port": $PORT,
+      "protocol": "vmess",
       "settings": {
         "clients": [
           {
-            "id": "$UUID",  
+            "id": "$UUID",
             "alterId": 0
           }
         ]
       },
       "streamSettings": {
         "network": "ws",
-        "wsSettings": {
-          "path": "$WS_PATH"
-        },
         "security": "tls",
         "tlsSettings": {
-          "certificates": [
-            {
-              "certificateFile": "/root/V2ray/server.crt", 
-              "keyFile": "/root/V2ray/server.key" 
-            }
-          ]
+          "serverName": "$DOMAIN"
+        },
+        "wsSettings": {
+          "path": "/$WS_PATH"
         }
       }
     }
@@ -231,186 +297,77 @@ EOF
       "protocol": "freedom",
       "settings": {}
     }
-  ],
-  "vmess-aead": true
+  ]
 }
 EOF
+        ;;
+        *)
+        echo -e "${Red_font_prefix}无效的选择，请重试。${Font_color_suffix}"
+        exit 1
+        ;;
     esac
+
+    echo -e "${Green_font_prefix}配置已更新。${Font_color_suffix}"
+    systemctl restart v2ray
 }
 
-# 查看当前 V2ray 配置
-view_config() {
-    if [[ -f /root/V2ray/config.json ]]; then
-        echo -e "当前 V2ray 配置文件内容:"
+# 查看配置信息
+View() {
+    if [[ -e "/root/V2ray/config.json" ]]; then
+        echo -e "${Green_font_prefix}当前配置信息:${Font_color_suffix}"
         cat /root/V2ray/config.json
     else
-        echo -e "${RED}配置文件不存在，请安装或配置 V2ray。${NC}"
+        echo -e "${Red_font_prefix}配置文件不存在。${Font_color_suffix}"
     fi
 }
 
-# 主菜单
-echo "V2ray 一键安装管理脚本"
-echo "请选择操作："
-echo "=============================="
-echo -e " ${GREEN}1${NC}、 安装 V2ray"
-echo -e " ${GREEN}2${NC}、 升级 V2ray"
-echo -e " ${GREEN}3${NC}、 卸载 V2ray"
-echo "=============================="
-echo -e " ${GREEN}4${NC}、 重新启动 V2ray"
-echo -e " ${GREEN}5${NC}、 重新加载 V2ray"
-echo -e " ${GREEN}6${NC}、 设置开机启动 V2ray"
-echo -e " ${GREEN}9${NC}、 设置 V2ray 配置信息"
-echo -e " ${GREEN}10${NC}、 查看 V2ray 配置信息"
-echo "=============================="
-echo -e " ${GREEN}0${NC}、 退出一键安装脚本"
-echo ""
-
-# 显示 V2ray 的当前运行状态和开机自启状态
-echo -e " 运行状态：$(check_v2ray_status)"
-echo -e " 开机自启：$(check_v2ray_enable)"
-echo ""
-
-read -p "输入数字选择 [0-10]: " action
-
-case $action in
-    1)
-    echo -e "${GREEN}开始安装 V2ray，请稍后...${NC}"
-    mkdir -p /root/V2ray
-    cd /root/V2ray
-
-    ARCH_RAW=$(uname -m)
-    case "${ARCH_RAW}" in
-        'x86_64')    ARCH='64';;
-        'x86' | 'i686' | 'i386')     ARCH='32';;
-        'aarch64' | 'arm64') ARCH='arm64-v8a';;
-        'armv7' | 'armv7l')   ARCH='arm32-v7a';;
-        's390x')    ARCH='s390x';;
-        *)          echo -e "${RED}不支持的架构: ${ARCH_RAW}${NC}"; exit 1;;
-    esac
-    echo -e "${GREEN}当前设备架构: ${ARCH_RAW}${NC}"
-
-    VERSION=$(curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" \
+# 检查V2Ray版本
+Check_Version() {
+    CURRENT_VERSION=$($FILE -version 2>&1 | head -n 1 | awk '{print $2}')
+    LATEST_VERSION=$(curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" \
         | grep tag_name \
         | cut -d ":" -f2 \
         | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
 
-    echo -e "${GREEN}获取到的最新版本: ${VERSION}${NC}"
+    echo -e "当前 V2Ray 版本: ${Green_font_prefix}$CURRENT_VERSION${Font_color_suffix}"
+    echo -e "最新 V2Ray 版本: ${Green_font_prefix}$LATEST_VERSION${Font_color_suffix}"
 
-    echo -e "${GREEN}开始下载 v2ray-core${NC}"
+    if [[ "$CURRENT_VERSION" != "$LATEST_VERSION" ]]; then
+        echo -e "${Red_font_prefix}当前版本不是最新版本，请考虑更新。${Font_color_suffix}"
+    else
+        echo -e "${Green_font_prefix}已是最新版本。${Font_color_suffix}"
+    fi
+}
 
-    wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo -e "${RED}下载失败${NC}"; exit 1; }
-
-    echo -e "${GREEN}v2ray-core 下载完成, 开始部署${NC}"
-
-    unzip "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo -e "${RED}解压失败${NC}"; exit 1; }
-
-    echo -e "${GREEN}配置 V2ray${NC}"
-    set_config
-
-    echo -e "${GREEN}V2ray 安装完成${NC}"
-    systemctl daemon-reload
-    systemctl start v2ray
-    ;;
-
-    2)
-    echo -e "${GREEN}开始升级 V2ray，请稍后...${NC}"
-
-    # 停止现有的 V2ray 服务
-    systemctl stop v2ray
-
-    # 获取当前系统架构
-    ARCH_RAW=$(uname -m)
-    case "${ARCH_RAW}" in
-        'x86_64')    ARCH='64';;
-        'x86' | 'i686' | 'i386')     ARCH='32';;
-        'aarch64' | 'arm64') ARCH='arm64-v8a';;
-        'armv7' | 'armv7l')   ARCH='arm32-v7a';;
-        's390x')    ARCH='s390x';;
-        *)          echo -e "${RED}不支持的架构: ${ARCH_RAW}${NC}"; exit 1;;
+# 脚本主菜单
+menu() {
+    echo && echo -e "  V2Ray 一键管理脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
+  ---- By ChatGPT ----
+  ${Green_font_prefix}0.${Font_color_suffix} 退出脚本
+  ${Green_font_prefix}1.${Font_color_suffix} 安装 V2Ray
+  ${Green_font_prefix}2.${Font_color_suffix} 更新 V2Ray
+  ${Green_font_prefix}3.${Font_color_suffix} 卸载 V2Ray
+  ${Green_font_prefix}4.${Font_color_suffix} 启动 V2Ray
+  ${Green_font_prefix}5.${Font_color_suffix} 停止 V2Ray
+  ${Green_font_prefix}6.${Font_color_suffix} 重启 V2Ray
+  ${Green_font_prefix}7.${Font_color_suffix} 设置 V2Ray 配置
+  ${Green_font_prefix}8.${Font_color_suffix} 查看 V2Ray 配置信息
+  ${Green_font_prefix}9.${Font_color_suffix} 检查 V2Ray 版本
+  "
+    echo && read -e -p "请输入数字 [0-9]: " num
+    case "$num" in
+        0) exit 0 ;;
+        1) Install ;;
+        2) Update ;;
+        3) Uninstall ;;
+        4) Start ;;
+        5) Stop ;;
+        6) Restart ;;
+        7) Set ;;
+        8) View ;;
+        9) Check_Version ;;
+        *) echo -e "${Red_font_prefix}请输入正确的数字 [0-9]。${Font_color_suffix}" ;;
     esac
-    echo -e "${GREEN}当前设备架构: ${ARCH_RAW}${NC}"
+}
 
-    # 获取最新版本
-    VERSION=$(curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" \
-        | grep tag_name \
-        | cut -d ":" -f2 \
-        | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
-
-    echo -e "${GREEN}获取到的最新版本: ${VERSION}${NC}"
-
-    echo -e "${GREEN}开始下载 v2ray-core${NC}"
-
-    wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo -e "${RED}下载失败${NC}"; exit 1; }
-
-    echo -e "${GREEN}v2ray-core 下载完成, 开始部署${NC}"
-
-    unzip -o "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo -e "${RED}解压失败${NC}"; exit 1; }
-
-    echo -e "${GREEN}V2ray 升级完成${NC}"
-    systemctl daemon-reload
-    systemctl start v2ray
-    ;;
-
-    3)
-    echo -e "${GREEN}开始卸载 V2ray${NC}"
-
-    # 停止服务
-    systemctl stop v2ray
-
-    # 删除服务文件和二进制文件
-    systemctl disable v2ray
-    rm -f /etc/systemd/system/v2ray.service
-    rm -rf /root/V2ray
-
-    echo -e "${GREEN}V2ray 卸载完成${NC}"
-    ;;
-
-    4)
-    echo -e "${GREEN}开始重新启动 V2ray${NC}"
-    systemctl restart v2ray
-    ;;
-
-    5)
-    echo -e "${GREEN}开始重新加载 V2ray 配置${NC}"
-    systemctl reload v2ray
-    ;;
-
-    6)
-    echo -e "${GREEN}设置 V2ray 开机启动${NC}"
-    systemctl enable v2ray
-    ;;
-
-    7)
-    echo -e "${GREEN}查看 V2ray 启动状态${NC}"
-    check_v2ray_status
-    ;;
-
-    8)
-    echo -e "${GREEN}查看 V2ray 开机启动设置${NC}"
-    check_v2ray_enable
-    ;;
-
-    9)
-    echo -e "${GREEN}设置 V2ray 配置信息${NC}"
-    set_config
-    ;;
-
-    10)
-    echo -e "${GREEN}查看 V2ray 配置信息${NC}"
-    view_config
-    ;;
-
-    0)
-    echo -e "${GREEN}退出脚本${NC}"
-    exit 0
-    ;;
-
-    *)
-    echo -e "${RED}无效选项${NC}"
-    exit 1
-    ;;
-esac
-
-# 显示 V2ray 的当前运行状态和开机自启状态
-echo -e " 运行状态：$(check_v2ray_status)"
-echo -e " 开机自启：$(check_v2ray_enable)"
+menu
