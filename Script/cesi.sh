@@ -31,8 +31,22 @@ check_v2ray_enable() {
     fi
 }
 
+# 检查 V2ray 是否已安装
+check_v2ray_installed() {
+    if [[ -d /root/V2ray && -f /root/V2ray/v2ray ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 # 设置 V2ray 配置信息
 set_config() {
+    if ! check_v2ray_installed; then
+        echo -e "${RED}V2ray 未安装，请先安装 V2ray。${NC}"
+        exit 1
+    fi
+
     echo "请选择配置文件类型："
     echo "=============================="
     echo -e " ${GREEN}1${NC}、 vmess+tcp"
@@ -237,11 +251,16 @@ EOF
 
 # 查看当前 V2ray 配置
 view_config() {
+    if ! check_v2ray_installed; then
+        echo -e "${RED}V2ray 未安装，请先安装 V2ray。${NC}"
+        exit 1
+    fi
+
     if [[ -f /root/V2ray/config.json ]]; then
         echo -e "当前 V2ray 配置文件内容:"
         cat /root/V2ray/config.json
     else
-        echo -e "${RED}配置文件不存在，请安装或配置 V2ray。${NC}"
+        echo -e "${RED}配置文件不存在，请配置 V2ray。${NC}"
     fi
 }
 
