@@ -26,75 +26,8 @@ check_v2ray_enable() {
     fi
 }
 
-echo "V2ray 一键安装管理脚本"
-echo "请选择操作："
-echo "=============================="
-echo " 1、 安装 V2ray"
-echo " 2、 升级 V2ray"
-echo " 3、 卸载 V2ray"
-echo "=============================="
-echo " 4、 重新启动 V2ray"
-echo " 5、 重新加载 V2ray"
-echo " 6、 设置开机启动 V2ray"
-echo " 7、 查看 V2ray 启动状态"
-echo " 8、 查看 V2ray 开机启动设置"
-echo "=============================="
-echo " 0、 退出一键安装脚本"
-read -p "输入数字选择 [0-8]: " action
-
-case $action in
-    1)
-    echo "开始安装 V2ray，请稍后..."
-    mkdir -p /root/V2ray
-    cd /root/V2ray
-
-    ARCH_RAW=$(uname -m)
-    case "${ARCH_RAW}" in
-        'x86_64')    ARCH='64';;
-        'x86' | 'i686' | 'i386')     ARCH='32';;
-        'aarch64' | 'arm64') ARCH='arm64-v8a';;
-        'armv7' | 'armv7l')   ARCH='arm32-v7a';;
-        's390x')    ARCH='s390x';;
-        *)          echo "不支持的架构: ${ARCH_RAW}"; exit 1;;
-    esac
-    echo "当前设备架构: ${ARCH_RAW}"
-
-    VERSION=$(curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" \
-        | grep tag_name \
-        | cut -d ":" -f2 \
-        | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
-
-    echo "获取到的最新版本: ${VERSION}"
-
-    echo "开始下载 v2ray-core"
-
-    wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo "下载失败"; exit 1; }
-
-    echo "v2ray-core 下载完成, 开始部署"
-
-    unzip "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo "解压失败"; exit 1; }
-
-    echo "配置 V2ray"
-
-    cat << EOF > /etc/systemd/system/v2ray.service
-[Unit]
-Description=V2Ray Service
-Documentation=https://www.v2fly.org/
-After=network.target nss-lookup.target
-
-[Service]
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/root/V2ray/v2ray run -config /root/V2ray/config.json
-Restart=on-failure
-RestartPreventExitStatus=23
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
+# 设置 V2ray 配置信息
+set_config() {
     echo "请选择配置文件类型："
     echo "=============================="
     echo " 1、 vmess+tcp"
@@ -123,15 +56,16 @@ EOF
     fi
 
     # WebSocket 路径处理
+    WS_PATH=""
     if [[ $config_choice == 2 || $config_choice == 4 ]]; then
-        read -p "请输入 WebSocket 路径（例如 /v2ray，留空以生成随机路径）: " WS_PATH
+        read -p "请输入 WebSocket 路径（例如 v2ray，留空以生成随机路径）: " WS_PATH
         if [[ -z "$WS_PATH" ]]; then
             WS_PATH=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)
-            echo "生成的 WebSocket 路径: /${WS_PATH}"
-            WS_PATH="/${WS_PATH}"
+            echo "生成的 WebSocket 路径: ${WS_PATH}"
         fi
     fi
 
+    # 创建配置文件
     case $config_choice in
         1)
         cat << EOF > /root/V2ray/config.json
@@ -178,7 +112,7 @@ EOF
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "$WS_PATH"
+          "path": "/$WS_PATH"
         }
       }
     }
@@ -260,7 +194,7 @@ EOF
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "$WS_PATH"
+          "path": "/$WS_PATH"
         },
         "security": "tls",
         "tlsSettings": {
@@ -284,6 +218,76 @@ EOF
 }
 EOF
     esac
+}
+
+# 查看当前 V2ray 配置
+view_config() {
+    if [[ -f /root/V2ray/config.json ]]; then
+        echo "当前 V2ray 配置文件内容:"
+        cat /root/V2ray/config.json
+    else
+        echo "配置文件不存在，请安装或配置 V2ray。"
+    fi
+}
+
+# 主菜单
+echo "V2ray 一键安装管理脚本"
+echo "请选择操作："
+echo "=============================="
+echo " 1、 安装 V2ray"
+echo " 2、 升级 V2ray"
+echo " 3、 卸载 V2ray"
+echo "=============================="
+echo " 4、 重新启动 V2ray"
+echo " 5、 重新加载 V2ray"
+echo " 6、 设置开机启动 V2ray"
+echo " 7、 查看 V2ray 启动状态"
+echo " 8、 查看 V2ray 开机启动设置"
+echo " 9、 设置 V2ray 配置信息"
+echo " 10、 查看 V2ray 配置信息"
+echo "=============================="
+echo " 0、 退出一键安装脚本"
+echo ""
+echo ""
+echo " 运行状态："
+echo " 开机自启："
+
+read -p "输入数字选择 [0-10]: " action
+
+case $action in
+    1)
+    echo "开始安装 V2ray，请稍后..."
+    mkdir -p /root/V2ray
+    cd /root/V2ray
+
+    ARCH_RAW=$(uname -m)
+    case "${ARCH_RAW}" in
+        'x86_64')    ARCH='64';;
+        'x86' | 'i686' | 'i386')     ARCH='32';;
+        'aarch64' | 'arm64') ARCH='arm64-v8a';;
+        'armv7' | 'armv7l')   ARCH='arm32-v7a';;
+        's390x')    ARCH='s390x';;
+        *)          echo "不支持的架构: ${ARCH_RAW}"; exit 1;;
+    esac
+    echo "当前设备架构: ${ARCH_RAW}"
+
+    VERSION=$(curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" \
+        | grep tag_name \
+        | cut -d ":" -f2 \
+        | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
+
+    echo "获取到的最新版本: ${VERSION}"
+
+    echo "开始下载 v2ray-core"
+
+    wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo "下载失败"; exit 1; }
+
+    echo "v2ray-core 下载完成, 开始部署"
+
+    unzip "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo "解压失败"; exit 1; }
+
+    echo "配置 V2ray"
+    set_config
 
     echo "V2ray 安装完成"
     systemctl daemon-reload
@@ -319,11 +323,11 @@ EOF
 
     echo "开始下载 v2ray-core"
 
-    wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip"
+    wget -P /root/V2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo "下载失败"; exit 1; }
 
     echo "v2ray-core 下载完成, 开始部署"
 
-    unzip -o "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip"
+    unzip -o "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo "解压失败"; exit 1; }
 
     echo "V2ray 升级完成"
     systemctl daemon-reload
@@ -367,6 +371,16 @@ EOF
     8)
     echo "查看 V2ray 开机启动设置"
     check_v2ray_enable
+    ;;
+
+    9)
+    echo "设置 V2ray 配置信息"
+    set_config
+    ;;
+
+    10)
+    echo "查看 V2ray 配置信息"
+    view_config
     ;;
 
     0)
