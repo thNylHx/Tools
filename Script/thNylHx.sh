@@ -65,23 +65,9 @@ while true; do
 
         2)
         echo "开始安装 青龙面板"
-        
         # 检查 Docker 环境
         check_docker
         
-        # 执行安装青龙面板的命令
-        docker run -dit \
-        -v $PWD/ql:/ql/data \
-        -p 5700:5700 \
-        -e TZ=Asia/Shanghai \
-        -e ENABLE_HANGUP=true \
-        -e ENABLE_WEB_PANEL=true \
-        --name qinglong \
-        --hostname qinglong \
-        --restart always \
-        whyour/qinglong:latest
-
-        echo "青龙面板 安装完成!"
         ;;
 
         3)
@@ -92,17 +78,13 @@ while true; do
 
         4)
         echo "开始安装 mihomo"
-        # 这里应该插入安装 mihomo 的命令
+        bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo-install.sh)
         echo "mihomo 安装完成!"
         ;;
 
         5)
         echo "开始安装 VMESS"
-        {
-            curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Script/vmess-install.sh | bash
-        } || {
-            echo "VMESS 安装失败，请检查脚本链接或网络连接。"
-        }
+        bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Script/vmess-install.sh)
         echo "VMESS 安装完成!"
         ;;
 
