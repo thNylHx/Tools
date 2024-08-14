@@ -31,22 +31,8 @@ check_v2ray_enable() {
     fi
 }
 
-# 检查 V2ray 是否已安装
-check_v2ray_installed() {
-    if [[ -d /root/V2ray && -f /root/V2ray/v2ray ]]; then
-        return 0
-    else
-        return 1
-    fi
-}
-
 # 设置 V2ray 配置信息
 set_config() {
-    if ! check_v2ray_installed; then
-        echo -e "${RED}V2ray 未安装，请先安装 V2ray。${NC}"
-        exit 1
-    fi
-
     echo "请选择配置文件类型："
     echo "=============================="
     echo -e " ${GREEN}1${NC}、 vmess+tcp"
@@ -85,7 +71,10 @@ set_config() {
             WS_PATH=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)
             echo -e "生成的 WebSocket 路径: ${GREEN}${WS_PATH}${NC}"
         fi
-        WS_PATH="/$WS_PATH"
+    
+        # 确保路径以 "/" 开头
+        WS_PATH="${WS_PATH#/}"  # 移除可能存在的开头斜杠
+        WS_PATH="/$WS_PATH"     # 确保路径以斜杠开头
     fi
 
     # 调试输出
@@ -251,16 +240,11 @@ EOF
 
 # 查看当前 V2ray 配置
 view_config() {
-    if ! check_v2ray_installed; then
-        echo -e "${RED}V2ray 未安装，请先安装 V2ray。${NC}"
-        exit 1
-    fi
-
     if [[ -f /root/V2ray/config.json ]]; then
         echo -e "当前 V2ray 配置文件内容:"
         cat /root/V2ray/config.json
     else
-        echo -e "${RED}配置文件不存在，请配置 V2ray。${NC}"
+        echo -e "${RED}配置文件不存在，请安装或配置 V2ray。${NC}"
     fi
 }
 
@@ -275,8 +259,6 @@ echo "=============================="
 echo -e " ${GREEN}4${NC}、 重新启动 V2ray"
 echo -e " ${GREEN}5${NC}、 重新加载 V2ray"
 echo -e " ${GREEN}6${NC}、 设置开机启动 V2ray"
-echo -e " ${GREEN}7${NC}、 查看 V2ray 启动状态"
-echo -e " ${GREEN}8${NC}、 查看 V2ray 开机启动设置"
 echo -e " ${GREEN}9${NC}、 设置 V2ray 配置信息"
 echo -e " ${GREEN}10${NC}、 查看 V2ray 配置信息"
 echo "=============================="
