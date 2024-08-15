@@ -851,11 +851,21 @@ EOF
 
     fi
 
-    echo -e "${Green_font_prefix}配置完成！${Font_color_suffix}"
+    echo -e "${Green_font_prefix}配置完成，正在启动中...${Font_color_suffix}"
     systemctl daemon-reload
     systemctl enable mihomo
     systemctl start mihomo
     systemctl status mihomo
+
+    # 检查服务状态
+    check_status
+
+    # 显示服务状态
+    if [ "$status" == "running" ]; then
+        echo -e "mihomo 服务启动成功，当前状态: ${Green_font_prefix}正在运行${Font_color_suffix}"
+    else
+        echo -e "mihomo 服务启动失败，当前状态: ${Red_font_prefix}未运行${Font_color_suffix}"
+    fi
 }
 
 # 修改 mihomo 配置
@@ -969,9 +979,9 @@ Restart() {
 
     # 显示服务状态
     if [ "$status" == "running" ]; then
-        echo -e "${Green_font_prefix}mihomo 服务已重启，当前状态: 正在运行${Font_color_suffix}"
+        echo -e "mihomo 服务已重启，当前状态: ${Green_font_prefix}正在运行${Font_color_suffix}"
     else
-        echo -e "${Red_font_prefix}mihomo 服务重启失败，当前状态: 未运行${Font_color_suffix}"
+        echo -e "mihomo 服务重启失败，当前状态: ${Red_font_prefix}未运行${Font_color_suffix}"
     fi
 }
 
