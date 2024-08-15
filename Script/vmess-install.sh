@@ -15,10 +15,10 @@ FILE="/root/V2Ray/v2ray"
 
 clear
 echo -e "================================="
-echo -e "${Green_font_prefix}欢迎使用 V2Ray 一键脚本${Font_color_suffix}"
+echo -e " ${Green_font_prefix}欢迎使用 V2Ray 一键脚本${Font_color_suffix}"
 echo -e " ${Green_font_prefix}作者：${Font_color_suffix}${Red_font_prefix}thNylHx${Font_color_suffix}"
-echo -e "${Green_font_prefix}请保证科学上网已经开启${Font_color_suffix}"
-echo -e "${Green_font_prefix}安装过程中可以按 ctrl+c 强制退出${Font_color_suffix}"
+echo -e " ${Green_font_prefix}请保证科学上网已经开启${Font_color_suffix}"
+echo -e " ${Green_font_prefix}安装过程中可以按 ctrl+c 强制退出${Font_color_suffix}"
 echo -e "================================="
 
 # 检查V2Ray服务状态
