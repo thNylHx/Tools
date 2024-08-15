@@ -16,10 +16,10 @@ VERSION_FILE="/root/mihomo/version.txt"
 
 clear
 echo -e "================================="
-echo -e "${Green_font_prefix}欢迎使用 mihomo 一键脚本${Font_color_suffix}"
+echo -e " ${Green_font_prefix}欢迎使用 mihomo 一键脚本${Font_color_suffix}"
 echo -e " ${Green_font_prefix}作者：${Font_color_suffix}${Red_font_prefix}thNylHx${Font_color_suffix}"
-echo -e "${Green_font_prefix}请保证科学上网已经开启${Font_color_suffix}"
-echo -e "${Green_font_prefix}安装过程中可以按 ctrl+c 强制退出${Font_color_suffix}"
+echo -e " ${Green_font_prefix}请保证科学上网已经开启${Font_color_suffix}"
+echo -e " ${Green_font_prefix}安装过程中可以按 ctrl+c 强制退出${Font_color_suffix}"
 echo -e "================================="
 
 # 检查 mihomo 服务状态
@@ -862,9 +862,9 @@ EOF
 
     # 显示服务状态
     if [ "$status" == "running" ]; then
-        echo -e "mihomo 服务启动成功，当前状态: ${Green_font_prefix}正在运行${Font_color_suffix}"
+        echo -e "${Green_font_prefix}mihomo 服务启动成功，当前状态: 正在运行${Font_color_suffix}"
     else
-        echo -e "mihomo 服务启动失败，当前状态: ${Red_font_prefix}未运行${Font_color_suffix}"
+        echo -e "${Red_font_prefix}mihomo 服务启动失败，当前状态: 未运行${Font_color_suffix}"
     fi
 }
 
@@ -979,9 +979,9 @@ Restart() {
 
     # 显示服务状态
     if [ "$status" == "running" ]; then
-        echo -e "mihomo 服务已重启，当前状态: ${Green_font_prefix}正在运行${Font_color_suffix}"
+        echo -e "${Green_font_prefix}mihomo 服务已重启，当前状态: 正在运行${Font_color_suffix}"
     else
-        echo -e "mihomo 服务重启失败，当前状态: ${Red_font_prefix}未运行${Font_color_suffix}"
+        echo -e "${Red_font_prefix}mihomo 服务重启失败，当前状态: 未运行${Font_color_suffix}"
     fi
 }
 
