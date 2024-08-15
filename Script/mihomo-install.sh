@@ -99,15 +99,21 @@ Install() {
         'aarch64' | 'arm64') ARCH='arm64';;
         'armv7l')   ARCH='armv7';;
         's390x')    ARCH='s390x';;
-        *)          echo "Unsupported architecture: ${ARCH_RAW}"; exit 1;;
+        *)          echo -e "${Red_font_prefix}不支持的架构: ${ARCH_RAW}${Font_color_suffix}"; exit 1;;
     esac
     echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
 
-    VERSION=$(curl -sSL "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt" || { echo "Failed to fetch version"; exit 1; })
-
+    # 获取最新版本信息
+    VERSION=$(curl -sSL "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt" || { echo -e "${Red_font_prefix}获取版本信息失败${Font_color_suffix}"; exit 1; })
     echo -e "${Green_font_prefix}获取到的最新版本: ${VERSION}${Font_color_suffix}"
 
-    FILENAME="mihomo-linux-${ARCH}-compatible-${VERSION}.gz"
+    # 构造文件名
+    case "$ARCH" in
+        'arm64' | 'armv7' | 's390x') FILENAME="mihomo-linux-${ARCH}-alpha-${VERSION}.gz";;
+        'amd64' | '386') FILENAME="mihomo-linux-${ARCH}-compatible-${VERSION}.gz";;
+        *)       FILENAME="mihomo-linux-${ARCH}-compatible-${VERSION}.gz";;
+    esac
+
     echo -e "${Green_font_prefix}开始下载 ${FILENAME}${Font_color_suffix}"
 
     wget -t 3 -T 30 "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${FILENAME}" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
@@ -130,7 +136,7 @@ Install() {
         echo -e "${Red_font_prefix}下载的文件不存在${Font_color_suffix}"
         exit 1
     fi
-    
+
     # 下载 UI
     git clone https://github.com/metacubex/metacubexd.git -b gh-pages /root/mihomo/ui
     
@@ -948,6 +954,7 @@ Main() {
     read -p "请输入选项[0-7]: " num
 
     case "$num" in
+
         1) check_ip_forward; Install ;;
         2) Update ;;
         3) Modify_Configuration ;;
