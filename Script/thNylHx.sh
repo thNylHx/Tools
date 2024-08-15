@@ -10,6 +10,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+clear
 echo "================================="
 echo "欢迎使用一键脚本"
 echo "作者：thNylHx"
