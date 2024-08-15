@@ -436,7 +436,7 @@ Uninstall() {
 }
 
 # 查看已安装的信息
-View_Config() {
+View() {
     if [ -f "/root/Trojan/config.json" ]; then
         echo -e "${Green_font_prefix}当前 Trojan 配置信息：${Font_color_suffix}"
         cat /root/Trojan/config.json
