@@ -124,7 +124,7 @@ Install() {
         # 授权
         chmod 777 mihomo
         
-                # 保存版本信息
+        # 保存版本信息
         echo "$VERSION" > /root/mihomo/version.txt
     else
         echo -e "${Red_font_prefix}下载的文件不存在${Font_color_suffix}"
@@ -168,6 +168,15 @@ Update() {
 
     echo -e "${Green_font_prefix}检查更新中...${Font_color_suffix}"
     cd /root/mihomo
+
+    # 更新 UI 代码
+    echo -e "${Green_font_prefix}正在更新 mihomo UI...${Font_color_suffix}"
+    if git -C /root/mihomo/ui pull -r; then
+        echo -e "${Green_font_prefix}mihomo UI 更新成功。${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}更新 mihomo UI 失败。${Font_color_suffix}"
+        exit 1
+    fi
 
     CURRENT_VERSION=$(get_current_version)
     LATEST_VERSION=$(curl -sSL "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt" || { echo "Failed to fetch version"; exit 1; })
@@ -828,39 +837,71 @@ Modify_Configuration() {
 # 启动 mihomo
 Start() {
     if [ ! -f "$FILE" ]; then
-        echo -e "${Red_font_prefix}mihomo 未安装，无法启动${Font_color_suffix}"
+        echo -e "${Red_font_prefix}mihomo 未安装，无法启动。${Font_color_suffix}"
         exit 1
     fi
 
-    echo -e "${Green_font_prefix}启动 mihomo...${Font_color_suffix}"
-    systemctl enable mihomo
-    systemctl start mihomo
+    if systemctl is-active --quiet mihomo; then
+        echo -e "${Green_font_prefix}mihomo 服务已经在运行中。${Font_color_suffix}"
+        exit 0
+    fi
+
+    echo -e "${Green_font_prefix}启动 mihomo 服务...${Font_color_suffix}"
+    
+    # 尝试启用并启动服务
+    if systemctl enable mihomo && systemctl start mihomo; then
+        echo -e "${Green_font_prefix}mihomo 服务已成功启动。${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}启动 mihomo 服务失败。${Font_color_suffix}"
+        exit 1
+    fi
 }
 
 # 停止 mihomo
 Stop() {
     if [ ! -f "$FILE" ]; then
-        echo -e "${Red_font_prefix}mihomo 未安装，无法停止${Font_color_suffix}"
+        echo -e "${Red_font_prefix}mihomo 未安装，无法停止。${Font_color_suffix}"
         exit 1
     fi
 
-    echo -e "${Green_font_prefix}停止 mihomo...${Font_color_suffix}"
-    systemctl stop mihomo
+    if ! systemctl is-active --quiet mihomo; then
+        echo -e "${Green_font_prefix}mihomo 服务已经停止。${Font_color_suffix}"
+        exit 0
+    fi
+
+    echo -e "${Green_font_prefix}停止 mihomo 服务...${Font_color_suffix}"
+    
+    # 尝试停止服务
+    if systemctl stop mihomo; then
+        echo -e "${Green_font_prefix}mihomo 服务已成功停止。${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}停止 mihomo 服务失败。${Font_color_suffix}"
+        exit 1
+    fi
 }
 
 # 卸载 mihomo
 Uninstall() {
     if [ ! -f "$FILE" ]; then
-        echo -e "${Red_font_prefix}mihomo 未安装，无法卸载${Font_color_suffix}"
+        echo -e "${Red_font_prefix}mihomo 未安装，无法卸载。${Font_color_suffix}"
         exit 1
     fi
 
-    echo -e "${Green_font_prefix}卸载 mihomo 中...${Font_color_suffix}"
-    systemctl stop mihomo.service || true
+    echo -e "${Green_font_prefix}正在卸载 mihomo...${Font_color_suffix}"
+    
+    # 检查并停止服务
+    if systemctl is-active --quiet mihomo; then
+        systemctl stop mihomo.service || true
+    fi
     systemctl disable mihomo.service || true
-    rm -f "$FILE"
-    rm -rf /root/mihomo
-    echo -e "${Green_font_prefix}mihomo 卸载完成${Font_color_suffix}"
+    
+    # 删除文件和目录
+    if rm -f "$FILE" && rm -rf /root/mihomo; then
+        echo -e "${Green_font_prefix}mihomo 已成功卸载。${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}卸载 mihomo 过程中发生错误。${Font_color_suffix}"
+        exit 1
+    fi
 }
 
 # 主菜单
