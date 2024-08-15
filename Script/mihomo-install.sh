@@ -946,7 +946,7 @@ Restart() {
         exit 1
     fi
 
-    echo -e "${Green_font_prefix}重启 mihomo...${Font_color_suffix}"
+    echo -e "${Green_font_prefix}重启 mihomo 服务...${Font_color_suffix}"
 
     # 停止服务
     if systemctl stop mihomo; then
