@@ -895,6 +895,42 @@ Uninstall() {
     fi
 }
 
+# 重启 mihomo
+Restart() {
+    if [ ! -f "$FILE" ]; then
+        echo -e "${Red_font_prefix}mihomo 未安装，无法重启${Font_color_suffix}"
+        exit 1
+    fi
+
+    echo -e "${Green_font_prefix}重启 mihomo...${Font_color_suffix}"
+
+    # 停止服务
+    if systemctl stop mihomo; then
+        echo -e "${Green_font_prefix}mihomo 服务已停止。${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}停止 mihomo 服务失败。${Font_color_suffix}"
+        exit 1
+    fi
+
+    # 启动服务
+    if systemctl start mihomo; then
+        echo -e "${Green_font_prefix}mihomo 服务已启动。${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}启动 mihomo 服务失败。${Font_color_suffix}"
+        exit 1
+    fi
+
+    # 检查服务状态
+    check_status
+
+    # 显示服务状态
+    if [ "$status" == "running" ]; then
+        echo -e "${Green_font_prefix}mihomo 服务已重启，当前状态: 正在运行${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}mihomo 服务重启失败，当前状态: 未运行${Font_color_suffix}"
+    fi
+}
+
 # 主菜单
 Main_Menu() {
     Show_Status
@@ -906,19 +942,21 @@ Main_Menu() {
     echo -e " ${Green_font_prefix}5${Font_color_suffix}、 启动 mihomo"
     echo -e " ${Green_font_prefix}6${Font_color_suffix}、 停止 mihomo"
     echo -e " ${Green_font_prefix}7${Font_color_suffix}、 重启 mihomo"
-    echo -e " ${Green_font_prefix}8${Font_color_suffix}、 退出脚本"
+    echo -e " ${Green_font_prefix}0${Font_color_suffix}、 退出脚本"
     echo -e "================================="
-    read -p "请输入选项[0-8]: " num
+    read -p "请输入选项[0-7]: " num
+
     case "$num" in
         1) check_ip_forward; Install ;;
         2) Update ;;
-        3) Start ;;
-        4) Stop ;;
-        5) Uninstall ;;
-        6) Modify_Configuration ;;
-        0) exit 0 ;;
+        3) Modify_Configuration ;;
+        4) Uninstall ;;
+        5) Start ;;
+        6) Stop ;;
+        7) Restart ;;
+        8) exit 0 ;;
         *) echo -e "${Red_font_prefix}无效选项，请重新选择${Font_color_suffix}" ;;
     esac
 }
 
-Main_Menu
+Main
