@@ -8,10 +8,18 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.0.2"
+sh_ver="1.0.6"
 
 # V2Ray 可执行文件的路径
 FILE="/root/V2ray/v2ray"
+
+clear
+echo -e "================================="
+echo -e "${Green_font_prefix}欢迎使用 V2ray 一键脚本${Font_color_suffix}"
+echo -e "${Green_font_prefix}作者：thNylHx${Font_color_suffix}"
+echo -e "${Green_font_prefix}请保证科学上网已经开启${Font_color_suffix}"
+echo -e "${Green_font_prefix}安装过程中可以按 ctrl+c 强制退出${Font_color_suffix}"
+echo -e "================================="
 
 # 检查V2Ray服务状态
 check_status() {
@@ -33,6 +41,12 @@ get_current_version() {
 
 # 安装V2Ray
 Install() {
+    
+    if [ -f "$FILE" ]; then
+        echo -e "${Green_font_prefix}V2Ray 已经安装。${Font_color_suffix}"
+        exit 0
+    fi
+    
     echo -e "${Green_font_prefix}安装 V2Ray 中...${Font_color_suffix}"
     mkdir -p /root/V2ray
     cd /root/V2ray
@@ -443,10 +457,23 @@ request_cf_cert() {
     echo -e "${Green_font_prefix}Cloudflare 证书申请完成！${Font_color_suffix}"
 }
 
+Show_Status() {
+    if [ ! -f "$FILE" ]; then
+        echo -e " 状态: ${Red_font_prefix}V2ray 未安装${Font_color_suffix}"
+    else
+        check_status
+        if [ "$status" == "running" ]; then
+            echo -e " 状态: ${Green_font_prefix}V2ray 运行中${Font_color_suffix}"
+        else
+            echo -e " 状态: ${Red_font_prefix}V2ray 未运行${Font_color_suffix}"
+        fi
+    fi
+}
+
 # 主菜单
 Main() {
-        echo "=============================="
-        echo "V2Ray 管理脚本 ${sh_ver}"
+        echo -e " 版本：${Green_font_prefix}${sh_ver}${Font_color_suffix}"
+        Show_Status
         echo "=============================="
         echo -e " ${Green_font_prefix}1${Font_color_suffix}、 安装 V2Ray"
         echo -e " ${Green_font_prefix}2${Font_color_suffix}、 更新 V2Ray"
@@ -459,7 +486,7 @@ Main() {
         echo -e " ${Green_font_prefix}9${Font_color_suffix}、 申请证书"
         echo -e " ${Green_font_prefix}0${Font_color_suffix}、 退出"
         echo "=============================="
-        read -p "请输入数字选择: " num
+        read -p "请输入数字选择[0-9]: " num
         case "$num" in
             1)
                 Install
