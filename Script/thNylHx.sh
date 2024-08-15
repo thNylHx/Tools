@@ -4,6 +4,12 @@
 
 set -e -o pipefail
 
+# 定义颜色代码
+Green_font_prefix="\033[32m"
+Red_font_prefix="\033[31m"
+Font_color_suffix="\033[0m"
+
+
 # 检查 root 权限
 if [[ $EUID -ne 0 ]]; then
     echo "请以 root 权限运行此脚本。"
@@ -12,11 +18,11 @@ fi
 
 clear
 echo "================================="
-echo "欢迎使用一键脚本"
-echo "作者：thNylHx"
-echo "请保证科学上网已经开启"
-echo "安装过程中可以按 ctrl+c 强制退出"
-echo "================================="
+echo -e " ${Green_font_prefix}欢迎使用一键脚本${Font_color_suffix}"
+echo -e " ${Green_font_prefix}作者：${Font_color_suffix}${Red_font_prefix}thNylHx${Font_color_suffix}"
+echo -e " ${Green_font_prefix}请保证科学上网已经开启${Font_color_suffix}"
+echo -e " ${Green_font_prefix}安装过程中可以按 ctrl+c 强制退出${Font_color_suffix}"
+echo -e "================================="
 
 # 检查 Docker 环境
 check_docker() {
