@@ -470,10 +470,10 @@ Main() {
     echo -e " ${Green_font_prefix}4${Font_color_suffix}、 卸载 Trojan"
     echo -e " ${Green_font_prefix}5${Font_color_suffix}、 启动 Trojan"
     echo -e " ${Green_font_prefix}6${Font_color_suffix}、 停止 Trojan"
-    echo -e " ${Green_font_prefix}7${Font_color_suffix}、 重启 Trojan"        
+    echo -e " ${Green_font_prefix}7${Font_color_suffix}、 重启 Trojan"
     echo -e " ${Green_font_prefix}8${Font_color_suffix}、 查看配置"
     echo -e " ${Green_font_prefix}9${Font_color_suffix}、 申请证书"
-    echo -e " ${Green_font_prefix}0${Font_color_suffix}、 退出"
+    echo -e " ${Green_font_prefix}0${Font_color_suffix}、 退出脚本"
     echo "=============================="
     read -p "请输入数字选择[0-9]: " num
 
