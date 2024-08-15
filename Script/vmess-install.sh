@@ -513,12 +513,26 @@ Uninstall() {
     echo -e "${Green_font_prefix}V2Ray 已成功卸载。${Font_color_suffix}"
 }
 
-# 查看配置
+# 查看已安装的信息
 View() {
     if [ -f "/root/V2Ray/config.json" ]; then
+        echo -e "${Green_font_prefix}当前 V2Ray 配置信息：${Font_color_suffix}"
         cat /root/V2Ray/config.json
     else
-        echo -e "${Red_font_prefix}配置文件不存在。${Font_color_suffix}"
+        echo -e "${Red_font_prefix}未找到 V2Ray 配置文件。${Font_color_suffix}"
+    fi
+}
+
+Show_Status() {
+    if [ ! -f "$FILE" ]; then
+        echo -e " 状态: ${Red_font_prefix}V2Ray 未安装${Font_color_suffix}"
+    else
+        check_status
+        if [ "$status" == "running" ]; then
+            echo -e " 状态: ${Green_font_prefix}V2Ray 运行中${Font_color_suffix}"
+        else
+            echo -e " 状态: ${Red_font_prefix}V2Ray 未运行${Font_color_suffix}"
+        fi
     fi
 }
 
