@@ -954,7 +954,7 @@ Main_Menu() {
         5) Start ;;
         6) Stop ;;
         7) Restart ;;
-        8) exit 0 ;;
+        0) exit 0 ;;
         *) echo -e "${Red_font_prefix}无效选项，请重新选择${Font_color_suffix}" ;;
     esac
 }
