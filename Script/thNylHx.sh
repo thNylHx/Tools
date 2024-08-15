@@ -90,7 +90,7 @@ while true; do
 
         6)
         echo "开始安装 Trojan-go"
-        # 这里应该插入安装 Trojan-go 的命令
+        bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Script/trojan-install.sh)
         echo "Trojan-go 安装完成!"
         ;;
 
