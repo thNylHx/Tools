@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# wget -O trojan-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/trojan-install.sh && chmod +x trojan-install.sh && ./trojan-install.sh
+
 # 定义颜色代码
 Green_font_prefix="\033[32m"
 Red_font_prefix="\033[31m"
