@@ -932,7 +932,8 @@ Restart() {
 }
 
 # 主菜单
-Main_Menu() {
+# 函数定义在这里
+Main() {
     Show_Status
     echo -e "================================="
     echo -e " ${Green_font_prefix}1${Font_color_suffix}、 安装 mihomo"
@@ -959,4 +960,5 @@ Main_Menu() {
     esac
 }
 
-Main_Menu
+# 调用主菜单函数
+Main
