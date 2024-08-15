@@ -169,15 +169,6 @@ Update() {
     echo -e "${Green_font_prefix}检查更新中...${Font_color_suffix}"
     cd /root/mihomo
 
-    # 更新 UI 代码
-    echo -e "${Green_font_prefix}正在更新 mihomo UI...${Font_color_suffix}"
-    if git -C /root/mihomo/ui pull -r; then
-        echo -e "${Green_font_prefix}mihomo UI 更新成功。${Font_color_suffix}"
-    else
-        echo -e "${Red_font_prefix}更新 mihomo UI 失败。${Font_color_suffix}"
-        exit 1
-    fi
-
     CURRENT_VERSION=$(get_current_version)
     LATEST_VERSION=$(curl -sSL "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt" || { echo "Failed to fetch version"; exit 1; })
 
