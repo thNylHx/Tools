@@ -16,7 +16,7 @@ FILE="/root/Trojan/trojan-go"
 clear
 echo -e "================================="
 echo -e " ${Green_font_prefix}欢迎使用 Trojan 一键脚本${Font_color_suffix}"
-echo -e " ${Green_font_prefix}作者：thNylHx${Font_color_suffix}"
+echo -e " ${Green_font_prefix}作者：${Font_color_suffix}${Red_font_prefix}thNylHx${Font_color_suffix}"
 echo -e " ${Green_font_prefix}请保证科学上网已经开启${Font_color_suffix}"
 echo -e " ${Green_font_prefix}安装过程中可以按 ctrl+c 强制退出${Font_color_suffix}"
 echo -e " ${Red_font_prefix}特别提醒：安装 Trojan 前，建议先申请证书！${Font_color_suffix}"
