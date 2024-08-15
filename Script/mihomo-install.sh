@@ -83,6 +83,8 @@ Show_Status() {
 
 # 安装 mihomo
 Install() {
+    FILE="/root/mihomo/mihomo"
+    
     if [ -f "$FILE" ]; then
         echo -e "${Green_font_prefix}mihomo 已经安装。${Font_color_suffix}"
         exit 0
@@ -90,7 +92,7 @@ Install() {
 
     echo -e "${Green_font_prefix}安装 mihomo 中...${Font_color_suffix}"
     mkdir -p /root/mihomo
-    cd /root/mihomo
+    cd /root/mihomo || { echo -e "${Red_font_prefix}切换到 /root/mihomo 目录失败${Font_color_suffix}"; exit 1; }
 
     ARCH_RAW=$(uname -m)
     case "${ARCH_RAW}" in
@@ -109,9 +111,9 @@ Install() {
 
     # 构造文件名
     case "$ARCH" in
-        'arm64' | 'armv7' | 's390x') FILENAME="mihomo-linux-${ARCH}-alpha-${VERSION}.gz";;
+        'arm64' | 'armv7' | 's390x') FILENAME="mihomo-linux-${ARCH}-${VERSION}.gz";;
         'amd64' | '386') FILENAME="mihomo-linux-${ARCH}-compatible-${VERSION}.gz";;
-        *)       FILENAME="mihomo-linux-${ARCH}-compatible-${VERSION}.gz";;
+        *)       echo -e "${Red_font_prefix}不支持的架构: ${ARCH}${Font_color_suffix}"; exit 1;;
     esac
 
     echo -e "${Green_font_prefix}开始下载 ${FILENAME}${Font_color_suffix}"
@@ -124,14 +126,26 @@ Install() {
         # 解压 
         gunzip "$FILENAME" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
 
-        # 重命名 mihomo
-        mv "mihomo-linux-${ARCH}-compatible-${VERSION}" mihomo
+        # 根据架构重命名 mihomo 文件
+        case "$ARCH" in
+            'arm64' | 'armv7' | 's390x')
+                mv "mihomo-linux-${ARCH}-${VERSION}" mihomo
+                ;;
+            'amd64' | '386')
+                mv "mihomo-linux-${ARCH}-compatible-${VERSION}" mihomo
+                ;;
+            *)
+                echo -e "${Red_font_prefix}不支持的架构: ${ARCH}${Font_color_suffix}"
+                exit 1
+                ;;
+        esac
         
         # 授权
         chmod 777 mihomo
         
         # 保存版本信息
         echo "$VERSION" > /root/mihomo/version.txt
+        echo -e "${Green_font_prefix}mihomo 安装成功${Font_color_suffix}"
     else
         echo -e "${Red_font_prefix}下载的文件不存在${Font_color_suffix}"
         exit 1
@@ -175,8 +189,10 @@ Update() {
     echo -e "${Green_font_prefix}检查更新中...${Font_color_suffix}"
     cd /root/mihomo
 
-    CURRENT_VERSION=$(get_current_version)
-    LATEST_VERSION=$(curl -sSL "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt" || { echo "Failed to fetch version"; exit 1; })
+    # 获取当前版本
+    CURRENT_VERSION=$(cat version.txt)
+    # 获取最新版本
+    LATEST_VERSION=$(curl -sSL "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt" || { echo -e "${Red_font_prefix}获取版本信息失败${Font_color_suffix}"; exit 1; })
 
     if [ "$CURRENT_VERSION" == "$LATEST_VERSION" ]; then
         echo -e "${Green_font_prefix}当前版本: ${CURRENT_VERSION}${Font_color_suffix}"
@@ -189,47 +205,60 @@ Update() {
     echo -e "${Green_font_prefix}最新版本: ${LATEST_VERSION}${Font_color_suffix}"
 
     read -p "是否更新到最新版本？(y/n): " confirm
-    if [[ "$confirm" == "y" ]]; then
-        echo -e "${Green_font_prefix}开始更新 mihomo...${Font_color_suffix}"
+    case $confirm in
+        [Yy]* )
+            echo -e "${Green_font_prefix}开始更新 mihomo...${Font_color_suffix}"
+            ARCH_RAW=$(uname -m)
+            case "${ARCH_RAW}" in
+                'x86_64') ARCH='amd64';;
+                'x86' | 'i686' | 'i386') ARCH='386';;
+                'aarch64' | 'arm64') ARCH='arm64';;
+                'armv7' | 'armv7l') ARCH='armv7';;
+                's390x') ARCH='s390x';;
+                *) echo -e "${Red_font_prefix}不支持的架构: ${ARCH_RAW}${Font_color_suffix}"; exit 1;;
+            esac
 
-        # 定义文件名和下载链接
-        ARCH_RAW=$(uname -m)
-        case "${ARCH_RAW}" in
-            'x86_64')    ARCH='amd64';;
-            'x86' | 'i686' | 'i386')     ARCH='386';;
-            'aarch64' | 'arm64') ARCH='arm64';;
-            'armv7l')   ARCH='armv7';;
-            's390x')    ARCH='s390x';;
-            *)          echo "Unsupported architecture: ${ARCH_RAW}"; exit 1;;
-        esac
-        FILENAME="mihomo-linux-${ARCH}-compatible-${LATEST_VERSION}.gz"
-        DOWNLOAD_URL="https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${FILENAME}"
+            # 构造文件名和下载链接
+            case "$ARCH" in
+                'arm64' | 'armv7' | 's390x') FILENAME="mihomo-linux-${ARCH}-${LATEST_VERSION}.gz";;
+                'amd64' | '386') FILENAME="mihomo-linux-${ARCH}-compatible-${LATEST_VERSION}.gz";;
+                *)       FILENAME="mihomo-linux-${ARCH}-compatible-${LATEST_VERSION}.gz";;
+            esac
 
-        echo -e "${Green_font_prefix}下载 ${FILENAME}...${Font_color_suffix}"
-        wget -t 3 -T 30 "${DOWNLOAD_URL}" -O "${FILENAME}" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
+            echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
 
-        if [ -f "$FILENAME" ]; then
+            DOWNLOAD_URL="https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${FILENAME}"
+
+            echo -e "${Green_font_prefix}开始下载最新版本 ${FILENAME}...${Font_color_suffix}"
+
+            wget -t 3 -T 30 "${DOWNLOAD_URL}" -O "${FILENAME}" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
+
             echo -e "${Green_font_prefix}${FILENAME} 下载完成，开始更新${Font_color_suffix}"
+
             gunzip "$FILENAME" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
-            mv "mihomo-linux-${ARCH}-compatible-${LATEST_VERSION}" "$FILE" || { echo -e "${Red_font_prefix}移动文件失败${Font_color_suffix}"; exit 1; }
+
+            mv "mihomo-linux-${ARCH}-${LATEST_VERSION}" mihomo || mv "mihomo-linux-${ARCH}-compatible-${LATEST_VERSION}" mihomo || { echo -e "${Red_font_prefix}移动文件失败${Font_color_suffix}"; exit 1; }
+
             # 授权
             chmod 777 mihomo
 
             # 更新版本信息
             echo "$LATEST_VERSION" > /root/mihomo/version.txt
 
-            echo -e "${Green_font_prefix}mihomo 更新完成！${Font_color_suffix}"
-        else
-            echo -e "${Red_font_prefix}下载的文件不存在${Font_color_suffix}"
+            # 重启 mihomo 服务
+            systemctl restart mihomo
+
+            echo -e "${Green_font_prefix}更新完成，当前版本已更新为 v${LATEST_VERSION}${Font_color_suffix}"
+            ;;
+        [Nn]* )
+            echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
+            ;;
+        * )
+            echo -e "${Red_font_prefix}无效的输入。${Font_color_suffix}"
             exit 1
-        fi
-
-    else
-        echo -e "${Red_font_prefix}已取消更新${Font_color_suffix}"
-        exit 0
-    fi
+            ;;
+    esac
 }
-
 
 # 配置 mihomo
 Configure() {
