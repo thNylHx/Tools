@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## bash <(curl -fsSL https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo-install.sh)
+## wget -O mihomo-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo-install.sh && chmod +x mihomo-install.sh && ./mihomo-install.sh
 
 set -e -o pipefail
 
