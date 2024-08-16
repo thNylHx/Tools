@@ -71,7 +71,7 @@ check_ip_forward() {
 
     # 如果设置不存在，则添加并执行 sysctl -p
     echo "$IPV4_FORWARD" >> "$SYSCTL_CONF"
-    echo "${Green_font_prefix}IPV4 转发开启成功。${Font_color_suffix}"
+    echo -e "${Green_font_prefix}IP 转发开启成功。${Font_color_suffix}"
 
     # 立即生效
     sysctl -p
