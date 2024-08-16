@@ -10,9 +10,10 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.0.8"
+sh_ver="1.0.9"
 FILE="/root/mihomo/mihomo"
 VERSION_FILE="/root/mihomo/version.txt"
+SYSCTL_CONF="/etc/sysctl.conf"
 
 clear
 echo -e "================================="
@@ -29,30 +30,6 @@ check_status() {
     else
         status="stopped"
     fi
-}
-
-# 检查和设置系 IP 转发参数
-check_ip_forward() {
-    SYSCTL_CONFIG="/etc/sysctl.conf"
-    
-    # 检查并设置 net.ipv4.ip_forward
-    if ! grep -q "^net.ipv4.ip_forward = 1" $SYSCTL_CONFIG; then
-        echo -e "${Green_font_prefix}启用 net.ipv4.ip_forward${Font_color_suffix}"
-        echo "net.ipv4.ip_forward = 1" >> $SYSCTL_CONFIG
-    else
-        echo -e "${Green_font_prefix}net.ipv4.ip_forward 已启用，跳过${Font_color_suffix}"
-    fi
-
-    # 检查并设置 net.ipv6.conf.all.forwarding
-    if ! grep -q "^net.ipv6.conf.all.forwarding = 1" $SYSCTL_CONFIG; then
-        echo -e "${Green_font_prefix}启用 net.ipv6.conf.all.forwarding${Font_color_suffix}"
-        echo "net.ipv6.conf.all.forwarding = 1" >> $SYSCTL_CONFIG
-    else
-        echo -e "${Green_font_prefix}net.ipv6.conf.all.forwarding 已启用，跳过${Font_color_suffix}"
-    fi
-
-    # 应用更改
-    sysctl -p
 }
 
 # 获取当前版本
@@ -79,6 +56,25 @@ Show_Status() {
 
     echo -e " 版本： ${Green_font_prefix}${sh_ver}${Font_color_suffix}"
     echo -e " 状态： ${status}"
+}
+
+# 检查和设置 IP 转发参数
+check_ip_forward() {
+    # 要检查的设置
+    local IPV4_FORWARD="net.ipv4.ip_forward = 1"
+
+    # 检查是否已存在 net.ipv4.ip_forward
+    if grep -q "^${IPV4_FORWARD}$" "$SYSCTL_CONF"; then
+        # 不执行 sysctl -p，因为设置已经存在
+        return
+    fi
+
+    # 如果设置不存在，则添加并执行 sysctl -p
+    echo "$IPV4_FORWARD" >> "$SYSCTL_CONF"
+    echo "${Green_font_prefix}IPV4 转发开启成功。${Font_color_suffix}"
+
+    # 立即生效
+    sysctl -p
 }
 
 # 安装 mihomo
@@ -851,7 +847,7 @@ EOF
 
     fi
 
-    echo -e "${Green_font_prefix}配置完成，正在启动中...${Font_color_suffix}"
+    echo -e "${Green_font_prefix}mihomo 配置完成，正在启动中...${Font_color_suffix}"
     systemctl daemon-reload
     systemctl enable mihomo
     systemctl start mihomo
@@ -862,9 +858,9 @@ EOF
 
     # 显示服务状态
     if [ "$status" == "running" ]; then
-        echo -e "${Green_font_prefix}mihomo 服务启动成功，当前状态: 正在运行${Font_color_suffix}"
+        echo -e "${Green_font_prefix}当前状态：运行中${Font_color_suffix}"
     else
-        echo -e "${Red_font_prefix}mihomo 服务启动失败，当前状态: 未运行${Font_color_suffix}"
+        echo -e "${Red_font_prefix}当前状态：未运行${Font_color_suffix}"
     fi
 }
 
@@ -875,157 +871,138 @@ Modify_Configuration() {
         exit 1
     fi
 
-    echo -e "${Green_font_prefix}修改 mihomo 配置...${Font_color_suffix}"
+    echo -e "${Green_font_prefix} mihomo 配置修改${Font_color_suffix}"
     Configure
 }
 
 # 启动 mihomo
 Start() {
     if [ ! -f "$FILE" ]; then
-        echo -e "${Red_font_prefix}mihomo 未安装，无法启动。${Font_color_suffix}"
+        echo -e "${Red_font_prefix}mihomo 未安装，无法启动${Font_color_suffix}"
         exit 1
     fi
 
     if systemctl is-active --quiet mihomo; then
-        echo -e "${Green_font_prefix}mihomo 服务已经在运行中。${Font_color_suffix}"
+        echo -e "${Green_font_prefix}mihomo 已经在运行中${Font_color_suffix}"
         exit 0
     fi
 
-    echo -e "${Green_font_prefix}启动 mihomo 服务...${Font_color_suffix}"
+    echo -e "${Green_font_prefix}mihomo 启动中${Font_color_suffix}"
     
     # 尝试启用并启动服务
     if systemctl enable mihomo && systemctl start mihomo; then
-        echo -e "${Green_font_prefix}mihomo 服务已成功启动。${Font_color_suffix}"
+        echo -e "${Green_font_prefix}mihomo 启动成功${Font_color_suffix}"
     else
-        echo -e "${Red_font_prefix}启动 mihomo 服务失败。${Font_color_suffix}"
+        echo -e "${Red_font_prefix}mihomo 启动失败${Font_color_suffix}"
         exit 1
     fi
 
     # 检查并显示服务状态
     if systemctl is-active --quiet mihomo; then
-        echo -e "${Green_font_prefix}mihomo 服务已重启，当前状态: 正在运行。${Font_color_suffix}"
+        echo -e "${Green_font_prefix}当前状态：运行中${Font_color_suffix}"
     else
-        echo -e "${Red_font_prefix}mihomo 服务重启失败，当前状态: 未运行。${Font_color_suffix}"
+        echo -e "${Red_font_prefix}当前状态：未运行${Font_color_suffix}"
         exit 1
     fi
-
-    # 清理环境变量
-    unset SERVICE_FILE INSTALL_DIR
 }
 
 # 停止 mihomo
 Stop() {
     if [ ! -f "$FILE" ]; then
-        echo -e "${Red_font_prefix}mihomo 未安装，无法停止。${Font_color_suffix}"
+        echo -e "${Red_font_prefix}mihomo 未安装，无法停止${Font_color_suffix}"
         exit 1
     fi
 
     if ! systemctl is-active --quiet mihomo; then
-        echo -e "${Green_font_prefix}mihomo 服务已经停止。${Font_color_suffix}"
+        echo -e "${Green_font_prefix}mihomo 已经停止${Font_color_suffix}"
         exit 0
     fi
 
-    echo -e "${Green_font_prefix}停止 mihomo 服务...${Font_color_suffix}"
+    echo -e "${Green_font_prefix}mihomo 停止中${Font_color_suffix}"
     
     # 尝试停止服务
     if systemctl stop mihomo; then
-        echo -e "${Green_font_prefix}mihomo 服务已成功停止。${Font_color_suffix}"
+        echo -e "${Green_font_prefix}mihomo 成功停止${Font_color_suffix}"
     else
-        echo -e "${Red_font_prefix}停止 mihomo 服务失败。${Font_color_suffix}"
+        echo -e "${Red_font_prefix}mihomo 停止失败${Font_color_suffix}"
         exit 1
     fi
+    
+    # 检查并显示服务状态
+    if systemctl is-active --quiet mihomo; then
+        echo -e "${Green_font_prefix}当前状态：运行中${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}当前状态：未运行${Font_color_suffix}"
+        exit 1
+    fi
+    
 }
 
 # 卸载 mihomo
 Uninstall() {
-    # 关键路径
-    SERVICE_FILE="/etc/systemd/system/mihomo.service"
-    INSTALL_DIR="/root/mihomo"
-
-    # 检查是否已安装 mihomo
+    # 检查服务文件是否存在以判断是否安装
     if [ ! -f "$FILE" ]; then
-        echo -e "${Red_font_prefix}mihomo 未安装，无法卸载。${Font_color_suffix}"
+        echo -e "${Red_font_prefix}mihomo 未安装，无法卸载${Font_color_suffix}"
         exit 1
     fi
 
-    echo -e "${Green_font_prefix}正在卸载 mihomo...${Font_color_suffix}"
+    echo -e "${Green_font_prefix}mihomo 开始卸载${Font_color_suffix}"
 
-    # 检查并停止服务
-    if systemctl is-active --quiet mihomo; then
-        systemctl stop mihomo.service || {
-            echo -e "${Red_font_prefix}停止 mihomo 服务失败。${Font_color_suffix}"
-            exit 1
-        }
-    fi
-    
-    # 禁用并删除服务
-    if systemctl is-enabled --quiet mihomo; then
-        systemctl disable mihomo.service || {
-            echo -e "${Red_font_prefix}禁用 mihomo 服务失败。${Font_color_suffix}"
-            exit 1
-        }
-    fi
-    if [ -f "$SERVICE_FILE" ]; then
-        rm -f "$SERVICE_FILE" || {
-            echo -e "${Red_font_prefix}删除 mihomo 服务文件失败。${Font_color_suffix}"
-            exit 1
-        }
-        systemctl daemon-reload || {
-            echo -e "${Red_font_prefix}重新加载 systemd 守护程序失败。${Font_color_suffix}"
-            exit 1
-        }
+    # 停止并禁用服务，如果失败则忽略错误
+    systemctl stop mihomo || true
+    systemctl disable mihomo || true
+
+    # 删除服务文件和安装目录
+    rm -f "$FILE"
+    rm -f /etc/systemd/system/mihomo.service
+    rm -rf /root/mihomo
+
+    # 重新加载 systemd 守护程序
+    systemctl daemon-reload
+
+    # 检查卸载是否成功
+    if [ ! -f "$FILE" ] && [ ! -d "/root/mihomo" ]; then
+        echo -e "${Green_font_prefix}mihomo 卸载完成${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}卸载过程中出现问题，请手动检查${Font_color_suffix}"
     fi
     
     # 删除文件和目录
     if rm -f "$FILE" && rm -rf "$INSTALL_DIR"; then
-        echo -e "${Green_font_prefix}mihomo 已成功卸载。${Font_color_suffix}"
+        echo -e "${Green_font_prefix}mihomo 成功卸载${Font_color_suffix}"
     else
-        echo -e "${Red_font_prefix}卸载 mihomo 过程中发生错误。${Font_color_suffix}"
+        echo -e "${Red_font_prefix}mihomo 卸载过程中发生错误${Font_color_suffix}"
         exit 1
     fi
-
-    # 清理环境变量
-    unset SERVICE_FILE INSTALL_DIR FILE
 }
 
 # 重启 mihomo
 Restart() {
-    # 关键路径
-    SERVICE_FILE="/etc/systemd/system/mihomo.service"
-    INSTALL_DIR="/root/mihomo"
-
     # 检查是否已安装 mihomo
-    if [ ! -f "$SERVICE_FILE" ] || [ ! -d "$INSTALL_DIR" ]; then
-        echo -e "${Red_font_prefix}mihomo 未安装，无法重启。${Font_color_suffix}"
+    if [ ! -f "$FILE" ]; then
+        echo -e "${Red_font_prefix}mihomo 未安装，无法重启${Font_color_suffix}"
         exit 1
     fi
 
-    echo -e "${Green_font_prefix}正在重启 mihomo 服务...${Font_color_suffix}"
-
-    # 停止服务
-    if ! systemctl stop mihomo; then
-        echo -e "${Red_font_prefix}停止 mihomo 服务失败。${Font_color_suffix}"
+    echo -e "${Green_font_prefix}mihomo 准备重启${Font_color_suffix}"
+    
+    # 重启服务
+    if systemctl restart mihomo; then
+        echo -e "${Green_font_prefix}mihomo 重启中${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}mihomo 重启失败${Font_color_suffix}"
         exit 1
     fi
-    echo -e "${Green_font_prefix}mihomo 服务已停止。${Font_color_suffix}"
-
-    # 启动服务
-    if ! systemctl start mihomo; then
-        echo -e "${Red_font_prefix}启动 mihomo 服务失败。${Font_color_suffix}"
-        exit 1
-    fi
-    echo -e "${Green_font_prefix}mihomo 服务已启动。${Font_color_suffix}"
+    
+    echo -e "${Green_font_prefix}mihomo 重启完成${Font_color_suffix}"
 
     # 检查并显示服务状态
     if systemctl is-active --quiet mihomo; then
-        echo -e "${Green_font_prefix}mihomo 服务已重启，当前状态: 正在运行。${Font_color_suffix}"
+        echo -e "${Green_font_prefix}当前状态：运行中${Font_color_suffix}"
     else
-        echo -e "${Red_font_prefix}mihomo 服务重启失败，当前状态: 未运行。${Font_color_suffix}"
+        echo -e "${Red_font_prefix}当前状态：未运行${Font_color_suffix}"
         exit 1
     fi
-
-    # 清理环境变量
-    unset SERVICE_FILE INSTALL_DIR
 }
 
 # 主菜单
