@@ -15,6 +15,8 @@ Font_color_suffix="\033[0m"
 
 # 脚本版本
 sh_ver="1.1.0"
+
+# 全局变量
 FILE="/root/mihomo/mihomo"
 VERSION_FILE="/root/mihomo/version.txt"
 SYSCTL_CONF="/etc/sysctl.conf"
