@@ -1,16 +1,20 @@
 #!/bin/bash
+#!name = mihomo 一键脚本
+#!desc = 支持，安装、更新、卸载等
+#!date = 2024-08-17 08:00
+#!author = thNylHx ChatGPT
 
 ## wget -O mihomo-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo-install.sh && chmod +x mihomo-install.sh && ./mihomo-install.sh
 
 set -e -o pipefail
 
-# 定义颜色代码
+# 颜色代码
 Green_font_prefix="\033[32m"
 Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
-# 定义脚本版本
-sh_ver="1.0.9"
+# 脚本版本
+sh_ver="1.1.0"
 FILE="/root/mihomo/mihomo"
 VERSION_FILE="/root/mihomo/version.txt"
 SYSCTL_CONF="/etc/sysctl.conf"
@@ -32,7 +36,7 @@ check_status() {
     fi
 }
 
-# 获取当前版本
+# 获取当前安装版本
 get_current_version() {
     if [ -f "$VERSION_FILE" ]; then
         cat "$VERSION_FILE"
@@ -41,7 +45,7 @@ get_current_version() {
     fi
 }
 
-# 显示状态
+# 显示当前脚本和服务状态
 Show_Status() {
     if [ ! -f "$FILE" ]; then
         status="${Red_font_prefix}未安装${Font_color_suffix}"
@@ -63,7 +67,7 @@ check_ip_forward() {
     # 要检查的设置
     local IPV4_FORWARD="net.ipv4.ip_forward = 1"
 
-    # 检查是否已存在 net.ipv4.ip_forward
+    # 检查是否已存在 net.ipv4.ip_forward = 1
     if grep -q "^${IPV4_FORWARD}$" "$SYSCTL_CONF"; then
         # 不执行 sysctl -p，因为设置已经存在
         return
@@ -71,24 +75,21 @@ check_ip_forward() {
 
     # 如果设置不存在，则添加并执行 sysctl -p
     echo "$IPV4_FORWARD" >> "$SYSCTL_CONF"
-    echo -e "${Green_font_prefix}IP 转发开启成功。${Font_color_suffix}"
-
     # 立即生效
     sysctl -p
+    echo -e "${Green_font_prefix}IP 转发开启成功。${Font_color_suffix}"
 }
 
 # 安装 mihomo
 Install() {
-    FILE="/root/mihomo/mihomo"
-    
+    # 检查是否安装 mihomo 
     if [ -f "$FILE" ]; then
-        echo -e "${Green_font_prefix}mihomo 已经安装。${Font_color_suffix}"
+        echo -e "${Green_font_prefix}mihomo 已经安装${Font_color_suffix}"
         exit 0
     fi
-
-    echo -e "${Green_font_prefix}安装 mihomo 中...${Font_color_suffix}"
-    mkdir -p /root/mihomo
-    cd /root/mihomo || { echo -e "${Red_font_prefix}切换到 /root/mihomo 目录失败${Font_color_suffix}"; exit 1; }
+    
+    echo -e "${Green_font_prefix}开始安装 mihomo${Font_color_suffix}"
+    mkdir -p /root/mihomo && cd /root/mihomo || { echo -e "${Red_font_prefix}创建或进入 /root/mihomo 目录失败${Font_color_suffix}"; exit 1; }
 
     ARCH_RAW=$(uname -m)
     case "${ARCH_RAW}" in
@@ -99,10 +100,12 @@ Install() {
         's390x')    ARCH='s390x';;
         *)          echo -e "${Red_font_prefix}不支持的架构: ${ARCH_RAW}${Font_color_suffix}"; exit 1;;
     esac
-    echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
+
+    echo -e "${Green_font_prefix}获取到当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
 
     # 获取最新版本信息
     VERSION=$(curl -sSL "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt" || { echo -e "${Red_font_prefix}获取版本信息失败${Font_color_suffix}"; exit 1; })
+    FILENAME="mihomo-linux-${ARCH}-${VERSION}.gz"
     echo -e "${Green_font_prefix}获取到的最新版本: ${VERSION}${Font_color_suffix}"
 
     # 构造文件名
@@ -134,9 +137,9 @@ Install() {
         
         # 授权
         chmod 777 mihomo
-        
+
         # 保存版本信息
-        echo "$VERSION" > /root/mihomo/version.txt
+        echo "$VERSION" > "$VERSION_FILE"
         echo -e "${Green_font_prefix}mihomo 安装成功${Font_color_suffix}"
     else
         echo -e "${Red_font_prefix}下载的文件不存在${Font_color_suffix}"
@@ -176,32 +179,32 @@ Update() {
     FILE="/root/mihomo/mihomo"  # 定义 FILE 变量
 
     if [ ! -f "$FILE" ]; then
-        echo -e "${Red_font_prefix}mihomo 未安装，无法更新${Font_color_suffix}"
+        echo -e "${Red_font_prefix}mihomo 未安装${Font_color_suffix}"
         exit 1
     fi
 
-    echo -e "${Green_font_prefix}检查更新中...${Font_color_suffix}"
+    echo -e "${Green_font_prefix}开始检查是否有更新${Font_color_suffix}"
     cd /root/mihomo
 
     # 获取当前版本
-    CURRENT_VERSION=$(cat version.txt)
+    CURRENT_VERSION=$(cat "$VERSION_FILE")
     # 获取最新版本
     LATEST_VERSION=$(curl -sSL "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt" || { echo -e "${Red_font_prefix}获取版本信息失败${Font_color_suffix}"; exit 1; })
 
     if [ "$CURRENT_VERSION" == "$LATEST_VERSION" ]; then
-        echo -e "${Green_font_prefix}当前版本: ${CURRENT_VERSION}${Font_color_suffix}"
-        echo -e "${Green_font_prefix}最新版本: ${LATEST_VERSION}${Font_color_suffix}"
+        echo -e "当前版本: ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix}"
+        echo -e "最新版本: ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix}"
         echo -e "${Green_font_prefix}当前已是最新版本，无需更新！${Font_color_suffix}"
         exit 0
     fi
 
-    echo -e "${Green_font_prefix}当前版本: ${CURRENT_VERSION}${Font_color_suffix}"
-    echo -e "${Green_font_prefix}最新版本: ${LATEST_VERSION}${Font_color_suffix}"
+    echo -e "当前版本: ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix}"
+    echo -e "最新版本: ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix}"
 
-    read -p "是否更新到最新版本？(y/n): " confirm
+    read -p "是否升级到最新版本？(y/n): " confirm
     case $confirm in
         [Yy]* )
-            echo -e "${Green_font_prefix}开始更新 mihomo...${Font_color_suffix}"
+            echo -e "${Green_font_prefix}开始更新 mihomo${Font_color_suffix}"
             ARCH_RAW=$(uname -m)
             case "${ARCH_RAW}" in
                 'x86_64') ARCH='amd64';;
@@ -245,7 +248,7 @@ Update() {
             chmod 777 mihomo
 
             # 更新版本信息
-            echo "$LATEST_VERSION" > /root/mihomo/version.txt
+            echo "$LATEST_VERSION" > "$VERSION_FILE"
 
             # 重新加载 systemd
             systemctl daemon-reload
@@ -253,8 +256,18 @@ Update() {
             # 重启 mihomo 服务
             systemctl restart mihomo
 
-            echo -e "${Green_font_prefix}更新完成，当前版本已更新为 v${LATEST_VERSION}${Font_color_suffix}"
+            echo -e "更新完成，当前版本已更新为 ${Green_font_prefix}v${LATEST_VERSION}${Font_color_suffix}"
+
+            # 检查并显示服务状态
+            if systemctl is-active --quiet mihomo; then
+                echo -e "当前状态：${Green_font_prefix}运行中${Font_color_suffix}"
+            else
+                echo -e "当前状态：${Green_font_prefix}未运行${Font_color_suffix}"
+                exit 1
+            fi
+            exit 0
             ;;
+
         [Nn]* )
             echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
             ;;
