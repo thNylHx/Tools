@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = mihomo 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-17 08:30
+#!date = 2024-08-17 09:30
 #!author = thNylHx ChatGPT
 
 ## wget -O mihomo-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo-install.sh && chmod +x mihomo-install.sh && ./mihomo-install.sh
@@ -14,7 +14,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 脚本版本
-sh_ver="1.1.0"
+sh_ver="1.1.1"
 
 # 全局变量
 FILE="/root/mihomo/mihomo"
@@ -174,12 +174,11 @@ EOF
 
     echo -e "${Green_font_prefix}mihomo 安装完成，开始配置 mihomo${Font_color_suffix}"
     Configure
+    Main
 }
 
 # 更新 mihomo
 Update() {
-    FILE="/root/mihomo/mihomo"  # 定义 FILE 变量
-
     if [ ! -f "$FILE" ]; then
         echo -e "${Red_font_prefix}mihomo 未安装${Font_color_suffix}"
         exit 1
@@ -196,7 +195,7 @@ Update() {
     if [ "$CURRENT_VERSION" == "$LATEST_VERSION" ]; then
         echo -e "当前版本: ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix}"
         echo -e "最新版本: ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix}"
-        echo -e "${Green_font_prefix}当前已是最新版本，无需更新！${Font_color_suffix}"
+        echo -e "当前已是最新版本，无需更新 ！"
         exit 0
     fi
 
@@ -278,6 +277,7 @@ Update() {
             exit 1
             ;;
     esac
+    Main
 }
 
 # 配置 mihomo
@@ -877,6 +877,7 @@ EOF
     else
         echo -e "${Red_font_prefix}当前状态：未运行${Font_color_suffix}"
     fi
+    Main
 }
 
 # 修改 mihomo 配置
@@ -888,6 +889,7 @@ Modify_Configuration() {
 
     echo -e "${Green_font_prefix} mihomo 配置修改${Font_color_suffix}"
     Configure
+    Main
 }
 
 # 启动 mihomo
@@ -919,6 +921,7 @@ Start() {
         echo -e "${Red_font_prefix}当前状态：未运行${Font_color_suffix}"
         exit 1
     fi
+    Main
 }
 
 # 停止 mihomo
@@ -950,7 +953,7 @@ Stop() {
         echo -e "${Red_font_prefix}当前状态：未运行${Font_color_suffix}"
         exit 1
     fi
-    
+    Main
 }
 
 # 卸载 mihomo
@@ -989,6 +992,7 @@ Uninstall() {
         echo -e "${Red_font_prefix}mihomo 卸载过程中发生错误${Font_color_suffix}"
         exit 1
     fi
+    Main
 }
 
 # 重启 mihomo
@@ -1018,43 +1022,55 @@ Restart() {
         echo -e "${Red_font_prefix}当前状态：未运行${Font_color_suffix}"
         exit 1
     fi
+    Main
 }
 
 # 检查更新
 Update_Shell() {
-    echo -e "当前版本为 [ ${sh_ver} ]，开始检测最新版本..."
+    # 获取当前版本
+    echo -e "当前版本为 ${sh_ver}，开始检测最新版本..."
     
     # 获取最新版本号
     sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo-install.sh" | grep 'sh_ver="' | awk -F "=" '{print $NF}' | sed 's/\"//g' | head -1)
     
-    if [[ -z ${sh_new_ver} ]]; then
-        echo -e "${Error} 检测最新版本失败！"
-        sleep 3s
-        Start_Menu
+    if [ "$sh_ver" == "$sh_new_ver" ]; then
+        echo -e "当前版本: ${Green_font_prefix}${sh_ver}${Font_color_suffix}"
+        echo -e "最新版本: ${Green_font_prefix}${sh_new_ver}${Font_color_suffix}"
+        echo -e "${Green_font_prefix}当前已是最新版本，无需更新！${Font_color_suffix}"
+        Main
     fi
+
+    echo -e "当前版本: ${Green_font_prefix}${sh_ver}${Font_color_suffix}"
+    echo -e "最新版本: ${Green_font_prefix}${sh_new_ver}${Font_color_suffix}"
+
     # 开始更新
-    if [[ ${sh_new_ver} != ${sh_ver} ]]; then
-        echo -e "发现新版本 [ ${sh_new_ver} ]，是否更新？[Y/n]"
-        read -p "(默认：y)：" yn
-        [[ -z "${yn}" ]] && yn="y"
-        
-        if [[ ${yn} == [Yy] ]]; then
+    read -p "是否升级到最新版本？(y/n): " confirm
+    case $confirm in
+        [Yy]* )
+            echo -e "${Green_font_prefix}开始更新${Font_color_suffix}"
             wget -O mihomo-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo-install.sh
             chmod +x mihomo-install.sh
-            echo -e "脚本已更新为最新版本 [ ${sh_new_ver} ]！"
+            echo -e "更新完成，当前版本已更新为 ${Green_font_prefix}v${sh_new_ver}${Font_color_suffix}"
             echo -e "3 秒后执行新脚本..."
             sleep 3s
             bash mihomo-install.sh
-        else
-            echo -e "已取消更新..."
-            sleep 3s
-            Start_Menu
-        fi
-    else
-        echo -e "当前已是最新版本 [ ${sh_new_ver} ] ！"
-        sleep 3s
-        Start_Menu
-    fi
+            ;;
+
+        [Nn]* )
+            echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
+            Main
+            ;;
+            
+        * )
+            echo -e "${Red_font_prefix}无效的输入。${Font_color_suffix}"
+            exit 1
+            ;;
+    esac
+}
+
+Before_Start_Menu() {
+    echo && echo -n -e "${yellow}* 按回车返回主菜单 *${plain}" && read temp
+    Main
 }
 
 # 主菜单
