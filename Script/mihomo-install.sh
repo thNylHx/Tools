@@ -107,7 +107,7 @@ Start() {
     Check_install
     if systemctl is-active --quiet mihomo; then
         echo -e "${Green_font_prefix}mihomo 已经在运行中${Font_color_suffix}"
-        return
+        Start_Main
     fi
     echo -e "${Green_font_prefix}mihomo 启动中...${Font_color_suffix}"
     # 重新加载
@@ -163,8 +163,16 @@ Restart() {
         echo -e "${Red_font_prefix}mihomo 重启失败${Font_color_suffix}"
         exit 1
     fi
-    echo -e "${Green_font_prefix}mihomo 重启完成${Font_color_suffix}"
-    Main
+    # 等待服务启动
+    sleep 2
+    # 检查服务状态
+    if systemctl is-active --quiet mihomo; then
+        echo -e "${Green_font_prefix}mihomo 重启成功${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}mihomo 启动失败，服务未激活${Font_color_suffix}"
+        exit 1
+    fi
+    Start_Main
 }
 
 # 卸载 mihomo
@@ -187,7 +195,7 @@ Uninstall() {
     else
         echo -e "${Red_font_prefix}卸载过程中出现问题，请手动检查${Font_color_suffix}"
     fi
-    Start_Main
+    exit 1
 }
 
 # 检查更新脚本
@@ -200,7 +208,7 @@ Update_Shell() {
         echo -e "当前版本: ${Green_font_prefix}${sh_ver}${Font_color_suffix}"
         echo -e "最新版本: ${Green_font_prefix}${sh_new_ver}${Font_color_suffix}"
         echo -e "${Green_font_prefix}当前已是最新版本，无需更新！${Font_color_suffix}"
-        Main
+        Start_Main
     fi
     echo -e "当前版本: ${Green_font_prefix}${sh_ver}${Font_color_suffix}"
     echo -e "最新版本: ${Green_font_prefix}${sh_new_ver}${Font_color_suffix}"
@@ -218,7 +226,7 @@ Update_Shell() {
             ;;
         [Nn]* )
             echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
-            Main
+            exit 1
             ;;
         * )
             echo -e "${Red_font_prefix}无效的输入。${Font_color_suffix}"
@@ -300,7 +308,7 @@ Update() {
         echo -e "当前版本: ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix}"
         echo -e "最新版本: ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix}"
         echo -e "当前已是最新版本，无需更新！"
-        Main
+        Start_Main
     fi
     echo -e "当前版本: ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix}"
     echo -e "最新版本: ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix}"
@@ -349,6 +357,7 @@ Update() {
             ;;
         [Nn]* )
             echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
+            exit 1
             ;;
         * )
             echo -e "${Red_font_prefix}无效的输入。${Font_color_suffix}"
