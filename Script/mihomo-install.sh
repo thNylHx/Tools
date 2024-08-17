@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = mihomo 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-17 08:00
+#!date = 2024-08-17 08:30
 #!author = thNylHx ChatGPT
 
 ## wget -O mihomo-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo-install.sh && chmod +x mihomo-install.sh && ./mihomo-install.sh
@@ -54,9 +54,9 @@ Show_Status() {
     else
         check_status
         if [ "$status" == "running" ]; then
-            status="${Green_font_prefix}运行中${Font_color_suffix}"
+            status="${Green_font_prefix}已安装${Font_color_suffix} 并 ${Green_font_prefix}运行中${Font_color_suffix}"
         else
-            status="${Red_font_prefix}未运行${Font_color_suffix}"
+            status="${Green_font_prefix}已安装${Font_color_suffix} 但 ${Red_font_prefix}未运行${Font_color_suffix}"
         fi
     fi
 
@@ -1020,6 +1020,43 @@ Restart() {
     fi
 }
 
+# 检查更新
+Update_Shell() {
+    echo -e "当前版本为 [ ${sh_ver} ]，开始检测最新版本..."
+    
+    # 获取最新版本号
+    sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo-install.sh" | grep 'sh_ver="' | awk -F "=" '{print $NF}' | sed 's/\"//g' | head -1)
+    
+    if [[ -z ${sh_new_ver} ]]; then
+        echo -e "${Error} 检测最新版本失败！"
+        sleep 3s
+        Start_Menu
+    fi
+    # 开始更新
+    if [[ ${sh_new_ver} != ${sh_ver} ]]; then
+        echo -e "发现新版本 [ ${sh_new_ver} ]，是否更新？[Y/n]"
+        read -p "(默认：y)：" yn
+        [[ -z "${yn}" ]] && yn="y"
+        
+        if [[ ${yn} == [Yy] ]]; then
+            wget -O mihomo-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo-install.sh
+            chmod +x mihomo-install.sh
+            echo -e "脚本已更新为最新版本 [ ${sh_new_ver} ]！"
+            echo -e "3 秒后执行新脚本..."
+            sleep 3s
+            bash mihomo-install.sh
+        else
+            echo -e "已取消更新..."
+            sleep 3s
+            Start_Menu
+        fi
+    else
+        echo -e "当前已是最新版本 [ ${sh_new_ver} ] ！"
+        sleep 3s
+        Start_Menu
+    fi
+}
+
 # 主菜单
 # 函数定义在这里
 Main() {
@@ -1032,9 +1069,10 @@ Main() {
     echo -e " ${Green_font_prefix}5${Font_color_suffix}、 启动 mihomo"
     echo -e " ${Green_font_prefix}6${Font_color_suffix}、 停止 mihomo"
     echo -e " ${Green_font_prefix}7${Font_color_suffix}、 重启 mihomo"
+    echo -e " ${Green_font_prefix}8${Font_color_suffix}、 更新脚本"
     echo -e " ${Green_font_prefix}0${Font_color_suffix}、 退出脚本"
     echo -e "================================="
-    read -p "请输入选项[0-7]: " num
+    read -p "请输入选项[0-8]: " num
 
     case "$num" in
 
@@ -1045,6 +1083,7 @@ Main() {
         5) Start ;;
         6) Stop ;;
         7) Restart ;;
+        8) Update_Shell ;;
         0) exit 0 ;;
         *) echo -e "${Red_font_prefix}无效选项，请重新选择${Font_color_suffix}" ;;
     esac
