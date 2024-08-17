@@ -409,15 +409,15 @@ Update_Shell() {
 Main() {
     Show_Status
     echo -e "================================="
-    echo -e "${Green_font_prefix}1${Font_color_suffix}、 安装 mihomo"
-    echo -e "${Green_font_prefix}2${Font_color_suffix}、 更新 mihomo"
-    echo -e "${Green_font_prefix}3${Font_color_suffix}、 配置 mihomo"
-    echo -e "${Green_font_prefix}4${Font_color_suffix}、 卸载 mihomo"
-    echo -e "${Green_font_prefix}5${Font_color_suffix}、 启动 mihomo"
-    echo -e "${Green_font_prefix}6${Font_color_suffix}、 停止 mihomo"
-    echo -e "${Green_font_prefix}7${Font_color_suffix}、 重启 mihomo"
-    echo -e "${Green_font_prefix}8${Font_color_suffix}、 更新脚本"
-    echo -e "${Green_font_prefix}0${Font_color_suffix}、 退出脚本"
+    echo -e "${Green_font_prefix}1${Font_color_suffix}、安装 mihomo"
+    echo -e "${Green_font_prefix}2${Font_color_suffix}、更新 mihomo"
+    echo -e "${Green_font_prefix}3${Font_color_suffix}、配置 mihomo"
+    echo -e "${Green_font_prefix}4${Font_color_suffix}、卸载 mihomo"
+    echo -e "${Green_font_prefix}5${Font_color_suffix}、启动 mihomo"
+    echo -e "${Green_font_prefix}6${Font_color_suffix}、停止 mihomo"
+    echo -e "${Green_font_prefix}7${Font_color_suffix}、重启 mihomo"
+    echo -e "${Green_font_prefix}8${Font_color_suffix}、更新脚本"
+    echo -e "${Green_font_prefix}0${Font_color_suffix}、退出脚本"
     echo -e "================================="
     read -p "请输入选项[0-8]: " num
     case "$num" in
