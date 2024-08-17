@@ -1,6 +1,8 @@
 #!/bin/bash
-
-# wget -O trojan-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/trojan-install.sh && chmod +x trojan-install.sh && ./trojan-install.sh
+#!name = mihomo 一键脚本
+#!desc = 支持，安装、更新、卸载等
+#!date = 2024-08-17 20:30
+#!author = thNylHx ChatGPT
 
 # 定义颜色代码
 Green_font_prefix="\033[32m"
@@ -8,18 +10,28 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.0.7"
+sh_ver="1.0.9"
 
 # Trojan 可执行文件的路径
 FILE="/root/Trojan/trojan-go"
+TROJAN_FOLDERS="/root/Trojan"
+CONFIG_FILE="/root/Trojan/config.json"
+VERSION_FILE="/root/Trojan/version.txt"
+SYSTEM_SERVICE_FILE="/etc/systemd/system/trojan-go.service"
 
-clear
-echo -e "================================="
-echo -e " ${Green_font_prefix}欢迎使用 Trojan 一键脚本${Font_color_suffix}"
-echo -e " ${Green_font_prefix}作者：${Font_color_suffix}${Red_font_prefix}thNylHx${Font_color_suffix}"
-echo -e " ${Green_font_prefix}请保证科学上网已经开启${Font_color_suffix}"
-echo -e " ${Green_font_prefix}安装过程中可以按 ctrl+c 强制退出${Font_color_suffix}"
-echo -e " ${Red_font_prefix}特别提醒：安装 Trojan 前，建议先申请证书！${Font_color_suffix}"
+# 返回主菜单
+Start_Main() {
+    echo && echo -n -e "${Red_font_prefix}* 按回车返回主菜单 *${Font_color_suffix}" && read temp
+    Main
+}
+
+# 检查是否已安装 Trojan
+Check_install(){
+    if [ ! -f "$FILE" ]; then
+        echo -e "${Red_font_prefix}Trojan 未安装${Font_color_suffix}"
+        exit 1
+    fi
+}
 
 # 检查Trojan服务状态
 check_status() {
@@ -30,102 +42,53 @@ check_status() {
     fi
 }
 
-# 获取当前版本
+# 获取当前安装版本
 get_current_version() {
-    if [ -f "/root/Trojan/version.txt" ]; then
-        cat /root/Trojan/version.txt
+    if [ -f "$VERSION_FILE" ]; then
+        cat "$VERSION_FILE"
     else
-        echo "未安装"
+        echo "Trojan 未安装"
     fi
 }
 
-# 显示状态
+# 显示当前脚本和服务状态
 Show_Status() {
     if [ ! -f "$FILE" ]; then
-        status="${Red_font_prefix}未安装${Font_color_suffix}"
+        status="${Red_font_prefix}Trojan 未安装${Font_color_suffix}"
     else
         check_status
         if [ "$status" == "running" ]; then
-            status="${Green_font_prefix}运行中${Font_color_suffix}"
+            status="${Green_font_prefix}已安装${Font_color_suffix} 并 ${Green_font_prefix}运行中${Font_color_suffix}"
         else
-            status="${Red_font_prefix}未运行${Font_color_suffix}"
+            status="${Green_font_prefix}已安装${Font_color_suffix} 但 ${Red_font_prefix}未运行${Font_color_suffix}"
         fi
     fi
-
-    echo -e " 版本： ${Green_font_prefix}${sh_ver}${Font_color_suffix}"
-    echo -e " 状态： ${status}"
+    echo -e "版本：${Green_font_prefix}${sh_ver}${Font_color_suffix}"
+    echo -e "状态：${status}"
 }
 
-# 配置文件
-Configure() {
-    # 端口处理
-    read -p "请输入监听端口 (留空以生成随机端口): " PORT
-    if [[ -z "$PORT" ]]; then
-        PORT=$(shuf -i 10000-65000 -n 1)
-        echo -e "随机生成的监听端口: ${Green_font_prefix}$PORT${Font_color_suffix}"
-    elif [[ "$PORT" -lt 10000 || "$PORT" -gt 65000 ]]; then
-        echo -e "${Red_font_prefix}端口号必须在10000到65000之间。${Font_color_suffix}"
-        exit 1
+# 显示当前配置
+View(){
+    # 检查是否安装 Trojan
+    Check_install
+    echo -e "${Red_font_prefix}Trojan 配置信息${Font_color_suffix}"
+    # 读取并显示端口和 UUID
+    if [[ -f "${CONFIG_FILE}" ]]; then
+        local_port=$(jq -r '.local_port' "${CONFIG_FILE}")
+        password=$(jq -r '.password[0]' "${CONFIG_FILE}")
+        # 如果读取值为 null，则显示“未设置”
+        local_port=${local_port:-"未设置"}
+        password=${password:-"未设置"}
+        echo -e "port: ${Green_font_prefix}${local_port}${Font_color_suffix}"
+        echo -e "password: ${Green_font_prefix}${password}${Font_color_suffix}"
+    else
+        echo -e "${Error} 找不到配置文件 ${CONFIG_FILE}，请检查路径是否正确！"
     fi
-
-    # UUID处理
-    read -p "请输入 Trojan 密码 (留空以生成随机): " UUID
-    if [[ -z "$UUID" ]]; then
-        if command -v uuidgen >/dev/null 2>&1; then
-            UUID=$(uuidgen)
-        else
-            UUID=$(cat /proc/sys/kernel/random/uuid)
-        fi
-        echo -e "随机生成的密码: ${Green_font_prefix}$UUID${Font_color_suffix}"
-    fi
-
-    # 获取远程地址
-    read -p "请输入远程地址 (输入远程伪装地址): " remote_addr
-    if [[ -z "$remote_addr" ]]; then
-        remote_addr="192.83.167.78"
-    fi
-
-    # 写入配置文件
-    cat << EOF > /root/Trojan/config.json
-{
-    "run_type": "server",
-    "local_addr": "0.0.0.0",
-    "local_port": $PORT,
-    "remote_addr": "$remote_addr",
-    "remote_port": 80,
-    "password": [
-        "$UUID"
-    ],
-    "ssl": {
-        "cert": "/root/Trojan/ssl/server.crt",
-        "key": "/root/Trojan/ssl/server.key"
-    }
-}
-EOF
-
-    # 设置为开机自启
-    systemctl enable trojan-go
-    
-    # 重新加载系统服务
-    systemctl daemon-reload
-
-    # 启动 Trojan-Go
-    systemctl start trojan-go
-
-    # 查看 Trojan-Go 状态
-    systemctl status trojan-go
+    Start_Main
 }
 
-# 安装 Trojan
-Install() {
-    if [ -f "$FILE" ]; then
-        echo -e "${Green_font_prefix}Trojan 已经安装。${Font_color_suffix}"
-        exit 0
-    fi
-
-    echo -e "${Green_font_prefix}安装 Trojan 中...${Font_color_suffix}"
-    mkdir -p /root/Trojan
-    cd /root/Trojan
+# 获取 CPU 架构
+Get_the_schema(){
     ARCH_RAW=$(uname -m)
     case "${ARCH_RAW}" in
         'x86_64')    ARCH='amd64';;
@@ -135,107 +98,257 @@ Install() {
         's390x')    ARCH='s390x';;
         *)          echo -e "${Red_font_prefix}不支持的架构: ${ARCH_RAW}${Font_color_suffix}"; exit 1;;
     esac
-    echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
+}
 
+# 启动 Trojan
+Start() {
+    # 检测是否安装
+    Check_install
+    # 判断 Trojan 是否已经运行
+    if systemctl is-active --quiet trojan-go; then
+        echo -e "${Green_font_prefix}Trojan 已经在运行中${Font_color_suffix}"
+        Main
+        return
+    fi
+    echo -e "${Green_font_prefix}Trojan 启动中...${Font_color_suffix}"
+    # 重新加载
+    systemctl daemon-reload
+    # 启动服务
+    if systemctl start trojan-go; then
+        echo -e "${Green_font_prefix}Trojan 启动命令已发出${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}Trojan 启动失败${Font_color_suffix}"
+        exit 1
+    fi
+    # 等待服务启动
+    sleep 2
+    # 检查服务状态
+    if systemctl is-active --quiet trojan-go; then
+        echo -e "${Green_font_prefix}Trojan 启动成功${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}Trojan 启动失败，服务未激活${Font_color_suffix}"
+        exit 1
+    fi
+    Main
+}
+
+# 停止 Trojan
+Stop() {
+    # 检查 Trojan 是否已安装
+    Check_install
+    echo -e "${Green_font_prefix}Trojan 停止中...${Font_color_suffix}"
+    # 尝试停止服务
+    if systemctl stop trojan-go; then
+        echo -e "${Green_font_prefix}Trojan 停止命令已发出${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}Trojan 停止失败${Font_color_suffix}"
+        exit 1
+    fi
+    echo -e "${Green_font_prefix}Trojan 停止完成${Font_color_suffix}"
+    # 检查服务状态
+    check_status
+    Main
+}
+
+# 重启 Trojan
+Restart() {
+    # 检查 Trojan 是否已安装
+    Check_install
+    echo -e "${Green_font_prefix}Trojan 重启中...${Font_color_suffix}"
+    # 重启 Trojan 服务
+    if systemctl restart trojan-go; then
+        echo -e "${Green_font_prefix}Trojan 重启命令已发出${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}Trojan 重启失败${Font_color_suffix}"
+        exit 1
+    fi
+    echo -e "${Green_font_prefix}Trojan 重启完成${Font_color_suffix}"
+    # 检查服务状态
+    check_status
+    Main
+}
+
+# 卸载 Trojan
+Uninstall() {
+    # 检查是否安装 Trojan
+    Check_install
+    echo -e "${Red_font_prefix}Trojan 卸载中...${Font_color_suffix}"
+    # 停止服务
+    systemctl stop trojan-go
+    systemctl disable trojan-go
+    # 删除服务文件
+    rm -f "$SYSTEM_SERVICE_FILE"
+    # 删除文件
+    rm -rf "$TROJAN_FOLDERS"
+    # 重新加载 systemd
+    systemctl daemon-reload
+    # 检查卸载是否成功
+    if [ ! -f "$SYSTEM_SERVICE_FILE" ] && [ ! -d "$TROJAN_FOLDERS" ]; then
+        echo -e "${Green_font_prefix}Trojan 卸载完成${Font_color_suffix}"
+    else
+        echo -e "${Red_font_prefix}卸载过程中出现问题，请手动检查${Font_color_suffix}"
+    fi
+    Main
+}
+
+# 更新脚本
+Update_Shell() {
+    # 获取当前版本
+    echo -e "当前版本为 ${sh_ver}，开始检测最新版本..."
+    # 获取最新版本号
+    sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/thNylHx/Tools/main/Script/trojan-install.sh" | grep 'sh_ver="' | awk -F "=" '{print $NF}' | sed 's/\"//g' | head -1)
+    if [ "$sh_ver" == "$sh_new_ver" ]; then
+        echo -e "当前版本: ${Green_font_prefix}${sh_ver}${Font_color_suffix}"
+        echo -e "最新版本: ${Green_font_prefix}${sh_new_ver}${Font_color_suffix}"
+        echo -e "${Green_font_prefix}当前已是最新版本，无需更新！${Font_color_suffix}"
+        Main
+    fi
+    echo -e "当前版本: ${Green_font_prefix}${sh_ver}${Font_color_suffix}"
+    echo -e "最新版本: ${Green_font_prefix}${sh_new_ver}${Font_color_suffix}"
+    # 开始更新
+    read -p "是否升级到最新版本？(y/n): " confirm
+    case $confirm in
+        [Yy]* )
+            echo -e "${Green_font_prefix}开始更新${Font_color_suffix}"
+            wget -O trojan-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/trojan-install.sh
+            chmod +x trojan-install.sh
+            echo -e "更新完成，当前版本已更新为 ${Green_font_prefix}v${sh_new_ver}${Font_color_suffix}"
+            echo -e "3 秒后执行新脚本..."
+            sleep 3s
+            bash trojan-install.sh
+            ;;
+        [Nn]* )
+            echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
+            Main
+            ;;
+        * )
+            echo -e "${Red_font_prefix}无效的输入。${Font_color_suffix}"
+            Main
+            ;;
+    esac
+}
+
+# 安装 Trojan
+Install() {
+    # 检测是否安装
+    if [ -f "$FILE" ]; then
+        echo -e "${Green_font_prefix}Trojan 已经安装${Font_color_suffix}"
+        Main
+    fi
+    # 开始安装
+    echo -e "${Green_font_prefix}Trojan 安装中...${Font_color_suffix}"
+    mkdir -p /root/Trojan && cd /root/Trojan || { echo -e "${Red_font_prefix}创建或进入 /root/Trojan 目录失败${Font_color_suffix}"; exit 1; }
+    Get_the_schema
+    echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
+    # 获取版本信息
     VERSION=$(curl -s "https://api.github.com/repos/p4gefau1t/trojan-go/releases/latest" \
         | grep tag_name \
         | cut -d ":" -f2 \
         | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
-
     echo -e "${Green_font_prefix}获取到的最新版本: ${VERSION}${Font_color_suffix}"
-
     echo -e "${Green_font_prefix}开始下载 trojan-go${Font_color_suffix}"
-    wget -P /root/Trojan "https://github.com/p4gefau1t/trojan-go/releases/download/v${VERSION}/trojan-go-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
-
+    wget -t 3 -T 30 "https://github.com/p4gefau1t/trojan-go/releases/download/v${VERSION}/trojan-go-linux-${ARCH}.zip"  || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
     echo -e "${Green_font_prefix}trojan-go 下载完成, 开始部署${Font_color_suffix}"
     unzip "trojan-go-linux-${ARCH}.zip" && rm "trojan-go-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
-    echo "$VERSION" > /root/Trojan/version.txt
-
+    echo "$VERSION" > "$VERSION_FILE"
     # 系统配置文件
-    cat << EOF > /etc/systemd/system/trojan-go.service
-[Unit]
-Description=Trojan-Go - An unidentifiable mechanism that helps you bypass GFW
-Documentation=https://p4gefau1t.github.io/trojan-go/
-After=network.target nss-lookup.target
-
-[Service]
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/root/Trojan/trojan-go -config /root/Trojan/config.json
-Restart=on-failure
-RestartSec=10s
-LimitNOFILE=infinity
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
+    wget -O "$SYSTEM_SERVICE_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Service/trojan-go.service && chmod 777 "$SYSTEM_SERVICE_FILE"
     # 提示用户选择配置
-    echo -e "${Green_font_prefix}Trojan 安装成功，开始配置配置文件。${Font_color_suffix}"
+    echo -e "${Green_font_prefix}Trojan 安装成功，开始配置配置文件${Font_color_suffix}"
     Configure
 }
 
 # 更新Trojan
 Update() {
-    if [ ! -f "$FILE" ]; then
-        echo -e "${Red_font_prefix}Trojan 未安装，无法更新${Font_color_suffix}"
-        exit 1
-    fi
-
-    echo -e "${Green_font_prefix}检查 Trojan 更新...${Font_color_suffix}"
+    # 检测是否安装
+    Check_install
+    echo -e "${Green_font_prefix}Trojan 检查是否有更新${Font_color_suffix}"
     cd /root/Trojan
-
     current_version=$(get_current_version)
-    latest_version=$(curl -s "https://api.github.com/repos/p4gefau1t/trojan-go/releases/latest" | grep tag_name | cut -d ":" -f2 | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
-
-    if [[ "$current_version" == "$latest_version" ]]; then
+    LATEST_VERSION=$(curl -s "https://api.github.com/repos/p4gefau1t/trojan-go/releases/latest" | grep tag_name | cut -d ":" -f2 | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
+    # 开始更新
+    if [[ "$current_version" == "$LATEST_VERSION" ]]; then
         echo -e "${Green_font_prefix}当前版本: (v${current_version})${Font_color_suffix}"
-        echo -e "${Green_font_prefix}最新版本: (v${latest_version})${Font_color_suffix}"
+        echo -e "${Green_font_prefix}最新版本: (v${LATEST_VERSION})${Font_color_suffix}"
         echo -e "${Green_font_prefix}当前已是最新版本，无需更新！${Font_color_suffix}"
+        Main
     else
         echo -e "${Red_font_prefix}当前版本: ${current_version}${Font_color_suffix}"
-        echo -e "${Green_font_prefix}最新版本: ${latest_version}${Font_color_suffix}"
+        echo -e "${Green_font_prefix}最新版本: ${LATEST_VERSION}${Font_color_suffix}"
         read -p "是否要更新到最新版本？(y/n): " choice
         case $choice in
             [Yy]* )
-                echo -e "${Green_font_prefix}开始更新 Trojan...${Font_color_suffix}"
-                ARCH_RAW=$(uname -m)
-                case "${ARCH_RAW}" in
-                    'x86_64') ARCH='amd64';;
-                    'x86' | 'i686' | 'i386') ARCH='386';;
-                    'aarch64' | 'arm64') ARCH='arm64-v8';;
-                    'armv7' | 'armv7l') ARCH='arm32-v7';;
-                    's390x') ARCH='s390x';;
-                    *) echo -e "${Red_font_prefix}不支持的架构: ${ARCH_RAW}${Font_color_suffix}"; exit 1;;
-                esac
+                echo -e "${Green_font_prefix}Trojan 开始更新${Font_color_suffix}"
+                Get_the_schema
                 echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
-
                 echo -e "${Green_font_prefix}开始下载最新版本的 trojan-go${Font_color_suffix}"
-                wget -P /root/Trojan "https://github.com/p4gefau1t/trojan-go/releases/download/v${latest_version}/trojan-go-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
-
+                wget -P /root/Trojan "https://github.com/p4gefau1t/trojan-go/releases/download/v${LATEST_VERSION}/trojan-go-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
                 echo -e "${Green_font_prefix}trojan-go 下载完成，开始部署${Font_color_suffix}"
                 unzip -o "trojan-go-linux-${ARCH}.zip" && rm "trojan-go-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
-                echo "$latest_version" > /root/Trojan/version.txt
-
-                # 重新加载系统服务
-                systemctl daemon-reload
-
+                echo "$LATEST_VERSION" > "$VERSION_FILE"
                 # 重启 Trojan-Go
                 systemctl restart trojan-go
-
-                echo -e "${Green_font_prefix}更新完成，当前版本已更新为 v${latest_version}${Font_color_suffix}"
+                echo -e "${Green_font_prefix}Trojan 更新完成，当前版本已更新为 v${LATEST_VERSION}${Font_color_suffix}"
+                Main
                 ;;
             [Nn]* )
                 echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
+                Main
                 ;;
             * )
                 echo -e "${Red_font_prefix}无效的输入。${Font_color_suffix}"
-                exit 1
+                Main
                 ;;
         esac
     fi
+}
+
+# 配置 Trojan
+Configure() {
+    echo -e "${Green_font_prefix}Trojan 开始配置${Font_color_suffix}"
+    # 端口处理
+    read -p "请输入监听端口 (留空以随机生成端口): " PORT
+    if [[ -z "$PORT" ]]; then
+        PORT=$(shuf -i 10000-65000 -n 1)
+        echo -e "随机生成的监听端口: ${Green_font_prefix}$PORT${Font_color_suffix}"
+    elif [[ "$PORT" -lt 10000 || "$PORT" -gt 65000 ]]; then
+        echo -e "${Red_font_prefix}端口号必须在10000到65000之间。${Font_color_suffix}"
+        exit 1
+    fi
+    # UUID处理
+    read -p "请输入 Trojan 密码 (留空以随机生成): " UUID
+    if [[ -z "$UUID" ]]; then
+        if command -v uuidgen >/dev/null 2>&1; then
+            UUID=$(uuidgen)
+        else
+            UUID=$(cat /proc/sys/kernel/random/uuid)
+        fi
+        echo -e "随机生成的密码: ${Green_font_prefix}$UUID${Font_color_suffix}"
+    fi
+    # 获取远程地址
+    read -p "请输入远程地址 (输入远程伪装地址): " REMOTE
+    if [[ -z "$REMOTE" ]]; then
+        REMOTE="192.83.167.78"
+    fi
+    # 写入配置文件
+    wget -O "$CONFIG_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Config/Trojan/Trojan.json
+    # 使用 sed 替换 JSON 文件中的占位符
+    sed -i "s#PORT#$PORT#" "$CONFIG_FILE"
+    sed -i "s#REMOTE#$REMOTE#" "$CONFIG_FILE"
+    sed -i "s#UUID#$UUID#" "$CONFIG_FILE"
+    echo -e "${Green_font_prefix}Trojan 配置完成，正在启动中...${Font_color_suffix}"
+    # 设置为开机自启
+    systemctl enable trojan-go
+    # 重新加载系统服务
+    systemctl daemon-reload
+    # 启动 Trojan
+    systemctl start trojan-go
+    # 查看 Trojan-Go 状态
+    systemctl status trojan-go
+    # 检查服务状态
+    check_status
+    # 返回主菜单
+    Main
 }
 
 # 申请证书
@@ -243,9 +356,9 @@ Request_Cert() {
     echo "=============================="
     echo "请选择证书申请方式："
     echo "=============================="
-    echo -e " ${Green_font_prefix}1${Font_color_suffix}、 自签证书申请"
-    echo -e " ${Green_font_prefix}2${Font_color_suffix}、 Cloudflare 证书申请"
-    echo -e " ${Green_font_prefix}3${Font_color_suffix}、 ACME 证书申请"
+    echo -e "${Green_font_prefix}1${Font_color_suffix}、自签证书申请"
+    echo -e "${Green_font_prefix}2${Font_color_suffix}、Cloudflare 证书申请"
+    echo -e "${Green_font_prefix}3${Font_color_suffix}、ACME 证书申请"
     echo "=============================="
     read -p "输入数字选择 (1-3): " cert_choice
 
@@ -305,212 +418,47 @@ request_cf_cert() {
     echo -e "${Green_font_prefix}Cloudflare 证书申请完成！${Font_color_suffix}"
 }
 
-# 启动 Trojan
-Start() {
-    echo -e "${Green_font_prefix}启动 Trojan 服务...${Font_color_suffix}"
-
-    # 检查 Trojan 是否已安装
-    if [ ! -f "/root/Trojan/trojan-go" ]; then
-        echo -e "${Red_font_prefix}Trojan 尚未安装。请先安装 Trojan。${Font_color_suffix}"
-        exit 1
-    fi
-
-    # 尝试启动服务
-    if systemctl start trojan-go; then
-        echo -e "${Green_font_prefix}Trojan 服务启动命令已发出。${Font_color_suffix}"
-    else
-        echo -e "${Red_font_prefix}启动服务失败。${Font_color_suffix}"
-        exit 1
-    fi
-
-    # 检查服务状态
-    check_status
-
-    # 显示服务状态
-    if [ "$status" == "running" ]; then
-        echo -e "${Green_font_prefix}Trojan 服务已启动，当前状态: 正在运行${Font_color_suffix}"
-    else
-        echo -e "${Red_font_prefix}Trojan 服务启动失败，当前状态: 未运行${Font_color_suffix}"
-    fi
-}
-
-# 停止 Trojan
-Stop() {
-    echo -e "${Green_font_prefix}停止 Trojan 服务...${Font_color_suffix}"
-
-    # 检查 Trojan 是否已安装
-    if [ ! -f "/root/Trojan/trojan-go" ]; then
-        echo -e "${Red_font_prefix}Trojan 尚未安装。请先安装 Trojan。${Font_color_suffix}"
-        exit 1
-    fi
-    
-    # 尝试停止服务
-    if systemctl stop trojan-go; then
-        echo -e "${Green_font_prefix}Trojan 服务停止命令已发出。${Font_color_suffix}"
-    else
-        echo -e "${Red_font_prefix}停止服务失败。${Font_color_suffix}"
-        exit 1
-    fi
-
-    # 检查服务状态
-    check_status
-
-    # 显示服务状态
-    if [ "$status" == "stopped" ]; then
-        echo -e "${Green_font_prefix}Trojan 服务已停止，当前状态: 未运行${Font_color_suffix}"
-    else
-        echo -e "${Red_font_prefix}Trojan 服务停止失败，当前状态: 正在运行${Font_color_suffix}"
-    fi
-}
-
-# 重启 Trojan
-Restart() {
-    echo -e "${Green_font_prefix}重启 Trojan 服务...${Font_color_suffix}"
-
-    # 检查 Trojan 是否已安装
-    if [ ! -f "/root/Trojan/trojan-go" ]; then
-        echo -e "${Red_font_prefix}Trojan 尚未安装。请先安装 Trojan。${Font_color_suffix}"
-        exit 1
-    fi
-    
-    # 尝试重启服务
-    if systemctl restart trojan-go; then
-        echo -e "${Green_font_prefix}Trojan 服务重启命令已发出。${Font_color_suffix}"
-    else
-        echo -e "${Red_font_prefix}重启服务失败。${Font_color_suffix}"
-        exit 1
-    fi
-
-    # 检查服务状态
-    check_status
-
-    # 显示服务状态
-    if [ "$status" == "running" ]; then
-        echo -e "${Green_font_prefix}Trojan 服务已重启，当前状态: 正在运行${Font_color_suffix}"
-    else
-        echo -e "${Red_font_prefix}Trojan 服务重启失败，当前状态: 未运行${Font_color_suffix}"
-    fi
-}
-
-# 卸载 Trojan
-Uninstall() {
-    echo -e "${Red_font_prefix}开始卸载 Trojan...${Font_color_suffix}"
-
-    # 停止 Trojan 服务
-    if systemctl is-active --quiet trojan-go; then
-        echo -e "${Green_font_prefix}停止 Trojan 服务...${Font_color_suffix}"
-        systemctl stop trojan-go || echo -e "${Red_font_prefix}停止服务失败。${Font_color_suffix}"
-    else
-        echo -e "${Yellow_font_prefix}Trojan 服务未运行。${Font_color_suffix}"
-    fi
-
-    # 禁用 Trojan 服务
-    if systemctl is-enabled --quiet trojan-go; then
-        echo -e "${Green_font_prefix}禁用 Trojan 服务...${Font_color_suffix}"
-        systemctl disable trojan-go || echo -e "${Red_font_prefix}禁用服务失败。${Font_color_suffix}"
-    else
-        echo -e "${Yellow_font_prefix}Trojan 服务已被禁用。${Font_color_suffix}"
-    fi
-
-    # 删除 Trojan 目录
-    if [ -d "/root/Trojan" ]; then
-        echo -e "${Green_font_prefix}删除 Trojan 文件夹...${Font_color_suffix}"
-        rm -rf /root/Trojan || echo -e "${Red_font_prefix}删除文件夹失败。${Font_color_suffix}"
-    else
-        echo -e "${Yellow_font_prefix}Trojan 文件夹不存在。${Font_color_suffix}"
-    fi
-
-    # 删除 systemd 服务文件
-    if [ -f "/etc/systemd/system/trojan-go.service" ]; then
-        echo -e "${Green_font_prefix}删除 systemd 服务文件...${Font_color_suffix}"
-        rm /etc/systemd/system/trojan-go.service || echo -e "${Red_font_prefix}删除服务文件失败。${Font_color_suffix}"
-    else
-        echo -e "${Yellow_font_prefix}systemd 服务文件不存在。${Font_color_suffix}"
-    fi
-
-    # 重新加载系统服务
-    echo -e "${Green_font_prefix}重新加载 systemd 配置...${Font_color_suffix}"
-    systemctl daemon-reload || echo -e "${Red_font_prefix}重新加载配置失败。${Font_color_suffix}"
-
-    echo -e "${Green_font_prefix}卸载完成。${Font_color_suffix}"
-}
-
-# 查看已安装的信息
-View() {
-    if [ -f "/root/Trojan/config.json" ]; then
-        echo -e "${Green_font_prefix}当前 Trojan 配置信息：${Font_color_suffix}"
-        cat /root/Trojan/config.json
-    else
-        echo -e "${Red_font_prefix}未找到 Trojan 配置文件。${Font_color_suffix}"
-    fi
-}
-
-Show_Status() {
-    if [ ! -f "$FILE" ]; then
-        echo -e " 状态: ${Red_font_prefix}Trojan 未安装${Font_color_suffix}"
-    else
-        check_status
-        if [ "$status" == "running" ]; then
-            echo -e " 状态: ${Green_font_prefix}Trojan 运行中${Font_color_suffix}"
-        else
-            echo -e " 状态: ${Red_font_prefix}Trojan 未运行${Font_color_suffix}"
-        fi
-    fi
-}
+    # 表头说明
+    clear
+    echo -e "================================="
+    echo -e "${Green_font_prefix}欢迎使用 Trojan 一键脚本${Font_color_suffix}"
+    echo -e "${Green_font_prefix}作者：${Font_color_suffix}${Red_font_prefix}thNylHx${Font_color_suffix}"
+    echo -e "${Green_font_prefix}请保证科学上网已经开启${Font_color_suffix}"
+    echo -e "${Green_font_prefix}安装过程中可以按 ctrl+c 强制退出${Font_color_suffix}"
+    echo -e "${Red_font_prefix}特别提醒：安装 Trojan 前，建议先申请证书！${Font_color_suffix}"
 
 # 主菜单
 Main() {
     echo "=============================="
-    echo -e " 版本：${Green_font_prefix}${sh_ver}${Font_color_suffix}"
     Show_Status
     echo "=============================="
-    echo -e " ${Green_font_prefix}1${Font_color_suffix}、安装 Trojan"
-    echo -e " ${Green_font_prefix}2${Font_color_suffix}、更新 Trojan"
-    echo -e " ${Green_font_prefix}3${Font_color_suffix}、配置 Trojan"
-    echo -e " ${Green_font_prefix}4${Font_color_suffix}、卸载 Trojan"
-    echo -e " ${Green_font_prefix}5${Font_color_suffix}、启动 Trojan"
-    echo -e " ${Green_font_prefix}6${Font_color_suffix}、停止 Trojan"
-    echo -e " ${Green_font_prefix}7${Font_color_suffix}、重启 Trojan"
-    echo -e " ${Green_font_prefix}8${Font_color_suffix}、查看配置"
-    echo -e " ${Green_font_prefix}9${Font_color_suffix}、申请证书"
-    echo -e " ${Green_font_prefix}0${Font_color_suffix}、退出脚本"
+    echo -e "${Green_font_prefix}1${Font_color_suffix}、安装 Trojan"
+    echo -e "${Green_font_prefix}2${Font_color_suffix}、更新 Trojan"
+    echo -e "${Green_font_prefix}3${Font_color_suffix}、配置 Trojan"
+    echo -e "${Green_font_prefix}4${Font_color_suffix}、卸载 Trojan"
+    echo -e "${Green_font_prefix}5${Font_color_suffix}、启动 Trojan"
+    echo -e "${Green_font_prefix}6${Font_color_suffix}、停止 Trojan"
+    echo -e "${Green_font_prefix}7${Font_color_suffix}、重启 Trojan"        
+    echo -e "${Green_font_prefix}8${Font_color_suffix}、查看配置"
+    echo -e "${Green_font_prefix}9${Font_color_suffix}、申请证书"
+    echo -e "${Green_font_prefix}10${Font_color_suffix}、更新脚本"
+    echo -e "${Green_font_prefix}0${Font_color_suffix}、退出"
     echo "=============================="
-    read -p "请输入数字选择[0-9]: " num
+    read -p "请输入数字选择[0-10]: " num
 
     case "$num" in
-        1)
-            Install
-            ;;
-        2)
-            Update
-            ;;
-        3)
-            Configure
-            ;;
-        4)
-            Uninstall
-            ;;
-        5)
-            Start
-            ;;
-        6)
-            Stop
-            ;;
-        7)
-            Restart
-            ;;
-        8)
-            View
-            ;;
-        9)
-            Request_Cert
-            ;;
-        0)
-            exit 0
-            ;;
-        *)
-            echo -e "${Red_font_prefix}无效的选择，请输入 0 到 9 之间的数字。${Font_color_suffix}"
-            ;;
+        1) Install ;;
+        2) Update ;;
+        3) Configure ;;
+        4) Uninstall ;;
+        5) Start ;;
+        6) Stop ;;
+        7) Restart ;;
+        8) View ;;
+        9) Request_Cert ;;
+        10) Update_Shell ;;
+        0) exit 0 ;;
+        *) echo -e "${Red_font_prefix}无效的选择，请输入 0 到 10 之间的数字。${Font_color_suffix}" ;;
     esac
 }
 
