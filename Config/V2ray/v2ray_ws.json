@@ -1,12 +1,12 @@
 {
   "inbounds": [
     {
-      "port": $PORT,
+      "port": PORT,
       "protocol": "vmess",
       "settings": {
         "clients": [
           {
-            "id": "$UUID",
+            "id": "UUID",
             "alterId": 0
           }
         ]
@@ -14,7 +14,7 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "/$WS_PATH"
+          "path": "/WS_PATH"
         }
       }
     }
