@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = mihomo 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-17 16:30
+#!date = 2024-08-17 15:30
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -186,8 +186,12 @@ Update() {
     case $confirm in
         [Yy]* )
             echo -e "${Green_font_prefix}开始更新 mihomo${Font_color_suffix}"
-            # 构造文件名和下载链接
-            Get_the_schema
+            # 构造文件名
+            case "$ARCH" in
+                'arm64' | 'armv7' | 's390x' | '386') FILENAME="mihomo-linux-${ARCH}-${LATEST_VERSION}.gz";;
+                'amd64') FILENAME="mihomo-linux-${ARCH}-compatible-${LATEST_VERSION}.gz";;
+                *)       FILENAME="mihomo-linux-${ARCH}-compatible-${LATEST_VERSION}.gz";;
+            esac
             echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
             DOWNLOAD_URL="https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${FILENAME}"
             echo -e "${Green_font_prefix}开始下载最新版本 ${FILENAME}...${Font_color_suffix}"
