@@ -158,7 +158,7 @@ Install() {
     # 下载 UI
     git clone https://github.com/metacubex/metacubexd.git -b gh-pages /root/mihomo/ui
     # 系统配置文件
-    wget -O "$SYSTEM_SERVICE_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo.service && chmod 777 "$SYSTEM_SERVICE_FILE"
+    wget -O "$SYSTEM_SERVICE_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Service/mihomo.service && chmod 777 "$SYSTEM_SERVICE_FILE"
     echo -e "${Green_font_prefix}mihomo 安装完成，开始配置 mihomo${Font_color_suffix}"
     # 开始配置 config 文件
     Configure
