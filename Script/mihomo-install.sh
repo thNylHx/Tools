@@ -12,12 +12,16 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 脚本版本
-sh_ver="1.1.5"
+sh_ver="1.1.8"
 
 # 全局变量
 FILE="/root/mihomo/mihomo"
-VERSION_FILE="/root/mihomo/version.txt"
+MIHOMO_FOLDERS="/root/mihomo"
+WEB_SERVICES="/root/mihomo/ui"
 SYSCTL_CONF="/etc/sysctl.conf"
+CONFIG_FILE="/root/mihomo/config.yaml"
+VERSION_FILE="/root/mihomo/version.txt"
+SYSTEM_SERVICE_FILE="/etc/systemd/system/mihomo.service"
 
 clear
 echo -e "================================="
@@ -154,7 +158,7 @@ Install() {
     # 下载 UI
     git clone https://github.com/metacubex/metacubexd.git -b gh-pages /root/mihomo/ui
     # 系统配置文件
-    wget -O /etc/systemd/system/mihomo.service https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo.service && chmod 777 /etc/systemd/system/mihomo.service
+    wget -O "$SYSTEM_SERVICE_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo.service && chmod 777 "$SYSTEM_SERVICE_FILE"
     echo -e "${Green_font_prefix}mihomo 安装完成，开始配置 mihomo${Font_color_suffix}"
     # 开始配置 config 文件
     Configure
@@ -240,21 +244,21 @@ Configure() {
         read -p "请输入第二个机场的订阅连接: " airport_url2
         read -p "请输入第二个机场的名称: " airport_name2
         # 下载 YAML 文件
-        wget -O /root/mihomo/config.yaml https://raw.githubusercontent.com/thNylHx/Tools/main/Meta/mihomo-two.yaml
+        wget -O "$CONFIG_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Meta/mihomo-two.yaml
         # 使用 sed 替换 YAML 文件中的占位符
-        sed -i "s#机场订阅连接1#$airport_url1#" /root/mihomo/config.yaml
-        sed -i "s#\[机场名称1\]#$airport_name1#" /root/mihomo/config.yaml
-        sed -i "s#机场订阅连接2#$airport_url2#" /root/mihomo/config.yaml
-        sed -i "s#\[机场名称2\]#$airport_name2#" /root/mihomo/config.yaml
+        sed -i "s#机场订阅连接1#$airport_url1#" "$CONFIG_FILE"
+        sed -i "s#\[机场名称1\]#$airport_name1#" "$CONFIG_FILE"
+        sed -i "s#机场订阅连接2#$airport_url2#" "$CONFIG_FILE"
+        sed -i "s#\[机场名称2\]#$airport_name2#" "$CONFIG_FILE"
     else
         # 配置单个机场
         read -p "请输入机场的订阅连接: " airport_url
         read -p "请输入机场的名称: " airport_name
         # 下载 YAML 文件
-        wget -O /root/mihomo/config.yaml https://raw.githubusercontent.com/thNylHx/Tools/main/Meta/mihomo-one.yaml
+        wget -O "$CONFIG_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Meta/mihomo-one.yaml
         # 使用 sed 替换 YAML 文件中的占位符
-        sed -i "s#机场订阅连接#$airport_url#" /root/mihomo/config.yaml
-        sed -i "s#\[机场名称\]#$airport_name#" /root/mihomo/config.yaml
+        sed -i "s#机场订阅连接#$airport_url#" "$CONFIG_FILE"
+        sed -i "s#\[机场名称\]#$airport_name#" "$CONFIG_FILE"
     fi
     echo -e "${Green_font_prefix}mihomo 配置完成，正在启动中...${Font_color_suffix}"
     # 启动命令
@@ -321,13 +325,16 @@ Uninstall() {
     Check_install
     echo -e "${Green_font_prefix}mihomo 开始卸载${Font_color_suffix}"
     # 停止并禁用服务，如果失败则忽略错误
-    systemctl stop mihomo || true
-    systemctl disable mihomo || true
-    # 删除服务文件和安装目录
-    rm -f "$FILE"
-    rm -f /etc/systemd/system/mihomo.service
-    rm -rf /root/mihomo
-    # 重新加载 systemd 守护程序
+    systemctl stop mihomo.service
+    systemctl disable mihomo.service
+    # 停止服务
+    systemctl stop mihomo.service
+    systemctl disable mihomo.service
+    # 删除服务文件
+    rm -f "$SYSTEM_SERVICE_FILE"
+    # 删除文件
+    rm -rf "$MIHOMO_FOLDERS"
+    # 重新加载 systemd
     systemctl daemon-reload
     # 检查卸载是否成功
     if [ ! -f "$FILE" ] && [ ! -d "/root/mihomo" ]; then
@@ -358,12 +365,6 @@ Restart() {
         exit 1
     fi
     echo -e "${Green_font_prefix}mihomo 重启完成${Font_color_suffix}"
-    # 显示服务状态
-    if [ "$status" == "running" ]; then
-        echo -e "${Green_font_prefix}当前状态：运行中${Font_color_suffix}"
-    else
-        echo -e "${Red_font_prefix}当前状态：未运行${Font_color_suffix}"
-    fi
     Main
 }
 
