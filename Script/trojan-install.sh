@@ -4,6 +4,8 @@
 #!date = 2024-08-17 21:30
 #!author = thNylHx ChatGPT
 
+set -e -o pipefail
+
 # 定义颜色代码
 Green_font_prefix="\033[32m"
 Red_font_prefix="\033[31m"
