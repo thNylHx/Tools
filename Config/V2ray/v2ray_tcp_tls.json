@@ -1,0 +1,34 @@
+{
+  "inbounds": [
+    {
+      "port": PORT,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "UUID",
+            "alterId": 0
+          }
+        ]
+      },
+        "streamSettings": {
+          "network": "tcp",
+          "security": "tls",
+          "tlsSettings": {
+            "certificates": [
+              {
+                "certificateFile": "/root/V2Ray/ssl/server.crt", 
+                "keyFile": "/root/V2Ray/ssl/server.key" 
+              }
+            ]
+          }
+        }
+      }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}
