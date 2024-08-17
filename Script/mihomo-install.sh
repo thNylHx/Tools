@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = mihomo 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-17 15:30
+#!date = 2024-08-17 16:30
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
