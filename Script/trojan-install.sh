@@ -1,5 +1,5 @@
 #!/bin/bash
-#!name = mihomo 一键脚本
+#!name = Trojan 一键脚本
 #!desc = 支持，安装、更新、卸载等
 #!date = 2024-08-17 21:30
 #!author = thNylHx ChatGPT
@@ -109,7 +109,7 @@ Start() {
     # 判断 Trojan 是否已经运行
     if systemctl is-active --quiet trojan-go; then
         echo -e "${Green_font_prefix}Trojan 已经在运行中${Font_color_suffix}"
-        return
+        Start_Main
     fi
     echo -e "${Green_font_prefix}Trojan 启动中...${Font_color_suffix}"
     # 重新加载
@@ -140,7 +140,7 @@ Stop() {
     # 检查是否运行
     if ! systemctl is-active --quiet trojan-go; then
         echo -e "${Green_font_prefix}Trojan 已经停止${Font_color_suffix}"
-        exit 0
+        Start_Main
     fi
     echo -e "${Green_font_prefix}Trojan 停止中...${Font_color_suffix}"
     # 尝试停止服务
@@ -194,7 +194,7 @@ Uninstall() {
     else
         echo -e "${Red_font_prefix}卸载过程中出现问题，请手动检查${Font_color_suffix}"
     fi
-    Start_Main
+    exit 1
 }
 
 # 更新脚本
@@ -225,9 +225,11 @@ Update_Shell() {
             ;;
         [Nn]* )
             echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
+            exit 1
             ;;
         * )
             echo -e "${Red_font_prefix}无效的输入。${Font_color_suffix}"
+            exit 1
             ;;
     esac
     Start_Main
@@ -238,7 +240,7 @@ Install() {
     # 检测是否安装
     if [ -f "$FILE" ]; then
         echo -e "${Green_font_prefix}Trojan 已经安装${Font_color_suffix}"
-        exit 0
+        Start_Main
     fi
     # 开始安装
     echo -e "${Green_font_prefix}Trojan 安装中...${Font_color_suffix}"
@@ -303,9 +305,11 @@ Update() {
                 ;;
             [Nn]* )
                 echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
+                exit 1
                 ;;
             * )
                 echo -e "${Red_font_prefix}无效的输入。${Font_color_suffix}"
+                exit 1
                 ;;
         esac
     fi
@@ -372,7 +376,6 @@ Request_Cert() {
     echo -e "${Green_font_prefix}3${Font_color_suffix}、ACME 证书申请"
     echo "=============================="
     read -p "输入数字选择 (1-3): " cert_choice
-
     case $cert_choice in
         1)
         generate_self_signed_cert
