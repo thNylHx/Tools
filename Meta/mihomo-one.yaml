@@ -12,15 +12,9 @@ proxy-providers:
   # 机场1
   Airport_01:
     <<: *pr
-    url: "此处填写机场订阅连接"
+    url: "机场订阅连接"
     override:
-      additional-prefix: "[此处填写机场名称]"
-  # 机场2
-  Airport_02:
-    <<: *pr
-    url: "此处填写机场订阅连接"
-    override:
-      additional-prefix: "[此处填写机场名称]"
+      additional-prefix: "[机场名称]"
 
 # 全局配置
 # 开启 IPv6 总开关，可选：true/false
