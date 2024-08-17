@@ -207,8 +207,8 @@ Update_Shell() {
         echo -e "当前版本: ${Green_font_prefix}${sh_ver}${Font_color_suffix}"
         echo -e "最新版本: ${Green_font_prefix}${sh_new_ver}${Font_color_suffix}"
         echo -e "${Green_font_prefix}当前已是最新版本，无需更新！${Font_color_suffix}"
+        Start_Main
     fi
-    Start_Main
     echo -e "当前版本: ${Green_font_prefix}${sh_ver}${Font_color_suffix}"
     echo -e "最新版本: ${Green_font_prefix}${sh_new_ver}${Font_color_suffix}"
     # 开始更新
@@ -282,7 +282,7 @@ Update() {
         echo -e "${Green_font_prefix}当前版本: (v${current_version})${Font_color_suffix}"
         echo -e "${Green_font_prefix}最新版本: (v${LATEST_VERSION})${Font_color_suffix}"
         echo -e "当前已是最新版本，无需更新！"
-        Main
+        Start_Main
     else
         echo -e "${Red_font_prefix}当前版本: ${current_version}${Font_color_suffix}"
         echo -e "${Green_font_prefix}最新版本: ${LATEST_VERSION}${Font_color_suffix}"
