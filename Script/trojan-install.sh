@@ -236,6 +236,7 @@ Install() {
     # 检测是否安装
     if [ -f "$FILE" ]; then
         echo -e "${Green_font_prefix}Trojan 已经安装${Font_color_suffix}"
+        exit 0
     fi
     # 开始安装
     echo -e "${Green_font_prefix}Trojan 安装中...${Font_color_suffix}"
