@@ -346,7 +346,7 @@ Update() {
                 exit 1
             fi
             # 授权
-            chmod 777 mihomo
+            chmod 755 mihomo
             # 更新版本信息
             echo "$LATEST_VERSION" > "$VERSION_FILE"
             # 重新加载 systemd
