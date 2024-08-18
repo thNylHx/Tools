@@ -469,7 +469,7 @@ Main() {
     echo -e "${Green_font_prefix}8${Font_color_suffix}、 查看配置"
     echo -e "${Green_font_prefix}9${Font_color_suffix}、 申请证书"
     echo -e "${Green_font_prefix}10${Font_color_suffix}、更新脚本"
-    echo -e "${Green_font_prefix}0${Font_color_suffix}、 退出"
+    echo -e "${Green_font_prefix}0${Font_color_suffix}、 退出脚本"
     echo "=============================="
     Show_Status
     echo "=============================="
