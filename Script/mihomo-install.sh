@@ -249,6 +249,8 @@ Install() {
     fi
     # 更新系统
     apt update && apt dist-upgrade -y
+    # 安装 iptables
+    apt install iptables -y
     # 开始安装
     echo -e "${Green_font_prefix}开始安装 mihomo${Font_color_suffix}"
     # 创建文件夹
