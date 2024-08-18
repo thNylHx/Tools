@@ -508,26 +508,27 @@ request_cf_cert() {
 # 主菜单
 Main() {
     clear
-    echo "=============================="
+    echo "================================="
     echo -e "${Green_font_prefix}欢迎使用 V2Ray 一键脚本${Font_color_suffix}"
     echo -e "${Green_font_prefix}作者：${Font_color_suffix}${Red_font_prefix}thNylHx${Font_color_suffix}"
     echo -e "${Green_font_prefix}请保证科学上网已经开启${Font_color_suffix}"
     echo -e "${Green_font_prefix}安装过程中可以按 ctrl+c 强制退出${Font_color_suffix}"
-    echo "=============================="
+    echo "================================="
     echo -e "${Green_font_prefix}1${Font_color_suffix}、 安装 V2Ray"
     echo -e "${Green_font_prefix}2${Font_color_suffix}、 更新 V2Ray"
     echo -e "${Green_font_prefix}3${Font_color_suffix}、 配置 V2Ray"
     echo -e "${Green_font_prefix}4${Font_color_suffix}、 卸载 V2Ray"
     echo -e "${Green_font_prefix}5${Font_color_suffix}、 启动 V2Ray"
     echo -e "${Green_font_prefix}6${Font_color_suffix}、 停止 V2Ray"
-    echo -e "${Green_font_prefix}7${Font_color_suffix}、 重启 V2Ray"        
+    echo -e "${Green_font_prefix}7${Font_color_suffix}、 重启 V2Ray"
+    echo "---------------------------------"
     echo -e "${Green_font_prefix}8${Font_color_suffix}、 查看配置"
     echo -e "${Green_font_prefix}9${Font_color_suffix}、 申请证书"
     echo -e "${Green_font_prefix}10${Font_color_suffix}、更新脚本"
     echo -e "${Green_font_prefix}0${Font_color_suffix}、 退出脚本"
-    echo "=============================="
+    echo "================================="
     Show_Status
-    echo "=============================="
+    echo "================================="
     read -p "请输入数字选择[0-10]: " num
     case "$num" in
         1) Install ;;
