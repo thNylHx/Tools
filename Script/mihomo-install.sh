@@ -58,17 +58,21 @@ get_current_version() {
 # 显示当前脚本和服务状态
 Show_Status() {
     if [ ! -f "$FILE" ]; then
-        status="${Red_font_prefix}mihomo 未安装${Font_color_suffix}"
+        status="${Red_font_prefix}未安装${Font_color_suffix}"
+        run_status="${Red_font_prefix}未运行${Font_color_suffix}"
     else
         check_status
         if [ "$status" == "running" ]; then
-            status="${Green_font_prefix}已安装${Font_color_suffix} 并 ${Green_font_prefix}运行中${Font_color_suffix}"
+            status="${Green_font_prefix}已安装${Font_color_suffix}"
+            run_status="${Green_font_prefix}运行中${Font_color_suffix}"
         else
-            status="${Green_font_prefix}已安装${Font_color_suffix} 但 ${Red_font_prefix}未运行${Font_color_suffix}"
+            status="${Green_font_prefix}已安装${Font_color_suffix}"
+            run_status="${Red_font_prefix}未运行${Font_color_suffix}"
         fi
     fi
-    echo -e "版本： ${Green_font_prefix}${sh_ver}${Font_color_suffix}"
-    echo -e "状态： ${status}"
+    echo -e "脚本版本：${Green_font_prefix}${sh_ver}${Font_color_suffix}"
+    echo -e "安装状态：${status}"
+    echo -e "运行状态：${run_status}"
 }
 
 # 获取 CPU 架构
