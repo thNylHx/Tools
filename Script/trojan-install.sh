@@ -307,6 +307,8 @@ Update() {
                 wget -P /root/Trojan "https://github.com/p4gefau1t/trojan-go/releases/download/v${LATEST_VERSION}/trojan-go-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
                 echo -e "${Green_font_prefix}trojan-go 下载完成，开始部署${Font_color_suffix}"
                 unzip -o "trojan-go-linux-${ARCH}.zip" && rm "trojan-go-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
+                # 授权
+                chmod 755 trojan-go
                 echo "$LATEST_VERSION" > "$VERSION_FILE"
                 # 重启 Trojan-Go
                 systemctl restart trojan-go
