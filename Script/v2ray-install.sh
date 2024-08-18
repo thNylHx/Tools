@@ -238,7 +238,7 @@ Update_Shell() {
             wget -O v2ray-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/v2ray-install.sh
             chmod +x v2ray-install.sh
             echo -e "更新完成，当前版本已更新为 ${Green_font_prefix}v${sh_new_ver}${Font_color_suffix}"
-            echo -e "5 秒后执行新脚本..."
+            echo -e "3 秒后执行新脚本..."
             sleep 3s
             bash v2ray-install.sh
             ;;
