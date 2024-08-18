@@ -436,6 +436,7 @@ Main() {
     echo -e "${Green_font_prefix}5${Font_color_suffix}、启动 mihomo"
     echo -e "${Green_font_prefix}6${Font_color_suffix}、停止 mihomo"
     echo -e "${Green_font_prefix}7${Font_color_suffix}、重启 mihomo"
+    echo "---------------------------------"
     echo -e "${Green_font_prefix}8${Font_color_suffix}、更新脚本"
     echo -e "${Green_font_prefix}0${Font_color_suffix}、退出脚本"
     echo "================================="
