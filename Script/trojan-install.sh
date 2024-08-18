@@ -15,8 +15,8 @@ Font_color_suffix="\033[0m"
 sh_ver="1.1.4"
 
 # Trojan 可执行文件的路径
+FOLDERS="/root/Trojan"
 FILE="/root/Trojan/trojan-go"
-TROJAN_FILE="/root/Trojan"
 SSL_FILE="/root/Trojan/ssl"
 CONFIG_FILE="/root/Trojan/config.json"
 VERSION_FILE="/root/Trojan/version.txt"
@@ -190,11 +190,11 @@ Uninstall() {
     # 删除服务文件
     rm -f "$SYSTEM_FILE"
     # 删除文件
-    rm -rf "$TROJAN_FILE"
+    rm -rf "$FOLDERS"
     # 重新加载 systemd
     systemctl daemon-reload
     # 检查卸载是否成功
-    if [ ! -f "$SYSTEM_FILE" ] && [ ! -d "$TROJAN_FILE" ]; then
+    if [ ! -f "$SYSTEM_FILE" ] && [ ! -d "$FOLDERS" ]; then
         echo -e "${Green_font_prefix}Trojan 卸载完成${Font_color_suffix}"
     else
         echo -e "${Red_font_prefix}卸载过程中出现问题，请手动检查${Font_color_suffix}"
