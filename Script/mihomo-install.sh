@@ -15,8 +15,8 @@ Font_color_suffix="\033[0m"
 sh_ver="1.2.2"
 
 # 全局变量
+FOLDERS="/root/mihomo"
 FILE="/root/mihomo/mihomo"
-MIHOMO_FILE="/root/mihomo"
 WEB_SERVICES="/root/mihomo/ui"
 SYSCTL_CONF="/etc/sysctl.conf"
 CONFIG_FILE="/root/mihomo/config.yaml"
@@ -190,11 +190,11 @@ Uninstall() {
     # 删除服务文件
     rm -f "$SYSTEM_FILE"
     # 删除文件
-    rm -rf "$MIHOMO_FILE"
+    rm -rf "$FOLDERS"
     # 重新加载 systemd
     systemctl daemon-reload
     # 检查卸载是否成功
-    if [ ! -f "$SYSTEM_FILE" ] && [ ! -d "$MIHOMO_FILE" ]; then
+    if [ ! -f "$SYSTEM_FILE" ] && [ ! -d "$FOLDERS" ]; then
         echo -e "${Green_font_prefix}mihomo 卸载完成${Font_color_suffix}"
     else
         echo -e "${Red_font_prefix}卸载过程中出现问题，请手动检查${Font_color_suffix}"
