@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = v2ray 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-18 10:05
+#!date = 2024-08-18 14:00
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -12,7 +12,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.0.8"
+sh_ver="1.0.9"
 
 # v2ray 可执行文件的路径
 FOLDERS="/root/v2ray"
@@ -134,8 +134,8 @@ Start() {
         echo -e "${Red_font_prefix}v2ray 启动失败${Font_color_suffix}"
         exit 1
     fi
-    # 等待服务启动
-    sleep 2
+    # 等待时间
+    sleep 3s
     # 检查服务状态
     if systemctl is-active --quiet v2ray; then
         echo -e "${Green_font_prefix}v2ray 启动成功${Font_color_suffix}"
@@ -163,6 +163,8 @@ Stop() {
         echo -e "${Red_font_prefix}v2ray 停止失败${Font_color_suffix}"
         exit 1
     fi
+    # 等待时间
+    sleep 3s
     echo -e "${Green_font_prefix}v2ray 停止完成${Font_color_suffix}"
     # 检查服务状态
     check_status
@@ -181,6 +183,8 @@ Restart() {
         echo -e "${Red_font_prefix}v2ray 重启失败${Font_color_suffix}"
         exit 1
     fi
+    # 等待时间
+    sleep 3s
     echo -e "${Green_font_prefix}v2ray 重启成功${Font_color_suffix}"
     # 检查服务状态
     check_status
@@ -201,6 +205,8 @@ Uninstall() {
     rm -rf "$FOLDERS"
     # 重新加载 systemd
     systemctl daemon-reload
+    # 等待时间
+    sleep 3s
     # 检查卸载是否成功
     if [ ! -f "$SYSTEM_FILE" ] && [ ! -d "$FOLDERS" ]; then
         echo -e "${Green_font_prefix}v2ray 卸载完成${Font_color_suffix}"
@@ -233,7 +239,7 @@ Update_Shell() {
             chmod +x v2ray-install.sh
             echo -e "更新完成，当前版本已更新为 ${Green_font_prefix}v${sh_new_ver}${Font_color_suffix}"
             echo -e "5 秒后执行新脚本..."
-            sleep 5s
+            sleep 3s
             bash v2ray-install.sh
             ;;
         [Nn]* )
@@ -316,7 +322,7 @@ Update() {
                 echo -e "${Green_font_prefix}v2ray 下载完成，开始部署${Font_color_suffix}"
                 unzip -o "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
                 echo "$LATEST_VERSION" > "$VERSION_FILE"
-                # 
+                # 授权
                 chmod 755 v2ray
                 # 重启 v2ray
                 systemctl restart v2ray
