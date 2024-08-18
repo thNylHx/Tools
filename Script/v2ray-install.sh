@@ -1,5 +1,5 @@
 #!/bin/bash
-#!name = V2Ray 一键脚本
+#!name = v2ray 一键脚本
 #!desc = 支持，安装、更新、卸载等
 #!date = 2024-08-18 10:05
 #!author = thNylHx ChatGPT
@@ -14,12 +14,12 @@ Font_color_suffix="\033[0m"
 # 定义脚本版本
 sh_ver="1.0.8"
 
-# V2Ray 可执行文件的路径
-FOLDERS="/root/V2Ray"
-FILE="/root/V2Ray/v2ray"
-SSL_FILE="/root/V2Ray/ssl"
-CONFIG_FILE="/root/V2Ray/config.json"
-VERSION_FILE="/root/V2Ray/version.txt"
+# v2ray 可执行文件的路径
+FOLDERS="/root/v2ray"
+FILE="/root/v2ray/v2ray"
+SSL_FILE="/root/v2ray/ssl"
+CONFIG_FILE="/root/v2ray/config.json"
+VERSION_FILE="/root/v2ray/version.txt"
 SYSTEM_FILE="/etc/systemd/system/v2ray.service"
 
 # 返回主菜单
@@ -28,15 +28,15 @@ Start_Main() {
     Main
 }
 
-# 检查是否已安装 V2Ray
+# 检查是否已安装 v2ray
 Check_install(){
     if [ ! -f "$FILE" ]; then
-        echo -e "${Red_font_prefix}V2Ray 未安装${Font_color_suffix}"
+        echo -e "${Red_font_prefix}v2ray 未安装${Font_color_suffix}"
         Start_Main
     fi
 }
 
-# 检查 V2Ray 服务状态
+# 检查 v2ray 服务状态
 check_status() {
     if pgrep -x "v2ray" > /dev/null; then
         status="running"
@@ -50,7 +50,7 @@ get_current_version() {
     if [ -f "$VERSION_FILE" ]; then
         cat "$VERSION_FILE"
     else
-        echo "V2Ray 未安装"
+        echo "v2ray 未安装"
     fi
 }
 
@@ -76,9 +76,9 @@ Show_Status() {
 
 # 显示当前配置
 View(){
-    # 检查是否安装 V2Ray
+    # 检查是否安装 v2ray
     Check_install
-    echo -e "${Red_font_prefix}V2Ray 配置信息${Font_color_suffix}"
+    echo -e "${Red_font_prefix}v2ray 配置信息${Font_color_suffix}"
     # 读取并显示 port、UUID、path
     if [[ -f "${CONFIG_FILE}" ]]; then
         port=$(jq -r '.inbounds[0].port' "${CONFIG_FILE}")
@@ -115,83 +115,83 @@ Get_the_schema(){
     esac
 }
 
-# 启动 V2Ray
+# 启动 v2ray
 Start() {
     # 检测是否安装
     Check_install
-    # 判断 V2Ray 是否已经运行
+    # 判断 v2ray 是否已经运行
     if systemctl is-active --quiet v2ray; then
-        echo -e "${Green_font_prefix}V2Ray 已经在运行中${Font_color_suffix}"
+        echo -e "${Green_font_prefix}v2ray 已经在运行中${Font_color_suffix}"
         Start_Main
     fi
-    echo -e "${Green_font_prefix}V2Ray 启动中...${Font_color_suffix}"
+    echo -e "${Green_font_prefix}v2ray 启动中...${Font_color_suffix}"
     # 重新加载
     systemctl daemon-reload
     # 启动服务
     if systemctl start v2ray; then
-        echo -e "${Green_font_prefix}V2Ray 启动命令已发出${Font_color_suffix}"
+        echo -e "${Green_font_prefix}v2ray 启动命令已发出${Font_color_suffix}"
     else
-        echo -e "${Red_font_prefix}V2Ray 启动失败${Font_color_suffix}"
+        echo -e "${Red_font_prefix}v2ray 启动失败${Font_color_suffix}"
         exit 1
     fi
     # 等待服务启动
     sleep 2
     # 检查服务状态
     if systemctl is-active --quiet v2ray; then
-        echo -e "${Green_font_prefix}V2Ray 启动成功${Font_color_suffix}"
+        echo -e "${Green_font_prefix}v2ray 启动成功${Font_color_suffix}"
     else
-        echo -e "${Red_font_prefix}V2Ray 启动失败，服务未激活${Font_color_suffix}"
+        echo -e "${Red_font_prefix}v2ray 启动失败，服务未激活${Font_color_suffix}"
         exit 1
     fi
     Start_Main
 }
 
-# 停止 V2Ray
+# 停止 v2ray
 Stop() {
-    # 检查 V2Ray 是否已安装
+    # 检查 v2ray 是否已安装
     Check_install
     # 检查是否运行
     if ! systemctl is-active --quiet v2ray; then
-        echo -e "${Green_font_prefix}V2Ray 已经停止${Font_color_suffix}"
+        echo -e "${Green_font_prefix}v2ray 已经停止${Font_color_suffix}"
         Start_Main
     fi
-    echo -e "${Green_font_prefix}V2Ray 停止中...${Font_color_suffix}"
+    echo -e "${Green_font_prefix}v2ray 停止中...${Font_color_suffix}"
     # 尝试停止服务
     if systemctl stop v2ray; then
-        echo -e "${Green_font_prefix}V2Ray 停止命令已发出${Font_color_suffix}"
+        echo -e "${Green_font_prefix}v2ray 停止命令已发出${Font_color_suffix}"
     else
-        echo -e "${Red_font_prefix}V2Ray 停止失败${Font_color_suffix}"
+        echo -e "${Red_font_prefix}v2ray 停止失败${Font_color_suffix}"
         exit 1
     fi
-    echo -e "${Green_font_prefix}V2Ray 停止完成${Font_color_suffix}"
+    echo -e "${Green_font_prefix}v2ray 停止完成${Font_color_suffix}"
     # 检查服务状态
     check_status
     Start_Main
 }
 
-# 重启 V2Ray
+# 重启 v2ray
 Restart() {
-    # 检查 V2Ray 是否已安装
+    # 检查 v2ray 是否已安装
     Check_install
-    echo -e "${Green_font_prefix}V2Ray 重启中...${Font_color_suffix}"
-    # 重启 V2Ray 服务
+    echo -e "${Green_font_prefix}v2ray 重启中...${Font_color_suffix}"
+    # 重启 v2ray 服务
     if systemctl restart v2ray; then
-        echo -e "${Green_font_prefix}V2Ray 重启命令已发出${Font_color_suffix}"
+        echo -e "${Green_font_prefix}v2ray 重启命令已发出${Font_color_suffix}"
     else
-        echo -e "${Red_font_prefix}V2Ray 重启失败${Font_color_suffix}"
+        echo -e "${Red_font_prefix}v2ray 重启失败${Font_color_suffix}"
         exit 1
     fi
-    echo -e "${Green_font_prefix}V2Ray 重启成功${Font_color_suffix}"
+    echo -e "${Green_font_prefix}v2ray 重启成功${Font_color_suffix}"
     # 检查服务状态
     check_status
     Start_Main
 }
 
-# 卸载 V2Ray
+# 卸载 v2ray
 Uninstall() {
-    # 检查是否安装 V2Ray
+    # 检查是否安装 v2ray
     Check_install
-    echo -e "${Red_font_prefix}V2Ray 卸载中...${Font_color_suffix}"
+    echo -e "${Red_font_prefix}v2ray 卸载中...${Font_color_suffix}"
     # 停止服务
     systemctl stop v2ray
     systemctl disable v2ray
@@ -203,7 +203,7 @@ Uninstall() {
     systemctl daemon-reload
     # 检查卸载是否成功
     if [ ! -f "$SYSTEM_FILE" ] && [ ! -d "$FOLDERS" ]; then
-        echo -e "${Green_font_prefix}V2Ray 卸载完成${Font_color_suffix}"
+        echo -e "${Green_font_prefix}v2ray 卸载完成${Font_color_suffix}"
     else
         echo -e "${Red_font_prefix}卸载过程中出现问题，请手动检查${Font_color_suffix}"
     fi
@@ -215,7 +215,7 @@ Update_Shell() {
     # 获取当前版本
     echo -e "当前版本为 ${sh_ver}，开始检测最新版本..."
     # 获取最新版本号
-    sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/thNylHx/Tools/main/Script/v2Ray-install.sh" | grep 'sh_ver="' | awk -F "=" '{print $NF}' | sed 's/\"//g' | head -1)
+    sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/thNylHx/Tools/main/Script/v2ray-install.sh" | grep 'sh_ver="' | awk -F "=" '{print $NF}' | sed 's/\"//g' | head -1)
     if [ "$sh_ver" == "$sh_new_ver" ]; then
         echo -e "当前版本: ${Green_font_prefix}${sh_ver}${Font_color_suffix}"
         echo -e "最新版本: ${Green_font_prefix}${sh_new_ver}${Font_color_suffix}"
@@ -229,12 +229,12 @@ Update_Shell() {
     case $confirm in
         [Yy]* )
             echo -e "${Green_font_prefix}开始更新${Font_color_suffix}"
-            wget -O v2Ray-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/v2Ray-install.sh
-            chmod +x v2Ray-install.sh
+            wget -O v2ray-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/v2ray-install.sh
+            chmod +x v2ray-install.sh
             echo -e "更新完成，当前版本已更新为 ${Green_font_prefix}v${sh_new_ver}${Font_color_suffix}"
             echo -e "5 秒后执行新脚本..."
             sleep 5s
-            bash v2Ray-install.sh
+            bash v2ray-install.sh
             ;;
         [Nn]* )
             echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
@@ -248,19 +248,19 @@ Update_Shell() {
     Start_Main
 }
 
-# 安装 V2Ray
+# 安装 v2ray
 Install() {
     # 检测是否安装
     if [ -f "$FILE" ]; then
-        echo -e "${Green_font_prefix}V2Ray 已经安装${Font_color_suffix}"
+        echo -e "${Green_font_prefix}v2ray 已经安装${Font_color_suffix}"
         Start_Main
     fi
     # 更新系统
     apt update && apt dist-upgrade -y
     # 开始安装
-    echo -e "${Green_font_prefix}V2Ray 安装中...${Font_color_suffix}"
+    echo -e "${Green_font_prefix}v2ray 安装中...${Font_color_suffix}"
     # 创建文件夹
-    mkdir -p /root/V2Ray && cd /root/V2Ray || { echo -e "${Red_font_prefix}创建或进入 /root/V2Ray 目录失败${Font_color_suffix}"; exit 1; }
+    mkdir -p /root/v2ray && cd /root/v2ray || { echo -e "${Red_font_prefix}创建或进入 /root/v2ray 目录失败${Font_color_suffix}"; exit 1; }
     # 获取的架构
     Get_the_schema
     echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
@@ -272,10 +272,10 @@ Install() {
     fi
     # 输出获取到的最新版本信息
     echo -e "${Green_font_prefix}获取到的最新版本：${VERSION}${Font_color_suffix}"
-    # 下载 V2Ray
-    echo -e "${Green_font_prefix}开始下载 V2Ray${Font_color_suffix}"
+    # 下载 v2ray
+    echo -e "${Green_font_prefix}开始下载 v2ray${Font_color_suffix}"
     wget -t 3 -T 30 "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
-    echo -e "${Green_font_prefix}V2Ray 下载完成, 开始部署${Font_color_suffix}"
+    echo -e "${Green_font_prefix}v2ray 下载完成, 开始部署${Font_color_suffix}"
     unzip "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
     # 授权
     chmod 755 v2ray
@@ -283,17 +283,17 @@ Install() {
     echo "$VERSION" > "$VERSION_FILE"
     # 下载系统配置文件
     wget -O "$SYSTEM_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Service/v2ray.service && chmod 755 "$SYSTEM_FILE"
-    echo -e "${Green_font_prefix}V2Ray 安装成功，开始配置配置文件${Font_color_suffix}"
+    echo -e "${Green_font_prefix}v2ray 安装成功，开始配置配置文件${Font_color_suffix}"
     # 开始配置 config 文件
     Configure
 }
 
-# 更新 V2Ray
+# 更新 v2ray
 Update() {
     # 检测是否安装
     Check_install
-    echo -e "${Green_font_prefix}V2Ray 检查是否有更新${Font_color_suffix}"
-    cd /root/V2Ray
+    echo -e "${Green_font_prefix}v2ray 检查是否有更新${Font_color_suffix}"
+    cd /root/v2ray
     current_version=$(get_current_version)
     LATEST_VERSION=$(curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" | grep tag_name | cut -d ":" -f2 | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
     # 开始更新
@@ -308,11 +308,11 @@ Update() {
         read -p "是否要更新到最新版本？(y/n): " confirm
         case $confirm in
             [Yy]* )
-                echo -e "${Green_font_prefix}V2Ray 开始更新${Font_color_suffix}"
+                echo -e "${Green_font_prefix}v2ray 开始更新${Font_color_suffix}"
                 Get_the_schema
                 echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
                 echo -e "${Green_font_prefix}开始下载最新版本的 v2ray${Font_color_suffix}"
-                wget -P /root/V2Ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
+                wget -P /root/v2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
                 echo -e "${Green_font_prefix}v2ray 下载完成，开始部署${Font_color_suffix}"
                 unzip -o "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
                 echo "$LATEST_VERSION" > "$VERSION_FILE"
@@ -320,7 +320,7 @@ Update() {
                 chmod 755 v2ray
                 # 重启 v2ray
                 systemctl restart v2ray
-                echo -e "${Green_font_prefix}V2Ray 更新完成，当前版本已更新为 v${LATEST_VERSION}${Font_color_suffix}"
+                echo -e "${Green_font_prefix}v2ray 更新完成，当前版本已更新为 v${LATEST_VERSION}${Font_color_suffix}"
                 ;;
             [Nn]* )
                 echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
@@ -335,11 +335,11 @@ Update() {
     Start_Main
 }
 
-# 配置 V2Ray
+# 配置 v2ray
 Configure() {
-    # 检查是否安装 V2Ray
+    # 检查是否安装 v2ray
     Check_install
-    echo -e "${Green_font_prefix}V2Ray 开始配置${Font_color_suffix}"
+    echo -e "${Green_font_prefix}v2ray 开始配置${Font_color_suffix}"
     echo "=============================="
     echo "请选择配置文件类型："
     echo "=============================="
@@ -360,7 +360,7 @@ Configure() {
         exit 1
     fi
     # UUID 处理
-    read -p "请输入 V2Ray UUID (留空以生成随机UUID): " UUID
+    read -p "请输入 v2ray UUID (留空以生成随机UUID): " UUID
     if [[ -z "$UUID" ]]; then
         if command -v uuidgen >/dev/null 2>&1; then
             UUID=$(uuidgen)
@@ -383,14 +383,14 @@ Configure() {
     case $confirm in
         1)
           # 写入配置文件
-          wget -O "$CONFIG_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Config/V2ray/v2ray_tcp.json
+          wget -O "$CONFIG_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Config/v2ray/v2ray_tcp.json
           # 使用 sed 替换 JSON 文件中的占位符
           sed -i "s#PORT#$PORT#" "$CONFIG_FILE"
           sed -i "s#UUID#$UUID#" "$CONFIG_FILE"
           ;;
         2)
           # 写入配置文件
-          wget -O "$CONFIG_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Config/V2ray/v2ray_ws.json
+          wget -O "$CONFIG_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Config/v2ray/v2ray_ws.json
           # 使用 sed 替换 JSON 文件中的占位符
           sed -i "s#PORT#$PORT#" "$CONFIG_FILE"
           sed -i "s#UUID#$UUID#" "$CONFIG_FILE"
@@ -398,14 +398,14 @@ Configure() {
           ;;
         3)
           # 写入配置文件
-          wget -O "$CONFIG_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Config/V2ray/v2ray_tcp_tls.json
+          wget -O "$CONFIG_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Config/v2ray/v2ray_tcp_tls.json
           # 使用 sed 替换 JSON 文件中的占位符
           sed -i "s#PORT#$PORT#" "$CONFIG_FILE"
           sed -i "s#UUID#$UUID#" "$CONFIG_FILE"
           ;;
         4)
           # 写入配置文件
-          wget -O "$CONFIG_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Config/V2ray/v2ray_ws_tls.json
+          wget -O "$CONFIG_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Config/v2ray/v2ray_ws_tls.json
           # 使用 sed 替换 JSON 文件中的占位符
           sed -i "s#PORT#$PORT#" "$CONFIG_FILE"
           sed -i "s#UUID#$UUID#" "$CONFIG_FILE"
@@ -416,7 +416,7 @@ Configure() {
           exit 1
           ;;
     esac
-    echo -e "${Green_font_prefix}V2Ray 配置完成，正在启动中...${Font_color_suffix}"
+    echo -e "${Green_font_prefix}v2ray 配置完成，正在启动中...${Font_color_suffix}"
     # 重新加载系统服务
     systemctl daemon-reload
     # 设置为开机自启
@@ -464,9 +464,9 @@ generate_self_signed_cert() {
     # 读取用户输入的域名
     read -p "请输入伪装域名（例如：bing.com）： " DOMAIN
     # 创建存储证书的目录
-    mkdir -p /root/V2ray/ssl
+    mkdir -p /root/v2ray/ssl
     # 生成自签名证书
-    openssl req -newkey rsa:2048 -nodes -keyout /root/V2ray/ssl/server.key -x509 -days 365 -out /root/V2ray/ssl/server.crt -subj "/C=CN/ST=Province/L=City/O=Organization/OU=Department/CN=$DOMAIN"
+    openssl req -newkey rsa:2048 -nodes -keyout /root/v2ray/ssl/server.key -x509 -days 365 -out /root/v2ray/ssl/server.crt -subj "/C=CN/ST=Province/L=City/O=Organization/OU=Department/CN=$DOMAIN"
     echo -e "${Green_font_prefix}自签名证书生成完成！${Font_color_suffix}"
 }
 
@@ -479,7 +479,7 @@ request_acme_cert() {
     # 安装 acme.sh 脚本
     curl https://get.acme.sh | sh
     # 创建存储证书的目录
-    mkdir -p /root/V2ray/ssl
+    mkdir -p /root/v2ray/ssl
     # 获取用户输入的域名和邮箱
     read -p "请输入域名（用于证书申请）： " DOMAIN
     read -p "请输入电子邮件（用于接收通知）： " EMAIL
@@ -491,9 +491,9 @@ request_acme_cert() {
     # 将证书和私钥复制到指定目录
     ~/.acme.sh/acme.sh --install-cert -d "$DOMAIN" \
         --ecc \
-        --cert-file /root/V2ray/ssl/server.crt \
-        --key-file /root/V2ray/ssl/server.key \
-        --fullchain-file /root/V2ray/ssl/fullchain.crt
+        --cert-file /root/v2ray/ssl/server.crt \
+        --key-file /root/v2ray/ssl/server.key \
+        --fullchain-file /root/v2ray/ssl/fullchain.crt
     # 重新启动可能被停止的服务
     systemctl start nginx
     systemctl start apache2
@@ -509,18 +509,18 @@ request_cf_cert() {
 Main() {
     clear
     echo "================================="
-    echo -e "${Green_font_prefix}欢迎使用 V2Ray 一键脚本${Font_color_suffix}"
+    echo -e "${Green_font_prefix}欢迎使用 v2ray 一键脚本${Font_color_suffix}"
     echo -e "${Green_font_prefix}作者：${Font_color_suffix}${Red_font_prefix}thNylHx${Font_color_suffix}"
     echo -e "${Green_font_prefix}请保证科学上网已经开启${Font_color_suffix}"
     echo -e "${Green_font_prefix}安装过程中可以按 ctrl+c 强制退出${Font_color_suffix}"
     echo "================================="
-    echo -e "${Green_font_prefix}1${Font_color_suffix}、 安装 V2Ray"
-    echo -e "${Green_font_prefix}2${Font_color_suffix}、 更新 V2Ray"
-    echo -e "${Green_font_prefix}3${Font_color_suffix}、 配置 V2Ray"
-    echo -e "${Green_font_prefix}4${Font_color_suffix}、 卸载 V2Ray"
-    echo -e "${Green_font_prefix}5${Font_color_suffix}、 启动 V2Ray"
-    echo -e "${Green_font_prefix}6${Font_color_suffix}、 停止 V2Ray"
-    echo -e "${Green_font_prefix}7${Font_color_suffix}、 重启 V2Ray"
+    echo -e "${Green_font_prefix}1${Font_color_suffix}、 安装 v2ray"
+    echo -e "${Green_font_prefix}2${Font_color_suffix}、 更新 v2ray"
+    echo -e "${Green_font_prefix}3${Font_color_suffix}、 配置 v2ray"
+    echo -e "${Green_font_prefix}4${Font_color_suffix}、 卸载 v2ray"
+    echo -e "${Green_font_prefix}5${Font_color_suffix}、 启动 v2ray"
+    echo -e "${Green_font_prefix}6${Font_color_suffix}、 停止 v2ray"
+    echo -e "${Green_font_prefix}7${Font_color_suffix}、 重启 v2ray"
     echo "---------------------------------"
     echo -e "${Green_font_prefix}8${Font_color_suffix}、 查看配置"
     echo -e "${Green_font_prefix}9${Font_color_suffix}、 申请证书"
