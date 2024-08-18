@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = Trojan 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-17 21:30
+#!date = 2024-08-18 09:00
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -249,8 +249,8 @@ Install() {
     echo -e "${Green_font_prefix}Trojan 安装中...${Font_color_suffix}"
     # 创建文件夹
     mkdir -p /root/Trojan && cd /root/Trojan || { echo -e "${Red_font_prefix}创建或进入 /root/Trojan 目录失败${Font_color_suffix}"; exit 1; }
-    Get_the_schema
     # 获取的架构
+    Get_the_schema
     echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
     # 获取版本信息
     VERSION=$(curl -s "https://api.github.com/repos/p4gefau1t/trojan-go/releases/latest" | grep tag_name | cut -d ":" -f2 | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
