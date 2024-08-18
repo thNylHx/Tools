@@ -381,7 +381,7 @@ Configure() {
     Check_install
     echo -e "${Green_font_prefix}配置 mihomo...${Font_color_suffix}"
     # 获取用户输入机场数量
-    read -p "是否有多个机场？目前只支持2个机场连接。(y/n): " multiple_airports
+    read -p "是否有多个机场？ 目前只支持2个机场连接。(y/n): " multiple_airports
     if [[ "$multiple_airports" == "y" ]]; then
         # 配置多个机场
         read -p "请输入第一个机场的订阅连接: " airport_url1
