@@ -2,6 +2,9 @@
 
 
 ### mihomo 一键安装脚本
+
+#### 如果是 PVE 虚拟机的 LXC 安装，需要在 PVE 里面开启 TUN ，才能在 mihomo 里面启用 TUN 模式
+
 ```bash
 ## wget -O mihomo-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo-install.sh && chmod +x mihomo-install.sh && ./mihomo-install.sh
 ```
