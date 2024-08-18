@@ -381,7 +381,6 @@ Update() {
 Configure() {
     # 检查是否安装 mihomo
     Check_install
-    echo -e "${Green_font_prefix}mihomo 开始配置${Font_color_suffix}"
     echo "=============================="
     echo "请选择配置文件类型："
     echo "=============================="
