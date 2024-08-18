@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = mihomo 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-17 21:30
+#!date = 2024-08-18 09:00
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -12,16 +12,16 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 脚本版本
-sh_ver="1.2.1"
+sh_ver="1.2.2"
 
 # 全局变量
 FILE="/root/mihomo/mihomo"
-MIHOMO_FOLDERS="/root/mihomo"
+MIHOMO_FILE="/root/mihomo"
 WEB_SERVICES="/root/mihomo/ui"
 SYSCTL_CONF="/etc/sysctl.conf"
 CONFIG_FILE="/root/mihomo/config.yaml"
 VERSION_FILE="/root/mihomo/version.txt"
-SYSTEM_SERVICE_FILE="/etc/systemd/system/mihomo.service"
+SYSTEM_FILE="/etc/systemd/system/mihomo.service"
 
 # 返回主菜单
 Start_Main() {
@@ -184,13 +184,13 @@ Uninstall() {
     systemctl stop mihomo.service
     systemctl disable mihomo.service
     # 删除服务文件
-    rm -f "$SYSTEM_SERVICE_FILE"
+    rm -f "$SYSTEM_FILE"
     # 删除文件
-    rm -rf "$MIHOMO_FOLDERS"
+    rm -rf "$MIHOMO_FILE"
     # 重新加载 systemd
     systemctl daemon-reload
     # 检查卸载是否成功
-    if [ ! -f "$SYSTEM_SERVICE_FILE" ] && [ ! -d "$MIHOMO_FOLDERS" ]; then
+    if [ ! -f "$SYSTEM_FILE" ] && [ ! -d "$MIHOMO_FILE" ]; then
         echo -e "${Green_font_prefix}mihomo 卸载完成${Font_color_suffix}"
     else
         echo -e "${Red_font_prefix}卸载过程中出现问题，请手动检查${Font_color_suffix}"
@@ -243,7 +243,11 @@ Install() {
         echo -e "${Green_font_prefix}mihomo 已经安装${Font_color_suffix}"
         exit 0
     fi
+    # 更新系统
+    apt update && apt dist-upgrade -y
+    # 开始安装
     echo -e "${Green_font_prefix}开始安装 mihomo${Font_color_suffix}"
+    # 创建文件夹
     mkdir -p /root/mihomo && cd /root/mihomo || { echo -e "${Red_font_prefix}创建或进入 /root/mihomo 目录失败${Font_color_suffix}"; exit 1; }
     # 获取架构
     Get_the_schema
@@ -289,7 +293,7 @@ Install() {
     # 下载 UI
     git clone https://github.com/metacubex/metacubexd.git -b gh-pages "$WEB_SERVICES"
     # 下载系统配置文件
-    wget -O "$SYSTEM_SERVICE_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Service/mihomo.service && chmod 755 "$SYSTEM_SERVICE_FILE"
+    wget -O "$SYSTEM_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Service/mihomo.service && chmod 755 "$SYSTEM_FILE"
     echo -e "${Green_font_prefix}mihomo 安装完成，开始配置 mihomo${Font_color_suffix}"
     # 开始配置 config 文件
     Configure
@@ -415,8 +419,6 @@ Configure() {
 # 主菜单
 Main() {
     clear
-    echo "=============================="
-    Show_Status
     echo "================================="
     echo -e "${Green_font_prefix}欢迎使用 mihomo 一键脚本${Font_color_suffix}"
     echo -e "${Green_font_prefix}作者：${Font_color_suffix}${Red_font_prefix}thNylHx${Font_color_suffix}"
@@ -433,11 +435,13 @@ Main() {
     echo -e "${Green_font_prefix}8${Font_color_suffix}、更新脚本"
     echo -e "${Green_font_prefix}0${Font_color_suffix}、退出脚本"
     echo "================================="
+    Show_Status
+    echo "================================="
     read -p "请输入选项[0-8]: " num
     case "$num" in
         1) check_ip_forward; Install ;;
         2) Update ;;
-        3) Modify_Configuration ;;
+        3) Configure ;;
         4) Uninstall ;;
         5) Start ;;
         6) Stop ;;
