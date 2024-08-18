@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = mihomo 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-18 09:00
+#!date = 2024-08-18 12:30
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -379,32 +379,58 @@ Update() {
 Configure() {
     # 检查是否安装 mihomo
     Check_install
-    echo -e "${Green_font_prefix}配置 mihomo...${Font_color_suffix}"
+    echo -e "${Green_font_prefix}mihomo 开始配置${Font_color_suffix}"
+    echo "=============================="
+    echo "请选择配置文件类型："
+    echo "=============================="
+    echo -e " ${Green_font_prefix}1${Font_color_suffix}、TProxy 模式"
+    echo -e " ${Green_font_prefix}2${Font_color_suffix}、TUN 模式"
+    echo "=============================="
+    read -p "输入数字选择 (1-2，默认1): " confirm
+    confirm=${confirm:-1}  # 如果用户没有输入，默认为1
     # 获取用户输入机场数量
-    read -p "是否有多个机场？ 目前只支持2个机场连接。(y/n): " multiple_airports
+    read -p "是否有多个机场？目前只支持2个机场连接。(y/n): " multiple_airports
     if [[ "$multiple_airports" == "y" ]]; then
         # 配置多个机场
         read -p "请输入第一个机场的订阅连接: " airport_url1
         read -p "请输入第一个机场的名称: " airport_name1
         read -p "请输入第二个机场的订阅连接: " airport_url2
         read -p "请输入第二个机场的名称: " airport_name2
-        # 下载 YAML 文件
-        wget -O "$CONFIG_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Config/mihomo/mihomo-2.yaml
-        # 使用 sed 替换 YAML 文件中的占位符
-        sed -i "s#机场订阅连接1#$airport_url1#" "$CONFIG_FILE"
-        sed -i "s#\[机场名称1\]#$airport_name1#" "$CONFIG_FILE"
-        sed -i "s#机场订阅连接2#$airport_url2#" "$CONFIG_FILE"
-        sed -i "s#\[机场名称2\]#$airport_name2#" "$CONFIG_FILE"
     else
         # 配置单个机场
         read -p "请输入机场的订阅连接: " airport_url
         read -p "请输入机场的名称: " airport_name
-        # 下载 YAML 文件
-        wget -O "$CONFIG_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Config/mihomo/mihomo-1.yaml
-        # 使用 sed 替换 YAML 文件中的占位符
-        sed -i "s#机场订阅连接#$airport_url#" "$CONFIG_FILE"
-        sed -i "s#\[机场名称\]#$airport_name#" "$CONFIG_FILE"
     fi
+    case $confirm in
+        1)
+            # 配置 TProxy 模式
+            if [[ "$multiple_airports" == "y" ]]; then
+                CONFIG_URL="https://raw.githubusercontent.com/thNylHx/Tools/main/Config/mihomo/mihomo-tp2.yaml"
+                sed_replace="s#机场订阅连接1#$airport_url1#g; s#\[机场名称1\]#$airport_name1#g; s#机场订阅连接2#$airport_url2#g; s#\[机场名称2\]#$airport_name2#g"
+            else
+                CONFIG_URL="https://raw.githubusercontent.com/thNylHx/Tools/main/Config/mihomo/mihomo-tp1.yaml"
+                sed_replace="s#机场订阅连接#$airport_url#g; s#\[机场名称\]#$airport_name#g"
+            fi
+            ;;
+        2)
+            # 配置 TUN 模式
+            if [[ "$multiple_airports" == "y" ]]; then
+                CONFIG_URL="https://raw.githubusercontent.com/thNylHx/Tools/main/Config/mihomo/mihomo-tun2.yaml"
+                sed_replace="s#机场订阅连接1#$airport_url1#g; s#\[机场名称1\]#$airport_name1#g; s#机场订阅连接2#$airport_url2#g; s#\[机场名称2\]#$airport_name2#g"
+            else
+                CONFIG_URL="https://raw.githubusercontent.com/thNylHx/Tools/main/Config/mihomo/mihomo-tun1.yaml"
+                sed_replace="s#机场订阅连接#$airport_url#g; s#\[机场名称\]#$airport_name#g"
+            fi
+            ;;
+        *)
+            echo -e "${Red_font_prefix}无效的选项。${Font_color_suffix}"
+            exit 1
+            ;;
+    esac
+    # 下载配置文件
+    wget -O "$CONFIG_FILE" "$CONFIG_URL"
+    # 使用 sed 替换 YAML 文件中的占位符
+    sed -i "$sed_replace" "$CONFIG_FILE"
     echo -e "${Green_font_prefix}mihomo 配置完成，正在启动中...${Font_color_suffix}"
     # 重新加载
     systemctl daemon-reload
