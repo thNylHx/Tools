@@ -12,14 +12,15 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.1.2"
+sh_ver="1.1.4"
 
 # Trojan 可执行文件的路径
 FILE="/root/Trojan/trojan-go"
-TROJAN_FOLDERS="/root/Trojan"
+TROJAN_FILE="/root/Trojan"
+SSL_FILE="/root/Trojan/ssl"
 CONFIG_FILE="/root/Trojan/config.json"
 VERSION_FILE="/root/Trojan/version.txt"
-SYSTEM_SERVICE_FILE="/etc/systemd/system/trojan-go.service"
+SYSTEM_FILE="/etc/systemd/system/trojan-go.service"
 
 # 返回主菜单
 Start_Main() {
@@ -183,13 +184,13 @@ Uninstall() {
     systemctl stop trojan-go
     systemctl disable trojan-go
     # 删除服务文件
-    rm -f "$SYSTEM_SERVICE_FILE"
+    rm -f "$SYSTEM_FILE"
     # 删除文件
-    rm -rf "$TROJAN_FOLDERS"
+    rm -rf "$TROJAN_FILE"
     # 重新加载 systemd
     systemctl daemon-reload
     # 检查卸载是否成功
-    if [ ! -f "$SYSTEM_SERVICE_FILE" ] && [ ! -d "$TROJAN_FOLDERS" ]; then
+    if [ ! -f "$SYSTEM_FILE" ] && [ ! -d "$TROJAN_FILE" ]; then
         echo -e "${Green_font_prefix}Trojan 卸载完成${Font_color_suffix}"
     else
         echo -e "${Red_font_prefix}卸载过程中出现问题，请手动检查${Font_color_suffix}"
@@ -242,10 +243,14 @@ Install() {
         echo -e "${Green_font_prefix}Trojan 已经安装${Font_color_suffix}"
         Start_Main
     fi
+    # 更新系统
+    apt update && apt dist-upgrade -y
     # 开始安装
     echo -e "${Green_font_prefix}Trojan 安装中...${Font_color_suffix}"
+    # 创建文件夹
     mkdir -p /root/Trojan && cd /root/Trojan || { echo -e "${Red_font_prefix}创建或进入 /root/Trojan 目录失败${Font_color_suffix}"; exit 1; }
     Get_the_schema
+    # 获取的架构
     echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
     # 获取版本信息
     VERSION=$(curl -s "https://api.github.com/repos/p4gefau1t/trojan-go/releases/latest" | grep tag_name | cut -d ":" -f2 | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
@@ -265,7 +270,7 @@ Install() {
     # 记录版本信息
     echo "$VERSION" > "$VERSION_FILE"
     # 下载系统配置文件
-    wget -O "$SYSTEM_SERVICE_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Service/trojan-go.service && chmod 755 "$SYSTEM_SERVICE_FILE"
+    wget -O "$SYSTEM_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Service/trojan-go.service && chmod 755 "$SYSTEM_FILE"
     echo -e "${Green_font_prefix}Trojan 安装成功，开始配置配置文件${Font_color_suffix}"
     # 开始配置 config 文件
     Configure
@@ -289,7 +294,7 @@ Update() {
         echo -e "${Red_font_prefix}当前版本: ${current_version}${Font_color_suffix}"
         echo -e "${Green_font_prefix}最新版本: ${LATEST_VERSION}${Font_color_suffix}"
         read -p "是否要更新到最新版本？(y/n): " confirm
-        case $choice in
+        case $confirm in
             [Yy]* )
                 echo -e "${Green_font_prefix}Trojan 开始更新${Font_color_suffix}"
                 Get_the_schema
@@ -372,11 +377,11 @@ Request_Cert() {
     echo "请选择证书申请方式："
     echo "=============================="
     echo -e "${Green_font_prefix}1${Font_color_suffix}、自签证书申请"
-    echo -e "${Green_font_prefix}2${Font_color_suffix}、Cloudflare 证书申请"
+    echo -e "${Green_font_prefix}2${Font_color_suffix}、CF 证书申请(暂时不支持)"
     echo -e "${Green_font_prefix}3${Font_color_suffix}、ACME 证书申请"
     echo "=============================="
-    read -p "输入数字选择 (1-3): " cert_choice
-    case $cert_choice in
+    read -p "输入数字选择 (1-3): " confirm
+    case $confirm in
         1)
         generate_self_signed_cert
         ;;
@@ -393,68 +398,76 @@ Request_Cert() {
     esac
 }
 
+# 自签证书申请
 generate_self_signed_cert() {
-    echo -e "${Green_font_prefix}生成自签名证书中...${Font_color_suffix}"
-    read -p "请输入伪装域名（例如：example.com）： " DOMAIN
+    echo -e "${Green_font_prefix}生成自签名证书中...${Font_color_suffix}" 
+    # 读取用户输入的域名
+    read -p "请输入伪装域名（例如：bing.com）： " DOMAIN
+    # 创建存储证书的目录
     mkdir -p /root/Trojan/ssl
+    # 生成自签名证书
     openssl req -newkey rsa:2048 -nodes -keyout /root/Trojan/ssl/server.key -x509 -days 365 -out /root/Trojan/ssl/server.crt -subj "/C=CN/ST=Province/L=City/O=Organization/OU=Department/CN=$DOMAIN"
     echo -e "${Green_font_prefix}自签名证书生成完成！${Font_color_suffix}"
 }
 
+# ACME 证书申请
 request_acme_cert() {
     echo -e "${Green_font_prefix}申请 ACME 证书中...${Font_color_suffix}"
-    apt-get install -y certbot
+    # 安装必要的软件包
+    apt-get update
+    apt-get install -y curl socat
+    # 安装 acme.sh 脚本
+    curl https://get.acme.sh | sh
+    # 创建存储证书的目录
+    mkdir -p /root/Trojan/ssl
+    # 获取用户输入的域名和邮箱
     read -p "请输入域名（用于证书申请）： " DOMAIN
     read -p "请输入电子邮件（用于接收通知）： " EMAIL
-    certbot certonly --standalone -d "$DOMAIN" -m "$EMAIL" --agree-tos --non-interactive
-    cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem /root/Trojan/ssl/server.crt
-    cp /etc/letsencrypt/live/$DOMAIN/privkey.pem /root/Trojan/ssl/server.key
-    echo -e "${Green_font_prefix}ACME 证书申请完成！${Font_color_suffix}"
+    # 停止可能占用 80 和 443 端口的服务
+    systemctl stop nginx
+    systemctl stop apache2
+    # 使用 acme.sh 的 standalone 模式申请证书
+    ~/.acme.sh/acme.sh --issue --standalone -d "$DOMAIN" --email "$EMAIL" --keylength ec-256
+    # 将证书和私钥复制到指定目录
+    ~/.acme.sh/acme.sh --install-cert -d "$DOMAIN" \
+        --ecc \
+        --cert-file /root/Trojan/ssl/server.crt \
+        --key-file /root/Trojan/ssl/server.key \
+        --fullchain-file /root/Trojan/ssl/fullchain.crt
+    # 重新启动可能被停止的服务
+    systemctl start nginx
+    systemctl start apache2
+    echo -e "${Green_font_prefix}ACME 证书申请完成并保存至 /root/Trojan/ssl 目录！${Font_color_suffix}"
 }
 
+# CF证书申请
 request_cf_cert() {
-    echo -e "${Green_font_prefix}申请 Cloudflare 证书中...${Font_color_suffix}"
-    read -p "请输入 Cloudflare API Key: " CF_API_KEY
-    read -p "请输入 Cloudflare 注册邮箱: " CF_EMAIL
-    read -p "请输入域名（用于证书申请）： " DOMAIN
-    apt-get install -y curl jq
-    cf_zone_id=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=$DOMAIN" -H "Authorization: Bearer $CF_API_KEY" -H "Content-Type: application/json" | jq -r '.result[0].id')
-    if [ -z "$cf_zone_id" ]; then
-        echo -e "${Red_font_prefix}未找到域名的 Zone ID，请检查域名是否正确。${Font_color_suffix}"
-        exit 1
-    fi
-    cert_response=$(curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$cf_zone_id/ssl/certificate_packs" \
-        -H "Authorization: Bearer $CF_API_KEY" \
-        -H "Content-Type: application/json" \
-        --data '{"type":"advanced"}')
-    cert_id=$(echo "$cert_response" | jq -r '.result.id')
-    echo "$cert_id"
-    echo -e "${Green_font_prefix}Cloudflare 证书申请完成！${Font_color_suffix}"
+     echo -e "${Green_font_prefix}暂时不支持${Font_color_suffix}"
 }
 
 # 主菜单
 Main() {
     clear
     echo "=============================="
-    Show_Status
-    echo "=============================="
     echo -e "${Green_font_prefix}欢迎使用 Trojan 一键脚本${Font_color_suffix}"
     echo -e "${Green_font_prefix}作者：${Font_color_suffix}${Red_font_prefix}thNylHx${Font_color_suffix}"
     echo -e "${Green_font_prefix}请保证科学上网已经开启${Font_color_suffix}"
     echo -e "${Green_font_prefix}安装过程中可以按 ctrl+c 强制退出${Font_color_suffix}"
-    echo -e "${Red_font_prefix}特别提醒：安装 Trojan 前，建议先申请证书！${Font_color_suffix}"
+    echo -e "${Red_font_prefix}特别提醒：Trojan 安装后，先申请证书，然后在启动！${Font_color_suffix}"
     echo "=============================="
-    echo -e "${Green_font_prefix}1${Font_color_suffix}、安装 Trojan"
-    echo -e "${Green_font_prefix}2${Font_color_suffix}、更新 Trojan"
-    echo -e "${Green_font_prefix}3${Font_color_suffix}、配置 Trojan"
-    echo -e "${Green_font_prefix}4${Font_color_suffix}、卸载 Trojan"
-    echo -e "${Green_font_prefix}5${Font_color_suffix}、启动 Trojan"
-    echo -e "${Green_font_prefix}6${Font_color_suffix}、停止 Trojan"
-    echo -e "${Green_font_prefix}7${Font_color_suffix}、重启 Trojan"        
-    echo -e "${Green_font_prefix}8${Font_color_suffix}、查看配置"
-    echo -e "${Green_font_prefix}9${Font_color_suffix}、申请证书"
+    echo -e "${Green_font_prefix}1${Font_color_suffix}、 安装 Trojan"
+    echo -e "${Green_font_prefix}2${Font_color_suffix}、 更新 Trojan"
+    echo -e "${Green_font_prefix}3${Font_color_suffix}、 配置 Trojan"
+    echo -e "${Green_font_prefix}4${Font_color_suffix}、 卸载 Trojan"
+    echo -e "${Green_font_prefix}5${Font_color_suffix}、 启动 Trojan"
+    echo -e "${Green_font_prefix}6${Font_color_suffix}、 停止 Trojan"
+    echo -e "${Green_font_prefix}7${Font_color_suffix}、 重启 Trojan"        
+    echo -e "${Green_font_prefix}8${Font_color_suffix}、 查看配置"
+    echo -e "${Green_font_prefix}9${Font_color_suffix}、 申请证书"
     echo -e "${Green_font_prefix}10${Font_color_suffix}、更新脚本"
-    echo -e "${Green_font_prefix}0${Font_color_suffix}、退出"
+    echo -e "${Green_font_prefix}0${Font_color_suffix}、 退出"
+    echo "=============================="
+    Show_Status
     echo "=============================="
     read -p "请输入数字选择[0-10]: " num
     case "$num" in
