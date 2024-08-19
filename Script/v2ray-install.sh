@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = v2ray 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-18 14:00
+#!date = 2024-08-19 13:30
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -12,7 +12,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.0.9"
+sh_ver="1.1.0"
 
 # v2ray 可执行文件的路径
 FOLDERS="/root/v2ray"
