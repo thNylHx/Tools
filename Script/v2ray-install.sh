@@ -263,6 +263,8 @@ Install() {
     fi
     # 更新系统
     apt update && apt dist-upgrade -y
+    # 安装插件
+    apt-get install jq -y
     # 开始安装
     echo -e "${Green_font_prefix}v2ray 安装中...${Font_color_suffix}"
     # 创建文件夹
