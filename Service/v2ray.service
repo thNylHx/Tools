@@ -8,7 +8,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/root/V2Ray/v2ray run -config /root/V2Ray/config.json
+ExecStart=/root/v2ray/v2ray run -config /root/v2ray/config.json
 Restart=on-failure
 RestartPreventExitStatus=23
 
