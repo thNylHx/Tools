@@ -23,7 +23,7 @@
 
 
 
-[一键懒人脚本](https://github.com/thNylHx/Tools/blob/main/Script/README.md)
+### [一键懒人脚本](https://github.com/thNylHx/Tools/blob/main/Script/README.md)
 
 ---
 ## 特别鸣谢
