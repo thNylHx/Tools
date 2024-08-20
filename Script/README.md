@@ -5,6 +5,10 @@
 
 #### 如果是 PVE 虚拟机的 LXC 安装，需要在 PVE 里面开启 TUN ，才能在 mihomo 里面启用 TUN 模式
 
+#### 目前支持 Debian 和 Ubuntu 系统，其他系统 目前暂不考虑。
+
+#### 有 BUG 欢迎提出来，毕竟我也是一枚小白！
+
 ```bash
 ## wget -O mihomo-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo-install.sh && chmod +x mihomo-install.sh && ./mihomo-install.sh
 ```
