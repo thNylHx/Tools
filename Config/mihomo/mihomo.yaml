@@ -57,6 +57,23 @@ sniffer:
     - "Mijia Cloud"
     - "+.push.apple.com"
 
+# TUN配置
+tun:
+  enable: true
+  stack: mixed
+  # 劫持所有53端口的DNS请求
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  # 指定 tun 网卡名称
+  device: Network
+  # 仅支持 Linux，自动设置全局路由，可以自动将全局流量路由进入 tun 网卡
+  auto-route: true
+  # 自动配置 iptables/nftables 以重定向 TCP 连接，需要auto-route已启用
+  auto-redirect: true
+  # 自动选择流量出口接口，多出口网卡同时连接的设备建议手动指定出口网卡
+  auto-detect-interface: true
+  
 # DNS配置
 dns:
   # 关闭将使用系统 DNS
