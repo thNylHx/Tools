@@ -488,7 +488,8 @@ Main() {
         7) Restart ;;
         8) exit 0 ;;
         0) Update_Shell ;;
-        *) echo -e "${Red_font_prefix}无效选项，请重新选择${Font_color_suffix}" ;;
+        *) echo -e "${Red_font_prefix}无效选项，请重新选择${Font_color_suffix}" 
+           exit 1 ;;
     esac
 }
 
