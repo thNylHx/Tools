@@ -378,8 +378,8 @@ Configure() {
     echo "=============================="
     echo -e " ${Green_font_prefix}1${Font_color_suffix}、 vmess+tcp"
     echo -e " ${Green_font_prefix}2${Font_color_suffix}、 vmess+ws"
-    echo -e " ${Green_font_prefix}3${Font_color_suffix}、 vmess+tcp+tls（需要域名）"
-    echo -e " ${Green_font_prefix}4${Font_color_suffix}、 vmess+ws+tls（需要域名）"
+    echo -e " ${Green_font_prefix}3${Font_color_suffix}、 vmess+tcp+tls（需要申请证书）"
+    echo -e " ${Green_font_prefix}4${Font_color_suffix}、 vmess+ws+tls（需要申请证书）"
     echo "=============================="
     read -p "输入数字选择 (1-4，默认1): " confirm
     confirm=${confirm:-1}  # 如果用户没有输入，默认为1
