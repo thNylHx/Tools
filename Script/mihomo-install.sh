@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = mihomo 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-21 17:30
+#!date = 2024-08-21 17:50
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -300,9 +300,8 @@ Install() {
     esac
     # 开始下载
     wget -t 3 -T 30 "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${FILENAME}" -O "${FILENAME}" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
-    # 
+    # 解压并重命名
     if [ -f "$FILENAME" ]; then
-        # 解压 
         gunzip "$FILENAME" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
         # 根据架构重命名 mihomo 文件
         if [ -f "mihomo-linux-${ARCH}-${VERSION}" ]; then
@@ -322,8 +321,10 @@ Install() {
         exit 1
     fi
     # 下载 UI
+    echo -e "开始下载 mihomo 管理面板"
     git clone https://github.com/metacubex/metacubexd.git -b gh-pages "$WEB_SERVICES"
     # 下载系统配置文件
+    echo -e "开始下载 mihomo 的 Service 系统配置"
     wget -O "$SYSTEM_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Service/mihomo.service && chmod 755 "$SYSTEM_FILE"
     echo -e "${Green_font_prefix}mihomo 安装完成，开始配置${Font_color_suffix}"
     # 开始配置 config 文件
@@ -448,13 +449,13 @@ Configure() {
     ' "$CONFIG_FILE" > temp.yaml && mv temp.yaml "$CONFIG_FILE"
     # 重新加载 systemd
     systemctl daemon-reload
-
-    # 设置开机启动
-    systemctl enable mihomo
     # 立即启动 mihomo 服务
     systemctl start mihomo
     # # 检查 mihomo 服务状态
     # systemctl status mihomo
+    echo -e "${Green_font_prefix}已设置开机自启${Font_color_suffix}"
+    # 设置开机启动
+    systemctl enable mihomo
     # 调用函数获取 IP
     GetLocalIP
     # 引导语
