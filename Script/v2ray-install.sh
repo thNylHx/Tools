@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = v2ray 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-21 21:30
+#!date = 2024-08-21 22:00
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
