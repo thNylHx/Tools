@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = mihomo 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-20 22:00
+#!date = 2024-08-21 16:30
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -12,7 +12,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 脚本版本
-sh_ver="1.2.5"
+sh_ver="1.2.6"
 
 # 全局变量
 FOLDERS="/root/mihomo"
@@ -27,6 +27,11 @@ SYSTEM_FILE="/etc/systemd/system/mihomo.service"
 Start_Main() {
     echo && echo -n -e "${Red_font_prefix}* 按回车返回主菜单 *${Font_color_suffix}" && read temp
     Main
+}
+
+# 获取本机 IP
+IP(){
+    ip=$(ip addr show $(ip route | grep default | awk '{print $5}') | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
 }
 
 # 检查是否已安装 mihomo
@@ -450,6 +455,11 @@ Configure() {
     systemctl start mihomo
     # # 检查 mihomo 服务状态
     # systemctl status mihomo
+    # 调用函数获取 IP
+    IP
+    # 引导语
+    echo -e "恭喜你，你的 mihomo 已经配置完成"
+    echo -e "使用 ${Green_font_prefix}http://$ip:9090/ui${Font_color_suffix} 访问你的 mihomo 管理面板面板"
     # 返回主菜单
     Start_Main
 }
