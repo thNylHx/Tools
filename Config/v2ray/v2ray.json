@@ -1,20 +1,20 @@
 {
   "inbounds": [
     {
-      "port": 12345,  // 这里替换成你需要的端口号，例如 12345
+      "port": 12345,
       "protocol": "vmess",
       "settings": {
         "clients": [
           {
-            "id": "your-uuid-here",  // 这里替换成你的 UUID，例如 "123e4567-e89b-12d3-a456-426614174000"
+            "id": "123e4567-e89b-12d3-a456-426614174000",
             "alterId": 0
           }
         ]
       },
       "streamSettings": {
-        "network": "ws",  // 选择 WebSocket (ws) 作为网络类型
-        "wsSettings": {    // 必须添加 WebSocket 的设置
-          "path": "/your-path"  // 替换成你想要的 WebSocket 路径，例如 "/ws"
+        "network": "ws",
+        "wsSettings": {
+          "path": "/abcd123"
         }
       }
     }
