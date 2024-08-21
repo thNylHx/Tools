@@ -285,7 +285,7 @@ Install() {
     mkdir -p /root/mihomo && cd /root/mihomo || { echo -e "${Red_font_prefix}创建或进入 /root/mihomo 目录失败${Font_color_suffix}"; exit 1; }
     # 获取架构
     Get_the_schema
-    echo -e "当前设备架构：[ ${Green_font_prefix}${ARCH_RAW}${Font_color_suffix} ]"
+    echo -e "当前设备架构：[ ${Green_font_prefix}${ARCH}${Font_color_suffix} ]"
     # 获取最新版本信息
     VERSION=$(curl -sSL "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt" || { echo -e "${Red_font_prefix}获取版本信息失败${Font_color_suffix}"; exit 1; })
     # 构建下载文件的名称# 根据系统架构（ARCH）和获取到的版本号（VERSION），生成目标文件的名称
