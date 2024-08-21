@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = mihomo 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-21 16:30
+#!date = 2024-08-21 17:30
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -29,8 +29,8 @@ Start_Main() {
     Main
 }
 
-# 获取本机 IP
-IP(){
+# 获取本机 IP 地址
+GetLocalIP(){
     ip=$(ip addr show $(ip route | grep default | awk '{print $5}') | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
 }
 
@@ -43,7 +43,7 @@ Check_install(){
 }
 
 # 检查 mihomo 服务状态
-check_status() {
+Check_status() {
     if pgrep -x "mihomo" > /dev/null; then
         status="running"
     else
@@ -52,7 +52,7 @@ check_status() {
 }
 
 # 获取当前安装版本
-get_current_version() {
+Get_current_version() {
     if [ -f "$VERSION_FILE" ]; then
         cat "$VERSION_FILE"
     else
@@ -67,7 +67,7 @@ Show_Status() {
         run_status="${Red_font_prefix}未运行${Font_color_suffix}"
         auto_start="${Red_font_prefix}未配置${Font_color_suffix}"
     else
-        check_status
+        Check_status
         if [ "$status" == "running" ]; then
             status="${Green_font_prefix}已安装${Font_color_suffix}"
             run_status="${Green_font_prefix}运行中${Font_color_suffix}"
@@ -78,9 +78,9 @@ Show_Status() {
 
         # 检查是否配置为开机自启
         if systemctl is-enabled mihomo.service &>/dev/null; then
-            auto_start="${Green_font_prefix}已配置${Font_color_suffix}"
+            auto_start="${Green_font_prefix}已设置${Font_color_suffix}"
         else
-            auto_start="${Red_font_prefix}未配置${Font_color_suffix}"
+            auto_start="${Red_font_prefix}未设置${Font_color_suffix}"
         fi
     fi
 
@@ -117,7 +117,7 @@ check_ip_forward() {
     echo "$IPV4_FORWARD" >> "$SYSCTL_CONF"
     # 立即生效
     sysctl -p
-    echo -e "${Green_font_prefix}IP 转发开启成功。${Font_color_suffix}"
+    echo -e "${Green_font_prefix}IP 转发开启成功${Font_color_suffix}"
 }
 
 # 启动 mihomo
@@ -144,7 +144,7 @@ Start() {
     if systemctl is-active --quiet mihomo; then
         echo -e "${Green_font_prefix}mihomo 启动成功${Font_color_suffix}"
     else
-        echo -e "${Red_font_prefix}mihomo 启动失败，服务未激活${Font_color_suffix}"
+        echo -e "${Red_font_prefix}mihomo 启动失败${Font_color_suffix}"
         exit 1
     fi
     Start_Main
@@ -197,7 +197,7 @@ Restart() {
     if systemctl is-active --quiet mihomo; then
         echo -e "${Green_font_prefix}mihomo 重启成功${Font_color_suffix}"
     else
-        echo -e "${Red_font_prefix}mihomo 启动失败，服务未激活${Font_color_suffix}"
+        echo -e "${Red_font_prefix}mihomo 启动失败${Font_color_suffix}"
         exit 1
     fi
     Start_Main
@@ -276,7 +276,7 @@ Install() {
         exit 0
     fi
     # 检查系统更新
-    echo -e "${Green_font_prefix}开始更新系统${Font_color_suffix}"
+    echo -e "开始更新系统"
     # 更新系统
     apt update && apt dist-upgrade -y
     # 安装 iptables
@@ -336,7 +336,7 @@ Update() {
     echo -e "${Green_font_prefix}开始检查是否有更新${Font_color_suffix}"
     cd /root/mihomo
     # 获取当前版本
-    CURRENT_VERSION=$(get_current_version)
+    CURRENT_VERSION=$(Get_current_version)
     # 获取最新版本
     LATEST_VERSION=$(curl -sSL "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt" || { echo -e "${Red_font_prefix}获取版本信息失败${Font_color_suffix}"; exit 1; })
     if [ "$CURRENT_VERSION" == "$LATEST_VERSION" ]; then
@@ -456,7 +456,7 @@ Configure() {
     # # 检查 mihomo 服务状态
     # systemctl status mihomo
     # 调用函数获取 IP
-    IP
+    GetLocalIP
     # 引导语
     echo -e "恭喜你，你的 mihomo 已经配置完成"
     echo -e "使用 ${Green_font_prefix}http://$ip:9090/ui${Font_color_suffix} 访问你的 mihomo 管理面板面板"
