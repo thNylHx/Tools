@@ -447,6 +447,8 @@ Configure() {
     }
     { print }
     ' "$CONFIG_FILE" > temp.yaml && mv temp.yaml "$CONFIG_FILE"
+    echo -e "${Green_font_prefix}mihomo 配置已完成并保存到 ${CONFIG_FILE}${Font_color_suffix}"
+    echo -e "${Green_font_prefix}mihomo 配置完成，正在启动中${Font_color_suffix}"
     # 重新加载 systemd
     systemctl daemon-reload
     # 立即启动 mihomo 服务
