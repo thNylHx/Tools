@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = v2ray 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-21 20:30
+#!date = 2024-08-21 21:30
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -12,9 +12,9 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.1.2"
+sh_ver="1.1.4"
 
-# v2ray 可执行文件的路径
+# 定义全局变量
 FOLDERS="/root/v2ray"
 FILE="/root/v2ray/v2ray"
 SSL_FILE="/root/v2ray/ssl"
@@ -69,7 +69,6 @@ Show_Status() {
             status="${Green_font_prefix}已安装${Font_color_suffix}"
             run_status="${Red_font_prefix}未运行${Font_color_suffix}"
         fi
-
         # 检查是否配置为开机自启
         if systemctl is-enabled v2ray.service &>/dev/null; then
             auto_start="${Green_font_prefix}已设置${Font_color_suffix}"
@@ -82,6 +81,19 @@ Show_Status() {
     echo -e "安装状态：${status}"
     echo -e "运行状态：${run_status}"
     echo -e "开机自启：${auto_start}"
+}
+
+# 获取 CPU 架构
+Get_the_schema(){
+    ARCH_RAW=$(uname -m)
+    case "${ARCH_RAW}" in
+        'x86_64')    ARCH='64';;
+        'x86' | 'i686' | 'i386')     ARCH='32';;
+        'aarch64' | 'arm64') ARCH='arm64-v8a';;
+        'armv7' | 'armv7l')   ARCH='arm32-v7a';;
+        's390x')    ARCH='s390x';;
+        *)          echo -e "${Red_font_prefix}不支持的架构: ${ARCH_RAW}${Font_color_suffix}"; exit 1;;
+    esac
 }
 
 # 显示当前配置
@@ -108,30 +120,16 @@ View() {
     Start_Main
 }
 
-# 获取 CPU 架构
-Get_the_schema(){
-    ARCH_RAW=$(uname -m)
-    case "${ARCH_RAW}" in
-        'x86_64')    ARCH='64';;
-        'x86' | 'i686' | 'i386')     ARCH='32';;
-        'aarch64' | 'arm64') ARCH='arm64-v8a';;
-        'armv7' | 'armv7l')   ARCH='arm32-v7a';;
-        's390x')    ARCH='s390x';;
-        *)          echo -e "${Red_font_prefix}不支持的架构: ${ARCH_RAW}${Font_color_suffix}"; exit 1;;
-    esac
-}
-
 # 启动 v2ray
 Start() {
     # 检查是否安装 v2ray
     Check_install
-    
     if systemctl is-active --quiet v2ray; then
         echo -e "${Green_font_prefix}v2ray 正在运行中${Font_color_suffix}"
         Start_Main
     fi
     echo -e "${Green_font_prefix}v2ray 准备启动中${Font_color_suffix}"
-    # 启用服务
+    # 重新加载
     systemctl enable v2ray
     # 启动服务
     if systemctl start v2ray; then
@@ -154,9 +152,8 @@ Start() {
 
 # 停止 v2ray
 Stop() {
-    # 检查 v2ray 是否已安装
+    # 检查是否安装 v2ray
     Check_install
-    
     # 检查是否运行
     if ! systemctl is-active --quiet v2ray; then
         echo -e "${Green_font_prefix}v2ray 已经停止${Font_color_suffix}"
@@ -184,7 +181,7 @@ Stop() {
 
 # 重启 v2ray
 Restart() {
-    # 检查 v2ray 是否已安装
+    # 检查是否安装 v2ray
     Check_install
     echo -e "${Green_font_prefix}v2ray 准备重启中${Font_color_suffix}"
     # 重启服务
@@ -274,7 +271,7 @@ Update_Shell() {
 
 # 安装 v2ray
 Install() {
-    # 检测是否安装
+    # 检查是否安装 v2ray 
     if [ -f "$FILE" ]; then
         echo -e "${Green_font_prefix}v2ray 已经安装${Font_color_suffix}"
         Start_Main
@@ -284,33 +281,31 @@ Install() {
     # 安装插件
     apt-get install jq -y
     apt install unzip -y
-    # 开始安装
-    echo -e "${Green_font_prefix}v2ray 安装中...${Font_color_suffix}"
     # 创建文件夹
     mkdir -p /root/v2ray && cd /root/v2ray || { echo -e "${Red_font_prefix}创建或进入 /root/v2ray 目录失败${Font_color_suffix}"; exit 1; }
-    # 获取的架构
+    # 获取架构
     Get_the_schema
-    echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
+    echo -e "当前设备架构：[ ${Green_font_prefix}${ARCH_RAW}${Font_color_suffix} ]"
     # 获取版本信息
-    VERSION=$(curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" | grep tag_name | cut -d ":" -f2 | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
+    VERSION=$(curl -sSL "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" | grep tag_name | cut -d ":" -f2 | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
     if [ -z "$VERSION" ]; then
         echo -e "${Red_font_prefix}获取最新版本信息失败${Font_color_suffix}"
         exit 1
     fi
     # 输出获取到的最新版本信息
-    echo -e "${Green_font_prefix}获取到的最新版本：${VERSION}${Font_color_suffix}"
-    # 下载 v2ray
-    echo -e "${Green_font_prefix}开始下载 v2ray${Font_color_suffix}"
+    echo -e "获取到的最新版本：[ ${Green_font_prefix}${VERSION}${Font_color_suffix} ]"
+    # 开始下载
     wget -t 3 -T 30 "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
-    echo -e "${Green_font_prefix}v2ray 下载完成, 开始部署${Font_color_suffix}"
+    # 解压并重命名
     unzip "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
     # 授权
     chmod 755 v2ray
     # 记录版本信息
     echo "$VERSION" > "$VERSION_FILE"
     # 下载系统配置文件
+    echo -e "开始下载 v2ray 的 Service 系统配置"
     wget -O "$SYSTEM_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Service/v2ray.service && chmod 755 "$SYSTEM_FILE"
-    echo -e "${Green_font_prefix}v2ray 安装成功，开始配置配置文件${Font_color_suffix}"
+    echo -e "${Green_font_prefix}v2ray 安装完成，开始配置${Font_color_suffix}"
     # 开始配置 config 文件
     Configure
 }
@@ -324,41 +319,53 @@ Update() {
     current_version=$(Get_current_version)
     LATEST_VERSION=$(curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" | grep tag_name | cut -d ":" -f2 | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
     # 开始更新
-    if [[ "$current_version" == "$LATEST_VERSION" ]]; then
-        echo -e "${Green_font_prefix}当前版本: (v${current_version})${Font_color_suffix}"
-        echo -e "${Green_font_prefix}最新版本: (v${LATEST_VERSION})${Font_color_suffix}"
+    if [ "$CURRENT_VERSION" == "$LATEST_VERSION" ]; then
+        echo -e "当前版本：[ ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix} ]"
+        echo -e "最新版本：[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
         echo -e "当前已是最新版本，无需更新！"
         Start_Main
-    else
-        echo -e "${Red_font_prefix}当前版本: ${current_version}${Font_color_suffix}"
-        echo -e "${Green_font_prefix}最新版本: ${LATEST_VERSION}${Font_color_suffix}"
+    fi
+    echo -e "当前版本：[ ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix} ]"
+    echo -e "最新版本：[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
+    while true; do
         read -p "是否要更新到最新版本？(y/n): " confirm
         case $confirm in
             [Yy]* )
-                echo -e "${Green_font_prefix}v2ray 开始更新${Font_color_suffix}"
+                # 获取架构
                 Get_the_schema
-                echo -e "${Green_font_prefix}当前设备架构: ${ARCH_RAW}${Font_color_suffix}"
-                echo -e "${Green_font_prefix}开始下载最新版本的 v2ray${Font_color_suffix}"
-                wget -P /root/v2ray "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
-                echo -e "${Green_font_prefix}v2ray 下载完成，开始部署${Font_color_suffix}"
+                echo -e "当前设备架构：${Green_font_prefix}[ ${ARCH} ]${Font_color_suffix}"
+                # 开始下载
+                DOWNLOAD_URL="https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip"
+                echo -e "开始下载最新版本 [ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
+                wget -t 3 -T 30 "${DOWNLOAD_URL}" -O "${FILENAME}" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
+                echo -e "[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ] 下载完成，开始更新"
+                # 解压并重命名
                 unzip -o "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
-                echo "$LATEST_VERSION" > "$VERSION_FILE"
                 # 授权
                 chmod 755 v2ray
+                # 更新版本信息
+                echo "$LATEST_VERSION" > "$VERSION_FILE"
                 # 重启 v2ray
                 systemctl restart v2ray
-                echo -e "${Green_font_prefix}v2ray 更新完成，当前版本已更新为 v${LATEST_VERSION}${Font_color_suffix}"
+                echo -e "更新完成，当前版本已更新为 [ ${Green_font_prefix}v${LATEST_VERSION}${Font_color_suffix} ]"
+                # 检查并显示服务状态
+                if systemctl is-active --quiet v2ray; then
+                    echo -e "当前状态：${Green_font_prefix}运行中${Font_color_suffix}"
+                else
+                    echo -e "当前状态：${Red_font_prefix}未运行${Font_color_suffix}"
+                    Start_Main
+                fi
+                Start_Main
                 ;;
             [Nn]* )
                 echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
-                exit 1
+                Start_Main
                 ;;
             * )
-                echo -e "${Red_font_prefix}无效的输入。${Font_color_suffix}"
-                exit 1
+                echo -e "${Red_font_prefix}无效的输入，请输入 y 或 n。${Font_color_suffix}"
                 ;;
         esac
-    fi
+    done
     Start_Main
 }
 
@@ -366,12 +373,10 @@ Update() {
 Configure() {
     # 检查是否安装 v2ray
     Check_install
-    
     # 下载基础配置文件
     CONFIG_URL="https://raw.githubusercontent.com/thNylHx/Tools/main/Config/v2ray/v2ray.json"
-    echo -e "${Green_font_prefix}下载基础配置文件...${Font_color_suffix}"
     curl -s -o "$CONFIG_FILE" "$CONFIG_URL"
-
+    # 开始配置
     echo -e "${Green_font_prefix}v2ray 开始配置${Font_color_suffix}"
     echo "=============================="
     echo "请选择配置文件类型："
@@ -383,7 +388,6 @@ Configure() {
     echo "=============================="
     read -p "输入数字选择 (1-4，默认1): " confirm
     confirm=${confirm:-1}  # 如果用户没有输入，默认为1
-
     # 端口处理
     read -p "请输入监听端口 (留空以随机生成端口): " PORT
     if [[ -z "$PORT" ]]; then
@@ -415,10 +419,10 @@ Configure() {
         fi
     fi
     # 读取配置文件
-    echo -e "${Green_font_prefix}读取配置文件...${Font_color_suffix}"
+    echo -e "${Green_font_prefix}读取配置文件${Font_color_suffix}"
     config=$(cat "$CONFIG_FILE")
-    # 根据选择的配置类型进行修改
-    echo -e "${Green_font_prefix}根据选择修改配置文件...${Font_color_suffix}"
+    # 修改配置文件
+    echo -e "${Green_font_prefix}修改配置文件${Font_color_suffix}"
     case $confirm in
         1)  # vmess + tcp
             config=$(echo "$config" | jq --arg port "$PORT" --arg uuid "$UUID" '
@@ -476,29 +480,29 @@ Configure() {
             exit 1
             ;;
     esac
-    # 替换占位符并写入配置文件
-    echo -e "${Green_font_prefix}替换占位符并写入配置文件...${Font_color_suffix}"
+    # 写入配置文件
+    echo -e "${Green_font_prefix}写入配置文件${Font_color_suffix}"
     echo "$config" > "$CONFIG_FILE"
     # 验证修改后的配置文件
-    echo -e "${Green_font_prefix}验证修改后的配置文件格式...${Font_color_suffix}"
+    echo -e "${Green_font_prefix}验证修改后的配置文件格式${Font_color_suffix}"
     if ! jq . "$CONFIG_FILE" >/dev/null 2>&1; then
-        echo -e "${Red_font_prefix}修改后的配置文件格式无效，请检查文件。${Font_color_suffix}"
+        echo -e "${Red_font_prefix}修改后的配置文件格式无效，请检查文件${Font_color_suffix}"
         exit 1
     fi
-    echo -e "${Green_font_prefix}v2ray 配置已完成并保存到 ${CONFIG_FILE}${Font_color_suffix}"
+    # 提示保存位置
+    echo -e "${Green_font_prefix}v2ray 配置已完成并保存到 ${CONFIG_FILE} 文件夹${Font_color_suffix}"
     echo -e "${Green_font_prefix}v2ray 配置完成，正在启动中${Font_color_suffix}"
-
     # 重新加载系统服务
     systemctl daemon-reload
-    # 设置为开机自启
-    systemctl enable v2ray
     # 立即启动
     systemctl start v2ray
     # # 运行状况
     # systemctl status v2ray
-    # 检查服务状态
-    Check_status
-
+    echo -e "${Green_font_prefix}已设置开机自启${Font_color_suffix}"
+    # 设置为开机自启
+    systemctl enable v2ray
+    # 引导语
+    echo -e "恭喜你，你的 v2ray 已经配置完成"
     # 返回主菜单
     Start_Main
 }
@@ -581,7 +585,7 @@ request_cf_cert() {
 Main() {
     clear
     echo "================================="
-    echo -e "${Green_font_prefix}欢迎使用 v2ray 一键脚本${Font_color_suffix}"
+    echo -e "${Green_font_prefix}欢迎使用 v2ray 一键脚本 Beta 版${Font_color_suffix}"
     echo -e "${Green_font_prefix}作者：${Font_color_suffix}${Red_font_prefix}thNylHx${Font_color_suffix}"
     echo -e "${Green_font_prefix}请保证科学上网已经开启${Font_color_suffix}"
     echo -e "${Green_font_prefix}安装过程中可以按 ctrl+c 强制退出${Font_color_suffix}"
