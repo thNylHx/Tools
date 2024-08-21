@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = mihomo 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-21 21:30
+#!date = 2024-08-21 21:50
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -12,7 +12,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.2.7"
+sh_ver="1.2.8"
 
 # 定义全局变量
 FOLDERS="/root/mihomo"
@@ -422,8 +422,6 @@ Configure() {
     echo -e "${Green_font_prefix}读取配置文件${Font_color_suffix}"
     # 初始化 proxy-providers 部分
     proxy_providers="proxy-providers:"
-    # 修改配置文件
-    echo -e "${Green_font_prefix}修改配置文件${Font_color_suffix}"
     # 动态添加机场
     for ((i=1; i<=airport_count; i++))
     do
@@ -438,6 +436,8 @@ Configure() {
     override:
       additional-prefix: \"[$airport_name]\""
     done
+    # 修改配置文件
+    echo -e "${Green_font_prefix}修改配置文件${Font_color_suffix}"
     # 写入配置文件
     echo -e "${Green_font_prefix}写入配置文件${Font_color_suffix}"
     # 使用 awk 将 proxy-providers 插入到指定位置
@@ -451,10 +451,6 @@ Configure() {
     ' "$CONFIG_FILE" > temp.yaml && mv temp.yaml "$CONFIG_FILE"
     # 验证修改后的配置文件格式
     echo -e "${Green_font_prefix}验证修改后的配置文件格式${Font_color_suffix}"
-    if ! yaml-validator "$CONFIG_FILE" >/dev/null 2>&1; then
-        echo -e "${Red_font_prefix}修改后的配置文件格式无效，请检查文件${Font_color_suffix}"
-        exit 1
-    fi
     # 提示保存位置
     echo -e "${Green_font_prefix}mihomo 配置已完成并保存到 ${CONFIG_FILE} 文件夹${Font_color_suffix}"
     echo -e "${Green_font_prefix}mihomo 配置完成，正在启动中${Font_color_suffix}"
