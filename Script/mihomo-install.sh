@@ -83,7 +83,7 @@ Show_Status() {
             auto_start="${Red_font_prefix}未设置${Font_color_suffix}"
         fi
     fi
-
+    # 输出状态
     echo -e "脚本版本：${Green_font_prefix}${sh_ver}${Font_color_suffix}"
     echo -e "安装状态：${status}"
     echo -e "运行状态：${run_status}"
