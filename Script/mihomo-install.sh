@@ -352,7 +352,7 @@ Update() {
             [Yy]* )
                 # 获取架构
                 Get_the_schema
-                echo -e "当前设备架构：${Green_font_prefix}[ ${ARCH} ]${Font_color_suffix}"
+                echo -e "当前设备架构：${Green_font_prefix}[ ${ARCH_RAW} ]${Font_color_suffix}"
                 # 构造文件名
                 case "$ARCH" in
                     'arm64' | 'armv7' | 's390x' | '386') FILENAME="mihomo-linux-${ARCH}-${LATEST_VERSION}.gz";;
