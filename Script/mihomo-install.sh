@@ -65,7 +65,7 @@ Show_Status() {
     if [ ! -f "$FILE" ]; then
         status="${Red_font_prefix}未安装${Font_color_suffix}"
         run_status="${Red_font_prefix}未运行${Font_color_suffix}"
-        auto_start="${Red_font_prefix}未配置${Font_color_suffix}"
+        auto_start="${Red_font_prefix}未设置${Font_color_suffix}"
     else
         Check_status
         if [ "$status" == "running" ]; then
