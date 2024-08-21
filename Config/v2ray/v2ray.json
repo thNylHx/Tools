@@ -12,10 +12,7 @@
         ]
       },
       "streamSettings": {
-        "network": "ws",
-        "wsSettings": {
-          "path": "/abcd123"
-        }
+        "network": "tcp"
       }
     }
   ],
