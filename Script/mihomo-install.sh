@@ -12,7 +12,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.2.8"
+sh_ver="1.2.7"
 
 # 定义全局变量
 FOLDERS="/root/mihomo"
@@ -412,12 +412,16 @@ Configure() {
     CONFIG_URL="https://raw.githubusercontent.com/thNylHx/Tools/main/Config/mihomo/mihomo.yaml"
     curl -s -o "$CONFIG_FILE" "$CONFIG_URL"
     # 获取用户输入的机场数量，默认为 1，且限制为 5 个以内
-    read -p "请输入需要配置的机场数量（默认 1 个，最多 5 个）：" airport_count
-    airport_count=${airport_count:-1}
-    if ! [[ "$airport_count" =~ ^[0-9]+$ ]] || [ "$airport_count" -le 0 ] || [ "$airport_count" -gt 5 ]; then
-        echo -e "\033[31m无效的数量，请输入 1 到 5 之间的正整数。\033[0m"
-        exit 1
-    fi
+    while true; do
+        read -p "请输入需要配置的机场数量（默认 1 个，最多 5 个）：" airport_count
+        airport_count=${airport_count:-1}
+        # 验证输入是否为 1 到 5 之间的正整数
+        if [[ "$airport_count" =~ ^[0-9]+$ ]] && [ "$airport_count" -ge 1 ] && [ "$airport_count" -le 5 ]; then
+            break
+        else
+            echo -e "\033[31m无效的数量，请输入 1 到 5 之间的正整数。\033[0m"
+        fi
+    done
     # 读取配置文件
     echo -e "${Green_font_prefix}读取配置文件${Font_color_suffix}"
     # 初始化 proxy-providers 部分
