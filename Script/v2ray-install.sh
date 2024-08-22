@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = v2ray 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-22 19:00
+#!date = 2024-08-22 19:20
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -210,7 +210,7 @@ Uninstall() {
     # 检查是否安装 v2ray
     Check_install
     echo -e "${Green_font_prefix}v2ray 开始卸载${Font_color_suffix}"
-    echo "${Green_font_prefix}v2ray 卸载命令已发出${Font_color_suffix}"
+    echo -e  "${Green_font_prefix}v2ray 卸载命令已发出${Font_color_suffix}"
     # 停止服务
     systemctl stop v2ray 2>/dev/null || { echo -e "${Red_font_prefix}停止 v2ray 服务失败${Font_color_suffix}"; exit 1; }
     systemctl disable v2ray 2>/dev/null || { echo -e "${Red_font_prefix}禁用 v2ray 服务失败${Font_color_suffix}"; exit 1; }
@@ -566,8 +566,8 @@ Request_acme_cert() {
     Select_Cert_Provider
     # 生成随机邮箱地址
     Generate_random_email() {
-        local RANDOM_NUMBER=$(shuf -i 1000-9999 -n 1)
-        local EMAIL="randomuser${RANDOM_NUMBER}@spymail.com"
+        local RANDOM_NUMBER=$(openssl rand -hex 12 | tr -dc 'a-z0-9' | head -c 15)
+        local EMAIL="${RANDOM_NUMBER}@spyemail.com"
         echo "$EMAIL"
     }
     # 获取用户输入的域名
