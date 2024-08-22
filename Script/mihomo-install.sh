@@ -471,13 +471,6 @@ Configure() {
     # 引导语
     echo -e "恭喜你，你的 mihomo 已经配置完成"
     echo -e "使用 ${Green_font_prefix}http://$ip:9090/ui${Font_color_suffix} 访问你的 mihomo 管理面板面板"
-    # 检查并显示服务状态
-    if systemctl is-active --quiet mihomo; then
-        echo -e "当前状态：[ ${Green_font_prefix}运行中${Font_color_suffix} ]"
-    else
-        echo -e "当前状态：[ ${Red_font_prefix}未运行${Font_color_suffix} ]"
-        Start_Main
-    fi
     # 返回主菜单
     Start_Main
 }
