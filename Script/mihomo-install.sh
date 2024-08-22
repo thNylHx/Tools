@@ -276,8 +276,7 @@ Install() {
     # 更新系统
     apt update && apt dist-upgrade -y
     # 安装插件
-    apt install iptables -y
-    apt install unzip -y
+    apt-get install -y wget curl iptables unzip
     # 创建文件夹
     mkdir -p /root/mihomo && cd /root/mihomo || { echo -e "${Red_font_prefix}创建或进入 /root/mihomo 目录失败${Font_color_suffix}"; exit 1; }
     # 获取架构
