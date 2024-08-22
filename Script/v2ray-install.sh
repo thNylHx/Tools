@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = v2ray 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-21 22:00
+#!date = 2024-08-22 19:00
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -12,11 +12,12 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.1.4"
+sh_ver="1.1.6"
 
 # 定义全局变量
 FOLDERS="/root/v2ray"
 FILE="/root/v2ray/v2ray"
+ACME_FILE="/root/.acme.sh"
 SSL_FILE="/root/v2ray/ssl"
 CONFIG_FILE="/root/v2ray/config.json"
 VERSION_FILE="/root/v2ray/version.txt"
@@ -124,6 +125,7 @@ View() {
 Start() {
     # 检查是否安装 v2ray
     Check_install
+    # 检查运行状态
     if systemctl is-active --quiet v2ray; then
         echo -e "${Green_font_prefix}v2ray 正在运行中${Font_color_suffix}"
         Start_Main
@@ -154,10 +156,10 @@ Start() {
 Stop() {
     # 检查是否安装 v2ray
     Check_install
-    # 检查是否运行
+    # 检查运行状态
     if ! systemctl is-active --quiet v2ray; then
         echo -e "${Green_font_prefix}v2ray 已经停止${Font_color_suffix}"
-        exit 0
+        Start_Main
     fi
     echo -e "${Green_font_prefix}v2ray 准备停止中${Font_color_suffix}"
     # 尝试停止服务
@@ -207,16 +209,19 @@ Restart() {
 Uninstall() {
     # 检查是否安装 v2ray
     Check_install
-    echo -e "${Red_font_prefix}v2ray 开始卸载中...${Font_color_suffix}"
+    echo -e "${Green_font_prefix}v2ray 开始卸载${Font_color_suffix}"
+    echo "${Green_font_prefix}v2ray 卸载命令已发出${Font_color_suffix}"
     # 停止服务
-    systemctl stop v2ray
-    systemctl disable v2ray
+    systemctl stop v2ray 2>/dev/null || { echo -e "${Red_font_prefix}停止 v2ray 服务失败${Font_color_suffix}"; exit 1; }
+    systemctl disable v2ray 2>/dev/null || { echo -e "${Red_font_prefix}禁用 v2ray 服务失败${Font_color_suffix}"; exit 1; }
     # 删除服务文件
-    rm -f "$SYSTEM_FILE"
+    rm -f "$SYSTEM_FILE" || { echo -e "${Red_font_prefix}删除服务文件失败${Font_color_suffix}"; exit 1; }
     # 删除相关文件夹
-    rm -rf "$FOLDERS"
+    rm -rf $FOLDERS || { echo -e "${Red_font_prefix}删除相关文件夹失败${Font_color_suffix}"; exit 1; }
     # 重新加载 systemd
-    systemctl daemon-reload
+    systemctl daemon-reload || { echo -e "${Red_font_prefix}重新加载 systemd 配置失败${Font_color_suffix}"; exit 1; }
+    # 删除证书
+    rm -rf $ACME_FILE
     # 等待服务停止
     sleep 3s
     # 检查卸载是否成功
@@ -225,7 +230,7 @@ Uninstall() {
     else
         echo -e "${Red_font_prefix}卸载过程中出现问题，请手动检查${Font_color_suffix}"
     fi
-    exit 1
+    exit 0
 }
 
 # 更新脚本
@@ -379,12 +384,13 @@ Configure() {
     # 开始配置
     echo -e "${Green_font_prefix}v2ray 开始配置${Font_color_suffix}"
     echo "=============================="
-    echo "请选择配置文件类型："
+    echo "使用说明"
+    echo "选择 3 和 4 后，需要申请证书才能使用"
     echo "=============================="
     echo -e " ${Green_font_prefix}1${Font_color_suffix}、 vmess+tcp"
     echo -e " ${Green_font_prefix}2${Font_color_suffix}、 vmess+ws"
-    echo -e " ${Green_font_prefix}3${Font_color_suffix}、 vmess+tcp+tls（需要申请证书）"
-    echo -e " ${Green_font_prefix}4${Font_color_suffix}、 vmess+ws+tls（需要申请证书）"
+    echo -e " ${Green_font_prefix}3${Font_color_suffix}、 vmess+tcp+tls"
+    echo -e " ${Green_font_prefix}4${Font_color_suffix}、 vmess+ws+tls"
     echo "=============================="
     read -p "输入数字选择 (1-4，默认1): " confirm
     confirm=${confirm:-1}  # 如果用户没有输入，默认为1
@@ -514,78 +520,195 @@ Configure() {
     Start_Main
 }
 
-# 申请证书
-Request_Cert() {
-    echo "=============================="
-    echo "请选择证书申请方式："
-    echo "=============================="
-    echo -e "${Green_font_prefix}1${Font_color_suffix}、自签证书申请"
-    echo -e "${Green_font_prefix}2${Font_color_suffix}、CF 证书申请(暂时不支持)"
-    echo -e "${Green_font_prefix}3${Font_color_suffix}、ACME 证书申请"
-    echo "=============================="
-    read -p "输入数字选择 (1-3): " confirm
-    case $confirm in
-        1)
-        generate_self_signed_cert
-        ;;
-        2)
-        request_cf_cert
-        ;;
-        3)
-        request_acme_cert
-        ;;
-        *)
-        echo -e "${Red_font_prefix}无效的选项。${Font_color_suffix}"
-        exit 1
-        ;;
-    esac
+# 创建存储证书的目录
+mkdir -p $SSL_FILE
+
+# 检查是否安装 acme.sh
+Install_acme_if_needed(){
+    if ! command -v ~/.acme.sh/acme.sh &>/dev/null; then
+        echo "acme.sh 未安装，正在安装..."
+        curl https://get.acme.sh | sh || { echo "安装失败"; exit 1; }
+    else
+        echo "acme.sh 已经安装"
+    fi
 }
 
-# 自签证书申请
-generate_self_signed_cert() {
-    echo -e "${Green_font_prefix}生成自签名证书中...${Font_color_suffix}" 
+# 检查是否已有该域名的证书
+Check_domain_name(){
+    local currentCert=$(~/.acme.sh/acme.sh --list | grep ${DOMAIN} | wc -l)
+    if [ ${currentCert} -ne 0 ]; then
+        local certInfo=$(~/.acme.sh/acme.sh --list)
+        echo -e "${Red_font_prefix}错误：当前环境已有对应域名的证书，无法重复申请${Font_color_suffix}"
+        echo "$certInfo"
+        exit 1
+    else
+        echo "域名合法性校验通过"
+    fi
+}
+
+# 自签证书申请函数
+Request_self_cert() {
+    echo -e "${Green_font_prefix}申请自签名证书中${Font_color_suffix}" 
     # 读取用户输入的域名
     read -p "请输入伪装域名（例如：bing.com）： " DOMAIN
-    # 创建存储证书的目录
-    mkdir -p /root/v2ray/ssl
     # 生成自签名证书
-    openssl req -newkey rsa:2048 -nodes -keyout /root/v2ray/ssl/server.key -x509 -days 365 -out /root/v2ray/ssl/server.crt -subj "/C=CN/ST=Province/L=City/O=Organization/OU=Department/CN=$DOMAIN"
+    openssl req -newkey rsa:2048 -nodes -keyout "$SSL_FILE/server.key" -x509 -days 365 -out "$SSL_FILE/server.crt" -subj "/C=CN/ST=Province/L=City/O=Organization/OU=Department/CN=$DOMAIN"
     echo -e "${Green_font_prefix}自签名证书生成完成！${Font_color_suffix}"
 }
 
-# ACME 证书申请
-request_acme_cert() {
-    echo -e "${Green_font_prefix}申请 ACME 证书中...${Font_color_suffix}"
-    # 安装必要的软件包
-    apt-get update
-    apt-get install -y curl socat
-    # 安装 acme.sh 脚本
-    curl https://get.acme.sh | sh
-    # 创建存储证书的目录
-    mkdir -p /root/v2ray/ssl
-    # 获取用户输入的域名和邮箱
-    read -p "请输入域名（用于证书申请）： " DOMAIN
-    read -p "请输入电子邮件（用于接收通知）： " EMAIL
-    # 停止可能占用 80 和 443 端口的服务
-    systemctl stop nginx
-    systemctl stop apache2
-    # 使用 acme.sh 的 standalone 模式申请证书
-    ~/.acme.sh/acme.sh --issue --standalone -d "$DOMAIN" --email "$EMAIL" --keylength ec-256
+# ACME Standalone 证书申请
+Request_acme_cert() {
+    # 检查安装情况
+    Install_acme_if_needed
+    # 安装必要插件
+    apt-get install -y curl dnsutils openssl coreutils grep gawk
+    # 选择 CA 提供商
+    Select_Cert_Provider
+    # 生成随机邮箱地址
+    Generate_random_email() {
+        local RANDOM_NUMBER=$(shuf -i 1000-9999 -n 1)
+        local EMAIL="randomuser${RANDOM_NUMBER}@spymail.com"
+        echo "$EMAIL"
+    }
+    # 获取用户输入的域名
+    read -p "请输入你的域名（用于证书申请）: " DOMAIN
+    # 获取用户输入的电子邮件
+    read -p "请输入申请证书的电子邮件（默认为随机生成邮箱）： " EMAIL
+    if [ -z "$EMAIL" ]; then
+        EMAIL=$(Generate_random_email)
+        echo "未输入电子邮件，使用生成的随机邮箱地址： $EMAIL"
+    else
+        echo "使用用户输入的邮箱地址： $EMAIL"
+    fi
+    # 检查是否已有该域名的证书
+    Check_domain_name
+    # 获取本机的公网 IP 地址
+    LOCAL_IP_V4=$(curl -s ifconfig.me)
+    LOCAL_IP_V6=$(curl -s ifconfig.co)
+    # 获取域名的 A 记录和 AAAA 记录 IP 地址
+    DOMAIN_IP_V4=$(dig +short A "$DOMAIN" | tail -n 1)
+    DOMAIN_IP_V6=$(dig +short AAAA "$DOMAIN" | tail -n 1)
+    # 检查域名是否解析到本机 IP 地址
+    if [[ "$DOMAIN_IP_V4" == "$LOCAL_IP_V4" || "$DOMAIN_IP_V6" == "$LOCAL_IP_V6" ]]; then
+        echo "域名验证通过，继续申请证书"
+    else
+        echo -e "${Red_font_prefix}错误：域名 $DOMAIN 未解析到本机 IP 地址。当前解析 IPv4 地址为 $DOMAIN_IP_V4，IPv6 地址为 $DOMAIN_IP_V6。${Font_color_suffix}"
+        exit 1
+    fi 
+    # 申请证书
+    ~/.acme.sh/acme.sh --set-default-ca --server "$CA_SERVER"
+    ~/.acme.sh/acme.sh --issue --standalone -d "$DOMAIN" --email "$EMAIL" --keylength ec-256 --log || { echo "证书申请失败！"; rm -rf ~/.acme.sh/${DOMAIN}; exit 1; }
     # 将证书和私钥复制到指定目录
     ~/.acme.sh/acme.sh --install-cert -d "$DOMAIN" \
         --ecc \
-        --cert-file /root/v2ray/ssl/server.crt \
-        --key-file /root/v2ray/ssl/server.key \
-        --fullchain-file /root/v2ray/ssl/fullchain.crt
-    # 重新启动可能被停止的服务
-    systemctl start nginx
-    systemctl start apache2
-    echo -e "${Green_font_prefix}ACME 证书申请完成并保存至 /root/Trojan/ssl 目录！${Font_color_suffix}"
+        --cert-file $SSL_FILE/server.crt \
+        --key-file $SSL_FILE/server.key \
+        --fullchain-file $SSL_FILE/fullchain.crt || { echo "证书安装失败！"; rm -rf ~/.acme.sh/${DOMAIN}; exit 1; }
+    # 启用证书自动更新
+    ~/.acme.sh/acme.sh --upgrade --auto-upgrade || { echo "自动更新设置失败"; chmod 755 $SSL_FILE; exit 1; }
+    echo -e "${Green_font_prefix}ACME 证书申请完成并保存至 $SSL_FILE 目录，证书已开启自动更新${Font_color_suffix}"
+    ls -lah $SSL_FILE
+    chmod 755 $SSL_FILE
 }
 
-# CF证书申请
-request_cf_cert() {
-     echo -e "${Green_font_prefix}暂时不支持${Font_color_suffix}"
+# CF DNS API 证书申请
+Request_cf_cert() {
+    # 检查安装情况
+    Install_acme_if_needed
+    # 安装必要插件
+    apt-get install -y curl dnsutils openssl coreutils grep gawk
+    # 选择 CA 提供商
+    Select_Cert_Provider
+    # 使用说明
+    echo -e ""
+    echo "******使用说明******"
+    echo "该脚本将使用 Acme 脚本申请证书，使用时需保证:"
+    echo "1. 知晓 Cloudflare 注册邮箱"
+    echo "2. 知晓 Cloudflare Global API Key"
+    echo "3. 域名已通过 Cloudflare 进行解析到当前服务器"
+    echo "4. 该脚本申请证书默认安装路径为 /root/v2ray/ssl 目录"
+    read -p "我已确认以上内容 [y/n]: " confirm
+    if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
+        echo "操作已取消。"
+        exit 0
+    fi
+    # 获取用户输入的域名、Cloudflare API 密钥和邮箱
+    read -p "请输入域名（用于证书申请）: " CF_Domain
+    read -p "请输入 Cloudflare Global API Key: " CF_GlobalKey
+    read -p "请输入 Cloudflare 注册邮箱: " CF_AccountEmail
+    # 设置 Cloudflare API 凭据
+    export CF_Key="$CF_GlobalKey"
+    export CF_Email="$CF_AccountEmail"
+    # 注册账户
+    ~/.acme.sh/acme.sh --register-account -m "$CF_AccountEmail" || { echo "账户注册失败！"; exit 1; }
+    # 设置默认 CA 为 ZeroSSL
+    ~/.acme.sh/acme.sh --set-default-ca --server zerossl || { echo "修改默认 CA 失败！"; exit 1; }
+    # 检查是否已有该域名的证书
+    Check_domain_name
+    # 申请证书
+    ~/.acme.sh/acme.sh --set-default-ca --server "$CA_SERVER"
+    ~/.acme.sh/acme.sh --issue --dns dns_cf -d "$CF_Domain" -d "*.$CF_Domain" --email "$CF_AccountEmail" --keylength ec-256 || { echo "证书申请失败！"; rm -rf ~/.acme.sh/${CF_Domain}; exit 1; }
+    # 将证书和私钥复制到指定目录
+    ~/.acme.sh/acme.sh --install-cert -d "$CF_Domain" -d "*.$CF_Domain" \
+        --ecc \
+        --cert-file $SSL_FILE/server.crt \
+        --key-file $SSL_FILE/server.key \
+        --fullchain-file $SSL_FILE/fullchain.crt || { echo "证书安装失败！"; rm -rf ~/.acme.sh/${CF_Domain}; exit 1; }
+    # 启用证书自动更新
+    ~/.acme.sh/acme.sh --upgrade --auto-upgrade || { echo "自动更新设置失败"; chmod 755 $SSL_FILE; exit 1; }
+    echo -e "${Green_font_prefix}ACME 证书申请完成并保存至 $SSL_FILE 目录，证书已开启自动更新${Font_color_suffix}"
+    ls -lah $SSL_FILE
+    chmod 755 $SSL_FILE
+}
+
+# 选择证书提供商函数
+Select_Cert_Provider() {
+    echo "请选择证书提供商，默认使用 Let's Encrypt"
+    echo "---------------------------------"
+    echo -e "${Green_font_prefix}1${Font_color_suffix}、Let's Encrypt"
+    echo -e "${Green_font_prefix}2${Font_color_suffix}、ZeroSSL"
+    echo -e "${Green_font_prefix}3${Font_color_suffix}、Buypass"
+    echo "================================="
+    read -p "输入数字选择 (1-3，默认1): " confirm
+    confirm=${confirm:-1}
+    # 设置证书提供商
+    case $confirm in
+        1) CA_SERVER="letsencrypt"; echo "选择了 Let's Encrypt 作为证书提供商";;
+        2) CA_SERVER="zerossl"; echo "选择了 ZeroSSL 作为证书提供商";;
+        3) CA_SERVER="buypass"; echo "选择了 Buypass 作为证书提供商";;
+        *) CA_SERVER="letsencrypt"; echo "无效选择，默认使用 Let's Encrypt 作为证书提供商";;
+    esac
+}
+
+# 申请证书
+Request_Cert() {
+    clear
+    echo "================================="
+    echo -e "${Green_font_prefix}欢迎使用 ACME 一键 SSL 证书申请脚本 Beta 版${Font_color_suffix}"
+    echo -e "${Green_font_prefix}作者：${Font_color_suffix}${Red_font_prefix}thNylHx${Font_color_suffix}"
+    echo -e "${Green_font_prefix}安装过程中可以按 ctrl+c 强制退出${Font_color_suffix}"
+    echo "================================="
+    echo "使用说明书："
+    echo "1. 该脚本提供三种方式实现证书签发"
+    echo "2. 使用 ACME Standalone 的方式申请证书，需要开放端口"
+    echo "3. 使用 DNS API 的方式申请证书，需要对 DNS 提供商的 API 进行配置（如 Cloudflare API 密钥）"
+    echo "4. 使用自签申请证书，适用于没有域名"
+    echo "================================="
+    echo -e "${Green_font_prefix}1${Font_color_suffix}、自签证书申请"
+    echo -e "${Green_font_prefix}2${Font_color_suffix}、DNS API 证书申请"
+    echo -e "${Green_font_prefix}3${Font_color_suffix}、Standalone 证书申请"
+    echo "================================="
+    # 默认选择 2（DNS API 证书申请）
+    read -p "请选择证书申请方式（默认2）: " confirm
+    confirm=${confirm:-2}
+    # 选择方式
+    echo -e "${Green_font_prefix}你选择了 ${confirm}${Font_color_suffix}"
+    case $confirm in
+        1) Request_self_cert ;;
+        2) Request_cf_cert ;;
+        3) Request_acme_cert ;;
+        *) echo -e "${Red_font_prefix}无效选择，默认使用 DNS API 证书申请${Font_color_suffix}"; Request_cf_cert ;;
+    esac
 }
 
 # 主菜单
