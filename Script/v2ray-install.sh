@@ -284,8 +284,7 @@ Install() {
     # 更新系统
     apt update && apt dist-upgrade -y
     # 安装插件
-    apt-get install jq -y
-    apt install unzip -y
+    apt-get install -y jq unzip curl git wget vim dnsutils openssl coreutils grep gawk
     # 创建文件夹
     mkdir -p /root/v2ray && cd /root/v2ray || { echo -e "${Red_font_prefix}创建或进入 /root/v2ray 目录失败${Font_color_suffix}"; exit 1; }
     # 获取架构
