@@ -34,7 +34,7 @@ Start_Main() {
     Main
 }
 
-# 检查是否已安装 mihomo
+# 检查是否已安装
 Check_install(){
     if [ ! -f "$FILE" ]; then
         echo -e "${Red_font_prefix}mihomo 未安装${Font_color_suffix}"
@@ -42,7 +42,7 @@ Check_install(){
     fi
 }
 
-# 检查 mihomo 服务状态
+# 检查服务状态
 Check_status() {
     if pgrep -x "mihomo" > /dev/null; then
         status="running"
@@ -89,7 +89,7 @@ Show_Status() {
     echo -e "开机自启：${auto_start}"
 }
 
-# 获取 CPU 架构
+# 获取架构
 Get_the_schema(){
     ARCH_RAW=$(uname -m)
     case "${ARCH_RAW}" in
@@ -118,7 +118,7 @@ check_ip_forward() {
     echo -e "${Green_font_prefix}IP 转发开启成功${Font_color_suffix}"
 }
 
-# 启动 mihomo
+# 启动
 Start() {
     # 检查是否安装 mihomo
     Check_install
@@ -148,7 +148,7 @@ Start() {
     Start_Main
 }
 
-# 停止 mihomo
+# 停止
 Stop() {
     # 检查是否安装 mihomo
     Check_install
@@ -201,7 +201,7 @@ Restart() {
     Start_Main
 }
 
-# 卸载 mihomo
+# 卸载
 Uninstall() {
     # 检查是否安装 mihomo
     Check_install
@@ -266,7 +266,7 @@ Update_Shell() {
     Start_Main
 }
 
-# 安装 mihomo
+# 安装
 Install() {
     # 检查是否安装 mihomo 
     if [ -f "$FILE" ]; then
@@ -327,7 +327,7 @@ Install() {
     Configure
 }
 
-# 更新 mihomo
+# 更新
 Update() {
     Check_install
     echo -e "${Green_font_prefix}开始检查是否有更新${Font_color_suffix}"
@@ -403,7 +403,7 @@ Update() {
     Start_Main
 }
 
-# 配置 mihomo
+# 配置
 Configure() {
     # 检查是否安装 mihomo
     Check_install
