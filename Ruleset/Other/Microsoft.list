@@ -5,6 +5,10 @@ DOMAIN,officecdn-microsoft-com.akamaized.net
 DOMAIN,statics-marketingsites-eas-ms-com.akamaized.net
 DOMAIN,statics-marketingsites-eus-ms-com.akamaized.net
 DOMAIN,statics-marketingsites-wcus-ms-com.akamaized.net
+DOMAIN,crl.microsoft.com
+DOMAIN,mscrl.microsoft.com
+DOMAIN,ocsp.microsoft.com
+DOMAIN,oneocsp.microsoft.com
 DOMAIN,azure.microsoft.com
 DOMAIN,azuremarketplace.microsoft.com
 DOMAIN,location.microsoft.com
@@ -24,10 +28,6 @@ DOMAIN,vscode-sync.trafficmanager.net
 DOMAIN,vscode.blob.core.windows.net
 DOMAIN,vscode.search.windows.net
 DOMAIN,vsmarketplacebadge.apphb.com
-DOMAIN,crl.microsoft.com
-DOMAIN,mscrl.microsoft.com
-DOMAIN,ocsp.microsoft.com
-DOMAIN,oneocsp.microsoft.com
 DOMAIN-SUFFIX,microsoft
 DOMAIN-SUFFIX,hotmail
 DOMAIN-SUFFIX,office
@@ -97,7 +97,7 @@ DOMAIN-SUFFIX,crmdynint-gcc.com
 DOMAIN-SUFFIX,crmdynint.com
 DOMAIN-SUFFIX,crossborderexpansion.com
 DOMAIN-SUFFIX,docs.com
-DOMAIN-SUFFIX,microsoftnews.org
+DOMAIN-SUFFIX,microsoftnews.net
 DOMAIN-SUFFIX,edgesuite.net
 DOMAIN-SUFFIX,efproject.net
 DOMAIN-SUFFIX,fasttrackreadysupport.com
@@ -232,7 +232,7 @@ DOMAIN-SUFFIX,successwithteams.com
 DOMAIN-SUFFIX,surface.com
 DOMAIN-SUFFIX,svc.ms
 DOMAIN-SUFFIX,sway-cdn.com
-DOMAIN-SUFFIX,microsoftnews.net
+DOMAIN-SUFFIX,microsoftnews.com
 DOMAIN-SUFFIX,sysinternals.com
 DOMAIN-SUFFIX,tailwindtraders.com
 DOMAIN-SUFFIX,techhub.ms
@@ -255,18 +255,19 @@ DOMAIN-SUFFIX,windowscommunity.net
 DOMAIN-SUFFIX,windowsmarketplace.com
 DOMAIN-SUFFIX,windowsphone-int.com
 DOMAIN-SUFFIX,windowsphone.com
-DOMAIN-SUFFIX,microsoftnews.com
+DOMAIN-SUFFIX,microsoftnews.cc
 DOMAIN-SUFFIX,windowsupdate.com
 DOMAIN-SUFFIX,winhec.com
 DOMAIN-SUFFIX,microsoft.ch
 DOMAIN-SUFFIX,yammer.com
-DOMAIN-SUFFIX,microsoftnews.cc
 DOMAIN-SUFFIX,msocsp.com
 DOMAIN-SUFFIX,xamarin.com
 DOMAIN-SUFFIX,vscode-unpkg.net
+DOMAIN-SUFFIX,vscode-cdn.net
 DOMAIN-SUFFIX,windowssearch.com
 DOMAIN-SUFFIX,microsoft.cl
 DOMAIN-SUFFIX,dynamics.com
+DOMAIN-SUFFIX,microsoftnews.org
 DOMAIN-SUFFIX,microsoftnewsforkids.com
 DOMAIN-SUFFIX,microsoftnewsforkids.net
 DOMAIN-SUFFIX,microsoftnewsforkids.org
@@ -286,7 +287,6 @@ DOMAIN-SUFFIX,onedrive.com
 DOMAIN-SUFFIX,1drv.com
 DOMAIN-SUFFIX,livefilestore.com
 DOMAIN-SUFFIX,sharepoint.cn
-DOMAIN-SUFFIX,vscode-cdn.net
 DOMAIN-SUFFIX,vscode.dev
 DOMAIN-SUFFIX,vsassets.io
 DOMAIN-SUFFIX,vfsforgit.org
@@ -295,6 +295,7 @@ DOMAIN-SUFFIX,visualstudio.net
 DOMAIN-SUFFIX,visualstudio.eu
 DOMAIN-SUFFIX,visualstudio.co
 DOMAIN-SUFFIX,visualstudio.com
+DOMAIN-SUFFIX,visualstudio-staging.com
 DOMAIN-SUFFIX,microsoft.by
 DOMAIN-SUFFIX,forzamotorsport.net
 DOMAIN-SUFFIX,forzaracingchampionship.com
@@ -435,7 +436,7 @@ DOMAIN-SUFFIX,thegithubshop.com
 DOMAIN-SUFFIX,npmjs.org
 DOMAIN-SUFFIX,npm.community
 DOMAIN-SUFFIX,npmjs.com
-DOMAIN-SUFFIX,visualstudio-staging.com
+DOMAIN-SUFFIX,uwpcommunitytoolkit.com
 DOMAIN-SUFFIX,adaptivecards.io
 DOMAIN-SUFFIX,api-extractor.com
 DOMAIN-SUFFIX,apisof.net
@@ -474,10 +475,9 @@ DOMAIN-SUFFIX,pwabuilder.com
 DOMAIN-SUFFIX,sankie.net
 DOMAIN-SUFFIX,sqlserveronlinux.com
 DOMAIN-SUFFIX,timelinestoryteller.com
-DOMAIN-SUFFIX,uwpcommunitytoolkit.com
 DOMAIN-SUFFIX,spoprod-a.akamaihd.net
-DOMAIN-SUFFIX,live.com.au
 DOMAIN-SUFFIX,visualstudio.co.uk
+DOMAIN-SUFFIX,live.com.au
 DOMAIN-SUFFIX,microsoftstore.com.hk
 DOMAIN-SUFFIX,skype-edf.akadns.net
 DOMAIN-SUFFIX,skypedata.akadns.net
@@ -556,6 +556,7 @@ DOMAIN,wl.dlservice.microsoft.com
 DOMAIN,wscont1.apps.microsoft.com
 DOMAIN,wscont2.apps.microsoft.com
 DOMAIN,xb.dlservice.microsoft.com
+DOMAIN,www.microsoft.com
 DOMAIN-SUFFIX,microsoftnews.cn
 DOMAIN-SUFFIX,msn.cn
 DOMAIN-SUFFIX,xboxlive.cn
@@ -625,4 +626,3 @@ DOMAIN,emoi-cncdn.bing.com
 DOMAIN-SUFFIX,microsoftreactor.cn
 DOMAIN-SUFFIX,microsoftreactor.com.cn
 DOMAIN-SUFFIX,reactorms.com.cn
-DOMAIN,www.microsoft.com

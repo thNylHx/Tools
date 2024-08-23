@@ -5,6 +5,10 @@ officecdn-microsoft-com.akamaized.net
 statics-marketingsites-eas-ms-com.akamaized.net
 statics-marketingsites-eus-ms-com.akamaized.net
 statics-marketingsites-wcus-ms-com.akamaized.net
+crl.microsoft.com
+mscrl.microsoft.com
+ocsp.microsoft.com
+oneocsp.microsoft.com
 azure.microsoft.com
 azuremarketplace.microsoft.com
 location.microsoft.com
@@ -24,10 +28,6 @@ vscode-sync.trafficmanager.net
 vscode.blob.core.windows.net
 vscode.search.windows.net
 vsmarketplacebadge.apphb.com
-crl.microsoft.com
-mscrl.microsoft.com
-ocsp.microsoft.com
-oneocsp.microsoft.com
 +.microsoft
 +.hotmail
 +.office
@@ -97,7 +97,7 @@ oneocsp.microsoft.com
 +.crmdynint.com
 +.crossborderexpansion.com
 +.docs.com
-+.microsoftnews.org
++.microsoftnews.net
 +.edgesuite.net
 +.efproject.net
 +.fasttrackreadysupport.com
@@ -232,7 +232,7 @@ oneocsp.microsoft.com
 +.surface.com
 +.svc.ms
 +.sway-cdn.com
-+.microsoftnews.net
++.microsoftnews.com
 +.sysinternals.com
 +.tailwindtraders.com
 +.techhub.ms
@@ -255,18 +255,19 @@ oneocsp.microsoft.com
 +.windowsmarketplace.com
 +.windowsphone-int.com
 +.windowsphone.com
-+.microsoftnews.com
++.microsoftnews.cc
 +.windowsupdate.com
 +.winhec.com
 +.microsoft.ch
 +.yammer.com
-+.microsoftnews.cc
 +.msocsp.com
 +.xamarin.com
 +.vscode-unpkg.net
++.vscode-cdn.net
 +.windowssearch.com
 +.microsoft.cl
 +.dynamics.com
++.microsoftnews.org
 +.microsoftnewsforkids.com
 +.microsoftnewsforkids.net
 +.microsoftnewsforkids.org
@@ -286,7 +287,6 @@ oneocsp.microsoft.com
 +.1drv.com
 +.livefilestore.com
 +.sharepoint.cn
-+.vscode-cdn.net
 +.vscode.dev
 +.vsassets.io
 +.vfsforgit.org
@@ -295,6 +295,7 @@ oneocsp.microsoft.com
 +.visualstudio.eu
 +.visualstudio.co
 +.visualstudio.com
++.visualstudio-staging.com
 +.microsoft.by
 +.forzamotorsport.net
 +.forzaracingchampionship.com
@@ -435,7 +436,7 @@ oneocsp.microsoft.com
 +.npmjs.org
 +.npm.community
 +.npmjs.com
-+.visualstudio-staging.com
++.uwpcommunitytoolkit.com
 +.adaptivecards.io
 +.api-extractor.com
 +.apisof.net
@@ -474,10 +475,9 @@ oneocsp.microsoft.com
 +.sankie.net
 +.sqlserveronlinux.com
 +.timelinestoryteller.com
-+.uwpcommunitytoolkit.com
 +.spoprod-a.akamaihd.net
-+.live.com.au
 +.visualstudio.co.uk
++.live.com.au
 +.microsoftstore.com.hk
 +.skype-edf.akadns.net
 +.skypedata.akadns.net
@@ -553,6 +553,7 @@ wl.dlservice.microsoft.com
 wscont1.apps.microsoft.com
 wscont2.apps.microsoft.com
 xb.dlservice.microsoft.com
+www.microsoft.com
 +.microsoftnews.cn
 +.msn.cn
 +.xboxlive.cn
@@ -622,4 +623,3 @@ emoi-cncdn.bing.com
 +.microsoftreactor.cn
 +.microsoftreactor.com.cn
 +.reactorms.com.cn
-www.microsoft.com
