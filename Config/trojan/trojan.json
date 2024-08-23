@@ -8,8 +8,8 @@
         "123e4567-e89b-12d3-a456-426614174000"
     ],
     "ssl": {
-        "cert": "/path/to/certificate.crt",
-        "key": "/path/to/private.key"
+        "cert": "/root/trojan/ssl/server.crt",
+        "key": "/root/trojan/ssl/server.key"
     },
     "websocket": {
         "enabled": true,
