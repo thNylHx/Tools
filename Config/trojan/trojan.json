@@ -1,14 +1,19 @@
 {
     "run_type": "server",
     "local_addr": "0.0.0.0",
-    "local_port": PORT,
-    "remote_addr": "REMOTE",
+    "local_port": 12345,
+    "remote_addr": "192.83.167.78",
     "remote_port": 80,
     "password": [
-        "UUID"
+        "123e4567-e89b-12d3-a456-426614174000"
     ],
     "ssl": {
-        "cert": "/root/Trojan/ssl/server.crt",
-        "key": "/root/Trojan/ssl/server.key"
+        "cert": "/path/to/certificate.crt",
+        "key": "/path/to/private.key"
+    },
+    "websocket": {
+        "enabled": true,
+        "path": "/ws",
+        "host": "bing.com"
     }
 }
