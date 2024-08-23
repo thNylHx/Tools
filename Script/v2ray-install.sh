@@ -1,7 +1,7 @@
 #!/bin/bash
-#!name = v2ray 一键脚本
+#!name = v2ray 一键脚本 Beta
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-22 19:20
+#!date = 2024-08-23 21:00
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -12,7 +12,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.1.6"
+sh_ver="1.1.7"
 
 # 定义全局变量
 FOLDERS="/root/v2ray"
@@ -29,7 +29,7 @@ Start_Main() {
     Main
 }
 
-# 检查是否已安装 v2ray
+# 检查是否已安装
 Check_install(){
     if [ ! -f "$FILE" ]; then
         echo -e "${Red_font_prefix}v2ray 未安装${Font_color_suffix}"
@@ -37,7 +37,7 @@ Check_install(){
     fi
 }
 
-# 检查 v2ray 服务状态
+# 检查服务状态
 Check_status() {
     if pgrep -x "v2ray" > /dev/null; then
         status="running"
@@ -47,7 +47,7 @@ Check_status() {
 }
 
 # 获取当前安装版本
-Get_current_version() {
+Get_Current_version() {
     if [ -f "$VERSION_FILE" ]; then
         cat "$VERSION_FILE"
     else
@@ -84,7 +84,7 @@ Show_Status() {
     echo -e "开机自启：${auto_start}"
 }
 
-# 获取 CPU 架构
+# 获取架构
 Get_the_schema(){
     ARCH_RAW=$(uname -m)
     case "${ARCH_RAW}" in
@@ -99,7 +99,7 @@ Get_the_schema(){
 
 # 显示当前配置
 View() {
-    # 检查是否安装 v2ray
+    # 检查是否安装
     Check_install
     echo -e "${Red_font_prefix}v2ray 配置信息${Font_color_suffix}"
     # 读取并显示 port、UUID、path
@@ -116,14 +116,14 @@ View() {
         echo -e "id: ${Green_font_prefix}${id}${Font_color_suffix}"
         echo -e "path: ${Green_font_prefix}${path}${Font_color_suffix}"
     else
-        echo -e "${Red_font_prefix}找不到配置文件 ${CONFIG_FILE}，请检查路径是否正确！${Font_color_suffix}"
+        echo -e "${Red_font_prefix}找不到配置文件 ${CONFIG_FILE}，请检查路径是否正确${Font_color_suffix}"
     fi
     Start_Main
 }
 
-# 启动 v2ray
+# 启动
 Start() {
-    # 检查是否安装 v2ray
+    # 检查是否安装
     Check_install
     # 检查运行状态
     if systemctl is-active --quiet v2ray; then
@@ -152,9 +152,9 @@ Start() {
     Start_Main
 }
 
-# 停止 v2ray
+# 停止
 Stop() {
-    # 检查是否安装 v2ray
+    # 检查是否安装
     Check_install
     # 检查运行状态
     if ! systemctl is-active --quiet v2ray; then
@@ -181,9 +181,9 @@ Stop() {
     Start_Main
 }
 
-# 重启 v2ray
+# 重启
 Restart() {
-    # 检查是否安装 v2ray
+    # 检查是否安装
     Check_install
     echo -e "${Green_font_prefix}v2ray 准备重启中${Font_color_suffix}"
     # 重启服务
@@ -205,9 +205,9 @@ Restart() {
     Start_Main
 }
 
-# 卸载 v2ray
+# 卸载
 Uninstall() {
-    # 检查是否安装 v2ray
+    # 检查是否安装
     Check_install
     echo -e "${Green_font_prefix}v2ray 开始卸载${Font_color_suffix}"
     echo -e  "${Green_font_prefix}v2ray 卸载命令已发出${Font_color_suffix}"
@@ -218,10 +218,10 @@ Uninstall() {
     rm -f "$SYSTEM_FILE" || { echo -e "${Red_font_prefix}删除服务文件失败${Font_color_suffix}"; exit 1; }
     # 删除相关文件夹
     rm -rf $FOLDERS || { echo -e "${Red_font_prefix}删除相关文件夹失败${Font_color_suffix}"; exit 1; }
+    # 删除证书
+    rm -rf "$ACME_FILE" || { echo -e "${Red_font_prefix}删除证书失败${Font_color_suffix}"; exit 1; }
     # 重新加载 systemd
     systemctl daemon-reload || { echo -e "${Red_font_prefix}重新加载 systemd 配置失败${Font_color_suffix}"; exit 1; }
-    # 删除证书
-    rm -rf $ACME_FILE
     # 等待服务停止
     sleep 3s
     # 检查卸载是否成功
@@ -236,10 +236,10 @@ Uninstall() {
 # 更新脚本
 Update_Shell() {
     # 获取当前版本
-    echo -e "当前版本为 [ ${Green_font_prefix}${sh_ver}${Font_color_suffix} ]，开始检测最新版本..."
+    echo -e "当前版本为 [ ${Green_font_prefix}${sh_ver}${Font_color_suffix} ]，开始检测最新版本"
     # 获取最新版本号
     sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/thNylHx/Tools/main/Script/v2ray-install.sh" | grep 'sh_ver="' | awk -F "=" '{print $NF}' | sed 's/\"//g' | head -1)
-    
+    # 最新版本无需更新
     if [ "$sh_ver" == "$sh_new_ver" ]; then
         echo -e "当前版本：[ ${Green_font_prefix}${sh_ver}${Font_color_suffix} ]"
         echo -e "最新版本：[ ${Green_font_prefix}${sh_new_ver}${Font_color_suffix} ]"
@@ -257,7 +257,7 @@ Update_Shell() {
                 wget -O v2ray-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/v2ray-install.sh
                 chmod +x v2ray-install.sh
                 echo -e "更新完成，当前版本已更新为 [ ${Green_font_prefix}v${sh_new_ver}${Font_color_suffix} ]"
-                echo -e "5 秒后执行新脚本..."
+                echo -e "5 秒后执行新脚本"
                 sleep 5s
                 bash v2ray-install.sh
                 break
@@ -274,9 +274,9 @@ Update_Shell() {
     Start_Main
 }
 
-# 安装 v2ray
+# 安装
 Install() {
-    # 检查是否安装 v2ray 
+    # 检查是否安装 
     if [ -f "$FILE" ]; then
         echo -e "${Green_font_prefix}v2ray 已经安装${Font_color_suffix}"
         Start_Main
@@ -284,7 +284,7 @@ Install() {
     # 更新系统
     apt update && apt dist-upgrade -y
     # 安装插件
-    apt-get install -y jq unzip curl git wget vim dnsutils openssl coreutils grep gawk
+    apt-get install jq unzip -y
     # 创建文件夹
     mkdir -p /root/v2ray && cd /root/v2ray || { echo -e "${Red_font_prefix}创建或进入 /root/v2ray 目录失败${Font_color_suffix}"; exit 1; }
     # 获取架构
@@ -314,22 +314,22 @@ Install() {
     Configure
 }
 
-# 更新 v2ray
+# 更新
 Update() {
     # 检测是否安装
     Check_install
     echo -e "${Green_font_prefix}v2ray 检查是否有更新${Font_color_suffix}"
     cd /root/v2ray
-    current_version=$(Get_current_version)
+    Current_version=$(Get_Current_version)
     LATEST_VERSION=$(curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" | grep tag_name | cut -d ":" -f2 | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
     # 开始更新
-    if [ "$CURRENT_VERSION" == "$LATEST_VERSION" ]; then
-        echo -e "当前版本：[ ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix} ]"
+    if [ "$Current_version" == "$LATEST_VERSION" ]; then
+        echo -e "当前版本：[ ${Green_font_prefix}${Current_version}${Font_color_suffix} ]"
         echo -e "最新版本：[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
         echo -e "当前已是最新版本，无需更新！"
         Start_Main
     fi
-    echo -e "当前版本：[ ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix} ]"
+    echo -e "当前版本：[ ${Green_font_prefix}${Current_version}${Font_color_suffix} ]"
     echo -e "最新版本：[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
     while true; do
         read -p "是否要更新到最新版本？(y/n): " confirm
@@ -349,11 +349,11 @@ Update() {
                 chmod 755 v2ray
                 # 更新版本信息
                 echo "$LATEST_VERSION" > "$VERSION_FILE"
-                # 重启 v2ray
+                # 重启 
                 systemctl restart v2ray
                 echo -e "更新完成，当前版本已更新为 [ ${Green_font_prefix}v${LATEST_VERSION}${Font_color_suffix} ]"
                 # 检查并显示服务状态
-                if systemctl is-active --quiet mihomo; then
+                if systemctl is-active --quiet v2ray; then
                     echo -e "当前状态：[ ${Green_font_prefix}运行中${Font_color_suffix} ]"
                 else
                     echo -e "当前状态：[ ${Red_font_prefix}未运行${Font_color_suffix} ]"
@@ -373,9 +373,9 @@ Update() {
     Start_Main
 }
 
-# 配置 v2ray
+# 配置
 Configure() {
-    # 检查是否安装 v2ray
+    # 检查是否安装
     Check_install
     # 下载基础配置文件
     CONFIG_URL="https://raw.githubusercontent.com/thNylHx/Tools/main/Config/v2ray/v2ray.json"
@@ -386,10 +386,10 @@ Configure() {
     echo "使用说明"
     echo "选择 3 和 4 后，需要申请证书才能使用"
     echo "=============================="
-    echo -e " ${Green_font_prefix}1${Font_color_suffix}、 vmess+tcp"
-    echo -e " ${Green_font_prefix}2${Font_color_suffix}、 vmess+ws"
-    echo -e " ${Green_font_prefix}3${Font_color_suffix}、 vmess+tcp+tls"
-    echo -e " ${Green_font_prefix}4${Font_color_suffix}、 vmess+ws+tls"
+    echo -e "${Green_font_prefix}1${Font_color_suffix}、vmess+tcp"
+    echo -e "${Green_font_prefix}2${Font_color_suffix}、vmess+ws"
+    echo -e "${Green_font_prefix}3${Font_color_suffix}、vmess+tcp+tls"
+    echo -e "${Green_font_prefix}4${Font_color_suffix}、vmess+ws+tls"
     echo "=============================="
     read -p "输入数字选择 (1-4，默认1): " confirm
     confirm=${confirm:-1}  # 如果用户没有输入，默认为1
@@ -419,7 +419,7 @@ Configure() {
             WS_PATH=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 8)
             echo -e "随机生成的 WebSocket 路径: ${Green_font_prefix}/$WS_PATH${Font_color_suffix}"
         else
-            WS_PATH="${WS_PATH#/}"  # 移除前导斜杠
+            WS_PATH="${WS_PATH#/}"
             echo -e "WebSocket 路径: ${Green_font_prefix}/$WS_PATH${Font_color_suffix}"
         fi
     fi
@@ -508,6 +508,13 @@ Configure() {
     systemctl enable v2ray
     # 引导语
     echo -e "恭喜你，你的 v2ray 已经配置完成"
+    # 检查并显示服务状态
+    if systemctl is-active --quiet v2ray; then
+        echo -e "当前状态：[ ${Green_font_prefix}运行中${Font_color_suffix} ]"
+    else
+        echo -e "当前状态：[ ${Red_font_prefix}未运行${Font_color_suffix} ]"
+        Start_Main
+    fi
     # 返回主菜单
     Start_Main
 }
@@ -541,11 +548,12 @@ Check_domain_name(){
 # 自签证书申请函数
 Request_self_cert() {
     echo -e "${Green_font_prefix}申请自签名证书中${Font_color_suffix}" 
-    # 读取用户输入的域名
-    read -p "请输入伪装域名（例如：bing.com）： " DOMAIN
+    # 读取用户输入的域名，如果未输入则默认使用 bing.com
+    read -p "请输入伪装域名（默认：bing.com）： " DOMAIN
+    DOMAIN=${DOMAIN:-bing.com}
     # 生成自签名证书
-    openssl req -newkey rsa:2048 -nodes -keyout "$SSL_FILE/server.key" -x509 -days 365 -out "$SSL_FILE/server.crt" -subj "/C=CN/ST=Province/L=City/O=Organization/OU=Department/CN=$DOMAIN"
-    echo -e "${Green_font_prefix}自签名证书生成完成！${Font_color_suffix}"
+    openssl req -newkey rsa:2048 -nodes -keyout $SSL_FILE/server.key -x509 -days 36500 -out $SSL_FILE/server.crt -subj "/CN=$DOMAIN"
+    echo -e "${Green_font_prefix}自签名证书生成完成${Font_color_suffix}"
 }
 
 # ACME Standalone 证书申请
@@ -553,7 +561,7 @@ Request_acme_cert() {
     # 检查安装情况
     Install_acme_if_needed
     # 安装必要插件
-    apt-get install -y curl dnsutils openssl coreutils grep gawk
+    apt-get install -y socat curl dnsutils openssl coreutils grep gawk
     # 选择 CA 提供商
     Select_Cert_Provider
     # 生成随机邮箱地址
@@ -740,10 +748,11 @@ Main() {
         8) View ;;
         9) Request_Cert ;;
         0) Update_Shell ;;
-        10) exit 0 ;;  # 退出脚本
+        10) exit 0 ;; 
         *) echo -e "${Red_font_prefix}无效选项，请重新选择${Font_color_suffix}"
            exit 1 ;;
     esac
 }
+
 # 启动主菜单
 Main
