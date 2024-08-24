@@ -455,8 +455,8 @@ Configure() {
     # # 运行状况
     # systemctl status trojan-go
     # 引导语
-    echo -e "恭喜你，你的 trojan 已经配置完成"
-    echo -e "申请证书后，启动 trojan 即可使用"
+    echo -e "${Green_font_prefix}恭喜你，你的 trojan 已经配置完成${Font_color_suffix}"
+    echo -e "${Red_font_prefix}trojan 需要申请证书后使用，证书申请完成后，选择 5 启动 trojan 即可${Font_color_suffix}"
     # 检查并显示服务状态
     if systemctl is-active --quiet trojan; then
         echo -e "当前状态：[ ${Green_font_prefix}运行中${Font_color_suffix} ]"
