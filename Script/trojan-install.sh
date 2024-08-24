@@ -474,7 +474,7 @@ mkdir -p $SSL_FILE
 # 检查是否安装 acme.sh
 Install_acme_if_needed(){
     if ! command -v ~/.acme.sh/acme.sh &>/dev/null; then
-        echo "acme.sh 未安装，正在安装..."
+        echo "acme.sh 未安装，正在安装"
         curl https://get.acme.sh | sh || { echo "安装失败"; exit 1; }
     else
         echo "acme.sh 已经安装"
