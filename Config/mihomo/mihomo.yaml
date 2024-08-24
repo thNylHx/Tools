@@ -129,7 +129,7 @@ proxy-groups:
   - {name: PayPal, <<: *pg}
   - {name: Twitter, <<: *pg}
   - {name: Facebook, <<: *pg}
-  - {name: Game, <<: *pg}
+  - {name: Game, type: select, proxies: [国内直连, 手动选择, 自动选择, 香港节点, 台湾节点, 美国节点, 狮城节点, 日本节点, 韩国节点]}
   - {name: Global, <<: *pg}
   - {name: Apple, type: select, proxies: [国内直连, 手动选择, 自动选择, 香港节点, 台湾节点, 美国节点, 狮城节点, 日本节点, 韩国节点]}
   - {name: Bilibili, type: select, proxies: [国内直连, 手动选择, 自动选择, 香港节点, 台湾节点, 美国节点, 狮城节点, 日本节点, 韩国节点]}
