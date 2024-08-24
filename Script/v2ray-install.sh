@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = v2ray 一键脚本 Beta
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-23 21:00
+#!date = 2024-08-24 10:05
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -12,7 +12,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.1.7"
+sh_ver="1.1.9"
 
 # 定义全局变量
 FOLDERS="/root/v2ray"
@@ -29,7 +29,7 @@ Start_Main() {
     Main
 }
 
-# 检查是否已安装
+# 检查是否安装
 Check_install(){
     if [ ! -f "$FILE" ]; then
         echo -e "${Red_font_prefix}v2ray 未安装${Font_color_suffix}"
@@ -47,7 +47,7 @@ Check_status() {
 }
 
 # 获取当前安装版本
-Get_Current_version() {
+Get_current_version() {
     if [ -f "$VERSION_FILE" ]; then
         cat "$VERSION_FILE"
     else
@@ -70,7 +70,6 @@ Show_Status() {
             status="${Green_font_prefix}已安装${Font_color_suffix}"
             run_status="${Red_font_prefix}未运行${Font_color_suffix}"
         fi
-        # 检查是否配置为开机自启
         if systemctl is-enabled v2ray.service &>/dev/null; then
             auto_start="${Green_font_prefix}已设置${Font_color_suffix}"
         else
@@ -236,14 +235,14 @@ Uninstall() {
 # 更新脚本
 Update_Shell() {
     # 获取当前版本
-    echo -e "当前版本为 [ ${Green_font_prefix}${sh_ver}${Font_color_suffix} ]，开始检测最新版本"
+    echo -e "${Green_font_prefix}开始检查是否有更新${Font_color_suffix}"
     # 获取最新版本号
     sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/thNylHx/Tools/main/Script/v2ray-install.sh" | grep 'sh_ver="' | awk -F "=" '{print $NF}' | sed 's/\"//g' | head -1)
     # 最新版本无需更新
     if [ "$sh_ver" == "$sh_new_ver" ]; then
         echo -e "当前版本：[ ${Green_font_prefix}${sh_ver}${Font_color_suffix} ]"
         echo -e "最新版本：[ ${Green_font_prefix}${sh_new_ver}${Font_color_suffix} ]"
-        echo -e "${Green_font_prefix}当前已是最新版本，无需更新！${Font_color_suffix}"
+        echo -e "${Green_font_prefix}当前已是最新版本，无需更新${Font_color_suffix}"
         Start_Main
     fi
     echo -e "当前版本：[ ${Green_font_prefix}${sh_ver}${Font_color_suffix} ]"
@@ -253,7 +252,7 @@ Update_Shell() {
         read -p "是否升级到最新版本？(y/n)： " confirm
         case $confirm in
             [Yy]* )
-                echo -e "${Green_font_prefix}开始更新${Font_color_suffix}"
+                echo -e "开始下载最新版本 [ ${Green_font_prefix}${sh_new_ver}${Font_color_suffix} ]"
                 wget -O v2ray-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/v2ray-install.sh
                 chmod +x v2ray-install.sh
                 echo -e "更新完成，当前版本已更新为 [ ${Green_font_prefix}v${sh_new_ver}${Font_color_suffix} ]"
@@ -263,11 +262,11 @@ Update_Shell() {
                 break
                 ;;
             [Nn]* )
-                echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
+                echo -e "${Red_font_prefix}更新已取消 ${Font_color_suffix}"
                 exit 1
                 ;;
             * )
-                echo -e "${Red_font_prefix}无效的输入，请输入 y 或 n。${Font_color_suffix}"
+                echo -e "${Red_font_prefix}无效的输入，请输入 y 或 n ${Font_color_suffix}"
                 ;;
         esac
     done
@@ -284,24 +283,26 @@ Install() {
     # 更新系统
     apt update && apt dist-upgrade -y
     # 安装插件
-    apt-get install jq unzip -y
+    apt-get install jq unzip wget curl -y
     # 创建文件夹
-    mkdir -p /root/v2ray && cd /root/v2ray || { echo -e "${Red_font_prefix}创建或进入 /root/v2ray 目录失败${Font_color_suffix}"; exit 1; }
+    mkdir -p $FOLDERS && cd $FOLDERS || { echo -e "${Red_font_prefix}创建或进入 $FOLDERS 目录失败${Font_color_suffix}"; exit 1; }
     # 获取架构
     Get_the_schema
-    echo -e "当前设备架构：[ ${Green_font_prefix}${ARCH_RAW}${Font_color_suffix} ]"
+    echo -e "当前架构：[ ${Green_font_prefix}${ARCH_RAW}${Font_color_suffix} ]"
     # 获取版本信息
-    VERSION=$(curl -sSL "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" | grep tag_name | cut -d ":" -f2 | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
-    if [ -z "$VERSION" ]; then
-        echo -e "${Red_font_prefix}获取最新版本信息失败${Font_color_suffix}"
-        exit 1
-    fi
-    # 输出获取到的最新版本信息
-    echo -e "获取到的最新版本：[ ${Green_font_prefix}${VERSION}${Font_color_suffix} ]"
+    VERSION=$(curl -sSL "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" | grep tag_name | cut -d ":" -f2 | sed 's/\"//g;s/\,//g;s/\ //g;s/v//' || { echo -e "${Red_font_prefix}获取最新版本信息失败${Font_color_suffix}"; exit 1; })
+    # 构造文件名
+    case "$ARCH" in
+            'arm64-v8a' | 'arm64-v7a' | 's390x' | '32' | '64') FILENAME="v2ray-linux-${ARCH}.zip";;
+            *)       echo -e "不支持的架构：[ ${Red_font_prefix}${ARCH}${Font_color_suffix} ]"; exit 1;;
+    esac
     # 开始下载
-    wget -t 3 -T 30 "https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
-    # 解压并重命名
-    unzip "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
+    DOWNLOAD_URL="https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/${FILENAME}"
+    echo -e "当前版本：[ ${Green_font_prefix}${VERSION}${Font_color_suffix} ]"
+    wget -t 3 -T 30 "${DOWNLOAD_URL}" -O "${FILENAME}" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
+    echo -e "[ ${Green_font_prefix}${VERSION}${Font_color_suffix} ] 下载完成，开始安装"
+    # 解压文件
+    unzip "$FILENAME" && rm "$FILENAME" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
     # 授权
     chmod 755 v2ray
     # 记录版本信息
@@ -316,20 +317,21 @@ Install() {
 
 # 更新
 Update() {
-    # 检测是否安装
+    # 检查是否安装
     Check_install
-    echo -e "${Green_font_prefix}v2ray 检查是否有更新${Font_color_suffix}"
-    cd /root/v2ray
-    Current_version=$(Get_Current_version)
+    echo -e "${Green_font_prefix}开始检查是否有更新${Font_color_suffix}"
+    cd $FOLDERS
+    # 获取当前版本
+    CURRENT_VERSION=$(Get_current_version)
     LATEST_VERSION=$(curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" | grep tag_name | cut -d ":" -f2 | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
     # 开始更新
-    if [ "$Current_version" == "$LATEST_VERSION" ]; then
-        echo -e "当前版本：[ ${Green_font_prefix}${Current_version}${Font_color_suffix} ]"
+    if [ "$CURRENT_VERSION" == "$LATEST_VERSION" ]; then
+        echo -e "当前版本：[ ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix} ]"
         echo -e "最新版本：[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
         echo -e "当前已是最新版本，无需更新！"
         Start_Main
     fi
-    echo -e "当前版本：[ ${Green_font_prefix}${Current_version}${Font_color_suffix} ]"
+    echo -e "当前版本：[ ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix} ]"
     echo -e "最新版本：[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
     while true; do
         read -p "是否要更新到最新版本？(y/n): " confirm
@@ -337,21 +339,25 @@ Update() {
             [Yy]* )
                 # 获取架构
                 Get_the_schema
-                echo -e "当前设备架构：${Green_font_prefix}[ ${ARCH} ]${Font_color_suffix}"
+                # 构造文件名
+                case "$ARCH" in
+                    'arm64-v8a' | 'arm64-v7a' | 's390x' | '32' | '64') FILENAME="v2ray-linux-${ARCH}.zip";;
+                    *)       echo -e "不支持的架构：[ ${Red_font_prefix}${ARCH}${Font_color_suffix} ]"; exit 1;;
+                esac
                 # 开始下载
                 DOWNLOAD_URL="https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip"
-                echo -e "开始下载最新版本 [ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
+                echo -e "开始下载最新版本：[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
                 wget -t 3 -T 30 "${DOWNLOAD_URL}" -O "${FILENAME}" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
                 echo -e "[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ] 下载完成，开始更新"
-                # 解压并重命名
-                unzip -o "v2ray-linux-${ARCH}.zip" && rm "v2ray-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
+                # 解压文件
+                unzip "$FILENAME" && rm "$FILENAME" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
                 # 授权
                 chmod 755 v2ray
                 # 更新版本信息
                 echo "$LATEST_VERSION" > "$VERSION_FILE"
                 # 重启 
                 systemctl restart v2ray
-                echo -e "更新完成，当前版本已更新为 [ ${Green_font_prefix}v${LATEST_VERSION}${Font_color_suffix} ]"
+                echo -e "更新完成，当前版本已更新为：[ ${Green_font_prefix}v${LATEST_VERSION}${Font_color_suffix} ]"
                 # 检查并显示服务状态
                 if systemctl is-active --quiet v2ray; then
                     echo -e "当前状态：[ ${Green_font_prefix}运行中${Font_color_suffix} ]"
@@ -362,11 +368,11 @@ Update() {
                 Start_Main
                 ;;
             [Nn]* )
-                echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
+                echo -e "${Red_font_prefix}更新已取消 ${Font_color_suffix}"
                 Start_Main
                 ;;
             * )
-                echo -e "${Red_font_prefix}无效的输入，请输入 y 或 n。${Font_color_suffix}"
+                echo -e "${Red_font_prefix}无效的输入，请输入 y 或 n ${Font_color_suffix}"
                 ;;
         esac
     done
@@ -422,69 +428,75 @@ Configure() {
             WS_PATH="${WS_PATH#/}"
             echo -e "WebSocket 路径: ${Green_font_prefix}/$WS_PATH${Font_color_suffix}"
         fi
-    fi
+        # WebSocket Host 处理
+        read -p "请输入 WebSocket Host (留空以使用默认值 bing.com): " HOST
+        HOST=${HOST:-bing.com}
+        echo -e "WebSocket Host: ${Green_font_prefix}$HOST${Font_color_suffix}"
+        fi
     # 读取配置文件
     echo -e "${Green_font_prefix}读取配置文件${Font_color_suffix}"
     config=$(cat "$CONFIG_FILE")
     # 修改配置文件
     echo -e "${Green_font_prefix}修改配置文件${Font_color_suffix}"
-    case $confirm in
-        1)  # vmess + tcp
-            config=$(echo "$config" | jq --arg port "$PORT" --arg uuid "$UUID" '
-                .inbounds[0].port = ($port | tonumber) |
-                .inbounds[0].settings.clients[0].id = $uuid |
-                .inbounds[0].streamSettings.network = "tcp" |
-                del(.inbounds[0].streamSettings.wsSettings) |
-                del(.inbounds[0].streamSettings.tlsSettings)
-            ')
-            ;;
-        2)  # vmess + ws
-            config=$(echo "$config" | jq --arg port "$PORT" --arg uuid "$UUID" --arg ws_path "/$WS_PATH" '
-                .inbounds[0].port = ($port | tonumber) |
-                .inbounds[0].settings.clients[0].id = $uuid |
-                .inbounds[0].streamSettings.network = "ws" |
-                .inbounds[0].streamSettings.wsSettings.path = $ws_path |
-                del(.inbounds[0].streamSettings.tlsSettings)
-            ')
-            ;;
-        3)  # vmess + tcp + tls
-            config=$(echo "$config" | jq --arg port "$PORT" --arg uuid "$UUID" '
-                .inbounds[0].port = ($port | tonumber) |
-                .inbounds[0].settings.clients[0].id = $uuid |
-                .inbounds[0].streamSettings.network = "tcp" |
-                .inbounds[0].streamSettings.security = "tls" |
-                .inbounds[0].streamSettings.tlsSettings = {
-                    "certificates": [
-                        {
-                            "certificateFile": "/root/v2ray/ssl/server.crt",
-                            "keyFile": "/root/v2ray/ssl/server.key"
-                        }
-                    ]
-                }
-            ')
-            ;;
-        4)  # vmess + ws + tls
-            config=$(echo "$config" | jq --arg port "$PORT" --arg uuid "$UUID" --arg ws_path "/$WS_PATH" '
-                .inbounds[0].port = ($port | tonumber) |
-                .inbounds[0].settings.clients[0].id = $uuid |
-                .inbounds[0].streamSettings.network = "ws" |
-                .inbounds[0].streamSettings.wsSettings.path = $ws_path |
-                .inbounds[0].streamSettings.security = "tls" |
-                .inbounds[0].streamSettings.tlsSettings = {
-                    "certificates": [
-                        {
-                            "certificateFile": "/root/v2ray/ssl/server.crt",
-                            "keyFile": "/root/v2ray/ssl/server.key"
-                        }
-                    ]
-                }
-            ')
-            ;;
-        *)
-            echo -e "${Red_font_prefix}无效选项${Font_color_suffix}"
-            exit 1
-            ;;
-    esac
+case $confirm in
+    1)  # vmess + tcp
+        config=$(echo "$config" | jq --arg port "$PORT" --arg uuid "$UUID" '
+            .inbounds[0].port = ($port | tonumber) |
+            .inbounds[0].settings.clients[0].id = $uuid |
+            .inbounds[0].streamSettings.network = "tcp" |
+            del(.inbounds[0].streamSettings.wsSettings) |
+            del(.inbounds[0].streamSettings.tlsSettings)
+        ')
+        ;;
+    2)  # vmess + ws
+        config=$(echo "$config" | jq --arg port "$PORT" --arg uuid "$UUID" --arg ws_path "/$WS_PATH" --arg host "$HOST" '
+            .inbounds[0].port = ($port | tonumber) |
+            .inbounds[0].settings.clients[0].id = $uuid |
+            .inbounds[0].streamSettings.network = "ws" |
+            .inbounds[0].streamSettings.wsSettings.path = $ws_path |
+            .inbounds[0].streamSettings.wsSettings.headers.Host = $host |
+            del(.inbounds[0].streamSettings.tlsSettings)
+        ')
+        ;;
+    3)  # vmess + tcp + tls
+        config=$(echo "$config" | jq --arg port "$PORT" --arg uuid "$UUID" '
+            .inbounds[0].port = ($port | tonumber) |
+            .inbounds[0].settings.clients[0].id = $uuid |
+            .inbounds[0].streamSettings.network = "tcp" |
+            .inbounds[0].streamSettings.security = "tls" |
+            .inbounds[0].streamSettings.tlsSettings = {
+                "certificates": [
+                    {
+                        "certificateFile": "/root/v2ray/ssl/server.crt",
+                        "keyFile": "/root/v2ray/ssl/server.key"
+                    }
+                ]
+            }
+        ')
+        ;;
+    4)  # vmess + ws + tls
+        config=$(echo "$config" | jq --arg port "$PORT" --arg uuid "$UUID" --arg ws_path "/$WS_PATH" --arg host "$HOST" '
+            .inbounds[0].port = ($port | tonumber) |
+            .inbounds[0].settings.clients[0].id = $uuid |
+            .inbounds[0].streamSettings.network = "ws" |
+            .inbounds[0].streamSettings.wsSettings.path = $ws_path |
+            .inbounds[0].streamSettings.wsSettings.headers.Host = $host |
+            .inbounds[0].streamSettings.security = "tls" |
+            .inbounds[0].streamSettings.tlsSettings = {
+                "certificates": [
+                    {
+                        "certificateFile": "/root/v2ray/ssl/server.crt",
+                        "keyFile": "/root/v2ray/ssl/server.key"
+                    }
+                ]
+            }
+        ')
+        ;;
+    *)
+        echo -e "${Red_font_prefix}无效选项${Font_color_suffix}"
+        exit 1
+        ;;
+esac
     # 写入配置文件
     echo -e "${Green_font_prefix}写入配置文件${Font_color_suffix}"
     echo "$config" > "$CONFIG_FILE"
