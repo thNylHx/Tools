@@ -55,7 +55,7 @@ Get_current_version() {
     fi
 }
 
-# 显示当前脚本和服务状态
+# 显示当前脚本、是否设置开机自启和服务状态
 Show_Status() {
     if [ ! -f "$FILE" ]; then
         status="${Red_font_prefix}未安装${Font_color_suffix}"
