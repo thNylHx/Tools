@@ -520,7 +520,7 @@ esac
     systemctl enable v2ray
     # 引导语
     echo -e "${Green_font_prefix}恭喜你，你的 v2ray 已经配置完成${Font_color_suffix}"
-    echo -e "${Red_font_prefix}如果选择带有 tls 选项，申请证书完成，选择 5 启动 v2ray 即可${Font_color_suffix}"
+    echo -e "${Red_font_prefix}如果选择带有 tls 选项，需要申请证书，完成证书申请后，选择 5 启动 v2ray 即可${Font_color_suffix}"
     # 检查并显示服务状态
     if systemctl is-active --quiet v2ray; then
         echo -e "当前状态：[ ${Green_font_prefix}运行中${Font_color_suffix} ]"
@@ -538,7 +538,7 @@ mkdir -p $SSL_FILE
 # 检查是否安装 acme.sh
 Install_acme_if_needed(){
     if ! command -v ~/.acme.sh/acme.sh &>/dev/null; then
-        echo "acme.sh 未安装，正在安装..."
+        echo "acme.sh 未安装，正在安装"
         curl https://get.acme.sh | sh || { echo "安装失败"; exit 1; }
     else
         echo "acme.sh 已经安装"
