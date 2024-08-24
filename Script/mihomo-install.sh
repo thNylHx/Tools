@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = mihomo 一键脚本
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-21 22:00
+#!date = 2024-08-24 10:05
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -12,7 +12,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.2.7"
+sh_ver="1.2.9"
 
 # 定义全局变量
 FOLDERS="/root/mihomo"
@@ -23,9 +23,12 @@ CONFIG_FILE="/root/mihomo/config.yaml"
 VERSION_FILE="/root/mihomo/version.txt"
 SYSTEM_FILE="/etc/systemd/system/mihomo.service"
 
-# 获取本机 IP 地址
-GetLocalIP(){
-    ip=$(ip addr show $(ip route | grep default | awk '{print $5}') | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
+# 获取当前本机 IP 地址
+GetLocal_ip(){
+    # 获取本机的 IPv4 地址
+    ipv4=$(ip addr show $(ip route | grep default | awk '{print $5}') | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
+    # 获取本机的 IPv6 地址
+    ipv6=$(ip addr show $(ip route | grep default | awk '{print $5}') | grep 'inet6 ' | awk '{print $2}' | cut -d/ -f1)
 }
 
 # 返回主菜单
@@ -34,7 +37,7 @@ Start_Main() {
     Main
 }
 
-# 检查是否已安装
+# 检查是否安装
 Check_install(){
     if [ ! -f "$FILE" ]; then
         echo -e "${Red_font_prefix}mihomo 未安装${Font_color_suffix}"
@@ -60,7 +63,7 @@ Get_current_version() {
     fi
 }
 
-# 显示当前脚本和服务状态
+# 显示当前脚本、是否设置开机自启和服务状态
 Show_Status() {
     if [ ! -f "$FILE" ]; then
         status="${Red_font_prefix}未安装${Font_color_suffix}"
@@ -75,7 +78,6 @@ Show_Status() {
             status="${Green_font_prefix}已安装${Font_color_suffix}"
             run_status="${Red_font_prefix}未运行${Font_color_suffix}"
         fi
-        # 检查是否配置为开机自启
         if systemctl is-enabled mihomo.service &>/dev/null; then
             auto_start="${Green_font_prefix}已设置${Font_color_suffix}"
         else
@@ -89,7 +91,7 @@ Show_Status() {
     echo -e "开机自启：${auto_start}"
 }
 
-# 获取架构
+# 获取当前架构
 Get_the_schema(){
     ARCH_RAW=$(uname -m)
     case "${ARCH_RAW}" in
@@ -120,7 +122,7 @@ check_ip_forward() {
 
 # 启动
 Start() {
-    # 检查是否安装 mihomo
+    # 检查是否安装
     Check_install
     if systemctl is-active --quiet mihomo; then
         echo -e "${Green_font_prefix}mihomo 正在运行中${Font_color_suffix}"
@@ -150,7 +152,7 @@ Start() {
 
 # 停止
 Stop() {
-    # 检查是否安装 mihomo
+    # 检查是否安装
     Check_install
     # 检查是否运行
     if ! systemctl is-active --quiet mihomo; then
@@ -177,9 +179,9 @@ Stop() {
     Start_Main
 }
 
-# 重启 mihomo
+# 重启
 Restart() {
-    # 检查是否安装 mihomo
+    # 检查是否安装
     Check_install
     echo -e "${Green_font_prefix}mihomo 准备重启中${Font_color_suffix}"
     # 重启服务
@@ -203,19 +205,20 @@ Restart() {
 
 # 卸载
 Uninstall() {
-    # 检查是否安装 mihomo
+    # 检查是否安装
     Check_install
     echo -e "${Green_font_prefix}mihomo 开始卸载${Font_color_suffix}"
+    echo -e "${Green_font_prefix}mihomo 卸载命令已发出${Font_color_suffix}"
     # 停止服务
-    systemctl stop mihomo.service
-    systemctl disable mihomo.service
+    systemctl stop mihomo.service 2>/dev/null || { echo -e "${Red_font_prefix}停止 mihomo 服务失败${Font_color_suffix}"; exit 1; }
+    systemctl disable mihomo.service 2>/dev/null || { echo -e "${Red_font_prefix}禁用 mihomo 服务失败${Font_color_suffix}"; exit 1; }
     # 删除服务文件
-    rm -f "$SYSTEM_FILE"
+    rm -f "$SYSTEM_FILE" || { echo -e "${Red_font_prefix}删除服务文件失败${Font_color_suffix}"; exit 1; }
     # 删除相关文件夹
-    rm -rf "$FOLDERS"
+    rm -rf "$FOLDERS" || { echo -e "${Red_font_prefix}删除相关文件夹失败${Font_color_suffix}"; exit 1; }
     # 重新加载 systemd
-    systemctl daemon-reload
-    # 等待服务启动
+    systemctl daemon-reload || { echo -e "${Red_font_prefix}重新加载 systemd 配置失败${Font_color_suffix}"; exit 1; }
+    # 等待服务停止
     sleep 3s
     # 检查卸载是否成功
     if [ ! -f "$SYSTEM_FILE" ] && [ ! -d "$FOLDERS" ]; then
@@ -223,19 +226,20 @@ Uninstall() {
     else
         echo -e "${Red_font_prefix}卸载过程中出现问题，请手动检查${Font_color_suffix}"
     fi
-    exit 1
+    exit 0
 }
 
 # 更新脚本
 Update_Shell() {
     # 获取当前版本
-    echo -e "当前版本为 [ ${Green_font_prefix}${sh_ver}${Font_color_suffix} ]，开始检测最新版本..."
+    echo -e "${Green_font_prefix}开始检查是否有更新${Font_color_suffix}"
     # 获取最新版本号
     sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo-install.sh" | grep 'sh_ver="' | awk -F "=" '{print $NF}' | sed 's/\"//g' | head -1)
+    # 最新版本无需更新
     if [ "$sh_ver" == "$sh_new_ver" ]; then
         echo -e "当前版本：[ ${Green_font_prefix}${sh_ver}${Font_color_suffix} ]"
         echo -e "最新版本：[ ${Green_font_prefix}${sh_new_ver}${Font_color_suffix} ]"
-        echo -e "${Green_font_prefix}当前已是最新版本，无需更新！${Font_color_suffix}"
+        echo -e "${Green_font_prefix}当前已是最新版本，无需更新${Font_color_suffix}"
         Start_Main
     fi
     echo -e "当前版本：[ ${Green_font_prefix}${sh_ver}${Font_color_suffix} ]"
@@ -245,21 +249,21 @@ Update_Shell() {
         read -p "是否升级到最新版本？(y/n)：" confirm
         case $confirm in
             [Yy]* )
-                echo -e "${Green_font_prefix}开始更新${Font_color_suffix}"
+                echo -e "开始下载最新版本 [ ${Green_font_prefix}${sh_new_ver}${Font_color_suffix} ]"
                 wget -O mihomo-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/mihomo-install.sh
                 chmod +x mihomo-install.sh
                 echo -e "更新完成，当前版本已更新为 ${Green_font_prefix}[ v${sh_new_ver} ]${Font_color_suffix}"
-                echo -e "5 秒后执行新脚本..."
+                echo -e "5 秒后执行新脚本"
                 sleep 5s
                 bash mihomo-install.sh
                 break
                 ;;
             [Nn]* )
-                echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
+                echo -e "${Red_font_prefix}更新已取消 ${Font_color_suffix}"
                 exit 1
                 ;;
             * )
-                echo -e "${Red_font_prefix}无效的输入，请输入 y 或 n。${Font_color_suffix}"
+                echo -e "${Red_font_prefix}无效的输入，请输入 y 或 n ${Font_color_suffix}"
                 ;;
         esac
     done
@@ -268,7 +272,7 @@ Update_Shell() {
 
 # 安装
 Install() {
-    # 检查是否安装 mihomo 
+    # 检查是否安装 
     if [ -f "$FILE" ]; then
         echo -e "${Green_font_prefix}mihomo 已经安装${Font_color_suffix}"
         Start_Main
@@ -276,18 +280,14 @@ Install() {
     # 更新系统
     apt update && apt dist-upgrade -y
     # 安装插件
-    apt-get install -y wget curl iptables unzip
+    apt-get install wget curl iptables unzip jq -y
     # 创建文件夹
-    mkdir -p /root/mihomo && cd /root/mihomo || { echo -e "${Red_font_prefix}创建或进入 /root/mihomo 目录失败${Font_color_suffix}"; exit 1; }
+    mkdir -p $FOLDERS && cd $FOLDERS || { echo -e "${Red_font_prefix}创建或进入 $FOLDERS 目录失败${Font_color_suffix}"; exit 1; }
     # 获取架构
     Get_the_schema
-    echo -e "当前设备架构：[ ${Green_font_prefix}${ARCH_RAW}${Font_color_suffix} ]"
+    echo -e "当前架构：[ ${Green_font_prefix}${ARCH_RAW}${Font_color_suffix} ]"
     # 获取版本信息
     VERSION=$(curl -sSL "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt" || { echo -e "${Red_font_prefix}获取版本信息失败${Font_color_suffix}"; exit 1; })
-    # 构建下载文件的名称# 根据系统架构（ARCH）和获取到的版本号（VERSION），生成目标文件的名称
-    FILENAME="mihomo-linux-${ARCH}-${VERSION}.gz"
-    # 输出获取到的最新版本信息
-    echo -e "获取到的最新版本：[ ${Green_font_prefix}${VERSION}${Font_color_suffix} ]"
     # 构造文件名
     case "$ARCH" in
         'arm64' | 'armv7' | 's390x' | '386') FILENAME="mihomo-linux-${ARCH}-${VERSION}.gz";;
@@ -295,32 +295,30 @@ Install() {
         *)       echo -e "不支持的架构：[ ${Red_font_prefix}${ARCH}${Font_color_suffix} ]"; exit 1;;
     esac
     # 开始下载
-    wget -t 3 -T 30 "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${FILENAME}" -O "${FILENAME}" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
-    # 解压并重命名
-    if [ -f "$FILENAME" ]; then
-        gunzip "$FILENAME" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
-        # 根据架构重命名 mihomo 文件
-        if [ -f "mihomo-linux-${ARCH}-${VERSION}" ]; then
-            mv "mihomo-linux-${ARCH}-${VERSION}" mihomo
-        elif [ -f "mihomo-linux-${ARCH}-compatible-${VERSION}" ]; then
-            mv "mihomo-linux-${ARCH}-compatible-${VERSION}" mihomo
-        else
-            echo -e "${Red_font_prefix}找不到解压后的文件${Font_color_suffix}"
-            exit 1
-        fi
-        # 授权
-        chmod 755 mihomo
-        # 记录版本信息
-        echo "$VERSION" > "$VERSION_FILE"
+    DOWNLOAD_URL="https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${FILENAME}"
+    echo -e "当前版本：[ ${Green_font_prefix}${VERSION}${Font_color_suffix} ]"
+    wget -t 3 -T 30 "${DOWNLOAD_URL}" -O "${FILENAME}" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
+    echo -e "[ ${Green_font_prefix}${VERSION}${Font_color_suffix} ] 下载完成，开始安装"
+    # 解压文件
+    gunzip "$FILENAME" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
+    # 重命名
+    if [ -f "mihomo-linux-${ARCH}-${VERSION}" ]; then
+        mv "mihomo-linux-${ARCH}-${VERSION}" mihomo
+    elif [ -f "mihomo-linux-${ARCH}-compatible-${VERSION}" ]; then
+        mv "mihomo-linux-${ARCH}-compatible-${VERSION}" mihomo
     else
-        echo -e "${Red_font_prefix}下载的文件不存在${Font_color_suffix}"
+        echo -e "${Red_font_prefix}找不到解压后的文件${Font_color_suffix}"
         exit 1
     fi
+    # 授权
+    chmod 755 mihomo
+    # 记录版本信息
+    echo "$VERSION" > "$VERSION_FILE"
     # 下载 UI
-    echo -e "开始下载 mihomo 管理面板"
+    echo -e "${Green_font_prefix}开始下载 mihomo 管理面板${Font_color_suffix}"
     git clone https://github.com/metacubex/metacubexd.git -b gh-pages "$WEB_SERVICES"
     # 下载系统配置文件
-    echo -e "开始下载 mihomo 的 Service 系统配置"
+    echo -e "${Green_font_prefix}开始下载 mihomo 的 Service 系统配置${Font_color_suffix}"
     wget -O "$SYSTEM_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Service/mihomo.service && chmod 755 "$SYSTEM_FILE"
     echo -e "${Green_font_prefix}mihomo 安装完成，开始配置${Font_color_suffix}"
     # 开始配置 config 文件
@@ -329,9 +327,10 @@ Install() {
 
 # 更新
 Update() {
+    # 检查是否安装
     Check_install
     echo -e "${Green_font_prefix}开始检查是否有更新${Font_color_suffix}"
-    cd /root/mihomo
+    cd $FOLDERS
     # 获取当前版本
     CURRENT_VERSION=$(Get_current_version)
     # 获取最新版本
@@ -340,7 +339,7 @@ Update() {
     if [ "$CURRENT_VERSION" == "$LATEST_VERSION" ]; then
         echo -e "当前版本：[ ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix} ]"
         echo -e "最新版本：[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
-        echo -e "当前已是最新版本，无需更新！"
+        echo -e "${Green_font_prefix}当前已是最新版本，无需更新${Font_color_suffix}"
         Start_Main
     fi
     echo -e "当前版本：[ ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix} ]"
@@ -351,7 +350,6 @@ Update() {
             [Yy]* )
                 # 获取架构
                 Get_the_schema
-                echo -e "当前设备架构：${Green_font_prefix}[ ${ARCH} ]${Font_color_suffix}"
                 # 构造文件名
                 case "$ARCH" in
                     'arm64' | 'armv7' | 's390x' | '386') FILENAME="mihomo-linux-${ARCH}-${LATEST_VERSION}.gz";;
@@ -360,11 +358,12 @@ Update() {
                 esac
                 # 开始下载
                 DOWNLOAD_URL="https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${FILENAME}"
-                echo -e "开始下载最新版本 [ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
+                echo -e "开始下载最新版本：[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
                 wget -t 3 -T 30 "${DOWNLOAD_URL}" -O "${FILENAME}" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
                 echo -e "[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ] 下载完成，开始更新"
+                # 解压文件
                 gunzip "$FILENAME" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
-                # 文件移动与重命名
+                # 重命名
                 if [ -f "mihomo-linux-${ARCH}-${LATEST_VERSION}" ]; then
                     mv "mihomo-linux-${ARCH}-${LATEST_VERSION}" mihomo
                 elif [ -f "mihomo-linux-${ARCH}-compatible-${LATEST_VERSION}" ]; then
@@ -381,7 +380,7 @@ Update() {
                 systemctl daemon-reload
                 # 重启 mihomo 服务
                 systemctl restart mihomo
-                echo -e "更新完成，当前版本已更新为 [ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
+                echo -e "更新完成，当前版本已更新为：[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
                 # 检查并显示服务状态
                 if systemctl is-active --quiet mihomo; then
                     echo -e "当前状态：[ ${Green_font_prefix}运行中${Font_color_suffix} ]"
@@ -392,11 +391,11 @@ Update() {
                 Start_Main
                 ;;
             [Nn]* )
-                echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
+                echo -e "${Red_font_prefix}更新已取消 ${Font_color_suffix}"
                 Start_Main
                 ;;
             * )
-                echo -e "${Red_font_prefix}无效的输入，请输入 y 或 n。${Font_color_suffix}"
+                echo -e "${Red_font_prefix}无效的输入，请输入 y 或 n ${Font_color_suffix}"
                 ;;
         esac
     done
@@ -405,7 +404,7 @@ Update() {
 
 # 配置
 Configure() {
-    # 检查是否安装 mihomo
+    # 检查是否安装
     Check_install
     # 下载配置文件
     CONFIG_URL="https://raw.githubusercontent.com/thNylHx/Tools/main/Config/mihomo/mihomo.yaml"
@@ -466,11 +465,11 @@ Configure() {
     echo -e "${Green_font_prefix}已设置开机自启${Font_color_suffix}"
     # 设置开机启动
     systemctl enable mihomo
-    # 调用函数获取 IP
-    GetLocalIP
+    # 调用函数获取
+    GetLocal_ip
     # 引导语
     echo -e "恭喜你，你的 mihomo 已经配置完成"
-    echo -e "使用 ${Green_font_prefix}http://$ip:9090/ui${Font_color_suffix} 访问你的 mihomo 管理面板面板"
+    echo -e "使用 ${Green_font_prefix}http://$ipv4:9090/ui${Font_color_suffix} 访问你的 mihomo 管理面板面板"
     # 返回主菜单
     Start_Main
 }
