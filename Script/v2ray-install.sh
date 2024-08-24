@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = v2ray 一键脚本 Beta
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-24 10:05
+#!date = 2024-08-24 10:20
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -308,7 +308,7 @@ Install() {
     # 记录版本信息
     echo "$VERSION" > "$VERSION_FILE"
     # 下载系统配置文件
-    echo -e "开始下载 v2ray 的 Service 系统配置"
+    echo -e "${Green_font_prefix}开始下载 v2ray 的 Service 系统配置${Font_color_suffix}"
     wget -O "$SYSTEM_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Service/v2ray.service && chmod 755 "$SYSTEM_FILE"
     echo -e "${Green_font_prefix}v2ray 安装完成，开始配置${Font_color_suffix}"
     # 开始配置 config 文件
