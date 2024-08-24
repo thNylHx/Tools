@@ -519,7 +519,8 @@ esac
     # 设置为开机自启
     systemctl enable v2ray
     # 引导语
-    echo -e "恭喜你，你的 v2ray 已经配置完成"
+    echo -e "${Green_font_prefix}恭喜你，你的 v2ray 已经配置完成${Font_color_suffix}"
+    echo -e "${Red_font_prefix}如果选择带有 tls 选项，申请证书完成，选择 5 启动 v2ray 即可${Font_color_suffix}"
     # 检查并显示服务状态
     if systemctl is-active --quiet v2ray; then
         echo -e "当前状态：[ ${Green_font_prefix}运行中${Font_color_suffix} ]"
