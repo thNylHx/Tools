@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = trojan 一键脚本 Beta
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-23 21:00
+#!date = 2024-08-24 10:30
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -12,7 +12,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.1.6"
+sh_ver="1.1.7"
 
 # 定义全局变量
 FOLDERS="/root/trojan"
@@ -47,7 +47,7 @@ Check_status() {
 }
 
 # 获取当前安装版本
-Get_Current_version() {
+Get_current_version() {
     if [ -f "$VERSION_FILE" ]; then
         cat "$VERSION_FILE"
     else
@@ -55,7 +55,7 @@ Get_Current_version() {
     fi
 }
 
-# 显示当前脚本和服务状态
+# 显示当前脚本、是否设置开机自启和服务状态
 Show_Status() {
     if [ ! -f "$FILE" ]; then
         status="${Red_font_prefix}未安装${Font_color_suffix}"
@@ -70,7 +70,6 @@ Show_Status() {
             status="${Green_font_prefix}已安装${Font_color_suffix}"
             run_status="${Red_font_prefix}未运行${Font_color_suffix}"
         fi
-        # 检查是否配置为开机自启
         if systemctl is-enabled v2ray.service &>/dev/null; then
             auto_start="${Green_font_prefix}已设置${Font_color_suffix}"
         else
@@ -232,14 +231,14 @@ Uninstall() {
 # 更新脚本
 Update_Shell() {
     # 获取当前版本
-    echo -e "当前版本为 [ ${Green_font_prefix}${sh_ver}${Font_color_suffix} ]，开始检测最新版本"
+    echo -e "${Green_font_prefix}开始检查是否有更新${Font_color_suffix}"
     # 获取最新版本号
     sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/thNylHx/Tools/main/Script/trojan-install.sh" | grep 'sh_ver="' | awk -F "=" '{print $NF}' | sed 's/\"//g' | head -1)
     # 最新版本无需更新
     if [ "$sh_ver" == "$sh_new_ver" ]; then
         echo -e "当前版本：[ ${Green_font_prefix}${sh_ver}${Font_color_suffix} ]"
         echo -e "最新版本：[ ${Green_font_prefix}${sh_new_ver}${Font_color_suffix} ]"
-        echo -e "${Green_font_prefix}当前已是最新版本，无需更新！${Font_color_suffix}"
+        echo -e "${Green_font_prefix}当前已是最新版本，无需更新${Font_color_suffix}"
         Start_Main
     fi
     echo -e "当前版本：[ ${Green_font_prefix}${sh_ver}${Font_color_suffix} ]"
@@ -248,23 +247,23 @@ Update_Shell() {
     while true; do
         read -p "是否升级到最新版本？(y/n)： " confirm
         case $confirm in
-        [Yy]* )
-            echo -e "${Green_font_prefix}开始更新${Font_color_suffix}"
-            wget -O trojan-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/trojan-install.sh
-            chmod +x trojan-install.sh
-            echo -e "更新完成，当前版本已更新为 ${Green_font_prefix}v${sh_new_ver}${Font_color_suffix}"
-            echo -e "5 秒后执行新脚本"
-            sleep 5s
-            bash trojan-install.sh
-            break
-            ;;
-        [Nn]* )
-            echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
-             exit 1
-             ;;
-        * )
-            echo -e "${Red_font_prefix}无效的输入，请输入 y 或 n。${Font_color_suffix}"
-            ;;
+            [Yy]* )
+                echo -e "开始下载最新版本：[ ${Green_font_prefix}${sh_new_ver}${Font_color_suffix} ]"
+                wget -O trojan-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/trojan-install.sh
+                chmod +x trojan-install.sh
+                echo -e "更新完成，当前版本已更新为：[ ${Green_font_prefix}v${sh_new_ver}${Font_color_suffix} ]"
+                echo -e "5 秒后执行新脚本"
+                sleep 5s
+                bash trojan-install.sh
+                break
+                ;;
+            [Nn]* )
+                echo -e "${Red_font_prefix}更新已取消 ${Font_color_suffix}"
+                exit 1
+                ;;
+            * )
+                echo -e "${Red_font_prefix}无效的输入，请输入 y 或 n ${Font_color_suffix}"
+                ;;
         esac
     done
     Start_Main
@@ -280,30 +279,34 @@ Install() {
     # 更新系统
     apt update && apt dist-upgrade -y
     # 安装插件
-    apt-get install -y jq unzip curl git wget vim dnsutils openssl coreutils grep gawk
+    apt-get install jq unzip curl git wget vim dnsutils openssl coreutils grep gawk -y
     # 创建文件夹
-    mkdir -p /root/trojan && cd /root/trojan || { echo -e "${Red_font_prefix}创建或进入 /root/trojan 目录失败${Font_color_suffix}"; exit 1; }
+    mkdir -p $FOLDERS && cd $FOLDERS || { echo -e "${Red_font_prefix}创建或进入 $FOLDERS 目录失败${Font_color_suffix}"; exit 1; }
     # 获取架构
     Get_the_schema
-    echo -e "当前设备架构：[ ${Green_font_prefix}${ARCH_RAW}${Font_color_suffix} ]"
+    echo -e "当前架构：[ ${Green_font_prefix}${ARCH_RAW}${Font_color_suffix} ]"
     # 获取版本信息
-    VERSION=$(curl -s "https://api.github.com/repos/p4gefau1t/trojan-go/releases/latest" | grep tag_name | cut -d ":" -f2 | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
-    if [ -z "$VERSION" ]; then
-        echo -e "${Red_font_prefix}获取最新版本信息失败${Font_color_suffix}"
-        exit 1
-    fi
+    VERSION=$(curl -sSL "https://api.github.com/repos/p4gefau1t/trojan-go/releases/latest" | grep tag_name | cut -d ":" -f2 | sed 's/\"//g;s/\,//g;s/\ //g;s/v//' || { echo -e "${Red_font_prefix}获取最新版本信息失败${Font_color_suffix}"; exit 1; })
+    # 构造文件名
+    case "$ARCH" in
+            'arm64-v8' | 'arm64-v7' | 's390x' | '386' | 'amd64') FILENAME="trojan-go-linux-${ARCH}.zip";;
+            *)       echo -e "不支持的架构：[ ${Red_font_prefix}${ARCH}${Font_color_suffix} ]"; exit 1;;
+    esac
     # 输出获取到的最新版本信息
     echo -e "获取到的最新版本：[ ${Green_font_prefix}${VERSION}${Font_color_suffix} ]"
     # 开始下载
-    wget -t 3 -T 30 "https://github.com/p4gefau1t/trojan-go/releases/download/v${VERSION}/trojan-go-linux-${ARCH}.zip"  || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
-    # 解压并重命名
-    unzip "trojan-go-linux-${ARCH}.zip" && rm "trojan-go-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
+    DOWNLOAD_URL="https://github.com/p4gefau1t/trojan-go/releases/download/v${VERSION}/${FILENAME}"
+    echo -e "当前版本：[ ${Green_font_prefix}${VERSION}${Font_color_suffix} ]"
+    wget -t 3 -T 30 "${DOWNLOAD_URL}" -O "${FILENAME}" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
+    echo -e "[ ${Green_font_prefix}${VERSION}${Font_color_suffix} ] 下载完成，开始安装"
+    # 解压文件
+    unzip "$FILENAME" && rm "$FILENAME" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
     # 授权
     chmod 755 trojan-go
     # 记录版本信息
     echo "$VERSION" > "$VERSION_FILE"
     # 下载系统配置文件
-    echo -e "开始下载 trojan 的 Service 系统配置"
+    echo -e "${Green_font_prefix}开始下载 trojan 的 Service 系统配置${Font_color_suffix}"
     wget -O "$SYSTEM_FILE" https://raw.githubusercontent.com/thNylHx/Tools/main/Service/trojan-go.service && chmod 755 "$SYSTEM_FILE"
     echo -e "${Green_font_prefix}trojan 安装成功，开始配置${Font_color_suffix}"
     # 开始配置 config 文件
@@ -312,20 +315,21 @@ Install() {
 
 # 更新
 Update() {
-    # 检测是否安装
+    # 检查是否安装
     Check_install
-    echo -e "${Green_font_prefix}trojan 检查是否有更新${Font_color_suffix}"
-    cd /root/trojan
-    Current_version=$(Get_Current_version)
+    echo -e "${Green_font_prefix}开始检查是否有更新${Font_color_suffix}"
+    cd $FOLDERS
+    # 获取当前版本
+    CURRENT_VERSION=$(Get_current_version)
     LATEST_VERSION=$(curl -s "https://api.github.com/repos/p4gefau1t/trojan-go/releases/latest" | grep tag_name | cut -d ":" -f2 | sed 's/\"//g;s/\,//g;s/\ //g;s/v//')
     # 开始更新
-    if [ "$Current_version" == "$LATEST_VERSION" ]; then
-        echo -e "当前版本：[ ${Green_font_prefix}${Current_version}${Font_color_suffix} ]"
+    if [ "$CURRENT_VERSION" == "$LATEST_VERSION" ]; then
+        echo -e "当前版本：[ ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix} ]"
         echo -e "最新版本：[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
         echo -e "当前已是最新版本，无需更新！"
         Start_Main
     fi
-    echo -e "当前版本：[ ${Green_font_prefix}${Current_version}${Font_color_suffix} ]"
+    echo -e "当前版本：[ ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix} ]"
     echo -e "最新版本：[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
     while true; do
         read -p "是否要更新到最新版本？(y/n): " confirm
@@ -333,19 +337,25 @@ Update() {
             [Yy]* )
                 # 获取架构
                 Get_the_schema
-                echo -e "当前设备架构：${Green_font_prefix}[ ${ARCH} ]${Font_color_suffix}"
+                # 构造文件名
+                case "$ARCH" in
+                    'arm64-v8' | 'arm64-v7' | 's390x' | '386' | 'amd64') FILENAME="trojan-go-linux-${ARCH}.zip";;
+                    *)       echo -e "不支持的架构：[ ${Red_font_prefix}${ARCH}${Font_color_suffix} ]"; exit 1;;
+                esac
                 # 开始下载
-                DOWNLOAD_URL="https://github.com/p4gefau1t/trojan-go/releases/download/v${LATEST_VERSION}/trojan-go-linux-${ARCH}.zip"
+                DOWNLOAD_URL="https://github.com/v2fly/v2ray-core/releases/download/v${VERSION}/v2ray-linux-${ARCH}.zip"
+                echo -e "开始下载最新版本：[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
                 wget -t 3 -T 30 "${DOWNLOAD_URL}" -O "${FILENAME}" || { echo -e "${Red_font_prefix}下载失败${Font_color_suffix}"; exit 1; }
                 echo -e "[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ] 下载完成，开始更新"
-                # 解压并重命名
-                unzip -o "trojan-go-linux-${ARCH}.zip" && rm "trojan-go-linux-${ARCH}.zip" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
+                # 解压文件
+                unzip "$FILENAME" && rm "$FILENAME" || { echo -e "${Red_font_prefix}解压失败${Font_color_suffix}"; exit 1; }
                 # 授权
                 chmod 755 trojan-go
                 # 更新版本信息
                 echo "$LATEST_VERSION" > "$VERSION_FILE"
                 # 重启
                 systemctl restart trojan-go
+                echo -e "更新完成，当前版本已更新为：[ ${Green_font_prefix}v${LATEST_VERSION}${Font_color_suffix} ]"
                 # 检查并显示服务状态
                 if systemctl is-active --quiet trojan-go; then
                     echo -e "当前状态：[ ${Green_font_prefix}运行中${Font_color_suffix} ]"
@@ -356,11 +366,11 @@ Update() {
                 Start_Main
                 ;;
             [Nn]* )
-                echo -e "${Red_font_prefix}更新已取消。${Font_color_suffix}"
+                echo -e "${Red_font_prefix}更新已取消 ${Font_color_suffix}"
                 Start_Main
                 ;;
             * )
-                echo -e "${Red_font_prefix}无效的输入，请输入 y 或 n。${Font_color_suffix}"
+                echo -e "${Red_font_prefix}无效的输入，请输入 y 或 n ${Font_color_suffix}"
                 ;;
         esac
     done
@@ -446,6 +456,7 @@ Configure() {
     # systemctl status trojan-go
     # 引导语
     echo -e "恭喜你，你的 trojan 已经配置完成"
+    echo -e "申请证书后，启动 trojan 即可使用"
     # 检查并显示服务状态
     if systemctl is-active --quiet trojan; then
         echo -e "当前状态：[ ${Green_font_prefix}运行中${Font_color_suffix} ]"
@@ -490,7 +501,7 @@ Request_self_cert() {
     read -p "请输入伪装域名（默认：bing.com）： " DOMAIN
     DOMAIN=${DOMAIN:-bing.com}
     # 生成自签名证书
-    openssl req -newkey rsa:2048 -nodes -keyout "$SSL_FILE/server.key" -x509 -days 36500 -out "$SSL_FILE/server.crt" -subj "/CN=$DOMAIN"
+    openssl req -newkey rsa:2048 -nodes -keyout $SSL_FILE/server.key -x509 -days 36500 -out $SSL_FILE/server.crt -subj "/CN=$DOMAIN"
     echo -e "${Green_font_prefix}自签名证书生成完成${Font_color_suffix}"
 }
 
@@ -668,8 +679,9 @@ Main() {
         8) View ;;
         9) Request_Cert ;;
         0) Update_Shell ;;
-        10) exit 0 ;;
-        *) echo -e "${Red_font_prefix}无效的选择，请输入 0 到 10 之间的数字。${Font_color_suffix}" ;;
+        10) exit 0 ;; 
+        *) echo -e "${Red_font_prefix}无效选项，请重新选择${Font_color_suffix}"
+           exit 1 ;;
     esac
 }
 
