@@ -252,10 +252,10 @@ Update_Shell() {
         read -p "是否升级到最新版本？(y/n)： " confirm
         case $confirm in
             [Yy]* )
-                echo -e "开始下载最新版本 [ ${Green_font_prefix}${sh_new_ver}${Font_color_suffix} ]"
+                echo -e "开始下载最新版本：[ ${Green_font_prefix}${sh_new_ver}${Font_color_suffix} ]"
                 wget -O v2ray-install.sh --no-check-certificate https://raw.githubusercontent.com/thNylHx/Tools/main/Script/v2ray-install.sh
                 chmod +x v2ray-install.sh
-                echo -e "更新完成，当前版本已更新为 [ ${Green_font_prefix}v${sh_new_ver}${Font_color_suffix} ]"
+                echo -e "更新完成，当前版本已更新为：[ ${Green_font_prefix}v${sh_new_ver}${Font_color_suffix} ]"
                 echo -e "5 秒后执行新脚本"
                 sleep 5s
                 bash v2ray-install.sh
