@@ -280,7 +280,7 @@ Install() {
     # 更新系统
     apt update && apt dist-upgrade -y
     # 安装插件
-    apt-get install wget curl iptables unzip jq -y
+    apt-get install jq unzip curl git wget vim dnsutils openssl coreutils grep gawk iptables gunzip -y
     # 创建文件夹
     mkdir -p $FOLDERS && cd $FOLDERS || { echo -e "${Red_font_prefix}创建或进入 $FOLDERS 目录失败${Font_color_suffix}"; exit 1; }
     # 获取架构
