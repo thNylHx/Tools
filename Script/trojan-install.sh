@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = trojan 一键脚本 Beta
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-24 10:30
+#!date = 2024-08-24 10:20
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
@@ -12,7 +12,7 @@ Red_font_prefix="\033[31m"
 Font_color_suffix="\033[0m"
 
 # 定义脚本版本
-sh_ver="1.1.7"
+sh_ver="1.1.9"
 
 # 定义全局变量
 FOLDERS="/root/trojan"
@@ -241,6 +241,7 @@ Update_Shell() {
         echo -e "${Green_font_prefix}当前已是最新版本，无需更新${Font_color_suffix}"
         Start_Main
     fi
+    echo -e "${Green_font_prefix}检查到已有新版本${Font_color_suffix}"
     echo -e "当前版本：[ ${Green_font_prefix}${sh_ver}${Font_color_suffix} ]"
     echo -e "最新版本：[ ${Green_font_prefix}${sh_new_ver}${Font_color_suffix} ]"
     # 开始更新
@@ -329,6 +330,7 @@ Update() {
         echo -e "当前已是最新版本，无需更新！"
         Start_Main
     fi
+    echo -e "${Green_font_prefix}检查到已有新版本${Font_color_suffix}"
     echo -e "当前版本：[ ${Green_font_prefix}${CURRENT_VERSION}${Font_color_suffix} ]"
     echo -e "最新版本：[ ${Green_font_prefix}${LATEST_VERSION}${Font_color_suffix} ]"
     while true; do
