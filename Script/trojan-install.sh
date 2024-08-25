@@ -1,7 +1,7 @@
 #!/bin/bash
 #!name = trojan 一键脚本 Beta
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-24 10:20
+#!date = 2024-08-25 10:20
 #!author = thNylHx ChatGPT
 
 set -e -o pipefail
