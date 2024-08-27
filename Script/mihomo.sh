@@ -1,138 +1,34 @@
 #!/bin/bash
-#!name = mihomo 一键脚本 Beta 全新版
+#!name = mihomo 一键脚本 Beta 加速版
 #!desc = 支持，安装、更新、卸载等
-#!date = 2024-08-26 20:00
+#!date = 2024-08-27 08:30
 #!author = AdsJK567 ChatGPT
 
 set -e -o pipefail
 
-# 定义颜色代码
-## 红色
-Red="\033[31m"
-## 绿色 
-Green="\033[32m"
-## 黄色
-Yellow="\033[33m"
-## 蓝色
-Blue="\033[34m"
-## 洋红
-Magenta="\033[35m"
-## 青色
-Cyan="\033[36m"
-## 白色
-White="\033[37m"
-## 黑色
-Reset="\033[0m"
+# 颜色代码
+Red="\033[31m"  ## 红色
+Green="\033[32m"  ## 绿色 
+Yellow="\033[33m"  ## 黄色
+Blue="\033[34m"  ## 蓝色
+Magenta="\033[35m"  ## 洋红
+Cyan="\033[36m"  ## 青色
+White="\033[37m"  ## 白色
+Reset="\033[0m"  ## 黑色
 
-# 定义脚本版本
-Sh_ver="1.5.5"
+# 脚本版本
+sh_ver="1.0.5"
 
-# 定义全局变量
-## 总文件夹路径
+# 全局变量路径
 FOLDERS="/root/mihomo"
-## 文件路径
 FILE="/root/mihomo/mihomo"
-## 管理面板文件夹路径
-WEB_SERVICES="/root/mihomo/ui"
-## 系统文件夹路径
-SYSCTL_CONF="/etc/sysctl.conf"
-## 配置文件夹路径
+WEB_FILE="/root/mihomo/ui"
+SYSCTL_FILE="/etc/sysctl.conf"
 CONFIG_FILE="/root/mihomo/config.yaml"
-## 版本文件夹路径
 VERSION_FILE="/root/mihomo/version.txt"
-## 系统服务配置文件夹路径
 SYSTEM_FILE="/etc/systemd/system/mihomo.service"
 
-#  GitHub 链接和 CDN 链接
-## 获取脚本版本和脚本下载路径
-SCRIPT_URL="https://raw.githubusercontent.com/AdsJK567/Tools/main/Script/mihomo-install.sh"
-CDN_SCRIPT_URL="https://gh-proxy.com/https://raw.githubusercontent.com/AdsJK567/Tools/main/Script/mihomo-install.sh"
-## 获取软件版本路径
-VERSION_URL="https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt"
-CDN_VERSION_URL="https://gh-proxy.com/https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt"
-## 软件下载地址路径
-DOWNLOAD_URL="https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${FILENAME}"
-CDN_DOWNLOAD_URL="https://gh-proxy.com/https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${FILENAME}"
-## 管理面板下载路径
-GIT_URL="https://github.com/metacubex/metacubexd.git"
-CDN_GIT_URL="https://gh-proxy.com/https://github.com/metacubex/metacubexd.git"
-## 系统服务配置文件下载路径
-SYSTEM_URL="https://raw.githubusercontent.com/AdsJK567/Tools/main/Service/mihomo.service"
-CDN_SYSTEM_URL="https://gh-proxy.com/https://raw.githubusercontent.com/AdsJK567/Tools/main/Service/mihomo.service"
-## 
-CONFIG_URL="https://raw.githubusercontent.com/AdsJK567/Tools/main/Config/mihomo.yaml"
-CDN_CONFIG_URL="https://gh-proxy.com/https://raw.githubusercontent.com/AdsJK567/Tools/main/Config/mihomo.yaml"
-
-# 获取版本信息
-Get_version(){
-    # 获取版本信息
-    VERSION=$(curl -sSL "$VERSION_URL")
-    # 判断是否成功获取版本信息
-    if [ -z "$VERSION" ]; then
-        echo -e "${Red}主链接获取版本信息失败，尝试使用 CDN 获取${Reset}"
-        # 从 CDN 获取版本信息
-        VERSION=$(curl -sSL "$CDN_VERSION_URL")
-        # 再次判断是否成功获取版本信息
-        if [ -z "$VERSION" ]; then
-            echo -e "${Red}CDN 获取版本信息失败，无法继续${Reset}"
-            exit 1
-        fi
-    fi
-}
-
-# 获取新版本信息
-Get_latest_version(){
-    # 获取版本信息
-    LATEST_VERSION=$(curl -sSL "$VERSION_URL")
-    # 判断是否成功获取版本信息
-    if [ -z "$LATEST_VERSION" ]; then
-        echo -e "${Red}主链接获取版本信息失败，尝试使用 CDN 获取${Reset}"
-        # 从 CDN 获取版本信息
-        LATEST_VERSION=$(curl -sSL "$CDN_VERSION_URL")
-        # 再次判断是否成功获取版本信息
-        if [ -z "$LATEST_VERSION" ]; then
-            echo -e "${Red}CDN 获取版本信息失败，无法继续${Reset}"
-            exit 1
-        fi
-    fi
-}
-
-# 获取当前安装版本信息
-Get_current_version() {
-    if [ -f "$VERSION_FILE" ]; then
-        cat "$VERSION_FILE"
-    else
-        echo "mihomo 未安装"
-    fi
-}
-
-# 下载软件
-Download(){
-    # 尝试从主链接下载
-    wget -t 3 -T 30 "$DOWNLOAD_URL" -O "$FILENAME" || {
-      echo -e "${Red}主链接下载失败，尝试使用 CDN${Reset}"
-      # 尝试从 CDN 下载
-      wget -t 3 -T 30 "$CDN_DOWNLOAD_URL" -O "$FILENAME" || {
-          echo -e "${Red}CDN 下载失败，更新中止${Reset}"
-          exit 1
-      }
-    }
-}
-
-# 更新下载软件
-Download_latest(){
-    # 尝试从主链接下载
-    wget -t 3 -T 30 "$DOWNLOAD_URL" -O "$LATEST_VERSION" || {
-      echo -e "${Red}主链接下载失败，尝试使用 CDN${Reset}"
-      # 尝试从 CDN 下载
-      wget -t 3 -T 30 "$CDN_DOWNLOAD_URL" -O "$LATEST_VERSION" || {
-          echo -e "${Red}CDN 下载失败，更新中止${Reset}"
-          exit 1
-      }
-    }
-}
-
-# 获取当前本机 IP 地址
+# 获取本机 IP
 GetLocal_ip(){
     # 获取本机的 IPv4 地址
     ipv4=$(ip addr show $(ip route | grep default | awk '{print $5}') | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
@@ -163,8 +59,16 @@ Check_status() {
     fi
 }
 
+# 获取安装版本
+Get_current_version() {
+    if [ -f "$VERSION_FILE" ]; then
+        cat "$VERSION_FILE"
+    else
+        echo "mihomo 未安装"
+    fi
+}
 
-# 显示当前脚本、是否设置开机自启和服务状态
+# 显示脚本版本、服务状态和开机设置
 Show_Status() {
     if [ ! -f "$FILE" ]; then
         status="${Red}未安装${Reset}"
@@ -185,8 +89,8 @@ Show_Status() {
             auto_start="${Red}未设置${Reset}"
         fi
     fi
-    # 输出状态
-    echo -e "脚本版本：${Green}${Sh_ver}${Reset}"
+    # 显示输出效果
+    echo -e "脚本版本：${Green}${sh_ver}${Reset}"
     echo -e "安装状态：${status}"
     echo -e "运行状态：${run_status}"
     echo -e "开机自启：${auto_start}"
@@ -210,18 +114,18 @@ Check_ip_forward() {
     # 要检查的设置
     local IPV4_FORWARD="net.ipv4.ip_forward = 1"
     # 检查是否已存在 net.ipv4.ip_forward = 1
-    if grep -q "^${IPV4_FORWARD}$" "$SYSCTL_CONF"; then
+    if grep -q "^${IPV4_FORWARD}$" "$SYSCTL_FILE"; then
         # 不执行 sysctl -p，因为设置已经存在
         return
     fi
     # 如果设置不存在，则添加并执行 sysctl -p
-    echo "$IPV4_FORWARD" >> "$SYSCTL_CONF"
+    echo "$IPV4_FORWARD" >> "$SYSCTL_FILE"
     # 立即生效
     sysctl -p
     echo -e "${Green}IP 转发开启成功${Reset}"
 }
 
-# 启动
+# 启动服务
 Start() {
     # 检查是否安装
     Check_install
@@ -251,7 +155,7 @@ Start() {
     Start_Main
 }
 
-# 停止
+# 停止服务
 Stop() {
     # 检查是否安装
     Check_install
@@ -261,7 +165,7 @@ Stop() {
         exit 0
     fi
     echo -e "${Green}mihomo 准备停止中${Reset}"
-    # 尝试停止服务
+    # 停止服务
     if systemctl stop mihomo; then
         echo -e "${Green}mihomo 停止命令已发出${Reset}"
     else
@@ -280,7 +184,7 @@ Stop() {
     Start_Main
 }
 
-# 重启
+# 重启服务
 Restart() {
     # 检查是否安装
     Check_install
@@ -304,7 +208,7 @@ Restart() {
     Start_Main
 }
 
-# 卸载
+# 卸载服务
 Uninstall() {
     # 检查是否安装
     Check_install
@@ -334,66 +238,45 @@ Uninstall() {
 Update_Shell() {
     # 获取当前版本
     echo -e "${Green}开始检查是否有更新${Reset}"
-    # 获取脚本版本信息
-    Sh_new_ver=$(wget --no-check-certificate -qO- "$SCRIPT_URL" | grep 'Sh_ver="' | awk -F "=" '{print $NF}' | sed 's/\"//g' | head -1)
-    # 判断是否成功获取脚本版本信息
-    if [ -z "$Sh_new_ver" ]; then
-        echo -e "${Red}主链接获取脚本版本信息失败，尝试使用 CDN 获取${Reset}"
-        # 从CDN获取脚本版本信息
-        Sh_new_ver=$(wget --no-check-certificate -qO- "$CDN_SCRIPT_URL" | grep 'Sh_ver="' | awk -F "=" '{print $NF}' | sed 's/\"//g' | head -1)
-        # 再次判断是否成功获取脚本版本信息
-        if [ -z "$Sh_new_ver" ]; then
-            echo -e "${Red}CDN 获取脚本版本信息失败，无法继续${Reset}"
-            exit 1
-        fi
-    fi
+    # 获取最新版本号
+    sh_new_ver=$(wget --no-check-certificate -qO- "https://gh-proxy.com/https://raw.githubusercontent.com/AdsJK567/Tools/main/Script/mihomo-install.sh" | grep 'sh_ver="' | awk -F "=" '{print $NF}' | sed 's/\"//g' | head -1)
     # 最新版本无需更新
-    if [ "$Sh_ver" == "$Sh_new_ver" ]; then
-        echo -e "当前版本：[ ${Green}${Sh_ver}${Reset} ]"
-        echo -e "最新版本：[ ${Green}${Sh_new_ver}${Reset} ]"
+    if [ "$sh_ver" == "$sh_new_ver" ]; then
+        echo -e "当前版本：[ ${Green}${sh_ver}${Reset} ]"
+        echo -e "最新版本：[ ${Green}${sh_new_ver}${Reset} ]"
         echo -e "${Green}当前已是最新版本，无需更新${Reset}"
         Start_Main
     fi
     echo -e "${Green}检查到已有新版本${Reset}"
-    echo -e "当前版本：[ ${Green}${Sh_ver}${Reset} ]"
-    echo -e "最新版本：[ ${Green}${Sh_new_ver}${Reset} ]"
+    echo -e "当前版本：[ ${Green}${sh_ver}${Reset} ]"
+    echo -e "最新版本：[ ${Green}${sh_new_ver}${Reset} ]"
     # 开始更新
     while true; do
-        read -p "是否升级到最新版本？(y/n): " confirm
+        read -p "是否升级到最新版本？(y/n)：" confirm
         case $confirm in
             [Yy]* )
-                # 尝试从主链接下载
-                echo -e "开始下载最新版本 [ ${Green}${Sh_new_ver}${Reset} ]"
-                wget -O mihomo-install.sh --no-check-certificate "$SCRIPT_URL" || {
-                    echo -e "${Red}主链接下载失败，尝试使用 CDN${Reset}"
-                    # 尝试从 CDN 下载
-                    wget -O mihomo-install.sh --no-check-certificate "$CDN_SCRIPT_URL" || {
-                        echo -e "${Red}CDN 下载失败，更新中止${Reset}"
-                        exit 1
-                    }
-                }
-                # 设置脚本为可执行
+                echo -e "开始下载最新版本 [ ${Green}${sh_new_ver}${Reset} ]"
+                wget -O mihomo-install.sh --no-check-certificate https://gh-proxy.com/https://raw.githubusercontent.com/AdsJK567/Tools/main/Script/mihomo-install.sh
                 chmod +x mihomo-install.sh
-                echo -e "更新完成，当前版本已更新为 [ ${Green}${Sh_new_ver}${Reset} ]"
+                echo -e "更新完成，当前版本已更新为 ${Green}[ v${sh_new_ver} ]${Reset}"
                 echo -e "5 秒后执行新脚本"
                 sleep 5s
-                # 执行新脚本
                 bash mihomo-install.sh
                 break
                 ;;
             [Nn]* )
-                echo -e "${Red}更新已取消${Reset}"
+                echo -e "${Red}更新已取消 ${Reset}"
                 exit 1
                 ;;
             * )
-                echo -e "${Red}无效的输入，请输入 y 或 n${Reset}"
+                echo -e "${Red}无效的输入，请输入 y 或 n ${Reset}"
                 ;;
         esac
     done
     Start_Main
 }
 
-# 安装
+# 安装服务
 Install() {
     # 检查是否安装 
     if [ -f "$FILE" ]; then
@@ -403,16 +286,15 @@ Install() {
     # 更新系统
     apt update && apt dist-upgrade -y
     # 安装插件
-    apt-get install jq unzip curl git wget vim dnsutils openssl coreutils grep gawk iptables -y
+    apt-get install jq unzip curl git wget vim dnsutils openssl coreutils grep gawk iptables gunzip -y
     # 创建文件夹
     mkdir -p $FOLDERS && cd $FOLDERS || { echo -e "${Red}创建或进入 $FOLDERS 目录失败${Reset}"; exit 1; }
     # 获取架构
     Get_the_schema
     echo -e "当前架构：[ ${Green}${ARCH_RAW}${Reset} ]"
     # 获取版本信息
-    Get_version
-    # 输出获取到的版本信息
-    echo -e "当前版本：[ ${Green}${VERSION}${Reset} ]"
+    VERSION_URL="https://gh-proxy.com/https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt"
+    VERSION=$(curl -sSL "$VERSION_URL" || { echo -e "${Red}获取版本信息失败${Reset}"; exit 1; })
     # 构造文件名
     case "$ARCH" in
         'arm64' | 'armv7' | 's390x' | '386') FILENAME="mihomo-linux-${ARCH}-${VERSION}.gz";;
@@ -420,7 +302,9 @@ Install() {
         *)       echo -e "不支持的架构：[ ${Red}${ARCH}${Reset} ]"; exit 1;;
     esac
     # 开始下载
-    Download
+    DOWNLOAD_URL="https://gh-proxy.com/https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${FILENAME}"
+    echo -e "当前版本：[ ${Green}${VERSION}${Reset} ]"
+    wget -t 3 -T 30 "${DOWNLOAD_URL}" -O "${FILENAME}" || { echo -e "${Red}下载失败${Reset}"; exit 1; }
     echo -e "[ ${Green}${VERSION}${Reset} ] 下载完成，开始安装"
     # 解压文件
     gunzip "$FILENAME" || { echo -e "${Red}解压失败${Reset}"; exit 1; }
@@ -437,28 +321,12 @@ Install() {
     chmod 755 mihomo
     # 记录版本信息
     echo "$VERSION" > "$VERSION_FILE"
-    # 管理面板下载
+    # 下载 UI
     echo -e "${Green}开始下载 mihomo 管理面板${Reset}"
-    # 尝试从主链接克隆
-    git clone "$GIT_URL" -b gh-pages "$WEB_SERVICES" || {
-        echo -e "${Red}主链接克隆失败，尝试使用 CDN${Reset}"
-        # 尝试从 CDN 克隆
-        git clone "$CDN_GIT_URL" -b gh-pages "$WEB_SERVICES" || {
-            echo -e "${Red}CDN 克隆失败，更新中止${Reset}"
-            exit 1
-        }
-    }
+    git clone https://gh-proxy.com/https://github.com/metacubex/metacubexd.git -b gh-pages "$WEB_FILE"
     # 下载系统配置文件
     echo -e "${Green}开始下载 mihomo 的 Service 系统配置${Reset}"
-    # 尝试从主链接下载
-    wget -O "$SYSTEM_FILE" "$SYSTEM_URL" && chmod 755 "$SYSTEM_FILE" || {
-        echo -e "${Red}主链接下载失败，尝试使用 CDN${Reset}"
-        # 尝试从 CDN 下载
-        wget -O "$SYSTEM_FILE" "$CDN_SYSTEM_URL" && chmod 755 "$SYSTEM_FILE" || {
-            echo -e "${Red}CDN 下载失败，更新中止${Reset}"
-            exit 1
-        }
-    }
+    wget -O "$SYSTEM_FILE" https://gh-proxy.com/https://raw.githubusercontent.com/AdsJK567/Tools/main/Service/mihomo.service && chmod 755 "$SYSTEM_FILE"
     echo -e "${Green}mihomo 安装完成，开始配置${Reset}"
     # 开始配置 config 文件
     Configure
@@ -472,8 +340,9 @@ Update() {
     cd $FOLDERS
     # 获取当前版本
     CURRENT_VERSION=$(Get_current_version)
-    # 获取新版本信息
-    Get_latest_version
+    # 获取最新版本
+    LATEST_VERSION_URL="https://gh-proxy.com/https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt"
+    LATEST_VERSION=$(curl -sSL "$LATEST_VERSION_URL" || { echo -e "${Red}获取版本信息失败${Reset}"; exit 1; })
     # 开始更新
     if [ "$CURRENT_VERSION" == "$LATEST_VERSION" ]; then
         echo -e "当前版本：[ ${Green}${CURRENT_VERSION}${Reset} ]"
@@ -497,7 +366,9 @@ Update() {
                     *)       FILENAME="mihomo-linux-${ARCH}-compatible-${LATEST_VERSION}.gz";;
                 esac
                 # 开始下载
-                Download_latest
+                DOWNLOAD_URL="https://gh-proxy.com/https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${FILENAME}"
+                echo -e "开始下载最新版本：[ ${Green}${LATEST_VERSION}${Reset} ]"
+                wget -t 3 -T 30 "${DOWNLOAD_URL}" -O "${FILENAME}" || { echo -e "${Red}下载失败${Reset}"; exit 1; }
                 echo -e "[ ${Green}${LATEST_VERSION}${Reset} ] 下载完成，开始更新"
                 # 解压文件
                 gunzip "$FILENAME" || { echo -e "${Red}解压失败${Reset}"; exit 1; }
@@ -545,14 +416,8 @@ Configure() {
     # 检查是否安装
     Check_install
     # 下载配置文件
-    wget -O "$CONFIG_FILE" "$CONFIG_URL" || {
-        echo -e "${Red}主链接下载配置文件失败，尝试使用 CDN${Reset}"
-        # 尝试从 CDN 下载配置文件
-        wget -O "$CONFIG_FILE" "$CDN_CONFIG_URL" || {
-            echo -e "${Red}CDN 下载配置文件失败，更新中止${Reset}"
-            exit 1
-        }
-    }
+    CONFIG_URL="https://gh-proxy.com/https://raw.githubusercontent.com/AdsJK567/Tools/main/Config/mihomo.yaml"
+    curl -s -o "$CONFIG_FILE" "$CONFIG_URL"
     # 获取用户输入的机场数量，默认为 1，且限制为 5 个以内
     while true; do
         read -p "请输入需要配置的机场数量（默认 1 个，最多 5 个）：" airport_count
@@ -622,9 +487,9 @@ Configure() {
 Main() {
     clear
     echo "================================="
-    echo -e "${Green}欢迎使用 mihomo 一键脚本 Beta 版${Reset}"
+    echo -e "${Green}欢迎使用 mihomo 一键脚本 Beta 加速版${Reset}"
     echo -e "${Green}作者：${Reset}${Red}AdsJK567${Reset}"
-    echo -e "${Green}请保证科学上网已经开启${Reset}"
+    echo -e "${Green}启用国内 CDN 加速${Reset}"
     echo -e "${Green}安装过程中可以按 ctrl+c 强制退出${Reset}"
     echo "================================="
     echo -e "${Green}0${Reset}、更新脚本"
