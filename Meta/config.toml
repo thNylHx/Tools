@@ -1,6 +1,6 @@
 [log]
 level = "warn"
-output = "$config_dir/realm.log"
+output = "root/realm/realm.log"
 
 [network]
 no_tcp = false
