@@ -1,0 +1,19 @@
+[log]
+level = "warn"
+output = "$config_dir/realm.log"
+
+[network]
+no_tcp = false
+use_udp = true
+
+[[endpoints]]
+listen = "0.0.0.0:5000"
+remote = "1.1.1.1:443"
+
+[[endpoints]]
+listen = "[::]:10000"
+remote = "[::]:443"
+
+[[endpoints]]
+listen = "[::]:10000"
+remote = "www.google.com:443"
