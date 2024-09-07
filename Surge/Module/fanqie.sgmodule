@@ -2,13 +2,33 @@
 #!desc = 名称： 番茄小说 拦截广告 \n作者： 可莉🅥 app2smile \n说明： 开屏广告、移除文章底部和章末广告、移除听书页面广告
 #!author = 可莉🅥 app2smile EAlyce
 #!category = 🚫 Block ads
-#!date= 2024-06-19 15:50
+#!date= 2024-09-06 22:17:20
 
 [Rule]
-URL-REGEX,^http:\/\/sf3-be-pack\.pglstatp-toutiao\.com\/obj\/ad-app-package\/,REJECT,extended-matching
-URL-REGEX,^https:\/\/sf3-fe-tos\.pglstatp-toutiao\.com\/obj\/ad-pattern\/,REJECT,extended-matching
-URL-REGEX,^https:\/\/lf-cdn-tos\.bytescm\.com\/obj\/static\/ad\/,REJECT,extended-matching
-URL-REGEX,^https:\/\/tnc3-alisc1\.zijieapi\.com\/get_domains\/,REJECT,extended-matching
+DOMAIN,mon.zijieapi.com,REJECT,extended-matching
+DOMAIN,i.snssdk.com,REJECT,extended-matching
+DOMAIN,is.snssdk.com,REJECT,extended-matching
+DOMAIN,bds.snssdk.com,REJECT,extended-matching
+DOMAIN,dm.bytedance.com,REJECT,extended-matching
+DOMAIN,dm.pstatp.com,REJECT,extended-matching
+DOMAIN,dm.toutiao.com,REJECT,extended-matching
+DOMAIN,log.snssdk.com,REJECT,extended-matching
+DOMAIN,s3a.pstatp.com,REJECT,extended-matching
+DOMAIN,sdfp.snssdk.com,REJECT,extended-matching
+DOMAIN,tosv.boe.byted.org,REJECT,extended-matching
+DOMAIN,tosv.byted.org,REJECT,extended-matching
+DOMAIN,extlog.snssdk.com,REJECT,extended-matching
+DOMAIN,mssdk-bu.bytedance.com,REJECT,extended-matching
+DOMAIN,toblog.ctobsnssdk.com,REJECT,extended-matching
+DOMAIN,mssdk.volces.com,REJECT,extended-matching
+DOMAIN,pangolin.snssdk.com,REJECT,extended-matching
+DOMAIN,gromore.pangolin-sdk-toutiao.com,REJECT,extended-matching
+DOMAIN-KEYWORD,-ad-sign.byteimg.com,REJECT,extended-matching
+DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching
+DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT,extended-matching
+DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching
+DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching
+# 原有
 DOMAIN-KEYWORD,zjurl,REJECT,extended-matching
 DOMAIN-KEYWORD,bdurl,REJECT,extended-matching
 DOMAIN-KEYWORD,365yg,REJECT,extended-matching
@@ -16,12 +36,38 @@ DOMAIN-KEYWORD,misc-l,REJECT,extended-matching
 DOMAIN-KEYWORD,mssdk,REJECT,extended-matching
 DOMAIN-KEYWORD,snssdk,REJECT,extended-matching
 DOMAIN-KEYWORD,zijieapi,REJECT,extended-matching
-DOMAIN-KEYWORD,-ad-sign.byteimg.com,REJECT,extended-matching
 DOMAIN-KEYWORD,-misc,REJECT,extended-matching
 DOMAIN-KEYWORD,-aliec,REJECT,extended-matching
 DOMAIN-KEYWORD,-alisc,REJECT,extended-matching
 DOMAIN-KEYWORD,-applog.fqnovel,REJECT,extended-matching
 DOMAIN-KEYWORD,-bjlgy,REJECT,extended-matching
+
+URL-REGEX,^http:\/\/sf3-be-pack\.pglstatp-toutiao\.com\/obj\/ad-app-package\/,REJECT,extended-matching
+URL-REGEX,^https:\/\/sf3-fe-tos\.pglstatp-toutiao\.com\/obj\/ad-pattern\/,REJECT,extended-matching
+URL-REGEX,^https:\/\/lf-cdn-tos\.bytescm\.com\/obj\/static\/ad\/,REJECT,extended-matching
+URL-REGEX,^https:\/\/tnc3-alisc1\.zijieapi\.com\/get_domains\/,REJECT,extended-matching
+URL-REGEX,^http:\/\/p\d+-be-pack-sign\.pglstatp-toutiao\.com\/(ad-app-package|web\.business\.image)\/,REJECT,extended-matching
+
+# 字节跳动广告
+AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com))
+AND,((DOMAIN-KEYWORD,-ttam-),(DOMAIN-SUFFIX,ibyteimg.com))
+AND,((DOMAIN-KEYWORD,ssdk-),(DOMAIN-SUFFIX,pangle.io))
+AND,((DOMAIN-KEYWORD,pangolin),(DOMAIN-SUFFIX,sgsnssdk.com))
+AND,((DOMAIN-KEYWORD,lf),(DOMAIN-KEYWORD,-short.bytetos.com))
+AND,((DOMAIN-KEYWORD,v),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com))
+AND,((DOMAIN-KEYWORD,sf),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com))
+AND,((DOMAIN-KEYWORD,s),(DOMAIN-KEYWORD,-fe-scm.pglstatp-toutiao.com))
+AND,((DOMAIN-KEYWORD,sf),(DOMAIN-KEYWORD,-ttcdn-tos.pstatp.com))
+AND,((DOMAIN-KEYWORD,sf),(DOMAIN-KEYWORD,-static.i18n-pglstatp.com))
+AND,((DOMAIN-KEYWORD,if),(DOMAIN-KEYWORD,-analytics.bytescm.com))
+AND,((DOMAIN-KEYWORD,lf),(DOMAIN-KEYWORD,-analytics.bytescm.com))
+AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,normal),(DOMAIN-SUFFIX,zijieapi.com))
+AND,((DOMAIN-KEYWORD,api),(DOMAIN-KEYWORD,-access-),(DOMAIN-SUFFIX,pangle.io))
+AND,((DOMAIN-KEYWORD,api),(DOMAIN-KEYWORD,-log-),(DOMAIN-SUFFIX,pangle.io))
+AND,((DOMAIN-KEYWORD,api),(DOMAIN-KEYWORD,-dual-event-),(DOMAIN-SUFFIX,pangle.io))
+AND,((DOMAIN-KEYWORD,api),(DOMAIN-KEYWORD,pangolin),(DOMAIN-SUFFIX,sgsnssdk.com))
+AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,-normal-lq),(DOMAIN-SUFFIX,zijieapi.com))
+
 AND,((DOMAIN-KEYWORD,zijie),(DOMAIN-KEYWORD,ad)),REJECT,extended-matching
 AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com)),REJECT,extended-matching
 AND,((DOMAIN-KEYWORD,gecko),(DOMAIN-SUFFIX,zijieapi.com)),REJECT,extended-matching
@@ -30,10 +76,13 @@ AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,normal),(DOMAIN-SUFFIX,zijieapi.com)),
 AND,((DOMAIN-KEYWORD,tnc),(AND,((OR,((DOMAIN-KEYWORD,-bjlgy),(DOMAIN-KEYWORD,-alisc),(DOMAIN-KEYWORD,-aliec))),(OR,((DOMAIN-SUFFIX,snssdk.com),(DOMAIN-SUFFIX,toutiaoapi.com),(DOMAIN-SUFFIX,bytedance.com),(DOMAIN-SUFFIX,zijieapi.com)))))),REJECT,extended-matching
 
 [URL Rewrite]
-^https:\/\/sf3-fe-tos\.pglstatp-toutiao\.com\/obj\/ad-pattern\/ - reject
 ^https:\/\/lf-cdn-tos\.bytescm\.com\/obj\/static\/ad\/ - reject
 # 域名解析
 ^https:\/\/tnc3-alisc1\.zijieapi\.com\/get_domains\/ - reject
+# 字节跳动广告
+^https:\/\/ether-pack\.pangolin-sdk-toutiao\.com\/union\/endcard\/ - reject
+^https:\/\/api-access\.pangolin-sdk-toutiao\d?\.com\/api\/ad\/ - reject
+^https:\/\/sf\d+-fe-tos\.pglstatp-toutiao\.com\/obj\/ad-pattern\/ - reject
 
 [MITM]
-hostname = %APPEND% sf3-fe-tos.pglstatp-toutiao.com, tnc3-alisc1.zijieapi.com, api-access.pangolin-sdk-toutiao*.com, lf-cdn-tos.bytescm.com, is.snssdk.com
+hostname = %APPEND% sf*-fe-tos.pglstatp-toutiao.com,tnc3-alisc1.zijieapi.com,api-access.pangolin-sdk-toutiao*.com,lf-cdn-tos.bytescm.com,is.snssdk.com,ether-pack.pangolin-sdk-toutiao.com
