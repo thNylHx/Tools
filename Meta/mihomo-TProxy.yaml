@@ -87,28 +87,29 @@ sniffer:
 dns:
   # 关闭将使用系统 DNS
   enable: true
-  # DNS
+  # 开启 DNS 服务器监听
+  listen: 0.0.0.0:53
+  # 开启 DNS IPv6 解析
   ipv6: true
   # 遵循规则
   respect-rules: true
   # 模式：redir-host 或 fake-ip
   enhanced-mode: fake-ip
-  # fake ip 白名单列表'以下地址不会下发fakeip映射用于连接
+  # fake ip 白名单列表，以下地址不会下发fakeip映射用于连接
   fake-ip-filter:
     - "*"
     - "+.lan"
     - "+.local"
     - "+.market.xiaomi.com"
-   # 使用的DNS服务器
+  # 默认的域名解析服务器
   nameserver:
-    - https://120.53.53.53/dns-query
     - https://223.5.5.5/dns-query
-  # 代理服务器使用的DNS服务器
+    - https://120.53.53.53/dns-query
+  # 代理节点域名解析服务器，仅用于解析代理节点的域名
   proxy-server-nameserver:
-    - https://dns.google/dns-query
-    - https://dns.cloudflare.com/dns-query
+    - https://223.5.5.5/dns-query
+    - https://120.53.53.53/dns-query
 
-# 单个出站代理节点
 # 单个出站代理节点
 proxies: 
   - name: "国内直连"
