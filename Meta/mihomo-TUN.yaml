@@ -90,26 +90,26 @@ tun:
 dns:
   # 关闭将使用系统 DNS
   enable: true
-  # DNS
+  # 是否解析 IPV6, 如为 false, 则回应 AAAA 的空解析
   ipv6: true
-  # 遵循规则
+  # DNS 连接遵守路由规则，需配置 proxy-server-nameserver
   respect-rules: true
   # 模式：redir-host 或 fake-ip
   enhanced-mode: fake-ip
-  # fake ip 白名单列表'以下地址不会下发fakeip映射用于连接
+  # fake ip 白名单列表，以下地址不会下发fakeip映射用于连接
   fake-ip-filter:
     - "*"
     - "+.lan"
     - "+.local"
     - "+.market.xiaomi.com"
-   # 使用的DNS服务器
+  # 默认的域名解析服务器
   nameserver:
-    - https://120.53.53.53/dns-query
     - https://223.5.5.5/dns-query
-  # 代理服务器使用的DNS服务器
+    - https://120.53.53.53/dns-query
+  # 代理节点域名解析服务器，仅用于解析代理节点的域名
   proxy-server-nameserver:
-    - https://dns.google/dns-query
-    - https://dns.cloudflare.com/dns-query
+    - https://223.5.5.5/dns-query
+    - https://120.53.53.53/dns-query
 
 # 单个出站代理节点
 proxies: 
