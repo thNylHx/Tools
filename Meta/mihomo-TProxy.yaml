@@ -1,8 +1,6 @@
 #!name = mihomo TProxy 配置文件
-#!desc = 说明：理论上适用于所有的 Meta 内核，已测试的有 Clash Verg Rev、Openclash、mihomo 
-#!date = 2024-07-31 17:00
-#!source = https://wiki.metacubex.one/example/conf/#__tabbed_1_3
-#!author = thNylHx
+#!date = 2024-09-27 09:16
+#!source = https://wiki.ClashMetacubex.one/example/conf/#__tabbed_1_2
 
 # 这里是机场订阅更新和延迟测试相关锚点
 pr: &pr {type: http, interval: 3600, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}}
@@ -23,23 +21,18 @@ proxy-providers:
       additional-prefix: "[此处填写机场名称]"
 
 # 全局配置
-# 开启 IPv6 总开关，可选：true/false
+# 开启 ip 总开关 true/false
 ipv6: true
-# 允许局域网连接
+# 允许局域网的连接（可用来共享加速）
 allow-lan: true
-# HTTP(S) 和 SOCKS 代理混合端口
+# 混合端口 HTTP 和 SOCKS5 用一个端口
 mixed-port: 7890
+# Tproxy 端口
+tproxy-port: 7891
 # 更换延迟计算方式,去除握手等额外延迟
 unified-delay: true
 # TCP 并发连接所有 IP, 将使用最快握手的 TCP
 tcp-concurrent: true
-
-# Tproxy 端口
-tproxy-port: 7891
-# 自动配置 iptables
-iptables: 
-  enable: true
-  inbound-interface: eth0
 
 # 配置 WEB UI
 # UI 名字
@@ -87,11 +80,13 @@ sniffer:
 dns:
   # 关闭将使用系统 DNS
   enable: true
-  # 开启 DNS 服务器监听
-  listen: 0.0.0.0:53
-  # 开启 DNS IPv6 解析
+  # 是否解析 IPV6, 如为 false, 则回应 AAAA 的空解析
   ipv6: true
-  # 遵循规则
+  # 开启 DNS 服务器监听，仅支持 udp
+  listen: 0.0.0.0:53
+  # fakeip 下的 IP 段设置
+  fake-ip-range: 28.0.0.1/8
+  # DNS 连接遵守路由规则，需配置 proxy-server-nameserver
   respect-rules: true
   # 模式：redir-host 或 fake-ip
   enhanced-mode: fake-ip
