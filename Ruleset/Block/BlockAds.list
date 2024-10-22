@@ -5,8 +5,6 @@ AND,((DOMAIN-KEYWORD,minigame),(DOMAIN-SUFFIX,zijieapi.com))
 AND,((DOMAIN-KEYWORD,tnc),(AND,((OR,((DOMAIN-KEYWORD,-bjlgy),(DOMAIN-KEYWORD,-alisc),(DOMAIN-KEYWORD,-aliec))),(OR,((DOMAIN-SUFFIX,snssdk.com),(DOMAIN-SUFFIX,toutiaoapi.com),(DOMAIN-SUFFIX,bytedance.com),(DOMAIN-SUFFIX,zijieapi.com))))))
 AND,((DOMAIN-KEYWORD,zijie),(DOMAIN-KEYWORD,ad))
 AND,((USER-AGENT,Frodo*),(DOMAIN,119.29.29.29))
-DOMAIN, api-adservices.apple.com
-DOMAIN, o33249.ingest.sentry.io
 DOMAIN,118.89.204.198
 DOMAIN,25e87c0802f91cf8cgg.6uzxtlv.cn
 DOMAIN,4lke.online
@@ -186,6 +184,7 @@ DOMAIN,amap-aos-info-nogw.amap.com
 DOMAIN,amdc.m.youku.com
 DOMAIN,analytics.slashdotmedia.com
 DOMAIN,api-ad.kajicam.com
+DOMAIN,api-adservices.apple.com
 DOMAIN,api-adservices.apple.com
 DOMAIN,api.ad.xiaomi.com
 DOMAIN,api.adnet.mob.com
@@ -429,6 +428,7 @@ DOMAIN,ns3.viglink.com
 DOMAIN,ns4.viglink.com
 DOMAIN,nsclick.baidu.com
 DOMAIN,o.clarity.ms
+DOMAIN,o33249.ingest.sentry.io
 DOMAIN,open.e.kuaishou.com
 DOMAIN,open.e.kuaishou.com
 DOMAIN,open.kuaishou.com
@@ -696,8 +696,6 @@ DOMAIN-KEYWORD,xxshuyuan
 DOMAIN-KEYWORD,zijieapi
 DOMAIN-KEYWORD,zjtoolbar
 DOMAIN-KEYWORD,zjurl
-DOMAIN-SUFFIX, iadsdk.apple.com
-DOMAIN-SUFFIX, pos.baidu.com
 DOMAIN-SUFFIX,002777.xyz
 DOMAIN-SUFFIX,003store.com
 DOMAIN-SUFFIX,01v62.xyz
@@ -4356,6 +4354,7 @@ DOMAIN-SUFFIX,iad-apple.com
 DOMAIN-SUFFIX,iad.appboy.com
 DOMAIN-SUFFIX,iads.xinmin.cn
 DOMAIN-SUFFIX,iadsdk.apple.com
+DOMAIN-SUFFIX,iadsdk.apple.com
 DOMAIN-SUFFIX,iaindu.cn
 DOMAIN-SUFFIX,iaiqk.top
 DOMAIN-SUFFIX,iairuo.xyz
@@ -6468,6 +6467,7 @@ DOMAIN-SUFFIX,popads.net
 DOMAIN-SUFFIX,popin.cc
 DOMAIN-SUFFIX,poppyta.com
 DOMAIN-SUFFIX,porjjhu.cn
+DOMAIN-SUFFIX,pos.baidu.com
 DOMAIN-SUFFIX,pos.baidu.com
 DOMAIN-SUFFIX,poster.weather.com.cn
 DOMAIN-SUFFIX,postrelease.com
@@ -9469,7 +9469,6 @@ DOMAIN-SUFFIX,zzyy17.top
 DOMAIN-SUFFIX,zzyy18.top
 DOMAIN-SUFFIX,zzyy19.top
 DOMAIN-SUFFIX,zzyy20.top
-IP-CIDR, 180.76.76.200/32,no-resolve
 IP-CIDR,101.124.19.122/32,no-resolve
 IP-CIDR,101.227.200.11/32,no-resolve
 IP-CIDR,101.227.200.28/32,no-resolve
@@ -9510,6 +9509,7 @@ IP-CIDR,124.232.160.178/32,no-resolve
 IP-CIDR,175.6.223.15/32,no-resolve
 IP-CIDR,180.166.52.24/32,no-resolve
 IP-CIDR,180.76.76.112/32,no-resolve
+IP-CIDR,180.76.76.200/32,no-resolve
 IP-CIDR,180.76.76.200/32,no-resolve
 IP-CIDR,183.59.53.237/32,no-resolve
 IP-CIDR,202.90.110.8/32,no-resolve

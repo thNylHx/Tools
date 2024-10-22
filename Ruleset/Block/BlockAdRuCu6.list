@@ -4,8 +4,8 @@
 ## 阿里云
 IP-CIDR,203.107.1.1/24,no-resolve
 # Apple
-DOMAIN, api-adservices.apple.com
-DOMAIN-SUFFIX, iadsdk.apple.com
+DOMAIN,api-adservices.apple.com
+DOMAIN-SUFFIX,iadsdk.apple.com
 # 安全浏览限制解除
 DOMAIN,lookup.api.bsb.baidu.com
 DOMAIN,proxy.safebrowsing.apple
@@ -19,13 +19,13 @@ DOMAIN-SUFFIX,u3.ucweb.com
 
 # ======= B ======= #
 # 百度
-DOMAIN-SUFFIX, pos.baidu.com
+DOMAIN-SUFFIX,pos.baidu.com
 # 百度贴吧
-IP-CIDR, 180.76.76.200/32,no-resolve
+IP-CIDR,180.76.76.200/32,no-resolve
 
 # ======= C ======= #
 # ChatGPT
-DOMAIN, o33249.ingest.sentry.io
+DOMAIN,o33249.ingest.sentry.io
 # Clue 智库
 DOMAIN,api.helloclue.com
 DOMAIN,brahe.apptimize.com
