@@ -1,4 +1,4 @@
-# 2024-08-11 20:00
+# 2024-10-22 09:15
 
 #!/bin/bash
 
@@ -23,14 +23,11 @@ curl -L -o Tools-repo/Ruleset/Block/BlockTracking.list "https://raw.githubuserco
 # 本地/局域网
 curl -L -o Tools-repo/Ruleset/Other/PrivateIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
 
-# 1Password
-curl -L -o Tools-repo/Ruleset/Other/1Password.list "https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/1PasswordUS.list"
-
 # PayPal
 curl -L -o Tools-repo/Ruleset/Media/PayPal.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/paypal.list"
 
 # AI
-curl -L -o Tools-repo/Ruleset/Other/AI.list "https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/AI.list"
+curl -L -o Tools-repo/Ruleset/Other/Openai.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.list"
 
 # 游戏平台
 curl -L -o Tools-repo/Ruleset/Other/Steam.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list"
@@ -38,7 +35,6 @@ curl -L -o Tools-repo/Ruleset/Other/Epic.list "https://raw.githubusercontent.com
 
 # 谷歌平台
 curl -L -o Tools-repo/Ruleset/Media/YouTube.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
-#curl -L -o Tools-repo/Ruleset/Media/YouTube.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list"
 curl -L -o Tools-repo/Ruleset/Media/YouTubeMusic.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
 curl -L -o Tools-repo/Ruleset/Other/Google.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
 curl -L -o Tools-repo/Ruleset/Other/GoogleIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
@@ -58,7 +54,7 @@ curl -L -o Tools-repo/Ruleset/Media/FacebookIP.list "https://raw.githubuserconte
 curl -L -o Tools-repo/Ruleset/Media/Instagram.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
 
 # 影视媒体
-curl -L -o Tools-repo/Ruleset/Media/TikTok.list "https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Rule/TikTok.list"
+curl -L -o Tools-repo/Ruleset/Media/TikTok.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/tiktok.list"
 curl -L -o Tools-repo/Ruleset/Media/GlobalMedia.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
 curl -L -o Tools-repo/Ruleset/Media/BilibiliHMT.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
 curl -L -o Tools-repo/Ruleset/Media/ChinaMedia.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
@@ -79,7 +75,6 @@ curl -L -o Tools-repo/Ruleset/Other/Apple.list "https://raw.githubusercontent.co
 
 # 国内直连
 curl -L -o Tools-repo/Ruleset/Other/China.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/cn.list"
-# curl -L -o Tools-repo/Ruleset/Other/Direct.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
 curl -L -o Tools-repo/Ruleset/Other/ChinaIP.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
 curl -L -o Tools-repo/Ruleset/Other/ChinaASN.list "https://raw.githubusercontent.com/missuo/ASN-China/main/ASN.China.list"
 
