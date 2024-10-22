@@ -8,7 +8,7 @@ mkdir -p Tools/Ruleset/{Block,ClashMeta,Media,Other}
 #--- Surge ---#
 # 广告拦截
 # RuCu6
-curl -L -o Tools-repo/Ruleset/Block/BlockAdRuCu6.list "https://raw.githubusercontent.com/RuCu6/QuanX/main/Rules/MyBlockAds.list"
+# curl -L -o Tools-repo/Ruleset/Block/BlockAdRuCu6.list "https://raw.githubusercontent.com/RuCu6/QuanX/main/Rules/MyBlockAds.list"
 # ACL4SSR
 curl -L -o Tools-repo/Ruleset/Block/BlockAdACL4SSR.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
 # limbopro
