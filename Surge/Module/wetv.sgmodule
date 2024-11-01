@@ -1,0 +1,34 @@
+#!name = Block ads | 腾讯视频
+#!desc = 名称： 腾讯视频 拦截广告 \n作者： RuCu6 \n说明： 移除开屏广告，需卸载重装！
+#!author = RuCu6
+#!category = 🚫 Block ads
+#!date= 2024-05-27 10:30
+
+[Rule]
+IP-CIDR,47.110.187.87/32,REJECT,no-resolve
+OR,((DOMAIN,pgdt.gtimg.cn,extended-matching), (AND,((USER-AGENT,live4iphoneRel*), (IP-CIDR,0.0.0.0/0,no-resolve)))),REJECT-DROP
+DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching
+DOMAIN,info4.video.qq.com,REJECT,extended-matching
+DOMAIN,info6.video.qq.com,REJECT,extended-matching
+DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching
+DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching
+DOMAIN,tmead.y.qq.com,REJECT,extended-matching
+DOMAIN,tmeadbak.y.qq.com,REJECT,extended-matching
+DOMAIN,tmeadcomm.y.qq.com,REJECT,extended-matching
+DOMAIN,tpns.qq.com,REJECT,extended-matching
+DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching
+DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching
+DOMAIN-KEYWORD,trace.qq.com,REJECT,extended-matching
+DOMAIN-KEYWORD,trace.video.qq.com,REJECT,extended-matching
+
+[URL Rewrite]
+^http:\/\/[\d\.:]*\/?(defaultts\.tc|vmind\.qqvideo\.tc|finderpdd\.video)\.qq\.com\/\w+ - reject
+^http:\/\/apd-vlive\.apdcdn\.tc\.qq\.com\/vmind\.qqvideo\.tc\.qq\.com\/\w+ - reject
+^http:\/\/apd-\w+\.v\.smtcdns\.com\/(defaultts|omts|vmind\.qqvideo)\.tc\.qq\.com\/\w+ - reject
+^https:\/\/ossgw\.alicdn\.com\/creatives-assets/prod/feupload/user - REJECT
+
+[Map Local]
+^https?:\/\/vv\.video\.qq\.com\/(diff|get)vmind data-type=text data="{}" status-code=200
+
+[MITM]
+hostname = %APPEND% vv.video.qq.com,ossgw.alicdn.com

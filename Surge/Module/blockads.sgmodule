@@ -1,0 +1,82 @@
+#!name = Block ads | 广告拦截合集
+#!desc = 名称： 常用软件 拦截广告 \n作者： RuCu6 Keywos fmz200 \n说明： 目前有，爱思、中国移动、网易邮箱大师、qq邮箱、大师兄、腾讯手机管家、招商银行、it之家
+#!author = RuCu6 Keywos fmz200
+#!category = 🚫 Block ads
+#!date= 2024-04-23 20:00
+
+[General]
+force-http-engine-hosts = %APPEND% sdk.alibaba.com.ailbaba.me
+
+[URL Rewrite]
+# 爱思开屏
+^https?:\/\/list-app-m\.i4\.cn\/getopfstadinfo\.xhtml - reject
+
+# qq邮箱开屏 rescdn.qqmail.com
+^https:\/\/rescdn\.qqmail\.com\/qqmail\/images\/.+\.(png|jpg)$ - reject
+
+# 腾讯手机管理开屏 us.l.qq.com
+^https:\/\/us\.l\.qq\.com\/exapp - reject
+
+# it之家 api.zuihuimai.com, dat.ruanmei.com
+^https?:\/\/api\.zuihuimai\.com\/static\/.*\/hongbao - reject
+^https?:\/\/dat\.ruanmei\.com\/ithome\/money\/acd\.json$ - reject
+
+[Rule]
+# 网易邮箱
+DOMAIN-SUFFIX,sdk.e.qq.com,REJECT-NO-DROP
+DOMAIN-SUFFIX,gorgon.youdao.com,REJECT-NO-DROP
+DOMAIN-SUFFIX,nex.163.com,REJECT-NO-DROP
+DOMAIN-SUFFIX,mi.gdt.qq.com,REJECT-NO-DROP
+# 酷安
+DOMAIN-SUFFIX,ulogs.umengcloud.com,REJECT-DROP
+DOMAIN-SUFFIX,toblog.ctobsnssdk.com,REJECT-NO-DROP
+DOMAIN-SUFFIX,adashbc.ut.taobao.com,REJECT-NO-DROP
+
+# 直接拦截会暴力请求或者使用缓存广告数据
+DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao.com,DIRECT
+DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao1.com,DIRECT
+DOMAIN-KEYWORD,pangolin-sdk-toutiao,DIRECT
+
+
+[Map Local]
+# 中国移动开屏 client.app.coc.10086.cn
+^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(explorePage\/getAdverList|init\/startInit) data="https://raw.githubusercontent.com/Keywos/rule/main/mocks//reject-200.txt"
+
+# 微信公众号底部 mp.weixin.qq.com
+^https?:\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad data="https://raw.githubusercontent.com/Keywos/rule/main/mocks//WeChat.json"
+
+# 网易邮箱大师开屏 appconf.mail.163.com
+^https?:\/\/appconf\.mail\.163\.com\/mmad\/ data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/reject-200.txt"
+^https?:\/\/mail\.163\.com\/smflow\/(config|get)\.do data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/reject-dict.json"
+^https?:\/\/iad\.g\.163\.com\/ma\/ad data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/reject-dict.json"
+^https:\/\/api-access\.pangolin-sdk-toutiao(\d|-\w)?\.com\/api\/ad\/union\/sdk\/get_ads data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/reject-dict.json"
+
+^https?:\/\/mobads\.baidu\.com\/cpro\/ui\/mads\.php\? data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/reject-dict.json"
+
+^https?:\/\/dsp-x\.jd\.com\/adx\/sdk data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/reject-dict.json"
+
+# 招商银行开屏 webappcfg.paas.cmbchina.com
+^https?:\/\/webappcfg\.paas\.cmbchina\.com\/v\d\/func\/getmarketconfig data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/reject-dict.json"
+
+# 大师兄 sdk.alibaba.com.ailbaba.me
+^https?:\/\/sdk\.alibaba\.com\.ailbaba\.me\/(dsx|xgapp)\.php\/v\d\/(top_notice\?|app_config|search_hot|version|advert\?position=[^2]+) data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/reject-dict.json"
+
+# 米家
+^https?:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/(banner|carousel\/banners|myTab|openingBanner) data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/reject-dict.json"
+
+# 彩云赏花
+^https?:\/\/wrapper\.cyapi\.cn\/v1\/activity\? data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/caiyun.json"
+^https?:\/\/api\.caiyunapp\.com\/v1\/activity data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/reject-dict.json"
+
+[Script]
+# 穿山甲广告联盟 修改加密广告配置/阻止上传等 汽水音乐/酷安/网易邮箱等
+AD_SDKEY = type=http-response,pattern=^https:\/\/api-access\.pangolin-sdk-toutiao(\d|-\w)??\.com\/api\/ad\/union\/sdk\/settings,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/Keywos/rule/main/JS/adsdk_chj.js
+
+# 爱思推广全部干掉只保留搜索 list-app-m.i4.cn, search-app-m.i4.cn
+爱思 = type=http-response,pattern=^https?:\/\/(search|list)-app-m\.i4\.cn\/(getHotSearchList|getAppList)\.xhtml,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/Keywos/rule/main/JS/aisi.js
+
+
+[MITM]
+h2 = true
+tcp-connection = true
+hostname = %APPEND% client.app.coc.10086.cn, list-app-m.i4.cn, search-app-m.i4.cn, mp.weixin.qq.com, webappcfg.paas.cmbchina.com, rescdn.qqmail.com, us.l.qq.com, napi.ithome.com, api.zuihuimai.com,mobads.baidu.com,dsp-x.jd.comdat.ruanmei.com,appconf.mail.163.com,home.mi.com, wrapper.cyapi.cn,api.caiyunapp.com, api-access.pangolin-sdk-toutiao*.com
