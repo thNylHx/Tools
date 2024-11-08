@@ -1,36 +1,44 @@
 name: Update Tools and Mods
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  # 触发方式：手动触发或定时任务
+  workflow_dispatch:  # 手动触发
   schedule:
-    - cron: '0 9 * * *'  # 每天 09:00 UTC 执行
-    - cron: '0 21 * * *'  # 每天 21:00 UTC 执行
+    - cron: "15 */12 * * *"  # 每6小时运行一次，00:15和12:15 UTC
 
 jobs:
-  update:
+  Fork-FLITER-list:
+    # 使用最新的 Ubuntu 作为运行环境
     runs-on: ubuntu-latest
+    env:
+      TZ: 'Asia/Shanghai'  # 设置时区为上海
+
     steps:
-    
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+    - name: Checkout target repository
+      # 克隆目标仓库（Tools）
+      uses: actions/checkout@v4.1.0
+      with:
+        repository: thNylHx/Tools  # 要克隆的仓库
+        path: Tools-repo  # 克隆到的目录
 
     - name: Set up Git config
+      # 配置 Git 用户名和邮箱
       run: |
-        git config --global user.name "${{ secrets.USERNAME }}"
-        git config --global user.email "${{ secrets.EMAIL }}"
+        git config --global user.name "${{ secrets.USERNAME }}"  # 设置 Git 用户名
+        git config --global user.email "${{ secrets.EMAIL }}"  # 设置 Git 邮箱
     
     - name: Clone LoonKissSurge repository
+      # 克隆 LoonKissSurge 仓库
       run: |
         if [ -d "${{ github.workspace }}/LoonKissSurge" ]; then
-          rm -rf "${{ github.workspace }}/LoonKissSurge"
+          rm -rf "${{ github.workspace }}/LoonKissSurge"  # 如果目录存在，先删除
           echo "已删除 ${GITHUB_WORKSPACE}/LoonKissSurge 目录。"
         fi
+        # 执行克隆操作，克隆失败则退出
         git clone "https://github.com/QingRex/LoonKissSurge.git" "${{ github.workspace }}/LoonKissSurge" && echo "成功克隆 LoonKissSurge 仓库" || { echo "克隆失败，退出。"; exit 1; }
 
     - name: Clone Tools repository if needed
+      # 如果 Tools 仓库目录不存在，则克隆
       run: |
         if [ ! -d "${{ github.workspace }}/Tools" ]; then
           echo "${{ github.workspace }}/Tools 不存在，开始克隆仓库"
@@ -40,27 +48,30 @@ jobs:
         fi
     
     - name: Rebuild Surge Mods directory
+      # 重建 Surge/Mods 目录
       run: |
         TOOLS_DIR="${{ github.workspace }}/Tools"
         SURGE_MODS_DIR="$TOOLS_DIR/Surge/Mods"
-        rm -rf "$SURGE_MODS_DIR" && mkdir -p "$SURGE_MODS_DIR"
+        rm -rf "$SURGE_MODS_DIR" && mkdir -p "$SURGE_MODS_DIR"  # 删除并重新创建目录
         echo "已重建 Surge/Mods 目录。"
 
     - name: Copy and rename Beta files
+      # 从 LoonKissSurge 仓库的 Beta 目录复制文件到 Tools 仓库的 Surge/Mods 目录
       run: |
         if [ -d "${{ github.workspace }}/LoonKissSurge/Surge/Beta" ]; then
           cp -r "${{ github.workspace }}/LoonKissSurge/Surge/Beta/"* "${{ github.workspace }}/Tools/Surge/Mods/" && echo "已拷贝 Beta 文件至 Surge/Mods"
           
           echo "匹配的文件："
-          # 确保路径正确，只列出 .sgmodule 文件
+          # 列出 Surge/Mods 目录下的 .sgmodule 文件，如果没有找到，则输出提示
           ls "${{ github.workspace }}/Tools/Surge/Mods"/*.sgmodule || echo "没有找到 .sgmodule 文件"
           
+          # 遍历所有 .sgmodule 文件，进行文件名重命名
           for file in "${{ github.workspace }}/Tools/Surge/Mods"/*.sgmodule; do
             if [ -e "$file" ]; then
-              # 将文件名中的 "去广告" 删除，如果没有变化则跳过
+              # 使用 sed 删除文件名中的 "去广告"
               new_name=$(echo "$file" | sed 's/去广告//g')
               if [ "$file" != "$new_name" ]; then
-                mv "$file" "$new_name"
+                mv "$file" "$new_name"  # 重命名文件
                 echo "已将 $file 重命名为 $new_name"
               else
                 echo "文件 $file 不需要重命名"
@@ -68,31 +79,44 @@ jobs:
             fi
           done
         else
+          # 如果未找到 Beta 目录，输出错误并退出
           echo "未找到 ${GITHUB_WORKSPACE}/LoonKissSurge/Surge/Beta 目录，退出。"
           exit 1
         fi
 
     - name: Set remote URL for Tools repository
+      # 设置远程仓库的 URL，使用 GitHub Token 进行身份验证
       run: |
         cd "${{ github.workspace }}/Tools"
+        # 如果远程仓库没有配置 "origin"，则添加
         if ! git remote | grep -q "origin"; then
-          git remote add origin "https://${{ secrets.USERNAME }}:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
+          git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
         else
-          git remote set-url origin "https://${{ secrets.USERNAME }}:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
+          # 如果已经存在 "origin"，则更新 URL
+          git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
         fi
 
     - name: Check for changes and push to GitHub
+      # 检查本地仓库是否有变更，并将变更推送到 GitHub
       run: |
         cd "${{ github.workspace }}/Tools"
-        git fetch origin
-        STATUS=$(git status --porcelain)
+        git fetch origin  # 获取最新的远程仓库信息
+        STATUS=$(git status --porcelain)  # 获取仓库状态
 
         if [ -n "$STATUS" ]; then
+          # 如果有变更，进行提交并推送
           echo "检测到本地变更，准备同步到 GitHub"
-          git add -A
-          git commit -m "Auto Update $(date +'%Y-%m-%d %H:%M:%S')"
-          git push origin main
+          git add -A  # 添加所有变更
+          git commit -m "Auto Update $(date +'%Y-%m-%d %H:%M:%S')"  # 提交变更
+          git push origin main  # 推送到远程仓库
           echo "同步完成！"
         else
+          # 如果没有变更，则输出提示
           echo "没有检测到本地变更，无需同步。"
         fi
+        
+    - name: Cleanup Workflow
+      uses: Mattraks/delete-workflow-runs@main
+      with:
+        retain_days: 0
+        keep_minimum_runs: 5
