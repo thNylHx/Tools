@@ -1,0 +1,120 @@
+#!name=丰巢去广告
+#!desc=移除弹窗，精简首页和生活服务。需要IPA签名注入方可使用，App Store用户请勿使用此插件，务必点击下方主页链接查看详细教程。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/FC_Box.png
+#!category=BetaModule
+#!openUrl=https://apps.apple.com/app/id1259763050
+#!tag=去广告
+#!loon_version=3.2.1(749)
+#!homepage=https://getupnote.com/share/notes/zSn1ShBmzNYISKcTgjXE5oHMrNf2/34bf3aad-7872-497d-b239-198e27e8c84c
+#!date=2024-09-25 12:36:51
+
+[Rule]
+# 腾讯
+DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,c2.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,huatuocode.huatuo.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,info4.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching,pre-matching
+# DOMAIN, mazu.m.qq.com, REJECT // 误杀
+DOMAIN,mi.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
+DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching,pre-matching
+# DOMAIN, qzonestyle.gtimg.cn, REJECT // 误杀
+DOMAIN,qzs.gdtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,qzs.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,rmonitor.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdk.e.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdkconfig.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,t.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,tmead.y.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,tmeadbak.y.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,tmeadcomm.y.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,tpns.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,v.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,v2.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,win.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,wup.imtt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,tpstelemetry.tencent.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,trace.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,trace.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
+IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
+# 百度联盟 - 广告服务商
+DOMAIN,als.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN,bgg.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN,cpro.baidustatic.com,REJECT,extended-matching,pre-matching
+DOMAIN,feed-image.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN,click-bes.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN,eclick.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN,mobads-logs.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN,mobads-pre-config.cdn.bcebos.com,REJECT,extended-matching,pre-matching
+DOMAIN,mobads.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN,nadvideo2.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN,wn.pos.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN,miniapp-ad.cdn.bcebos.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,union.baidu.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,union.baidu.com,REJECT,extended-matching,pre-matching
+# 个推
+DOMAIN,b-gtc.getui.net,REJECT,extended-matching,pre-matching
+DOMAIN,c-gtc.getui.net,REJECT,extended-matching,pre-matching
+DOMAIN,c-hzgt2.getui.com,REJECT,extended-matching,pre-matching
+DOMAIN,c-ido.getui.net,REJECT,extended-matching,pre-matching
+DOMAIN,c-gtc.getui.net,REJECT,extended-matching,pre-matching
+DOMAIN,dnms.getui.com,REJECT,extended-matching,pre-matching
+DOMAIN,ido.getui.net,REJECT,extended-matching,pre-matching
+DOMAIN,sdk-conf.getui.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdk-open-phone.getui.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,mobileservice.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,getui.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,igexin.com,REJECT,extended-matching,pre-matching
+# 友盟
+DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,errnewlog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,ucc.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,ulogs.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,utoken.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,deeplink.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,aspect-upush.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,plbslog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,log.umtrack.com,REJECT,extended-matching,pre-matching
+DOMAIN,aaid.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,log.umsns.com,REJECT,extended-matching,pre-matching
+
+[Body Rewrite]
+http-response-jq ^https:\/\/consumer\.fcbox\.com\/v1\/dynamicConfig\/findTabbarConfig\/mainPage$ 'delpaths([["data","lifeService"]])'
+http-response-jq ^https:\/\/consumer\.fcbox\.com\/v1\/dynamicConfig\/findTabbarConfig\/mainPage$ 'delpaths([["data","mall"]])'
+
+[Map Local]
+# 首页 - 各类服务推广
+^https:\/\/consumer\.fcbox\.com\/fcboxactivityweb\/api\/v\d\/clientPage\/modulesAggregated\? data-type=text data="{}" status-code=200
+
+# 首页 - 丰巢商城
+^https:\/\/consumer\.fcbox\.com\/v2\/home\/mallInfo$ data-type=text data="{}" status-code=200
+
+# 广告配置及横幅推广
+^https:\/\/dsp\.fcbox\.com\/adSearch\/ data-type=text data="{}" status-code=200
+
+# 生活服务
+^https:\/\/consumer\.fcbox\.com\/hs-portal\/app\/config\/page\/home\/v2\? data-type=text data="{}" status-code=200
+
+# 订单页面 - 邀请开通会员横幅
+^https:\/\/consumer\.fcbox\.com\/post\/suggestion\/query$ data-type=text data="{}" status-code=200
+
+# 弹窗配置
+^https:\/\/consumer\.fcbox\.com\/fcboxactivityweb\/marketingEntrance\/retentionPopup$ data-type=text data="{}" status-code=200
+
+^https:\/\/consumer\.fcbox\.com\/fcboxactivityweb\/api\/clientPopup\/v\d\/queryPopupWithPriority$ data-type=text data="{}" status-code=200
+
+^https:\/\/consumer\.fcbox\.com\/fcboxactivityweb\/api\/guidePopup\/popup$ data-type=text data="{}" status-code=200
+
+[MITM]
+hostname = %APPEND% consumer.fcbox.com, dsp.fcbox.com
+
