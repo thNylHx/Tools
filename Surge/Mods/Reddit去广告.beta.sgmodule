@@ -1,0 +1,17 @@
+#!name=Reddit去广告
+#!desc=过滤应用内推广，阻止NSFW提示。
+#!author=xream[https://github.com/xream]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Reddit.png
+#!category=BetaModule
+#!openUrl=https://apps.apple.com/app/id1064216828
+#!tag=去广告
+#!loon_version=3.2.1(749)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-01-28 16:25:19
+
+[Script]
+移除广告 = type=http-response, pattern=^https?:\/\/gql(-fed)?\.reddit\.com, script-path=https://kelee.one/Resource/Script/Reddit/Reddit_remove_ads.js, requires-body=true
+
+[MITM]
+hostname = %APPEND% gql.reddit.com, gql-fed.reddit.com
+
