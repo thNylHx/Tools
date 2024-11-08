@@ -20,41 +20,42 @@ jobs:
     - name: Set up Git config
       run: |
         git config --global user.name "${{ secrets.USERNAME }}"
-        git config --global user.email "${{ secrets.EMAIL }}"
+        git config --global user.email "${{ secrets.GITHUB_EMAIL }}"
     
     - name: Clone LoonKissSurge repository
       run: |
-        if [ -d "/home/LoonKissSurge" ]; then
-          rm -rf "/home/LoonKissSurge"
-          echo "已删除 /home/LoonKissSurge 目录。"
+        # 使用 GitHub Actions 默认的工作空间目录，而不是自定义路径
+        if [ -d "${{ github.workspace }}/LoonKissSurge" ]; then
+          rm -rf "${{ github.workspace }}/LoonKissSurge"
+          echo "已删除 ${GITHUB_WORKSPACE}/LoonKissSurge 目录。"
         fi
-        git clone "https://github.com/QingRex/LoonKissSurge.git" "/home/LoonKissSurge" && echo "成功克隆 LoonKissSurge 仓库" || { echo "克隆失败，退出。"; exit 1; }
+        git clone "https://github.com/QingRex/LoonKissSurge.git" "${{ github.workspace }}/LoonKissSurge" && echo "成功克隆 LoonKissSurge 仓库" || { echo "克隆失败，退出。"; exit 1; }
 
     - name: Clone Tools repository if needed
       run: |
-        if [ ! -d "/home/Tools" ]; then
-          echo "/home/Tools 不存在，开始克隆仓库"
-          git clone "https://github.com/${{ secrets.USERNAME }}/Tools.git" "/home/Tools" && echo "成功克隆 Tools 仓库" || { echo "克隆失败，退出。"; exit 1; }
+        if [ ! -d "${{ github.workspace }}/Tools" ]; then
+          echo "${{ github.workspace }}/Tools 不存在，开始克隆仓库"
+          git clone "https://github.com/${{ secrets.USERNAME }}/Tools.git" "${{ github.workspace }}/Tools" && echo "成功克隆 Tools 仓库" || { echo "克隆失败，退出。"; exit 1; }
         else
-          echo "/home/Tools 目录已经存在，跳过克隆操作。"
+          echo "${{ github.workspace }}/Tools 目录已经存在，跳过克隆操作。"
         fi
     
     - name: Rebuild Surge Mods directory
       run: |
-        TOOLS_DIR="/home/Tools"
+        TOOLS_DIR="${{ github.workspace }}/Tools"
         SURGE_MODS_DIR="$TOOLS_DIR/Surge/Mods"
         rm -rf "$SURGE_MODS_DIR" && mkdir -p "$SURGE_MODS_DIR"
         echo "已重建 Surge/Mods 目录。"
 
     - name: Copy and rename Beta files
       run: |
-        if [ -d "/home/LoonKissSurge/Surge/Beta" ]; then
-          cp -r "/home/LoonKissSurge/Surge/Beta/"* "/home/Tools/Surge/Mods/" && echo "已拷贝 Beta 文件至 Surge/Mods"
+        if [ -d "${{ github.workspace }}/LoonKissSurge/Surge/Beta" ]; then
+          cp -r "${{ github.workspace }}/LoonKissSurge/Surge/Beta/"* "${{ github.workspace }}/Tools/Surge/Mods/" && echo "已拷贝 Beta 文件至 Surge/Mods"
           
           echo "匹配的文件："
-          ls "/home/Tools/Surge/Mods/*.sgmodule" || echo "没有找到 .sgmodule 文件"
+          ls "${{ github.workspace }}/Tools/Surge/Mods/*.sgmodule" || echo "没有找到 .sgmodule 文件"
           
-          for file in /home/Tools/Surge/Mods/*.sgmodule; do
+          for file in "${{ github.workspace }}/Tools/Surge/Mods"/*.sgmodule; do
             if [ -e "$file" ]; then
               new_name=$(echo "$file" | sed 's/去广告//g')
               mv "$file" "$new_name"
@@ -62,13 +63,13 @@ jobs:
             fi
           done
         else
-          echo "未找到 /home/LoonKissSurge/Surge/Beta 目录，退出。"
+          echo "未找到 ${GITHUB_WORKSPACE}/LoonKissSurge/Surge/Beta 目录，退出。"
           exit 1
         fi
 
     - name: Set remote URL for Tools repository
       run: |
-        cd "/home/Tools"
+        cd "${{ github.workspace }}/Tools"
         if ! git remote | grep -q "origin"; then
           git remote add origin "https://${{ secrets.USERNAME }}:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
         else
@@ -77,7 +78,7 @@ jobs:
 
     - name: Check for changes and push to GitHub
       run: |
-        cd "/home/Tools"
+        cd "${{ github.workspace }}/Tools"
         git fetch origin
         STATUS=$(git status --porcelain)
 
