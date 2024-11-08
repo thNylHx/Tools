@@ -20,11 +20,10 @@ jobs:
     - name: Set up Git config
       run: |
         git config --global user.name "${{ secrets.USERNAME }}"
-        git config --global user.email "${{ secrets.GITHUB_EMAIL }}"
+        git config --global user.email "${{ secrets.EMAIL }}"
     
     - name: Clone LoonKissSurge repository
       run: |
-        # 使用 GitHub Actions 默认的工作空间目录，而不是自定义路径
         if [ -d "${{ github.workspace }}/LoonKissSurge" ]; then
           rm -rf "${{ github.workspace }}/LoonKissSurge"
           echo "已删除 ${GITHUB_WORKSPACE}/LoonKissSurge 目录。"
@@ -53,13 +52,19 @@ jobs:
           cp -r "${{ github.workspace }}/LoonKissSurge/Surge/Beta/"* "${{ github.workspace }}/Tools/Surge/Mods/" && echo "已拷贝 Beta 文件至 Surge/Mods"
           
           echo "匹配的文件："
-          ls "${{ github.workspace }}/Tools/Surge/Mods/*.sgmodule" || echo "没有找到 .sgmodule 文件"
+          # 确保路径正确，只列出 .sgmodule 文件
+          ls "${{ github.workspace }}/Tools/Surge/Mods"/*.sgmodule || echo "没有找到 .sgmodule 文件"
           
           for file in "${{ github.workspace }}/Tools/Surge/Mods"/*.sgmodule; do
             if [ -e "$file" ]; then
+              # 将文件名中的 "去广告" 删除，如果没有变化则跳过
               new_name=$(echo "$file" | sed 's/去广告//g')
-              mv "$file" "$new_name"
-              echo "已将 $file 重命名为 $new_name"
+              if [ "$file" != "$new_name" ]; then
+                mv "$file" "$new_name"
+                echo "已将 $file 重命名为 $new_name"
+              else
+                echo "文件 $file 不需要重命名"
+              fi
             fi
           done
         else
