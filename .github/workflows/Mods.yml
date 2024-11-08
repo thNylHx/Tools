@@ -90,10 +90,10 @@ jobs:
         cd "${{ github.workspace }}/Tools"
         # 如果远程仓库没有配置 "origin"，则添加
         if ! git remote | grep -q "origin"; then
-          git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
+          git remote add origin "https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
         else
           # 如果已经存在 "origin"，则更新 URL
-          git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
+          git remote set-url origin "https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
         fi
 
     - name: Check for changes and push to GitHub
