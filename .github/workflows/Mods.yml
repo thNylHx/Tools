@@ -1,0 +1,92 @@
+name: Update Tools and Mods
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * *'  # 每天 09:00 UTC 执行
+    - cron: '0 21 * * *'  # 每天 21:00 UTC 执行
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Git config
+      run: |
+        git config --global user.name "${{ secrets.USERNAME }}"
+        git config --global user.email "${{ secrets.EMAIL }}"
+    
+    - name: Clone LoonKissSurge repository
+      run: |
+        if [ -d "/root/LoonKissSurge" ]; then
+          rm -rf "/root/LoonKissSurge"
+          echo "已删除 /root/LoonKissSurge 目录。"
+        fi
+        git clone "https://github.com/QingRex/LoonKissSurge.git" "/root/LoonKissSurge" && echo "成功克隆 LoonKissSurge 仓库" || { echo "克隆失败，退出。"; exit 1; }
+
+    - name: Clone Tools repository if needed
+      run: |
+        if [ ! -d "/root/Tools" ]; then
+          echo "/root/Tools 不存在，开始克隆仓库"
+          git clone "https://github.com/${{ secrets.USERNAME }}/Tools.git" "/root/Tools" && echo "成功克隆 Tools 仓库" || { echo "克隆失败，退出。"; exit 1; }
+        else
+          echo "/root/Tools 目录已经存在，跳过克隆操作。"
+        fi
+    
+    - name: Rebuild Surge Mods directory
+      run: |
+        TOOLS_DIR="/root/Tools"
+        SURGE_MODS_DIR="$TOOLS_DIR/Surge/Mods"
+        rm -rf "$SURGE_MODS_DIR" && mkdir -p "$SURGE_MODS_DIR"
+        echo "已重建 Surge/Mods 目录。"
+
+    - name: Copy and rename Beta files
+      run: |
+        if [ -d "/root/LoonKissSurge/Surge/Beta" ]; then
+          cp -r "/root/LoonKissSurge/Surge/Beta/"* "/root/Tools/Surge/Mods/" && echo "已拷贝 Beta 文件至 Surge/Mods"
+          
+          echo "匹配的文件："
+          ls "/root/Tools/Surge/Mods/*.sgmodule" || echo "没有找到 .sgmodule 文件"
+          
+          for file in /root/Tools/Surge/Mods/*.sgmodule; do
+            if [ -e "$file" ]; then
+              new_name=$(echo "$file" | sed 's/去广告//g')
+              mv "$file" "$new_name"
+              echo "已将 $file 重命名为 $new_name"
+            fi
+          done
+        else
+          echo "未找到 /root/LoonKissSurge/Surge/Beta 目录，退出。"
+          exit 1
+        fi
+
+    - name: Set remote URL for Tools repository
+      run: |
+        cd "/root/Tools"
+        if ! git remote | grep -q "origin"; then
+          git remote add origin "https://${{ secrets.USERNAME }}:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
+        else
+          git remote set-url origin "https://${{ secrets.USERNAME }}:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
+        fi
+
+    - name: Check for changes and push to GitHub
+      run: |
+        cd "/root/Tools"
+        git fetch origin
+        STATUS=$(git status --porcelain)
+
+        if [ -n "$STATUS" ]; then
+          echo "检测到本地变更，准备同步到 GitHub"
+          git add -A
+          git commit -m "Auto Update $(date +'%Y-%m-%d %H:%M:%S')"
+          git push origin main
+          echo "同步完成！"
+        else
+          echo "没有检测到本地变更，无需同步。"
+        fi
