@@ -68,8 +68,8 @@ jobs:
           # 遍历所有 .sgmodule 文件，进行文件名重命名
           for file in "${{ github.workspace }}/Tools/Surge/Mods"/*.sgmodule; do
             if [ -e "$file" ]; then
-              # 使用 sed 删除文件名中的 "去广告"
-              new_name=$(echo "$file" | sed 's/去广告//g')
+              # 使用 sed 删除文件名中的 "去广告" 和 ".beta"
+              new_name=$(echo "$file" | sed 's/去广告//g' | sed 's/\.beta//g')
               if [ "$file" != "$new_name" ]; then
                 mv "$file" "$new_name"  # 重命名文件
                 echo "已将 $file 重命名为 $new_name"
