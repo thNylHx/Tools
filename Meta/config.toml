@@ -1,0 +1,61 @@
+[log]
+level = "warn"
+output = "root/realm/realm.log"
+
+[network]
+no_tcp = false
+use_udp = true
+
+
+# 转发规则
+
+[[endpoints]]
+listen = "0.0.0.0:5000"
+remote = "1.1.1.1:443"
+
+[[endpoints]]
+listen = "[::]:10000"
+remote = "[::]:443"
+
+[[endpoints]]
+listen = "[::]:10000"
+remote = "www.google.com:443"
+
+
+# tls 加密 入口
+[[endpoints]]
+listen = "127.0.0.1:10000"
+remote = "127.0.0.1:20000"
+remote_transport = "tls;sni=example.com;insecure"
+
+# tls 加密 出口
+[[endpoints]]
+listen = "127.0.0.1:20000"
+remote = "127.0.0.1:30000"
+listen_transport = "tls;servername=example.com"
+
+
+# ws 加密 入口
+[[endpoints]]
+listen = "127.0.0.1:10000"
+remote = "127.0.0.1:20000"
+remote_transport = "ws;host=example.com;path=/chat"
+
+# ws 加密 出口
+[[endpoints]]
+listen = "127.0.0.1:20000"
+remote = "127.0.0.1:30000"
+listen_transport = "ws;host=example.com;path=/chat"
+
+
+# wss 加密 入口
+[[endpoints]]
+listen = "127.0.0.1:10000"
+remote = "127.0.0.1:20000"
+remote_transport = "ws;host=example.com;path=/chat;tls;sni=example.com;insecure"
+
+# wss 加密 出口
+[[endpoints]]
+listen = "127.0.0.1:20000"
+remote = "127.0.0.1:30000"
+listen_transport = "ws;host=example.com;path=/chat;tls;servername=example.com"

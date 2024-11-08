@@ -1,0 +1,207 @@
+name: Surge
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 */6 * * *"  # 每6小时运行一次
+
+jobs:
+  Fork-FLITER-list:
+    runs-on: ubuntu-latest
+    env:
+      TZ: 'Asia/Shanghai'  # 设置时区为上海
+
+    steps:
+    - name: Checkout target repository
+      uses: actions/checkout@v4.1.0
+      with:
+        repository: thNylHx/Tools
+        path: Tools-repo
+
+    - name: 复刻
+      run: |
+        curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/Fork/Surge.sh | sh
+
+    ###### Surge ###### 
+    - name: Edit Ruleset
+      run: |
+        # 指定多个文件夹
+        for dir in Tools-repo/Ruleset/Surge/Block Tools-repo/Ruleset/Surge/Media Tools-repo/Ruleset/Surge/Other; do
+          if [ -d "$dir" ]; then
+            cd "$dir"
+            # 指定多个文件
+            for file in *.list; do
+              # 跳过不修改的指定文件
+              if [[ "$file" == "BlockPrivacy.list" ]]; then
+                echo "Skipping $file"
+                continue
+              fi
+              # 修改 删除 规则
+              if [ -f "$file" ]; then
+                sed -i -e 's/, /,/g' \
+                       -e 's/;/# /g' \
+                       -e 's/host,/HOST,/g' \
+                       -e 's/host-/HOST-/g' \
+                       -e 's/-suffix/-SUFFIX/g' \
+                       -e 's/-keyword/-KEYWORD/g' \
+                       -e 's/ip-cidr/IP-CIDR/g' \
+                       -e 's/-wildcard/-WILDCARD/g' \
+                       -e 's/geoip/GEOIP/g' \
+                       -e 's/HOST,/DOMAIN,/g' \
+                       -e 's/HOST-/DOMAIN-/g' \
+                       -e 's/IP6-CIDR,/IP-CIDR6,/g' \
+                       -e 's/,REJECT$//g' \
+                       -e 's/,DIRECT$//g' \
+                       -e 's/,reject$//g' \
+                       -e 's/,direct$//g' \
+                       -e '/# 更新：/d' \
+                       -e '/# AUTHOR:/d' \
+                       -e '/# REPO:/d' \
+                       -e '/# UPDATED:/d' \
+                       -e '/# 数目: /d' \
+                       -e '/# 规则: /d' \
+                       -e '/# 数量: /d' \
+                       -e '/404: Not Found/d' \
+                       -e '/DOMAIN-REGEX,/d' \
+                       "$file"
+                       
+                # 如果为 IP 规则且不包含 no-resolve 则添加 no-resolve
+                awk '/^IP-/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile
+                mv tmpfile "$file"
+
+                # 删除 // 及其后面的内容
+                sed -i -E 's|//.*||' "$file"
+
+              else
+                echo "$file not found."
+              fi
+            done
+
+            # 格式转换 domain-set 为 rule-set
+            for file in *_ip*.list; do
+              if [ -f "$file" ]; then
+                # 查找符合 IPv4 CIDR 格式的行，并将其转换为 IP-CIDR,<IPv4 CIDR>,no-resolve 格式
+                sed -i -E 's|^(([0-9]{1,3}\.){3}[0-9]{1,3}/[0-9]+)$|IP-CIDR,\1,no-resolve|' "$file"
+                # 查找符合 IPv6 CIDR 格式的行，并将其转换为 IP-CIDR6,<IPv6 CIDR>,no-resolve 格式
+                sed -i -E 's|^([0-9a-fA-F:]+/[0-9]+)$|IP-CIDR6,\1,no-resolve|' "$file"
+              else
+                echo "$file not found."
+              fi
+            done
+
+            cd - > /dev/null  # 返回到上一级目录，并抑制输出
+          else
+            echo "Directory $dir not found."
+          fi
+        done
+
+    # 追加规则
+    - name: Copy custom rules
+      run: |
+        # 合并 ConnersHua 到 Ads_ConnersHua
+        if [ -f "Tools-repo/Ruleset/Surge/Block/Ads_ConnersHua.list" ] ; then
+          cat Tools-repo/Ruleset/Surge/Block/Ads_Advertising.list >> Tools-repo/Ruleset/Surge/Block/Ads_ConnersHua.list
+          cat Tools-repo/Ruleset/Surge/Block/Ads_Malicious.list >> Tools-repo/Ruleset/Surge/Block/Ads_ConnersHua.list
+          cat Tools-repo/Ruleset/Surge/Block/Ads_Tracking.list >> Tools-repo/Ruleset/Surge/Block/Ads_ConnersHua.list
+        else
+          echo "Ads_ConnersHua.list not found."
+        fi
+
+        # 合并 limbopro 到 Ads_limbopro
+        if [ -f "Tools-repo/Ruleset/Surge/Block/Ads_limbopro.list" ] ; then
+          cat Tools-repo/Ruleset/Surge/Block/Ads_Adblock4limbo_surge.list >> Tools-repo/Ruleset/Surge/Block/Ads_limbopro.list
+          cat Tools-repo/Ruleset/Surge/Block/Ads_easyprivacy_surge.list >> Tools-repo/Ruleset/Surge/Block/Ads_limbopro.list
+          cat Tools-repo/Ruleset/Surge/Block/Ads_easylist_surge.list >> Tools-repo/Ruleset/Surge/Block/Ads_limbopro.list
+        else
+          echo "Ads_limbopro.list not found."
+        fi
+
+        # 合并 Other 到 Ads_ml
+        if [ -f "Tools-repo/Ruleset/Surge/Block/Ads_ml.list" ] ; then
+          cat Tools-repo/Ruleset/Surge/Block/Ads_th.list >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
+          cat Tools-repo/Ruleset/Surge/Block/Ads_RuCu6.list >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
+          cat Tools-repo/Ruleset/Surge/Block/Ads_category-ads-all.list >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
+          cat Tools-repo/Ruleset/Surge/Block/Ads_BanAD.list >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
+          cat Tools-repo/Ruleset/Surge/Block/Ads_BanProgramAD.list >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
+        else
+          echo "Ads_ml.list not found."
+        fi
+
+        # 合并 FacebookIP & Instagram 到 Facebook
+        if [ -f "Tools-repo/Ruleset/Surge/Media/Facebook.list" ] ; then
+         echo "" >> Tools-repo/Ruleset/Surge/Media/Facebook.list
+         cat Tools-repo/Ruleset/Surge/Media/Instagram.list >> Tools-repo/Ruleset/Surge/Media/Facebook.list
+         echo "" >> Tools-repo/Ruleset/Surge/Media/Facebook.list
+         cat Tools-repo/Ruleset/Surge/Media/Facebook_ip.list >> Tools-repo/Ruleset/Surge/Media/Facebook.list
+        else
+          echo "Facebook.list not found."
+        fi
+
+        # 合并 NetflixIP 到 Netflix
+        if [ -f "Tools-repo/Ruleset/Surge/Media/Netflix.list" ] ; then
+         echo "" >> Tools-repo/Ruleset/Surge/Media/Netflix.list
+         cat Tools-repo/Ruleset/Surge/Media/Netflix_ip.list >> Tools-repo/Ruleset/Surge/Media/Netflix.list
+        else
+          echo "Netflix.list not found."
+        fi
+
+        # 合并 TwitterIP 到 Twitter
+        if [ -f "Tools-repo/Ruleset/Surge/Media/Twitter.list" ] ; then
+         echo "" >> Tools-repo/Ruleset/Surge/Media/Twitter.list
+         cat Tools-repo/Ruleset/Surge/Media/Twitter_ip.list >> Tools-repo/Ruleset/Surge/Media/Twitter.list
+        else
+          echo "Twitter.list not found."
+        fi
+
+        # 合并 YouTubeMusic 到 YouTube
+        if [ -f "Tools-repo/Ruleset/Surge/Media/YouTube.list" ] ; then
+         echo "" >> Tools-repo/Ruleset/Surge/Media/YouTube.list
+         cat Tools-repo/Ruleset/Surge/Media/YouTubeMusic.list >> Tools-repo/Ruleset/Surge/Media/YouTube.list
+        else
+          echo "YouTube.list not found."
+        fi
+
+        # 合并 GoogleIP 到 Google
+        if [ -f "Tools-repo/Ruleset/Surge/Other/Google.list" ] ; then
+         echo "" >> Tools-repo/Ruleset/Surge/Other/Google.list
+         cat Tools-repo/Ruleset/Surge/Other/Google_ip.list >> Tools-repo/Ruleset/Surge/Other/Google.list
+        else
+          echo "Google.list not found."
+        fi
+
+    # 去重排序
+    - name: Remove duplicates, lines, and delete URL-REGEX lines
+      run: |
+        cd Tools-repo/Ruleset/Surge/Block
+        shopt -s nullglob  # 避免没有匹配的文件时保留原始通配符
+        for file in Ads_ConnersHua.list Ads_limbopro.list Ads_ml.list; do
+          if [ -f "$file" ]; then
+            sorted_file="sorted_${file}"
+            # 使用 grep 去掉包含 # 的行和包含 URL-REGEX, 的行
+            grep -v '^\s*#' "$file" | grep -v '^\s*$' | grep -v 'URL-REGEX,' | sort | uniq > "$sorted_file"
+            mv "$sorted_file" "$file"
+          else
+            echo "$file not found."
+          fi
+        done
+      shell: bash
+
+    ###### Commit ######
+    - name: Add and Commit
+      run: |
+        cd Tools-repo
+        if [[ -n $(git status -s) ]]; then
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Auto Update $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
+          git push origin HEAD
+        else
+          echo "No changes to commit."
+        fi
+
+    - name: Cleanup Workflow
+      uses: Mattraks/delete-workflow-runs@main
+      with:
+        retain_days: 0
+        keep_minimum_runs: 5
