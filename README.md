@@ -29,6 +29,9 @@
 ### 排名不分先后
 
 - [@28413761](https://github.com/28413761)(张军本人)
+- [@kissyouhunter](https://github.com/kissyouhunter)
+- [@cooip-jm](https://github.com/cooip-jm/About-openwrt/wiki)
+- [@QingRex](https://github.com/QingRex/LoonKissSurge)
 - [@app2smile](https://github.com/app2smile)
 - [@blackmatrix7](https://github.com/blackmatrix7)
 - [@chavyleung](https://github.com/chavyleung)
@@ -44,13 +47,11 @@
 - [@RuCu6](https://github.com/RuCu6)
 - [@Tartarus2014](https://github.com/Tartarus2014)
 - [@zmqcherish](https://github.com/zmqcherish)
-- [@kissyouhunter](https://github.com/kissyouhunter)
 - [@ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master)
 - [@Maasea](https://github.com/Maasea/sgmodule)
 - [@Repcz](https://github.com/Repcz/Tool)
 - [@fmz200](https://github.com/fmz200/wool_scripts)
 - [@limbopro](https://github.com/limbopro/Adblock4limbo)
-
 
 
 #### 其他
