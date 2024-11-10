@@ -29,13 +29,13 @@ jobs:
       # 始终执行克隆 LoonKissSurge 仓库的操作
       run: |
         rm -rf "${{ github.workspace }}/LoonKissSurge"  # 确保清空目录
-        git clone "https://github.com/QingRex/LoonKissSurge.git" "${{ github.workspace }}/LoonKissSurge" || { echo "克隆失败，退出。"; exit 1; }
+        git clone "https://github.com/QingRex/LoonKissSurge.git" "${{ github.workspace }}/LoonKissSurge" && echo "成功克隆 LoonKissSurge 仓库" || { echo "克隆失败，退出。"; exit 1; }
 
     - name: 克隆 Tools 仓库
       # 始终执行克隆 Tools 仓库的操作
       run: |
         rm -rf "${{ github.workspace }}/Tools"  # 确保清空目录
-        git clone "https://github.com/${{ secrets.USERNAME }}/Tools.git" "${{ github.workspace }}/Tools" || { echo "克隆失败，退出。"; exit 1; }
+        git clone "https://github.com/${{ secrets.USERNAME }}/Tools.git" "${{ github.workspace }}/Tools" && echo "成功克隆 Tools 仓库" || { echo "克隆失败，退出。"; exit 1; }
     
     - name: 重建 Surge Mods 目录
       # 重建 Surge/Mods 目录
