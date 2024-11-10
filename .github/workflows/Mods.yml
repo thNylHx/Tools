@@ -3,7 +3,7 @@ name: Surg 拉取模块
 on:
   workflow_dispatch:  # 手动触发
   schedule:
-    - cron: "15 8,17 * * *"  # 每12小时运行一次，00:15和12:15 UTC
+    - cron: "35 */8 * * *"  # 每12小时运行一次，00:15和12:15 UTC
 
 jobs:
   Fork-Filter-List:
