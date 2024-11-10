@@ -121,8 +121,8 @@ jobs:
           cat Tools-repo/Ruleset/Surge/Block/Ads_th.list >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
           cat Tools-repo/Ruleset/Surge/Block/Ads_RuCu6.list >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
           cat Tools-repo/Ruleset/Surge/Block/Ads_category-ads-all.list >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
-          cat Tools-repo/Ruleset/Surge/Block/Ads_BanAD.list >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
-          cat Tools-repo/Ruleset/Surge/Block/Ads_BanProgramAD.list >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
+          # cat Tools-repo/Ruleset/Surge/Block/Ads_BanAD.list >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
+          # cat Tools-repo/Ruleset/Surge/Block/Ads_BanProgramAD.list >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
         else
           echo "Ads_ml.list not found."
         fi
