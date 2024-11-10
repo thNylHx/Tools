@@ -1,0 +1,27 @@
+#!name=粉笔去广告
+#!desc=移除开屏广告、首页弹窗和悬浮窗。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/FenBi.png
+#!category=BetaModule
+#!openUrl=https://apps.apple.com/app/id584660358
+#!tag=去广告
+#!loon_version=3.2.1(749)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-07-11 00:20:34
+
+[Map Local]
+# 开屏广告
+^https:\/\/tiku\.fenbi\.com\/activity\/app\/launcher data-type=text data="{}" status-code=200
+
+# 首页 - 弹窗
+^https:\/\/keapi\.fenbi\.com\/app\/iphone\/\w+\/popup data-type=text data="{}" status-code=200
+
+# 首页 - 新用户注册送好礼全屏弹窗
+^https:\/\/market-api\.fenbi\.com\/iphone\/v1\/assistant\/info data-type=text data="{}" status-code=200
+
+# 首页 - 悬浮窗 - 笔面常备资料
+^https:\/\/market-api\.fenbi\.com\/iphone\/v1\/assistant\/entrance\/show data-type=text data="{}" status-code=200
+
+[MITM]
+hostname = %APPEND% keapi.fenbi.com, market-api.fenbi.com, tiku.fenbi.com
+

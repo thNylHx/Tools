@@ -1,0 +1,80 @@
+#!name=酷狗音乐去广告
+#!desc=移除开屏广告、应用各类弹窗、各类横幅广告、评论区广告和播放器界面广告。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/KuGou.png
+#!category=BetaModule
+#!openUrl=https://apps.apple.com/app/id472208016
+#!tag=去广告
+#!loon_version=3.2.1(749)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-07-25 00:46:39
+
+[Rule]
+DOMAIN,ads.service.kugou.com,REJECT,extended-matching,pre-matching
+DOMAIN,adstats.tencentmusic.com,REJECT,extended-matching,pre-matching
+DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,adserviceretry.kugou.com,REJECT,extended-matching,pre-matching
+DOMAIN,adserviceretry.kglink.cn,REJECT,extended-matching,pre-matching
+DOMAIN,ad.tencentmusic.com,REJECT,extended-matching,pre-matching
+DOMAIN,adservice.kugou.com,REJECT,extended-matching,pre-matching
+DOMAIN,splashimgretrybssdl.cloud.kugou.com,REJECT,extended-matching,pre-matching
+# 腾讯优量汇 - 广告服务商
+DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdk.e.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,us.l.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
+# DOMAIN, qzs.gdtimg.com, REJECT
+DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
+# c2.gdt.qq.com, REJECT
+URL-REGEX,"^http:\/\/log\.stat\.kugou\.com\/mobile\/ad\.html",REJECT,extended-matching
+
+[Map Local]
+# 广告配置
+^https:\/\/fx\.service\.kugou\.com\/mfx-kugoulive\/ad\/ data-type=text data="{}" status-code=200
+
+^https:\/\/gateway(retry)?\.kugou\.com\/adp\/ad\/ data-type=text data="{}" status-code=200
+
+^https:\/\/gateway(retry)?\.kugou\.com\/ads\.gateway\/ data-type=text data="{}" status-code=200
+
+# 我的 - 关注 - 发现更多动态
+^https:\/\/gateway(retry)?\.kugou\.com\/v\d\/feeds\/follow_feed_fallback data-type=text data="{}" status-code=200
+
+# 任务广告
+^https:\/\/gateway(retry)?\.kugou\.com\/mstc\/musicsymbol\/v\d\/system\/profile data-type=text data="{}" status-code=200
+
+# 搜索填充词
+^https:\/\/gateway(retry)?\.kugou\.com\/searchnofocus\/v\d\/search_no_focus_word data-type=text data="{}" status-code=200
+
+# 播放页顶部气泡
+^https:\/\/gateway(retry)?\.kugou\.com\/adp\/bubble\/v\d\/song_play data-type=text data="{}" status-code=200
+
+# 歌曲评论 - 与歌手有关的回答
+^https:\/\/gateway(retry)?\.kugou\.com\/singerdiscuss\/v\d\/entrance\/comment data-type=text data="{}" status-code=200
+
+^https:\/\/gateway(retry)?\.kugou\.com\/r\/v\d\/general\/putin\/midad data-type=text data="{}" status-code=200
+
+# 各类横幅推广
+^https:\/\/gateway(retry)?\.kugou\.com\/ocean\/v\d\/sound\/banner data-type=text data="{}" status-code=200
+
+# 热搜主播
+^https:\/\/gzacshow\.kugou\.com\/mfanxing-home\/cdn\/room\/index\/list_v2 data-type=text data="{}" status-code=200
+
+# 直播推荐 - 主播修仙中
+^https:\/\/gzacshow\.kugou\.com\/mfx-rt-show\/cdn\/mo\/show\/headline data-type=text data="{}" status-code=200
+
+# 歌房弹窗
+^https:\/\/m1fxgroup\.kugou\.com\/fxsing\/yqc\/alongInfo\/getUserAlongInfo data-type=text data="{}" status-code=200
+
+# 酷狗商城 - 文字广告
+^https:\/\/hwstore\.kugou\.com\/v\d\/get_store_data data-type=text data="{}" status-code=200
+
+# 唱片店 - 文字广告
+^https:\/\/ep\.kugou\.com\/v\d\/album_shop\/get_entrance_info data-type=text data="{}" status-code=200
+
+[Script]
+# 精简顶部标签
+精简顶部标签 = type=http-response, pattern=^https:\/\/gateway(retry)?\.kugou\.com\/ocean\/v\d\/tab\/list_v\d, script-path=https://kelee.one/Resource/Script/KuGou/KuGou_remove_ads.js, requires-body=true
+
+[MITM]
+hostname = %APPEND% gateway.kugou.com, fx.service.kugou.com, hwstore.kugou.com, ep.kugou.com, gatewayretry.kugou.com, gzacshow.kugou.com, m1fxgroup.kugou.com
+
