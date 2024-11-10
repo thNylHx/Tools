@@ -47,20 +47,29 @@ jobs:
     - name: 复制并重命名 Beta 文件类容
       # 从 LoonKissSurge 仓库的 Beta 目录复制文件到 Tools 仓库的 Surge/Mods 目录
       run: |
-        BETA_DIR="${{ github.workspace }}/LoonKissSurge/Surge/Beta"
-        if [ -d "$BETA_DIR" ]; then
-          cp -r "$BETA_DIR/"* "$SURGE_MODS_DIR" && echo "已拷贝 Beta 文件至 Surge/Mods"
-
-          echo "匹配的文件："
-          ls "$SURGE_MODS_DIR"/*.sgmodule || echo "没有找到 .sgmodule 文件"
+        if [ -d "${{ github.workspace }}/LoonKissSurge/Surge/Beta" ]; then
+          cp -r "${{ github.workspace }}/LoonKissSurge/Surge/Beta/"* "${{ github.workspace }}/Tools/Surge/Mods/" && echo "已拷贝 Beta 文件至 Surge/Mods"
           
-          for file in "$SURGE_MODS_DIR"/*.sgmodule; do
-            [ -e "$file" ] || continue
-            new_name=$(echo "$file" | sed 's/去广告//g; s/\.beta//g')
-            [ "$file" != "$new_name" ] && mv "$file" "$new_name" && echo "重命名: $file -> $new_name"
+          echo "匹配的文件："
+          # 列出 Surge/Mods 目录下的 .sgmodule 文件，如果没有找到，则输出提示
+          ls "${{ github.workspace }}/Tools/Surge/Mods"/*.sgmodule || echo "没有找到 .sgmodule 文件"
+          
+          # 遍历所有 .sgmodule 文件，进行文件名重命名
+          for file in "${{ github.workspace }}/Tools/Surge/Mods"/*.sgmodule; do
+            if [ -e "$file" ]; then
+              # 使用 sed 删除文件名中的 "去广告" 和 ".beta"
+              new_name=$(echo "$file" | sed 's/去广告//g' | sed 's/\.beta//g')
+              if [ "$file" != "$new_name" ]; then
+                mv "$file" "$new_name"  # 重命名文件
+                echo "已将 $file 重命名为 $new_name"
+              else
+                echo "文件 $file 不需要重命名"
+              fi
+            fi
           done
         else
-          echo "未找到 Beta 目录，退出。"
+          # 如果未找到 Beta 目录，输出错误并退出
+          echo "未找到 ${GITHUB_WORKSPACE}/LoonKissSurge/Surge/Beta 目录，退出。"
           exit 1
         fi
 
