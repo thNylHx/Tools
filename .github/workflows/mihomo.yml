@@ -1,4 +1,4 @@
-name: mihomo
+name: mihomo 规则拉取
 
 on:
   workflow_dispatch:
@@ -18,12 +18,12 @@ jobs:
         repository: thNylHx/Tools
         path: Tools-repo
 
-    - name: 复刻
+    - name: 执行脚本
       run: |
         curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/Fork/mihomo.sh | sh
         
 ###### Commit
-    - name: Add and Commit
+    - name: 推送到仓库
       run: |
         cd Tools-repo
         if [[ -n $(git status -s) ]]; then
@@ -36,7 +36,7 @@ jobs:
           echo "No changes to commit."
         fi
 
-    - name: Cleanup Workflow
+    - name: 清理工作流
       uses: Mattraks/delete-workflow-runs@main
       with:
         retain_days: 0

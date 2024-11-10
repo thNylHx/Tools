@@ -1,4 +1,4 @@
-name: Surge
+name: Surge 规则拉取
 
 on:
   workflow_dispatch:
@@ -18,12 +18,12 @@ jobs:
         repository: thNylHx/Tools
         path: Tools-repo
 
-    - name: 复刻
+    - name: 执行脚本
       run: |
         curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/Fork/Surge.sh | sh
 
     ###### Surge ###### 
-    - name: Edit Ruleset
+    - name: 转换规则
       run: |
         # 指定多个文件夹
         for dir in Tools-repo/Ruleset/Surge/Block Tools-repo/Ruleset/Surge/Media Tools-repo/Ruleset/Surge/Other; do
@@ -96,7 +96,7 @@ jobs:
         done
 
     # 追加规则
-    - name: Copy custom rules
+    - name: 合并规则
       run: |
         # 合并 ConnersHua 到 Ads_ConnersHua
         if [ -f "Tools-repo/Ruleset/Surge/Block/Ads_ConnersHua.list" ] ; then
@@ -170,7 +170,7 @@ jobs:
         fi
 
     # 去重排序
-    - name: Remove duplicates, lines, and delete URL-REGEX lines
+    - name: 去重排序
       run: |
         cd Tools-repo/Ruleset/Surge/Block
         shopt -s nullglob  # 避免没有匹配的文件时保留原始通配符
@@ -187,7 +187,7 @@ jobs:
       shell: bash
 
     ###### Commit ######
-    - name: Add and Commit
+    - name: 推送到仓库
       run: |
         cd Tools-repo
         if [[ -n $(git status -s) ]]; then
@@ -200,7 +200,7 @@ jobs:
           echo "No changes to commit."
         fi
 
-    - name: Cleanup Workflow
+    - name: 清理工作流
       uses: Mattraks/delete-workflow-runs@main
       with:
         retain_days: 0
