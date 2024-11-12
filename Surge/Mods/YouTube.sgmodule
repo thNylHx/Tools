@@ -8,7 +8,7 @@
 #!system_version=15
 #!loon_version=3.2.1(749)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-06-11 21:59:22
+#!date=2024-11-11 23:37:40
 
 [Rule]
 AND,((DOMAIN-SUFFIX,googlevideo.com,extended-matching),(PROTOCOL,QUIC)),REJECT
