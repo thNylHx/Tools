@@ -104,15 +104,15 @@ jobs:
       run: |
         # 根据上一步的输出状态判断推送的消息内容
         if [ "${{ steps.push_changes.outputs.status }}" == "updated" ]; then
-          STATUS="✅ Tools 仓库更新成功。"
+          STATUS="操作完成，仓库类容更新成功。"
         elif [ "${{ steps.push_changes.outputs.status }}" == "no_update" ]; then
-          STATUS="⚠️ 操作完成，本次没有内容更新。"
+          STATUS="操作完成，本次没有内容更新。"
         else
-          STATUS="❌ 工作流失败！请检查日志获取详细信息。"
+          STATUS="工作流失败！请检查日志获取详细信息。"
         fi
         
         # 发送状态消息到 Telegram
-        MESSAGE="🔔 操作状态：${STATUS}\n时间：$(date +'%Y-%m-%d %H:%M:%S')"
+        MESSAGE="状态：${STATUS}\n时间：$(date +'%Y-%m-%d %H:%M:%S')"
         
         # 使用 curl 将消息发送到 Telegram
         curl -s -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage \
