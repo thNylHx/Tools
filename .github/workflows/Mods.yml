@@ -89,36 +89,17 @@ jobs:
           git add -A
           git commit -m "Auto Update $(date +'%Y-%m-%d %H:%M:%S')"
           git push origin main && echo "同步完成！"
-          echo "::set-output name=status::updated"
         else
           echo "没有本地变更，无需同步。"
-          echo "::set-output name=status::no_update"
         fi
         
-    - name: 推送通知到 Telegram
-      # 推送更新通知到 Telegram
-      if: always()
-      env:
-        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    - name: Telegram 推送通知
       run: |
-        # 根据上一步的输出状态判断推送的消息内容
-        if [ "${{ steps.push_changes.outputs.status }}" == "updated" ]; then
-          STATUS="操作完成，仓库类容更新成功。"
-        elif [ "${{ steps.push_changes.outputs.status }}" == "no_update" ]; then
-          STATUS="操作完成，本次没有内容更新。"
-        else
-          STATUS="工作流失败！请检查日志获取详细信息。"
-        fi
-        
-        # 发送状态消息到 Telegram
-        MESSAGE=$'📢  通知'$'\n✉️  标题：Surge 模块拉取'$'\n🔔  状态：'"${STATUS}"$'\n⏰  时间：'"$(date +'%Y-%m-%d %H:%M:%S')"
-        
-        # 使用 curl 将消息发送到 Telegram
-        curl -s -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage \
-          -d chat_id=$TELEGRAM_CHAT_ID \
-          -d text="$MESSAGE" \
-          -d parse_mode="Markdown"
+        MESSAGE=$'📢  通知'$'\n✉️  标题：Surge 模块拉取'$'\n🔔  状态：GitHub Actions 自动更新成功'$'\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
+        curl -X POST \
+          "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=${MESSAGE}"
 
     - name: 清理工作流
       uses: Mattraks/delete-workflow-runs@main
