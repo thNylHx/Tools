@@ -106,7 +106,7 @@ jobs:
         if [ "${{ steps.push_changes.outputs.status }}" == "updated" ]; then
           STATUS="操作完成，仓库类容更新成功。"
         elif [ "${{ steps.push_changes.outputs.status }}" == "no_update" ]; then
-          STATUS=" 操作完成，本次没有内容更新。"
+          STATUS="操作完成，本次没有内容更新。"
         else
           STATUS="工作流失败！请检查日志获取详细信息。"
         fi
