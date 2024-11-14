@@ -1,9 +1,10 @@
 name: Surge 模块拉取
 
 on:
-  workflow_dispatch:  # 手动触发
+  # 手动触发和定时任务触发
+  workflow_dispatch:
   schedule:
-    - cron: "35 */12 * * *" 
+    - cron: "35 */12 * * *"  # 每12小时运行一次，35分钟时触发
 
 jobs:
   Fork-Filter-List:
@@ -38,38 +39,39 @@ jobs:
         git clone "https://github.com/${{ secrets.USERNAME }}/Tools.git" "${{ github.workspace }}/Tools" && echo "成功克隆 Tools 仓库" || { echo "克隆失败，退出。"; exit 1; }
     
     - name: 重建 Surge Mods 目录
-      # 重建 Surge/Mods 目录
+      # 删除并重新创建 Surge/Mods 目录
       run: |
         SURGE_MODS_DIR="${{ github.workspace }}/Tools/Surge/Mods"
         rm -rf "$SURGE_MODS_DIR" && mkdir -p "$SURGE_MODS_DIR"
         echo "已重建 Surge/Mods 目录。"
 
-    - name: 复制并重命名 Beta 文件类容
+    - name: 复制并重命名 Beta 文件
       # 从 LoonKissSurge 仓库的 Beta 目录复制文件到 Tools 仓库的 Surge/Mods 目录
       run: |
-        if [ -d "${{ github.workspace }}/LoonKissSurge/Surge/Beta" ]; then
-          cp -r "${{ github.workspace }}/LoonKissSurge/Surge/Beta/"* "${{ github.workspace }}/Tools/Surge/Mods/" && echo "已拷贝 Beta 文件至 Surge/Mods"
+        SOURCE_DIR="${{ github.workspace }}/LoonKissSurge/Surge/Beta"
+        TARGET_DIR="${{ github.workspace }}/Tools/Surge/Mods"
+        
+        # 检查 Beta 目录是否存在
+        if [ -d "$SOURCE_DIR" ]; then
+          cp -r "$SOURCE_DIR/"* "$TARGET_DIR" && echo "已拷贝 Beta 文件至 Surge/Mods"
           
-          echo "匹配的文件："
-          # 列出 Surge/Mods 目录下的 .sgmodule 文件，如果没有找到，则输出提示
-          ls "${{ github.workspace }}/Tools/Surge/Mods"/*.sgmodule || echo "没有找到 .sgmodule 文件"
+          # 列出 Surge/Mods 目录下的 .sgmodule 文件
+          ls "$TARGET_DIR"/*.sgmodule || echo "没有找到 .sgmodule 文件"
           
-          # 遍历所有 .sgmodule 文件，进行文件名重命名
-          for file in "${{ github.workspace }}/Tools/Surge/Mods"/*.sgmodule; do
+          # 遍历所有 .sgmodule 文件，重命名以去除 "去广告" 和 ".beta"
+          for file in "$TARGET_DIR"/*.sgmodule; do
             if [ -e "$file" ]; then
-              # 使用 sed 删除文件名中的 "去广告" 和 ".beta"
-              new_name=$(echo "$file" | sed 's/去广告//g' | sed 's/\.beta//g')
+              new_name=$(echo "$file" | sed 's/去广告//g; s/\.beta//g')
               if [ "$file" != "$new_name" ]; then
-                mv "$file" "$new_name"  # 重命名文件
+                mv "$file" "$new_name"
                 echo "已将 $file 重命名为 $new_name"
               else
-                echo "文件 $file 不需要重命名"
+                echo "文件 $file 无需重命名"
               fi
             fi
           done
         else
-          # 如果未找到 Beta 目录，输出错误并退出
-          echo "未找到 ${GITHUB_WORKSPACE}/LoonKissSurge/Surge/Beta 目录，退出。"
+          echo "未找到 $SOURCE_DIR 目录，退出。"
           exit 1
         fi
 
@@ -93,6 +95,7 @@ jobs:
         fi
         
     - name: 清理工作流
+      # 清理历史工作流记录
       uses: Mattraks/delete-workflow-runs@main
       with:
         retain_days: 0
