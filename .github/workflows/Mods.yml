@@ -1,10 +1,9 @@
 name: Surge 模块拉取
 
 on:
-  # 手动触发和定时任务触发
-  workflow_dispatch:
+  workflow_dispatch:  # 手动触发
   schedule:
-    - cron: "35 */12 * * *"  # 每12小时运行一次，35分钟时触发
+    - cron: "35 */12 * * *"  # 每12小时触发一次
 
 jobs:
   Fork-Filter-List:
@@ -39,39 +38,38 @@ jobs:
         git clone "https://github.com/${{ secrets.USERNAME }}/Tools.git" "${{ github.workspace }}/Tools" && echo "成功克隆 Tools 仓库" || { echo "克隆失败，退出。"; exit 1; }
     
     - name: 重建 Surge Mods 目录
-      # 删除并重新创建 Surge/Mods 目录
+      # 重建 Surge/Mods 目录
       run: |
         SURGE_MODS_DIR="${{ github.workspace }}/Tools/Surge/Mods"
         rm -rf "$SURGE_MODS_DIR" && mkdir -p "$SURGE_MODS_DIR"
         echo "已重建 Surge/Mods 目录。"
 
-    - name: 复制并重命名 Beta 文件
+    - name: 复制并重命名 Beta 文件内容
       # 从 LoonKissSurge 仓库的 Beta 目录复制文件到 Tools 仓库的 Surge/Mods 目录
       run: |
-        SOURCE_DIR="${{ github.workspace }}/LoonKissSurge/Surge/Beta"
-        TARGET_DIR="${{ github.workspace }}/Tools/Surge/Mods"
-        
-        # 检查 Beta 目录是否存在
-        if [ -d "$SOURCE_DIR" ]; then
-          cp -r "$SOURCE_DIR/"* "$TARGET_DIR" && echo "已拷贝 Beta 文件至 Surge/Mods"
+        if [ -d "${{ github.workspace }}/LoonKissSurge/Surge/Beta" ]; then
+          cp -r "${{ github.workspace }}/LoonKissSurge/Surge/Beta/"* "${{ github.workspace }}/Tools/Surge/Mods/" && echo "已拷贝 Beta 文件至 Surge/Mods"
           
-          # 列出 Surge/Mods 目录下的 .sgmodule 文件
-          ls "$TARGET_DIR"/*.sgmodule || echo "没有找到 .sgmodule 文件"
+          echo "匹配的文件："
+          # 列出 Surge/Mods 目录下的 .sgmodule 文件，如果没有找到，则输出提示
+          ls "${{ github.workspace }}/Tools/Surge/Mods"/*.sgmodule || echo "没有找到 .sgmodule 文件"
           
-          # 遍历所有 .sgmodule 文件，重命名以去除 "去广告" 和 ".beta"
-          for file in "$TARGET_DIR"/*.sgmodule; do
+          # 遍历所有 .sgmodule 文件，进行文件名重命名
+          for file in "${{ github.workspace }}/Tools/Surge/Mods"/*.sgmodule; do
             if [ -e "$file" ]; then
-              new_name=$(echo "$file" | sed 's/去广告//g; s/\.beta//g')
+              # 使用 sed 删除文件名中的 "去广告" 和 ".beta"
+              new_name=$(echo "$file" | sed 's/去广告//g' | sed 's/\.beta//g')
               if [ "$file" != "$new_name" ]; then
-                mv "$file" "$new_name"
+                mv "$file" "$new_name"  # 重命名文件
                 echo "已将 $file 重命名为 $new_name"
               else
-                echo "文件 $file 无需重命名"
+                echo "文件 $file 不需要重命名"
               fi
             fi
           done
         else
-          echo "未找到 $SOURCE_DIR 目录，退出。"
+          # 如果未找到 Beta 目录，输出错误并退出
+          echo "未找到 ${GITHUB_WORKSPACE}/LoonKissSurge/Surge/Beta 目录，退出。"
           exit 1
         fi
 
@@ -82,6 +80,7 @@ jobs:
         git remote set-url origin "https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
 
     - name: 检查更改并推送到 GitHub Tools 仓库
+      id: push_changes
       # 检查本地仓库是否有变更，并将变更推送到 GitHub
       run: |
         cd "${{ github.workspace }}/Tools"
@@ -90,12 +89,38 @@ jobs:
           git add -A
           git commit -m "Auto Update $(date +'%Y-%m-%d %H:%M:%S')"
           git push origin main && echo "同步完成！"
+          echo "::set-output name=status::updated"
         else
           echo "没有本地变更，无需同步。"
+          echo "::set-output name=status::no_update"
         fi
         
+    - name: 推送通知到 Telegram
+      # 推送更新通知到 Telegram
+      if: always()
+      env:
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: |
+        # 根据上一步的输出状态判断推送的消息内容
+        if [ "${{ steps.push_changes.outputs.status }}" == "updated" ]; then
+          STATUS="✅ Tools 仓库更新成功。"
+        elif [ "${{ steps.push_changes.outputs.status }}" == "no_update" ]; then
+          STATUS="⚠️ 操作完成，本次没有内容更新。"
+        else
+          STATUS="❌ 工作流失败！请检查日志获取详细信息。"
+        fi
+        
+        # 发送状态消息到 Telegram
+        MESSAGE="🔔 操作状态：${STATUS}\n时间：$(date +'%Y-%m-%d %H:%M:%S')"
+        
+        # 使用 curl 将消息发送到 Telegram
+        curl -s -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage \
+          -d chat_id=$TELEGRAM_CHAT_ID \
+          -d text="$MESSAGE" \
+          -d parse_mode="Markdown"
+
     - name: 清理工作流
-      # 清理历史工作流记录
       uses: Mattraks/delete-workflow-runs@main
       with:
         retain_days: 0
