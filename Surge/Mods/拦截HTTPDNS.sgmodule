@@ -6,7 +6,7 @@
 #!tag=DNS
 #!loon_version=3.2.1(749)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-05 10:03:15
+#!date=2024-11-13 15:00:36
 
 [Rule]
 # YY语音
@@ -212,6 +212,8 @@ IP-CIDR,118.89.204.198/23,REJECT,no-resolve,pre-matching
 IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,REJECT,no-resolve,pre-matching
 # 青桔科技
 DOMAIN,hd.xiaojukeji.com,REJECT,extended-matching,pre-matching
+# 作业帮
+DOMAIN,httpdns.zybang.com,REJECT,extended-matching,pre-matching
 
 [URL Rewrite]
 # 腾讯DNS
