@@ -207,9 +207,9 @@ jobs:
         
         # 使用curl命令调用Telegram的Bot API来发送消息
         curl -X POST \
-          "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \     # 通过Telegram Bot API发送消息
-          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \     # 指定消息发送的目标聊天ID
-          -d "text=${MESSAGE}"     # 设置消息的内容
+          "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=${MESSAGE}"
 
     - name: 清理工作流
       uses: Mattraks/delete-workflow-runs@main
