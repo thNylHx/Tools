@@ -112,7 +112,7 @@ jobs:
         fi
         
         # 发送状态消息到 Telegram
-        MESSAGE=$'标题：'Surge 模块拉取$'\n状态：'"${STATUS}"$'\n时间：'"$(date +'%Y-%m-%d %H:%M:%S')"
+        MESSAGE=$'**通知**'$'标题：Surge 模块拉取'$'\n状态：'"${STATUS}"$'\n时间：'"$(date +'%Y-%m-%d %H:%M:%S')"
         
         # 使用 curl 将消息发送到 Telegram
         curl -s -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage \
