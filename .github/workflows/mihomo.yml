@@ -50,10 +50,10 @@ jobs:
         echo "发送Telegram通知..."  # 输出提示，表示开始发送Telegram通知
 
         # 使用curl命令调用Telegram的Bot API来发送消息
-        curl -s -X POST \
+        curl -X POST \
           "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \  # 通过Telegram Bot API发送消息
           -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \  # 指定消息发送的目标聊天ID
-          -d "text=${MESSAGE}" \  # 设置消息的内容
+          -d "text=${MESSAGE}"   # 设置消息的内容
 
     # 步骤5：清理旧的工作流运行记录
     - name: 清理工作流
