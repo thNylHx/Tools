@@ -3,14 +3,14 @@ name: mihomo 规则拉取
 on:
   workflow_dispatch:
   schedule:
-    - cron: "15 */6 * * *"
-  
+    - cron: "15 */6 * * *"  # 每6小时执行一次
+
 jobs:
   Fork-FLITER-list:
     runs-on: ubuntu-latest
     env:
       TZ: 'Asia/Shanghai'
-    
+
     steps: 
     - name: Checkout target repository
       uses: actions/checkout@v4.1.0
@@ -20,9 +20,9 @@ jobs:
 
     - name: 执行脚本
       run: |
+        set -e  # 如果脚本出错，工作流会停止
         curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/Fork/mihomo.sh | sh
-        
-###### Commit
+
     - name: 推送到仓库
       run: |
         cd Tools-repo
@@ -32,9 +32,35 @@ jobs:
           git add .
           git commit -m "Auto Update $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
           git push origin HEAD
+          echo "更新成功"  # 标记为更新成功
         else
-          echo "No changes to commit."
+          echo "No changes to commit."  # 无内容更新
+          echo "No updates"  # 标记为无更新
         fi
+
+    - name: 推送通知到 Telegram
+      if: always()  # 确保无论成功还是失败都会推送消息
+      env:
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: |
+        # 判断是否有内容更新
+        if grep -q "更新成功" <<< "$(git status -s)"; then
+          STATUS="操作完成，仓库内容更新成功。"
+        elif grep -q "No updates" <<< "$(git status -s)"; then
+          STATUS="操作完成，本次没有内容更新。"
+        else
+          STATUS="工作流失败！请检查日志获取详细信息。"
+        fi
+        
+        # 发送状态消息到 Telegram
+        MESSAGE=$'状态：'"${STATUS}"$'\n时间：'"$(date +'%Y-%m-%d %H:%M:%S')"
+        
+        # 使用 curl 将消息发送到 Telegram
+        curl -s -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage \
+          -d chat_id=$TELEGRAM_CHAT_ID \
+          -d text="$MESSAGE" \
+          -d parse_mode="Markdown"
 
     - name: 清理工作流
       uses: Mattraks/delete-workflow-runs@main
