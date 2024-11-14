@@ -38,7 +38,7 @@ jobs:
 
     - name: Telegram 推送通知
       run: |
-        MESSAGE=$'📢  通知'$'\n✉️  标题：mihomo 规则拉取'$'\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
+        MESSAGE=$'📢  通知'$'\n✉️  标题：mihomo 规则拉取'$'\n🔔  状态：GitHub Actions自动更新成功'$'\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
         curl -X POST \
           "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
           -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
