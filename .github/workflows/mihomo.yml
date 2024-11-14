@@ -45,15 +45,11 @@ jobs:
     # 步骤4：发送Telegram通知
     - name: Telegram 推送通知
       run: |
-        # 定义消息内容，包含表情符号、标题、状态和当前时间
-        MESSAGE=$'📢  通知'$'\n✉️  标题：mihomo 规则拉取'$'\n🔔  状态：GitHub Actions 自动更新成功'$'\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
-        echo "发送Telegram通知..."  # 输出提示，表示开始发送Telegram通知
-
-        # 使用curl命令调用Telegram的Bot API来发送消息
+        MESSAGE=$'📢  通知'$'\n✉️  标题：Surge 规则拉取'$'\n🔔  状态：GitHub Actions 自动更新成功'$'\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
         curl -X POST \
-          "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \  # 通过Telegram Bot API发送消息
-          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \  # 指定消息发送的目标聊天ID
-          -d "text=${MESSAGE}"   # 设置消息的内容
+          "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+          -d "text=${MESSAGE}"
 
     # 步骤5：清理旧的工作流运行记录
     - name: 清理工作流
