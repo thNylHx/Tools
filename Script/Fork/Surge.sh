@@ -29,6 +29,7 @@ curl -L -o Tools-repo/Ruleset/Surge/Other/PayPal.list "https://raw.githubusercon
 
 # AI
 curl -L -o Tools-repo/Ruleset/Surge/Other/Openai.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.list"
+curl -L -o Tools-repo/Ruleset/Surge/Other/OpenAI.list "https://kelee.one/Tool/Loon/Rule/AI.list"
 
 # 游戏平台
 curl -L -o Tools-repo/Ruleset/Surge/Other/Steam.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list"
@@ -55,7 +56,8 @@ curl -L -o Tools-repo/Ruleset/Surge/Media/Facebook_ip.list "https://raw.githubus
 curl -L -o Tools-repo/Ruleset/Surge/Media/Instagram.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
 
 # 影视媒体
-curl -L -o Tools-repo/Ruleset/Surge/Media/TikTok.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/tiktok.list"
+# curl -L -o Tools-repo/Ruleset/Surge/Media/TikTok.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/tiktok.list"
+curl -L -o Tools-repo/Ruleset/Surge/Media/TikTok.list "https://kelee.one/Tool/Loon/Rule/TikTok.list"
 curl -L -o Tools-repo/Ruleset/Surge/Media/GlobalMedia.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
 curl -L -o Tools-repo/Ruleset/Surge/Media/BilibiliHMT.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
 curl -L -o Tools-repo/Ruleset/Surge/Media/ChinaMedia.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
@@ -70,7 +72,9 @@ curl -L -o Tools-repo/Ruleset/Surge/Other/GlobalGFW.list "https://raw.githubuser
 curl -L -o Tools-repo/Ruleset/Surge/Other/Global.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
 
 # 苹果
-curl -L -o Tools-repo/Ruleset/Surge/Other/Apple.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
+# curl -L -o Tools-repo/Ruleset/Surge/Other/Apple.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
+curl -L -o Tools-repo/Ruleset/Surge/Other/Apple.list "https://github.com/ACL4SSR/ACL4SSR/blob/master/Clash/Apple.list"
+
 
 # 国内直连
 curl -L -o Tools-repo/Ruleset/Surge/Other/China.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/cn.list"
