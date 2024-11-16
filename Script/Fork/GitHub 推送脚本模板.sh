@@ -50,7 +50,6 @@ git config --global user.email "${PREFIX}+${NAME}@users.noreply.github.com"
 # `OSTYPE` 是一个环境变量，它存储了操作系统类型的字符串。
 # 如果操作系统是 Windows，`OSTYPE` 会返回 'msys' 或 'win32'。
 # 如果操作系统是类 Unix 系统（如 Linux 或 macOS），`OSTYPE` 将返回其他字符串（通常为 'linux-gnu' 或 'darwin'）。
-
 if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
     # Windows 系统：启用换行符转换
     # 在 Windows 上，文本文件的换行符通常是 CRLF（回车 + 换行），而 Git 默认使用 LF（换行）作为换行符。
@@ -81,6 +80,8 @@ if [ ! -d "$FOLDERS" ]; then
     if [ ! -d "$FOLDERS" ]; then
         # 如果克隆失败，输出错误信息并退出脚本
         echo "克隆仓库失败，退出脚本"
+        
+        # 使用 `exit 1` 退出脚本，表示脚本执行失败。
         exit 1
     fi
     # 克隆成功后，输出提示信息
