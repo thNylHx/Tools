@@ -28,8 +28,7 @@ curl -L -o Tools-repo/Ruleset/Surge/Other/Private_ip.list "https://raw.githubuse
 curl -L -o Tools-repo/Ruleset/Surge/Other/PayPal.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/paypal.list"
 
 # AI
-curl -L -o Tools-repo/Ruleset/Surge/Other/ChatGPT.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.list"
-curl -L -o Tools-repo/Ruleset/Surge/Other/Openai.list "https://kelee.one/Tool/Loon/Rule/AI.list"
+curl -L -o Tools-repo/Ruleset/Surge/Other/Openai.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.list"
 
 # 游戏平台
 curl -L -o Tools-repo/Ruleset/Surge/Other/Steam.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list"
@@ -56,8 +55,7 @@ curl -L -o Tools-repo/Ruleset/Surge/Media/Facebook_ip.list "https://raw.githubus
 curl -L -o Tools-repo/Ruleset/Surge/Media/Instagram.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
 
 # 影视媒体
-# curl -L -o Tools-repo/Ruleset/Surge/Media/TikTok.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/tiktok.list"
-curl -L -o Tools-repo/Ruleset/Surge/Media/TikTok.list "https://kelee.one/Tool/Loon/Rule/TikTok.list"
+curl -L -o Tools-repo/Ruleset/Surge/Media/TikTok.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/tiktok.list"
 curl -L -o Tools-repo/Ruleset/Surge/Media/GlobalMedia.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
 curl -L -o Tools-repo/Ruleset/Surge/Media/BilibiliHMT.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
 curl -L -o Tools-repo/Ruleset/Surge/Media/ChinaMedia.list "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
