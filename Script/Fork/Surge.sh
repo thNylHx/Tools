@@ -28,8 +28,8 @@ curl -L -o Tools-repo/Ruleset/Surge/Other/Private_ip.list "https://raw.githubuse
 curl -L -o Tools-repo/Ruleset/Surge/Other/PayPal.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/paypal.list"
 
 # AI
-curl -L -o Tools-repo/Ruleset/Surge/Other/Openai.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.list"
-curl -L -o Tools-repo/Ruleset/Surge/Other/OpenAI.list "https://kelee.one/Tool/Loon/Rule/AI.list"
+curl -L -o Tools-repo/Ruleset/Surge/Other/ChatGPT.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.list"
+curl -L -o Tools-repo/Ruleset/Surge/Other/Openai.list "https://kelee.one/Tool/Loon/Rule/AI.list"
 
 # 游戏平台
 curl -L -o Tools-repo/Ruleset/Surge/Other/Steam.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list"
