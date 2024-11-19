@@ -1,30 +1,31 @@
-#!name=美柚去广告
-#!desc=移除开屏广告、弹窗推广和信息流推广，移除青少年模式弹窗和我的页面推广。
+#!name=下厨房去广告
+#!desc=移除开屏广告、信息流推广、各类横幅推广，精简首页标签。
 #!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
-#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MeetYou.png
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/XiaChuFang.png
 #!category=BetaModule
-#!openUrl=https://apps.apple.com/app/id634896669
+#!openUrl=https://apps.apple.com/app/id460979760
 #!tag=去广告
-#!loon_version=3.2.1(749)
+#!loon_version=3.2.4(780)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-02 15:19:15
+#!date=2024-11-15 16:45:47
 
 [Rule]
-# 拦截HTTPDNS
-DOMAIN,httpdns.music.163.com,REJECT,extended-matching,pre-matching
-DOMAIN,httpdns.n.netease.com,REJECT,extended-matching,pre-matching
-DOMAIN,httpdns-sdk.n.netease.com,REJECT,extended-matching,pre-matching
-DOMAIN,httpdns.yunxindns.com,REJECT,extended-matching,pre-matching
-DOMAIN,lofter.httpdns.c.163.com,REJECT,extended-matching,pre-matching
-DOMAIN,music.httpdns.c.163.com,REJECT,extended-matching,pre-matching
-DOMAIN,httpdns.yunxindns.com,REJECT,extended-matching,pre-matching
-IP-CIDR,59.111.239.61/32,REJECT,no-resolve,pre-matching
-IP-CIDR,59.111.239.62/32,REJECT,no-resolve,pre-matching
-IP-CIDR,115.236.121.51/32,REJECT,no-resolve,pre-matching
-IP-CIDR,115.236.121.195/32,REJECT,no-resolve,pre-matching
-# 广告接口
-DOMAIN,ad.seeyouyima.com,REJECT,extended-matching,pre-matching
-DOMAIN,axxd.xmseeyouyima.com,REJECT,extended-matching,pre-matching
+# 友盟
+DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,errnewlog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,ucc.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,ulogs.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,utoken.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,deeplink.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,aspect-upush.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,plbslog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,log.umtrack.com,REJECT,extended-matching,pre-matching
+DOMAIN,aaid.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,log.umsns.com,REJECT,extended-matching,pre-matching
+# 上海倍孜
+DOMAIN,sdk.beizi.biz,REJECT,extended-matching,pre-matching
+DOMAIN,api-htp.beizi.biz,REJECT,extended-matching,pre-matching
 AND,((DOMAIN-KEYWORD,-ad-,extended-matching),(DOMAIN-SUFFIX,byteimg.com,extended-matching)),REJECT,pre-matching
 AND,((DOMAIN-KEYWORD,-ttam-,extended-matching),(DOMAIN-SUFFIX,ibyteimg.com,extended-matching)),REJECT,pre-matching
 AND,((DOMAIN-KEYWORD,ssdk-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching)),REJECT,pre-matching
@@ -73,6 +74,12 @@ DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matchin
 DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching,pre-matching
+# 快手联盟 - 广告服务商
+DOMAIN,gdfp.gifshow.com,REJECT,extended-matching,pre-matching
+DOMAIN,open.e.kuaishou.com,REJECT,extended-matching,pre-matching
+DOMAIN,adtrack.e.kuaishou.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,adukwai.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,adbkwai.com,REJECT,extended-matching,pre-matching
 # 腾讯
 DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
@@ -111,54 +118,51 @@ DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
 IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
-# 阿里巴巴
-DOMAIN,ossgw.alicdn.com,REJECT,extended-matching,pre-matching
-DOMAIN,ems.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN,hudong.alicdn.com,REJECT,extended-matching,pre-matching
-DOMAIN,et.tanx.com,REJECT,extended-matching,pre-matching
-DOMAIN,df.tanx.com,REJECT,extended-matching,pre-matching
-DOMAIN,beacon-api.aliyuncs.com,REJECT,extended-matching,pre-matching
-DOMAIN,adash.man.aliyuncs.com,REJECT,extended-matching,pre-matching
-DOMAIN,applog.uc.cn,REJECT,extended-matching,pre-matching
-AND,((DOMAIN-KEYWORD,adash,extended-matching),(DOMAIN-SUFFIX,ut.taobao.com,extended-matching)),REJECT,pre-matching
-# 友盟
-DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,errnewlog.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,ucc.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,ulogs.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,utoken.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,deeplink.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,aspect-upush.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,plbslog.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,log.umtrack.com,REJECT,extended-matching,pre-matching
-DOMAIN,aaid.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,log.umsns.com,REJECT,extended-matching,pre-matching
-# 快手联盟 - 广告服务商
-DOMAIN,gdfp.gifshow.com,REJECT,extended-matching,pre-matching
-DOMAIN,open.e.kuaishou.com,REJECT,extended-matching,pre-matching
-DOMAIN,adtrack.e.kuaishou.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,adukwai.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,adbkwai.com,REJECT,extended-matching,pre-matching
+# 京东
+DOMAIN,dsp-x.jd.com,REJECT,extended-matching,pre-matching
+DOMAIN,im-x.jd.com,REJECT,extended-matching,pre-matching
+DOMAIN,xlog.jd.com,REJECT,extended-matching,pre-matching
+DOMAIN,janapi.jd.com,REJECT,extended-matching,pre-matching
+# 个推
+DOMAIN,b-gtc.getui.net,REJECT,extended-matching,pre-matching
+DOMAIN,c-gtc.getui.net,REJECT,extended-matching,pre-matching
+DOMAIN,c-hzgt2.getui.com,REJECT,extended-matching,pre-matching
+DOMAIN,c-ido.getui.net,REJECT,extended-matching,pre-matching
+DOMAIN,c-gtc.getui.net,REJECT,extended-matching,pre-matching
+DOMAIN,dnms.getui.com,REJECT,extended-matching,pre-matching
+DOMAIN,ido.getui.net,REJECT,extended-matching,pre-matching
+DOMAIN,sdk-conf.getui.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdk-open-phone.getui.com,REJECT,extended-matching,pre-matching
+DOMAIN,ido.gepush.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,mobileservice.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,getui.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,igexin.com,REJECT,extended-matching,pre-matching
+# 钧云 - ADHUB
+DOMAIN,api.htp.hubcloud.com.cn,REJECT,extended-matching,pre-matching
+DOMAIN,res1.hubcloud.com.cn,REJECT,extended-matching,pre-matching
+DOMAIN,sdktmp.hubcloud.com.cn,REJECT,extended-matching,pre-matching
+DOMAIN,v.adx.hubcloud.com.cn,REJECT,extended-matching,pre-matching
+# 杭州推啊网络科技有限公司
+DOMAIN,adx.tuia.cn,REJECT,extended-matching,pre-matching
 # 北京锐讯灵通科技有限公司
 DOMAIN,ztoken.uyunad.com,REJECT,extended-matching,pre-matching
 DOMAIN,aaid.uyunad.com,REJECT,extended-matching,pre-matching
 DOMAIN,yumao.puata.info,REJECT,extended-matching,pre-matching
-# 海南丽声影视文化传播有限公司
-DOMAIN,ad-evods.tianya.tv,REJECT,extended-matching,pre-matching
-
-[URL Rewrite]
-# 帖子底部 - 推荐阅读
-^https:\/\/circle\.(xm)?seeyouyima\.com\/v\d\/article_recommend\? - reject
-# 拼多多广告平台
-^https:\/\/video-dsp\.pddpic\.com\/market-dsp-video\/ - reject
-^https:\/\/t-dsp\.pinduoduo\.com\/dspcb\/i\/mrk_union - reject
-^https:\/\/images\.pinduoduo\.com\/mrk\/ - reject
-^https:\/\/images\.pinduoduo\.com\/marketing_api\/ - reject
 
 [Body Rewrite]
-http-response-jq ^https:\/\/common\.seeyouyima\.com\/v2\/conf_list$ 'delpaths([["data","confList","Minor_mode_card"]])'
+http-response-jq ^https:\/\/api\.xiachufang\.com\/v2\/homepage\/paged_waterfall_recommendations\.json$ 'del(.multiplex_cells[] | select(.recommendation_cell.impression_sensor_events[]?.properties.target_type? == "ad"))'
+http-response-jq ^https:\/\/api\.xiachufang\.com\/v2\/config\/get\.json$ 'del(.content.tab_name[] | select(. == "减脂" or . == "商店" or . == "分类"))'
+
+[Map Local]
+# 开屏广告
+^https:\/\/api\.xiachufang\.com\/v2\/ad\/ data-type=text data="{}" status-code=200
+
+# 首页 - 关注 - 作品推荐
+^https:\/\/api\.xiachufang\.com\/v2\/account\/feeds_v7\.json data-type=text data="{}" status-code=200
+
+# 发布 - 横幅推广
+^https:\/\/api\.xiachufang\.com\/v2\/mark_mission\/get_sticker_info\.json data-type=text data="{}" status-code=200
 
 [MITM]
-hostname = %APPEND% circle.seeyouyima.com, circle.xmseeyouyima.com, common.seeyouyima.com, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com
+hostname = %APPEND% api.xiachufang.com
 

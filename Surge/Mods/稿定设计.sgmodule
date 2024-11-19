@@ -12,7 +12,7 @@
 [Body Rewrite]
 http-response-jq ^https:\/\/www\.gaoding\.com\/api\/v\d\/oc\/exhibitions\/template\/resources$ '.pits |= map(select(.module_type != "BANNER"))'
 http-response-jq ^https:\/\/www\.gaoding\.com\/api\/v\d\/oc\/exhibitions\/app_mine\/resources$ '.pits |= map(select(.module_type != "BANNER"))'
-http-response ^https:\/\/www\.gaoding\.com\/api\/v\d\/oc\/exhibitions\/(templates|all_editor_tools)\/resources$ "badge_img_url":"https:\/\/(gaoding-market|st\d)\.dancf\.com\/market-operations\/market\/side\/([a-z0-9]+\/)?\d+\.png", "badge_img_url":"",
+http-response ^https:\/\/www\.gaoding\.com\/api\/v\d\/oc\/exhibitions\/(templates|all_editor_tools)\/resources$ 
 
 [Map Local]
 # 开屏广告

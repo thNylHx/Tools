@@ -69,9 +69,9 @@ DOMAIN,open-pixon.ads-pixiv.net,REJECT,extended-matching,pre-matching
 ^http:\/\/img\.allahall\.com\/img\/6\/90585d9e96c73dd49644af57d8501624\.jpg - reject
 ^http:\/\/img\.allahall\.com\/img\/5\/6cb2aa237ce1f65944aa1ecb29fbdeef\.jpg - reject
 ^http:\/\/img\.allahall\.com\/img\/59\/6a13a75dfe46ebfdac96bd27ef098885\.jpg - reject
-# 拼多多 //api.pinduoduo.com, api.yangkeduo.com
+# 拼多多 //api.pinduoduo.com,api.yangkeduo.com
 ^https:\/\/api\.(pinduoduo|yangkeduo)\.com\/api\/cappuccino\/splash - reject
-# 闲鱼 //gw.alicdn.com, acs.m.taobao.com
+# 闲鱼 //gw.alicdn.com,acs.m.taobao.com
 ^https:\/\/gw\.alicdn\.com\/mt\/ - reject
 ^https:\/\/gw\.alicdn\.com\/tfs\/.+\d{3,4}-\d{4} - reject
 ^https:\/\/gw\.alicdn\.com\/tps\/.+\d{3,4}-\d{4} - reject
@@ -157,7 +157,7 @@ DOMAIN,open-pixon.ads-pixiv.net,REJECT,extended-matching,pre-matching
 # 深圳通
 ^https?:\/\/ecard\.shenzhentong\.com\/wxweb\/bwxppub2\/QryAdvertList\.do data-type=text data=" " status-code=200
 
-# 埋堆堆 @Kuraki //sfo.mddcloud.com.cn, mob.mddcloud.com.cn, toblog.ctobsnssdk.com, t-dsp.pinduoduo.com, mobads-pre-config.cdn.bcebos.com, sdk1xyajs.data.kuiniuca.com, conf-darwin.xycdn.com, *.ubixioe.com
+# 埋堆堆 @Kuraki //sfo.mddcloud.com.cn,mob.mddcloud.com.cn,toblog.ctobsnssdk.com,t-dsp.pinduoduo.com,mobads-pre-config.cdn.bcebos.com,sdk1xyajs.data.kuiniuca.com,conf-darwin.xycdn.com,*.ubixioe.com
 ^https?:\/\/mob\.mddcloud\.com\.cn\/adApi\/advert\/(first|third)part\/advertList data-type=text data="{}" status-code=200
 
 ^https?:\/\/t-dsp\.pinduoduo\.com data-type=text data=" " status-code=200

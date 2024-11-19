@@ -5,9 +5,9 @@
 #!category=BetaModule
 #!openUrl=https://apps.apple.com/app/id897003024
 #!tag=去广告
-#!loon_version=3.2.1(749)
+#!loon_version=3.2.4(780)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-10-04 03:32:32
+#!date=2024-11-17 20:50:14
 
 [Rule]
 # 拦截HTTPDNS
@@ -103,12 +103,12 @@ DOMAIN,info4.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching,pre-matching
-# DOMAIN, mazu.m.qq.com, REJECT // 误杀
+# DOMAIN,mazu.m.qq.com,REJECT // 误杀
 DOMAIN,mi.gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching,pre-matching
-# DOMAIN, qzonestyle.gtimg.cn, REJECT // 误杀
+# DOMAIN,qzonestyle.gtimg.cn,REJECT // 误杀
 DOMAIN,qzs.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,qzs.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,rmonitor.qq.com,REJECT,extended-matching,pre-matching
@@ -204,7 +204,7 @@ DOMAIN-SUFFIX,bridgeoos.com,REJECT,extended-matching,pre-matching
 http-response-jq ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/page\/v2\/conf\.do$ 'delpaths([["data","functionOperatorInfoList"]])'
 http-response-jq ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/page\/v2\/conf\.do$ 'delpaths([["data","memberOperator"]])'
 http-response-jq ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/page\/v2\/conf\.do$ 'delpaths([["data","activityTabInfoList"]])'
-http-response-jq ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/config\/function\.do$ 'delpaths([["data","config",39,"result","tools",2]])'
+http-response-jq ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/config\/function\.do$ 'walk(if type == "object" and has("name") and .name == "看视频扩容" then empty else . end) | del(.data.config[] | select(.functionName == "Function-AD"))'
 
 [Map Local]
 # 拦截HTTPDNS

@@ -21,12 +21,12 @@ DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,pro.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching,pre-matching
-# DOMAIN, mazu.m.qq.com, REJECT // 误杀
+# DOMAIN,mazu.m.qq.com,REJECT // 误杀
 DOMAIN,mi.gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching,pre-matching
-# DOMAIN, qzonestyle.gtimg.cn, REJECT // 误杀
+# DOMAIN,qzonestyle.gtimg.cn,REJECT // 误杀
 DOMAIN,qzs.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,qzs.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,rmonitor.qq.com,REJECT,extended-matching,pre-matching
@@ -147,7 +147,7 @@ DOMAIN-SUFFIX,adukwai.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adbkwai.com,REJECT,extended-matching,pre-matching
 
 [Body Rewrite]
-http-response-jq ^https:\/\/v0-client-lz\.rili\.cn\/lizhi\/api\/zhwnl\/cal_module\/(datas|config)\? '.data |= map(select(.module_name as $name | ["实用工具", "会员下icon", "天气页面_右上角图标", "天气页面_24小时", "天气页面_15日", "每日插屏", "下拉屏保", "星座Tab（黄历页）"] | index($name) != null))'
+http-response-jq ^https:\/\/v0-client-lz\.rili\.cn\/lizhi\/api\/zhwnl\/cal_module\/(datas|config)\? '.data |= map(select(.module_name as $name | ["实用工具","会员下icon","天气页面_右上角图标","天气页面_24小时","天气页面_15日","每日插屏","下拉屏保","星座Tab（黄历页）"] | index($name) != null))'
 http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |= map((.layout |= map(select(.key_name == "实用工具" or .key_name == "会员下icon" or .key_name == "天气页面_右上角图标" or .key_name == "天气页面_24小时" or .key_name == "天气页面_15日" or .key_name == "每日插屏" or .key_name == "下拉屏保" or .key_name == "星座Tab（黄历页）"))) | select(.layout | length > 0))'
 
 [Map Local]
