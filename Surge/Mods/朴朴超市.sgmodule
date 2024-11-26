@@ -7,10 +7,7 @@
 #!tag=去广告
 #!loon_version=3.2.1(749)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-06-20 22:28:12
-
-[General]
-force-http-engine-hosts = %APPEND% 54.222.159.138:8053, 101.42.130.147:8053, 106.55.220.18:8053, 139.196.12.179:8053
+#!date=2024-11-26 13:23:43
 
 [Rule]
 URL-REGEX,"^http:\/\/54\.222\.159\.138:8053\/httpdns\/",REJECT,extended-matching
