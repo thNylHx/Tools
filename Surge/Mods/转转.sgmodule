@@ -5,9 +5,9 @@
 #!category=BetaModule
 #!openUrl=https://apps.apple.com/app/id1002355194
 #!tag=去广告
-#!loon_version=3.2.4(780)
+#!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-17 20:08:15
+#!date=2024-11-28 00:00:00
 
 [Body Rewrite]
 http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\? 'delpaths([["respData","topOpera","leftOpera"]])'

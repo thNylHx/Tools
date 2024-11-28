@@ -5,9 +5,9 @@
 #!category=BetaModule
 #!openUrl=https://apps.apple.com/app/id324684580
 #!tag=去广告
-#!loon_version=3.2.1(749)
+#!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-04-28 15:54:48
+#!date=2024-11-28 00:00:00
 
 [Script]
 JSON处理 = type=http-request, pattern=^https:\/\/spclient\.wg\.spotify\.com\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/, script-path=https://kelee.one/Resource/Script/Spotify/Spotify_remove_ads.js, timeout=10

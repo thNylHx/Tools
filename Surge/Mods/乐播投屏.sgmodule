@@ -5,9 +5,9 @@
 #!category=BetaModule
 #!openUrl=https://apps.apple.com/app/id1116038378
 #!tag=去广告
-#!loon_version=3.2.1(749)
+#!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-07-11 02:43:39
+#!date=2024-11-28 00:00:00
 
 [Rule]
 AND,((DOMAIN-KEYWORD,ads,extended-matching),(DOMAIN-KEYWORD,normal,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)),REJECT,pre-matching

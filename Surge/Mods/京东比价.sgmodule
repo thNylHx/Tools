@@ -5,9 +5,9 @@
 #!category=BetaModule
 #!openUrl=https://apps.apple.com/app/id414245413
 #!tag=功能增强
-#!loon_version=3.2.1(749)
+#!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-09-18 16:14:34
+#!date=2024-11-28 00:00:00
 
 [Script]
 京东比价 = type=http-response, pattern=^https?:\/\/api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig|basicConfig), script-path=https://kelee.one/Resource/Script/JD/JD_Price.js, requires-body=true
