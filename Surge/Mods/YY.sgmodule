@@ -10,15 +10,11 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-# 拦截HTTPDNS
 DOMAIN,yyapp-httpdns.gslb.yy.com,REJECT,extended-matching,pre-matching
 DOMAIN,union-httpdns.gslb.yy.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns-v6.gslb.yy.com,REJECT,extended-matching,pre-matching
-# 开屏广告
 DOMAIN,splash.yy.com,REJECT,extended-matching,pre-matching
-# 广告下发
 DOMAIN,dsp-ad.yy.com,REJECT,extended-matching,pre-matching
-# 腾讯
 DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,c2.gdt.qq.com,REJECT,extended-matching,pre-matching
@@ -27,12 +23,10 @@ DOMAIN,info4.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching,pre-matching
-# DOMAIN,mazu.m.qq.com,REJECT // 误杀
 DOMAIN,mi.gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching,pre-matching
-# DOMAIN,qzonestyle.gtimg.cn,REJECT // 误杀
 DOMAIN,qzs.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,qzs.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,rmonitor.qq.com,REJECT,extended-matching,pre-matching
@@ -54,7 +48,6 @@ DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
 IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
-# 袤博 - 广告服务商
 DOMAIN,api-c.dutils.com,REJECT,extended-matching,pre-matching
 DOMAIN,api-d.dutils.com,REJECT,extended-matching,pre-matching
 DOMAIN,api-p0.yksdks.com,REJECT,extended-matching,pre-matching
@@ -67,24 +60,19 @@ DOMAIN,api.share.mob.com,REJECT,extended-matching,pre-matching
 DOMAIN,api.verify.mob.com,REJECT,extended-matching,pre-matching
 DOMAIN,log-verify.mob.com,REJECT,extended-matching,pre-matching
 DOMAIN,sdk.push.mob.com,REJECT,extended-matching,pre-matching
-# 京东
 DOMAIN,dsp-x.jd.com,REJECT,extended-matching,pre-matching
 DOMAIN,xlog.jd.com,REJECT,extended-matching,pre-matching
 DOMAIN,janapi.jd.com,REJECT,extended-matching,pre-matching
-# 天目 - 广告服务商
 DOMAIN,sdk.tianmu.mobi,REJECT,extended-matching,pre-matching
-# 上海倍孜
 DOMAIN,sdk.beizi.biz,REJECT,extended-matching,pre-matching
 
 [Body Rewrite]
 http-response-jq ^https:\/\/tab\.yy\.com\/tabs\? 'delpaths([["data","tabs",0]])'
 
 [Map Local]
-# 首页 - 弹窗
 ^https:\/\/yyapp-act-entrance\.yy\.com\/entrance\/list\? data-type=text data="{}" status-code=200
 
 [Script]
-# 我的页面
 精简我的页面 = type=http-response, pattern=^https:\/\/personal-center\.yy\.com\/personalCenter\/list\?, script-path=https://kelee.one/Resource/Script/YY_Voice/YY_Voice_remove_ads.js, requires-body=true
 
 [MITM]

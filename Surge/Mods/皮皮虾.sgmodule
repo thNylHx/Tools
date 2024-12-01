@@ -60,20 +60,15 @@ DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching,pre-matching
 
 [Map Local]
-# 广告下发
 ^https:\/\/api(5-lq)?\.pipix\.com\/api\/ad\/ data-type=text data="{}" status-code=200
 
-# 横幅
 ^https:\/\/api(5-lq)?\.pipix\.com\/bds\/banner\/ data-type=text data="{}" status-code=200
 
-# 关注 - 近期热门皮友
 ^https:\/\/api(5-lq)?\.pipix\.com\/bds\/feed\/follow_feed\/ data-type=text data="{}" status-code=200
 
 [Script]
-# 视频流广告
 移除视频流广告 = type=http-response, pattern=^https:\/\/api(5-lq)?\.pipix\.com\/bds\/feed\/stream\/v2\/, script-path=https://kelee.one/Resource/Script/PiPiXia/PiPiXia_remove_ads.js, requires-body=true
 
-# 我的页面
 精简我的页面 = type=http-response, pattern=^https:\/\/api(5-lq)?\.pipix\.com\/bds\/user\/check_in\/, script-path=https://kelee.one/Resource/Script/PiPiXia/PiPiXia_remove_ads.js, requires-body=true
 
 [MITM]

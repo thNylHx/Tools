@@ -10,10 +10,8 @@
 #!date=2024-11-28 00:00:00
 
 [Script]
-# 捕获Cookie
 捕获Cookie = type=http-request, pattern=^https:\/\/moapi\.wps\.cn\/app\/ios\/v1\/app$, script-path=https://kelee.one/Resource/Script/WPS/WPS_checkin.js, requires-body=true
 
-# 定时签到
 WPS每日签到 = type=cron, cronexp="null", script-path=https://kelee.one/Resource/Script/WPS/WPS_checkin.js, timeout=120, argument="[{AK},{SK},{MAX_RETRIES}]"
 
 [MITM]

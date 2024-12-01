@@ -20,10 +20,8 @@ http-response-jq ^https:\/\/fm\.missevan\.com\/api\/v2\/chatroom\/sound\/recomme
 http-response-jq ^https:\/\/app\.missevan\.com\/site\/config$ 'delpaths([["info","teenager_popup_mode"]])'
 
 [Script]
-# 首页顶部入口
 精简首页顶部入口 = type=http-response, pattern=^https:\/\/app\.missevan\.com\/site\/icons\?, script-path=https://kelee.one/Resource/Script/CatEarFM/CatEarFM_remove_ads.js, requires-body=true
 
-# 发现页面 - 直播间、广播剧、免流服务
 精简发现页面 = type=http-response, pattern=^https:\/\/app\.missevan\.com\/discovery\/list$, script-path=https://kelee.one/Resource/Script/CatEarFM/CatEarFM_remove_ads.js, requires-body=true
 
 [MITM]

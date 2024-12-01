@@ -22,26 +22,19 @@ http-response-jq ^https:\/\/api\.boohee\.com\/open-interface\/v1\/string\/market
 http-response-jq ^https:\/\/api\.boohee\.com\/open-interface\/v1\/string\/market_page\?title=metabolism_config$ 'delpaths([["brand_story"]])'
 
 [Map Local]
-# 记录 - 悬浮部件
 ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/page_float_bubbles\? data-type=text data="{}" status-code=200
 
-# 记录 - 发布
 ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/tool_buttons\? data-type=text data="{}" status-code=200
 
-# 记录 - 搜索发现
 ^https:\/\/api\.boohee\.com\/app-interface\/v1\/search\/search\? data-type=text data="{}" status-code=200
 
-# 记录 - 消息 - 通知 - 横幅推广
 ^https:\/\/status\.boohee\.com\/api\/v1\/merged_messages$ data-type=text data="{}" status-code=200
 
-# 弹窗配置
 ^https:\/\/bohe\.sfo-tx-shanghai-01\.saas\.sensorsdata\.cn\/api\/v2\/sfo\/user_popup_configs\? data-type=text data="{}" status-code=200
 
-# 绑定设备 - 横幅推广
 ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/sensor-banners\? data-type=text data="{}" status-code=200
 
 [Script]
-# 广场 - 推荐 - 横幅
 移除广场推荐页面横幅 = type=http-response, pattern=^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/plaza-flow\?, script-path=https://kelee.one/Resource/Script/BooHee/BooHee_remove_ads.js, requires-body=true
 
 [MITM]

@@ -15,22 +15,16 @@ http-response-jq ^https:\/\/cupid\.51job(app)?\.com\/open\/user-task\/user\/task
 http-response-jq ^https:\/\/cupid\.51job(app)?\.com\/open\/tab\/good-job\/modules 'delpaths([["resultbody","bannerList"]])'
 
 [Map Local]
-# 开屏广告
 ^https:\/\/appapi\.51job\.com\/api\/market\/get_launch\.php\? data-type=text data="{}" status-code=200
 
-# 职位 - 下拉二楼
 ^https:\/\/cupid\.51job(app)?\.com\/open\/51job-activities\/secJob\/queryHomeSecondConfigV2\? data-type=text data="{}" status-code=200
 
-# 职位 - 职位详情 - 竞争力分析
 ^https:\/\/cupid\.51job(app)?\.com\/open\/noauth\/jobs\/detail\/sesame-competitive\/ data-type=text data="{}" status-code=200
 
-# 简历向导
 ^https:\/\/cupid\.51jobapp(app)?\.com\/open\/resume\/strategy\/resume-build\? data-type=text data="{}" status-code=200
 
-# 弹窗
 ^https:\/\/cupid\.51job(app)?\.com\/open\/noauth\/popUp\/ data-type=text data="{}" status-code=200
 
-# 消息页面 - 无忧小助手 - 横幅推广
 ^https:\/\/cupid\.51job(app)?\.com\/open\/operation\/get\/banner-list\? data-type=text data="{}" status-code=200
 
 [MITM]

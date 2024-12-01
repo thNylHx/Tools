@@ -10,12 +10,9 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-# 拦截HTTPDNS
 IP-CIDR,119.29.29.98/32,REJECT,no-resolve,pre-matching
 URL-REGEX,"^http:\/\/162\.14\.3\.250\/v4",REJECT,extended-matching
-# 首页 - 发现 - 横幅广告
 DOMAIN,advert.mafengwo.cn,REJECT,extended-matching,pre-matching
-# 袤博 - 广告服务商
 DOMAIN,api-c.dutils.com,REJECT,extended-matching,pre-matching
 DOMAIN,api-d.dutils.com,REJECT,extended-matching,pre-matching
 DOMAIN,api-p0.yksdks.com,REJECT,extended-matching,pre-matching
@@ -34,7 +31,6 @@ http-response-jq ^https:\/\/mapi\.mafengwo\.cn\/discovery\/get_index\/v7\? '.dat
 http-response-jq ^https:\/\/mapi\.mafengwo\.cn\/sales\/home\/get_header\/v3\? '.data.list[] |= ( .data |= del(.banners) )'
 
 [Map Local]
-# 我的 - 打卡成就勋章弹窗
 ^https:\/\/mapi\.mafengwo\.cn\/user\/growth\/get_growth_tip\/v1\? data-type=text data="{}" status-code=200
 
 [MITM]

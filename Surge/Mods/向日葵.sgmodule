@@ -10,9 +10,7 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-# 开屏广告
 DOMAIN,mobads.baidu.com,REJECT,extended-matching,pre-matching
-# 友盟
 DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,errnewlog.umeng.com,REJECT,extended-matching,pre-matching
@@ -75,7 +73,6 @@ DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching,pre-matching
 
 [URL Rewrite]
-# 首页横幅
 ^https:\/\/client-api-v2\.oray\.com\/materials\/SLCC_iOS_DEVICE_FREE\? - reject
 
 [MITM]
