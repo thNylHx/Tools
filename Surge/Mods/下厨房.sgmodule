@@ -7,7 +7,7 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
+#!date=2024-12-02 09:16:28
 
 [Rule]
 DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
@@ -146,6 +146,8 @@ http-response-jq ^https:\/\/api\.xiachufang\.com\/v2\/config\/get\.json$ 'del(.c
 ^https:\/\/api\.xiachufang\.com\/v2\/ad\/ data-type=text data="{}" status-code=200
 
 ^https:\/\/api\.xiachufang\.com\/v2\/account\/feeds_v7\.json data-type=text data="{}" status-code=200
+
+^https:\/\/api\.xiachufang\.com\/v2\/homepage1810\/init_page\.json data-type=text data="{}" status-code=200
 
 ^https:\/\/api\.xiachufang\.com\/v2\/mark_mission\/get_sticker_info\.json data-type=text data="{}" status-code=200
 
