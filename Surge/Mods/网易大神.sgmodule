@@ -7,7 +7,7 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
+#!date=2024-12-04 15:48:23
 
 [Rule]
 DOMAIN,httpdns.music.163.com,REJECT,extended-matching,pre-matching
@@ -25,10 +25,7 @@ IP-CIDR,115.236.121.195/32,REJECT,no-resolve,pre-matching
 ^https:\/\/god\.gameyw\.netease\.com\/v\d\/ad - reject
 
 [Body Rewrite]
-http-response-jq ^https:\/\/app-conf\.ds\.163\.com\/v\d\/app\/base\/conf\/static\/start-config\? 'delpaths([["result","updateConfig",2,"itemList",94,"itemList",2]])'
-
-[Map Local]
-^https:\/\/god\.gameyw\.netease\.com\/v\d\/app\/static\/conf\/getByModuleNameList$ data-type=text data="{}" status-code=200
+http-response ^https:\/\/app-conf\.ds\.163\.com\/v1\/app\/base\/conf\/static\/start-config\? \{"os":"all","weight":50\.0,"hidden":false,"name":"游戏"\},\{"os":"all","weight":50\.0,"hidden":false,"name":"频道"\}, null
 
 [MITM]
 hostname = %APPEND% god.gameyw.netease.com, app-conf.ds.163.com

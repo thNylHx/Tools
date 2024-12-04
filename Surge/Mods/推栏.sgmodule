@@ -1,16 +1,17 @@
 #!name=推栏去广告
 #!desc=过滤推栏广告
-#!author=Keywos[https://github.com/Keywos],可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Daily.png
 #!category=BetaModule
 #!openUrl=https://apps.apple.com/app/id1352849256
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
+#!date=2024-12-04 11:02:01
 
-[Script]
-移除开屏广告 = type=http-response, pattern=^https?:\/\/m\.pvp\.xoyo\.com\/conf\/server-mapping, script-path=https://kelee.one/Resource/Script/Daily/Daily_remove_ads.js, requires-body=true
+[Body Rewrite]
+http-response-jq ^https?:\/\/m\.pvp\.xoyo\.com\/conf\/server-mapping$ 'delpaths([["data","splashConf"]])'
+http-response-jq ^https?:\/\/m\.pvp\.xoyo\.com\/conf\/server-mapping$ 'delpaths([["data","splashConfNew"]])'
 
 [MITM]
 hostname = %APPEND% m.pvp.xoyo.com
