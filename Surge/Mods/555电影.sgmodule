@@ -8,13 +8,13 @@
 #!system=ios
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
+#!date=2024-12-05 15:34:08
+
+[Body Rewrite]
+http-response-jq ^https:\/\/app-v1\.ecoliving168\.com\/api\/v1\/movie\/index_recommend\? '(.data[] | select(.layout == "advert_self")) |= del(.data) | .data |= map(select(.layout != "advert_self")) | .data |= map(if .layout == "index_recommend_carousel" then .list |= map(select(.type != 3)) else . end)'
 
 [Map Local]
 ^https:\/\/app-v1\.ecoliving168\.com\/api\/v1\/advert\/config data-type=text data="{}" status-code=200
-
-[Script]
-移除横幅广告 = type=http-response, pattern=^https:\/\/app-v1\.ecoliving168\.com\/api\/v1\/movie\/index_recommend\?, script-path=https://kelee.one/Resource/Script/555DY/555DY_remove_ads.js, requires-body=true
 
 [MITM]
 hostname = %APPEND% app-v1.ecoliving168.com

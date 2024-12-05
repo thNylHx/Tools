@@ -7,17 +7,13 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
+#!date=2024-12-05 14:00:35
 
 [Map Local]
 ^https:\/\/api\.coolapk\.com\/v6\/search\?.*type=hotSearch data-type=text data="{}" status-code=200
 
 [Script]
-移除酷安广告 = type=http-response, pattern=^https:\/\/api\.coolapk\.com\/v6\/feed\/(detail|replyList)\?, script-path=https://kelee.one/Resource/Script/CoolApk/CoolApk_remove_ads.js, requires-body=true
-
-移除酷安广告 = type=http-response, pattern=^https:\/\/api\.coolapk\.com\/v6\/main\/(dataList|indexV8|init), script-path=https://kelee.one/Resource/Script/CoolApk/CoolApk_remove_ads.js, requires-body=true
-
-移除酷安广告 = type=http-response, pattern=^https:\/\/api\.coolapk\.com\/v6\/page\/dataList\?, script-path=https://kelee.one/Resource/Script/CoolApk/CoolApk_remove_ads.js, requires-body=true
+移除酷安广告 = type=http-response, pattern=^https:\/\/api\.coolapk\.com\/v6\/(?:feed\/detail|feed\/replyList|page\/dataList|main\/dataList|main\/indexV8|main\/init), script-path=https://kelee.one/Resource/Script/CoolApk/CoolApk_remove_ads.js, requires-body=true
 
 [MITM]
 hostname = %APPEND% api.coolapk.com
