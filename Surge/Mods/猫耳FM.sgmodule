@@ -7,7 +7,7 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
+#!date=2024-12-07 17:29:07
 
 [Body Rewrite]
 http-response-jq ^https:\/\/app\.missevan\.com\/site\/launch\? 'delpaths([["info"]])'
@@ -18,11 +18,8 @@ http-response-jq ^https:\/\/app\.missevan\.com\/drama\/catalog-homepage\? 'delpa
 http-response-jq ^https:\/\/app\.missevan\.com\/catalog\/sound-homepage\? 'delpaths([["info","extra_banners"]])'
 http-response-jq ^https:\/\/fm\.missevan\.com\/api\/v2\/chatroom\/sound\/recommend\? 'delpaths([["info"]])'
 http-response-jq ^https:\/\/app\.missevan\.com\/site\/config$ 'delpaths([["info","teenager_popup_mode"]])'
-
-[Script]
-精简首页顶部入口 = type=http-response, pattern=^https:\/\/app\.missevan\.com\/site\/icons\?, script-path=https://kelee.one/Resource/Script/CatEarFM/CatEarFM_remove_ads.js, requires-body=true
-
-精简发现页面 = type=http-response, pattern=^https:\/\/app\.missevan\.com\/discovery\/list$, script-path=https://kelee.one/Resource/Script/CatEarFM/CatEarFM_remove_ads.js, requires-body=true
+http-response-jq ^https:\/\/app\.missevan\.com\/site\/icons\? '.info.icons |= (if . == null then null else map(select(.title != "直播" and .title != "周边商城")) end)'
+http-response-jq ^https:\/\/app\.missevan\.com\/discovery\/list$ '.info |= with_entries(.value |= (if . == null then null else map(select(.title != "直播间" and .title != "广播剧" and .title != "免流服务")) end))'
 
 [MITM]
 hostname = %APPEND% app.missevan.com, fm.missevan.com
