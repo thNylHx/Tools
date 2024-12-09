@@ -7,13 +7,13 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-12-08 00:07:45
+#!date=2024-12-08 00:49:15
 
 [Body Rewrite]
 http-response-jq ^https:\/\/app\.missevan\.com\/site\/launch\? 'delpaths([["info"]])'
 http-response-jq ^https:\/\/app\.missevan\.com\/site\/config$ 'delpaths([["info","homepage_top_task_button"]])'
 http-response-jq ^https:\/\/app\.missevan\.com\/site\/config$ 'delpaths([["info","teenager_popup_mode"]])'
-http-response-jq ^https:\/\/app\.missevan\.com\/site\/get-top$ 'delpaths([["search_words"]])'
+http-response-jq ^https:\/\/app\.missevan\.com\/site\/get-top$ 'delpaths([["info","search_words"]])'
 http-response-jq ^https:\/\/app\.missevan\.com\/site\/get-top$ 'delpaths([["info","extra_banners"]])'
 http-response-jq ^https:\/\/app\.missevan\.com\/you-might-like\/my-favors\? 'delpaths([["info","video_card"]])'
 http-response-jq ^https:\/\/app\.missevan\.com\/you-might-like\/my-favors\? '.info.ranks.data|=map(select(.name!="直播榜"))'
@@ -29,8 +29,6 @@ http-response-jq ^https:\/\/app\.missevan\.com\/site\/icons\? '.info.icons |= (i
 ^https:\/\/app\.missevan\.com\/sound\/recommend\? data-type=text data="{}" status-code=200
 
 ^https:\/\/app\.missevan\.com\/drama\/get-recommend-by-id\? data-type=text data="{}" status-code=200
-
-^https:\/\/fm\.missevan\.com\/api\/v\d\/chatroom\/open\/feed-list$ data-type=text data="{}" status-code=200
 
 ^https:\/\/fm\.missevan\.com\/api\/v\d\/meta\/banner$ data-type=text data="{}" status-code=200
 
