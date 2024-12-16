@@ -117,6 +117,13 @@ DOMAIN,pageviewp.icbc.com.cn,REJECT,extended-matching,pre-matching
 # 小米
 DOMAIN,sdkconfig.ad.xiaomi.com,REJECT,extended-matching,pre-matching
 
+# 微信小程序
+DOMAIN,wxsnsdy.wxs.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,wxsmsdy.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,wxsnsdythumb.wxs.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,ads-shopping.shouqianba.com,REJECT,extended-matching,pre-matching
+DOMAIN,ad.maoyan.com,REJECT,extended-matching,pre-matching
+DOMAIN,e.jparking.cn,REJECT,extended-matching,pre-matching
 
 [URL Rewrite]
 # 拼多多广告平台
@@ -138,6 +145,41 @@ DOMAIN,sdkconfig.ad.xiaomi.com,REJECT,extended-matching,pre-matching
 # 腾讯手机管理开屏 us.l.qq.com
 ^https:\/\/us\.l\.qq\.com\/exapp - reject
 
+# 微信小程序
+^https:\/\/webapi\.qmai\.cn\/web\/cmk-center\/marketing\/canvas\/advert-reach - reject
+^https:\/\/creditcardapp\.bankcomm\.com\/cnsvPmpaMdbcardWeb\/page\/getGuidePageAds - reject
+^https:\/\/mbmodule-openapi\.paas\.cmbchina\.com\/graphic\/v2\/module\/graphic - reject
+^https:\/\/app\.95504\.net\/app\/json\/page_ad\/initPageAd\?ver= - reject
+^https:\/\/minipro\.95504\.net\/app\/json\/ad\/getPopAdData - reject
+^https:\/\/minipro\.95504\.net\/app\/json\/ad\/getIndexAdData - reject
+^https:\/\/flow\.dmall\.com\/app\/home\/pops - reject
+^https:\/\/api\.yonghuivip\.com\/api\/fp\/homepage\/pop - reject
+^https:\/\/activity\.yonghuivip\.com\/api\/app\/fp\/homepage\/pop - reject
+^https:\/\/activity\.yonghuivip\.com\/api\/\/web\/shensuan\/ad - reject
+^https:\/\/sauron-report\.yonghuivip\.com\/collect - reject
+^https:\/\/ump\.ems\.com\.cn\/mailAd$ - reject
+^https:\/\/hdgateway\.zto\.com\/getApolloConfig - reject
+^https:\/\/hdgateway\.zto\.com\/track - reject
+^https:\/\/hdgateway\.zto\.com\/getAdInfo - reject
+^https:\/\/hdgateway\.zto\.com\/listJumperShow - reject
+^https:\/\/fscdn\.zto\.com\/fs1 - reject
+^https:\/\/aag\.enmonster\.com\/apa\/index\/advert\/skin - reject
+^https:\/\/ad\.xiaotucc\.com\/advert - reject
+^https:\/\/api-marketing\.zhinengxiyifang\.cn\/api\/v2\/cloudcode\/wechat\/bid - reject
+^https:\/\/ccmsupport-sz\.tenpay\.com\/cgi-bin\/common\/ccm_page_element.cgi - reject
+^https:\/\/api\.pinduoduo\.com\/api\/ktt_gateway\/activity\/feeds\/personal_home_page\/ - reject
+^https:\/\/api\.szbgcx\.cn\/account\/adv\/ - reject
+
+[Body Rewrite]
+# 555 电影去广告
+http-response-jq ^https:\/\/app-v1\.ecoliving168\.com\/api\/v1\/movie\/index_recommend\? '(.data[] | select(.layout == "advert_self")) |= del(.data) | .data |= map(select(.layout != "advert_self")) | .data |= map(if .layout == "index_recommend_carousel" then .list |= map(select(.type != 3)) else . end)'
+
+# 微信小程序
+http-response-jq ^https:\/\/mcsp\.cloudpnr\.com\/api\/miniapp\/popular\/T_MINIAPP$ 'delpaths([["data"]])'
+http-response-jq ^https:\/\/saas-ad\.cloudpnr\.com\/huifuad-base-api\/api\/tactics\/ad$ 'delpaths([["data",0]])'
+http-response-jq ^https:\/\/saas-ad\.cloudpnr\.com\/huifuad-base-api\/api\/tactics\/ad$ 'delpaths([["data",1]])'
+http-response-jq ^https:\/\/saas-ad\.cloudpnr\.com\/huifuad-base-api\/api\/tactics\/ad$ 'delpaths([["data",2]])'
+http-response-jq ^https:\/\/rms\.meituan\.com\/api\/v1\/rmsmina\/c\/queryShopPortalInfo\? 'delpaths([["data","popUpWindows"]])'
 
 [Map Local]
 # 阿里云盘 //*api.alipan.com, member.alipan.com
@@ -195,9 +237,6 @@ DOMAIN,sdkconfig.ad.xiaomi.com,REJECT,extended-matching,pre-matching
 移除12306开屏广告 = type=http-request,pattern=^https:\/\/ad\.12306\.cn\/ad\/ser\/getAdList$,script-path=https://kelee.one/Resource/Script/12306/12306_remove_splashscreen_ads.js,requires-body=true
 # 移除12306应用内广告
 移除12306应用内广告 = type=http-response,pattern=^https:\/\/mobile\.12306\.cn\/otsmobile\/app\/mgs\/mgw\.htm$,script-path=https://kelee.one/Resource/Script/12306/12306_remove_ads.js
-
-# 555 电影去广告
-移除横幅广告 = type=http-response,pattern=^https:\/\/app-v1\.ecoliving168\.com\/api\/v1\/movie\/index_recommend\?,script-path=https://kelee.one/Resource/Script/555DY/555DY_remove_ads.js,requires-body=true
 
 # IT之家
 IT之家去广告 = type=http-response,pattern=^https:\/\/napi\.ithome\.com\/api\/(?:news\/index|topmenu\/getfeeds\?|api\/douyin\/GetLiveInfo),script-path=https://kelee.one/Resource/Script/IThome/IThome_remove_ads.js,requires-body=true
