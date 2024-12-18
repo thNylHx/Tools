@@ -7,17 +7,12 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-12-11 17:30:36
+#!date=2024-12-17 21:27:52
 
 [Rule]
-DOMAIN,wbapp.uve.weibo.com,DIRECT,extended-matching
+DOMAIN-SUFFIX,uve.weibo.com,DIRECT,extended-matching
 DOMAIN,huodong.weibo.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,biz.weibo.com,REJECT,extended-matching,pre-matching
-DOMAIN,dns.weibo.cn,REJECT,extended-matching,pre-matching
-IP-CIDR,39.97.130.51/32,REJECT,no-resolve,pre-matching
-IP-CIDR,39.97.128.148/32,REJECT,no-resolve,pre-matching
-URL-REGEX,"^http:\/\/api\.weibo\.cn\/2\/httpdns\/config",REJECT,extended-matching
-URL-REGEX,"^http:\/\/api\.weibo\.cn\/httpdns\/config",REJECT,extended-matching
 
 [Map Local]
 ^https:\/\/api\.weibo\.cn\/2\/(?:ug\/checkin\/list|push\/daily) data-type=text data="{}" status-code=200
@@ -45,6 +40,8 @@ URL-REGEX,"^http:\/\/api\.weibo\.cn\/httpdns\/config",REJECT,extended-matching
 ^https:\/\/api\.weibo\.cn\/2\/video\/redpacket\? data-type=text data="{}" status-code=200
 
 ^https:\/\/api\.weibo\.cn\/!\/(sug\/list\/finderchange|was\/finder\/searchbarchange)\? data-type=text data="{}" status-code=200
+
+^https:\/\/api\.weibo\.cn\/2\/video\/tiny_video_info_show\? data-type=text data="{}" status-code=200
 
 ^https:\/\/bootrealtime\.uve\.weibo\.com\/v[23]\/ad\/realtime data-type=text data="{}" status-code=200
 
@@ -75,7 +72,7 @@ URL-REGEX,"^http:\/\/api\.weibo\.cn\/httpdns\/config",REJECT,extended-matching
 
 移除微博详情页广告 = type=http-response, pattern=^https:\/\/api\.weibo\.cn\/2\/statuses\/(?:extend|show), script-path=https://kelee.one/Resource/Script/Weibo/Weibo_remove_ads.js, requires-body=true
 
-移除视频流广告 = type=http-response, pattern=^https:\/\/api\.weibo\.cn\/2\/video\/tiny_stream_video_list\?, script-path=https://kelee.one/Resource/Script/Weibo/Weibo_remove_ads.js, requires-body=true
+移除视频流广告 = type=http-response, pattern=^https:\/\/api\.weibo\.cn\/2\/video\/(?:full_screen_stream|tiny_stream_video_list)\?, script-path=https://kelee.one/Resource/Script/Weibo/Weibo_remove_ads.js, requires-body=true
 
 移除超话顶部标签 = type=http-response, pattern=^https:\/\/api\.weibo\.cn\/2\/!\/huati\/discovery_home_bottom_channels\?, script-path=https://kelee.one/Resource/Script/Weibo/Weibo_remove_ads.js, requires-body=true
 
