@@ -7,7 +7,7 @@ on:
 
 jobs:
   Fork-FLITER-list:
-    runs-on: ubuntu-latest  # 在最新版本的Ubuntu环境中运行工作流
+    runs-on: ubuntu-22.04  # 在最新版本的Ubuntu环境中运行工作流
     env:
       TZ: 'Asia/Shanghai'  # 设置时区为上海时间，确保时间一致
 
