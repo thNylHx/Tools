@@ -7,7 +7,7 @@ on:
 
 jobs:
   Fork-Filter-List:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       TZ: 'Asia/Shanghai'  # 设置时区为上海
 
