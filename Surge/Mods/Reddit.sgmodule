@@ -7,10 +7,10 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
+#!date=2024-12-02 10:28:36
 
-[Script]
-移除广告 = type=http-response, pattern=^https?:\/\/gql(-fed)?\.reddit\.com, script-path=https://kelee.one/Resource/Script/Reddit/Reddit_remove_ads.js, requires-body=true
+[Body Rewrite]
+http-response-jq ^https?:\/\/gql(-fed)?\.reddit\.com ' walk(   if type == "object" then      (if .isNsfw == true then .isNsfw = false else . end)     | (if .isNsfwMediaBlocked == true then .isNsfwMediaBlocked = false else . end)     | (if .isNsfwContentShown == false then .isNsfwContentShown = true else . end)      | (if (.commentsPageAds | type == "array") then (.commentsPageAds = []) else . end)      | (if ( (.node | type == "object") and (.node.cells | type == "array") and (.node.cells | any(.__typename? == "AdMetadataCell" or .isAdPost? == true)) ) then empty else . end)     | (if (.node | type == "object") and (.node.adPayload | type == "object") then empty else . end)     | (if .__typename == "AdPost" then empty else . end)   else .  end)'
 
 [MITM]
 hostname = %APPEND% gql.reddit.com, gql-fed.reddit.com

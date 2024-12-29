@@ -1,5 +1,5 @@
 #!name=京东比价
-#!desc=在京东应用内嵌入比价信息，点击商品标题即可查看，仅支持京东的标准模式。
+#!desc=点击商品详情后以通知的形式推送比价内容
 #!author=githubdulong[https://github.com/githubdulong]
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/JD.png
 #!category=BetaModule
@@ -7,7 +7,7 @@
 #!tag=功能增强
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-12-27 12:33:47
+#!date=2024-12-29 00:51:00
 
 [Script]
 京东比价 = type=http-response, pattern=^https:\/\/in\.m\.jd\.com\/product\/graphext\/\d+\.html, script-path=https://kelee.one/Resource/Script/JD/JD_Price.js, requires-body=true
