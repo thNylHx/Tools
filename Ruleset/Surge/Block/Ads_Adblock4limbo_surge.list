@@ -3,21 +3,28 @@
 ## 原文参阅 https:
 ## 电报群组 https:
 ## Repo: https:
-## Adblock4limbo: 545 Domains/IP/Others From https:
+## Adblock4limbo: 549 Domains/IP/Others From https:
 ## EasyList/EasylistChina/EasyPrivacy 隐私追踪器/去广告分流规则请在Github仓库 Adblock4limbo -> rule 文件夹下查找，按需添加...
 ## 仓库地址：https:
-## Peter Lowe’s Ad and tracking server list: 3544 Domains/IP/Others From https:
-## EasyList: 29904 Domains/IP/Others From https:
-## EasyPrivacy: 41448 Domains/IP/Others From https:
-## EasyList China: 4458 Domains/IP/Others From https:
+## Peter Lowe’s Ad and tracking server list: 3548 Domains/IP/Others From https:
+## EasyList: 29959 Domains/IP/Others From https:
+## EasyPrivacy: 41449 Domains/IP/Others From https:
+## EasyList China: 4482 Domains/IP/Others From https:
 ## ACL4SSR BadAD: 591 Domains/IP/Others From https:
-## 以上共计: 80490 Domains/IP/Others (非去重统计)
-## Last updated at 14/1月/2025/23:23
+## 以上共计: 80578 Domains/IP/Others (非去重统计)
+## Last updated at 17/1月/2025/23:37
 ## */
 
 
 #### 毒奶去广告计划
 ## 如需完整配置，参阅请原文 https:
+
+
+##### https:
+DOMAIN-SUFFIX,ad-nex.com
+DOMAIN-SUFFIX,waqool.com
+DOMAIN-SUFFIX,img.ad-nex.com
+DOMAIN-SUFFIX,js.waqool.com
 
 ##### www.dmmiku.com
 DOMAIN-SUFFIX,3adtjg.com
