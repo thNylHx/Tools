@@ -59,6 +59,7 @@ DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matchin
 DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching,pre-matching
+# DOMAIN,win.gdt.qq.com,REJECT
 DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,info4.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
@@ -66,6 +67,7 @@ DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
+# DOMAIN,qzonestyle.gtimg.cn,REJECT // 误杀
 DOMAIN,sdk.e.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,tmead.y.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,tmeadbak.y.qq.com,REJECT,extended-matching,pre-matching
@@ -77,6 +79,7 @@ DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
 IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
+# 友盟
 DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,errnewlog.umeng.com,REJECT,extended-matching,pre-matching
@@ -89,6 +92,7 @@ DOMAIN,plbslog.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,log.umtrack.com,REJECT,extended-matching,pre-matching
 
 [URL Rewrite]
+# 广告下发
 ^https:\/\/cili\.xfuse\.fun\/s\/ - reject
 
 [MITM]

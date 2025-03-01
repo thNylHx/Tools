@@ -10,13 +10,16 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
+# 地理位置 - 影响注册账号时的属地判断
 DOMAIN-SUFFIX,soulapp.cn,DIRECT,extended-matching
 IP-CIDR,8.210.3.170/32,DIRECT,no-resolve
 IP-CIDR,47.75.72.47/32,DIRECT,no-resolve
+# 广告下发
 DOMAIN,ad-h5-cdn.soulapp.cn,REJECT,extended-matching,pre-matching
 DOMAIN,ad-h5-station-cdn.soulapp.cn,REJECT,extended-matching,pre-matching
 DOMAIN,ad-r.soulapp.cn,REJECT,extended-matching,pre-matching
 DOMAIN,soul-ad.soulapp.cn,REJECT,extended-matching,pre-matching
+# 广告域名IP查询
 IP-CIDR,47.56.131.76/32,REJECT,no-resolve,pre-matching
 IP-CIDR,47.97.215.55/32,REJECT,no-resolve,pre-matching
 IP-CIDR,47.99.42.29/32,REJECT,no-resolve,pre-matching
@@ -29,6 +32,7 @@ IP-CIDR,121.196.197.147/32,REJECT,no-resolve,pre-matching
 http-response-jq ^https:\/\/(?:api-\w+|gateway-mobile-gray|post)\.soulapp\.cn\/(?:furion\/position\/content|hot\/soul\/rank|mobile\/app\/version\/queryIos|official\/scene\/module|teenager\/config|v2\/post\/gift\/list|v\d\/post\/homepage\/guide\/card) 'delpaths([["data"]])'
 
 [Map Local]
+# 开屏广告
 ^https:\/\/ssp\.soulapp\.cn\/api\/q data-type=text data="{}" status-code=200
 
 ^https:\/\/chat-live\.soulapp\.cn\/live\/planet\/recListV2 data-type=text data=" " status-code=200

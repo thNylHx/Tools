@@ -58,10 +58,13 @@ DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matchin
 DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching,pre-matching
+# 快手联盟 - 广告服务商
 DOMAIN,gdfp.gifshow.com,REJECT,extended-matching,pre-matching
 DOMAIN,open.e.kuaishou.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adukwai.com,REJECT,extended-matching,pre-matching
+# 上海倍孜
 DOMAIN,sdk.beizi.biz,REJECT,extended-matching,pre-matching
+# 百度联盟 - 广告服务商
 DOMAIN,mobads.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,mobads-logs.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,wn.pos.baidu.com,REJECT,extended-matching,pre-matching
@@ -70,13 +73,19 @@ DOMAIN,als.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,feed-image.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,union.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,union.baidu.com,REJECT,extended-matching,pre-matching
+# 腾讯优量汇 - 广告服务商
 DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,sdk.e.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
+# DOMAIN,pgdt.ugdtimg.com,REJECT
 DOMAIN-SUFFIX,gdtimg.com,REJECT,extended-matching,pre-matching
+# DOMAIN,qzs.gdtimg.com,REJECT
 DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
+# App全渠道统计
 DOMAIN-SUFFIX,openinstall.io,REJECT,extended-matching,pre-matching
+# 个推
 DOMAIN,zxid-m.mobileservice.cn,REJECT,extended-matching,pre-matching
+# 友盟
 DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,errnewlog.umeng.com,REJECT,extended-matching,pre-matching
@@ -99,14 +108,19 @@ http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpat
 http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpaths([["result","examPageLoadADSwitch"]])'
 
 [Map Local]
+# 广告配置
 ^https:\/\/richmanrules\.ksedt\.com\/serverConfig\/3\/adConfig\.json data-type=text data="{}" status-code=200
 
+# 弹窗广告
 ^https:\/\/gouche\.ksedt\.com\/config\/popup\/info$ data-type=text data="{}" status-code=200
 
+# 考试 - 信息流广告、右上角免费领秘籍入口
 ^https:\/\/richmanrules\.ksedt\.com\/intellectWaterfallBidding\/find$ data-type=text data="{}" status-code=200
 
+# 考试 - 满分通关技巧直播课入口
 ^https:\/\/op\.ksedt\.com\/jxedtLive\/liveIntroduceResource data-type=text data="{}" status-code=200
 
+# 我的页面广告
 ^https:\/\/richmanrules\.ksedt\.com\/intellectWaterfall\/find$ data-type=text data="{}" status-code=200
 
 [MITM]

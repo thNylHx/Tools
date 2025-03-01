@@ -18,10 +18,12 @@ DOMAIN,info4.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching,pre-matching
+# DOMAIN,mazu.m.qq.com,REJECT // 误杀
 DOMAIN,mi.gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching,pre-matching
+# DOMAIN,qzonestyle.gtimg.cn,REJECT // 误杀
 DOMAIN,qzs.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,qzs.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,rmonitor.qq.com,REJECT,extended-matching,pre-matching
@@ -52,6 +54,7 @@ URL-REGEX,"^http:\/\/y\.gtimg\.cn\/music\/common\/upload\/t_k_main_page_banner\/
 
 ^https:\/\/amsweb-cdn-\S+-\d+\.file\.myqcloud\.com\/video\/ad_profile\/ data-type=text data="{}" status-code=200
 
+# 右下角轮播动画
 ^https:\/\/wnsaviator\.kg\.qq\.com\/wnsaviator\/api\/v1\/transMerge\?_webcgikey=get_activity_entry$ data-type=text data="{}" status-code=200
 
 [MITM]

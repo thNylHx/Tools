@@ -10,25 +10,35 @@
 #!date=2024-11-28 00:00:00
 
 [URL Rewrite]
+# 开屏广告
 ^https:\/\/qxb-minicode-pic-osscache\.qixin\.com\/web\/ - reject
 
 [Map Local]
+# 首页 - 搜索栏热搜词
 ^https:\/\/appc\.qixin\.com\/v4\/general\/getSearchPlaceholderRedirect$ data-type=text data="{}" status-code=200
 
+# 首页 - 悬浮窗
 ^https:\/\/appc-v6\.qixin\.com\/v4\/general\/getAppFloatAd$ data-type=text data="{}" status-code=200
 
+# 首页 - 轮播图
 ^https:\/\/appc-v6\.qixin\.com\/v4\/general\/getAppBanners$ data-type=text data="{}" status-code=200
 
+# 首页 - 弹窗
 ^https:\/\/appc-v6\.qixin\.com\/v4\/user\/getUserActivitys$ data-type=text data="{}" status-code=200
 
+# 首页 - 个性化推荐
 ^https:\/\/appc-v6\.qixin\.com\/v4\/enterprise\/homePageRecommend\/recommendCard\d+ data-type=text data="{}" status-code=200
 
+# 首页 - 热门老板
 ^https:\/\/appc-v6\.qixin\.com\/v4\/user\/getRecommendPersons$ data-type=text data="{}" status-code=200
 
+# 首页 - 热门企业
 ^https:\/\/appc-v6\.qixin\.com\/v4\/enterprise\/getRecommendEnts$ data-type=text data="{}" status-code=200
 
+# 首页 - 轮播消息
 ^https:\/\/appc-v6\.qixin\.com\/v4\/enterprise\/getRecommendation$ data-type=text data="{}" status-code=200
 
+# 我的页面 - 轮播图
 ^https:\/\/appc-v6\.qixin\.com\/v4\/general\/getAppBottomBanners$ data-type=text data="{}" status-code=200
 
 [MITM]

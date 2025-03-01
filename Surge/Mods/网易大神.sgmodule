@@ -10,6 +10,7 @@
 #!date=2024-12-04 15:48:23
 
 [Rule]
+# 拦截HTTPDNS
 DOMAIN,httpdns.music.163.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.n.netease.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns-sdk.n.netease.com,REJECT,extended-matching,pre-matching
@@ -22,6 +23,7 @@ IP-CIDR,115.236.121.51/32,REJECT,no-resolve,pre-matching
 IP-CIDR,115.236.121.195/32,REJECT,no-resolve,pre-matching
 
 [URL Rewrite]
+# 广告下发
 ^https:\/\/god\.gameyw\.netease\.com\/v\d\/ad - reject
 
 [Body Rewrite]

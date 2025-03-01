@@ -10,16 +10,24 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
+# 首页 - 活动弹窗、签到图标
 URL-REGEX,"^http:\/\/go\.babytree\.com\/go_pregnancy\/api\/(index_activity\/get_app_index_activity|sign\/sign_h_5)\?",REJECT-TINYGIF,extended-matching
+# 搜索框填充词
 URL-REGEX,"^http:\/\/go\.babytree\.com\/go_search\/api\/mobile_search_new\/get_multi_search_default_keywords\?",REJECT-TINYGIF,extended-matching
+# 我的页面商品信息流
 URL-REGEX,"^http:\/\/m\.meitun\.com\/newapi\/router\/topic\/hometptf\/feedRecommend",REJECT-TINYGIF,extended-matching
+# 新客专享红包
 URL-REGEX,"^http:\/\/pic08\.babytreeimg\.com\/knowledge\/2022\/0923\/\w+",REJECT,extended-matching
+# 开屏广告
 URL-REGEX,"^http:\/\/plough\.babytree\.com\/plough\.do",REJECT-TINYGIF,extended-matching
 
 [Script]
+# 整体配置
 调整整体配置 = type=http-response, pattern=^http:\/\/api\.babytree\.com\/bafconfigcenter_intf\/config\/get\?, script-path=https://kelee.one/Resource/Script/BabyTree/BabyTree_remove_ads.js, requires-body=true
 
+# 底栏标签、首页顶部标签、首页信息流、我的页面
 移除各页面推广 = type=http-response, pattern=^http:\/\/go\.babytree\.com\/go_pregnancy\/api\/(app_index\/get_app_tab|cms_column\/get_column_list|feeds\/get_index_feeds_list|user\/get_user_info)\?, script-path=https://kelee.one/Resource/Script/BabyTree/BabyTree_remove_ads.js, requires-body=true
 
+# 搜索列表
 移除搜索列表推广 = type=http-response, pattern=^http:\/\/go\.babytree\.com\/go_search\/api\/mobile_search_new\/search_index, script-path=https://kelee.one/Resource/Script/BabyTree/BabyTree_remove_ads.js, requires-body=true
 

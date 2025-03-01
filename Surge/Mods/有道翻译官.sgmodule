@@ -10,6 +10,7 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
+# 拦截HTTPDNS
 DOMAIN,httpdns.music.163.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.n.netease.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns-sdk.n.netease.com,REJECT,extended-matching,pre-matching
@@ -20,6 +21,7 @@ IP-CIDR,59.111.239.61/32,REJECT,no-resolve,pre-matching
 IP-CIDR,59.111.239.62/32,REJECT,no-resolve,pre-matching
 IP-CIDR,115.236.121.51/32,REJECT,no-resolve,pre-matching
 IP-CIDR,115.236.121.195/32,REJECT,no-resolve,pre-matching
+# 腾讯
 DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,c2.gdt.qq.com,REJECT,extended-matching,pre-matching
@@ -28,10 +30,12 @@ DOMAIN,info4.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching,pre-matching
+# DOMAIN,mazu.m.qq.com,REJECT // 误杀
 DOMAIN,mi.gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching,pre-matching
+# DOMAIN,qzonestyle.gtimg.cn,REJECT // 误杀
 DOMAIN,qzs.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,qzs.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,rmonitor.qq.com,REJECT,extended-matching,pre-matching
@@ -53,6 +57,7 @@ DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
 IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
+# 友盟
 DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,errnewlog.umeng.com,REJECT,extended-matching,pre-matching
@@ -66,10 +71,12 @@ DOMAIN,log.umtrack.com,REJECT,extended-matching,pre-matching
 DOMAIN,aaid.umeng.com,REJECT,extended-matching,pre-matching
 
 [Map Local]
+# 开屏广告
 ^https:\/\/gorgon\.youdao\.com\/gorgon\/v2\/request\.s data-type=text data="{}" status-code=200
 
 ^https:\/\/gorgon\.youdao\.com\/gorgon\/brand\/prefetch\.s data-type=text data="{}" status-code=200
 
+# 首页横幅广
 ^https:\/\/gorgon\.youdao\.com\/gorgon\/request\.s data-type=text data="{}" status-code=200
 
 [MITM]

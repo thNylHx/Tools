@@ -16,24 +16,34 @@ URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/",REJECT,extended-matching
 ^https:\/\/aiqicha\.baidu\.com\/app\/commonstatusAjax - reject
 
 [Map Local]
+# 首页 - 轮播图
 ^https:\/\/aiqicha\.baidu\.com\/app\/bannerPicAjax data-type=text data="{}" status-code=200
 
+# 首页 - 悬浮部件
 ^https:\/\/aiqicha\.baidu\.com\/app\/getPopConfigAjax data-type=text data="{}" status-code=200
 
+# 首页 - 热门话题
 ^https:\/\/aiqicha\.baidu\.com\/app\/getHotTopicAjax data-type=text data="{}" status-code=200
 
+# 首页 - 每日早报
 ^https:\/\/aiqicha\.baidu\.com\/app\/getNewsReportAjax data-type=text data="{}" status-code=200
 
+# 首页 - 专家讲堂
 ^https:\/\/aiqicha\.baidu\.com\/app\/getExpertVideoAjax data-type=text data="{}" status-code=200
 
+# 首页 - 热门快讯
 ^https:\/\/aiqicha\.baidu\.com\/apps\/getHotRecommendV2Ajax data-type=text data="{}" status-code=200
 
+# 首页 - 底部登录横幅
 ^https:\/\/aiqicha\.baidu\.com\/m\/getLoginWordsAjax data-type=text data="{}" status-code=200
 
+# 首页 - 弹窗
 ^https:\/\/aiqicha\.baidu\.com\/app\/getAppPopSettingAjax data-type=text data="{}" status-code=200
 
+# 首页 - 精选监控
 ^https:\/\/aiqicha\.baidu\.com\/apps\/getHomeMonitorDataAjax data-type=text data="{}" status-code=200
 
+# 首页 - 搜索栏大家都在搜
 ^https:\/\/aiqicha\.baidu\.com\/apps\/searchRecommendAjax data-type=text data="{}" status-code=200
 
 [MITM]

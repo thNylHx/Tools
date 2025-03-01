@@ -10,12 +10,16 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
+# 腾讯HTTPDNS
 URL-REGEX,"^http?:\/\/119\.29\.29\.29\/d",REJECT,extended-matching
+# 快手HTTPDNS
 DOMAIN,kuaishou.httpdns.pro,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.kwd.inkuai.com,REJECT,extended-matching,pre-matching
 DOMAIN,apidns.kwd.inkuai.com,REJECT,extended-matching,pre-matching
 DOMAIN,apidns-js.kwd.inkuai.com,REJECT,extended-matching,pre-matching
+# 金山云HTTPDNS
 DOMAIN,hdns.ksyun.com,REJECT,extended-matching,pre-matching
+# 百度HTTPDNS
 DOMAIN,httpdns.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpsdns.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.bcelive.com,REJECT,extended-matching,pre-matching
@@ -28,7 +32,9 @@ URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/",REJECT,extended-matching
 URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/resolve",REJECT,extended-matching
 URL-REGEX,"^http:\/\/180\.76\.76\.220\/v\d\/resolve",REJECT,extended-matching
 IP-CIDR,186.76.76.200/32,REJECT,no-resolve,pre-matching
+# 阿里巴巴HTTPDNS
 DOMAIN,httpdns.alicdn.com,REJECT,extended-matching,pre-matching
+# 华为云HTTPDNS
 DOMAIN,httpdns-browser.platform.dbankcloud.cn,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.huaweicloud.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.c.cdnhwc2.com,REJECT,extended-matching,pre-matching
@@ -83,6 +89,7 @@ DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matchin
 DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching,pre-matching
+# 腾讯
 DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,c2.gdt.qq.com,REJECT,extended-matching,pre-matching
@@ -92,10 +99,12 @@ DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,pro.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching,pre-matching
+# DOMAIN,mazu.m.qq.com,REJECT // 误杀
 DOMAIN,mi.gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching,pre-matching
+# DOMAIN,qzonestyle.gtimg.cn,REJECT // 误杀
 DOMAIN,qzs.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,qzs.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,rmonitor.qq.com,REJECT,extended-matching,pre-matching
@@ -118,10 +127,12 @@ DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
 IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
+# 快手联盟 - 广告服务商
 DOMAIN,gdfp.gifshow.com,REJECT,extended-matching,pre-matching
 DOMAIN,open.e.kuaishou.com,REJECT,extended-matching,pre-matching
 DOMAIN,adtrack.e.kuaishou.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adukwai.com,REJECT,extended-matching,pre-matching
+# 百度联盟 - 广告服务商
 DOMAIN,afd.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,als.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,bgg.baidu.com,REJECT,extended-matching,pre-matching
@@ -137,6 +148,7 @@ DOMAIN,wn.pos.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,miniapp-ad.cdn.bcebos.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,union.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,union.baidu.com,REJECT,extended-matching,pre-matching
+# 袤博 - 广告服务商
 DOMAIN,api-c.dutils.com,REJECT,extended-matching,pre-matching
 DOMAIN,api-d.dutils.com,REJECT,extended-matching,pre-matching
 DOMAIN,api-p0.yksdks.com,REJECT,extended-matching,pre-matching
@@ -155,12 +167,16 @@ http-response-jq ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/ban
 http-response-jq ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/banner\/common\/getAllBannerPage\? 'del(.data[] | select(.bannerChannelName == "活动"))'
 
 [Map Local]
+# 开屏广告
 ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/resource\/get\? data-type=text data="{}" status-code=200
 
+# 剪同款 - 横幅推广
 ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/banner\/common\/getBannerByType\? data-type=text data="{}" status-code=200
 
+# 剪同款 - 信息流广告
 ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/merchant\/ad\/ data-type=text data="{}" status-code=200
 
+# 悬浮部件 - 多品类模板师招募
 ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/resource\/activity\/pendant\? data-type=text data="{}" status-code=200
 
 [MITM]

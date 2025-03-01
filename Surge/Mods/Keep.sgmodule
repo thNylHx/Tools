@@ -10,8 +10,10 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
+# 拦截HTTPDNS
 DOMAIN,httpdns.n.netease.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.calorietech.com,REJECT,extended-matching,pre-matching
+# 拦截广告下发
 DOMAIN,hc-ssp.sm.cn,REJECT,extended-matching,pre-matching
 
 [Body Rewrite]
@@ -19,13 +21,17 @@ http-response-jq ^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/followPage 'if 
 http-response-jq ^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/entryDetail 'if (getpath([]) | has("data")) then (setpath(["data"]; {})) else . end'
 
 [Map Local]
+# 搜索填充词
 ^https:\/\/api\.gotokeep\.com\/search\/v6\/default\/keyword\/list data-type=text data="{}" status-code=200
 
+# 信息流推广
 ^https:\/\/kad\.gotokeep\.com\/op-engine-webapp\/v1\/ad data-type=text data="{}" status-code=200
 
+# 弹窗
 ^https:\/\/api\.gotokeep\.com\/guide-webapp\/v1\/popup\/getPopUp data-type=text data="{}" status-code=200
 
 [Script]
+# 首页 - 活动标签
 移除首页活动标签 = type=http-response, pattern=^https:\/\/api\.gotokeep\.com\/config\/v3\/basic, script-path=https://kelee.one/Resource/Script/Keep/Keep_remove_ads.js, requires-body=true
 
 [MITM]

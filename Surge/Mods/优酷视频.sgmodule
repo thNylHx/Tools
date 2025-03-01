@@ -10,9 +10,11 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
+# 放行地址
 DOMAIN,push.m.youku.com,DIRECT,extended-matching
 DOMAIN,un-acs.youku.com,DIRECT,extended-matching
 DOMAIN,dorangesource.alicdn.com,DIRECT,extended-matching
+# 拦截地址
 DOMAIN,acs4baichuan.m.taobao.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,amdc.m.youku.com,REJECT,extended-matching,pre-matching
@@ -34,19 +36,26 @@ DOMAIN,ykad-data.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN,youku-acs.m.taobao.com,REJECT,extended-matching,pre-matching
 
 [Map Local]
+# 播放页弹窗动图
 ^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.(pisp\.scripts\.get|xspace\.play\.position\.preload\.query|xspace\.poplayer\.position\.query) data-type=text data="{}" status-code=200
 
 [Script]
+# 播放详情页、首页信息流、顶部标签页、我的页面、评论区
 移除首页广告 = type=http-response, pattern=^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.columbus\.(gateway\.new\.execute|home\.feed|home\.query|uc\.query|ycp\.query), script-path=https://kelee.one/Resource/Script/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
 
+# 底栏
 移除无用底栏 = type=http-response, pattern=^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.haidai\.lantern\.appconfig\.get, script-path=https://kelee.one/Resource/Script/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
 
+# 青少年模式弹窗
 移除青少年模式弹窗 = type=http-response, pattern=^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.huluwa\.dispatcher\.youthmode\.config2, script-path=https://kelee.one/Resource/Script/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
 
+# 搜索列表
 移除搜索列表推广 = type=http-response, pattern=^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.soku\.yksearch, script-path=https://kelee.one/Resource/Script/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
 
+# 热剧弹窗
 移除热剧弹窗 = type=http-response, pattern=^https:\/\/push\.m\.youku\.com\/collect-api\/get_push_interval_config_wx\?, script-path=https://kelee.one/Resource/Script/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
 
+# 开屏广告
 移除开屏广告 = type=http-response, pattern=^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get, script-path=https://kelee.one/Resource/Script/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
 
 [MITM]

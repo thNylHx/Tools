@@ -10,6 +10,7 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
+# 友盟
 DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,errnewlog.umeng.com,REJECT,extended-matching,pre-matching
@@ -24,10 +25,13 @@ DOMAIN,aaid.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,log.umsns.com,REJECT,extended-matching,pre-matching
 
 [Map Local]
+# 开屏广告
 ^https:\/\/pan-api\.bitqiu\.com\/activity\/getPromoteGuide$ data-type=text data="{}" status-code=200
 
+# 我的页面 - 横幅推广
 ^http:\/\/pan-api\.bitqiu\.com\/activity\/getUrlList$ data-type=text data="{}" status-code=200
 
+# 上传 - 横幅推广
 ^https:\/\/pan-api\.bitqiu\.com\/activity\/guides$ data-type=text data="{}" status-code=200
 
 [MITM]

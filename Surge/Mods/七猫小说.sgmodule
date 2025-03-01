@@ -15,7 +15,9 @@ DOMAIN,cdn-new-ad.wtzw.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
 
 [URL Rewrite]
+# 头条广告SDK
 ^https:\/\/sf3-fe-tos\.pglstatp-toutiao\.com\/obj\/ad-pattern\/ - reject
+# 其他广告
 ^https:\/\/api-cfg\.wtzw\.com\/v\d\/reward\/ - reject
 ^https:\/\/api-cfg\.wtzw\.com\/v\d\/adv\/ - reject
 
@@ -24,18 +26,25 @@ http-response-jq ^https:\/\/xiaoshuo\.wtzw\.com\/api\/v\d\/user\/my-center\? 'de
 http-response-jq ^https:\/\/xiaoshuo\.wtzw\.com\/api\/v\d\/user\/my-center\? 'delpaths([["data","func_area",2]])'
 
 [Map Local]
+# 开屏广告
 ^https:\/\/api-cfg\.wtzw\.com\/v\d\/splash\/ data-type=text data="{}" status-code=200
 
+# 腾格尔打卡喵喵歌
 ^https:\/\/api-bc\.wtzw\.com\/api\/v4\/search\/dispose data-type=text data="{}" status-code=200
 
+# 必读榜弹窗
 ^https:\/\/api-bc\.wtzw\.com\/api\/v\d\/book-store\/config data-type=text data="{}" status-code=200
 
+# 推荐书籍弹窗
 ^https:\/\/api-bc\.wtzw\.com\/api\/v\d\/book-store\/push-book data-type=text data="{}" status-code=200
 
+# 有声阅读界面广告横幅
 ^https:\/\/api-bc\.wtzw\.com\/api\/v\d\/operation data-type=text data="{}" status-code=200
 
+# 听书赚金币
 ^https:\/\/api-gw\.wtzw\.com\/welf\/app\/v\d\/task\/red-packet data-type=text data="{}" status-code=200
 
+# 正文底部推广
 ^https:\/\/cdn\.wtzw\.com\/bookimg\/free\/api\/v\d\/reader\/reader-copy-paragraph-all\.json data-type=text data="{}" status-code=200
 
 ^https:\/\/api-cfg\.wtzw\.com\/v\d\/offline-adv\/index data-type=text data="{}" status-code=200

@@ -14,6 +14,7 @@
 http-response-jq ^https:\/\/app-v1\.ecoliving168\.com\/api\/v1\/movie\/index_recommend\? '(.data[] | select(.layout == "advert_self")) |= del(.data) | .data |= map(select(.layout != "advert_self")) | .data |= map(if .layout == "index_recommend_carousel" then .list |= map(select(.type != 3)) else . end)'
 
 [Map Local]
+# 广告配置
 ^https:\/\/app-v1\.ecoliving168\.com\/api\/v1\/advert\/config data-type=text data="{}" status-code=200
 
 [MITM]

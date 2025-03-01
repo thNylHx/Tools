@@ -10,5 +10,6 @@
 #!date=2024-11-28 00:00:00
 
 [Script]
+# 阿里云盘、夸克网盘和PikPak网盘挂载
 三合一网盘挂载 = type=http-request, pattern=^http:\/\/(aliyun|quark|pikpak)\.example\.com, script-path=https://kelee.one/Resource/Script/Fileball/Fileball_mount.js, requires-body=true
 

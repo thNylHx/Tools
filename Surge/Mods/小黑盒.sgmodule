@@ -10,9 +10,11 @@
 #!date=2024-12-23 11:27:16
 
 [Map Local]
+# 开屏广告
 ^https:\/\/api\.xiaoheihe\.cn\/account\/get_ads_info_v2 data-type=text data="{}" status-code=200
 
 [Script]
+# 移除热点板块信息流广告
 移除热点板块信息流广告 = type=http-response, pattern=^https:\/\/api\.xiaoheihe\.cn\/bbs\/app\/feeds\/news, script-path=https://kelee.one/Resource/Script/XiaoHeiHe/XiaoHeiHe_remove_ads.js, requires-body=true
 
 [MITM]
