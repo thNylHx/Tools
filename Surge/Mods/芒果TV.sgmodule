@@ -23,32 +23,44 @@ DOMAIN,rprain.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,rprain.log.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,vip.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,da.mgtv.com,REJECT,extended-matching,pre-matching
+# 无用请求
 URL-REGEX,"^http:\/\/[\d\.]+:\d{5}\/\?cmd=indexes",REJECT,extended-matching
+# 首页左上角推广
 URL-REGEX,"^http:\/\/[\d\.]+\/odin\/c1\/(channel\/ads|skin\/config)\?",REJECT-TINYGIF,extended-matching
+# 播放详情页
 URL-REGEX,"^http:\/\/mobile-thor\.api\.mgtv\.com\/v1\/vod\/cms\/list\?",REJECT-TINYGIF,extended-matching
+# 搜索框填充词
 URL-REGEX,"^http:\/\/mobileso\.bz\.mgtv\.com\/spotlight\/search\/v1\?",REJECT-TINYGIF,extended-matching
 
 [Map Local]
+# 底部tab红点
 ^https:\/\/damang\.api\.mgtv\.com\/station\/album\/red\/dot\? data-type=text data="{}" status-code=200
 
+# 播放器界面
 ^https:\/\/hb-boom\.api\.mgtv\.com\/release\/pullReleaseInfo data-type=text data="{}" status-code=200
 
+# 升级弹窗
 ^https:\/\/mobile\.api\.mgtv\.com\/v2\/mobile\/checkUpdate\? data-type=text data="{}" status-code=200
 
 [Script]
-移除我的页面广告 = type=http-response, pattern=^https:\/\/me\.bz\.mgtv\.com\/v3\/module\/list\?, script-path=https://kelee.one/Resource/Script/Mango_TV/Mango_TV_remove_ads.js, requires-body=true
+# 我的页面
+移除我的页面广告 = type=http-response, pattern=^https:\/\/me\.bz\.mgtv\.com\/v3\/module\/list\?, script-path=https://kelee.one/Resource/Script/Mango_TV/MangoTV_remove_ads.js, requires-body=true
 
-移除首页广告 = type=http-response, pattern=^http:\/\/mob-st\.bz\.mgtv\.com\/odin\/c1\/channel\/index\?, script-path=https://kelee.one/Resource/Script/Mango_TV/Mango_TV_remove_ads.js, requires-body=true
+# 首页信息流、顶部标签
+移除首页广告 = type=http-response, pattern=^http:\/\/mob-st\.bz\.mgtv\.com\/odin\/c1\/channel\/index\?, script-path=https://kelee.one/Resource/Script/Mango_TV/MangoTV_remove_ads.js, requires-body=true
 
-移除首页广告 = type=http-response, pattern=^https?:\/\/dc2?\.bz\.mgtv\.com\/dynamic\/v1\/channel\/(index|vrsList)\/\w, script-path=https://kelee.one/Resource/Script/Mango_TV/Mango_TV_remove_ads.js, requires-body=true
+移除首页广告 = type=http-response, pattern=^https?:\/\/dc2?\.bz\.mgtv\.com\/dynamic\/v1\/channel\/(index|vrsList)\/\w, script-path=https://kelee.one/Resource/Script/Mango_TV/MangoTV_remove_ads.js, requires-body=true
 
-移除底部多余标签 = type=http-response, pattern=^https:\/\/mobile\.api\.mgtv\.com\/mobile\/config\?, script-path=https://kelee.one/Resource/Script/Mango_TV/Mango_TV_remove_ads.js, requires-body=true
+# 底部标签
+移除底部多余标签 = type=http-response, pattern=^https:\/\/mobile\.api\.mgtv\.com\/mobile\/config\?, script-path=https://kelee.one/Resource/Script/Mango_TV/MangoTV_remove_ads.js, requires-body=true
 
-移除播放详情页广告 = type=http-response, pattern=^https:\/\/mobile\.api\.mgtv\.com\/v10\/video\/info\?, script-path=https://kelee.one/Resource/Script/Mango_TV/Mango_TV_remove_ads.js, requires-body=true
+# 播放详情页
+移除播放详情页广告 = type=http-response, pattern=^https:\/\/mobile\.api\.mgtv\.com\/v10\/video\/info\?, script-path=https://kelee.one/Resource/Script/Mango_TV/MangoTV_remove_ads.js, requires-body=true
 
-移除播放详情页广告 = type=http-response, pattern=^https:\/\/mobile-thor\.api\.mgtv\.com\/v1\/vod\/info\?, script-path=https://kelee.one/Resource/Script/Mango_TV/Mango_TV_remove_ads.js, requires-body=true
+移除播放详情页广告 = type=http-response, pattern=^https:\/\/mobile-thor\.api\.mgtv\.com\/v1\/vod\/info\?, script-path=https://kelee.one/Resource/Script/Mango_TV/MangoTV_remove_ads.js, requires-body=true
 
-移除搜索填充词 = type=http-response, pattern=^https?:\/\/mobileso\.bz\.mgtv\.com\/mobile\/recommend\/v2\?, script-path=https://kelee.one/Resource/Script/Mango_TV/Mango_TV_remove_ads.js, requires-body=true
+# 搜索框填充词
+移除搜索填充词 = type=http-response, pattern=^https?:\/\/mobileso\.bz\.mgtv\.com\/mobile\/recommend\/v2\?, script-path=https://kelee.one/Resource/Script/Mango_TV/MangoTV_remove_ads.js, requires-body=true
 
 [MITM]
 hostname = %APPEND% *.mgtv.com

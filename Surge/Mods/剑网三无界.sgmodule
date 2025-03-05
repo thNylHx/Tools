@@ -7,10 +7,10 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
+#!date=2025-03-05 01:04:13
 
 [General]
-always-real-ip = %APPEND% *-update.xoyocdn.com
+always-real-ip = %APPEND% *-update.xoyocdn.com, xg-flow.xoyo.com
 
 [URL Rewrite]
 # 热点推送
