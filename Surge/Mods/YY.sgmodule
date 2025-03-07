@@ -7,7 +7,7 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
+#!date=2025-03-06 00:38:1906
 
 [Rule]
 # 拦截HTTPDNS
@@ -77,16 +77,20 @@ DOMAIN,sdk.tianmu.mobi,REJECT,extended-matching,pre-matching
 DOMAIN,sdk.beizi.biz,REJECT,extended-matching,pre-matching
 
 [Body Rewrite]
-http-response-jq ^https:\/\/tab\.yy\.com\/tabs\? 'delpaths([["data","tabs",0]])'
+http-response-jq ^https:\/\/yyapp-idx\.yy\.com\/mobyy\/nav\/index\/idx\? '.data[].modules |= map(select(.name != "新版本滚动条" and .name != "通栏轮播" and .name != "新静默位"))'
+http-response-jq ^https:\/\/tab\.yy\.com\/tabs\? 'delpaths([["data","tabsForSelect"]])'
+http-response-jq ^https:\/\/tab\.yy\.com\/tabs\? '.data.tabs |= map(select(.name != "直播" and .name != "短剧")) | {data: .data, message: .message, code: .code}'
+http-response-jq ^https:\/\/personal-center\.yy\.com\/personalCenter\/list\? '.data.modules |= map(select(.moduleName != "Banner轮播")) | .data.modules[] |= if .entrances != null then .entrances |= map(select(.name != "度小满借钱" and .name != "手机充值" and .name != "免流量")) else . end'
 
 [Map Local]
+# 首页 - 下拉进入直播间
+^https:\/\/yyapp-fastnet\.yy\.com\/dispatch\? data-type=text data="{}" status-code=200
+
 # 首页 - 弹窗
+^https:\/\/data\.3g\.yy\.com\/popup\/topLiveCardPopup\? data-type=text data="{}" status-code=200
+
 ^https:\/\/yyapp-act-entrance\.yy\.com\/entrance\/list\? data-type=text data="{}" status-code=200
 
-[Script]
-# 我的页面
-精简我的页面 = type=http-response, pattern=^https:\/\/personal-center\.yy\.com\/personalCenter\/list\?, script-path=https://kelee.one/Resource/Script/YY_Voice/YY_Voice_remove_ads.js, requires-body=true
-
 [MITM]
-hostname = %APPEND% yyapp-act-entrance.yy.com, yyapp-fastnet.yy.com, personal-center.yy.com, tab.yy.com
+hostname = %APPEND% yyapp-act-entrance.yy.com, yyapp-fastnet.yy.com, personal-center.yy.com, tab.yy.com, data.3g.yy.com, yyapp-idx.yy.com
 

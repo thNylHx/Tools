@@ -3,20 +3,16 @@
 #!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/555DY.png
 #!category=BetaModule
-#!openUrl=https://5wuv.com/
+#!openUrl=https://5wuv.com
 #!tag=去广告
 #!system=ios
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-12-05 15:34:08
+#!date=2025-03-06 22:30:00
 
 [Body Rewrite]
-http-response-jq ^https:\/\/app-v1\.ecoliving168\.com\/api\/v1\/movie\/index_recommend\? '(.data[] | select(.layout == "advert_self")) |= del(.data) | .data |= map(select(.layout != "advert_self")) | .data |= map(if .layout == "index_recommend_carousel" then .list |= map(select(.type != 3)) else . end)'
-
-[Map Local]
-# 广告配置
-^https:\/\/app-v1\.ecoliving168\.com\/api\/v1\/advert\/config data-type=text data="{}" status-code=200
+http-response-jq ^https:\/\/(app-v1\.ecoliving168\.com|852b95d36\.xwlpk\.cn)\/api\/v1\/movie\/index_recommend\? '.data[].list |= map(select(.type != 3)) | .data |= map(select(.layout != "advert_self"))'
 
 [MITM]
-hostname = %APPEND% app-v1.ecoliving168.com
+hostname = %APPEND% app-v1.ecoliving168.com, 852b95d36.xwlpk.cn
 
