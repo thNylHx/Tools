@@ -7,7 +7,7 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
+#!date=2025-03-09 03:19:39
 
 [Rule]
 DOMAIN,ads.service.kugou.com,REJECT,extended-matching,pre-matching
@@ -27,6 +27,9 @@ DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
 # c2.gdt.qq.com,REJECT
 URL-REGEX,"^http:\/\/log\.stat\.kugou\.com\/mobile\/ad\.html",REJECT,extended-matching
+
+[Body Rewrite]
+http-response-jq ^https:\/\/gateway(retry)?\.kugou\.com\/ocean\/v\d\/tab\/list_v\d 'def namesToRemove:["AI帮唱","长相思2","K歌","小说","游戏"];def removeParentIfNameMatches:if type=="object"then with_entries(select(.value|(type=="object"and .name as $name|$name|IN(namesToRemove[])|not)))|map_values(removeParentIfNameMatches)else .end;removeParentIfNameMatches'
 
 [Map Local]
 # 广告配置
@@ -70,10 +73,6 @@ URL-REGEX,"^http:\/\/log\.stat\.kugou\.com\/mobile\/ad\.html",REJECT,extended-ma
 
 # 唱片店 - 文字广告
 ^https:\/\/ep\.kugou\.com\/v\d\/album_shop\/get_entrance_info data-type=text data="{}" status-code=200
-
-[Script]
-# 精简顶部标签
-精简顶部标签 = type=http-response, pattern=^https:\/\/gateway(retry)?\.kugou\.com\/ocean\/v\d\/tab\/list_v\d, script-path=https://kelee.one/Resource/Script/KuGou/KuGou_remove_ads.js, requires-body=true
 
 [MITM]
 hostname = %APPEND% gateway.kugou.com, fx.service.kugou.com, hwstore.kugou.com, ep.kugou.com, gatewayretry.kugou.com, gzacshow.kugou.com, m1fxgroup.kugou.com
