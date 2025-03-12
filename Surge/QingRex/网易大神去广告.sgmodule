@@ -1,0 +1,34 @@
+#!name=网易大神去广告
+#!desc=移除开屏广告，精简我的页面。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/NetEaseGodlike.png
+#!category=iKeLee
+#!openUrl=https://apps.apple.com/app/id1359055423
+#!tag=去广告
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-12-04 15:48:23
+
+[Rule]
+# 拦截HTTPDNS
+DOMAIN,httpdns.music.163.com,REJECT,extended-matching,pre-matching
+DOMAIN,httpdns.n.netease.com,REJECT,extended-matching,pre-matching
+DOMAIN,httpdns-sdk.n.netease.com,REJECT,extended-matching,pre-matching
+DOMAIN,httpdns.yunxindns.com,REJECT,extended-matching,pre-matching
+DOMAIN,lofter.httpdns.c.163.com,REJECT,extended-matching,pre-matching
+DOMAIN,music.httpdns.c.163.com,REJECT,extended-matching,pre-matching
+IP-CIDR,59.111.239.61/32,REJECT,no-resolve,pre-matching
+IP-CIDR,59.111.239.62/32,REJECT,no-resolve,pre-matching
+IP-CIDR,115.236.121.51/32,REJECT,no-resolve,pre-matching
+IP-CIDR,115.236.121.195/32,REJECT,no-resolve,pre-matching
+
+[URL Rewrite]
+# 广告下发
+^https:\/\/god\.gameyw\.netease\.com\/v\d\/ad - reject
+
+[Script]
+body_rewrite_27 = type=http-response, pattern=^https:\/\/app-conf\.ds\.163\.com\/v1\/app\/base\/conf\/static\/start-config\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22replace-regex%22%2C%5B%5B%22%5C%5C%7B%5C%22os%5C%22%3A%5C%22all%5C%22%2C%5C%22weight%5C%22%3A50%5C%5C.0%2C%5C%22hidden%5C%22%3Afalse%2C%5C%22name%5C%22%3A%5C%22%E6%B8%B8%E6%88%8F%5C%22%5C%5C%7D%2C%5C%5C%7B%5C%22os%5C%22%3A%5C%22all%5C%22%2C%5C%22weight%5C%22%3A50%5C%5C.0%2C%5C%22hidden%5C%22%3Afalse%2C%5C%22name%5C%22%3A%5C%22%E9%A2%91%E9%81%93%5C%22%5C%5C%7D%2C%22%2C%22null%22%5D%5D%5D%5D
+
+[MITM]
+hostname = %APPEND% god.gameyw.netease.com, app-conf.ds.163.com
+

@@ -1,0 +1,40 @@
+#!name=前程无忧去广告
+#!desc=移除开屏广告、弹窗、信息流推广、职位页面推广和各类横幅推广。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/51Job.png
+#!category=iKeLee
+#!openUrl=https://apps.apple.com/app/id415443644
+#!tag=去广告
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-12-29 00:13:17
+
+[Map Local]
+# 开屏广告
+^https:\/\/appapi\.51job\.com\/api\/market\/get_launch\.php\? data-type=text data="{}" status-code=200
+
+# 职位 - 下拉二楼
+^https:\/\/cupid\.51job(app)?\.com\/open\/51job-activities\/secJob\/queryHomeSecondConfigV2\? data-type=text data="{}" status-code=200
+
+# 职位 - 职位详情 - 竞争力分析
+^https:\/\/cupid\.51job(app)?\.com\/open\/noauth\/jobs\/detail\/sesame-competitive\/ data-type=text data="{}" status-code=200
+
+# 简历向导
+^https:\/\/cupid\.51jobapp(app)?\.com\/open\/resume\/strategy\/resume-build\? data-type=text data="{}" status-code=200
+
+# 弹窗
+^https:\/\/cupid\.51job(app)?\.com\/open\/noauth\/popUp\/ data-type=text data="{}" status-code=200
+
+# 消息页面 - 无忧小助手 - 横幅推广
+^https:\/\/cupid\.51job(app)?\.com\/open\/operation\/get\/banner-list\? data-type=text data="{}" status-code=200
+
+[Script]
+body_rewrite_17 = type=http-response, pattern=^https:\/\/cupid\.51job(app)?\.com\/open\/noauth\/recommend\/job-tab-dynamic\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22resultbody.adsTabFeeds%22%5D%5D%5D
+
+body_rewrite_21 = type=http-response, pattern=^https:\/\/cupid\.51job(app)?\.com\/open\/user-task\/user\/task\/, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22resultbody.availableTaskList%22%5D%5D%5D
+
+body_rewrite_27 = type=http-response, pattern=^https:\/\/cupid\.51job(app)?\.com\/open\/tab\/good-job\/modules, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22resultbody.bannerList%22%5D%5D%5D
+
+[MITM]
+hostname = %APPEND% appapi.51job.com, cupid.51job.com, cupid.51jobapp.com
+
