@@ -1,0 +1,18 @@
+#!name=知识星球去水印
+#!desc=移除内容的水印编号
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/UnnooQuan.png
+#!category=iKeLee
+#!openUrl=https://apps.apple.com/app/id1039749242
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-11-28 00:00:00
+
+[Script]
+body_rewrite_12 = type=http-response, pattern=^https:\/\/api\.zsxq\.com\/v2\/groups\/\d+$, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-replace%22%2C%5B%5B%22resp_data.group.policies.enable_watermark%22%2Cfalse%5D%5D%5D%5D
+
+body_rewrite_14 = type=http-response, pattern=^https:\/\/articles\.zsxq\.com\/inline_form\/id_[a-z0-9]+\.html, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22replace-regex%22%2C%5B%5B%22name%3D%5C%22group_enable_watermark%5C%22%20value%3D%5C%22true%5C%22%22%2C%22name%3D%5C%22group_enable_watermark%5C%22%20value%3D%5C%22false%5C%22%22%5D%5D%5D%5D
+
+[MITM]
+hostname = %APPEND% api.zsxq.com
+
