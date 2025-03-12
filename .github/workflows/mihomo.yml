@@ -3,7 +3,7 @@ name: mihomo 规则拉取  # 设置工作流名称
 on:
   workflow_dispatch:  # 允许手动触发工作流
   schedule:
-    - cron: "15 */6 * * *"  # 设置定时触发，表示每6小时执行一次
+    - cron: "5 */6 * * *"  # 设置定时触发，表示每6小时执行一次
 
 jobs:
   Fork-FLITER-list:
@@ -13,8 +13,8 @@ jobs:
 
     steps:
     # 步骤1：检出目标仓库
-    - name: Checkout target repository
-      uses: actions/checkout@v4.1.0  # 使用GitHub提供的action来检出代码仓库
+    - name: 检出目标仓库
+      uses: actions/checkout@v4  # 使用GitHub提供的action来检出代码仓库
       with:
         repository: thNylHx/Tools  # 指定要检出的仓库
         path: Tools-repo  # 将仓库检出到的本地路径
@@ -46,7 +46,7 @@ jobs:
     - name: Telegram 推送通知
       run: |
         # 定义消息内容，包含表情符号、标题、状态和当前时间
-        MESSAGE=$'📢  通知'$'\n✉️  标题：mihomo 规则拉取'$'\n🔔  状态：GitHub Actions 自动更新成功'$'\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
+        MESSAGE=$'📢  通知'$'\n✉️  标题：mihomo 规则拉取'$'\n🔔  状态：GitHub Actions 执行完成'$'\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
         
         # 使用curl命令调用Telegram的Bot API来发送消息
         curl -X POST \

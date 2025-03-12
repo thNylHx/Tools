@@ -1,23 +1,23 @@
 name: Surge 模块拉取
 
 on:
-  workflow_dispatch:  # 手动触发
+  workflow_dispatch:  # 允许手动触发工作流
   schedule:
-    - cron: "35 */12 * * *"  # 每12小时触发一次
+    - cron: "15 */8 * * *"  # 设置定时触发，表示每8小时执行一次
 
 jobs:
-  Fork-Filter-List:
-    runs-on: ubuntu-latest
+  Fork-FLITER-list:
+    runs-on: ubuntu-latest  # 在最新版本的Ubuntu环境中运行工作流
     env:
-      TZ: 'Asia/Shanghai'  # 设置时区为上海
+      TZ: 'Asia/Shanghai'  # 设置时区为上海时间，确保时间一致
 
     steps:
+    # 步骤1：检出目标仓库
     - name: 检出目标仓库
-      # 克隆目标仓库（Tools）
-      uses: actions/checkout@v4.1.0
+      uses: actions/checkout@v4  # 使用GitHub提供的action来检出代码仓库
       with:
-        repository: thNylHx/Tools
-        path: Tools-repo
+        repository: thNylHx/Tools  # 指定要检出的仓库
+        path: Tools-repo  # 将仓库检出到的本地路径
 
     - name: 设置 Git 配置
       # 配置 Git 用户名和邮箱
@@ -92,10 +92,14 @@ jobs:
         else
           echo "没有本地变更，无需同步。"
         fi
-        
+
+    # 步骤4：发送Telegram通知
     - name: Telegram 推送通知
       run: |
-        MESSAGE=$'📢  通知'$'\n✉️  标题：Surge 模块拉取'$'\n🔔  状态：GitHub Actions 自动更新成功'$'\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
+        # 定义消息内容，包含表情符号、标题、状态和当前时间
+        MESSAGE=$'📢  通知'$'\n✉️  标题：Surge 模块拉取'$'\n🔔  状态：GitHub Actions 执行完成'$'\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
+        
+        # 使用curl命令调用Telegram的Bot API来发送消息
         curl -X POST \
           "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
           -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
