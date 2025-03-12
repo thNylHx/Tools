@@ -44,7 +44,7 @@ jobs:
       # 步骤 5：复制 LoonKissSurge 仓库内容到目标目录
       - name: 复制 LoonKissSurge 仓库内容到 Surge/QingRex
         run: |
-          cp -r "${{ github.workspace }}/LoonKissSurge/." "${{ github.workspace }}/Tools/Surge/QingRex/" \
+          cp -r "${{ github.workspace }}/LoonKissSurge/Surge/." "${{ github.workspace }}/Tools/Surge/QingRex/" \
             && echo "已同步 LoonKissSurge 仓库内容到 Surge/QingRex" \
             || { echo "复制文件失败，退出。"; exit 1; }
 

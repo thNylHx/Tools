@@ -1,4 +1,4 @@
-name: mihomo 规则拉取  # 设置工作流名称
+name: 同步 mihomo 上游规则  # 设置工作流名称
 
 on:
   workflow_dispatch:  # 允许手动触发工作流
