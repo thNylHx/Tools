@@ -1,83 +1,85 @@
-name: Surge 模块拉取
+name: 同步 LoonKissSurge 仓库内容
 
 on:
   workflow_dispatch:  # 允许手动触发工作流
   schedule:
-    - cron: "15 */6 * * *"  # 定时触发，每6小时执行一次（此处为UTC时间，实际触发时间以触发器设置为准）
+    - cron: "15 */6 * * *"  # 每6小时执行一次（UTC时间）
 
 jobs:
-  Fork-FLITER-list:
-    runs-on: ubuntu-latest  # 在最新版本的 Ubuntu 环境中运行工作流
+  sync-loonkisssurge:
+    runs-on: ubuntu-latest  # 使用最新版本的 Ubuntu 运行器
     env:
       TZ: 'Asia/Shanghai'  # 设置时区为上海时间
 
     steps:
-      # 步骤1：检出 Tools 仓库
-      - name: 检出 Tools 仓库
+      # 步骤 1：检出当前仓库
+      - name: 检出当前仓库
         uses: actions/checkout@v4
         with:
-          repository: thNylHx/Tools  # 指定要检出的仓库
+          repository: thNylHx/Tools  # 替换为您的仓库名
           path: Tools                # 将仓库检出到本地目录 Tools 下
 
-      # 步骤2：设置 Git 用户配置（用于后续提交）
+      # 步骤 2：设置 Git 用户配置
       - name: 设置 Git 配置
         run: |
           git config --global user.name "${{ secrets.USERNAME }}"
           git config --global user.email "${{ secrets.EMAIL }}"
+        # 确保在仓库的 Secrets 中设置了 USERNAME 和 EMAIL
 
-      # 步骤3：克隆 LoonKissSurge 仓库的 main 分支
-      - name: 克隆 LoonKissSurge 仓库的 main 分支
+      # 步骤 3：克隆 LoonKissSurge 仓库
+      - name: 克隆 LoonKissSurge 仓库
         run: |
           rm -rf "${{ github.workspace }}/LoonKissSurge"  # 清理旧的目录
-          git clone --branch main "https://github.com/QingRex/LoonKissSurge.git" "${{ github.workspace }}/LoonKissSurge" \
-            && echo "成功克隆 LoonKissSurge 仓库的 main 分支" \
+          git clone "https://github.com/QingRex/LoonKissSurge.git" "${{ github.workspace }}/LoonKissSurge" \
+            && echo "成功克隆 LoonKissSurge 仓库" \
             || { echo "克隆失败，退出。"; exit 1; }
 
-      # 步骤4：重建 Surge/QingRex 目录
+      # 步骤 4：清理并创建目标目录
       - name: 重建 Surge/QingRex 目录
         run: |
           TARGET_DIR="${{ github.workspace }}/Tools/Surge/QingRex"
           rm -rf "$TARGET_DIR" && mkdir -p "$TARGET_DIR"
           echo "已重建目录 $TARGET_DIR。"
 
-      # 步骤5：复制 LoonKissSurge 仓库内容到 Surge/QingRex 目录
+      # 步骤 5：复制 LoonKissSurge 仓库内容到目标目录
       - name: 复制 LoonKissSurge 仓库内容到 Surge/QingRex
         run: |
           cp -r "${{ github.workspace }}/LoonKissSurge/." "${{ github.workspace }}/Tools/Surge/QingRex/" \
             && echo "已同步 LoonKissSurge 仓库内容到 Surge/QingRex" \
             || { echo "复制文件失败，退出。"; exit 1; }
 
-      # 步骤6：设置 Tools 仓库远程 URL（使用 TOKEN 进行身份验证）
+      # 步骤 6：设置 Tools 仓库的远程 URL（使用 TOKEN 进行身份验证）
       - name: 为 Tools 仓库设置远程 URL
         run: |
           cd "${{ github.workspace }}/Tools"
           git remote set-url origin "https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
+        # 确保在仓库的 Secrets 中设置了 TOKEN 和 USERNAME
 
-      # 步骤7：检查更改并推送到 Tools 仓库（分支：main）
+      # 步骤 7：检查更改并推送到 Tools 仓库的 main 分支
       - name: 检查更改并推送到 GitHub Tools 仓库
-        id: push_changes
         run: |
           cd "${{ github.workspace }}/Tools"
           git fetch origin
           if [ -n "$(git status --porcelain)" ]; then
             git add -A
-            git commit -m "Auto Update $(date +'%Y-%m-%d %H:%M:%S')"
+            git commit -m "同步 LoonKissSurge 更新 $(date +'%Y-%m-%d %H:%M:%S')"
             git push origin main && echo "同步完成！"
           else
             echo "没有本地变更，无需同步。"
           fi
 
-      # 步骤8：发送 Telegram 推送通知
-      - name: Telegram 推送通知
+      # 步骤 8：发送 Telegram 推送通知
+      - name: 发送 Telegram 推送通知
         run: |
-          MESSAGE=$'📢  通知\n✉️  标题：Surge 模块拉取\n🔔  状态：GitHub Actions 执行完成\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
+          MESSAGE=$'📢  通知\n✉️  标题：LoonKissSurge 同步\n🔔  状态：GitHub Actions 执行完成\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
           curl -X POST \
             "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
             -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
             -d "text=${MESSAGE}"
+        # 确保在仓库的 Secrets 中设置了 TELEGRAM_TOKEN 和 TELEGRAM_CHAT_ID
 
-      # 步骤9：清理工作流运行记录（可选）
-      - name: 清理工作流
+      # 步骤 9：清理工作流运行记录（可选）
+      - name: 清理工作流运行记录
         uses: Mattraks/delete-workflow-runs@main
         with:
           retain_days: 0
