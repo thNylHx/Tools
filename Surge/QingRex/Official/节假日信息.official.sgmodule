@@ -1,0 +1,11 @@
+#!name=节假日信息
+#!desc=显示节假日的信息
+#!category=深巷有喵的模块
+# 更新日期：2024.09.09
+# 版本：3.3
+
+[Panel]
+Timecard = script-name=Timecard,update-interval=3600
+
+[Script]
+Timecard = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/smartmimi/conf/master/surge/timecard.js

@@ -1,0 +1,57 @@
+#!name=转转去广告
+#!desc=移除开屏广告、应用内悬浮窗、信息流推广、商品推荐、首页弹窗，精简我的页面。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/ZhuanZhuan.png
+#!category=BetaModule
+#!openUrl=https://apps.apple.com/app/id1002355194
+#!tag=去广告
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-11-28 00:00:00
+
+[Body Rewrite]
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\? 'delpaths([["respData","topOpera","leftOpera"]])'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\? 'delpaths([["respData","topOpera","rightOpera2"]])'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\? 'delpaths([["respData","topActBanner"]])'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\? 'delpaths([["respData","bmArea"]])'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zzx\/transfer\/getConfigInfo\? 'delpaths([["respData","freeMarketTabLeadPop"]])'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zzx\/transfer\/getConfigInfo\? 'delpaths([["respData","topOperations"]])'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/getfeedflowinfo\? 'if .respData.userRed.campName == "OCD挂件" then del(.respData.userRed) else . end | .respData.infoData |= map(del(.rotateResource,.appRecommendResource,."cargoGroupCardV2"))'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmymoretools$ 'walk(if type == "object" and .name == "免流量特权" then empty else . end) | del(.respData.groupList[] | select(.groupName == "活动参与" or .groupName == "金融工具"))'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmyprofilev3$ 'delpaths([["respData","bmNewInfo"]])'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmyprofilev3$ 'del(.respData.itemGroupList[].itemList[] | select(.name == "天天赚钱" or .name == "借钱")) | del(.respData.itemGroupList[] | select(.groupType == 15))'
+
+[Map Local]
+# 开屏广告
+^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/getOpenScreen$ data-type=text data="{}" status-code=200
+
+# 首页 - 信息流 - 猜你想搜
+^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/getwindvanecardv2$ data-type=text data="{}" status-code=200
+
+# 首页 - 弹窗
+^https:\/\/app\.zhuanzhuan\.com\/zzopen\/popwindow\/getallpopwin\? data-type=text data="{}" status-code=200
+
+# 首页 - 回收 - 弹窗
+^https:\/\/app\.zhuanzhuan\.com\/zzopen\/zzbmlogic\/queryFrontPageWindowInfo\? data-type=text data="{}" status-code=200
+
+# 收藏 - 订阅 - 热门精选
+^https:\/\/app\.zhuanzhuan\.com\/zzopen\/ptuserlogic\/subscribehotrecommend$ data-type=text data="{}" status-code=200
+
+# 商品页面 - 评价 - 好货推荐
+^https:\/\/app\.zhuanzhuan\.com\/zzopen\/ypmall\/listData$ data-type=text data="{}" status-code=200
+
+# 我的页面 - 发布闲置赚钱
+^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzusercenter\/myprofilevariouscards$ data-type=text data="{}" status-code=200
+
+# 收藏 - 收藏 - 精选推荐
+^https:\/\/app\.zhuanzhuan\.com\/zzopen\/ptsimpleshow\/recommendbymyloveinfo\? data-type=text data="{"respCode":0,"errorMsg":"null","errMsg":""}" status-code=200 header="Content-Type:text/json"
+
+# 收藏 - 足迹 - 精选推荐
+^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/footprintsamerecommend\? data-type=text data="{"respCode":0,"errorMsg":"","errMsg":""}" status-code=200 header="Content-Type:text/json"
+
+# 我的页面 - 精选好货
+^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/getchoicegoodsinfos\? data-type=text data="{"respCode":0,"respData":{},"errorMsg":"","errMsg":""}" status-code=200 header="Content-Type:text/json"
+
+[MITM]
+hostname = %APPEND% app.zhuanzhuan.com
+
