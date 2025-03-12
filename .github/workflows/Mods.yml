@@ -62,7 +62,7 @@ jobs:
           git fetch origin
           if [ -n "$(git status --porcelain)" ]; then
             git add -A
-            git commit -m "同步 LoonKissSurge 更新 $(date +'%Y-%m-%d %H:%M:%S')"
+            git commit -m "Auto Update $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"  # 提交更改，提交信息包含当前时间戳
             git push origin main && echo "同步完成！"
           else
             echo "没有本地变更，无需同步。"
