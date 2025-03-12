@@ -3,110 +3,91 @@ name: Surge 模块拉取
 on:
   workflow_dispatch:  # 允许手动触发工作流
   schedule:
-    - cron: "15 */8 * * *"  # 设置定时触发，表示每8小时执行一次
+    - cron: "15 */6 * * *"  # 定时触发，每8小时执行一次（此处为UTC时间，实际触发时间以触发器设置为准）
 
 jobs:
   Fork-FLITER-list:
-    runs-on: ubuntu-latest  # 在最新版本的Ubuntu环境中运行工作流
+    runs-on: ubuntu-latest  # 在最新版本的 Ubuntu 环境中运行工作流
     env:
-      TZ: 'Asia/Shanghai'  # 设置时区为上海时间，确保时间一致
+      TZ: 'Asia/Shanghai'  # 设置时区为上海时间
 
     steps:
-    # 步骤1：检出目标仓库
-    - name: 检出目标仓库
-      uses: actions/checkout@v4  # 使用GitHub提供的action来检出代码仓库
-      with:
-        repository: thNylHx/Tools  # 指定要检出的仓库
-        path: Tools-repo  # 将仓库检出到的本地路径
+      # 步骤1：检出目标仓库（Tools 仓库）
+      - name: 检出 Tools 仓库
+        uses: actions/checkout@v4
+        with:
+          repository: thNylHx/Tools  # 指定要检出的仓库
+          path: Tools                # 将仓库检出到本地目录 Tools 下
+      # 说明：检出目标仓库代码，后续将在该仓库内更新 Surge/QingRex 目录
 
-    - name: 设置 Git 配置
-      # 配置 Git 用户名和邮箱
-      run: |
-        git config --global user.name "${{ secrets.USERNAME }}"
-        git config --global user.email "${{ secrets.EMAIL }}"
-    
-    - name: 克隆 LoonKissSurge 仓库
-      # 始终执行克隆 LoonKissSurge 仓库的操作
-      run: |
-        rm -rf "${{ github.workspace }}/LoonKissSurge"  # 确保清空目录
-        git clone "https://github.com/QingRex/LoonKissSurge.git" "${{ github.workspace }}/LoonKissSurge" && echo "成功克隆 LoonKissSurge 仓库" || { echo "克隆失败，退出。"; exit 1; }
+      # 步骤2：设置 Git 用户配置（用于后续提交）
+      - name: 设置 Git 配置
+        run: |
+          git config --global user.name "${{ secrets.USERNAME }}"
+          git config --global user.email "${{ secrets.EMAIL }}"
+      # 说明：配置 Git 用户名和邮箱，用于提交记录
 
-    - name: 克隆 Tools 仓库
-      # 始终执行克隆 Tools 仓库的操作
-      run: |
-        rm -rf "${{ github.workspace }}/Tools"  # 确保清空目录
-        git clone "https://github.com/${{ secrets.USERNAME }}/Tools.git" "${{ github.workspace }}/Tools" && echo "成功克隆 Tools 仓库" || { echo "克隆失败，退出。"; exit 1; }
-    
-    - name: 重建 Surge Mods 目录
-      # 重建 Surge/Mods 目录
-      run: |
-        SURGE_MODS_DIR="${{ github.workspace }}/Tools/Surge/Mods"
-        rm -rf "$SURGE_MODS_DIR" && mkdir -p "$SURGE_MODS_DIR"
-        echo "已重建 Surge/Mods 目录。"
+      # 步骤3：克隆 LoonKissSurge 源仓库
+      - name: 克隆 LoonKissSurge 仓库
+        run: |
+          rm -rf "${{ github.workspace }}/LoonKissSurge"  # 清理旧的目录
+          git clone "https://github.com/QingRex/LoonKissSurge.git" "${{ github.workspace }}/LoonKissSurge" \
+            && echo "成功克隆 LoonKissSurge 仓库" \
+            || { echo "克隆失败，退出。"; exit 1; }
+      # 说明：克隆整个 LoonKissSurge 仓库，作为同步的源仓库
 
-    - name: 复制并重命名 Beta 文件内容
-      # 从 LoonKissSurge 仓库的 Beta 目录复制文件到 Tools 仓库的 Surge/Mods 目录
-      run: |
-        if [ -d "${{ github.workspace }}/LoonKissSurge/Surge/Beta" ]; then
-          cp -r "${{ github.workspace }}/LoonKissSurge/Surge/Beta/"* "${{ github.workspace }}/Tools/Surge/Mods/" && echo "已拷贝 Beta 文件至 Surge/Mods"
-          
-          echo "匹配的文件："
-          # 列出 Surge/Mods 目录下的 .sgmodule 文件，如果没有找到，则输出提示
-          ls "${{ github.workspace }}/Tools/Surge/Mods"/*.sgmodule || echo "没有找到 .sgmodule 文件"
-          
-          # 遍历所有 .sgmodule 文件，进行文件名重命名
-          for file in "${{ github.workspace }}/Tools/Surge/Mods"/*.sgmodule; do
-            if [ -e "$file" ]; then
-              # 使用 sed 删除文件名中的 "去广告" 和 ".beta"
-              new_name=$(echo "$file" | sed 's/去广告//g' | sed 's/\.beta//g')
-              if [ "$file" != "$new_name" ]; then
-                mv "$file" "$new_name"  # 重命名文件
-                echo "已将 $file 重命名为 $new_name"
-              else
-                echo "文件 $file 不需要重命名"
-              fi
-            fi
-          done
-        else
-          # 如果未找到 Beta 目录，输出错误并退出
-          echo "未找到 ${GITHUB_WORKSPACE}/LoonKissSurge/Surge/Beta 目录，退出。"
-          exit 1
-        fi
+      # 步骤4：重建 Surge/QingRex 目录
+      - name: 重建 Surge/QingRex 目录
+        run: |
+          TARGET_DIR="${{ github.workspace }}/Tools/Surge/QingRex"
+          rm -rf "$TARGET_DIR" && mkdir -p "$TARGET_DIR"
+          echo "已重建目录 $TARGET_DIR。"
+      # 说明：清空 Tools 仓库中 Surge/QingRex 目录，确保同步时不会混入旧文件
 
-    - name: 为 Tools 仓库设置远程 URL
-      # 设置远程仓库的 URL，使用 GitHub Token 进行身份验证
-      run: |
-        cd "${{ github.workspace }}/Tools"
-        git remote set-url origin "https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
+      # 步骤5：复制整个 LoonKissSurge 仓库内容到 Surge/QingRex 目录
+      - name: 复制 LoonKissSurge 仓库内容到 Surge/QingRex
+        run: |
+          cp -r "${{ github.workspace }}/LoonKissSurge/." "${{ github.workspace }}/Tools/Surge/QingRex/" \
+            && echo "已同步整个 LoonKissSurge 仓库内容到 Surge/QingRex" \
+            || { echo "复制文件失败，退出。"; exit 1; }
+      # 说明：将 LoonKissSurge 仓库中的所有文件复制到目标目录 Surge/QingRex
 
-    - name: 检查更改并推送到 GitHub Tools 仓库
-      id: push_changes
-      # 检查本地仓库是否有变更，并将变更推送到 GitHub
-      run: |
-        cd "${{ github.workspace }}/Tools"
-        git fetch origin
-        if [ -n "$(git status --porcelain)" ]; then
-          git add -A
-          git commit -m "Auto Update $(date +'%Y-%m-%d %H:%M:%S')"
-          git push origin main && echo "同步完成！"
-        else
-          echo "没有本地变更，无需同步。"
-        fi
+      # 步骤6：设置 Tools 仓库远程 URL（使用 TOKEN 进行身份验证）
+      - name: 为 Tools 仓库设置远程 URL
+        run: |
+          cd "${{ github.workspace }}/Tools"
+          git remote set-url origin "https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
+      # 说明：修改远程 URL，使用令牌进行推送身份验证
 
-    # 步骤4：发送Telegram通知
-    - name: Telegram 推送通知
-      run: |
-        # 定义消息内容，包含表情符号、标题、状态和当前时间
-        MESSAGE=$'📢  通知'$'\n✉️  标题：Surge 模块拉取'$'\n🔔  状态：GitHub Actions 执行完成'$'\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
-        
-        # 使用curl命令调用Telegram的Bot API来发送消息
-        curl -X POST \
-          "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
-          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-          -d "text=${MESSAGE}"
+      # 步骤7：检查更改并推送到 Tools 仓库（分支：main）
+      - name: 检查更改并推送到 GitHub Tools 仓库
+        id: push_changes
+        run: |
+          cd "${{ github.workspace }}/Tools"
+          git fetch origin
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "Auto Update $(date +'%Y-%m-%d %H:%M:%S')"
+            git push origin main && echo "同步完成！"
+          else
+            echo "没有本地变更，无需同步。"
+          fi
+      # 说明：如果 Tools 仓库内有改动，则提交更改并推送到 main 分支
 
-    - name: 清理工作流
-      uses: Mattraks/delete-workflow-runs@main
-      with:
-        retain_days: 0
-        keep_minimum_runs: 5
+      # 步骤8：发送 Telegram 推送通知
+      - name: Telegram 推送通知
+        run: |
+          MESSAGE=$'📢  通知\n✉️  标题：Surge 模块拉取\n🔔  状态：GitHub Actions 执行完成\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
+          curl -X POST \
+            "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
+            -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -d "text=${MESSAGE}"
+      # 说明：调用 Telegram Bot API 发送通知，告知同步任务执行状态
+
+      # 步骤9：清理工作流运行记录（可选）
+      - name: 清理工作流
+        uses: Mattraks/delete-workflow-runs@main
+        with:
+          retain_days: 0
+          keep_minimum_runs: 5
+      # 说明：删除旧的工作流运行记录，保持仓库整洁（可选）
