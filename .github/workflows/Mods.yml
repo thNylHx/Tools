@@ -25,8 +25,8 @@ jobs:
       with:
         # 指定需要检出的远程仓库，格式为“用户名/仓库名”
         repository: thNylHx/Tools  # 目标仓库：thNylHx/Tools
-        # 设置将仓库检出到本地的目录名称为 Tools-repo
-        path: Tools-repo  # 本地目录名称：Tools-repo
+        # 设置将仓库检出到本地的目录名称为 Tools
+        path: Tools  # 本地目录名称：Tools
 
     # 步骤 2：设置 Git 用户配置
     - name: 设置 Git 配置
