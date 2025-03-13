@@ -71,7 +71,7 @@ jobs:
       # 步骤 8：发送 Telegram 推送通知
       - name: 发送 Telegram 推送通知
         run: |
-          MESSAGE=$'📢  通知 \n✉️  标题：同步 LoonKissSurge 仓库内容 \n🔔  状态：GitHub Actions 执行完成 \n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
+          MESSAGE=$'📢  通知 \n🚀  来源：JK567 仓库'$' \n✉️  标题：同步 LoonKissSurge 仓库内容 \n🔔  状态：GitHub Actions 执行完成 \n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
           curl -X POST \
             "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
             -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \

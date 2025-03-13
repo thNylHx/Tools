@@ -205,7 +205,7 @@ jobs:
     - name: Telegram 推送通知
       run: |
         # 定义消息内容，包含表情符号、标题、状态和当前时间
-        MESSAGE=$'📢  通知'$'\n✉️  标题：同步 Surge 上游规则'$'\n🔔  状态：GitHub Actions 执行完成'$'\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
+        MESSAGE=$'📢  通知'$' \n🚀  来源：JK567 仓库'$' \n✉️  标题：同步 Surge 上游规则'$'\n🔔  状态：GitHub Actions 执行完成'$'\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
         
         # 使用curl命令调用Telegram的Bot API来发送消息
         curl -X POST \
