@@ -69,10 +69,11 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             📢 通知
-            🚀 来源：JK567 仓库
+            🚀 来源：GitHub Actions
+            📦 仓库：JK567
             ✉️ 标题：同步 mihomo 上游规则
             ⏰ 时间：${{ env.time }}
-            🔔 状态：GitHub Actions 执行完成
+            🎉 状态：恭喜你！全部任务执行成功
 
       # 步骤6：清理旧的工作流运行记录
       - name: 清理工作流  # 定义步骤名称：清理工作流
