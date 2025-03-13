@@ -215,18 +215,26 @@ jobs:
           echo "没有需要提交的更改"  # 输出提示信息，表示当前没有文件更改需要提交
         fi  # 结束 if 条件判断
 
-    # 步骤7：发送Telegram通知
-    - name: Telegram 推送通知
+    # 步骤7：获取当前时间并设置为环境变量
+    - name: 获取当前时间
+      id: current_time
       run: |
-        # 定义消息内容，包含表情符号、标题、状态和当前时间
-        MESSAGE=$'📢  通知'$' \n🚀  来源：JK567 仓库'$' \n✉️  标题：同步 Surge 上游规则'$'\n🔔  状态：GitHub Actions 执行完成'$'\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
-        # 使用curl命令调用Telegram的Bot API来发送消息
-        curl -X POST \
-          "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
-          -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-          -d "text=${MESSAGE}"
+        echo "time=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
-    # 步骤8：清理旧的工作流运行记录
+    # 步骤8：发送 Telegram 通知
+    - name: 发送 Telegram 通知
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_CHAT_ID }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          📢 通知
+          🚀 来源：JK567 仓库
+          ✉️ 标题：同步 Surge 上游规则
+          ⏰ 时间：${{ env.time }}
+          🔔 状态：GitHub Actions 执行完成
+
+    # 步骤9：清理旧的工作流运行记录
     - name: 清理工作流  # 定义步骤名称：清理工作流
       uses: Mattraks/delete-workflow-runs@main  # 使用 Mattraks 提供的 Action 清理旧的工作流运行记录
       with:

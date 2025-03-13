@@ -58,7 +58,8 @@ jobs:
       # 步骤4：获取当前时间并设置为环境变量
       - name: 获取当前时间
         id: current_time
-        run: echo "time=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+        run: |
+          echo "time=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
       # 步骤5：发送 Telegram 通知
       - name: 发送 Telegram 通知

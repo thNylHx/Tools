@@ -68,14 +68,24 @@ jobs:
             echo "没有变更，无需同步。"
           fi
 
-      # 7. 发送 Telegram 通知
-      - name: 发送 Telegram 推送通知
+      # 步骤7：获取当前时间并设置为环境变量
+      - name: 获取当前时间
+        id: current_time
         run: |
-          MESSAGE=$'📢 通知\n🚀 来源：JK567 仓库\n✉️ 标题：同步 Surge 上游模块\n🔔 状态：执行完成\n⏰ 时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
-          curl -X POST \
-            "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
-            -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-            -d "text=${MESSAGE}"
+          echo "time=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+
+      # 步骤8：发送 Telegram 通知
+      - name: 发送 Telegram 通知
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            📢 通知
+            🚀 来源：JK567 仓库
+            ✉️ 标题：同步 Surge 上游模块
+            ⏰ 时间：${{ env.time }}
+            🔔 状态：GitHub Actions 执行完成
 
       # 9. 清理旧的工作流运行记录
       - name: 清理工作流运行记录
