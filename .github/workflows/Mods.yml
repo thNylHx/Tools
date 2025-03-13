@@ -29,11 +29,11 @@ jobs:
         path: Tools  # 本地目录名称：Tools
 
     # 步骤 2：设置 Git 用户配置
-    - name: 设置 Git 配置
-      run: |
-        git config --global user.name "${{ secrets.USERNAME }}"
-        git config --global user.email "${{ secrets.EMAIL }}"
-        # 确保在仓库的 Secrets 中设置了 USERNAME 和 EMAIL
+    # - name: 设置 Git 配置
+    #   run: |
+    #     git config --global user.name "${{ secrets.USERNAME }}"
+    #     git config --global user.email "${{ secrets.EMAIL }}"
+    #     # 确保在仓库的 Secrets 中设置了 USERNAME 和 EMAIL
 
     # 步骤 3：克隆 LoonKissSurge 仓库
     - name: 克隆 LoonKissSurge 仓库
