@@ -1,53 +1,65 @@
-name: 同步 mihomo 上游规则  # 设置工作流名称
+# 设置工作流名称，定义该 GitHub Actions 工作流的名称
+name: 同步 mihomo 上游规则  # 工作流名称：同步 mihomo 上游规则
 
+# 定义触发该工作流的事件
 on:
-  workflow_dispatch:  # 允许手动触发工作流
-  schedule:
-    - cron: "0 */6 * * *"  # 设置定时触发，表示每6小时执行一次
+  # 允许通过 GitHub 界面手动触发工作流
+  workflow_dispatch:  # 支持手动触发
+  schedule:  # 定时触发设置
+    # 设置定时触发规则，使用 cron 语法表示每6小时触发一次
+    - cron: "0 */6 * * *"  # 每6小时执行一次工作流（分钟为0，每6小时一次）
 
+# 工作流
 jobs:
+  # 定义名为 Fork-FLITER-list 的任务
   Fork-FLITER-list:
-    runs-on: ubuntu-latest  # 在最新版本的Ubuntu环境中运行工作流
+    # 指定运行环境为最新版本的 Ubuntu
+    runs-on: ubuntu-latest  # 在 ubuntu-latest 环境中运行任务
     env:
-      TZ: 'Asia/Shanghai'  # 设置时区为上海时间，确保时间一致
+      # 设置环境变量 TZ 为上海时间，确保任务中的时间与上海时区一致
+      TZ: 'Asia/Shanghai'  # 配置时区为 Asia/Shanghai
 
     steps:
-    # 步骤1：检出目标仓库
-    - name: 检出目标仓库
-      uses: actions/checkout@v4  # 使用GitHub提供的action来检出代码仓库
+      # 步骤1：检出目标仓库
+    - name: 检出目标仓库  # 定义步骤名称：检出目标仓库
+      uses: actions/checkout@v4  # 使用 GitHub 官方 checkout action 检出代码
       with:
-        repository: thNylHx/Tools  # 指定要检出的仓库
-        path: Tools-repo  # 将仓库检出到的本地路径
+        # 指定需要检出的远程仓库，格式为“用户名/仓库名”
+        repository: thNylHx/Tools  # 目标仓库：thNylHx/Tools
+        # 设置将仓库检出到本地的目录名称为 Tools-repo
+        path: Tools-repo  # 本地目录名称：Tools-repo
 
     # 步骤2：执行远程脚本来更新规则
-    - name: 执行脚本
-      run: |
-        echo "开始执行脚本..."  # 输出提示，表明脚本执行开始
-        curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/Fork/mihomo.sh | sh  # 使用curl命令下载并执行远程脚本
-        echo "脚本执行完毕"  # 输出提示，表明脚本执行完成
+    - name: 执行脚本  # 定义步骤名称：执行脚本
+      run: |  # 使用 shell 脚本执行下面的命令
+        echo "开始执行脚本..."  # 输出提示信息，表示脚本执行开始
+        # 使用 curl 命令从远程仓库下载 fork.sh 脚本，并通过 sh 执行
+        curl https://raw.githubusercontent.com/thNylHx/Tools/main/Script/Fork/mihomo.sh | sh  # 下载并执行远程脚本 fork.sh
+        echo "脚本执行完毕"  # 输出提示信息，表示脚本执行结束
 
     # 步骤3：提交更改并推送到仓库
-    - name: 推送到仓库
-      run: |
-        cd Tools-repo  # 进入到已经检出的目标仓库目录
-        if [[ -n $(git status -s) ]]; then  # 如果有修改的文件（即有更改）
-          echo "发现更新，准备提交..."  # 输出提示，表示发现更新并准备提交
-          git config --local user.email "action@github.com"  # 配置提交的用户邮箱
-          git config --local user.name "GitHub Action"  # 配置提交的用户名
-          git add .  # 将所有修改的文件添加到暂存区
-          git commit -m "Auto Update $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"  # 提交更改，提交信息包含当前时间戳
-          git push origin HEAD  # 将更改推送到远程仓库
-          echo "更新已推送到仓库"  # 输出提示，表示更新已经成功推送到仓库
-        else
-          echo "没有需要提交的更改"  # 如果没有文件修改，输出提示表示没有更改需要提交
-        fi
+    - name: 推送到仓库  # 定义步骤名称：推送到仓库
+      run: |  # 使用 shell 脚本执行下面的命令
+        cd Tools-repo  # 切换到已检出的目标仓库目录
+        # 检查当前 git 状态，判断是否存在文件更改（git status -s 有输出表示有更改）
+        if [[ -n $(git status -s) ]]; then  # 如果存在未提交的更改，则执行提交操作
+          echo "发现更新，准备提交..."  # 输出提示信息，表示检测到更新
+          git config --local user.email "action@github.com"  # 配置本地 git 用户邮箱
+          git config --local user.name "GitHub Action"  # 配置本地 git 用户名
+          git add .  # 将所有更改添加到 git 暂存区
+          # 提交更改，提交信息中包含当前上海时区的时间戳
+          git commit -m "Auto Update $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"  # 提交更新并标注提交时间
+          git push origin HEAD  # 将本次提交推送到远程仓库当前分支
+          echo "更新已推送到仓库"  # 输出提示信息，表示推送操作已完成
+        else  # 若没有检测到任何更改
+          echo "没有需要提交的更改"  # 输出提示信息，表示当前没有文件更改需要提交
+        fi  # 结束 if 条件判断
 
     # 步骤4：发送Telegram通知
     - name: Telegram 推送通知
       run: |
         # 定义消息内容，包含表情符号、标题、状态和当前时间
         MESSAGE=$'📢  通知'$' \n🚀  来源：JK567 仓库'$' \n✉️  标题：同步 mihomo 上游规则'$' \n🔔  状态：GitHub Actions 执行完成'$'\n⏰  时间：'"$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
-        
         # 使用curl命令调用Telegram的Bot API来发送消息
         curl -X POST \
           "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
@@ -55,8 +67,10 @@ jobs:
           -d "text=${MESSAGE}"
 
     # 步骤5：清理旧的工作流运行记录
-    - name: 清理工作流
-      uses: Mattraks/delete-workflow-runs@main  # 使用Mattraks提供的GitHub Action来清理工作流记录
+    - name: 清理工作流  # 定义步骤名称：清理工作流
+      uses: Mattraks/delete-workflow-runs@main  # 使用 Mattraks 提供的 Action 清理旧的工作流运行记录
       with:
-        retain_days: 0  # 设置保留的工作流运行天数为0，即清除所有过期的运行记录
-        keep_minimum_runs: 5  # 至少保留5次工作流运行记录，避免过度清理
+        # 设置保留的工作流运行记录天数为 0，即清除所有过期的记录
+        retain_days: 0  # 过期记录保留天数设置为 0
+        # 保证至少保留最近 5 次的工作流运行记录，避免记录被全部清理
+        keep_minimum_runs: 5  # 最少保留 5 次工作流运行记录
