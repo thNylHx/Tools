@@ -70,8 +70,8 @@ jobs:
           message: |
             📢 通知
             🚀 来源：GitHub Actions
-            📦 仓库：JK567
             ✉️ 标题：同步 mihomo 上游规则
+            📦 仓库：JK567
             ⏰ 时间：${{ env.time }}
             🎉 状态：恭喜你！全部任务执行成功
 
