@@ -56,7 +56,7 @@ jobs:
           git config --global user.name "${{ secrets.USERNAME }}"
           git config --global user.email "${{ secrets.EMAIL }}"
           cd "${{ github.workspace }}/Tools-repo"
-          git remote set-url origin "https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools-repo.git"
+          git remote set-url origin "https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
 
       # 步骤6：检查变更并推送更新到 Tools-repo 仓库 main 分支
       - name: 推送更新到 Tools-repo 仓库
