@@ -143,16 +143,19 @@ jobs:
               )
 
               for file in "${files[@]}"; do
-                  dir_name=$(echo $file | cut -d "/" -f 1)
-                  file_name=$(echo $file | cut -d "/" -f 2)
+                  file_name=$(echo $file | cut -d " " -f 1)
                   url=$(echo $file | cut -d " " -f 2)
-                  echo "Downloading: $url"
-                  curl -f -L "$url" -o "Tools-repo/Ruleset/Surge/$dir_name/$file_name"
+                  # 确保 URL 是正确的，避免重复的 https:
+                  if [[ ! "$url" =~ ^https?: ]]; then
+                      url="https:$url"
+                  fi
+                  echo "Downloading: $file_name"
+                  curl -f -L "$url" -o "Tools-repo/Ruleset/Surge/$file_name" || { echo "Download Failed: $url"; exit 1; }
               done
           else
-              echo "Unknown repository. Please run this script in Tools repository."
-              exit 1
+              echo "This is not the Tools repository. Skipping."
           fi
+        shell: bash
 
       # 步骤3：执行规则转换和修改
       - name: 规则转换和修改
