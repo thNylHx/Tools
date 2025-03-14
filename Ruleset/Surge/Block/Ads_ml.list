@@ -1,3 +1,6 @@
+# 规则名称: Ads_ml
+# 规则统计: 1027
+
 AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com))
 AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,normal),(DOMAIN-SUFFIX,zijieapi.com))
 AND,((DOMAIN-KEYWORD,gecko),(DOMAIN-SUFFIX,zijieapi.com))
