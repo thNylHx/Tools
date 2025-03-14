@@ -33,6 +33,7 @@ jobs:
               
               # 合并 Ads 规则
               urls=(
+                  "https://raw.githubusercontent.com/thNylHx/Tools/refs/heads/main/Ruleset/Surge/Block/Ads_ml.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
               )
               > Tools-repo/Ruleset/Surge/Block/Ads_Moli.list
