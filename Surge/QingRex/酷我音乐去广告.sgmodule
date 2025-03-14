@@ -1,0 +1,59 @@
+#!name=酷我音乐去广告
+#!desc=移除开屏广告、各类弹窗、悬浮窗、各类横幅广告、信息流广告、歌词评论区广告和播放器界面广告，精简侧边栏。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Kuwo.png
+#!category=iKeLee
+#!openUrl=https://apps.apple.com/app/id588673713
+#!tag=去广告
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2025-03-09 03:18:30
+
+[Rule]
+# 拦截HTTPDNS
+DOMAIN,serveraddr.service.kugou.com,REJECT,extended-matching,pre-matching
+DOMAIN,twns.p2ptun.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,tp2p.kg.qq.com,REJECT,extended-matching,pre-matching
+IP-CIDR,81.71.61.216/32,REJECT,no-resolve,pre-matching
+# 腾讯优量汇 - 广告服务商
+DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdk.e.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,us.l.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
+# DOMAIN,qzs.gdtimg.com,REJECT
+DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
+# c2.gdt.qq.com,REJECT
+DOMAIN,tmeadcomm.y.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,mobilead.kuwo.cn,REJECT,extended-matching,pre-matching
+DOMAIN,adstats.tencentmusic.com,REJECT,extended-matching,pre-matching
+DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,ad.tencentmusic.com,REJECT,extended-matching,pre-matching
+DOMAIN,mc.tencentmusic.com,REJECT,extended-matching,pre-matching
+# 广告配置
+URL-REGEX,"^http:\/\/rich\.kuwo\.cn\/AdService\/",REJECT-TINYGIF,extended-matching
+URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/user\/freeMode\/",REJECT-TINYGIF,extended-matching
+URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/pasterAdvert\/",REJECT-TINYGIF,extended-matching
+URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/startup\/config",REJECT-TINYGIF,extended-matching
+URL-REGEX,"^http:\/\/rich\.kuwo\.cn\/EcomResourceServer\/",REJECT-TINYGIF,extended-matching
+IP-CIDR,111.206.98.63/32,REJECT,no-resolve,pre-matching
+# 搜索填充词
+URL-REGEX,"^http:\/\/searchrecterm\.kuwo\.cn\/recterm\.s",REJECT-TINYGIF,extended-matching
+# 精简我的页面侧边栏
+URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/newMenuList\/menuListInfo",REJECT-TINYGIF,extended-matching
+# 迷你播放器横幅
+URL-REGEX,"^http:\/\/vip\d\.kuwo\.cn\/vip\/v\d\/sysinfo\?op=getRePayAndDoPayBox",REJECT-TINYGIF,extended-matching
+# 听书页面广告
+URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/album\/adBar\/",REJECT-TINYGIF,extended-matching
+
+[Map Local]
+# 首页 - 推广语
+^https:\/\/vip\d\.kuwo\.cn\/commercia\/vipconf\/projectPage\/getPageContent data-type=text data="{}" status-code=200
+
+^https:\/\/tingshu\.kuwo\.cn\/v2\/api\/pay\/user\/info data-type=text data="{}" status-code=200
+
+# 我的页面横幅
+^https:\/\/appi\.kuwo\.cn\/kuwopay\/personal\/cells data-type=text data="{}" status-code=200
+
+[MITM]
+hostname = %APPEND% appi.kuwo.cn, mc.tencentmusic.com, vip*.kuwo.cn, tingshu.kuwo.cn
+

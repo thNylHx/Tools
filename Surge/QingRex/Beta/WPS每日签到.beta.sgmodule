@@ -1,0 +1,21 @@
+#!name=WPS每日签到
+#!desc=WPS每日签到并兑换会员，需要进入此插件的主页链接，阅读使用说明操作。
+#!author=小白脸
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/WPS.png
+#!category=BetaModule
+#!openUrl=https://apps.apple.com/app/id599852710
+#!tag=签到
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/Resource/Markdown/WPS/README.md
+#!date=2024-11-28 00:00:00
+
+[Script]
+# 捕获Cookie
+捕获Cookie = type=http-request, pattern=^https:\/\/moapi\.wps\.cn\/app\/ios\/v1\/app$, script-path=https://kelee.one/Resource/Script/WPS/WPS_checkin.js, requires-body=true
+
+# 定时签到
+WPS每日签到 = type=cron, cronexp={CRONEXP}, script-path=https://kelee.one/Resource/Script/WPS/WPS_checkin.js, timeout=120, argument="[{AK},{SK},{MAX_RETRIES}]"
+
+[MITM]
+hostname = %APPEND% moapi.wps.cn
+

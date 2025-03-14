@@ -1,0 +1,18 @@
+#!name=Google搜索重定向
+#!desc=将Google搜索重定向至.com域名，如遇频繁跳转请禁用本插件。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Google.png
+#!category=BetaModule
+#!tag=去广告
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-11-28 00:00:00
+
+[URL Rewrite]
+# ^https?:\/\/(www.)?(g|google)\.(cn|com\.hk) 307 https://www.google.com
+^https?:\/\/(www.)?(g|google)\.cn https://www.google.com 307
+^https?:\/\/(ditu|maps).google\.cn https://maps.google.com 307
+
+[MITM]
+hostname = %APPEND% www.google.cn
+
