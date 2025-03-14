@@ -147,7 +147,7 @@ jobs:
                   file_name=$(echo $file | cut -d "/" -f 2)
                   url=$(echo $file | cut -d " " -f 2)
                   echo "Downloading: $url"
-                  curl -f -L "$url" > "Tools/Ruleset/Surge/$dir_name/$file_name" || { echo "Download Failed: $url"; exit 1; }
+                  curl -f -L "$url" -o "Tools-repo/Ruleset/Surge/$dir_name/$file_name"
               done
           else
               echo "Unknown repository. Please run this script in Tools repository."
