@@ -1,0 +1,51 @@
+#!name=爱企查去广告
+#!desc=移除开屏广告、应用内弹窗、首页轮播图、悬浮部件、信息流和搜索填充词。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Aiinquiry.png
+#!category=BetaModule
+#!openUrl=https://apps.apple.com/app/id1527039353
+#!tag=去广告
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-11-28 00:00:00
+
+[Rule]
+URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/",REJECT,extended-matching
+
+[URL Rewrite]
+^https:\/\/aiqicha\.baidu\.com\/app\/commonstatusAjax - reject
+
+[Map Local]
+# 首页 - 轮播图
+^https:\/\/aiqicha\.baidu\.com\/app\/bannerPicAjax data-type=text data="{}" status-code=200
+
+# 首页 - 悬浮部件
+^https:\/\/aiqicha\.baidu\.com\/app\/getPopConfigAjax data-type=text data="{}" status-code=200
+
+# 首页 - 热门话题
+^https:\/\/aiqicha\.baidu\.com\/app\/getHotTopicAjax data-type=text data="{}" status-code=200
+
+# 首页 - 每日早报
+^https:\/\/aiqicha\.baidu\.com\/app\/getNewsReportAjax data-type=text data="{}" status-code=200
+
+# 首页 - 专家讲堂
+^https:\/\/aiqicha\.baidu\.com\/app\/getExpertVideoAjax data-type=text data="{}" status-code=200
+
+# 首页 - 热门快讯
+^https:\/\/aiqicha\.baidu\.com\/apps\/getHotRecommendV2Ajax data-type=text data="{}" status-code=200
+
+# 首页 - 底部登录横幅
+^https:\/\/aiqicha\.baidu\.com\/m\/getLoginWordsAjax data-type=text data="{}" status-code=200
+
+# 首页 - 弹窗
+^https:\/\/aiqicha\.baidu\.com\/app\/getAppPopSettingAjax data-type=text data="{}" status-code=200
+
+# 首页 - 精选监控
+^https:\/\/aiqicha\.baidu\.com\/apps\/getHomeMonitorDataAjax data-type=text data="{}" status-code=200
+
+# 首页 - 搜索栏大家都在搜
+^https:\/\/aiqicha\.baidu\.com\/apps\/searchRecommendAjax data-type=text data="{}" status-code=200
+
+[MITM]
+hostname = %APPEND% aiqicha.baidu.com
+
