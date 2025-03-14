@@ -70,8 +70,8 @@ curl -L -o Tools-repo/Ruleset/Surge/Other/GlobalGFW.list "https://raw.githubuser
 curl -L -o Tools-repo/Ruleset/Surge/Other/Global.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
 
 # 苹果
-# curl -L -o Tools-repo/Ruleset/Surge/Other/Apple.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
-curl -L -o Tools-repo/Ruleset/Surge/Other/Apple.list "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Apple.list"
+curl -L -o Tools-repo/Ruleset/Surge/Other/Apple.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
+curl -L -o Tools-repo/Ruleset/Surge/Other/AppleCN.list "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Apple.list"
 
 # 国内直连
 curl -L -o Tools-repo/Ruleset/Surge/Other/China.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/cn.list"
