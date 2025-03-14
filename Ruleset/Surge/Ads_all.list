@@ -1,5 +1,5 @@
-# 规则名称: Ads_ml
-# 规则统计: 782
+# 规则名称: Ads_all
+# 规则统计: 783
 
 DOMAIN,pinggai0.caixin.com
 DOMAIN,pinggai1.caixin.com
@@ -435,6 +435,7 @@ DOMAIN-SUFFIX,mail-ads.google.com
 DOMAIN-SUFFIX,marketingplatform.google.com
 DOMAIN-SUFFIX,urchin.com
 DOMAIN,analytics.google.com
+DOMAIN,DOMAIN-REGEX,^adservice\.google\.([a-z]{2}|com?)(\.[a-z]{2})?$
 DOMAIN-SUFFIX,cdn.segment.com
 DOMAIN-SUFFIX,onesignal.com
 DOMAIN-SUFFIX,static.hotjar.com
@@ -707,6 +708,7 @@ DOMAIN-SUFFIX,msg2.video.qiyi.com
 DOMAIN-SUFFIX,policy.video.iqiyi.com
 DOMAIN-SUFFIX,yuedu.iqiyi.com
 DOMAIN-SUFFIX,decide.mixpanel.com
+DOMAIN,DOMAIN-REGEX,^speed\.(coe|open)\.ad\.[a-z]{2,6}\.prod\.hosts\.ooklaserver\.net$
 DOMAIN-SUFFIX,ads.pubmatic.com
 DOMAIN-SUFFIX,ads.yahoo.com
 DOMAIN-SUFFIX,gemini.yahoo.com
