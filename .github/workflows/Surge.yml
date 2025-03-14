@@ -121,7 +121,7 @@ jobs:
                   "China_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
                   "ChinaASN.list https://raw.githubusercontent.com/missuo/ASN-China/main/ASN.China.list"
 
-                  # 
+                  # Media
                  "YouTube.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
                  "YouTubeMusic.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
                  "Telegram.list https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
@@ -140,12 +140,13 @@ jobs:
                  "Netflix_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
                  "Spotify.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.list"
               )
+
               for file in "${files[@]}"; do
-                  set -- $file
-                  echo "Downloading: $2"
-                  curl -A "Surge iOS/3367" -f -L -o "Tools-repo/Ruleset/$1" "$2" || { echo "Download Failed: $2"; exit 1; }
+                  name=$(echo $file | cut -d " " -f 1)
+                  url=$(echo $file | cut -d " " -f 2)
+                  echo "Downloading: $url"
+                  curl -f -L "$url" > Tools-repo/Ruleset/Surge/"$name" || { echo "Download Failed: $url"; exit 1; }
               done
-              echo "Files downloaded successfully."
           else
               echo "Unknown repository. Please run this script in either Tools or Tools repository."
               exit 1
