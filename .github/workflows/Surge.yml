@@ -313,6 +313,7 @@ jobs:
                 sed -i '3a\\' "$file"
               else
                 echo "文件未更新：$file"
+              fi
             else
               echo "$file not found."
             fi
