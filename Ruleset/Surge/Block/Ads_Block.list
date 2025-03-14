@@ -1,6 +1,7 @@
 # 规则名称: Ads_Block
 # 规则统计: 1415
 
+# 更新时间: 2025-03-14 20:53:04
 AND,((DEST-PORT,18000),(PROTOCOL,STUN))
 AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com))
 AND,((DOMAIN-KEYWORD,-ad-,extended-matching),(DOMAIN-SUFFIX,byteimg.com,extended-matching))
