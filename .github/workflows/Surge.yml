@@ -7,11 +7,12 @@ on:
 
 jobs:
   # 定义名为 Fork-FLITER-list 的任务
-  Fork-FLITER-list:
+  Fork:
     runs-on: ubuntu-latest  # 在 ubuntu-latest 环境中运行任务
     env:
       TZ: 'Asia/Shanghai'  # 配置时区为 Asia/Shanghai
 
+  
     steps:
       # 步骤1：检出目标仓库
       - name: 检出目标仓库
@@ -20,97 +21,135 @@ jobs:
           repository: thNylHx/Tools  # 目标仓库：thNylHx/Tools
           path: Tools-repo         # 本地目录名称：Tools-repo
 
-      # 步骤2：执行内嵌脚本来更新规则
+      # 步骤2：执行内嵌脚本来更新规则 
       - name: 执行内嵌脚本
         run: |
-          echo "开始执行脚本..."
-          
-          # 创建规则目录
-          mkdir -p Tools/Ruleset/Surge/{Block,Media,Other}
+          #!/bin/bash
+          repo_name=$(basename "$GITHUB_REPOSITORY")
+          if [[ "$repo_name" == "Tool" ]]; then
+              echo "Running in Tool repository"
+              mkdir -p Tools/Ruleset/Surge/{Block,Media,Other}
+              # 合并 Ads 规则
+              urls=(
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
+              )
+              > Tool-repo/Ruleset/Surge/Block/Ads_ml.list
+              for url in "${urls[@]}"; do
+                  echo "Downloading: $url"
+                  curl -f -L "$url" >> Tool-repo/Ruleset/Surge/Block/Ads_ml.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tool-repo/Ruleset/Surge/Block/Ads_ml.list
+              done
 
-          # 定义下载函数
-          download_file() {
-            local dest="$1"
-            local url="$2"
-            curl -L -o "$dest" "$url"
-          }
+              # 合并 Facebook 规则
+              urls=(
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
+                  )
+              > Tool-repo/Ruleset/Surge/Media/Facebook.list
+              for url in "${urls[@]}"; do
+                  echo "Downloading: $url"
+                  curl -f -L "$url" >> Tool-repo/Ruleset/Surge/Media/Facebook.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tool-repo/Ruleset/Surge/Media/Facebook.list
+              done
 
-          # --- Block 类（广告拦截） ---
-          block_downloads=(
-            "Ads_all.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
-            "Ads_BanAD.list|https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
-            "Ads_BanProgramAD.list|https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
-            "Ads_Adblock4limbo_surge.list|https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/Surge/rule/Adblock4limbo_surge.list"
-            "Ads_easyprivacy_surge.list|https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easyprivacy_surge.list"
-            "Ads_easylist_surge.list|https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easylist_surge.list"
-            "Ads_Advertising.list|https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Advertising.list"
-            "Ads_Malicious.list|https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Malicious.list"
-            "Ads_Tracking.list|https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Tracking.list"
-          )
+              # 合并 Netflix 规则
+              urls=(
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
+                  )
+              > Tool-repo/Ruleset/Surge/Media/Netflix.list
+              for url in "${urls[@]}"; do
+                  echo "Downloading: $url"
+                  curl -f -L "$url" >> Tool-repo/Ruleset/Surge/Media/Netflix.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tool-repo/Ruleset/Surge/Media/Netflix.list
+              done
 
-          for item in "${block_downloads[@]}"; do
-            filename="${item%%|*}"
-            url="${item#*|}"
-            download_file "Tools/Ruleset/Surge/Block/${filename}" "$url"
-          done
+              # 合并 Twitter 规则
+              urls=(
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
+                  )
+              > Tool-repo/Ruleset/Surge/Media/Twitter.list
+              for url in "${urls[@]}"; do
+                  echo "Downloading: $url"
+                  curl -f -L "$url" >> Tool-repo/Ruleset/Surge/Media/Twitter.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tool-repo/Ruleset/Surge/Media/Twitter.list
+              done
 
-          # --- Other 类（本地/局域网、PayPal、AI、游戏平台、谷歌平台、微软平台、海外代理、苹果、国内直连） ---
-          other_downloads=(
-            "Private_ip.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
-            "PayPal.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/paypal.list"
-            "Openai.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.list"
-            "Steam.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list"
-            "Epic.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.list"
-            "Google.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
-            "Google_ip.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
-            "Line.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/line.list"
-            "GitHub.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/github.list"
-            "OneDrive.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/onedrive.list"
-            "Microsoft.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/microsoft.list"
-            "GlobalGFW.list|https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
-            "Global.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
-            "Apple.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
-            "AppleCN.list|https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Apple.list"
-            "China.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/cn.list"
-            "China_ip.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
-            "ChinaASN.list|https://raw.githubusercontent.com/missuo/ASN-China/main/ASN.China.list"
-          )
+              # 合并 Google 规则
+              urls=(
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
+                  )
+              > Tool-repo/Ruleset/Surge/Other/Google.list
+              for url in "${urls[@]}"; do
+                  echo "Downloading: $url"
+                  curl -f -L "$url" >> Tool-repo/Ruleset/Surge/Other/Google.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tool-repo/Ruleset/Surge/Other/Google.list
+              done
 
-          for item in "${other_downloads[@]}"; do
-            filename="${item%%|*}"
-            url="${item#*|}"
-            download_file "Tools/Ruleset/Surge/Other/${filename}" "$url"
-          done
+              files=(
+                  # Ads
+                  "Ads_all.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
+                  "Ads_BanAD.list|https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
+                  "Ads_BanProgramAD.list|https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
+                  "Ads_Adblock4limbo_surge.list|https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/Surge/rule/Adblock4limbo_surge.list"
+                  "Ads_easyprivacy_surge.list|https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easyprivacy_surge.list"
+                  "Ads_easylist_surge.list|https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easylist_surge.list"
+                  "Ads_Advertising.list|https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Advertising.list"
+                  "Ads_Malicious.list|https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Malicious.list"
+                  "Ads_Tracking.list|https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Tracking.list"
 
-          # --- Media 类（谷歌平台、社交平台、影视媒体） ---
-          media_downloads=(
-            "YouTube.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
-            "YouTubeMusic.list|https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
-            "Telegram.list|https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
-            "Twitter.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
-            "Twitter_ip.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
-            "Facebook.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
-            "Facebook_ip.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
-            "Instagram.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
-            "TikTok.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/tiktok.list"
-            "GlobalMedia.list|https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
-            "BilibiliHMT.list|https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
-            "ChinaMedia.list|https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
-            "Bilibili.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.list"
-            "Disney.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/disney.list"
-            "Netflix.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
-            "Netflix_ip.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
-            "Spotify.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.list"
-          )
-  
-          for item in "${media_downloads[@]}"; do
-            filename="${item%%|*}"
-            url="${item#*|}"
-            download_file "Tools/Ruleset/Surge/Media/${filename}" "$url"
-          done
+                  # Other
+                  "Private_ip.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
+                  "PayPal.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/paypal.list"
+                  "Openai.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.list"
+                  "Steam.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list"
+                  "Epic.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.list"
+                  "Google.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
+                  "Google_ip.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
+                  "Line.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/line.list"
+                  "GitHub.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/github.list"
+                  "OneDrive.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/onedrive.list"
+                  "Microsoft.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/microsoft.list"
+                  "GlobalGFW.list|https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
+                  "Global.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
+                  "Apple.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
+                  "AppleCN.list|https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Apple.list"
+                  "China.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/cn.list"
+                  "China_ip.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
+                  "ChinaASN.list|https://raw.githubusercontent.com/missuo/ASN-China/main/ASN.China.list"
 
-          echo "脚本执行完毕"
-        shell: bash
+                  # 
+                 "YouTube.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
+                 "YouTubeMusic.list|https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
+                 "Telegram.list|https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
+                 "Twitter.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
+                 "Twitter_ip.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
+                 "Facebook.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
+                 "Facebook_ip.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
+                 "Instagram.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
+                 "TikTok.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/tiktok.list"
+                 "GlobalMedia.list|https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
+                 "BilibiliHMT.list|https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
+                 "ChinaMedia.list|https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
+                 "Bilibili.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.list"
+                 "Disney.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/disney.list"
+                 "Netflix.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
+                 "Netflix_ip.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
+                 "Spotify.list|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.list"
+              )
+              for file in "${files[@]}"; do
+                  set -- $file
+                  echo "Downloading: $2"
+                  curl -A "Surge iOS/3367" -f -L -o "Tool-repo/Ruleset/$1" "$2" || { echo "Download Failed: $2"; exit 1; }
+              done
+              echo "Files downloaded successfully."
+          else
+              echo "Unknown repository. Please run this script in either Tool or Tool repository."
+              exit 1
+          fi
 
       # 步骤3：执行规则转换和修改
       - name: 规则转换和修改
@@ -178,6 +217,29 @@ jobs:
             fi
           done
 
+      # 修正规则
+      - name: 修正规则
+        run: |
+          # 启用 globstar，以支持递归匹配子目录下的 .list 文件
+          shopt -s globstar
+          for file in Tools-repo/Ruleset/Surge/**/*.list; do
+            if [ -f "$file" ]; then
+              # 将以"."开头的行的第一个"."替换为 "DOMAIN-SUFFIX"
+              sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
+              # 将除了以 "#" 开头、"空行" 开头之外的行, 在行首添加 "DOMAIN"
+              sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^GEOIP,|^AND,|^OR,|^NOT,|^URL-REGEX,|^USER-AGENT,|^PROCESS-NAME,|^DEST-PORT,/b; s/^([^#])/DOMAIN,\1/' "$file"
+              # 删除文件中所有 [以 # 或 ; 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
+              sed -i -e '/^\s*[#;]/d' -e '/^$/d' -e 's| //.*||'  "$file"
+              # 删除指定域名
+              sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
+              sed -i -e 's/,reject$//' "$file"
+              # 修正格式
+              sed -i 's/, */,/g' "$file"
+            else
+              echo "$file not found."
+            fi
+          done
+
       # 步骤4：追加规则
       - name: 合并规则
         run: |
@@ -207,87 +269,6 @@ jobs:
           else
             echo "Ads_ml.list not found."
           fi
-
-          # 合并 FacebookIP & Instagram 到 Facebook
-          if [ -f "Tools-repo/Ruleset/Surge/Media/Facebook.list" ]; then
-            echo "" >> Tools-repo/Ruleset/Surge/Media/Facebook.list
-            cat Tools-repo/Ruleset/Surge/Media/Instagram.list >> Tools-repo/Ruleset/Surge/Media/Facebook.list
-            echo "" >> Tools-repo/Ruleset/Surge/Media/Facebook.list
-            cat Tools-repo/Ruleset/Surge/Media/Facebook_ip.list >> Tools-repo/Ruleset/Surge/Media/Facebook.list
-          else
-            echo "Facebook.list not found."
-          fi
-
-          # 合并 NetflixIP 到 Netflix
-          if [ -f "Tools-repo/Ruleset/Surge/Media/Netflix.list" ]; then
-            echo "" >> Tools-repo/Ruleset/Surge/Media/Netflix.list
-            cat Tools-repo/Ruleset/Surge/Media/Netflix_ip.list >> Tools-repo/Ruleset/Surge/Media/Netflix.list
-          else
-            echo "Netflix.list not found."
-          fi
-
-          # 合并 TwitterIP 到 Twitter
-          if [ -f "Tools-repo/Ruleset/Surge/Media/Twitter.list" ]; then
-            echo "" >> Tools-repo/Ruleset/Surge/Media/Twitter.list
-            cat Tools-repo/Ruleset/Surge/Media/Twitter_ip.list >> Tools-repo/Ruleset/Surge/Media/Twitter.list
-          else
-            echo "Twitter.list not found."
-          fi
-
-          # 合并 YouTubeMusic 到 YouTube
-          if [ -f "Tools-repo/Ruleset/Surge/Media/YouTube.list" ]; then
-            echo "" >> Tools-repo/Ruleset/Surge/Media/YouTube.list
-            cat Tools-repo/Ruleset/Surge/Media/YouTubeMusic.list >> Tools-repo/Ruleset/Surge/Media/YouTube.list
-          else
-            echo "YouTube.list not found."
-          fi
-
-          # 合并 GoogleIP 到 Google
-          if [ -f "Tools-repo/Ruleset/Surge/Other/Google.list" ]; then
-            echo "" >> Tools-repo/Ruleset/Surge/Other/Google.list
-            cat Tools-repo/Ruleset/Surge/Other/Google_ip.list >> Tools-repo/Ruleset/Surge/Other/Google.list
-          else
-            echo "Google.list not found."
-          fi
-
-      #     
-      - name: 修正规则
-        run: |
-          # 启用 globstar，以支持递归匹配子目录下的 .list 文件
-          shopt -s globstar
-          for file in Tools-repo/Ruleset/Surge/**/*.list; do
-            if [ -f "$file" ]; then
-              # 将以"."开头的行的第一个"."替换为 "DOMAIN-SUFFIX"
-              sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
-              # 将除了以 "#" 开头、"空行" 开头之外的行, 在行首添加 "DOMAIN"
-              sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^GEOIP,|^AND,|^OR,|^NOT,|^URL-REGEX,|^USER-AGENT,|^PROCESS-NAME,|^DEST-PORT,/b; s/^([^#])/DOMAIN,\1/' "$file"
-              # 删除文件中所有 [以 # 或 ; 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
-              sed -i -e '/^\s*[#;]/d' -e '/^$/d' -e 's| //.*||'  "$file"
-              # 删除指定域名
-              sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
-              sed -i -e 's/,reject$//' "$file"
-              # 修正格式
-              sed -i 's/, */,/g' "$file"
-            else
-              echo "$file not found."
-            fi
-          done
-
-      # 步骤5：去重排序
-      - name: 去重排序
-        run: |
-          cd Tools-repo/Ruleset/Surge/Block
-          shopt -s nullglob
-          for file in Ads_ConnersHua.list Ads_limbopro.list Ads_ml.list; do
-            if [ -f "$file" ]; then
-              sorted_file="sorted_${file}"
-              grep -v '^\s*#' "$file" | grep -v '^\s*$' | grep -v 'URL-REGEX,' | sort | uniq > "$sorted_file"
-              mv "$sorted_file" "$file"
-            else
-              echo "$file not found."
-            fi
-          done
-        shell: bash
 
       # 步骤6：对 Surge 下所有子目录中的 .list 文件追加规则信息（优化处理）
       - name: 追加规则信息
