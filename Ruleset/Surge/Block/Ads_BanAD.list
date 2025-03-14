@@ -1,12 +1,6 @@
 # 规则名称: Ads_BanAD
-# 规则统计: 606
+# 规则统计: 591
 
-# 规则名称: Ads_BanAD
-# 规则统计: 603
-
-# 本碎片只包含常见广告关键字、广告联盟。无副作用，放心使用
-
-# 广告关键词
 DOMAIN-KEYWORD,admarvel
 DOMAIN-KEYWORD,admaster
 DOMAIN-KEYWORD,adsage
@@ -31,8 +25,6 @@ DOMAIN-KEYWORD,socdm
 DOMAIN-KEYWORD,supersonicads
 DOMAIN-KEYWORD,wlmonitor
 DOMAIN-KEYWORD,zjtoolbar
-
-# 广告联盟-国内****************
 DOMAIN-SUFFIX,09mk.cn
 DOMAIN-SUFFIX,100peng.com
 DOMAIN-SUFFIX,114la.com
@@ -427,8 +419,6 @@ DOMAIN-SUFFIX,zhiziyun.com
 DOMAIN-SUFFIX,zhjfad.com
 DOMAIN-SUFFIX,zqzxz.com
 DOMAIN-SUFFIX,zzsx8.com
-
-# 广告联盟-国外****************
 DOMAIN-SUFFIX,acuityplatform.com
 DOMAIN-SUFFIX,ad-stir.com
 DOMAIN-SUFFIX,ad-survey.com
@@ -581,8 +571,6 @@ DOMAIN-SUFFIX,yadro.ru
 DOMAIN-SUFFIX,yengo.com
 DOMAIN-SUFFIX,zedo.com
 DOMAIN-SUFFIX,zemanta.com
-
-# 垃圾站点****************
 DOMAIN-SUFFIX,11h5.com
 DOMAIN-SUFFIX,1kxun.mobi
 DOMAIN-SUFFIX,26zsd.cn
@@ -598,11 +586,8 @@ DOMAIN-SUFFIX,wanfeng1.com
 DOMAIN-SUFFIX,wep016.top
 DOMAIN-SUFFIX,win-stock.com.cn
 DOMAIN-SUFFIX,zantainet.com
-
 DOMAIN-SUFFIX,dh54wf.xyz
 DOMAIN-SUFFIX,g2q3e.cn
-
-# 运营商广告****************
 DOMAIN-SUFFIX,114so.cn
 DOMAIN-SUFFIX,go.10086.cn
 DOMAIN-SUFFIX,hivedata.cc

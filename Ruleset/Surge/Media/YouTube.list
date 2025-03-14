@@ -1,8 +1,5 @@
 # 规则名称: YouTube
-# 规则统计: 206
-
-# 规则名称: YouTube
-# 规则统计: 192
+# 规则统计: 196
 
 DOMAIN-SUFFIX,youtube
 DOMAIN-SUFFIX,youtube.ru
@@ -180,28 +177,21 @@ DOMAIN-SUFFIX,youtube.co.ae
 DOMAIN-SUFFIX,youtube-ui.l.google.com
 DOMAIN-SUFFIX,wide-youtube.l.google.com
 DOMAIN-SUFFIX,ggpht.cn
-
-# 内容：YouTubeMusic
-# 数量：5条
 USER-AGENT,*YouTubeMusic*
 USER-AGENT,*com.google.ios.youtubemusic*
 USER-AGENT,YouTubeMusic*
 USER-AGENT,com.google.ios.youtubemusic*
 DOMAIN,music.youtube.com
-
-# 内容：YouTubeMusic
-# 数量：5条
 USER-AGENT,*YouTubeMusic*
 USER-AGENT,*com.google.ios.youtubemusic*
 USER-AGENT,YouTubeMusic*
 USER-AGENT,com.google.ios.youtubemusic*
 DOMAIN,music.youtube.com
-
-# 规则名称: YouTubeMusic
-# 规则统计: 7
-
-# 内容：YouTubeMusic
-# 数量：5条
+USER-AGENT,*YouTubeMusic*
+USER-AGENT,*com.google.ios.youtubemusic*
+USER-AGENT,YouTubeMusic*
+USER-AGENT,com.google.ios.youtubemusic*
+DOMAIN,music.youtube.com
 USER-AGENT,*YouTubeMusic*
 USER-AGENT,*com.google.ios.youtubemusic*
 USER-AGENT,YouTubeMusic*
