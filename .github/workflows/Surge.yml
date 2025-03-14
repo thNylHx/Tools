@@ -33,11 +33,11 @@ jobs:
               urls=(
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
               )
-              > Tool-repo/Ruleset/Surge/Block/Ads_ml.list
+              > Tools-repo/Ruleset/Surge/Block/Ads_ml.list
               for url in "${urls[@]}"; do
                   echo "Downloading: $url"
-                  curl -f -L "$url" >> Tool-repo/Ruleset/Surge/Block/Ads_ml.list || { echo "Download Failed: $url"; exit 1; }
-                  echo "" >> Tool-repo/Ruleset/Surge/Block/Ads_ml.list
+                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
               done
 
               # 合并 Facebook 规则
@@ -46,11 +46,11 @@ jobs:
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
                   )
-              > Tool-repo/Ruleset/Surge/Media/Facebook.list
+              > Tools-repo/Ruleset/Surge/Media/Facebook.list
               for url in "${urls[@]}"; do
                   echo "Downloading: $url"
-                  curl -f -L "$url" >> Tool-repo/Ruleset/Surge/Media/Facebook.list || { echo "Download Failed: $url"; exit 1; }
-                  echo "" >> Tool-repo/Ruleset/Surge/Media/Facebook.list
+                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Media/Facebook.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tools-repo/Ruleset/Surge/Media/Facebook.list
               done
 
               # 合并 Netflix 规则
@@ -58,11 +58,11 @@ jobs:
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
                   )
-              > Tool-repo/Ruleset/Surge/Media/Netflix.list
+              > Tools-repo/Ruleset/Surge/Media/Netflix.list
               for url in "${urls[@]}"; do
                   echo "Downloading: $url"
-                  curl -f -L "$url" >> Tool-repo/Ruleset/Surge/Media/Netflix.list || { echo "Download Failed: $url"; exit 1; }
-                  echo "" >> Tool-repo/Ruleset/Surge/Media/Netflix.list
+                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Media/Netflix.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tools-repo/Ruleset/Surge/Media/Netflix.list
               done
 
               # 合并 Twitter 规则
@@ -70,11 +70,11 @@ jobs:
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
                   )
-              > Tool-repo/Ruleset/Surge/Media/Twitter.list
+              > Tools-repo/Ruleset/Surge/Media/Twitter.list
               for url in "${urls[@]}"; do
                   echo "Downloading: $url"
-                  curl -f -L "$url" >> Tool-repo/Ruleset/Surge/Media/Twitter.list || { echo "Download Failed: $url"; exit 1; }
-                  echo "" >> Tool-repo/Ruleset/Surge/Media/Twitter.list
+                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Media/Twitter.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tools-repo/Ruleset/Surge/Media/Twitter.list
               done
 
               # 合并 Google 规则
@@ -82,11 +82,11 @@ jobs:
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
                   )
-              > Tool-repo/Ruleset/Surge/Other/Google.list
+              > Tools-repo/Ruleset/Surge/Other/Google.list
               for url in "${urls[@]}"; do
                   echo "Downloading: $url"
-                  curl -f -L "$url" >> Tool-repo/Ruleset/Surge/Other/Google.list || { echo "Download Failed: $url"; exit 1; }
-                  echo "" >> Tool-repo/Ruleset/Surge/Other/Google.list
+                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Other/Google.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tools-repo/Ruleset/Surge/Other/Google.list
               done
 
               files=(
@@ -143,11 +143,11 @@ jobs:
               for file in "${files[@]}"; do
                   set -- $file
                   echo "Downloading: $2"
-                  curl -A "Surge iOS/3367" -f -L -o "Tool-repo/Ruleset/$1" "$2" || { echo "Download Failed: $2"; exit 1; }
+                  curl -A "Surge iOS/3367" -f -L -o "Tools-repo/Ruleset/$1" "$2" || { echo "Download Failed: $2"; exit 1; }
               done
               echo "Files downloaded successfully."
           else
-              echo "Unknown repository. Please run this script in either Tool or Tool repository."
+              echo "Unknown repository. Please run this script in either Tools or Tools repository."
               exit 1
           fi
 
