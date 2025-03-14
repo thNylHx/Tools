@@ -27,6 +27,12 @@ jobs:
           # 设置将仓库检出到本地的目录名称为 Tools
           path: Tools  # 本地目录名称：Tool
 
+      # 步骤 2：设置 Git 用户配置
+      - name: 设置 Git 配置
+        run: |
+          git config --global user.name "${{ secrets.USERNAME }}"
+          # git config --global user.email "${{ secrets.EMAIL }}"
+
       # 2. 克隆 LoonKissSurge 仓库到工作目录
       - name: 克隆 LoonKissSurge 仓库
         run: |
