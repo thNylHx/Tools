@@ -241,36 +241,6 @@ jobs:
             fi
           done
 
-      # 步骤4：追加规则
-      - name: 合并规则
-        run: |
-          # 合并 ConnersHua 到 Ads_ConnersHua
-          if [ -f "Tools-repo/Ruleset/Surge/Block/Ads_ConnersHua.list" ]; then
-            cat Tools-repo/Ruleset/Surge/Block/Ads_Advertising.list >> Tools-repo/Ruleset/Surge/Block/Ads_ConnersHua.list
-            cat Tools-repo/Ruleset/Surge/Block/Ads_Malicious.list >> Tools-repo/Ruleset/Surge/Block/Ads_ConnersHua.list
-            cat Tools-repo/Ruleset/Surge/Block/Ads_Tracking.list >> Tools-repo/Ruleset/Surge/Block/Ads_ConnersHua.list
-          else
-            echo "Ads_ConnersHua.list not found."
-          fi
-
-          # 合并 limbopro 到 Ads_limbopro
-          if [ -f "Tools-repo/Ruleset/Surge/Block/Ads_limbopro.list" ]; then
-            cat Tools-repo/Ruleset/Surge/Block/Ads_Adblock4limbo_surge.list >> Tools-repo/Ruleset/Surge/Block/Ads_limbopro.list
-            cat Tools-repo/Ruleset/Surge/Block/Ads_easyprivacy_surge.list >> Tools-repo/Ruleset/Surge/Block/Ads_limbopro.list
-            cat Tools-repo/Ruleset/Surge/Block/Ads_easylist_surge.list >> Tools-repo/Ruleset/Surge/Block/Ads_limbopro.list
-          else
-            echo "Ads_limbopro.list not found."
-          fi
-
-          # 合并 Other 到 Ads_ml
-          if [ -f "Tools-repo/Ruleset/Surge/Block/Ads_ml.list" ]; then
-            cat Tools-repo/Ruleset/Surge/Block/Ads_th.list >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
-            cat Tools-repo/Ruleset/Surge/Block/Ads_RuCu6.list >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
-            cat Tools-repo/Ruleset/Surge/Block/Ads_all.list >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
-          else
-            echo "Ads_ml.list not found."
-          fi
-
       # 步骤6：对 Surge 下所有子目录中的 .list 文件追加规则信息（优化处理）
       - name: 追加规则信息
         run: |
