@@ -38,20 +38,7 @@ jobs:
               for url in "${urls[@]}"; do
                   echo "Downloading: $url"
                   curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list || { echo "Download Failed: $url"; exit 1; }
-                  echo "" >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list
-              done
-
-              # 合并 Facebook 规则
-              urls=(
-                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
-                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
-                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
-                  )
-              > Tools-repo/Ruleset/Surge/Media/Facebook.list
-              for url in "${urls[@]}"; do
-                  echo "Downloading: $url"
-                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Media/Facebook.list || { echo "Download Failed: $url"; exit 1; }
-                  echo "" >> Tools-repo/Ruleset/Surge/Media/Facebook.list
+                  echo "" >> Tools-repo/Ruleset/Surge/Block/Ads_Moli.list
               done
 
               # 合并 Netflix 规则
@@ -152,6 +139,20 @@ jobs:
                   echo "Downloading: $file_name"
                   curl -f -L "$url" -o "Tools-repo/Ruleset/Surge/$file_name" || { echo "Download Failed: $url"; exit 1; }
               done
+
+              # 合并 Facebook 规则
+              urls=(
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
+                  )
+              > Tools-repo/Ruleset/Surge/Media/Facebook.list
+              for url in "${urls[@]}"; do
+                  echo "Downloading: $url"
+                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Media/Facebook.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tools-repo/Ruleset/Surge/Media/Facebook.list
+              done
+
           else
               echo "This is not the Tools repository. Skipping."
           fi
