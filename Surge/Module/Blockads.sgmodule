@@ -9,6 +9,9 @@
 # 12306 放行规则
 DOMAIN,ad.12306.cn,DIRECT,extended-matching
 
+# 阿里云盘去广告
+IP-CIDR,203.107.1.1/24,REJECT,no-resolve,pre-matching
+
 # Apple
 DOMAIN,ca.iadsdk.apple.com,DIRECT,extended-matching
 DOMAIN-SUFFIX,advp.apple.com,REJECT,extended-matching,pre-matching
@@ -258,9 +261,192 @@ DOMAIN,api.mobrtb.com,REJECT,extended-matching,pre-matching
 DOMAIN,ssp.maplehaze.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,lnk0.com,REJECT,extended-matching,pre-matching
 
+# 友盟
+DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,errnewlog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,ucc.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,ulogs.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,utoken.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,deeplink.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,aspect-upush.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,plbslog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,log.umtrack.com,REJECT,extended-matching,pre-matching
+DOMAIN,aaid.umeng.com,REJECT,extended-matching,pre-matching
+AND,((DOMAIN-KEYWORD,-ad-,extended-matching),(DOMAIN-SUFFIX,byteimg.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,-ttam-,extended-matching),(DOMAIN-SUFFIX,ibyteimg.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,ssdk-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,pangolin,extended-matching),(DOMAIN-SUFFIX,sgsnssdk.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,lf,extended-matching),(DOMAIN-KEYWORD,-short.bytetos.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,v,extended-matching),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,s,extended-matching),(DOMAIN-KEYWORD,-fe-scm.pglstatp-toutiao.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-ttcdn-tos.pstatp.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-fe-tos.pglstatp-toutiao.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-static.i18n-pglstatp.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,if,extended-matching),(DOMAIN-KEYWORD,-cdn-tos.bytescm.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,if,extended-matching),(DOMAIN-KEYWORD,-analytics.bytescm.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,lf,extended-matching),(DOMAIN-KEYWORD,-analytics.bytescm.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,lf,extended-matching),(DOMAIN-KEYWORD,-analytics.bytescm.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,ads,extended-matching),(DOMAIN-KEYWORD,normal,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,-access-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,-log-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,-dual-event-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,pangolin,extended-matching),(DOMAIN-SUFFIX,sgsnssdk.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,ads,extended-matching),(DOMAIN-KEYWORD,-normal-lq,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)),REJECT,pre-matching
+URL-REGEX,"^http:\/\/p\d+-be-pack-sign\.pglstatp-toutiao\.com\/(ad-app-package|web\.business\.image)\/",REJECT,extended-matching
+DOMAIN,mon.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN,lf-ad-ies.bytecdn.cn,REJECT,extended-matching,pre-matching
+DOMAIN,i.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,is.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,bds.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,dm.bytedance.com,REJECT,extended-matching,pre-matching
+DOMAIN,dm.pstatp.com,REJECT,extended-matching,pre-matching
+DOMAIN,dm.toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN,log.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,s3a.pstatp.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdfp.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,tosv.boe.byted.org,REJECT,extended-matching,pre-matching
+DOMAIN,tosv.byted.org,REJECT,extended-matching,pre-matching
+DOMAIN,extlog.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,mssdk-bu.bytedance.com,REJECT,extended-matching,pre-matching
+DOMAIN,toblog.ctobsnssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,mssdk.volces.com,REJECT,extended-matching,pre-matching
+DOMAIN,pangolin.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,gromore.pangolin-sdk-toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN,ether-pack.pangolin-sdk-toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,-ad-sign.byteimg.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,api-access.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching,pre-matching
+
+# 番茄小说去广告
+AND,((DOMAIN-KEYWORD,-ad-,extended-matching),(DOMAIN-SUFFIX,byteimg.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,-ttam-,extended-matching),(DOMAIN-SUFFIX,ibyteimg.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,ssdk-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,pangolin,extended-matching),(DOMAIN-SUFFIX,sgsnssdk.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,lf,extended-matching),(DOMAIN-KEYWORD,-short.bytetos.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,v,extended-matching),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,s,extended-matching),(DOMAIN-KEYWORD,-fe-scm.pglstatp-toutiao.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-ttcdn-tos.pstatp.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-fe-tos.pglstatp-toutiao.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-static.i18n-pglstatp.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,if,extended-matching),(DOMAIN-KEYWORD,-cdn-tos.bytescm.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,if,extended-matching),(DOMAIN-KEYWORD,-analytics.bytescm.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,lf,extended-matching),(DOMAIN-KEYWORD,-analytics.bytescm.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,lf,extended-matching),(DOMAIN-KEYWORD,-analytics.bytescm.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,ads,extended-matching),(DOMAIN-KEYWORD,normal,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,-access-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,-log-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,-dual-event-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,pangolin,extended-matching),(DOMAIN-SUFFIX,sgsnssdk.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,ads,extended-matching),(DOMAIN-KEYWORD,-normal-lq,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)),REJECT,pre-matching
+URL-REGEX,"^http:\/\/p\d+-be-pack-sign\.pglstatp-toutiao\.com\/(ad-app-package|web\.business\.image)\/",REJECT,extended-matching
+DOMAIN,mon.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN,lf-ad-ies.bytecdn.cn,REJECT,extended-matching,pre-matching
+DOMAIN,i.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,is.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,bds.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,dm.bytedance.com,REJECT,extended-matching,pre-matching
+DOMAIN,dm.pstatp.com,REJECT,extended-matching,pre-matching
+DOMAIN,dm.toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN,log.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,s3a.pstatp.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdfp.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,tosv.boe.byted.org,REJECT,extended-matching,pre-matching
+DOMAIN,tosv.byted.org,REJECT,extended-matching,pre-matching
+DOMAIN,extlog.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,mssdk-bu.bytedance.com,REJECT,extended-matching,pre-matching
+DOMAIN,toblog.ctobsnssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,mssdk.volces.com,REJECT,extended-matching,pre-matching
+DOMAIN,pangolin.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,gromore.pangolin-sdk-toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN,ether-pack.pangolin-sdk-toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,-ad-sign.byteimg.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,api-access.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching,pre-matching
+
+# 汽水音乐去广告
+AND,((DOMAIN-KEYWORD,api100-core-quic-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api100-normal-quic-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api100-normal-quic-aweme-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api100-quic-core-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api100-quic-normal-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,frontier100-aweme,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,ma5-normal-,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,polaris5-normal-,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,webcast100-ws-c-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,tnc,extended-matching),(AND,((OR,((DOMAIN-KEYWORD,-bjlgy,extended-matching),(DOMAIN-KEYWORD,-alisc,extended-matching),(DOMAIN-KEYWORD,-aliec,extended-matching),(DOMAIN-KEYWORD,-alisg,extended-matching))),(OR,((DOMAIN-SUFFIX,snssdk.com,extended-matching),(DOMAIN-SUFFIX,isnssdk.com,extended-matching),(DOMAIN-SUFFIX,toutiaoapi.com,extended-matching),(DOMAIN-SUFFIX,bytedance.com,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)))))),REJECT,pre-matching
+DOMAIN,frontier-aweme-hl.snssdk.com,REJECT,extended-matching,pre-matching
+# DOMAIN,frontier-aweme.snssdk.com,REJECT
+DOMAIN,frontier-quic-test.bytedance.com,REJECT,extended-matching,pre-matching
+AND,((IP-CIDR,110.249.199.75/32,no-resolve),(DEST-PORT,6443)),REJECT,pre-matching
+AND,((IP-CIDR,111.225.147.191/32,no-resolve),(DEST-PORT,6443)),REJECT,pre-matching
+AND,((IP-CIDR,111.63.61.101/32,no-resolve),(DEST-PORT,6443)),REJECT,pre-matching
+AND,((IP-CIDR,220.243.141.0/32,no-resolve),(DEST-PORT,6443)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,-ad-,extended-matching),(DOMAIN-SUFFIX,byteimg.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,-ttam-,extended-matching),(DOMAIN-SUFFIX,ibyteimg.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,ssdk-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,pangolin,extended-matching),(DOMAIN-SUFFIX,sgsnssdk.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,lf,extended-matching),(DOMAIN-KEYWORD,-short.bytetos.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,v,extended-matching),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,s,extended-matching),(DOMAIN-KEYWORD,-fe-scm.pglstatp-toutiao.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-ttcdn-tos.pstatp.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-fe-tos.pglstatp-toutiao.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-static.i18n-pglstatp.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,if,extended-matching),(DOMAIN-KEYWORD,-cdn-tos.bytescm.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,if,extended-matching),(DOMAIN-KEYWORD,-analytics.bytescm.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,lf,extended-matching),(DOMAIN-KEYWORD,-analytics.bytescm.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,lf,extended-matching),(DOMAIN-KEYWORD,-analytics.bytescm.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,ads,extended-matching),(DOMAIN-KEYWORD,normal,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,-access-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,-log-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,-dual-event-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,pangolin,extended-matching),(DOMAIN-SUFFIX,sgsnssdk.com,extended-matching)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,ads,extended-matching),(DOMAIN-KEYWORD,-normal-lq,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching)),REJECT,pre-matching
+URL-REGEX,"^http:\/\/p\d+-be-pack-sign\.pglstatp-toutiao\.com\/(ad-app-package|web\.business\.image)\/",REJECT,extended-matching
+DOMAIN,mon.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN,lf-ad-ies.bytecdn.cn,REJECT,extended-matching,pre-matching
+DOMAIN,i.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,is.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,bds.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,dm.bytedance.com,REJECT,extended-matching,pre-matching
+DOMAIN,dm.pstatp.com,REJECT,extended-matching,pre-matching
+DOMAIN,dm.toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN,log.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,s3a.pstatp.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdfp.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,tosv.boe.byted.org,REJECT,extended-matching,pre-matching
+DOMAIN,tosv.byted.org,REJECT,extended-matching,pre-matching
+DOMAIN,extlog.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,mssdk-bu.bytedance.com,REJECT,extended-matching,pre-matching
+DOMAIN,toblog.ctobsnssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,mssdk.volces.com,REJECT,extended-matching,pre-matching
+DOMAIN,pangolin.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,gromore.pangolin-sdk-toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN,ether-pack.pangolin-sdk-toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,-ad-sign.byteimg.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,api-access.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching,pre-matching
 
 
 [URL Rewrite]
+# 阿里云盘去广告
+# 首页活动日历
+^https:\/\/member\.alipan\.com\/v2\/activity\/sign_in_luckyBottle data-type=text data="{}" status-code=200
+# 首页板块入口
+^https:\/\/api\.alipan\.com\/adrive\/v1\/file\/getTopFolders data-type=text data="{}" status-code=200
+
 # 拼多多广告平台
 ^https:\/\/video-dsp\.pddpic\.com\/market-dsp-video\/ - reject
 ^https:\/\/t-dsp\.pinduoduo\.com\/dspcb\/i\/mrk_union - reject
@@ -315,7 +501,6 @@ DOMAIN-SUFFIX,lnk0.com,REJECT,extended-matching,pre-matching
 ^https:\/\/cc\.163\.com\/act\/m\/daily\/ad_ - reject
 
 
-
 [Body Rewrite]
 # 555 电影去广告
 http-response-jq ^https:\/\/app-v1\.ecoliving168\.com\/api\/v1\/movie\/index_recommend\? '(.data[] | select(.layout == "advert_self")) |= del(.data) | .data |= map(select(.layout != "advert_self")) | .data |= map(if .layout == "index_recommend_carousel" then .list |= map(select(.type != 3)) else . end)'
@@ -349,6 +534,12 @@ http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/mgamenavigation\/navigation_
 http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/mgamerecpage\/recommend_page\? '.data.plugins|=map(select(.module_type!="banner"))|.data.plugins|=map(select(.module_type!="show_list"))|.data.plugins|=map(select(.title!="推荐品类"))'
 http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/entpage\/live_navbar_mobile\/ios\? '.data.top_nav |= map(select(.cn_name == "推荐" or .cn_name == "星秀" or .cn_name == "心动交友"))'
 
+# 汽水音乐去广告
+http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/me\? 'delpaths([["reward_ad_banner"]])'
+http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? 'if (getpath(["card_items",0]) | has("priority_display")) then (setpath(["card_items",0,"priority_display"]; false)) else . end'
+http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? 'if (getpath(["card_items",0]) | has("is_show")) then (setpath(["card_items",0,"is_show"]; false)) else . end'
+http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? 'if (getpath([]) | has("preview_guide")) then (setpath(["preview_guide"]; null)) else . end'
+http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/more-panel\? 'delpaths([["blocks",1]])'
 
 
 [Map Local]
@@ -411,13 +602,24 @@ http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/entpage\/live_navbar_mobile\
 ^https:\/\/appapi\.cc\.163\.com\/v\d\/mixfloatingwindow\/floating_windows\? data-type=text data="{}" status-code=200
 ^http:\/\/api\.cc\.163\.com\/v1\/mpopuprecommend\/exit_room_conf$ data-type=text data="{}" status-code=200
 
+# 汽水音乐去广告
+# 发现页面 - 正在直播
+^https:\/\/webcast-open\.douyin\.com\/webcast\/openapi\/feed\/\? data-type=text data="{}" status-code=200
+# 免费听歌推广
+^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/upsells\? data-type=text data="{}" status-code=200
+# 邀请开通会员弹窗
+^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/v2\/commerce_info\? data-type=text data="{}" status-code=200
 
 
 [Script]
+# 阿里云盘去广告
+移除阿里云盘广告 = type=http-response, pattern=^https:\/\/(biz)?api\.alipan\.com\/apps\/v\d\/users?\/home\/(news|widgets), script-path=https://kelee.one/Resource/Script/AliYunDrive/AliYunDrive_remove_ads.js, requires-body=true
+移除阿里云盘广告 = type=http-response, pattern=^https:\/\/member\.alipan\.com\/v1\/users\/onboard_list, script-path=https://kelee.one/Resource/Script/AliYunDrive/AliYunDrive_remove_ads.js, requires-body=true
+
 # 移除12306开屏广告
-移除12306开屏广告 = type=http-request,pattern=^https:\/\/ad\.12306\.cn\/ad\/ser\/getAdList$,script-path=https://kelee.one/Resource/Script/12306/12306_remove_splashscreen_ads.js,requires-body=true
+移除12306开屏广告 = type=http-request, pattern=^https:\/\/ad\.12306\.cn\/ad\/ser\/getAdList$, script-path=https://kelee.one/Resource/Script/12306/12306_remove_splashscreen_ads.js, requires-body=true
 # 移除12306应用内广告
-移除12306应用内广告 = type=http-response,pattern=^https:\/\/mobile\.12306\.cn\/otsmobile\/app\/mgs\/mgw\.htm$,script-path=https://kelee.one/Resource/Script/12306/12306_remove_ads.js
+移除12306应用内广告 = type=http-request, pattern=^https:\/\/mobile\.12306\.cn\/otsmobile\/app\/mgs\/mgw\.htm$, script-path=https://kelee.one/Resource/Script/12306/12306_remove_ads.js
 
 # IT之家
 IT之家去广告 = type=http-response,pattern=^https:\/\/napi\.ithome\.com\/api\/(?:news\/index|topmenu\/getfeeds\?|api\/douyin\/GetLiveInfo),script-path=https://kelee.one/Resource/Script/IThome/IThome_remove_ads.js,requires-body=true
@@ -450,10 +652,4 @@ AD_SDKEY = type=http-response,pattern=^https:\/\/api-access\.pangolin-sdk-toutia
 
 
 [MITM]
-hostname = %APPEND% mp.weixin.qq.com, gab.122.gov.cn, flowplus.meituan.net, img.meituan.net, s3plus.meituan.net, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, *api.alipan.com, member.alipan.com, ad.12306.cn,mobile.12306.cn,video-dsp.pddpic.com,t-dsp.pinduoduo.com,images.pinduoduo.com,app-v1.ecoliving168.com,napi.ithome.com,api.zuihuimai.com,dat.ruanmei.com,jzts.cmpassport.com,ad.mcloud.139.com,api.m.jd.com,haojia-api.smzdm.com,homepage-api.smzdm.com,app-api.smzdm.com,user-api.smzdm.com,article-api.smzdm.com,qianbao.smzdm.com,s3.zdmimg.com,client.app.coc.10086.cn,list-app-m.i4.cn,search-app-m.i4.cn,rescdn.qqmail.com,us.l.qq.com,home.mi.com,api-access.pangolin-sdk-toutiao*.com, p.kuaidi100.com, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, api.cc.163.com, cc.163.com, mshare.cc.163.com, appapi.cc.163.com
-
-
-
-
-
-
+hostname = %APPEND% webcast-open.douyin.com, beta-luna.douyin.com, api.alipan.com, member.alipan.com, bizapi.alipan.com, mp.weixin.qq.com, gab.122.gov.cn, flowplus.meituan.net, img.meituan.net, s3plus.meituan.net, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, *api.alipan.com, member.alipan.com, ad.12306.cn,mobile.12306.cn,video-dsp.pddpic.com,t-dsp.pinduoduo.com,images.pinduoduo.com,app-v1.ecoliving168.com,napi.ithome.com,api.zuihuimai.com,dat.ruanmei.com,jzts.cmpassport.com,ad.mcloud.139.com,api.m.jd.com,haojia-api.smzdm.com,homepage-api.smzdm.com,app-api.smzdm.com,user-api.smzdm.com,article-api.smzdm.com,qianbao.smzdm.com,s3.zdmimg.com,client.app.coc.10086.cn,list-app-m.i4.cn,search-app-m.i4.cn,rescdn.qqmail.com,us.l.qq.com,home.mi.com,api-access.pangolin-sdk-toutiao*.com, p.kuaidi100.com, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, api.cc.163.com, cc.163.com, mshare.cc.163.com, appapi.cc.163.com
