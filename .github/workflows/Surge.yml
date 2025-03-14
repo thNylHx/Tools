@@ -26,8 +26,8 @@ jobs:
         run: |
           #!/bin/bash
           repo_name=$(basename "$GITHUB_REPOSITORY")
-          if [[ "$repo_name" == "Tool" ]]; then
-              echo "Running in Tool repository"
+          if [[ "$repo_name" == "Tools" ]]; then
+              echo "Running in Tools repository"
               mkdir -p Tools/Ruleset/Surge/{Block,Media,Other}
               # 合并 Ads 规则
               urls=(
