@@ -301,12 +301,18 @@ jobs:
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
             if [ -f "$file" ]; then
               file_names=$(basename "$file" .list)
-              current_time=$(date "+%Y-%m-%d %H:%M:%S")  # 获取当前时间
               line_count=$(wc -l < "$file")
-              awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
-              awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
-              awk -v time="$current_time" 'NR==3 {print "# 更新时间: " time} {print}' "$file" > tmpfile && mv tmpfile "$file"
-              sed -i '3a\\' "$file"
+              current_time=$(date "+%Y-%m-%d %H:%M:%S")  # 获取当前时间
+              last_modified_time=$(stat -c %Y "$file")  # 文件的修改时间（秒数）
+              current_modified_time=$(date +%s)
+              if [ "$last_modified_time" -lt "$current_modified_time" ]; then
+                echo "文件已更新：$file"
+                awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
+                awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
+                awk -v time="$current_time" 'NR==3 {print "# 更新时间: " time} {print}' "$file" > tmpfile && mv tmpfile "$file"
+                sed -i '3a\\' "$file"
+              else
+                echo "文件未更新：$file"
             else
               echo "$file not found."
             fi
