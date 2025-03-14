@@ -30,6 +30,7 @@ jobs:
               echo "Running in Tools repository"
 
               mkdir -p Tools/Ruleset/Surge/{Block,Media,Other}
+              
               # 合并 Ads 规则
               urls=(
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
