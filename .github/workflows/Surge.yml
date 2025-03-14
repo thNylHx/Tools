@@ -6,7 +6,7 @@ on:
     - cron: "0 */6 * * *"  # 设置定时触发，表示每6小时执行一次
 
 jobs:
-  # 定义名为 Fork-FLITER-list 的任务
+  # 定义名为 Fork 的任务
   Fork:
     runs-on: ubuntu-latest  # 在 ubuntu-latest 环境中运行任务
     env:
@@ -31,7 +31,7 @@ jobs:
 
               mkdir -p Tools-repo/Ruleset/Surge/{Block,Media,Other}
               
-              # 合并 Ads 规则
+              # 合并 Ads_Block 规则
               urls=(
                   "https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Ruleset/Surge/Block/BlockAds.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
@@ -95,53 +95,81 @@ jobs:
               files=(
                   # Ads
                   "Block/Ads_all.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
+
                   "Block/Ads_BanAD.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
                   "Block/Ads_BanProgramAD.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
+
+                  "Block/Ads_Easylist_surge.list https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easylist_surge.list"
+                  "Block/Ads_EasyListChina.list https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easylistchina_surge.list"
+                  "Block/Ads_EasyPrivacy_surge.list https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easyprivacy_surge.list"
                   "Block/Ads_Adblock4limbo_surge.list https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/Surge/rule/Adblock4limbo_surge.list"
-                  "Block/Ads_easyprivacy_surge.list https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easyprivacy_surge.list"
-                  "Block/Ads_easylist_surge.list https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easylist_surge.list"
+                  
                   "Block/Ads_Advertising.list https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Advertising.list"
                   "Block/Ads_Malicious.list https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Malicious.list"
                   "Block/Ads_Tracking.list https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Tracking.list"
 
+                  "Block/Ads_Dlerio.list https://raw.githubusercontent.com/dler-io/Rules/main/Surge/Surge%203/Provider/AdBlock.list"
+                  "Block/Ads_AWAvenue.list https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge.list"
+                  "Block/AdGuardChinese.list https://raw.githubusercontent.com/geekdada/surge-list/master/domain-set/chinese-filter.txt"
+
                   # Other
                   "Other/Private_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
+
                   "Other/PayPal.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/paypal.list"
+
                   "Other/Openai.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.list"
+
                   "Other/Steam.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list"
+
                   "Other/Epic.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.list"
-                  # "Other/Google.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
+
+                  "Other/vGoogle.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
                   "Other/Google_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
+
                   "Other/Line.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/line.list"
+
                   "Other/GitHub.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/github.list"
                   "Other/OneDrive.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/onedrive.list"
                   "Other/Microsoft.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/microsoft.list"
+
                   "Other/GlobalGFW.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
                   "Other/Global.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
+
                   "Other/Apple.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
                   "Other/AppleCN.list https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Apple.list"
+
                   "Other/China.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/cn.list"
                   "Other/China_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
                   "Other/ChinaASN.list https://raw.githubusercontent.com/missuo/ASN-China/main/ASN.China.list"
 
                   # Media
-                 "Media/YouTube.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
-                 "Media/YouTubeMusic.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
-                 "Media/Telegram.list https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
-                #  "Media/Twitter.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
-                 "Media/Twitter_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
-                #  "Media/Facebook.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
-                 "Media/Facebook_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
-                 "Media/Instagram.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
-                 "Media/TikTok.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/tiktok.list"
-                 "Media/GlobalMedia.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
-                 "Media/BilibiliHMT.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
-                 "Media/ChinaMedia.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
-                 "Media/Bilibili.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.list"
-                 "Media/Disney.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/disney.list"
-                #  "Media/Netflix.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
-                 "Media/Netflix_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
-                 "Media/Spotify.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.list"
+                  "Media/YouTube.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
+                  "Media/YouTubeMusic.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
+
+                  "Media/Telegram.list https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
+
+                  "Media/vTwitter.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
+                  "Media/Twitter_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
+
+                  "Media/vFacebook.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
+                  "Media/Facebook_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
+                  "Media/Instagram.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
+
+                  "Media/Disney.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/disney.list"
+
+                  "Media/vNetflix.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
+                  "Media/Netflix_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
+
+                  "Media/Spotify.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.list"
+
+                  "Media/TikTok.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/tiktok.list"
+
+                  "Media/GlobalMedia.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
+
+                  "Media/BilibiliHMT.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
+
+                  "Media/ChinaMedia.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
+                  "Media/Bilibili.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.list"
               )
 
               for file in "${files[@]}"; do

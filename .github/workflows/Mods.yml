@@ -10,7 +10,7 @@ on:
 
 # 工作流
 jobs:
-  sync:
+  Fork:
     # 指定运行环境为最新版本的 Ubuntu
     runs-on: ubuntu-latest  # 在 ubuntu-latest 环境中运行任务
     env:
@@ -24,8 +24,8 @@ jobs:
         with:
           # 指定需要检出的远程仓库，格式为“用户名/仓库名”
           repository: thNylHx/Tools  # 目标仓库：thNylHx/Tools
-          # 设置将仓库检出到本地的目录名称为 Tools
-          path: Tools  # 本地目录名称：Tool
+          # 设置将仓库检出到本地的目录名称为 Tools-repo
+          path: Tools-repo  # 本地目录名称：Tools-repo
 
       # 步骤2：克隆 LoonKissSurge 仓库（优化速度）
       - name: 克隆 LoonKissSurge 仓库
@@ -39,29 +39,29 @@ jobs:
       # 步骤3：重建 Surge/QingRex 目标目录
       - name: 重建 Surge/QingRex 目录
         run: |
-          TARGET_DIR="${{ github.workspace }}/Tools/Surge/QingRex"
+          TARGET_DIR="${{ github.workspace }}/Tools-repo/Surge/QingRex"
           rm -rf "$TARGET_DIR" && mkdir -p "$TARGET_DIR"
           echo "✅ 已重建目录 $TARGET_DIR"
 
       # 步骤4：同步 LoonKissSurge 中的 Surge 模块到目标目录
       - name: 同步 LoonKissSurge 到 Surge/QingRex
         run: |
-          cp -r "${{ github.workspace }}/LoonKissSurge/Surge/." "${{ github.workspace }}/Tools/Surge/QingRex/" \
+          cp -r "${{ github.workspace }}/LoonKissSurge/Surge/." "${{ github.workspace }}/Tools-repo/Surge/QingRex/" \
             && echo "已同步 LoonKissSurge 内容到 Surge/QingRex" \
             || { echo "复制失败，退出。"; exit 1; }
 
-      # 步骤5：设置 Tools 仓库远程 URL（通过 TOKEN 进行身份验证）
-      - name: 设置 Tools 远程 URL
+      # 步骤5：设置 Tools-repo 仓库远程 URL（通过 TOKEN 进行身份验证）
+      - name: 设置 Tools-repo 远程 URL
         run: |
           git config --global user.name "${{ secrets.USERNAME }}"
           git config --global user.email "${{ secrets.EMAIL }}"
-          cd "${{ github.workspace }}/Tools"
-          git remote set-url origin "https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
+          cd "${{ github.workspace }}/Tools-repo"
+          git remote set-url origin "https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools-repo.git"
 
-      # 步骤6：检查变更并推送更新到 Tools 仓库 main 分支
-      - name: 推送更新到 Tools 仓库
+      # 步骤6：检查变更并推送更新到 Tools-repo 仓库 main 分支
+      - name: 推送更新到 Tools-repo 仓库
         run: |
-          cd "${{ github.workspace }}/Tools"
+          cd "${{ github.workspace }}/Tools-repo"
           git fetch origin
           if [ -n "$(git status --porcelain)" ]; then
             git add -A
