@@ -306,7 +306,7 @@ jobs:
               awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
               awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
               awk -v time="$current_time" 'NR==3 {print "# 更新时间: " time} {print}' "$file" > tmpfile && mv tmpfile "$file"
-              sed -i '2a\\' "$file"
+              sed -i '3a\\' "$file"
             else
               echo "$file not found."
             fi
