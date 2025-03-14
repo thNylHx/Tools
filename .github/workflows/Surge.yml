@@ -34,11 +34,24 @@ jobs:
               urls=(
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
               )
-              > Tools-repo/Ruleset/Surge/Block/Ads_ml.list
+              > Tools-repo/Ruleset/Surge/Block/Ads_Moli.list
               for url in "${urls[@]}"; do
                   echo "Downloading: $url"
-                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Block/Ads_ml.list || { echo "Download Failed: $url"; exit 1; }
+                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Block/Ads_Moli.list || { echo "Download Failed: $url"; exit 1; }
                   echo "" >> Tools-repo/Ruleset/Surge/Block/Ads_Moli.list
+              done
+
+              # 合并 Facebook 规则
+              urls=(
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
+                  )
+              > Tools-repo/Ruleset/Surge/Media/Facebook.list
+              for url in "${urls[@]}"; do
+                  echo "Downloading: $url"
+                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Media/Facebook.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tools-repo/Ruleset/Surge/Media/Facebook.list
               done
 
               # 合并 Netflix 规则
@@ -95,7 +108,7 @@ jobs:
                   "Other/Openai.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.list"
                   "Other/Steam.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list"
                   "Other/Epic.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.list"
-                  "Other/Google.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
+                  # "Other/Google.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
                   "Other/Google_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
                   "Other/Line.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/line.list"
                   "Other/GitHub.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/github.list"
@@ -113,9 +126,9 @@ jobs:
                  "Media/YouTube.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
                  "Media/YouTubeMusic.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
                  "Media/Telegram.list https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
-                 "Media/Twitter.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
+                #  "Media/Twitter.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
                  "Media/Twitter_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
-                 "Media/Facebook.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
+                #  "Media/Facebook.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
                  "Media/Facebook_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
                  "Media/Instagram.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
                  "Media/TikTok.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/tiktok.list"
@@ -124,7 +137,7 @@ jobs:
                  "Media/ChinaMedia.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
                  "Media/Bilibili.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.list"
                  "Media/Disney.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/disney.list"
-                 "Media/Netflix.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
+                #  "Media/Netflix.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
                  "Media/Netflix_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
                  "Media/Spotify.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.list"
               )
@@ -139,20 +152,6 @@ jobs:
                   echo "Downloading: $file_name"
                   curl -f -L "$url" -o "Tools-repo/Ruleset/Surge/$file_name" || { echo "Download Failed: $url"; exit 1; }
               done
-
-              # 合并 Facebook 规则
-              urls=(
-                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
-                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
-                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
-                  )
-              > Tools-repo/Ruleset/Surge/Media/Facebook.list
-              for url in "${urls[@]}"; do
-                  echo "Downloading: $url"
-                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Media/Facebook.list || { echo "Download Failed: $url"; exit 1; }
-                  echo "" >> Tools-repo/Ruleset/Surge/Media/Facebook.list
-              done
-
           else
               echo "This is not the Tools repository. Skipping."
           fi
