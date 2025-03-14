@@ -248,6 +248,23 @@ jobs:
             fi
           done
 
+      # 步骤5： 去重排序
+      - name: 去重排序
+        run: |
+          cd Tools-repo/Ruleset/Surge/Block
+          shopt -s nullglob  # 避免没有匹配的文件时保留原始通配符
+          for file in Ads_Moli.list; do
+            if [ -f "$file" ]; then
+              sorted_file="sorted_${file}"
+              # 使用 grep 去掉包含 # 的行和包含 URL-REGEX, 的行
+              grep -v '^\s*#' "$file" | grep -v '^\s*$' | grep -v 'URL-REGEX,' | sort | uniq > "$sorted_file"
+              mv "$sorted_file" "$file"
+            else
+              echo "$file not found."
+            fi
+          done
+        shell: bash
+
       # 步骤6：对 Surge 下所有子目录中的 .list 文件追加规则信息（优化处理）
       - name: 追加规则信息
         run: |
