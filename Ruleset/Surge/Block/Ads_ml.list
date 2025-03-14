@@ -1,3 +1,6 @@
+# 规则名称: Ads_ml
+# 规则统计: 1415
+
 AND,((DEST-PORT,18000),(PROTOCOL,STUN))
 AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com))
 AND,((DOMAIN-KEYWORD,-ad-,extended-matching),(DOMAIN-SUFFIX,byteimg.com,extended-matching))
