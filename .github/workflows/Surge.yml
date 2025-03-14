@@ -33,14 +33,14 @@ jobs:
               
               # 合并 Ads 规则
               urls=(
-                  "https://raw.githubusercontent.com/thNylHx/Tools/refs/heads/main/Ruleset/Surge/Block/Ads_ml.list"
+                  "https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Ruleset/Surge/Block/BlockAds.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
               )
-              > Tools-repo/Ruleset/Surge/Block/Ads_Moli.list
+              > Tools-repo/Ruleset/Surge/Block/Ads_Block.list
               for url in "${urls[@]}"; do
                   echo "Downloading: $url"
-                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Block/Ads_Moli.list || { echo "Download Failed: $url"; exit 1; }
-                  echo "" >> Tools-repo/Ruleset/Surge/Block/Ads_Moli.list
+                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Block/Ads_Block.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tools-repo/Ruleset/Surge/Block/Ads_Block.list
               done
 
               # 合并 Facebook 规则
@@ -253,7 +253,7 @@ jobs:
         run: |
           cd Tools-repo/Ruleset/Surge/Block
           shopt -s nullglob  # 避免没有匹配的文件时保留原始通配符
-          for file in Ads_Moli.list; do
+          for file in Ads_Block.list; do
             if [ -f "$file" ]; then
               sorted_file="sorted_${file}"
               # 使用 grep 去掉包含 # 的行和包含 URL-REGEX, 的行
