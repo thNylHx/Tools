@@ -3,8 +3,6 @@
 
 DOMAIN,4lke.online
 DOMAIN,643108e7617ef.cdn.sohucs.com
-DOMAIN,DOMAIN-REGEX,^adservice\.google\.([a-z]{2}|com?)(\.[a-z]{2})?$
-DOMAIN,DOMAIN-REGEX,^speed\.(coe|open)\.ad\.[a-z]{2,6}\.prod\.hosts\.ooklaserver\.net$
 DOMAIN,a-remad.qm989.com
 DOMAIN,a.adtng.com
 DOMAIN,a.labadena.com
@@ -1480,3 +1478,5 @@ AND,((IP-CIDR,111.225.147.191/32,no-resolve),(DEST-PORT,6443))
 AND,((IP-CIDR,111.63.61.101/32,no-resolve),(DEST-PORT,6443))
 AND,((IP-CIDR,220.243.141.0/32,no-resolve),(DEST-PORT,6443))
 AND,((USER-AGENT,Frodo*),(DOMAIN,119.29.29.29))
+DOMAIN-REGEX,^adservice\.google\.([a-z]{2}|com?)(\.[a-z]{2})?$
+DOMAIN-REGEX,^speed\.(coe|open)\.ad\.[a-z]{2,6}\.prod\.hosts\.ooklaserver\.net$
