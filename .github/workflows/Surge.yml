@@ -23,9 +23,7 @@ jobs:
           repo_name=$(basename "$GITHUB_REPOSITORY")
           if [[ "$repo_name" == "Tools" ]]; then
               echo "Running in Tools repository"
-
               mkdir -p Tools-repo/Ruleset/Surge/{Block,Media,Other}
-              
               # 合并 广告 规则
               urls=(
                   "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
