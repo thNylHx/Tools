@@ -28,7 +28,7 @@ jobs:
 
               mkdir -p Tools-repo/Ruleset/Surge/{Block,Media,Other}
               
-              # 合并 Ads_Block 规则
+              # 合并 广告 规则
               urls=(
                   "https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Ruleset/Surge/Block/BlockAds.list"
                   "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge.list"
@@ -41,7 +41,7 @@ jobs:
                   echo "" >> Tools-repo/Ruleset/Surge/Block/Ads_Block.list
               done
 
-              # 合并 Facebook 规则
+              # 合并 脸书 规则
               urls=(
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
@@ -54,7 +54,7 @@ jobs:
                   echo "" >> Tools-repo/Ruleset/Surge/Media/Facebook.list
               done
 
-              # 合并 Netflix 规则
+              # 合并 奈飞 规则
               urls=(
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
@@ -66,7 +66,7 @@ jobs:
                   echo "" >> Tools-repo/Ruleset/Surge/Media/Netflix.list
               done
 
-              # 合并 Twitter 规则
+              # 合并 推特 规则
               urls=(
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
@@ -78,7 +78,7 @@ jobs:
                   echo "" >> Tools-repo/Ruleset/Surge/Media/Twitter.list
               done
 
-              # 合并 YouTube 规则
+              # 合并 油管 规则
               urls=(
                   "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
@@ -90,7 +90,7 @@ jobs:
                   echo "" >> Tools-repo/Ruleset/Surge/Media/YouTube.list
               done
 
-              # 合并 Google 规则
+              # 合并 谷歌 规则
               urls=(
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
@@ -102,7 +102,7 @@ jobs:
                   echo "" >> Tools-repo/Ruleset/Surge/Other/Google.list
               done
 
-              # 合并 Global 规则
+              # 合并 海外 规则
               urls=(
                   "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
                   "https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/ruleset/gfw.txt"
@@ -115,83 +115,98 @@ jobs:
                   echo "" >> Tools-repo/Ruleset/Surge/Other/Global.list
               done
 
+              # 合并 游戏 规则
+              urls=(
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list"
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.list"
+              )
+              > Tools-repo/Ruleset/Surge/Other/Game.list
+              for url in "${urls[@]}"; do
+                  echo "Downloading: $url"
+                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Other/Game.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tools-repo/Ruleset/Surge/Other/Game.list
+              done
+
               files=(
                   # Ads
+                  # MetaCubeX
                   "Block/Ads_all.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
-
+                  # ACL4SSR
                   "Block/Ads_BanAD.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
                   "Block/Ads_BanProgramAD.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
-
+                  # limbopro
                   "Block/Ads_Easylist_surge.list https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easylist_surge.list"
                   "Block/Ads_EasyListChina.list https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easylistchina_surge.list"
                   "Block/Ads_EasyPrivacy_surge.list https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easyprivacy_surge.list"
                   "Block/Ads_Adblock4limbo_surge.list https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/Surge/rule/Adblock4limbo_surge.list"
-                  
+                  # ConnersHua
                   "Block/Ads_Advertising.list https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Advertising.list"
                   "Block/Ads_Malicious.list https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Malicious.list"
                   "Block/Ads_Tracking.list https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Tracking.list"
-
+                  # dler-io TG-Twilight geekdada
                   "Block/Ads_Dlerio.list https://raw.githubusercontent.com/dler-io/Rules/main/Surge/Surge%203/Provider/AdBlock.list"
                   "Block/Ads_AWAvenue.list https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge.list"
                   "Block/Ads_Chinese.list https://raw.githubusercontent.com/geekdada/surge-list/master/domain-set/chinese-filter.txt"
 
                   # Other
+                  # 本地/局域网
                   "Other/Private_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
-
+                  # PayPal
                   "Other/PayPal.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/paypal.list"
-
+                  # Openai
                   "Other/Openai.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.list"
-
+                  # Steam
                   "Other/Steam.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list"
-
+                  # Epic
                   "Other/Epic.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.list"
-
+                  # 谷歌
                   "Other/vGoogle.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
                   "Other/Google_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
-
+                  # Line
                   "Other/Line.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/line.list"
-
+                  # 微软
                   "Other/GitHub.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/github.list"
                   "Other/OneDrive.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/onedrive.list"
                   "Other/Microsoft.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/microsoft.list"
-
+                  # 海外
                   "Other/GlobalGFWa.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
                   "Other/GlobalGFW.list https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/ruleset/gfw.txt"
                   "Other/vGlobal.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
-
+                  # 苹果
                   "Other/Apple.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
                   "Other/AppleCN.list https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Apple.list"
-
+                  # 中国
                   "Other/China.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/cn.list"
                   "Other/China_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
                   "Other/ChinaASN.list https://raw.githubusercontent.com/missuo/ASN-China/main/ASN.China.list"
 
                   # Media
+                  # 油管
                   "Media/vYouTube.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
                   "Media/YouTubeMusic.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
-
+                  # 电报
                   "Media/Telegram.list https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
-
+                  # 推特
                   "Media/vTwitter.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
                   "Media/Twitter_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
-
+                  # 脸书
                   "Media/vFacebook.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
                   "Media/Facebook_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
                   "Media/Instagram.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
-
+                  # 迪士尼
                   "Media/Disney.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/disney.list"
-
+                  # 奈飞
                   "Media/vNetflix.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
                   "Media/Netflix_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
-
+                  # Spotify
                   "Media/Spotify.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.list"
-
+                  # TikTok
                   "Media/TikTok.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/tiktok.list"
 
                   "Media/GlobalMedia.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
-
+                  # 
                   "Media/BilibiliHMT.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
-
+                  # 中国
                   "Media/ChinaMedia.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
                   "Media/Bilibili.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.list"
               )
