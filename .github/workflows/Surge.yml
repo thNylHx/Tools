@@ -193,7 +193,7 @@ jobs:
               # 将以 "." 开头的行替换为 "DOMAIN-SUFFIX,"
               sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
               # 对于非注释、非空行，且不匹配 IPv4 或 IPv6 格式的行添加 "DOMAIN," 前缀
-              sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b; /^\s*[0-9A-Fa-f:]+\/[0-9]+/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^PROCESS-NAME,|^URL-REGEX,|^USER-AGENT,|^DOMAIN-REGEX,|^DEST-PORT,/b; s/^\s*([^#])/DOMAIN,\1/' "$file"
+              sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b; /^\s*[0-9A-Fa-f:]+\/[0-9]+/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^PROCESS-NAME,|^URL-REGEX,|^USER-AGENT,|^DEST-PORT,/b; s/^\s*([^#])/DOMAIN,\1/' "$file"
               # 删除注释、空行及每行中 "//" 后的内容
               sed -i -e '/^\s*[#;]/d' -e '/^$/d' -e 's| //.*||' "$file"
               # 删除指定域名
@@ -233,6 +233,7 @@ jobs:
               /^PROCESS-NAME,/   { print "7 " $0; next }
               /^URL-REGEX,/      { print "8 " $0; next }
               /^USER-AGENT,/     { print "9 " $0; next }
+<<<<<<< Updated upstream
               /^DOMAIN-REGEX,/   { print "10 " $0; next }
               /^GEOIP,/          { print "11 " $0; next }
               /^AND,/            { print "12 " $0; next }
@@ -243,6 +244,14 @@ jobs:
                                  { print "16 " $0; next }
 =======
                                   { print "16 " $0; next }
+>>>>>>> Stashed changes
+=======
+              /^GEOIP,/          { print "10 " $0; next }
+              /^AND,/            { print "11 " $0; next }
+              /^OR,/             { print "12 " $0; next }
+              /^NOT,/            { print "13 " $0; next }
+              /^DEST-PORT,/      { print "14 " $0; next }
+                                 { print "15 " $0; next }
 >>>>>>> Stashed changes
               ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
 
