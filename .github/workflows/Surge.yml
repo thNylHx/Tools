@@ -193,7 +193,11 @@ jobs:
               # 将以 "." 开头的行替换为 "DOMAIN-SUFFIX,"
               sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
               # 对于非注释、非空行，且不匹配 IPv4 或 IPv6 格式的行添加 "DOMAIN," 前缀
+<<<<<<< Updated upstream
               sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b; /^\s*[0-9A-Fa-f:]+\/[0-9]+/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^PROCESS-NAME,|^URL-REGEX,|^USER-AGENT,|^DEST-PORT,/b; s/^\s*([^#])/DOMAIN,\1/' "$file"
+=======
+              sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b; /^\s*[0-9A-Fa-f:]+\/[0-9]+/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^PROCESS-NAME,|^URL-REGEX,|^USER-AGENT,|^DOMAIN-REGEX,|^DEST-PORT,/b; s/^\s*([^#])/DOMAIN,\1/' "$file"
+>>>>>>> Stashed changes
               # 删除注释、空行及每行中 "//" 后的内容
               sed -i -e '/^\s*[#;]/d' -e '/^$/d' -e 's| //.*||' "$file"
               # 删除指定域名
@@ -220,8 +224,12 @@ jobs:
               sed -i -E '/^(IP-CIDR,|IP-CIDR6,)/!{/^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^\s*/IP-CIDR,/}' "$file"
               # 对于仍然为裸 IP（IPv6）的行，添加 IP-CIDR6, 前缀
               sed -i -E '/^(IP-CIDR,|IP-CIDR6,)/!{/^\s*[0-9A-Fa-f:]+\/[0-9]+/s/^\s*/IP-CIDR6,/}' "$file"
+<<<<<<< Updated upstream
               # 删除所有以 DOMAIN-REGEX, 开头的行
               sed -i '/^DOMAIN-REGEX,/d' "$file"
+=======
+
+>>>>>>> Stashed changes
               # 分类排序：为各类规则添加数字前缀，排序后再去除前缀
               awk '
               /^DOMAIN,/         { print "0 " $0; next }
@@ -234,12 +242,22 @@ jobs:
               /^PROCESS-NAME,/   { print "7 " $0; next }
               /^URL-REGEX,/      { print "8 " $0; next }
               /^USER-AGENT,/     { print "9 " $0; next }
+<<<<<<< Updated upstream
               /^GEOIP,/          { print "10 " $0; next }
               /^AND,/            { print "11 " $0; next }
               /^OR,/             { print "12 " $0; next }
               /^NOT,/            { print "13 " $0; next }
               /^DEST-PORT,/      { print "14 " $0; next }
                                  { print "15 " $0; next }
+=======
+              /^DOMAIN-REGEX,/   { print "10 " $0; next }
+              /^GEOIP,/          { print "11 " $0; next }
+              /^AND,/            { print "12 " $0; next }
+              /^OR,/             { print "13 " $0; next }
+              /^NOT,/            { print "14 " $0; next }
+              /^DEST-PORT,/      { print "15 " $0; next }
+                                  { print "16 " $0; next }
+>>>>>>> Stashed changes
               ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
 
               # 为 IP 规则且未包含 no-resolve 的行追加 no-resolve
@@ -252,7 +270,11 @@ jobs:
             fi
           done
 
+<<<<<<< Updated upstream
       # 步骤5：对所有子目录下的 .list 文件追加规则信息
+=======
+      # 步骤6：对 Surge 下所有子目录中的 .list 文件追加规则信息
+>>>>>>> Stashed changes
       - name: 追加规则信息
         run: |
           shopt -s globstar
