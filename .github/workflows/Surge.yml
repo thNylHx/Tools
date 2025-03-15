@@ -200,20 +200,22 @@ jobs:
       # 步骤3：修正规则
       - name: 修正规则
         run: |
+          # 启用 ** 通配符匹配
           shopt -s globstar
+          # 遍历所有 .list 规则文件
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
             if [ -f "$file" ]; then
               # 删除所有以 DOMAIN-REGEX, 开头的行
               sed -i '/^DOMAIN-REGEX,/d' "$file"
               # 将以 "." 开头的行替换为 "DOMAIN-SUFFIX,"
               sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
-              # 对于非注释、非空行，且不匹配 IPv4 或 IPv6 格式的行添加 "DOMAIN," 前缀
               # 对于非注释、非空行，且不匹配 IPv4 或 IPv6 格式的行，添加 "DOMAIN," 前缀（但跳过 AND, 开头的行）
               sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b; /^\s*[0-9A-Fa-f:]+\/[0-9]+/b; /^AND,\(/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^PROCESS-NAME,|^URL-REGEX,|^USER-AGENT,|^DEST-PORT,/b; s/^\s*([^#])/DOMAIN,\1/' "$file"
               # 删除注释、空行及每行中 "//" 后的内容
               sed -i -e '/^\s*[#;]/d' -e '/^$/d' -e 's| //.*||' "$file"
               # 删除指定域名
               sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
+              # 删除以 ",reject" 结尾的内容
               sed -i -e 's/,reject$//' "$file"
               # 修正格式：删除多余空格
               sed -i 's/, */,/g' "$file"
