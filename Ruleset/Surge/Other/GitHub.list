@@ -1,6 +1,7 @@
 # 规则名称: GitHub
 # 规则统计: 28
 
+DOMAIN,DOMAIN-REGEX,^github-production-release-asset-[0-9a-zA-Z]{6}\.s3\.amazonaws\.com$
 DOMAIN,github-cloud.s3.amazonaws.com
 DOMAIN-SUFFIX,atom.io
 DOMAIN-SUFFIX,blob.core.windows.net
@@ -28,4 +29,3 @@ DOMAIN-SUFFIX,npmjs.org
 DOMAIN-SUFFIX,opensource.guide
 DOMAIN-SUFFIX,repo.new
 DOMAIN-SUFFIX,thegithubshop.com
-DOMAIN-REGEX,^github-production-release-asset-[0-9a-zA-Z]{6}\.s3\.amazonaws\.com$

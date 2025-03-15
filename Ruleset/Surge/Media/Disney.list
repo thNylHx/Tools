@@ -1,6 +1,7 @@
 # 规则名称: Disney
 # 规则统计: 157
 
+DOMAIN,DOMAIN-REGEX,^hses[1-7]?\.akamaized\.net$
 DOMAIN,espn.api.edge.bamgrid.com
 DOMAIN,espn.hb.omtrdc.net
 DOMAIN,espndotcom.tt.omtrdc.net
@@ -157,4 +158,3 @@ DOMAIN-SUFFIX,thestationbymaker.com
 DOMAIN-SUFFIX,thisispolaris.com
 DOMAIN-SUFFIX,watchdisneyfe.com
 DOMAIN-SUFFIX,watchespn.com
-DOMAIN-REGEX,^hses[1-7]?\.akamaized\.net$
