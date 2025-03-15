@@ -1,9 +1,9 @@
 name: 同步 Surge 上游规则
 
 on:
-  workflow_dispatch:  # 允许手动触发工作流
+  workflow_dispatch:
   schedule:
-    - cron: "0 */6 * * *"  # 每6小时执行一次
+    - cron: "0 */6 * * *"
 
 jobs:
   Fork:
@@ -102,19 +102,6 @@ jobs:
                   echo "" >> Tools-repo/Ruleset/Surge/Other/Google.list
               done
 
-              # 合并 Global 规则
-              urls=(
-                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
-                  "https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/ruleset/gfw.txt"
-                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
-              )
-              > Tools-repo/Ruleset/Surge/Other/Global.list
-              for url in "${urls[@]}"; do
-                  echo "Downloading: $url"
-                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Other/Global.list || { echo "Download Failed: $url"; exit 1; }
-                  echo "" >> Tools-repo/Ruleset/Surge/Other/Global.list
-              done
-
               files=(
                   # Ads
                   "Block/Ads_all.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
@@ -155,9 +142,8 @@ jobs:
                   "Other/OneDrive.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/onedrive.list"
                   "Other/Microsoft.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/microsoft.list"
 
-                  "Other/GlobalGFWA.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
-                  "Other/GlobalGFW.list https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/ruleset/gfw.txt"
-                  "Other/vGlobal.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
+                  "Other/GlobalGFW.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
+                  "Other/Global.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
 
                   "Other/Apple.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
                   "Other/AppleCN.list https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Apple.list"
