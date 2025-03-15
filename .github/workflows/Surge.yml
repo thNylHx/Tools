@@ -31,6 +31,7 @@ jobs:
               # 合并 Ads_Block 规则
               urls=(
                   "https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Ruleset/Surge/Block/BlockAds.list"
+                  "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
               )
               > Tools-repo/Ruleset/Surge/Block/Ads_Block.list
@@ -77,6 +78,18 @@ jobs:
                   echo "" >> Tools-repo/Ruleset/Surge/Media/Twitter.list
               done
 
+              # 合并 YouTube 规则
+              urls=(
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
+                  "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
+              )
+              > Tools-repo/Ruleset/Surge/Media/YouTube.list
+              for url in "${urls[@]}"; do
+                  echo "Downloading: $url"
+                  curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Media/YouTube.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tools-repo/Ruleset/Surge/Media/YouTube.list
+              done
+
               # 合并 Google 规则
               urls=(
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
@@ -107,7 +120,7 @@ jobs:
 
                   "Block/Ads_Dlerio.list https://raw.githubusercontent.com/dler-io/Rules/main/Surge/Surge%203/Provider/AdBlock.list"
                   "Block/Ads_AWAvenue.list https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge.list"
-                  "Block/AdGuardChinese.list https://raw.githubusercontent.com/geekdada/surge-list/master/domain-set/chinese-filter.txt"
+                  "Block/Ads_Chinese.list https://raw.githubusercontent.com/geekdada/surge-list/master/domain-set/chinese-filter.txt"
 
                   # Other
                   "Other/Private_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
@@ -140,7 +153,7 @@ jobs:
                   "Other/ChinaASN.list https://raw.githubusercontent.com/missuo/ASN-China/main/ASN.China.list"
 
                   # Media
-                  "Media/YouTube.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
+                  "Media/vYouTube.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
                   "Media/YouTubeMusic.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
 
                   "Media/Telegram.list https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
