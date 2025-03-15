@@ -3,23 +3,20 @@ name: 同步 Surge 上游规则
 on:
   workflow_dispatch:  # 允许手动触发工作流
   schedule:
-    - cron: "0 */6 * * *"  # 设置定时触发，表示每6小时执行一次
+    - cron: "0 */6 * * *"  # 每6小时执行一次
 
 jobs:
-  # 定义名为 Fork 的任务
   Fork:
-    runs-on: ubuntu-latest  # 在 ubuntu-latest 环境中运行任务
+    runs-on: ubuntu-latest
     env:
-      TZ: 'Asia/Shanghai'  # 配置时区为 Asia/Shanghai
-
-  
+      TZ: 'Asia/Shanghai'
     steps:
       # 步骤1：检出目标仓库
       - name: 检出目标仓库
         uses: actions/checkout@v4
         with:
-          repository: thNylHx/Tools  # 目标仓库：thNylHx/Tools
-          path: Tools-repo         # 本地目录名称：Tools-repo
+          repository: thNylHx/Tools
+          path: Tools-repo
 
       # 步骤2：执行内嵌脚本来更新规则 
       - name: 执行内嵌脚本
@@ -48,7 +45,7 @@ jobs:
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
-                  )
+              )
               > Tools-repo/Ruleset/Surge/Media/Facebook.list
               for url in "${urls[@]}"; do
                   echo "Downloading: $url"
@@ -60,7 +57,7 @@ jobs:
               urls=(
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
-                  )
+              )
               > Tools-repo/Ruleset/Surge/Media/Netflix.list
               for url in "${urls[@]}"; do
                   echo "Downloading: $url"
@@ -72,7 +69,7 @@ jobs:
               urls=(
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
-                  )
+              )
               > Tools-repo/Ruleset/Surge/Media/Twitter.list
               for url in "${urls[@]}"; do
                   echo "Downloading: $url"
@@ -84,7 +81,7 @@ jobs:
               urls=(
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
-                  )
+              )
               > Tools-repo/Ruleset/Surge/Other/Google.list
               for url in "${urls[@]}"; do
                   echo "Downloading: $url"
@@ -175,7 +172,7 @@ jobs:
               for file in "${files[@]}"; do
                   file_name=$(echo $file | cut -d " " -f 1)
                   url=$(echo $file | cut -d " " -f 2)
-                  # 确保 URL 是正确的，避免重复的 https:
+                  # 确保 URL 格式正确
                   if [[ ! "$url" =~ ^https?: ]]; then
                       url="https:$url"
                   fi
@@ -187,11 +184,7 @@ jobs:
           fi
         shell: bash
 
-<<<<<<< Updated upstream
-      # 步骤3：修正规则
-=======
       # 步骤3：修正规则（避免对纯 IP 规则误加 DOMAIN, 前缀）
->>>>>>> Stashed changes
       - name: 修正规则
         run: |
           shopt -s globstar
@@ -199,17 +192,10 @@ jobs:
             if [ -f "$file" ]; then
               # 将以 "." 开头的行替换为 "DOMAIN-SUFFIX,"
               sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
-<<<<<<< Updated upstream
-              # 将除了以 "#" 开头、"空行" 开头之外的行, 在行首添加 "DOMAIN"
-              sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^GEOIP,|^AND,|^OR,|^NOT,|^URL-REGEX,|^USER-AGENT,|^PROCESS-NAME,|^DOMAIN-REGEX,|^DEST-PORT,/b; s/^([^#])/DOMAIN,\1/' "$file"
-              # 删除文件中所有 [以 # 或 ; 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
-              sed -i -e '/^\s*[#;]/d' -e '/^$/d' -e 's| //.*||'  "$file"
-=======
               # 对于非注释、非空行，且不匹配 IPv4 或 IPv6 格式的行添加 "DOMAIN," 前缀
               sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b; /^\s*[0-9A-Fa-f:]+\/[0-9]+/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^PROCESS-NAME,|^URL-REGEX,|^USER-AGENT,|^DOMAIN-REGEX,|^DEST-PORT,/b; s/^\s*([^#])/DOMAIN,\1/' "$file"
               # 删除注释、空行及每行中 "//" 后的内容
               sed -i -e '/^\s*[#;]/d' -e '/^$/d' -e 's| //.*||' "$file"
->>>>>>> Stashed changes
               # 删除指定域名
               sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
               sed -i -e 's/,reject$//' "$file"
@@ -220,24 +206,12 @@ jobs:
             fi
           done
 
-<<<<<<< Updated upstream
-      # 步骤4：执行规则转换和修改
-=======
       # 步骤4：规则转换和修改（纠正 IP 规则前缀）
->>>>>>> Stashed changes
       - name: 规则转换和修改
         run: |
           shopt -s globstar
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
             if [ -f "$file" ]; then
-<<<<<<< Updated upstream
-            # 为 IPv4 规则添加前缀
-            sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^/IP-CIDR,/}' "$file"
-            # 为 IPv6 规则添加前缀
-            sed -i -E '/^IP-CIDR6,/!{/^[a-fA-F0-9]+:|([a-fA-F0-9]+:+)+[a-fA-F0-9]+\/[0-9]+/s/^/IP-CIDR6,/}' "$file"
-
-            # 分类排序：为每种规则添加数字前缀，然后排序，最后去掉前缀
-=======
               # 如果行以错误的 DOMAIN, 前缀开始且后面是 IPv4，直接替换为 IP-CIDR,
               sed -i -E 's/^\s*DOMAIN,([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+)/IP-CIDR,\1/' "$file"
               # 如果行以错误的 DOMAIN, 前缀开始且后面是 IPv6，直接替换为 IP-CIDR6,
@@ -248,47 +222,28 @@ jobs:
               sed -i -E '/^(IP-CIDR,|IP-CIDR6,)/!{/^\s*[0-9A-Fa-f:]+\/[0-9]+/s/^\s*/IP-CIDR6,/}' "$file"
 
               # 分类排序：为各类规则添加数字前缀，排序后再去除前缀
->>>>>>> Stashed changes
               awk '
               /^DOMAIN,/         { print "0 " $0; next }
               /^DOMAIN-SUFFIX,/  { print "1 " $0; next }
               /^DOMAIN-KEYWORD,/ { print "2 " $0; next }
-<<<<<<< Updated upstream
-              /^DOMAIN-WILDCARD,/{ print "3 " $0; next }
-=======
               /^DOMAIN-WILDCARD,/ { print "3 " $0; next }
->>>>>>> Stashed changes
               /^IP-CIDR,/        { print "4 " $0; next }
               /^IP-CIDR6,/       { print "5 " $0; next }
               /^IP-ASN,/         { print "6 " $0; next }
               /^PROCESS-NAME,/   { print "7 " $0; next }
               /^URL-REGEX,/      { print "8 " $0; next }
               /^USER-AGENT,/     { print "9 " $0; next }
-<<<<<<< Updated upstream
-              /^GEOIP,/          { print "10 " $0; next }
-              /^AND,/            { print "11 " $0; next }
-              /^OR,/             { print "12 " $0; next }
-              /^NOT,/            { print "13 " $0; next }
-              /^DEST-PORT,/      { print "14 " $0; next }
-              /^DOMAIN-REGEX,/   { print "15 " $0; next }
-                                 { print "16 " $0; next }
-              ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
-
-              # 新增功能：为 IP 规则（以 IP- 开头）且不包含 no-resolve 的行添加 no-resolve
-              awk '/^IP-/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile && mv tmpfile "$file"
-=======
               /^DOMAIN-REGEX,/   { print "10 " $0; next }
               /^GEOIP,/          { print "11 " $0; next }
               /^AND,/            { print "12 " $0; next }
               /^OR,/             { print "13 " $0; next }
               /^NOT,/            { print "14 " $0; next }
               /^DEST-PORT,/      { print "15 " $0; next }
-                                  { print "16 " $0; next }
+                                 { print "16 " $0; next }
               ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
 
               # 为 IP 规则且未包含 no-resolve 的行追加 no-resolve
               awk '/^(IP-CIDR,|IP-CIDR6,)/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile && mv tmpfile "$file"
->>>>>>> Stashed changes
 
               # 去重处理（不区分大小写）
               awk '!seen[tolower($0)]++' "$file" > temp && mv temp "$file"
@@ -297,30 +252,9 @@ jobs:
             fi
           done
 
-<<<<<<< Updated upstream
-      # # 步骤5： 去重排序
-      # - name: 去重排序
-      #   run: |
-      #     cd Tools-repo/Ruleset/Surge/Block
-      #     shopt -s nullglob  # 避免没有匹配的文件时保留原始通配符
-      #     for file in Ads_Block.list; do
-      #       if [ -f "$file" ]; then
-      #         sorted_file="sorted_${file}"
-      #         # 使用 grep 去掉包含 # 的行和包含 URL-REGEX, 的行
-      #         grep -v '^\s*#' "$file" | grep -v '^\s*$' | grep -v 'URL-REGEX,' | sort | uniq > "$sorted_file"
-      #         mv "$sorted_file" "$file"
-      #       else
-      #         echo "$file not found."
-      #       fi
-      #     done
-      #   shell: bash
-
-=======
->>>>>>> Stashed changes
-      # 步骤6：对 Surge 下所有子目录中的 .list 文件追加规则信息
+      # 步骤5：对所有子目录下的 .list 文件追加规则信息
       - name: 追加规则信息
         run: |
-          # 启用 globstar，以支持递归匹配子目录下的 .list 文件
           shopt -s globstar
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
             if [ -f "$file" ]; then
@@ -334,7 +268,7 @@ jobs:
             fi
           done
 
-      # 步骤7：提交更改并推送到仓库
+      # 步骤6：提交更改并推送到仓库
       - name: 推送到仓库
         run: |
           cd Tools-repo
@@ -350,13 +284,13 @@ jobs:
             echo "没有需要提交的更改"
           fi
 
-      # 步骤8：获取当前时间并设置为环境变量
+      # 步骤7：获取当前时间并设置为环境变量
       - name: 获取当前时间
         id: current_time
         run: |
           echo "time=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
-      # 步骤9：发送 Telegram 通知
+      # 步骤8：发送 Telegram 通知
       - name: 发送 Telegram 通知
         uses: appleboy/telegram-action@master
         with:
@@ -370,7 +304,7 @@ jobs:
             ⏰ 时间：${{ env.time }}
             🎉 状态：恭喜你！全部任务执行成功
 
-      # 步骤10：清理旧的工作流运行记录
+      # 步骤9：清理旧的工作流运行记录
       - name: 清理工作流
         uses: Mattraks/delete-workflow-runs@main
         with:
