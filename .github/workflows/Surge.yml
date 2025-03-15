@@ -233,26 +233,12 @@ jobs:
               /^PROCESS-NAME,/   { print "7 " $0; next }
               /^URL-REGEX,/      { print "8 " $0; next }
               /^USER-AGENT,/     { print "9 " $0; next }
-<<<<<<< Updated upstream
-              /^DOMAIN-REGEX,/   { print "10 " $0; next }
-              /^GEOIP,/          { print "11 " $0; next }
-              /^AND,/            { print "12 " $0; next }
-              /^OR,/             { print "13 " $0; next }
-              /^NOT,/            { print "14 " $0; next }
-              /^DEST-PORT,/      { print "15 " $0; next }
-<<<<<<< Updated upstream
-                                 { print "16 " $0; next }
-=======
-                                  { print "16 " $0; next }
->>>>>>> Stashed changes
-=======
               /^GEOIP,/          { print "10 " $0; next }
               /^AND,/            { print "11 " $0; next }
               /^OR,/             { print "12 " $0; next }
               /^NOT,/            { print "13 " $0; next }
               /^DEST-PORT,/      { print "14 " $0; next }
                                  { print "15 " $0; next }
->>>>>>> Stashed changes
               ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
 
               # 为 IP 规则且未包含 no-resolve 的行追加 no-resolve
@@ -265,11 +251,7 @@ jobs:
             fi
           done
 
-<<<<<<< Updated upstream
       # 步骤5：对所有子目录下的 .list 文件追加规则信息
-=======
-      # 步骤6：对 Surge 下所有子目录中的 .list 文件追加规则信息
->>>>>>> Stashed changes
       - name: 追加规则信息
         run: |
           shopt -s globstar
