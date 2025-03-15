@@ -241,7 +241,7 @@ jobs:
               # 对于非注释、非空行，且不匹配 IPv4 或 IPv6 格式的行，添加 "DOMAIN," 前缀
               sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b; /^\s*[0-9A-Fa-f:]+\/[0-9]+/b; /^AND,\(/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^PROCESS-NAME,|^URL-REGEX,|^USER-AGENT,|^DEST-PORT,/b; s/^\s*([^#])/DOMAIN,\1/' "$file"
               # 删除注释、空行及每行中 "//" 后的内容
-              sed -i -e '/^\s*[#;]/d' -e '/^$/d' -e 's| //.*||' "$file"
+              sed -i -e '/^\s*[#;]/d' -e '/^\s*\/\//d' -e '/^$/d' -e 's| //.*||' "$file"
               # 删除指定域名
               sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
               # 删除以 ",reject" 结尾的内容
@@ -259,15 +259,8 @@ jobs:
           # 遍历所有 .list 规则文件
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
             if [ -f "$file" ]; then
-              # 如果行以错误的 DOMAIN, 前缀开始且后面是 IPv4，直接替换为 IP-CIDR,
-              sed -i -E 's/^\s*DOMAIN,([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+)/IP-CIDR,\1/' "$file"
-              # 如果行以错误的 DOMAIN, 前缀开始且后面是 IPv6，直接替换为 IP-CIDR6,
-              sed -i -E 's/^\s*DOMAIN,([0-9A-Fa-f:]+\/[0-9]+)/IP-CIDR6,\1/' "$file"
-              # 对于仍然为裸 IP（IPv4）的行，添加 IP-CIDR, 前缀
-              sed -i -E '/^(IP-CIDR,|IP-CIDR6,)/!{/^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^\s*/IP-CIDR,/}' "$file"
-              # 对于仍然为裸 IP（IPv6）的行，添加 IP-CIDR6, 前缀
-              sed -i -E '/^(IP-CIDR,|IP-CIDR6,)/!{/^\s*[0-9A-Fa-f:]+\/[0-9]+/s/^\s*/IP-CIDR6,/}' "$file"
-              # 分类排序：为各类规则添加数字前缀，排序后再去除前缀
+              sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^/IP-CIDR,/}' "$file"
+              sed -i -E '/^IP-CIDR6,/!{/^[a-fA-F0-9]+:|([a-fA-F0-9]+:+)+[a-fA-F0-9]+\/[0-9]+/s/^/IP-CIDR6,/}' "$file"
               awk '
               /^DOMAIN,/           { print "0 " $0; next }
               /^DOMAIN-SUFFIX,/    { print "1 " $0; next }
