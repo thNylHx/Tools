@@ -229,24 +229,15 @@ jobs:
 
       - name: 修正规则
         run: |
-          # 启用 ** 通配符匹配
           shopt -s globstar
-          # 遍历所有 .list 规则文件
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
             if [ -f "$file" ]; then
-              # 删除所有以 DOMAIN-REGEX, 开头的行
               sed -i '/^DOMAIN-REGEX,/d' "$file"
-              # 将以 "." 开头的行替换为 "DOMAIN-SUFFIX,"
               sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
-              # 对于非注释、非空行，且不匹配 IPv4 或 IPv6 格式的行，添加 "DOMAIN," 前缀
               sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b; /^\s*[0-9A-Fa-f:]+\/[0-9]+/b; /^AND,\(/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^PROCESS-NAME,|^URL-REGEX,|^USER-AGENT,|^DEST-PORT,/b; s/^\s*([^#])/DOMAIN,\1/' "$file"
-              # 删除注释、空行及每行中 "//" 后的内容
               sed -i -e '/^\s*[#;]/d' -e '/^\s*\/\//d' -e '/^$/d' -e 's| //.*||' "$file"
-              # 删除指定域名
               sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
-              # 删除以 ",reject" 结尾的内容
               sed -i -e 's/,reject$//' "$file"
-              # 修正格式：删除多余空格
               sed -i 's/, */,/g' "$file"
             else
               echo "$file not found."
@@ -256,7 +247,6 @@ jobs:
       - name: 规则转换和修改
         run: |
           shopt -s globstar
-          # 遍历所有 .list 规则文件
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
             if [ -f "$file" ]; then
               sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^/IP-CIDR,/}' "$file"
@@ -279,11 +269,7 @@ jobs:
               /^DEST-PORT,/        { print "14 " $0; next }
                                    { print "15 " $0; next }
               ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
-
-              # 为 IP 规则且未包含 no-resolve 的行追加 no-resolve
               awk '/^(IP-CIDR,|IP-CIDR6,)/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile && mv tmpfile "$file"
-
-              # 去重处理（不区分大小写）
               awk '!seen[tolower($0)]++' "$file" > temp && mv temp "$file"
             else
               echo "$file not found."
@@ -309,7 +295,6 @@ jobs:
         run: |
           cd Tools-repo
           if [[ -n $(git status -s) ]]; then
-            echo "发现更新，准备提交..."
             git config --local user.email "action@github.com"
             git config --local user.name "GitHub Action"
             git add .
