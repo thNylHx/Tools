@@ -128,7 +128,7 @@ jobs:
               done
 
               files=(
-                  # Ads
+                  ##### Ads #####
                   # MetaCubeX
                   "Block/Ads_all.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
                   # ACL4SSR
@@ -143,12 +143,13 @@ jobs:
                   "Block/Ads_Advertising.list https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Advertising.list"
                   "Block/Ads_Malicious.list https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Malicious.list"
                   "Block/Ads_Tracking.list https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Tracking.list"
-                  # dler-io TG-Twilight geekdada
+                  # dler-io TG-Twilight geekdada Abcd789JK
+                  "Block/Ads_BlockAds.list https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Ruleset/Surge/Block/BlockAds.list"
                   "Block/Ads_Dlerio.list https://raw.githubusercontent.com/dler-io/Rules/main/Surge/Surge%203/Provider/AdBlock.list"
                   "Block/Ads_AWAvenue.list https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge.list"
                   "Block/Ads_Chinese.list https://raw.githubusercontent.com/geekdada/surge-list/master/domain-set/chinese-filter.txt"
 
-                  # Other
+                  ##### Other #####
                   # 本地/局域网
                   "Other/Private_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
                   # PayPal
@@ -180,7 +181,7 @@ jobs:
                   "Other/China_ip.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
                   "Other/ChinaASN.list https://raw.githubusercontent.com/missuo/ASN-China/main/ASN.China.list"
 
-                  # Media
+                  ##### Media #####
                   # 油管
                   "Media/vYouTube.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
                   "Media/YouTubeMusic.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
@@ -202,11 +203,11 @@ jobs:
                   "Media/Spotify.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.list"
                   # TikTok
                   "Media/TikTok.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/tiktok.list"
-
+                  # 海外媒体
                   "Media/GlobalMedia.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
-                  # 
+                  # B站海外
                   "Media/BilibiliHMT.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
-                  # 中国
+                  # 中国媒体
                   "Media/ChinaMedia.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
                   "Media/Bilibili.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.list"
               )
