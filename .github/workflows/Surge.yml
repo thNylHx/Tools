@@ -184,7 +184,7 @@ jobs:
           fi
         shell: bash
 
-      # 步骤3：修正规则（避免对纯 IP 规则误加 DOMAIN, 前缀）
+      # 步骤3：修正规则
       - name: 修正规则
         run: |
           shopt -s globstar
@@ -206,7 +206,7 @@ jobs:
             fi
           done
 
-      # 步骤4：规则转换和修改（纠正 IP 规则前缀）
+      # 步骤4：规则转换和修改
       - name: 规则转换和修改
         run: |
           shopt -s globstar
