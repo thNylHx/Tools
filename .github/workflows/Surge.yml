@@ -11,14 +11,12 @@ jobs:
     env:
       TZ: 'Asia/Shanghai'
     steps:
-      # 步骤1：检出目标仓库
       - name: 检出目标仓库
         uses: actions/checkout@v4
         with:
           repository: thNylHx/Tools
           path: Tools-repo
 
-      # 步骤2：执行内嵌脚本来更新规则 
       - name: 执行内嵌脚本
         run: |
           #!/bin/bash
@@ -230,7 +228,6 @@ jobs:
           fi
         shell: bash
 
-      # 步骤3：修正规则
       - name: 修正规则
         run: |
           # 启用 ** 通配符匹配
@@ -257,7 +254,6 @@ jobs:
             fi
           done
 
-      # 步骤4：规则转换和修改
       - name: 规则转换和修改
         run: |
           shopt -s globstar
@@ -302,7 +298,6 @@ jobs:
             fi
           done
 
-      # 步骤5：对所有子目录下的 .list 文件追加规则信息
       - name: 追加规则信息
         run: |
           shopt -s globstar
@@ -318,7 +313,6 @@ jobs:
             fi
           done
 
-      # 步骤6：提交更改并推送到仓库
       - name: 推送到仓库
         run: |
           cd Tools-repo
@@ -334,13 +328,11 @@ jobs:
             echo "没有需要提交的更改"
           fi
 
-      # 步骤7：获取当前时间并设置为环境变量
       - name: 获取当前时间
         id: current_time
         run: |
           echo "time=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
-      # 步骤8：发送 Telegram 通知
       - name: 发送 Telegram 通知
         uses: appleboy/telegram-action@master
         with:
@@ -354,7 +346,6 @@ jobs:
             ⏰ 时间：${{ env.time }}
             🎉 状态：恭喜你！全部任务执行成功
 
-      # 步骤9：清理旧的工作流运行记录
       - name: 清理工作流
         uses: Mattraks/delete-workflow-runs@main
         with:

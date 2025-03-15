@@ -1,108 +1,83 @@
-# 设置工作流名称，定义该 GitHub Actions 工作流的名称
-name: 同步 mihomo 上游规则  # 工作流名称：同步 mihomo 上游规则
+name: 同步 mihomo 上游规则
 
-# 定义触发该工作流的事件
 on:
-  # 允许通过 GitHub 界面手动触发工作流
-  workflow_dispatch:  # 支持手动触发
-  schedule:  # 定时触发设置
-    # 设置定时触发规则，使用 cron 语法表示每6小时触发一次
-    - cron: "0 */6 * * *"  # 每6小时执行一次工作流（分钟为0，每6小时一次）
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
 
-# 工作流
 jobs:
-  # 定义名为 Fork 的任务
   Fork:
-    # 指定运行环境为最新版本的 Ubuntu
-    runs-on: ubuntu-latest  # 在 ubuntu-latest 环境中运行任务
+    runs-on: ubuntu-latest
     env:
-      # 设置环境变量 TZ 为上海时间，确保任务中的时间与上海时区一致
-      TZ: 'Asia/Shanghai'  # 配置时区为 Asia/Shanghai
+      TZ: 'Asia/Shanghai'
 
     steps:
-      # 步骤1：检出目标仓库
-      - name: 检出目标仓库  # 定义步骤名称：检出目标仓库
-        uses: actions/checkout@v4  # 使用 GitHub 官方 checkout action 检出代码
+      - name: 检出目标仓库
+        uses: actions/checkout@v4
         with:
-          # 指定需要检出的远程仓库，格式为“用户名/仓库名”
-          repository: thNylHx/Tools  # 目标仓库：thNylHx/Tools
-          # 设置将仓库检出到本地的目录名称为 Tools-repo
-          path: Tools-repo  # 本地目录名称：Tools-repo
+          repository: thNylHx/Tools
+          path: Tools-repo
 
-      # 步骤2：执行内嵌脚本来更新规则
       - name: 执行内嵌脚本
         run: |
-          echo "开始执行脚本..."
-          
-          # 创建规则目录
-          mkdir -p Tools-repo/Ruleset/mihomo/{geoip,geosite}
-          
-          # 定义下载函数
-          download_file() {
-            local output_path="$1"
-            local url="$2"
-            curl -L -o "$output_path" "$url"
-          }
-          
-          # geosite 文件列表，格式：文件名|下载地址
-          geosite_downloads=(
-            "Ads_all.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.mrs"
-            "Local.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
-            "China.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
-            "Openai.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs"
-            "PayPal.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs"
-            "Apple.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
-            "Global.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
-            "Google.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
-            "YouTube.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
-            "Steam.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
-            "Epic.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/epicgames.mrs"
-            "Facebook.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs"
-            "Instagram.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs"
-            "Twitter.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
-            "telegram.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
-            "Line.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/line.mrs"
-            "GitHub.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
-            "OneDrive.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs"
-            "Microsoft.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
-            "tiktok.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"
-            "Bilibili.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs"
-            "Disney.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs"
-            "Netflix.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
-            "Spotify.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs"
-          )
-          
-          # 循环下载 geosite 文件
-          for item in "${geosite_downloads[@]}"; do
-            filename="${item%%|*}"
-            url="${item#*|}"
-            download_file "Tools-repo/Ruleset/mihomo/geosite/${filename}" "$url"
-          done
-          
-          # geoip 文件列表，格式：文件名|下载地址
-          geoip_downloads=(
-            "Local.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
-            "China.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
-            "Netflix.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"
-            "Twitter.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"
-            "telegram.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
-            "Facebook.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.mrs"
-            "Google.mrs|https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
-          )
-          
-          # 循环下载 geoip 文件
-          for item in "${geoip_downloads[@]}"; do
-            filename="${item%%|*}"
-            url="${item#*|}"
-            download_file "Tools-repo/Ruleset/mihomo/geoip/${filename}" "$url"
-          done
-          
-          echo "脚本执行完毕"
+          #!/bin/bash
+          repo_name=$(basename "$GITHUB_REPOSITORY")
+          if [[ "$repo_name" == "Tools" ]]; then
+              echo "Running in Tools repository"
+              mkdir -p Tools-repo/Ruleset/mihomo/{geoip,geosite}
+              files=(
+                  # geosite
+                  "geosite/Ads_all.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.mrs"
+                  "geosite/Local.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+                  "geosite/China.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+                  "geosite/Openai.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs"
+                  "geosite/PayPal.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs"
+                  "geosite/Apple.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
+                  "geosite/Global.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
+                  "geosite/Google.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
+                  "geosite/YouTube.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
+                  "geosite/Steam.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
+                  "geosite/Epic.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/epicgames.mrs"
+                  "geosite/Facebook.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs"
+                  "geosite/Instagram.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs"
+                  "geosite/Twitter.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
+                  "geosite/telegram.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
+                  "geosite/Line.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/line.mrs"
+                  "geosite/GitHub.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
+                  "geosite/OneDrive.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs"
+                  "geosite/Microsoft.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
+                  "geosite/tiktok.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"
+                  "geosite/Bilibili.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs"
+                  "geosite/Disney.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs"
+                  "geosite/Netflix.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
+                  "geosite/Spotify.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs"
+
+                  # geoip
+                  "geoip/Local.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
+                  "geoip/China.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
+                  "geoip/Netflix.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"
+                  "geoip/Twitter.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"
+                  "geoip/telegram.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
+                  "geoip/Facebook.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.mrs"
+                  "geoip/Google.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
+              )
+              for file in "${files[@]}"; do
+                  file_name=$(echo $file | cut -d " " -f 1)
+                  url=$(echo $file | cut -d " " -f 2)
+                  # 确保 URL 格式正确
+                  if [[ ! "$url" =~ ^https?: ]]; then
+                      url="https:$url"
+                  fi
+                  echo "Downloading: $file_name"
+                  curl -f -L "$url" -o "Tools-repo/Ruleset/mihomo/$file_name" || { echo "Download Failed: $url"; exit 1; }
+              done
+          else
+              echo "This is not the Tools repository. Skipping."
+          fi
         shell: bash
 
-      # 步骤3：提交更改并推送到仓库
-      - name: 推送到仓库  # 定义步骤名称：推送到仓库
-        run: |  # 使用 shell 脚本执行下面的命令
+      - name: 推送到仓库
+        run: |
           cd Tools-repo  # 切换到已检出的目标仓库目录
           # 检查当前 git 状态，判断是否存在文件更改（git status -s 有输出表示有更改）
           if [[ -n $(git status -s) ]]; then  # 如果存在未提交的更改，则执行提交操作
@@ -118,13 +93,11 @@ jobs:
             echo "没有需要提交的更改"  # 输出提示信息，表示当前没有文件更改需要提交
           fi  # 结束 if 条件判断
 
-      # 步骤4：获取当前时间并设置为环境变量
       - name: 获取当前时间
         id: current_time
         run: |
           echo "time=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
-      # 步骤5：发送 Telegram 通知
       - name: 发送 Telegram 通知
         uses: appleboy/telegram-action@master
         with:
@@ -138,11 +111,8 @@ jobs:
             ⏰ 时间：${{ env.time }}
             🎉 状态：恭喜你！全部任务执行成功
 
-      # 步骤6：清理旧的工作流运行记录
-      - name: 清理工作流  # 定义步骤名称：清理工作流
-        uses: Mattraks/delete-workflow-runs@main  # 使用 Mattraks 提供的 Action 清理旧的工作流运行记录
+      - name: 清理工作流
+        uses: Mattraks/delete-workflow-runs@main
         with:
-          # 设置保留的工作流运行记录天数为 0，即清除所有过期的记录
-          retain_days: 0  # 过期记录保留天数设置为 0
-          # 保证至少保留最近 5 次的工作流运行记录，避免记录被全部清理
-          keep_minimum_runs: 5  # 最少保留 5 次工作流运行记录
+          retain_days: 0
+          keep_minimum_runs: 5
