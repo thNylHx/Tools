@@ -209,7 +209,7 @@ jobs:
               sed -i '/^DOMAIN-REGEX,/d' "$file"
               # 将以 "." 开头的行替换为 "DOMAIN-SUFFIX,"
               sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
-              # 对于非注释、非空行，且不匹配 IPv4 或 IPv6 格式的行，添加 "DOMAIN," 前缀（但跳过 AND, 开头的行）
+              # 对于非注释、非空行，且不匹配 IPv4 或 IPv6 格式的行，添加 "DOMAIN," 前缀
               sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b; /^\s*[0-9A-Fa-f:]+\/[0-9]+/b; /^AND,\(/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^PROCESS-NAME,|^URL-REGEX,|^USER-AGENT,|^DEST-PORT,/b; s/^\s*([^#])/DOMAIN,\1/' "$file"
               # 删除注释、空行及每行中 "//" 后的内容
               sed -i -e '/^\s*[#;]/d' -e '/^$/d' -e 's| //.*||' "$file"
@@ -228,6 +228,7 @@ jobs:
       - name: 规则转换和修改
         run: |
           shopt -s globstar
+          # 遍历所有 .list 规则文件
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
             if [ -f "$file" ]; then
               # 如果行以错误的 DOMAIN, 前缀开始且后面是 IPv4，直接替换为 IP-CIDR,
@@ -240,22 +241,22 @@ jobs:
               sed -i -E '/^(IP-CIDR,|IP-CIDR6,)/!{/^\s*[0-9A-Fa-f:]+\/[0-9]+/s/^\s*/IP-CIDR6,/}' "$file"
               # 分类排序：为各类规则添加数字前缀，排序后再去除前缀
               awk '
-              /^DOMAIN,/         { print "0 " $0; next }
-              /^DOMAIN-SUFFIX,/  { print "1 " $0; next }
-              /^DOMAIN-KEYWORD,/ { print "2 " $0; next }
-              /^DOMAIN-WILDCARD,/ { print "3 " $0; next }
-              /^IP-CIDR,/        { print "4 " $0; next }
-              /^IP-CIDR6,/       { print "5 " $0; next }
-              /^IP-ASN,/         { print "6 " $0; next }
-              /^PROCESS-NAME,/   { print "7 " $0; next }
-              /^URL-REGEX,/      { print "8 " $0; next }
-              /^USER-AGENT,/     { print "9 " $0; next }
-              /^GEOIP,/          { print "10 " $0; next }
-              /^AND,/            { print "11 " $0; next }
-              /^OR,/             { print "12 " $0; next }
-              /^NOT,/            { print "13 " $0; next }
-              /^DEST-PORT,/      { print "14 " $0; next }
-                                 { print "15 " $0; next }
+              /^DOMAIN,/           { print "0 " $0; next }
+              /^DOMAIN-SUFFIX,/    { print "1 " $0; next }
+              /^DOMAIN-KEYWORD,/   { print "2 " $0; next }
+              /^DOMAIN-WILDCARD,/  { print "3 " $0; next }
+              /^IP-CIDR,/          { print "4 " $0; next }
+              /^IP-CIDR6,/         { print "5 " $0; next }
+              /^IP-ASN,/           { print "6 " $0; next }
+              /^PROCESS-NAME,/     { print "7 " $0; next }
+              /^URL-REGEX,/        { print "8 " $0; next }
+              /^USER-AGENT,/       { print "9 " $0; next }
+              /^GEOIP,/            { print "10 " $0; next }
+              /^AND,/              { print "11 " $0; next }
+              /^OR,/               { print "12 " $0; next }
+              /^NOT,/              { print "13 " $0; next }
+              /^DEST-PORT,/        { print "14 " $0; next }
+                                   { print "15 " $0; next }
               ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
 
               # 为 IP 规则且未包含 no-resolve 的行追加 no-resolve
