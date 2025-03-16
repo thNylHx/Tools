@@ -250,7 +250,12 @@ jobs:
               ' "$file"
               # sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^\s*\/\//b; /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b; /^\s*[0-9A-Fa-f:]+\/[0-9]+/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^GEOIP,|^AND,|^OR,|^NOT,|^URL-REGEX,|^USER-AGENT,|^PROCESS-NAME,|^DEST-PORT,/b; s/^([^#])/DOMAIN,\1/' "$file"
               # 删除文件中所有 [以 "#" ";" "//" 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
-              sed -i -E '/^\s*[#;]/d; /^\s*\/\//d; /^$/d; s| //.*||' "$file"
+              sed -i -E '
+                /^\s*[#;]/d;          # 删除 `#` 或 `;` 开头的注释行
+                /^\s*\/\//d;          # 删除 `//` 开头的注释行
+                /^$/d;                # 删除空行
+                s| //.*||             # 删除 `//` 后面的内容
+              ' "$file"
               # 删除指定域名
               sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
               # 删除文件中所有 [以 ",reject" 及其后面的内容]
