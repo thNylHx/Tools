@@ -23,7 +23,8 @@ jobs:
           repo_name=$(basename "$GITHUB_REPOSITORY")
           if [[ "$repo_name" == "Tools" ]]; then
               echo "Running in Tools repository"
-              mkdir -p Tools-repo/Ruleset/Surge/{Block,Media,Other}
+              # 创建目录
+              mkdir -p Tools-repo/Ruleset/Surge/{Block,Media,Other} Tools-repo/Ruleset/mihomo/Block
               # 合并 广告 规则
               urls=(
                   "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
@@ -35,10 +36,13 @@ jobs:
                   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
               )
               > Tools-repo/Ruleset/Surge/Block/Ads_Block.list
+              > Tools-repo/Ruleset/mihomo/Block/Ads_Block.list
               for url in "${urls[@]}"; do
                   echo "Downloading: $url"
                   curl -f -L "$url" >> Tools-repo/Ruleset/Surge/Block/Ads_Block.list || { echo "Download Failed: $url"; exit 1; }
                   echo "" >> Tools-repo/Ruleset/Surge/Block/Ads_Block.list
+                  curl -f -L "$url" >> Tools-repo/Ruleset/mihomo/Block/Ads_Block.list || { echo "Download Failed: $url"; exit 1; }
+                  echo "" >> Tools-repo/Ruleset/mihomo/Block/Ads_Block.list
               done
 
               # 合并 脸书 规则
@@ -230,8 +234,8 @@ jobs:
         run: |
           # 开启 globstar 选项，支持递归匹配子目录中的文件
           shopt -s globstar
-          # 遍历 Tools-repo/Ruleset/Surge 目录下所有 .list 文件
-          for file in Tools-repo/Ruleset/Surge/**/*.list; do
+          # 遍历 Tools-repo/Ruleset/Surge 目录下所有 .list 文件以及 Tools-repo/Ruleset/mihomo/Block 目录下所有 .list 文件
+          for file in Tools-repo/Ruleset/Surge/**/*.list Tools-repo/Ruleset/mihomo/Block/*.list; do
             if [ -f "$file" ]; then
               # 删除文件中所有 [以 DOMAIN-REGEX" 开头的行]
               sed -i '/^DOMAIN-REGEX,/d' "$file"
@@ -268,7 +272,7 @@ jobs:
       - name: 规则转换和修改
         run: |
           shopt -s globstar
-          for file in Tools-repo/Ruleset/Surge/**/*.list; do
+          for file in Tools-repo/Ruleset/Surge/**/*.list Tools-repo/Ruleset/mihomo/Block/*.list; do
             if [ -f "$file" ]; then
               sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^/IP-CIDR,/}' "$file"
               sed -i -E '/^IP-CIDR6,/!{/^([a-fA-F0-9]*:){2,}[a-fA-F0-9]*\/[0-9]+/s/^/IP-CIDR6,/}' "$file"
@@ -319,20 +323,12 @@ jobs:
 
       - name: 修改 mihomo 规则
         run: |
-          # 创建目录
-          mkdir -p Tools-repo/Ruleset/mihomo/Block
-          # 删除 Ads_Block.list 文件
-          rm -rf Tools-repo/Ruleset/mihomo/Block/*.list
-          # 复制 Ads_Block.list 文件到 mihomo 目录
-          cp Tools-repo/Ruleset/Surge/Block/Ads_Block.list Tools-repo/Ruleset/mihomo/Block/Ads_Block.list
           # 对 mihomo/Block 目录下的 .list 文件进行处理
           for file in Tools-repo/Ruleset/mihomo/Block/*.list; do
             if [ -f "$file" ]; then
               # 删除特定的规则行
               sed -i -e '/^USER-AGENT/d' "$file"
               sed -i -e '/^URL-REGEX/d' "$file"
-              # 删除 `#` 或 `;` 开头的注释行、空行
-              sed -i -E '/^\s*[#;]/d; /^$/d' "$file"
               # 获取文件名
               file_names=$(basename "$file" .list)
               # 统计文件行数
