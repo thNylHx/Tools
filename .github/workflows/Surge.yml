@@ -11,13 +11,13 @@ jobs:
     env:
       TZ: 'Asia/Shanghai'
     steps:
-      - name: 检出目标仓库
+      - name: 目标仓库
         uses: actions/checkout@v4
         with:
           repository: thNylHx/Tools
           path: Tools-repo
 
-      - name: 执行内嵌脚本
+      - name: 执行脚本
         run: |
           #!/bin/bash
           repo_name=$(basename "$GITHUB_REPOSITORY")
@@ -269,7 +269,7 @@ jobs:
             fi
           done
 
-      - name: 规则转换和修改
+      - name: 转换规则
         run: |
           shopt -s globstar
           for file in Tools-repo/Ruleset/Surge/**/*.list Tools-repo/Ruleset/mihomo/Block/*.list; do
@@ -344,7 +344,7 @@ jobs:
             fi
           done
             
-      - name: 推送到仓库
+      - name: 推送仓库
         run: |
           cd Tools-repo
           if [[ -n $(git status -s) ]]; then
@@ -358,7 +358,7 @@ jobs:
             echo "没有需要提交的更改"
           fi
 
-      - name: 获取当前时间
+      - name: 当前时间
         id: current_time
         run: |
           echo "time=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
