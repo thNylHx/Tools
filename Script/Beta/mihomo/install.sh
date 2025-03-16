@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#!name = mihomo 一键安装脚本
+#!name = mihomo 一键安装脚本 Beta
 #!desc = 安装 & 配置
-#!date = 2024-12-20 11:30
+#!date = 2025-01-15 14:30
 #!author = ChatGPT
 
 set -e -o pipefail
@@ -49,7 +49,7 @@ get_schema() {
 
 update_system() {
     apt update && apt upgrade -y
-    apt install -y curl git gzip wget nano iptables tzdata jq unzip
+    apt install -y curl git gzip wget nano iptables tzdata jq
 }
 
 check_ip_forward() {
@@ -65,21 +65,42 @@ check_ip_forward() {
     sysctl -p > /dev/null
 }
 
-download_version() {
+download_alpha_version() {
     local version_url=$(get_url "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt")
     version=$(curl -sSL "$version_url") || { echo -e "${red}获取 mihomo 远程版本失败${reset}"; exit 1; }
 }
 
-download_mihomo() {
+download_latest_version() {
+    local version_url="https://api.github.com/repos/MetaCubeX/mihomo/releases/latest"
+    version=$(curl -sSL "$version_url" | jq -r '.tag_name' | sed 's/v//') || { echo -e "${red}获取 mihomo 远程版本失败${reset}"; exit 1;}
+}
+
+download_alpha_mihomo() {
     local version_file="/root/mihomo/version.txt"
     local filename
-    download_version || { echo -e "${red}获取版本失败${reset}"; exit 1; }
+    get_schema
+    download_alpha_version || { echo -e "${red}获取最新版本失败，请检查网络或源地址！${reset}"; exit 1; }
+    [[ "$arch" == 'amd64' ]] && filename="mihomo-linux-${arch}-compatible-${version}.gz" ||
     filename="mihomo-linux-${arch}-${version}.gz"
-    [[ "$arch" == 'amd64' ]] && filename="mihomo-linux-${arch}-compatible-${version}.gz"
     local download_url=$(get_url "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${filename}")
     wget -t 3 -T 30 "${download_url}" -O "${filename}" || { echo -e "${red}mihomo 下载失败，可能是网络问题，建议重新运行本脚本重试下载${reset}"; exit 1; }
     gunzip "$filename" || { echo -e "${red}mihomo 解压失败${reset}"; exit 1; }
     mv "mihomo-linux-${arch}-compatible-${version}" mihomo 2>/dev/null || mv "mihomo-linux-${arch}-${version}" mihomo || { echo -e "${red}找不到解压后的文件${reset}"; exit 1; }
+    chmod +x mihomo
+    echo "$version" > "$version_file"
+}
+
+download_latest_mihomo() {
+    local version_file="/root/mihomo/version.txt"
+    local filename
+    get_schema
+    download_latest_version || { echo -e "${red}获取最新版本失败，请检查网络或源地址！${reset}"; exit 1; }
+    [[ "$arch" == 'amd64' ]] && filename="mihomo-linux-${arch}-compatible-v${version}.gz" ||
+    filename="mihomo-linux-${arch}-v${version}.gz"
+    local download_url=$(get_url "https://github.com/MetaCubeX/mihomo/releases/download/v${version}/${filename}")
+    wget -t 3 -T 30 "${download_url}" -O "${filename}" || { echo -e "${red}mihomo 下载失败，可能是网络问题，建议重新运行本脚本重试下载${reset}"; exit 1; }
+    gunzip "$filename" || { echo -e "${red}mihomo 解压失败${reset}"; exit 1; }
+    mv "mihomo-linux-${arch}-compatible-v${version}" mihomo 2>/dev/null || mv "mihomo-linux-${arch}-v${version}" mihomo || { echo -e "${red}找不到解压后的文件${reset}"; exit 1; }
     chmod +x mihomo
     echo "$version" > "$version_file"
 }
@@ -100,7 +121,7 @@ download_wbeui() {
 
 download_shell() {
     local shell_file="/usr/bin/mihomo"
-    local sh_url=$(get_url "https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Script/mihomo/mihomo.sh")
+    local sh_url=$(get_url "https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Script/Beta/mihomo/mihomo.sh")
     [ -f "$shell_file" ] && rm -f "$shell_file"
     wget -q -O "$shell_file" --no-check-certificate "$sh_url" || { echo -e "${red}mihomo 管理脚本下载失败，可能是网络问题，建议重新运行本脚本重试下载${reset}"; exit 1; }
     chmod +x "$shell_file"
@@ -109,13 +130,33 @@ download_shell() {
 
 install_mihomo() {
     local folders="/root/mihomo"
+    local choice
+    echo -e "${yellow}请选择版本：${reset}"
+    echo -e "${green}1. 测试版 (Prerelease-Alpha)${reset}"
+    echo -e "${green}2. 正式版 (Latest)${reset}"
+    read -rp "请输入选项 (1/2): " choice
     [ -d "$folders" ] && rm -rf "$folders"
-    mkdir -p "$folders" && cd "$folders" 
+    mkdir -p "$folders" && cd "$folders"
     get_schema
     echo -e "${yellow}当前系统架构${reset}：【 ${green}${arch_raw}${reset} 】"
-    download_version
-    echo -e "${yellow}当前软件版本${reset}：【 ${green}${version}${reset} 】"
-    download_mihomo
+    case "$choice" in
+        1)
+            echo -e "${yellow}选择安装测试版${reset}"
+            download_alpha_version || { echo -e "${red}获取测试版版本失败，请检查网络或源地址！${reset}"; exit 1; }
+            echo -e "${yellow}当前软件版本${reset}：【 ${green}${version}${reset} 】"
+            download_alpha_mihomo || { echo -e "${red}测试版安装失败${reset}"; exit 1; }
+            ;;
+        2)
+            echo -e "${yellow}选择安装正式版${reset}"
+            download_latest_version || { echo -e "${red}获取正式版版本失败，请检查网络或源地址！${reset}"; exit 1; }
+            echo -e "${yellow}当前软件版本${reset}：【 ${green}v${version}${reset} 】"
+            download_latest_mihomo || { echo -e "${red}正式版安装失败${reset}"; exit 1; }
+            ;;
+        *)
+            echo -e "${red}无效选项，请输入 1 或 2${reset}"
+            exit 1
+            ;;
+    esac
     download_service
     download_wbeui
     download_shell

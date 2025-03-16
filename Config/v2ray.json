@@ -1,0 +1,26 @@
+{
+  "inbounds": [
+    {
+      "port": 4433, 
+      "protocol": "vmess",    
+      "settings": {
+        "clients": [
+          {
+            "id": "5f940784-315b-40ef-8f08-25f9733a033a",  
+            "alterId": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",  
+      "settings": {}
+    }
+  ],
+  "vmess-aead": true
+}

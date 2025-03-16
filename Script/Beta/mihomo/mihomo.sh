@@ -1,20 +1,20 @@
 #!/bin/bash
 
-#!name = mihomo 一键管理脚本
+#!name = mihomo 一键管理脚本 Beta
 #!desc = 管理 & 面板
-#!date = 2025-03-10 16:00
+#!date = 2025-01-15 14:30
 #!author = ChatGPT
 
 set -e -o pipefail
 
-red="\033[31m"  ## 红色
-green="\033[32m"  ## 绿色 
-yellow="\033[33m"  ## 黄色
-blue="\033[34m"  ## 蓝色
-cyan="\033[36m"  ## 青色
-reset="\033[0m"  ## 重置
+red="\033[31m"  # 红色
+green="\033[32m"  # 绿色
+yellow="\033[33m"  # 黄色
+blue="\033[34m"  # 蓝色
+cyan="\033[36m"  # 青色
+reset="\033[0m"  # 重置
 
-sh_ver="0.1.5"
+sh_ver="1.0.6"
 
 use_cdn=false
 
@@ -61,12 +61,12 @@ show_status() {
         software_version="${red}未安装${reset}"
     else
         install_status="${green}已安装${reset}"
-        if systemctl is-active --quiet mihomo; then
+        if pgrep -f "$file" > /dev/null; then
             run_status="${green}已运行${reset}"
         else
             run_status="${red}未运行${reset}"
         fi
-        if systemctl is-enabled --quiet mihomo; then
+        if systemctl is-enabled mihomo.service &>/dev/null; then
             auto_start="${green}已设置${reset}"
         else
             auto_start="${red}未设置${reset}"
@@ -94,7 +94,6 @@ service_mihomo() {
         restart) action_text="重启" ;;
         enable) action_text="设置开机自启" ;;
         disable) action_text="取消开机自启" ;;
-        logs)    action_text="查看日志" ;;
     esac
     if [[ "$action" == "enable" || "$action" == "disable" ]]; then
         local is_enabled=$(systemctl is-enabled --quiet mihomo && echo "enabled" || echo "disabled")
@@ -102,8 +101,7 @@ service_mihomo() {
            [[ "$action" == "disable" && "$is_enabled" == "disabled" ]]; then
             echo -e "${yellow}已${action_text}，无需重复操作${reset}"
         else
-            echo -e "${green}正在${action_text}请等待${reset}"
-            sleep 1s
+            echo -e "${green}正在 ${action_text} mihomo...${reset}"
             if systemctl "$action" mihomo; then
                 echo -e "${green}${action_text}成功${reset}"
             else
@@ -113,11 +111,6 @@ service_mihomo() {
         start_menu
         return
     fi
-    if [[ "$action" == "logs" ]]; then
-        echo -e "${green}正在实时查看 mihomo 日志，按 Ctrl+C 退出${reset}"
-        journalctl -u mihomo -o cat -f
-        return
-    fi
     local service_status=$(systemctl is-active --quiet mihomo && echo "active" || echo "inactive")
     if [[ "$action" == "start" && "$service_status" == "active" ]] || 
        [[ "$action" == "stop" && "$service_status" == "inactive" ]]; then
@@ -125,8 +118,7 @@ service_mihomo() {
         start_menu
         return
     fi
-    echo -e "${green}正在${action_text}请等待${reset}"
-    sleep 1s
+    echo -e "${green}正在 ${action_text} mihomo...${reset}"
     if systemctl "$action" mihomo; then
         echo -e "${green}${action_text}成功${reset}"
     else
@@ -140,7 +132,6 @@ stop_mihomo() { service_mihomo stop; }
 restart_mihomo() { service_mihomo restart; }
 enable_mihomo() { service_mihomo enable; }
 disable_mihomo() { service_mihomo disable; }
-logs_mihomo(){ service_mihomo logs; }
 
 uninstall_mihomo() {
     check_installation || { start_menu; return; }
@@ -175,7 +166,7 @@ uninstall_mihomo() {
 install_mihomo() {
     check_network
     local folders="/root/mihomo"
-    local install_url="https://raw.githubusercontent.com/Abcd789JK/Tools/main/Script/mihomo/install.sh"
+    local install_url="https://raw.githubusercontent.com/Abcd789JK/Tools/main/Script/Beta/mihomo/install.sh"
     if [ -d "$folders" ]; then
         echo -e "${red}检测到 mihomo 已经安装在 ${folders} 目录下${reset}"
         read -p "$(echo -e "${red}警告：重新安装将删除当前配置和文件！\n${yellow}是否删除并重新安装？${reset} (y/n): ")" input
@@ -207,6 +198,7 @@ download_alpha_version() {
 }
 
 download_latest_version() {
+    check_network
     local version_url="https://api.github.com/repos/MetaCubeX/mihomo/releases/latest"
     version=$(curl -sSL "$version_url" | jq -r '.tag_name' | sed 's/v//') || { echo -e "${red}获取 mihomo 远程版本失败${reset}"; exit 1;}
 }
@@ -217,8 +209,8 @@ download_alpha_mihomo() {
     local filename
     get_schema
     download_alpha_version || { echo -e "${red}获取最新版本失败，请检查网络或源地址！${reset}"; start_menu; return; }
+    [[ "$arch" == 'amd64' ]] && filename="mihomo-linux-${arch}-compatible-${version}.gz" ||
     filename="mihomo-linux-${arch}-${version}.gz"
-    [[ "$arch" == 'amd64' ]] && filename="mihomo-linux-${arch}-compatible-${version}.gz"
     local download_url=$(get_url "https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${filename}")
     wget -t 3 -T 30 "${download_url}" -O "${filename}" || { echo -e "${red}mihomo 下载失败，可能是网络问题，建议重新运行本脚本重试下载${reset}"; exit 1; }
     gunzip "$filename" || { echo -e "${red}mihomo 解压失败${reset}"; exit 1; }
@@ -233,8 +225,8 @@ download_latest_mihomo() {
     local filename
     get_schema
     download_latest_version || { echo -e "${red}获取最新版本失败，请检查网络或源地址！${reset}"; start_menu; return; }
+    [[ "$arch" == 'amd64' ]] && filename="mihomo-linux-${arch}-compatible-v${version}.gz" ||
     filename="mihomo-linux-${arch}-v${version}.gz"
-    [[ "$arch" == 'amd64' ]] && filename="mihomo-linux-${arch}-compatible-v${version}.gz"
     local download_url=$(get_url "https://github.com/MetaCubeX/mihomo/releases/download/v${version}/${filename}")
     wget -t 3 -T 30 "${download_url}" -O "${filename}" || { echo -e "${red}mihomo 下载失败，可能是网络问题，建议重新运行本脚本重试下载${reset}"; exit 1; }
     gunzip "$filename" || { echo -e "${red}mihomo 解压失败${reset}"; exit 1; }
@@ -293,7 +285,7 @@ update_mihomo() {
 update_shell() {
     check_network
     local shell_file="/usr/bin/mihomo"
-    local sh_ver_url="https://raw.githubusercontent.com/Abcd789JK/Tools/main/Script/mihomo/mihomo.sh"
+    local sh_ver_url="https://raw.githubusercontent.com/Abcd789JK/Tools/main/Script/Beta/mihomo/mihomo.sh"
     local sh_new_ver=$(wget --no-check-certificate -qO- "$(get_url "$sh_ver_url")" | grep 'sh_ver="' | awk -F "=" '{print $NF}' | sed 's/\"//g' | head -1)
     echo -e "${green}开始检查脚本是否有更新${reset}"
     if [ "$sh_ver" == "$sh_new_ver" ]; then
@@ -329,9 +321,9 @@ config_mihomo() {
     echo -e "${yellow}1. TUN 模式${reset}"
     echo -e "${yellow}2. TProxy 模式${reset}"
     echo -e "${cyan}-------------------------${reset}"
-    read -p "$(echo -e "请选择运行模式（${green}推荐使用 TUN 模式${reset}）请输入选择(1/2): ")" confirm
-    confirm=${confirm:-1}
-    case "$confirm" in
+    read -p "$(echo -e "请选择运行模式（${green}推荐使用 TUN 模式${reset}）请输入选择(1/2): ")" input
+    input=${input:-1}
+    case "$input" in
         1) config_url="https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Config/mihomo.yaml" ;;
         2) config_url="https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Config/mihomotp.yaml" ;;
         *) echo -e "${red}无效选择，跳过配置文件下载。${reset}"; return ;;
@@ -369,11 +361,8 @@ config_mihomo() {
     { print }
     ' "$config_file" > temp.yaml && mv temp.yaml "$config_file"
     systemctl daemon-reload
-    systemctl restart mihomo
-    echo -e "${green}mihomo 配置完成，准备启动中${reset}"
-    echo -e ""
-    echo -e "${green}恭喜你，你的 mihomo 已成功启动并设置为开机自启，配置文件保存到 ${yellow}${config_file}${reset}"
-    echo -e ""
+    systemctl start mihomo
+    echo -e "${green}恭喜你，你的 mihomo 已经配置完成并保存到 ${yellow}${config_file}${reset}"
     echo -e "${red}下面是 mihomo 管理面板地址和进入管理菜单命令${reset}"
     echo -e "${cyan}=========================${reset}"
     echo -e "${green}http://$ipv4:9090/ui ${reset}"
@@ -450,16 +439,15 @@ switch_version() {
 menu() {
     clear
     echo "================================="
-    echo -e "${green}欢迎使用 mihomo 一键脚本${reset}"
+    echo -e "${green}欢迎使用 mihomo 一键脚本 Beta 版${reset}"
     echo -e "${green}作者：${yellow}ChatGPT JK789${reset}"
-    echo -e "${red}使用说明：${reset}"
+    echo -e "${red}更换订阅说明：${reset}"
     echo -e "${red} 1. 更换订阅不能保存原有机场订阅"
     echo -e "${red} 2. 需要全部重新添加机场订阅${reset}"
     echo "================================="
     echo -e "${green} 0${reset}. 更新脚本"
     echo -e "${green}10${reset}. 退出脚本"
     echo -e "${green}20${reset}. 更换订阅"
-    echo -e "${green}30${reset}. 查看日志"
     echo "---------------------------------"
     echo -e "${green} 1${reset}. 安装 mihomo"
     echo -e "${green} 2${reset}. 更新 mihomo"
@@ -487,7 +475,6 @@ menu() {
         8) disable_mihomo ;;
         9) switch_version ;;
         20) config_mihomo ;;
-        30) logs_mihomo ;;
         10) exit 0 ;;
         0) update_shell ;;
         *) echo -e "${red}无效选项，请重新选择${reset}" 

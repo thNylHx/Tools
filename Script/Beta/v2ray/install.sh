@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#!name = v2ray 一键安装脚本
+#!name = v2ray 一键安装脚本 Beta
 #!desc = 安装 & 配置
-#!date = 2025-02-11 12:00
+#!date = 2025-01-05 11:30
 #!author = ChatGPT
 
 set -e -o pipefail
@@ -49,28 +49,19 @@ get_schema(){
 
 update_system() {
     apt update && apt upgrade -y
-    apt install -y curl git gzip wget nano iptables tzdata jq unzip
+    apt install -y curl git gzip wget nano unzip jq
 }
 
 download_version() {
     local version_url="https://api.github.com/repos/v2fly/v2ray-core/releases/latest"
-    version=$(curl -sSL "$version_url" | jq -r '.tag_name' | sed 's/v//') || {
-        echo -e "${red}获取 v2ray 远程版本失败${reset}";
-        exit 1;
-    }
+    version=$(curl -sSL "$version_url" | jq -r '.tag_name' | sed 's/v//') || { echo -e "${red}获取 v2ray 远程版本失败${reset}"; exit 1;}
 }
 
 download_v2ray() {
     local version_file="/root/v2ray/version.txt"
     local filename
-    download_version
-    case "$arch" in
-        '64' | '32' | 'arm64-v8a' | 'arm32-v7a' | 's390x') 
-            filename="v2ray-linux-${arch}.zip";;
-        *) 
-            echo -e "${red}未知的架构: ${arch}${reset}"
-            exit 1;;
-    esac
+    download_version || { echo -e "${red}获取最新版本失败，请检查网络或源地址！${reset}"; exit 1; }
+    filename="v2ray-linux-${arch}.zip"
     local download_url=$(get_url "https://github.com/v2fly/v2ray-core/releases/download/v${version}/${filename}")
     wget -t 3 -T 30 "${download_url}" -O "${filename}" || { echo -e "${red}v2ray 下载失败，可能是网络问题，建议重新运行本脚本重试下载${reset}"; exit 1; }
     unzip "$filename" && rm "$filename" || { echo -e "${red}v2ray 解压失败${reset}"; exit 1; }
@@ -88,7 +79,7 @@ download_service() {
 
 download_shell() {
     local shell_file="/usr/bin/v2ray"
-    local sh_url=$(get_url "https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Script/v2ray/v2ray.sh")
+    local sh_url=$(get_url "https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Script/Beta/v2ray/v2ray.sh")
     [ -f "$shell_file" ] && rm -f "$shell_file"
     wget -q -O "$shell_file" --no-check-certificate "$sh_url" || { echo -e "${red}v2ray 管理脚本下载失败，可能是网络问题，建议重新运行本脚本重试下载${reset}"; exit 1; }
     chmod +x "$shell_file"
@@ -101,13 +92,13 @@ install_v2ray() {
     [ -d "$folders" ] && rm -rf "$folders"
     mkdir -p "$folders" && cd "$folders" 
     get_schema
-    echo -e "当前系统架构：[ ${green}${arch_raw}${reset} ]" 
+    echo -e "${yellow}当前系统架构${reset}：【 ${green}${arch_raw}${reset} 】"
     download_version
-    echo -e "当前软件版本：[ ${green}${version}${reset} ]"
+    echo -e "${yellow}当前软件版本${reset}：【 ${green}${version}${reset} 】"
     download_v2ray
     download_service
     download_shell
-    read -p "$(echo -e "${green}安装完成，是否下载配置文件\n${yellow}你也可以上传自己的配置文件到 $folders 目录下\n${red}配置文件名称必须是 config.yaml ${reset}，是否继续(y/n): ")" choice
+    read -p "$(echo -e "${green}安装完成，是否下载配置文件\n${yellow}你也可以上传自己的配置文件到 $folders 目录下\n${red}配置文件名称必须是 config.json ${reset}，是否继续(y/n): ")" choice
     case "$choice" in
         [Yy]* ) config_v2ray ;;
         [Nn]* ) echo -e "${green}跳过配置文件下载${reset}" ;;
@@ -269,6 +260,5 @@ config_v2ray() {
     echo -e "${green}v2ray 已成功启动并设置为开机自启${reset}"
 }
 
-check_network
 update_system
 install_v2ray
