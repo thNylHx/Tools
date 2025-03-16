@@ -393,8 +393,8 @@ jobs:
           cd "${{ github.workspace }}/Tools-repo"
           git fetch origin
           # 配置 Git 用户信息
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
           # git config --local user.email "${{ github.actor }}@users.noreply.github.com"
           # git config --local user.name "${{ github.actor }}"
           if [[ -n $(git status --porcelain) ]]; then
