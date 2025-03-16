@@ -319,8 +319,10 @@ jobs:
 
       - name: 修改 mihomo 规则
         run: |
+          # 创建目录
+          mkdir -p Tools-repo/Ruleset/mihomo/Block
           # 删除 Ads_Block.list 文件
-          rm -rf Tools-repo/Ruleset/mihomo/Block/Ads_Block.list
+          rm -rf Tools-repo/Ruleset/mihomo/Block/*.list
           # 复制 Ads_Block.list 文件到 mihomo 目录
           cp Tools-repo/Ruleset/Surge/Block/Ads_Block.list Tools-repo/Ruleset/mihomo/Block/Ads_Block.list
           # 对 mihomo/Block 目录下的 .list 文件进行处理
