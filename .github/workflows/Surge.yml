@@ -233,9 +233,19 @@ jobs:
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
             if [ -f "$file" ]; then
               sed -i '/^DOMAIN-REGEX,/d' "$file"
-              sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
-              sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b; /^\s*[0-9A-Fa-f:]+\/[0-9]+/b; /^AND,\(/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^PROCESS-NAME,|^URL-REGEX,|^USER-AGENT,|^DEST-PORT,/b; s/^\s*([^#])/DOMAIN,\1/' "$file"
-              sed -i -e '/^\s*[#;]/d' -e '/^\s*\/\//d' -e '/^$/d' -e 's| //.*||' "$file"
+              sed -i 's/^\s*\./DOMAIN-SUFFIX,/' "$file"
+              sed -i -E '
+                  s/\r$//;                           # 处理 Windows (CRLF) 换行符
+                  /^\s*[#;]/d;                       # 删除 `#` 或 `;` 开头的注释
+                  /^\s*\/\//d;                       # 删除 `//` 开头的行
+                  /^\s*$/d;                          # 删除空行
+                  s|\s*//.*||;                       # 删除行内 `//` 及其后面的内容
+                  /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b;  # 跳过 IPv4 CIDR 规则
+                  /^\s*[0-9A-Fa-f:]+\/[0-9]+/b;      # 跳过 IPv6 CIDR 规则
+                  /^AND,\(/b;                        # 跳过 `AND,(...)` 规则
+                  /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^PROCESS-NAME,|^URL-REGEX,|^USER-AGENT,|^DEST-PORT,/b;  # 跳过已有前缀的规则
+                  s/^\s*([^#\/])/DOMAIN,\1/' "$file" # 给没有前缀的行加 `DOMAIN,`，但不处理 `http://`
+              ' "$file"
               sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
               sed -i -e 's/,reject$//' "$file"
               sed -i 's/, */,/g' "$file"
