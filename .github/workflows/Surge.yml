@@ -229,20 +229,23 @@ jobs:
 
       - name: 修正规则
         run: |
+          # 开启 globstar 选项，支持递归匹配子目录中的文件
           shopt -s globstar
+          # 遍历 Tools-repo/Ruleset/Surge 目录下所有 .list 文件
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
             if [ -f "$file" ]; then
-              # # 删除文件中所有 "DOMAIN-REGEX" 开头
+              # 删除文件中所有 "DOMAIN-REGEX" 开头
               sed -i '/^DOMAIN-REGEX,/d' "$file"
               # 将以"."开头的行的第一个"."替换为 "DOMAIN-SUFFIX"
               sed -i 's/^\s*\./DOMAIN-SUFFIX,/' "$file"
               # 将除了以 "#" 开头、"空行"、"//"开头之外的行, 在行首添加 "DOMAIN"
-              sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^\s*\/\//d; /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b; /^\s*[0-9A-Fa-f:]+\/[0-9]+/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^GEOIP,|^AND,|^OR,|^NOT,|^URL-REGEX,|^USER-AGENT,|^PROCESS-NAME,|^DEST-PORT,/b; s/^([^#])/DOMAIN,\1/' "$file"
-              # 删除文件中所有 [以 # 或 ; 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
-              sed -i -e '/^\s*[#;]/d' -e '/^$/d' -e 's| //.*||'  "$file"
+              sed -i -E '/^\s*$/b; /^\s*(#|;|\/\/)/b; /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b; /^\s*[0-9A-Fa-f:]+\/[0-9]+/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^GEOIP,|^AND,|^OR,|^NOT,|^URL-REGEX,|^USER-AGENT,|^PROCESS-NAME,|^DEST-PORT,/b; s/^([^#])/DOMAIN,\1/' "$file"
+              # 删除文件中所有 [以 # 或 ; 或 // 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
+              sed -i -E '/^\s*[#;] /d; /^\s*\/\//d; /^$/d; s| //.*||' "$file"
               # 删除指定域名
               sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
-              sed -i -e 's/,reject$//' "$file"
+              # 删除以 ",reject" 结尾的内容
+              sed -i -E 's/,reject(,[^,]+)*$//I' "$file"
               # 修正格式
               sed -i 's/, */,/g' "$file"
             else
