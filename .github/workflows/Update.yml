@@ -359,7 +359,7 @@ jobs:
             fi
           done
 
-      # 步骤2：克隆 LoonKissSurge 仓库（优化速度）
+      # 克隆 LoonKissSurge 仓库（优化速度）
       - name: 克隆 LoonKissSurge 仓库
         run: |
           REPO_DIR="${{ github.workspace }}/LoonKissSurge"
@@ -368,21 +368,21 @@ jobs:
             && echo "✅ 成功克隆 LoonKissSurge 仓库" \
             || { echo "❌ 克隆失败，退出。"; exit 1; }
             
-      # 步骤3：重建 Surge/QingRex 目标目录
+      # 重建 Surge/QingRex 目标目录
       - name: 重建 Surge/QingRex 目录
         run: |
           TARGET_DIR="${{ github.workspace }}/Tools-repo/Surge/QingRex"
           rm -rf "$TARGET_DIR" && mkdir -p "$TARGET_DIR"
           echo "✅ 已重建目录 $TARGET_DIR"
 
-      # 步骤4：同步 LoonKissSurge 中的 Surge 模块到目标目录
+      # 同步 LoonKissSurge 中的 Surge 模块到目标目录
       - name: 同步 LoonKissSurge 到 Surge/QingRex
         run: |
           cp -r "${{ github.workspace }}/LoonKissSurge/Surge/." "${{ github.workspace }}/Tools-repo/Surge/QingRex/" \
             && echo "已同步 LoonKissSurge 内容到 Surge/QingRex" \
             || { echo "复制失败，退出。"; exit 1; }
 
-      # 步骤5：设置 Tools-repo 仓库远程 URL（通过 TOKEN 进行身份验证）
+      # 设置 Tools-repo 仓库远程 URL（通过 TOKEN 进行身份验证）
       - name: 设置 Tools-repo 远程 URL
         run: |
           git config --global user.name "${{ secrets.USERNAME }}"
@@ -390,7 +390,7 @@ jobs:
           cd "${{ github.workspace }}/Tools-repo"
           git remote set-url origin "https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
 
-      # 合并后的步骤：检查变更并推送更新到 Tools-repo 仓库 main 分支
+      # 检查变更并推送更新到 Tools-repo 仓库 main 分支
       - name: 推送更新到 Tools-repo 仓库
         shell: bash
         run: |
