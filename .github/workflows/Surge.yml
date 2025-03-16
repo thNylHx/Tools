@@ -215,7 +215,6 @@ jobs:
               for file in "${files[@]}"; do
                   file_name=$(echo $file | cut -d " " -f 1)
                   url=$(echo $file | cut -d " " -f 2)
-                  # 确保 URL 格式正确
                   if [[ ! "$url" =~ ^https?: ]]; then
                       url="https:$url"
                   fi
@@ -291,35 +290,67 @@ jobs:
               /^DEST-PORT,/        { print "14 " $0; next }
                                    { print "15 " $0; next }
               ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
-              awk '/^(IP-CIDR,|IP-CIDR6,)/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              awk '/^(IP-CIDR,|IP-CIDR6,|IP-ASN,)/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile && mv tmpfile "$file"
               awk '!seen[tolower($0)]++' "$file" > temp && mv temp "$file"
             else
               echo "$file not found."
             fi
           done
 
-      - name: 追加规则信息
+      - name: 修改 Surge 规则
         run: |
           shopt -s globstar
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
             if [ -f "$file" ]; then
+              # 获取文件名
               file_names=$(basename "$file" .list)
+              # 统计文件行数
               line_count=$(wc -l < "$file")
+              # 在文件第一行插入规则名称
               awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在文件第二行插入规则统计
               awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在第二行后面插入空行
               sed -i '2a\\' "$file"
             else
               echo "$file not found."
             fi
           done
 
+      - name: 修改 mihomo 规则
+        run: |
+          # 删除 Ads_Block.list 文件
+          rm -rf Tools-repo/Ruleset/mihomo/Block/Ads_Block.list
+          # 复制 Ads_Block.list 文件到 mihomo 目录
+          cp Tools-repo/Ruleset/Surge/Block/Ads_Block.list Tools-repo/Ruleset/mihomo/Block/Ads_Block.list
+          # 对 mihomo/Block 目录下的 .list 文件进行处理
+          for file in Tools-repo/Ruleset/mihomo/Block/*.list; do
+            if [ -f "$file" ]; then
+              # 删除特定的规则行
+              sed -i -e '/^USER-AGENT/d' "$file"
+              sed -i -e '/^URL-REGEX/d' "$file"
+              # 获取文件名
+              file_names=$(basename "$file" .list)
+              # 统计文件行数
+              line_count=$(wc -l < "$file")
+              # 在文件第一行插入规则名称
+              awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在文件第二行插入规则统计
+              awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在第二行后面插入空行
+              sed -i '2a\\' "$file"
+            else
+              echo "$file not found."
+            fi
+          done
+            
       - name: 推送到仓库
         run: |
           cd Tools-repo
           if [[ -n $(git status -s) ]]; then
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git add .
+            git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+            git config --local user.name "${{ github.actor }}"
+            git add -A
             git commit -m "Auto Update $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
             git push origin HEAD
             echo "更新已推送到仓库"
