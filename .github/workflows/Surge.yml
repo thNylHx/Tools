@@ -3,7 +3,7 @@ name: 同步 Surge 上游规则
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: '0 16,22,4,10 * * *'  # 在上海时间 0:00、6:00、12:00 和 18:00 执行
 
 jobs:
   Fork:
