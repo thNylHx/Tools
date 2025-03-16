@@ -393,10 +393,10 @@ jobs:
           cd "${{ github.workspace }}/Tools-repo"
           git fetch origin
           # 配置 Git 用户信息
-          git config --local user.name "GitHub Actions"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          # git config --local user.email "${{ github.actor }}@users.noreply.github.com"
-          # git config --local user.name "${{ github.actor }}"
+            git config --local user.name "GitHub Actions"
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            # git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+            # git config --local user.name "${{ github.actor }}"
           if [[ -n $(git status --porcelain) ]]; then
             git add -A
             git commit -m "Auto Update $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
