@@ -1,0 +1,21 @@
+#!name=微信公众号去广告
+#!desc=过滤微信公众号广告
+#!author=RuCu6[https://github.com/RuCu6]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Weixin.png
+#!category=BetaModule
+#!openUrl=https://apps.apple.com/app/id414478124
+#!tag=功能增强
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-11-28 00:00:00
+
+[Rule]
+DOMAIN-SUFFIX,wxs.qq.com,REJECT,extended-matching,pre-matching
+
+[Map Local]
+# ^http:\/\/\w+\.wxs\.qq\.com\/\d+\/\d+\/(snscosdownload|snssvpdownload)\/(SH|SZ)\/reserved\/\w+ reject-dict
+^https:\/\/mp\.weixin\.qq\.com\/mp\/(cps_product_info|getappmsgad|jsmonitor|masonryfeed|relatedarticle)\? data-type=text data="{}" status-code=200
+
+[MITM]
+hostname = %APPEND% mp.weixin.qq.com
+

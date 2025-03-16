@@ -1,0 +1,15 @@
+#!name=小爱音箱 去广告
+#!desc=去开屏 去 banner
+#!category=xream
+
+[General]
+
+force-http-engine-hosts = %APPEND% info.mina.xiaoaisound.com
+
+[MITM]
+
+hostname = %APPEND%, info.mina.xiaoaisound.com
+
+[Map Local]
+
+^https?:\/\/info\.mina\.xiaoaisound\.com\/(advertise|payGuide)\/ data-type=text data='{"code":0,"message":"Success","data":[]}' header='Content-Type:application/json'

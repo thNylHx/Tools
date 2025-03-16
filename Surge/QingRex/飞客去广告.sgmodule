@@ -1,0 +1,35 @@
+#!name=飞客去广告
+#!desc=移除开屏广告、首页广告、板块广告、帖内广告和我的页面广告。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/FlyerTea.png
+#!category=iKeLee
+#!openUrl=https://apps.apple.com/app/id547560608
+#!tag=去广告
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-11-28 00:00:00
+
+[URL Rewrite]
+# 全局广告配置
+^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=advis - reject
+
+[Map Local]
+# 我的页面 - 弹窗
+^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=vip_coupon data-type=text data="{}" status-code=200
+
+# 我的页面 - 悬浮窗
+^https:\/\/ptf\.flyertrip\.com\/static\/img\/common\/ic_plate_mine_button\.png data-type=tiny-gif status-code=200
+
+# 发帖 - 横幅广告
+^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=getdata data-type=text data="{}" status-code=200
+
+[Script]
+# 板块广告
+移除板块广告 = type=http-response, pattern=^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?version=5, script-path=https://kelee.one/Resource/Script/FlyerTea/FlyerTea_remove_ads.js, requires-body=true
+
+# 签到弹窗广告
+移除签到弹窗广告 = type=http-response, pattern=^https:\/\/www\.flyert\.com\.cn\/api\/mobile\/index\.php\?module=plugin&id=k_misign:sign, script-path=https://kelee.one/Resource/Script/FlyerTea/FlyerTea_remove_ads.js, requires-body=true
+
+[MITM]
+hostname = %APPEND% www.flyert.com.cn, ptf.flyertrip.com
+

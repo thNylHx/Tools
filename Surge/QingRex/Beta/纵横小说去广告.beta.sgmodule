@@ -1,0 +1,22 @@
+#!name=纵横小说去广告
+#!desc=移除纵横小说开屏广告和弹窗
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/ZongHeng.png
+#!category=BetaModule
+#!openUrl=https://apps.apple.com/app/id433125283
+#!tag=去广告
+#!loon_version=3.2.4(787)
+#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!date=2024-11-28 00:00:00
+
+[URL Rewrite]
+# 开屏广告
+^https:\/\/api1\.zongheng\.com\/iosapi\/system\/startup$ - reject
+
+[Map Local]
+# 弹窗
+^https:\/\/api2\.zongheng\.com\/api\/giftBag\/bindingBag$ data-type=text data="{}" status-code=200
+
+[MITM]
+hostname = %APPEND% api?.zongheng.com
+

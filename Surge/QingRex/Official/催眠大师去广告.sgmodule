@@ -1,0 +1,15 @@
+#!name=催眠大师 去广告
+#!desc=去开屏
+#!category=xream
+
+[General]
+
+force-http-engine-hosts = %APPEND% cmds.omesoft.com
+
+[MITM]
+
+hostname = %APPEND%, cmds.omesoft.com
+
+[Body Rewrite]
+
+http-response ^https?:\/\/cmds\.omesoft\.com\/HypnotistWS\.asmx '<GetADResult>.*?</GetADResult>' '<GetADResult>{"ret":0,"msg":"正常","err_code":0,"data":{"ad":[]}}</GetADResult>'
