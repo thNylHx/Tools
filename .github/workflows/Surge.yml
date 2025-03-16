@@ -331,6 +331,8 @@ jobs:
               # 删除特定的规则行
               sed -i -e '/^USER-AGENT/d' "$file"
               sed -i -e '/^URL-REGEX/d' "$file"
+              # 删除 `#` 或 `;` 开头的注释行、空行
+              sed -i -E '/^\s*[#;]/d; /^$/d' "$file"
               # 获取文件名
               file_names=$(basename "$file" .list)
               # 统计文件行数
