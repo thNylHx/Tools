@@ -211,11 +211,9 @@ jobs:
                   "Media/ChinaMedia.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
                   "Media/Bilibili.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.list"
               )
-
               for file in "${files[@]}"; do
                   file_name=$(echo $file | cut -d " " -f 1)
                   url=$(echo $file | cut -d " " -f 2)
-                  # 确保 URL 格式正确
                   if [[ ! "$url" =~ ^https?: ]]; then
                       url="https:$url"
                   fi
