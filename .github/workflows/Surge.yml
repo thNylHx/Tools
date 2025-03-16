@@ -211,9 +211,11 @@ jobs:
                   "Media/ChinaMedia.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
                   "Media/Bilibili.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.list"
               )
+
               for file in "${files[@]}"; do
                   file_name=$(echo $file | cut -d " " -f 1)
                   url=$(echo $file | cut -d " " -f 2)
+                  # 确保 URL 格式正确
                   if [[ ! "$url" =~ ^https?: ]]; then
                       url="https:$url"
                   fi
@@ -231,16 +233,28 @@ jobs:
           shopt -s globstar
           # 遍历 Tools-repo/Ruleset/Surge 目录下所有 .list 文件
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
-            [[ $file == *_ip.list ]] && continue  # 跳过 *_ip.list 文件
             if [ -f "$file" ]; then
               # 删除文件中所有 [以 DOMAIN-REGEX" 开头的行]
               sed -i '/^DOMAIN-REGEX,/d' "$file"
               # 将文件中所有 [以"."开头的行的第一个"."替换为 "DOMAIN-SUFFIX"] 
               sed -i 's/^\s*\./DOMAIN-SUFFIX,/' "$file"
               # 跳过文件中所有 [以 "#" ";" "//" 开头的注释行、"空行" 和下面的前缀规则行，给没有前缀的行加 "DOMAIN"]
-              sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b; /^\s*[0-9A-Fa-f:]+\/[0-9]+/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^GEOIP,|^AND,|^OR,|^NOT,|^URL-REGEX,|^USER-AGENT,|^PROCESS-NAME,|^DEST-PORT,/b; s/^([^#])/DOMAIN,\1/' "$file"
+              sed -i -E '
+                /^\s*$/b;                                       # 跳过空行
+                /^\s*[#;]/b;                                    # 跳过 `#` 或 `;` 开头的注释
+                /^\s*\/\//b;                                    # 跳过 `//` 开头的行
+                /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b;  # 跳过 IPv4 CIDR 规则
+                /^\s*[0-9A-Fa-f:]+\/[0-9]+/b;                   # 跳过 IPv6 CIDR 规则
+                /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^GEOIP,|^AND,|^OR,|^NOT,|^URL-REGEX,|^USER-AGENT,|^PROCESS-NAME,|^DEST-PORT,/b;  # 跳过已有前缀的规则
+                s/^([^#])/DOMAIN,\1/                            # 给没有前缀的行加 "DOMAIN"
+              ' "$file"
               # 删除文件中所有 [以 "#" ";" "//" 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
-              sed -i -E '/^\s*[#;]/d; /^\s*\/\//d; /^$/d; s| //.*||' "$file"
+              sed -i -E '
+                /^\s*[#;]/d;          # 删除 `#` 或 `;` 开头的注释行
+                /^\s*\/\//d;          # 删除 `//` 开头的注释行
+                /^$/d;                # 删除空行
+                s| //.*||             # 删除 `//` 后面的内容
+              ' "$file"
               # 删除指定域名
               sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
               # 删除文件中所有 [以 ",reject" 及其后面的内容]
@@ -258,7 +272,7 @@ jobs:
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
             if [ -f "$file" ]; then
               sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^/IP-CIDR,/}' "$file"
-              sed -i -E '/^IP-CIDR6,/!{/^[a-fA-F0-9]+:|([a-fA-F0-9]+:+)+[a-fA-F0-9]+\/[0-9]+/s/^/IP-CIDR6,/}' "$file"
+              sed -i -E '/^IP-CIDR6,/!{/^([a-fA-F0-9]*:){2,}[a-fA-F0-9]*\/[0-9]+/s/^/IP-CIDR6,/}' "$file"
               awk '
               /^DOMAIN,/           { print "0 " $0; next }
               /^DOMAIN-SUFFIX,/    { print "1 " $0; next }
