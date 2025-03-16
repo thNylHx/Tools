@@ -244,7 +244,7 @@ jobs:
               sed -i -E '/^\s*[#;] /d; /^\s*\/\//d; /^$/d; s| //.*||' "$file"
               # 删除指定域名
               sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
-              # 删除以 ",reject" 结尾的内容
+              # 删除以 ",reject" 及其后面的内容
               sed -i -E 's/,reject(,[^,]+)*$//I' "$file"
               # 修正格式
               sed -i 's/, */,/g' "$file"
