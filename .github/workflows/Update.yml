@@ -391,7 +391,7 @@ jobs:
         run: |
           set -euo pipefail
           cd "${{ github.workspace }}/Tools-repo"
-          git fetch origin
+          git pull --rebase --autostash origin main
           if [[ -n $(git status --porcelain) ]]; then
             git pull --rebase --autostash origin main
             git config --local user.name "GitHub Actions"
