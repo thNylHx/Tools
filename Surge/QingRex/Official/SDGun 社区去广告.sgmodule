@@ -1,0 +1,17 @@
+#!name=SDGun 社区去广告
+#!desc=去开屏, 轮播等
+#!category=xream
+
+[General]
+
+force-http-engine-hosts = %APPEND% mag1.sdgun.net
+
+[MITM]
+
+hostname = %APPEND%, mag1.sdgun.net
+
+[Map Local]
+
+^https?:\/\/mag1\.sdgun\.net\/mag\/operative\/v1\/ad\/listNotEndByPlace data-type=text data='{"success":true,"code":100,"msg":null,"list":[]}' header='Content-Type:application/json'
+
+^https?:\/\/mag1\.sdgun\.net\/mag\/operative\/v1\/Ad\/listNotEndByPlaceWap data-type=text data='{"success":true,"code":100,"data":{},"msg":null}' header='Content-Type:application/json'
