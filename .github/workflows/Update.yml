@@ -47,6 +47,7 @@ jobs:
           # 合并 广告规则
           download_urls "Tools-repo/Ruleset/Surge/Block/Ads_Block.list" \
             "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list" \
+            "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list" \
             "https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Ruleset/Surge/Block/BlockAds.list" \
             "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Malicious.list" \
             "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Tracking.list" \
