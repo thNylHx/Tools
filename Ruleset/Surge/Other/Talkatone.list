@@ -1,10 +1,19 @@
 # 规则名称: Talkatone
-# 规则统计: 7
+# 规则统计: 16
 
-DOMAIN,DOMAIN-SUFFIX,mobilefuse.com
-DOMAIN,DOMAIN-SUFFIX,talkatone.com
 DOMAIN,DOMAIN-SUFFIX,tktn.at
 DOMAIN,DOMAIN-SUFFIX,tktn.be
-DOMAIN,IP-CIDR,205.164.56.0/24,no-resolve
-DOMAIN,IP-CIDR,50.117.27.0/24,no-resolve
-DOMAIN,IP-CIDR,69.46.75.0/24,no-resolve
+DOMAIN-SUFFIX,agkn.com
+DOMAIN-SUFFIX,cohere.com
+DOMAIN-SUFFIX,crashlytics.com
+DOMAIN-SUFFIX,inmobi.com
+DOMAIN-SUFFIX,inner-active.mobi
+DOMAIN-SUFFIX,ip-api.com
+DOMAIN-SUFFIX,kochava.com
+DOMAIN-SUFFIX,mobilefuse.com
+DOMAIN-SUFFIX,talkatone.com
+IP-CIDR,69.46.75.0/24,no-resolve
+IP-CIDR,50.117.27.0/24,no-resolve
+IP-CIDR,63.251.124.0/24,no-resolve
+IP-CIDR,205.164.56.0/24,no-resolve
+IP-CIDR,216.172.154.0/24,no-resolve
