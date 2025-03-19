@@ -439,6 +439,27 @@ DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching,pre-matching
 
+# 菜鸟
+AND,((URL-REGEX,^http:\/\/.+\/amdc\/mobileDispatch), (USER-AGENT,Cainiao4iPhone*)),REJECT
+DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,amdc.m.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,apiv4-iyes.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,httpdns.alicdn.com,REJECT,extended-matching,pre-matching
+DOMAIN,huichuan-mc.sm.cn,REJECT,extended-matching,pre-matching
+DOMAIN,huichuan.sm.cn,REJECT,extended-matching,pre-matching
+DOMAIN,iyes.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,mc.atm.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,vali-g1.cp31.ott.cibntv.net,REJECT,extended-matching,pre-matching
+DOMAIN,vali-ugc.cp31.ott.cibntv.net,REJECT,extended-matching,pre-matching
+DOMAIN,yk-ssp.ad.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,ykad-data.youku.com,REJECT,extended-matching,pre-matching
+
+# 滴滴出行
+DOMAIN,hd.xiaojukeji.com,REJECT,extended-matching,pre-matching
+DOMAIN,gwp.xiaojukeji.com,REJECT,extended-matching,pre-matching
+AND,((IP-ASN,45090,no-resolve), (DEST-PORT,25641), (PROTOCOL,TCP)),REJECT
+AND,((IP-ASN,63646,no-resolve), (DEST-PORT,25641), (PROTOCOL,TCP)),REJECT
+
 
 [URL Rewrite]
 # 阿里云盘去广告
@@ -541,6 +562,18 @@ http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? 'if (getpath(["
 http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? 'if (getpath([]) | has("preview_guide")) then (setpath(["preview_guide"]; null)) else . end'
 http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/more-panel\? 'delpaths([["blocks",1]])'
 
+# 拼多多
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/oak\/integration\/render 'delpaths([["bottom_section_list"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/oak\/integration\/render 'delpaths([["ui","bottom_section"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/oak\/integration\/render 'delpaths([["ui","live_section","float_info"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/philo\/personal\/hub\? 'delpaths([["monthly_card_entrance"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/philo\/personal\/hub\? 'delpaths([["personal_center_style_v2_vo"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/philo\/personal\/hub\? 'delpaths([["icon_set","icons"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/philo\/personal\/hub\? 'delpaths([["icon_set","top_personal_icons"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/philo\/personal\/hub\? 'delpaths([["title_bar_items"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/search 'delpaths([["expansion"]])'
+
+
 
 [Map Local]
 # 阿里云盘 //*api.alipan.com, member.alipan.com
@@ -610,6 +643,15 @@ http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/more-panel\? 'delpaths
 # 邀请开通会员弹窗
 ^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/v2\/commerce_info\? data-type=text data="{}" status-code=200
 
+# 滴滴出行
+^https:\/\/res\.xiaojukeji\.com\/resapi\/activity\/getMulti\? data-type=text data="{}" status-code=200
+^https:\/\/res\.xiaojukeji\.com\/resapi\/activity\/xpget data-type=text data="{}" status-code=200
+^https:\/\/ct\.xiaojukeji\.com\/agent\/v3\/feeds data-type=text data="{}" status-code=200
+^https:\/\/freight\.xiaojukeji\.com\/gateway data-type=text data="{}" status-code=200
+^https:\/\/res\.xiaojukeji\.com\/resapi\/activity\/mget data-type=text data="{}" status-code=200
+^https:\/\/conf\.diditaxi\.com\.cn\/homepage\/v\d\/other\/fast data-type=text data="{}" status-code=200
+^https:\/\/conf\.diditaxi\.com\.cn\/dynamic\/conf data-type=text data="{}" status-code=200
+^https:\/\/conf\.diditaxi\.com\.cn\/homepage\/v1\/other\/slow data-type=text data="{}" status-code=200
 
 [Script]
 # 阿里云盘去广告
@@ -652,4 +694,5 @@ AD_SDKEY = type=http-response,pattern=^https:\/\/api-access\.pangolin-sdk-toutia
 
 
 [MITM]
-hostname = %APPEND% webcast-open.douyin.com, beta-luna.douyin.com, api.alipan.com, member.alipan.com, bizapi.alipan.com, mp.weixin.qq.com, gab.122.gov.cn, flowplus.meituan.net, img.meituan.net, s3plus.meituan.net, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, *api.alipan.com, member.alipan.com, ad.12306.cn,mobile.12306.cn,video-dsp.pddpic.com,t-dsp.pinduoduo.com,images.pinduoduo.com,app-v1.ecoliving168.com,napi.ithome.com,api.zuihuimai.com,dat.ruanmei.com,jzts.cmpassport.com,ad.mcloud.139.com,api.m.jd.com,haojia-api.smzdm.com,homepage-api.smzdm.com,app-api.smzdm.com,user-api.smzdm.com,article-api.smzdm.com,qianbao.smzdm.com,s3.zdmimg.com,client.app.coc.10086.cn,list-app-m.i4.cn,search-app-m.i4.cn,rescdn.qqmail.com,us.l.qq.com,home.mi.com,api-access.pangolin-sdk-toutiao*.com, p.kuaidi100.com, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, api.cc.163.com, cc.163.com, mshare.cc.163.com, appapi.cc.163.com
+hostname = %APPEND% conf.diditaxi.com, res.xiaojukeji.com, ct.xiaojukeji.com, freight.xiaojukeji.com, api.pinduoduo.com, webcast-open.douyin.com, beta-luna.douyin.com, api.alipan.com, member.alipan.com, bizapi.alipan.com, mp.weixin.qq.com, gab.122.gov.cn, flowplus.meituan.net, img.meituan.net, s3plus.meituan.net, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, *api.alipan.com, member.alipan.com, ad.12306.cn,mobile.12306.cn,video-dsp.pddpic.com,t-dsp.pinduoduo.com,images.pinduoduo.com,app-v1.ecoliving168.com,napi.ithome.com,api.zuihuimai.com,dat.ruanmei.com,jzts.cmpassport.com,ad.mcloud.139.com,api.m.jd.com,haojia-api.smzdm.com,homepage-api.smzdm.com,app-api.smzdm.com,user-api.smzdm.com,article-api.smzdm.com,qianbao.smzdm.com,s3.zdmimg.com,client.app.coc.10086.cn,list-app-m.i4.cn,search-app-m.i4.cn,rescdn.qqmail.com,us.l.qq.com,home.mi.com,api-access.pangolin-sdk-toutiao*.com, p.kuaidi100.com, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, api.cc.163.com, cc.163.com, mshare.cc.163.com, appapi.cc.163.com
+
