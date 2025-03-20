@@ -258,7 +258,6 @@ jobs:
               if [[ $(basename "$file") == "China_ip.list" ]]; then
                   echo "Skipping $file for no-resolve addition"
               else
-                  # awk '/^(IP-CIDR,|IP-CIDR6,|IP-ASN,)/ && !/,no-resolve$/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile && mv tmpfile "$file"
                   awk '/^(IP-CIDR,|IP-CIDR6,|IP-ASN,)/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile && mv tmpfile "$file"
               fi
               # 去除重复规则（忽略大小写）
