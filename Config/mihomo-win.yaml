@@ -21,7 +21,7 @@ rule-anchor:
   jp: &jp "(?i)日本|jp|japan"
   us: &us "(?i)美|us|unitedstates|united states"
   sg: &sg "(?i)(新|sg|singapore)"
-  al: &al "^((?!(直连|拦截)).)*$"
+  al: &al "^((?!(中国|直连|拦截)).)*$"
   cn: &cn "中国"
   ad: &ad "拦截"
   # 规则锚点配置
