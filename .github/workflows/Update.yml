@@ -139,6 +139,7 @@ jobs:
             # 海外
             "Other/GlobalGFWa.list https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
             "Other/GlobalGFW.list https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/ruleset/gfw.txt"
+            "Other/Global_GFW.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/gfw.list"
             "Other/vGlobal.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
             # 苹果
             "Other/Apple.list https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
@@ -253,8 +254,12 @@ jobs:
               /^DEST-PORT,/        { print "14 " $0; next }
                                    { print "15 " $0; next }
               ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
-              # 为 CIDR 规则添加 "no-resolve" 后缀（若未添加）
-              awk '/^(IP-CIDR,|IP-CIDR6,|IP-ASN,)/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 为 CIDR 规则添加 "no-resolve" 后缀
+              if [[ "$file" == "China_ip.list" ]]; then
+                  echo "Skipping $file"
+              else
+                  awk '/^(IP-CIDR,|IP-CIDR6,|IP-ASN,)/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              fi
               # 去除重复规则（忽略大小写）
               awk '!seen[tolower($0)]++' "$file" > temp && mv temp "$file"
             else
