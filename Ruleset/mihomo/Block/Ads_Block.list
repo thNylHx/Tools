@@ -1,5 +1,5 @@
 # 规则名称: Ads_Block
-# 规则统计: 4120
+# 规则统计: 4143
 
 DOMAIN,118.89.204.198
 DOMAIN,4lke.online
@@ -160,9 +160,11 @@ DOMAIN,adv.ettoday.net
 DOMAIN,advert.mafengwo.cn
 DOMAIN,advertise.baicizhan.com
 DOMAIN,advertise.baicizhan.org
+DOMAIN,advertising.apple.com
 DOMAIN,adwbs.ximalaya.com
 DOMAIN,adx-api.hupu.com
 DOMAIN,adx-bj.anythinktech.com
+DOMAIN,adx.halomobi.com
 DOMAIN,adx.hupu.com
 DOMAIN,adx.op.cp18.ott.cibntv.net
 DOMAIN,adx.sogaha.cn
@@ -186,6 +188,7 @@ DOMAIN,api.ad.xiaomi.com
 DOMAIN,api.adnet.mob.com
 DOMAIN,api.anythinktech.com
 DOMAIN,api.helloclue.com
+DOMAIN,api.htp.hubcloud.com.cn
 DOMAIN,api.installer.xiaomi.com
 DOMAIN,api.iqiyi.com
 DOMAIN,api.newad.ifeng.com
@@ -195,6 +198,7 @@ DOMAIN,apiv4-iyes.youku.com
 DOMAIN,app-ad.variflight.com
 DOMAIN,appcloud.zhihu.com
 DOMAIN,appcloud2.in.zhihu.com
+DOMAIN,apple.comscoreresearch.com
 DOMAIN,applog.uc.cn
 DOMAIN,applog.zijieapi.com
 DOMAIN,applogapi.autohome.com.cn
@@ -206,6 +210,7 @@ DOMAIN,aspect-upush.umeng.com
 DOMAIN,atrace.chelaile.net.cn
 DOMAIN,b-gtc.getui.net
 DOMAIN,baichuan-sdk.alicdn.com
+DOMAIN,banners.itunes.apple.com
 DOMAIN,bds.snssdk.com
 DOMAIN,beacon-api.aliyuncs.com
 DOMAIN,bgg.baidu.com
@@ -221,7 +226,9 @@ DOMAIN,c.bing.com
 DOMAIN,c.clarity.ms
 DOMAIN,c1wx.lianwangtech.com
 DOMAIN,c2.gdt.qq.com
+DOMAIN,ca.iadsdk.apple.com
 DOMAIN,cdn-new-ad.wtzw.com
+DOMAIN,cdn.1rtb.com
 DOMAIN,cdn.adapi.fotoable.com
 DOMAIN,ce3e75d5.jpush.cn
 DOMAIN,cf-ads.pinger.com
@@ -329,12 +336,17 @@ DOMAIN,hui.sohu.com
 DOMAIN,huichuan-mc.sm.cn
 DOMAIN,huichuan.sm.cn
 DOMAIN,i.snssdk.com
+DOMAIN,iad.apple.com
 DOMAIN,iad.g.163.com
 DOMAIN,iad0ssl.pcauto.com.cn
 DOMAIN,iad0ssl.pconline.com.cn
+DOMAIN,iadcontent.apple.com
+DOMAIN,iadctest.qwapi.com
 DOMAIN,iadmat.nosdn.127.net
+DOMAIN,iadmoo.apple.com
 DOMAIN,iadmusicmat.music.126.net
 DOMAIN,iadmusicmatvideo.music.126.net
+DOMAIN,iadworkbench.apple.com
 DOMAIN,id.hadron.ad.gt
 DOMAIN,ido.getui.net
 DOMAIN,ifengad.3g.ifeng.com
@@ -362,6 +374,7 @@ DOMAIN,kad.gotokeep.com
 DOMAIN,kadmimage.biz.weibo.com
 DOMAIN,kgmobilestat.kugou.com
 DOMAIN,kgmobilestatbak.kugou.com
+DOMAIN,launch.apple.com
 DOMAIN,lf-ad-ies.bytecdn.cn
 DOMAIN,livep.l.t002.ottcn.com
 DOMAIN,log-sdk.gifshow.com
@@ -447,6 +460,7 @@ DOMAIN,proxy.safebrowsing.apple
 DOMAIN,pubads.g.doubleclick.net
 DOMAIN,pv.vipads.cc
 DOMAIN,pvnapp.zol.com.cn
+DOMAIN,qwapi.apple.com
 DOMAIN,qzs.gdtimg.com
 DOMAIN,qzs.qq.com
 DOMAIN,r.51wnl-cq.com
@@ -454,6 +468,8 @@ DOMAIN,r.trackwilltrk.com
 DOMAIN,rd.autohome.com.cn
 DOMAIN,reactads.engine.adglare.net
 DOMAIN,regist.fotoable.com
+DOMAIN,render-web.11222.cn
+DOMAIN,res1.hubcloud.com.cn
 DOMAIN,rich.kuwo.cn
 DOMAIN,richmanapi.jxedt.com
 DOMAIN,richmanapi.ksedt.com
@@ -481,7 +497,9 @@ DOMAIN,sdapprecv.app.cntvwb.cn
 DOMAIN,sdfp.snssdk.com
 DOMAIN,sdk-conf.getui.com
 DOMAIN,sdk-open-phone.getui.com
+DOMAIN,sdk.1rtb.net
 DOMAIN,sdk.51.la
+DOMAIN,sdk.beizi.biz
 DOMAIN,sdk.e.qq.com
 DOMAIN,sdk.open.talk.getui.net
 DOMAIN,sdk.ssp.admobile.top
@@ -491,6 +509,7 @@ DOMAIN,sdkclick.biz.weibo.com
 DOMAIN,sdkconfig.ad.xiaomi.com
 DOMAIN,sdkconfig.video.qq.com
 DOMAIN,sdkmonitor.biz.weibo.com
+DOMAIN,sdktmp.hubcloud.com.cn
 DOMAIN,sec.umeng.com
 DOMAIN,sin3-ib.adnxs.com
 DOMAIN,sis-ipv6.jpush.cn
@@ -548,6 +567,7 @@ DOMAIN,user.jpush.cn
 DOMAIN,ut.taobao.com
 DOMAIN,utoken.umeng.com
 DOMAIN,uug27.com
+DOMAIN,v.adx.hubcloud.com.cn
 DOMAIN,v.gdt.qq.com
 DOMAIN,v1.log.moji.com
 DOMAIN,v2.gdt.qq.com
@@ -1126,6 +1146,7 @@ DOMAIN-SUFFIX,advertserve.com
 DOMAIN-SUFFIX,advice-ads.s3.amazonaws.com
 DOMAIN-SUFFIX,adview.cn
 DOMAIN-SUFFIX,advmob.cn
+DOMAIN-SUFFIX,advp.apple.com
 DOMAIN-SUFFIX,adwetec.com
 DOMAIN-SUFFIX,adwhirl.com
 DOMAIN-SUFFIX,adwo.com
@@ -2125,6 +2146,7 @@ DOMAIN-SUFFIX,iad-04.braze.com
 DOMAIN-SUFFIX,iad-05.braze.com
 DOMAIN-SUFFIX,iad-06.braze.com
 DOMAIN-SUFFIX,iad-08.braze.com
+DOMAIN-SUFFIX,iad-apple.com
 DOMAIN-SUFFIX,iad.appboy.com
 DOMAIN-SUFFIX,iad.apple.com
 DOMAIN-SUFFIX,iadctest.qwapi.com
@@ -2663,6 +2685,7 @@ DOMAIN-SUFFIX,newscgp.com
 DOMAIN-SUFFIX,newspush.sinajs.cn
 DOMAIN-SUFFIX,newton-api.ele.me
 DOMAIN-SUFFIX,newvoice.chiq5.smart-tv.cn
+DOMAIN-SUFFIX,nex.163.com
 DOMAIN-SUFFIX,nex.corp.163.com
 DOMAIN-SUFFIX,nex8.net
 DOMAIN-SUFFIX,nexac.com

@@ -1,5 +1,5 @@
 # 规则名称: Ads_BlockAds
-# 规则统计: 614
+# 规则统计: 641
 
 DOMAIN,4lke.online
 DOMAIN,a-remad.qm989.com
@@ -53,7 +53,9 @@ DOMAIN,adstrategy.biz.weibo.com
 DOMAIN,adtrack.e.kuaishou.com
 DOMAIN,adtracker.adfunlink.com
 DOMAIN,adui.tg.meitu.com
+DOMAIN,advertising.apple.com
 DOMAIN,adx-bj.anythinktech.com
+DOMAIN,adx.halomobi.com
 DOMAIN,aedns.weixin.qq.com
 DOMAIN,afd.baidu.com
 DOMAIN,afdconf.baidu.com
@@ -66,17 +68,20 @@ DOMAIN,analytics-api.smzdm.com
 DOMAIN,api-adservices.apple.com
 DOMAIN,api.anythinktech.com
 DOMAIN,api.helloclue.com
+DOMAIN,api.htp.hubcloud.com.cn
 DOMAIN,api.iqiyi.com
 DOMAIN,api.zuihuimai.com
 DOMAIN,apiv4-iyes.youku.com
 DOMAIN,appcloud.zhihu.com
 DOMAIN,appcloud2.in.zhihu.com
+DOMAIN,apple.comscoreresearch.com
 DOMAIN,applog.uc.cn
 DOMAIN,applog.zijieapi.com
 DOMAIN,apppv.zol.com.cn
 DOMAIN,aspect-upush.umeng.com
 DOMAIN,b-gtc.getui.net
 DOMAIN,baichuan-sdk.alicdn.com
+DOMAIN,banners.itunes.apple.com
 DOMAIN,bds.snssdk.com
 DOMAIN,beacon-api.aliyuncs.com
 DOMAIN,bgg.baidu.com
@@ -86,7 +91,9 @@ DOMAIN,c-gtc.getui.net
 DOMAIN,c-hzgt2.getui.com
 DOMAIN,c-ido.getui.net
 DOMAIN,c2.gdt.qq.com
+DOMAIN,ca.iadsdk.apple.com
 DOMAIN,cdn-new-ad.wtzw.com
+DOMAIN,cdn.1rtb.com
 DOMAIN,ce3e75d5.jpush.cn
 DOMAIN,click-bes.baidu.com
 DOMAIN,cm-10-138.getui.com
@@ -156,7 +163,6 @@ DOMAIN,go.xxxviijmp.com
 DOMAIN,go.xxxvjmp.com
 DOMAIN,googleads.g.doubleclick-cn.net
 DOMAIN,googleads.g.doubleclick.net
-DOMAIN,gorgon.youdao.com
 DOMAIN,gromore.pangolin-sdk-toutiao.com
 DOMAIN,h-adashx.ut.taobao.com
 DOMAIN,h.trace.qq.com
@@ -171,10 +177,15 @@ DOMAIN,hudong.alicdn.com
 DOMAIN,huichuan-mc.sm.cn
 DOMAIN,huichuan.sm.cn
 DOMAIN,i.snssdk.com
+DOMAIN,iad.apple.com
 DOMAIN,iad.g.163.com
+DOMAIN,iadcontent.apple.com
+DOMAIN,iadctest.qwapi.com
 DOMAIN,iadmat.nosdn.127.net
+DOMAIN,iadmoo.apple.com
 DOMAIN,iadmusicmat.music.126.net
 DOMAIN,iadmusicmatvideo.music.126.net
+DOMAIN,iadworkbench.apple.com
 DOMAIN,id.hadron.ad.gt
 DOMAIN,ido.getui.net
 DOMAIN,ii.gdt.qq.com
@@ -188,6 +199,7 @@ DOMAIN,is.snssdk.com
 DOMAIN,iyes.youku.com
 DOMAIN,janapi.jd.com
 DOMAIN,kadmimage.biz.weibo.com
+DOMAIN,launch.apple.com
 DOMAIN,lf-ad-ies.bytecdn.cn
 DOMAIN,log.snssdk.com
 DOMAIN,log.umsns.com
@@ -217,7 +229,6 @@ DOMAIN,msg.umengcloud.com
 DOMAIN,mssdk-bu.bytedance.com
 DOMAIN,mssdk.volces.com
 DOMAIN,nadvideo2.baidu.com
-DOMAIN,nex.163.com
 DOMAIN,o33249.ingest.sentry.io
 DOMAIN,open.e.kuaishou.com
 DOMAIN,open.kuaishou.com
@@ -237,10 +248,13 @@ DOMAIN,proxy.safebrowsing.apple
 DOMAIN,pubads.g.doubleclick.net
 DOMAIN,pv.vipads.cc
 DOMAIN,pvnapp.zol.com.cn
+DOMAIN,qwapi.apple.com
 DOMAIN,qzs.gdtimg.com
 DOMAIN,qzs.qq.com
 DOMAIN,r.trackwilltrk.com
 DOMAIN,reactads.engine.adglare.net
+DOMAIN,render-web.11222.cn
+DOMAIN,res1.hubcloud.com.cn
 DOMAIN,rmonitor.qq.com
 DOMAIN,rockpoint.xhamster.com
 DOMAIN,s.jpush.cn
@@ -253,6 +267,8 @@ DOMAIN,safebrowsing.urlsec.qq.com
 DOMAIN,sdfp.snssdk.com
 DOMAIN,sdk-conf.getui.com
 DOMAIN,sdk-open-phone.getui.com
+DOMAIN,sdk.1rtb.net
+DOMAIN,sdk.beizi.biz
 DOMAIN,sdk.e.qq.com
 DOMAIN,sdk.open.talk.getui.net
 DOMAIN,sdk.ssp.admobile.top
@@ -262,6 +278,7 @@ DOMAIN,sdkclick.biz.weibo.com
 DOMAIN,sdkconfig.ad.xiaomi.com
 DOMAIN,sdkconfig.video.qq.com
 DOMAIN,sdkmonitor.biz.weibo.com
+DOMAIN,sdktmp.hubcloud.com.cn
 DOMAIN,sec.umeng.com
 DOMAIN,sin3-ib.adnxs.com
 DOMAIN,sis-ipv6.jpush.cn
@@ -302,6 +319,7 @@ DOMAIN,user.jpush.cn
 DOMAIN,ut.taobao.com
 DOMAIN,utoken.umeng.com
 DOMAIN,uug27.com
+DOMAIN,v.adx.hubcloud.com.cn
 DOMAIN,v.gdt.qq.com
 DOMAIN,v2.gdt.qq.com
 DOMAIN,vali-g1.cp31.ott.cibntv.net
@@ -328,6 +346,7 @@ DOMAIN-SUFFIX,163jiasu.com
 DOMAIN-SUFFIX,a1click.cpc.sogou.com
 DOMAIN-SUFFIX,ad.cmvideo.cn
 DOMAIN-SUFFIX,ad.e.waimai.sankuai.com
+DOMAIN-SUFFIX,adashbc.ut.taobao.com
 DOMAIN-SUFFIX,adbkwai.com
 DOMAIN-SUFFIX,admgr.qingting.fm
 DOMAIN-SUFFIX,admobile.top
@@ -338,6 +357,7 @@ DOMAIN-SUFFIX,adsappier.com
 DOMAIN-SUFFIX,adsence.sogou.com
 DOMAIN-SUFFIX,adstream.123.sogoucdn.com
 DOMAIN-SUFFIX,adukwai.com
+DOMAIN-SUFFIX,advp.apple.com
 DOMAIN-SUFFIX,adxadserv.com
 DOMAIN-SUFFIX,alexametrics.com
 DOMAIN-SUFFIX,amazon-adsystem.com
@@ -374,6 +394,8 @@ DOMAIN-SUFFIX,gdt.qq.com
 DOMAIN-SUFFIX,getui.com
 DOMAIN-SUFFIX,golden1.sogou.com
 DOMAIN-SUFFIX,googleads.g.doubleclick.net
+DOMAIN-SUFFIX,gorgon.youdao.com
+DOMAIN-SUFFIX,iad-apple.com
 DOMAIN-SUFFIX,iadsdk.apple.com
 DOMAIN-SUFFIX,igexin.com
 DOMAIN-SUFFIX,img-x.jd.com
@@ -400,12 +422,14 @@ DOMAIN-SUFFIX,mall.icbc.com.cn
 DOMAIN-SUFFIX,meituan.xn
 DOMAIN-SUFFIX,meituan.yoga
 DOMAIN-SUFFIX,meituangov.cn
+DOMAIN-SUFFIX,mi.gdt.qq.com
 DOMAIN-SUFFIX,miaozhen.com
 DOMAIN-SUFFIX,mnaspm.com
 DOMAIN-SUFFIX,mobileservice.cn
 DOMAIN-SUFFIX,msclick2.kuwo.cn
 DOMAIN-SUFFIX,msphoneclick.kuwo.cn
 DOMAIN-SUFFIX,new.xiongzhangad.com
+DOMAIN-SUFFIX,nex.163.com
 DOMAIN-SUFFIX,o1098464.ingest.sentry.io
 DOMAIN-SUFFIX,pangolin-sdk-toutiao-b.com
 DOMAIN-SUFFIX,pangolin-sdk-toutiao.com
@@ -416,6 +440,7 @@ DOMAIN-SUFFIX,rich.kuwo.cn
 DOMAIN-SUFFIX,s.qd.qingting.fm
 DOMAIN-SUFFIX,s.qd.qingtingfm.com
 DOMAIN-SUFFIX,safebrowsing.apple
+DOMAIN-SUFFIX,sdk.e.qq.com
 DOMAIN-SUFFIX,shouji.sougou.com
 DOMAIN-SUFFIX,shuzilm.cn
 DOMAIN-SUFFIX,smaato.net
@@ -423,11 +448,13 @@ DOMAIN-SUFFIX,stripchat.com
 DOMAIN-SUFFIX,stripchat.ooo
 DOMAIN-SUFFIX,tappx.com
 DOMAIN-SUFFIX,theta.sogoucdn.com
+DOMAIN-SUFFIX,toblog.ctobsnssdk.com
 DOMAIN-SUFFIX,trafficjunky.com
 DOMAIN-SUFFIX,trafficjunky.net
 DOMAIN-SUFFIX,u3.ucweb.com
 DOMAIN-SUFFIX,ubixioe.com
 DOMAIN-SUFFIX,ugdtimg.com
+DOMAIN-SUFFIX,ulogs.umengcloud.com
 DOMAIN-SUFFIX,union.baidu.cn
 DOMAIN-SUFFIX,union.baidu.com
 DOMAIN-SUFFIX,unityads.unity3d.com
