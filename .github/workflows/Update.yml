@@ -350,9 +350,11 @@ jobs:
           set -euo pipefail
           for file in Tools-repo/Ruleset/mihomo/Block/*.list; do
             if [[ -f "$file" ]]; then
-              # 删除无效规则（如 USER-AGENT、URL-REGEX 开头的行）
+              # 删除无效规则：删除以 USER-AGENT、URL-REGEX、AND,((URL-REGEX 和 AND,((IP-CIDR 开头的行
               sed -i -e '/^USER-AGENT/d' "$file"
               sed -i -e '/^URL-REGEX/d' "$file"
+              sed -i -e '/^AND,((IP-CIDR/d' "$file"
+              sed -i -e '/^AND,((URL-REGEX/d' "$file"
               file_names=$(basename "$file" .list)
               line_count=$(wc -l < "$file")
               # 在文件头添加规则名称
