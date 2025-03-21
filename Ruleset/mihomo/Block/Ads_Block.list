@@ -1,5 +1,5 @@
 # 规则名称: Ads_Block
-# 规则统计: 4143
+# 规则统计: 4173
 
 DOMAIN,118.89.204.198
 DOMAIN,4lke.online
@@ -89,6 +89,7 @@ DOMAIN,admusicpic.music.126.net
 DOMAIN,adnew.wifi8.com
 DOMAIN,adpai.thepaper.cn
 DOMAIN,adproxy.autohome.com.cn
+DOMAIN,adreport.adtianmai.com
 DOMAIN,adreq.vivo.com.cn
 DOMAIN,ads-cloud.rovio.com
 DOMAIN,ads-d.viber.com
@@ -164,11 +165,14 @@ DOMAIN,advertising.apple.com
 DOMAIN,adwbs.ximalaya.com
 DOMAIN,adx-api.hupu.com
 DOMAIN,adx-bj.anythinktech.com
+DOMAIN,adx.adtaipo.com
 DOMAIN,adx.halomobi.com
 DOMAIN,adx.hupu.com
+DOMAIN,adx.kuaiyiad.com
 DOMAIN,adx.op.cp18.ott.cibntv.net
 DOMAIN,adx.sogaha.cn
 DOMAIN,adx.yiche.com
+DOMAIN,adxapi.readgps.com
 DOMAIN,adxlog.vivo.com.cn
 DOMAIN,aedns.weixin.qq.com
 DOMAIN,afd.baidu.com
@@ -184,6 +188,7 @@ DOMAIN,analytics.google.com
 DOMAIN,analytics.slashdotmedia.com
 DOMAIN,api-ad.kajicam.com
 DOMAIN,api-adservices.apple.com
+DOMAIN,api-htp.beizi.biz
 DOMAIN,api.ad.xiaomi.com
 DOMAIN,api.adnet.mob.com
 DOMAIN,api.anythinktech.com
@@ -191,6 +196,7 @@ DOMAIN,api.helloclue.com
 DOMAIN,api.htp.hubcloud.com.cn
 DOMAIN,api.installer.xiaomi.com
 DOMAIN,api.iqiyi.com
+DOMAIN,api.mobrtb.com
 DOMAIN,api.newad.ifeng.com
 DOMAIN,api.zuihuimai.com
 DOMAIN,apilog-web.acfun.cn
@@ -208,6 +214,7 @@ DOMAIN,apppv.zol.com.cn
 DOMAIN,asimgs.pplive.cn
 DOMAIN,aspect-upush.umeng.com
 DOMAIN,atrace.chelaile.net.cn
+DOMAIN,ax.admobile.top
 DOMAIN,b-gtc.getui.net
 DOMAIN,baichuan-sdk.alicdn.com
 DOMAIN,banners.itunes.apple.com
@@ -219,7 +226,6 @@ DOMAIN,brahe.apptimize.com
 DOMAIN,bravetense.com
 DOMAIN,browsercfg-drcn.cloud.dbankcloud.cn
 DOMAIN,business-cdn.shouji.sogou.com
-DOMAIN,c-gtc.getui.net
 DOMAIN,c-hzgt2.getui.com
 DOMAIN,c-ido.getui.net
 DOMAIN,c.bing.com
@@ -285,6 +291,8 @@ DOMAIN,fcapi-ipv6.jpush.cn
 DOMAIN,feed-image.baidu.com
 DOMAIN,flash.sec.miui.com
 DOMAIN,flowplus.meituan.net
+DOMAIN,frontier-aweme-hl.snssdk.com
+DOMAIN,frontier-quic-test.bytedance.com
 DOMAIN,furiousfar.com
 DOMAIN,g.koowo.com
 DOMAIN,g.ousns.net
@@ -363,13 +371,13 @@ DOMAIN,info6.video.qq.com
 DOMAIN,init.supersonicads.com
 DOMAIN,ios.bugly.qq.com
 DOMAIN,ios.video.mpush.qq.com
-DOMAIN,is.snssdk.com
 DOMAIN,itad.linetv.tw
 DOMAIN,ivy.pchouse.com.cn
 DOMAIN,iyes.youku.com
 DOMAIN,janapi.jd.com
 DOMAIN,js-ad.a.yximgs.com
 DOMAIN,js.users.51.la
+DOMAIN,jump.admobile.top
 DOMAIN,kad.gotokeep.com
 DOMAIN,kadmimage.biz.weibo.com
 DOMAIN,kgmobilestat.kugou.com
@@ -424,6 +432,7 @@ DOMAIN,n.3g.163.com
 DOMAIN,nadvideo2.baidu.com
 DOMAIN,nativeadv.dftoutiao.com
 DOMAIN,nex.163.com
+DOMAIN,nfy.slyxmobi.com
 DOMAIN,nsclick.baidu.com
 DOMAIN,o.clarity.ms
 DOMAIN,o33249.ingest.sentry.io
@@ -503,6 +512,7 @@ DOMAIN,sdk.beizi.biz
 DOMAIN,sdk.e.qq.com
 DOMAIN,sdk.open.talk.getui.net
 DOMAIN,sdk.ssp.admobile.top
+DOMAIN,sdk.tianmu.mobi
 DOMAIN,sdk.verification.jiguang.cn
 DOMAIN,sdkaction.biz.weibo.com
 DOMAIN,sdkclick.biz.weibo.com
@@ -517,6 +527,7 @@ DOMAIN,smartop-sdkapi.jiguang.cn
 DOMAIN,soul-ad.soulapp.cn
 DOMAIN,splashimgbssdl.yun.kugou.com
 DOMAIN,splashqqlive.gtimg.com
+DOMAIN,ssp.maplehaze.cn
 DOMAIN,stat.10jqka.com.cn
 DOMAIN,stat.y.qq.com
 DOMAIN,statics.woozooo.com
@@ -525,6 +536,7 @@ DOMAIN,sugar.zhihu.com
 DOMAIN,swallowcrockerybless.com
 DOMAIN,switch.cup.com.cn
 DOMAIN,t-ads.xiaohongshu.com
+DOMAIN,t.fanglinad.com
 DOMAIN,t.gdt.qq.com
 DOMAIN,t7z.cupid.iqiyi.com
 DOMAIN,t7z.cupid.ptqy.gitv.tv
@@ -552,8 +564,10 @@ DOMAIN,track.tenjin.com
 DOMAIN,track.tenjin.io
 DOMAIN,track.tiara.daum.net
 DOMAIN,track.tiara.kakao.com
+DOMAIN,tracker.tianmu.mobi
 DOMAIN,tracking.intl.miui.com
 DOMAIN,tracklog.58.com
+DOMAIN,trk1.17admob.com
 DOMAIN,tsis.jpush.cn
 DOMAIN,tunion-api.m.taobao.com
 DOMAIN,tysdk.95516.com
@@ -3977,6 +3991,8 @@ DOMAIN-KEYWORD,bdsp.x.jd.com
 DOMAIN-KEYWORD,bdurl
 DOMAIN-KEYWORD,client-dmp.suishenyun.cn
 DOMAIN-KEYWORD,clk.gentags.net
+DOMAIN-KEYWORD,dig.bdurl.net
+DOMAIN-KEYWORD,dig.zjurl.cn
 DOMAIN-KEYWORD,dm.bytedance.com
 DOMAIN-KEYWORD,dm.pstatp.com
 DOMAIN-KEYWORD,dm.toutiao.com
@@ -3987,6 +4003,7 @@ DOMAIN-KEYWORD,guanggao
 DOMAIN-KEYWORD,hoisin.coocaa.com
 DOMAIN-KEYWORD,hoisin.coocaatv.com
 DOMAIN-KEYWORD,in-page-push
+DOMAIN-KEYWORD,is.snssdk.com
 DOMAIN-KEYWORD,kepler.jd.com
 DOMAIN-KEYWORD,keplerapi.jd.com
 DOMAIN-KEYWORD,lkme.cc
@@ -4128,19 +4145,32 @@ AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,-access-,extended-ma
 AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,-dual-event-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching))
 AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,-log-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching))
 AND,((DOMAIN-KEYWORD,api,extended-matching),(DOMAIN-KEYWORD,pangolin,extended-matching),(DOMAIN-SUFFIX,sgsnssdk.com,extended-matching))
+AND,((DOMAIN-KEYWORD,api100-core-quic-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching))
+AND,((DOMAIN-KEYWORD,api100-normal-quic-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching))
+AND,((DOMAIN-KEYWORD,api100-normal-quic-aweme-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching))
+AND,((DOMAIN-KEYWORD,api100-quic-core-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching))
+AND,((DOMAIN-KEYWORD,api100-quic-normal-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching))
+AND,((DOMAIN-KEYWORD,frontier100-aweme,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching))
 AND,((DOMAIN-KEYWORD,if,extended-matching),(DOMAIN-KEYWORD,-analytics.bytescm.com,extended-matching))
 AND,((DOMAIN-KEYWORD,if,extended-matching),(DOMAIN-KEYWORD,-cdn-tos.bytescm.com,extended-matching))
 AND,((DOMAIN-KEYWORD,lf,extended-matching),(DOMAIN-KEYWORD,-analytics.bytescm.com,extended-matching))
 AND,((DOMAIN-KEYWORD,lf,extended-matching),(DOMAIN-KEYWORD,-short.bytetos.com,extended-matching))
+AND,((DOMAIN-KEYWORD,ma5-normal-,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching))
 AND,((DOMAIN-KEYWORD,pangolin,extended-matching),(DOMAIN-SUFFIX,sgsnssdk.com,extended-matching))
+AND,((DOMAIN-KEYWORD,polaris5-normal-,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching))
 AND,((DOMAIN-KEYWORD,s,extended-matching),(DOMAIN-KEYWORD,-fe-scm.pglstatp-toutiao.com,extended-matching))
 AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com,extended-matching))
 AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-fe-tos.pglstatp-toutiao.com,extended-matching))
 AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-static.i18n-pglstatp.com,extended-matching))
 AND,((DOMAIN-KEYWORD,sf,extended-matching),(DOMAIN-KEYWORD,-ttcdn-tos.pstatp.com,extended-matching))
 AND,((DOMAIN-KEYWORD,ssdk-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-matching))
+AND,((DOMAIN-KEYWORD,tnc,extended-matching),(AND,((OR,((DOMAIN-KEYWORD,-bjlgy,extended-matching),(DOMAIN-KEYWORD,-alisc,extended-matching),(DOMAIN-KEYWORD,-aliec,extended-matching),(DOMAIN-KEYWORD,-alisg,extended-matching))),(OR,((DOMAIN-SUFFIX,snssdk.com,extended-matching),(DOMAIN-SUFFIX,isnssdk.com,extended-matching),(DOMAIN-SUFFIX,toutiaoapi.com,extended-matching),(DOMAIN-SUFFIX,bytedance.com,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching))))))
 AND,((DOMAIN-KEYWORD,v,extended-matching),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com,extended-matching))
-AND,((URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/d",extended-matching),(USER-AGENT,"*com.xunmeng.pinduoduo*"))
+AND,((DOMAIN-KEYWORD,webcast100-ws-c-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching))
+AND,((DOMAIN-KEYWORD,zijieapi),(DOMAIN-KEYWORD,ad))
+AND,((IP-CIDR,110.249.199.75/32,no-resolve),(DEST-PORT,6443))
+AND,((IP-CIDR,111.225.147.191/32,no-resolve),(DEST-PORT,6443))
+AND,((IP-CIDR,111.63.61.101/32,no-resolve),(DEST-PORT,6443))
+AND,((IP-CIDR,220.243.141.0/32,no-resolve),(DEST-PORT,6443))
 AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch",extended-matching),(USER-AGENT,"Cainiao4iPhone*"))
-AND,((URL-REGEX,"^http:\/\/\[((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))\]\/d4\?",extended-matching),(USER-AGENT,"*com.xunmeng.pinduoduo*"))
 AND,((URL-REGEX,^http:\/\/amdc\.m\.taobao\.com\/amdc\/mobileDispatch),(USER-AGENT,Hema4iPhone*))
