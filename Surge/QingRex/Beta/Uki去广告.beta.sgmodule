@@ -58,14 +58,12 @@ DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matchin
 DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching,pre-matching
-# 个推
 DOMAIN,sdk-open-phone.getui.com,REJECT,extended-matching,pre-matching
 DOMAIN,c-hzgt2.getui.com,REJECT,extended-matching,pre-matching
 DOMAIN,sdk-conf.getui.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mobileservice.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,getui.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,igexin.com,REJECT,extended-matching,pre-matching
-# 腾讯
 DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,appsupport.qq.com,REJECT,extended-matching,pre-matching
@@ -79,7 +77,6 @@ DOMAIN,mi.gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching,pre-matching
-# DOMAIN,qzonestyle.gtimg.cn,REJECT // 误杀
 DOMAIN,qzs.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,qzs.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,rmonitor.qq.com,REJECT,extended-matching,pre-matching
@@ -102,13 +99,11 @@ DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
 IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
-# 快手联盟 - 广告服务商
 DOMAIN,gdfp.gifshow.com,REJECT,extended-matching,pre-matching
 DOMAIN,open.e.kuaishou.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adukwai.com,REJECT,extended-matching,pre-matching
 
 [URL Rewrite]
-# 小川在线HTTPDNS
 ^https?:\/\/203\.107\.1\.1/\d+/ss - reject
 ^https?:\/\/203\.107\.1\.33/\d+/ss - reject
 ^https?:\/\/203\.107\.1\.66/\d+/ss - reject
@@ -118,34 +113,25 @@ DOMAIN-SUFFIX,adukwai.com,REJECT,extended-matching,pre-matching
 ^https?:\/\/2401:b180:2000:20::10\/\d+\/d - reject
 
 [Map Local]
-# 首页悬浮窗
 ^https:\/\/api\.chenlongtech\.cn\/v\d\/friends\/startInfo$ data-type=text data="{}" status-code=200
 
-# 首页横幅
 ^https:\/\/api\.chenlongtech\.cn\/v\d\/friends\/indexBanner$ data-type=text data="{}" status-code=200
 
-# 弹窗配置
 ^https:\/\/api\.chenlongtech\.cn\/v\d\/friends\/getPopup data-type=text data="{}" status-code=200
 
 ^https:\/\/api\.chenlongtech\.cn\/v\d\/friends\/allPopUpConfig$ data-type=text data="{}" status-code=200
 
-# 广告配置
 ^https:\/\/api\.chenlongtech\.cn\/v\d\/friends\/advConf$ data-type=text data="{}" status-code=200
 
-# 私聊交友护航弹窗
 ^https:\/\/api\.chenlongtech\.cn\/v\d\/user\/checkQTSheInsurance$ data-type=text data="{}" status-code=200
 
 [Script]
-# 匹配卡横幅
 移除匹配卡横幅 = type=http-response, pattern=^https:\/\/api\.chenlongtech\.cn\/v\d\/lover\/productList, script-path=https://kelee.one/Resource/Script/Uki/Uki_remove_ads.js, requires-body=true
 
-# 密友横幅
 移除密友横幅 = type=http-response, pattern=^https:\/\/api\.chenlongtech\.cn\/v\d\/friends\/closeFriend\/home, script-path=https://kelee.one/Resource/Script/Uki/Uki_remove_ads.js, requires-body=true
 
-# 娱乐页面横幅和悬浮窗配置
 移除娱乐页面横幅和悬浮窗配置 = type=http-response, pattern=^https:\/\/api\.chenlongtech\.cn\/v\d\/party\/config$, script-path=https://kelee.one/Resource/Script/Uki/Uki_remove_ads.js, requires-body=true
 
-# 广场搜索填充词
 移除广场搜索填充词 = type=http-response, pattern=^https:\/\/api\.chenlongtech\.cn\/v1\/post\/fetchSearchRecommend$, script-path=https://kelee.one/Resource/Script/Uki/Uki_remove_ads.js, requires-body=true
 
 [MITM]

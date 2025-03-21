@@ -10,44 +10,34 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-# 字节跳动
 DOMAIN,toblog.ctobsnssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN,mon.zijieapi.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,api-access.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,-fe-tos.pglstatp-toutiao.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,-be-pack-sign.pglstatp-toutiao.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matching
-# 友盟
 DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,ucc.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,ulogs.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,utoken.umeng.com,REJECT,extended-matching,pre-matching
-# 腾讯
 DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,mi.gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,sdk.e.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,win.gdt.qq.com,REJECT,extended-matching,pre-matching
-# 快手
 DOMAIN,gdfp.gifshow.com,REJECT,extended-matching,pre-matching
 DOMAIN,open.e.kuaishou.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adukwai.com,REJECT,extended-matching,pre-matching
-# 其他广告
 DOMAIN,adapi.izuiyou.com,REJECT,extended-matching,pre-matching
-# 信息流广告
 URL-REGEX,"^http:\/\/mercury-gateway\.ixiaochuan\.cn\/mercury\/v1\/ad\/",REJECT-TINYGIF,extended-matching
-# 搜索 - 榜单页面
 URL-REGEX,"^http:\/\/file-share\.izuiyou\.com\/octopus\/media\/templates\/search_home_page_(nv|nv_v2)\/search_home_page_nv",REJECT,extended-matching
 
 [URL Rewrite]
-# 其他广告
 ^https?:\/\/api\.izuiyou\.com\/ad\/ - reject
-# 字节跳动
 ^https:\/\/gromore\.pangolin-sdk-toutiao\.com\/api\/ad\/ - reject
 ^https:\/\/lf-cdn-tos\.bytescm\.com\/obj\/static\/ad\/ - reject
-# 小川在线HTTPDNS
 ^https?:\/\/203\.107\.1\.1/\d+/ss - reject
 ^https?:\/\/203\.107\.1\.33/\d+/ss - reject
 ^https?:\/\/203\.107\.1\.66/\d+/ss - reject
@@ -57,10 +47,8 @@ URL-REGEX,"^http:\/\/file-share\.izuiyou\.com\/octopus\/media\/templates\/search
 ^https?:\/\/2401:b180:2000:20::10\/\d+\/d - reject
 
 [Map Local]
-# 轮播图广告
 ^https?:\/\/api\.izuiyou\.com\/config\/get_banner data-type=text data="{}" status-code=200
 
-# 首页 - 悬浮窗
 ^https:\/\/zyfile\.izuiyou\.com\/zyfile\/c2\/a0\/[a-z0-9-]+\.json data-type=text data="{}" status-code=200
 
 [MITM]

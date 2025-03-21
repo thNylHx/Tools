@@ -13,9 +13,7 @@
 AND,((GEOIP,CN),(DOMAIN,pitaya.bytedance.com,extended-matching)),DIRECT
 
 [URL Rewrite]
-# 去广告
 ^https:\/\/api-va\.tiktokv\.com\/api\/ad\/ - reject
-# 域名解析
 ^https:\/\/tnc\d+-platform-\w+\.tiktokv\.com\/get_domains\/ - reject
 
 [Script]

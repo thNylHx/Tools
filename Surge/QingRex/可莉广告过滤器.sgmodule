@@ -9,57 +9,41 @@
 #!date=2024-12-02 10:07:27
 
 [Rule]
-# Outlook
 DOMAIN,acdn.adnxs.com,REJECT,extended-matching,pre-matching
 DOMAIN,mediation.adnxs.com,REJECT,extended-matching,pre-matching
 DOMAIN,sin3-ib.adnxs.com,REJECT,extended-matching,pre-matching
-# 小米
 DOMAIN,sdkconfig.ad.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN,data.mistat.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN,tracking.intl.miui.com,REJECT,extended-matching,pre-matching
-# 米家
 DOMAIN,sdkconfig.ad.xiaomi.com,REJECT,extended-matching,pre-matching
-# 通用广告
 DOMAIN-SUFFIX,doubleclick-cn.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,doubleclick.net,REJECT,extended-matching,pre-matching
-# 虎牙直播开屏广告
 DOMAIN,business.msstatic.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,v1d.szbdyd.com,REJECT,extended-matching,pre-matching
 URL-REGEX,"^http:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns$",REJECT,extended-matching
-# 中国联通
 DOMAIN-SUFFIX,m1.ad.10010.com,REJECT,extended-matching,pre-matching
-# 中国电信
 DOMAIN,ad.21cn.com,REJECT,extended-matching,pre-matching
 DOMAIN,ad.k.21cn.com,REJECT,extended-matching,pre-matching
 DOMAIN,admarket.21cn.com,REJECT,extended-matching,pre-matching
 DOMAIN,adshows.21cn.com,REJECT,extended-matching,pre-matching
 IP-CIDR,122.229.8.47/32,REJECT,no-resolve,pre-matching
 IP-CIDR,122.229.29.89/32,REJECT,no-resolve,pre-matching
-# 快递100
 URL-REGEX,"^http:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do",REJECT-TINYGIF,extended-matching
 URL-REGEX,"^http:\/\/p\.kuaidi100\.com\/advertisement\/",REJECT-TINYGIF,extended-matching
-# 亲邻开门
 DOMAIN,mall-dsp2.qinlinkeji.com,REJECT,extended-matching,pre-matching
 DOMAIN,mallapi2.qinlinkeji.com,REJECT,extended-matching,pre-matching
-# Pixiv - 作品底部广告
 DOMAIN,open-pixon.ads-pixiv.net,REJECT,extended-matching,pre-matching
 
 [URL Rewrite]
-# 摩托范弹窗广告
 ^https?:\/\/api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk - reject
-# 车来了 - 为您推荐
 ^https:\/\/cdn\.web\.chelaile\.net\.cn\/info-flow\/index\.html - reject
-# 最右
 ^http:\/\/mercury-gateway\.ixiaochuan\.cn\/mercury\/v1\/ad\/ - reject
 ^https?:\/\/home\.mi\.com\/cgi-op\/api\/v\d\/recommendation\/banner - reject
 ^https?:\/\/(api-mifit|api-mifit-\w+)\.huami\.com\/discovery\/mi\/discovery\/\w+_ad\? - reject
-# 小米运动
 ^https:\/\/api-mifit-cn2\.huami\.com\/discovery\/mi\/cards\/startpage_ad - reject
-# 米读
 ^https:\/\/apiwz\.midukanshu\.com\/advert\/getPopup$ - reject
 ^https:\/\/apiwz\.midukanshu\.com\/advert\/treasureInfo$ - reject
 ^https:\/\/apiwz\.midukanshu\.com\/config\/getAds$ - reject
-# 有兔阅读（米兔）
 ^http:\/\/img\.dailmo\.com\/img\/61\/23c7125bfe6166d69f3bff5b0ca4d31e\.jpg - reject
 ^http:\/\/img\.dailmo\.com\/img\/50\/edb40c6392f848df37f9c31d8a6f90f6\.jpg - reject
 ^http:\/\/img\.dailmo\.com\/img\/6\/90585d9e96c73dd49644af57d8501624\.jpg - reject
@@ -69,31 +53,22 @@ DOMAIN,open-pixon.ads-pixiv.net,REJECT,extended-matching,pre-matching
 ^http:\/\/img\.allahall\.com\/img\/6\/90585d9e96c73dd49644af57d8501624\.jpg - reject
 ^http:\/\/img\.allahall\.com\/img\/5\/6cb2aa237ce1f65944aa1ecb29fbdeef\.jpg - reject
 ^http:\/\/img\.allahall\.com\/img\/59\/6a13a75dfe46ebfdac96bd27ef098885\.jpg - reject
-# 拼多多 //api.pinduoduo.com,api.yangkeduo.com
 ^https:\/\/api\.(pinduoduo|yangkeduo)\.com\/api\/cappuccino\/splash - reject
-# 闲鱼 //gw.alicdn.com,acs.m.taobao.com
 ^https:\/\/gw\.alicdn\.com\/mt\/ - reject
 ^https:\/\/gw\.alicdn\.com\/tfs\/.+\d{3,4}-\d{4} - reject
 ^https:\/\/gw\.alicdn\.com\/tps\/.+\d{3,4}-\d{4} - reject
 ^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.taobao\.idle\.home\.welcome - reject
-# 首页悬浮标签
 ^http:\/\/home\.umetrip\.com\/gateway\/api\/umetrip\/native - reject
-# 我的页面轮播图
 ^http:\/\/umerp\.umetrip\.com\/gateway\/api\/umetrip\/native - reject
-# 中国移动开屏广告
 ^https:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(explorePage\/getAdverList|init\/startInit) - reject
 ^https?:\/\/tower\.ubixioe\.com\/mob\/mediation - reject
 ^https?:\/\/sdk1xyajs\.data\.kuiniuca\.com - reject
-# 威锋 - 开屏广告
 ^https:\/\/api\.wfdata\.club\/v2\/yesfeng\/yesList - reject
-# 10099
 ^https:\/\/app\.10099\.com\.cn\/contact-web\/api\/version\/getFlashScreenPage - reject
 
 [Map Local]
-# 米家
 ^https:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/(banner|carousel\/banners|myTab|openingBanner) data-type=text data="{}" status-code=200
 
-# 小米
 ^https?:\/\/api\.m\.mi\.com\/v\d\/app\/start data-type=text data=" " status-code=200
 
 ^https?:\/\/api\.jr\.mi\.com\/v\d\/adv\/ data-type=text data=" " status-code=200
@@ -114,50 +89,36 @@ DOMAIN,open-pixon.ads-pixiv.net,REJECT,extended-matching,pre-matching
 
 ^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/training_video_ad\? data-type=tiny-gif status-code=200
 
-# 小米有品
 ^https:\/\/shopapi\.io\.mi\.com\/mtop\/mf\/resource\/homePage\/pageConfig data-type=text data=" " status-code=200
 
 ^http:\/\/app\.zhoudamozi\.com\/ad\/.+ data-type=text data=" " status-code=200
 
-# QQ钱包广告 //m.qianbao.qq.com
 ^https:\/\/m\.qianbao\.qq\.com\/services\/walletHome\/getQQshopData\? data-type=text data="{}" status-code=200
 
 ^https:\/\/m\.qianbao\.qq\.com\/services\/walletHome\/getGameData\? data-type=text data="{}" status-code=200
 
-# QQ钱包公益广告
 ^https:\/\/m\.qianbao\.qq\.com\/services\/walletHome\/getFootData\? data-type=text data="{}" status-code=200
 
-# 和风天气 hfapp-service.qweather.net
 ^https:\/\/hfapp-service\.qweather\.net\/v2\.0\/app\/ad\/list\? data-type=text data="{}" status-code=200
 
-# 掌上英雄联盟 @𝑨梦 @𝑪𝒉𝒙𝒎𝟏𝟎𝟐𝟑
 ^https?:\/\/us\.l\.qq\.com\/exapp data-type=text data=" " status-code=200
 
-# 翻译广告
 ^https:\/\/dict\.youdao\.com\/course\/tab\/translateTab data-type=text data="{}" status-code=200
 
-# 听读训练
 ^https:\/\/dict\.youdao\.com\/homepage\/tile data-type=text data="{}" status-code=200
 
-# 首次查词弹窗
 ^https:\/\/api-overmind\.youdao\.com\/openapi\/get\/luna\/dict\/dict-mobile\/prod\/dictCommonConfig data-type=text data="{}" status-code=200
 
-# 首页弹窗
 ^https:\/\/cdke\.youdao\.com\/course3\/recommend\/dict\/startup data-type=text data="{}" status-code=200
 
-# 搜索预想
 ^https:\/\/dict\.youdao\.com\/commonsearch data-type=text data="{}" status-code=200
 
-# 会员优惠券弹窗
 ^https:\/\/dict\.youdao\.com\/vip\/activity\/couponinfo data-type=text data="{}" status-code=200
 
-# 首页左上角福利中心
 ^https:\/\/dict\.youdao\.com\/dictusertask\/system data-type=text data="{}" status-code=200
 
-# 深圳通
 ^https?:\/\/ecard\.shenzhentong\.com\/wxweb\/bwxppub2\/QryAdvertList\.do data-type=text data=" " status-code=200
 
-# 埋堆堆 @Kuraki //sfo.mddcloud.com.cn,mob.mddcloud.com.cn,toblog.ctobsnssdk.com,t-dsp.pinduoduo.com,mobads-pre-config.cdn.bcebos.com,sdk1xyajs.data.kuiniuca.com,conf-darwin.xycdn.com,*.ubixioe.com
 ^https?:\/\/mob\.mddcloud\.com\.cn\/adApi\/advert\/(first|third)part\/advertList data-type=text data="{}" status-code=200
 
 ^https?:\/\/t-dsp\.pinduoduo\.com data-type=text data=" " status-code=200
@@ -170,73 +131,52 @@ DOMAIN,open-pixon.ads-pixiv.net,REJECT,extended-matching,pre-matching
 
 ^https?:\/\/conf-darwin\.xycdn\.com data-type=text data="{}" status-code=200
 
-# 闲鱼 - 开屏广告
 ^https:\/\/iyes\.youku\.com\/uts\/v1\/start\/ data-type=text data="{}" status-code=200
 
-# 闲鱼 - 底部浮层发布球
 ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.user\.strategy\.get\/ data-type=text data="{}" status-code=200
 
-# 创客贴设计 - 开屏广告
 ^https:\/\/gw\.chuangkit\.com\/team\/app\/common\/ad\/ data-type=text data="{}" status-code=200
 
-# 稿定设计 - 开屏广告
 ^https:\/\/qiye\.gaoding\.com\/api\/v3\/oc\/v2\/delivery-pits\/ios-splash\/ data-type=text data="{}" status-code=200
 
-# 猫眼 - 移除开屏广告、红包悬浮
 ^https:\/\/p0\.pipi\.cn\/(adAdmin|mediaplus\/maoyantong_ads_fe)\/\w+\.jpg\?imageMogr2\/quality\/ data-type=text data="{}" status-code=200
 
 ^https:\/\/p0\.pipi\.cn\/(adAdmin|mediaplus\/maoyantong_ads_fe)\/\w+\.(jpg|png)\?imageMogr2\/thumbnail\/(860x0|!165x165|!1049x1169) data-type=text data="{}" status-code=200
 
-# 站酷 - 开屏广告
 ^https:\/\/api\.zcool\.com\.cn\/v\d\.\d\.\d/common\/open-screen data-type=text data="{}" status-code=200
 
-# 懒饭 - 开屏广告
 ^https:\/\/lanfanapp\.com\/api\/v1\/ads\/ data-type=text data="{}" status-code=200
 
-#向日葵 #开屏广告 #主机名client-api-v2.oray.com
 ^https:\/\/client-api-v2\.oray\.com\/materials\/SLCC_IOS_STARTUP data-type=text data="{}" status-code=200
 
-#向日葵 #首页文字广告
 ^https:\/\/client-api-v2\.oray\.com\/materials\/SLCC_IOS_DEVICE data-type=text data="{}" status-code=200
 
-#向日葵 #发现页广告
 ^https:\/\/client-api-v2\.oray\.com\/materials\/SUNLOGIN_CLIENT_IOS_PROMOTION data-type=text data="{}" status-code=200
 
-# 飞智游戏厅 - 开屏广告
 ^https:\/\/api\.flydigi\.com\/android\/v2\/ad data-type=text data="{}" status-code=200
 
-# 水印相机 - 去开屏广告
 ^https:\/\/api\.xiangji\.qq\.com\/splash$ data-type=text data="{}" status-code=200
 
-# 央视频广告
 ^https:\/\/cdn\.cmgadx\.com\/sdk\/pool\/ data-type=text data="{}" status-code=200
 
-# 亲邻开门
 ^https:\/\/qadx\.qinlinad\.com\/ad\/ data-type=text data="{}" status-code=200
 
-# 运动页面活动推广
 ^https:\/\/watch\.iot\.mi\.com\/cgi-op\/api\/v1\/watch\/health\/resource\?business=MI_WATCH_SPORT data-type=text data="{}" status-code=200
 
-# 设备页面横幅推广
 ^https:\/\/watch\.iot\.mi\.com\/cgi-op\/api\/v1\/watch\/health\/resource\?business=MI_HEALTH_DEVICE_TAB_PAGE data-type=text data="{}" status-code=200
 
-# 淘票票 - 开屏广告
 ^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.film\.mtopadvertiseapi\.queryloadingbanner\/ data-type=text data="{}" status-code=200
 
-# 淘票票 - 弹窗
 ^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.film\.life\.popup\.get\/ data-type=text data="{}" status-code=200
 
-# Pixiv - 底栏广告
 ^https:\/\/d\.socdm\.com\/adsv\/ data-type=text data="{}" status-code=200
 
-# 中国联通 - 开屏广告 - by xream
 ^https?:\/\/m\.client\.10010\.com\/mobileService\/customer\/accountListData\.htm data-type=text data="{"imgIndex":"0","adv":{"startup_adv":{"advCntList":[],"buttonList":[]}},"respCode":"0000"}" header="Content-Type:text/json"
 
-# 小爱音箱 - 开屏广告和横幅 - by xream
 ^https?:\/\/info\.mina\.xiaoaisound\.com\/(advertise|payGuide)\/ data-type=text data="{"code":0,"message":"Success","data":[]}" header="Content-Type:text/json"
 
 [Script]
-body_rewrite_186 = type=http-response, pattern=^https?:\/\/cmds\.omesoft\.com\/HypnotistWS\.asmx, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22replace-regex%22%2C%5B%5B%22%3CGetADResult%3E%5C%5C.%5C%5C*%5C%5C%3F%3C%5C%5C%2FGetADResult%3E%22%2C%22%3CGetADResult%3E%7B%5C%22ret%5C%22%3A0%2C%5C%22msg%5C%22%3A%5C%22%E6%AD%A3%E5%B8%B8%5C%22%2C%5C%22err_code%5C%22%3A0%2C%5C%22data%5C%22%3A%7B%5C%22ad%5C%22%3A%5B%5D%7D%7D%3C%2FGetADResult%3E%22%5D%5D%5D%5D
+body_rewrite_121 = type=http-response, pattern=^https?:\/\/cmds\.omesoft\.com\/HypnotistWS\.asmx, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22replace-regex%22%2C%5B%5B%22%3CGetADResult%3E%5C%5C.%5C%5C*%5C%5C%3F%3C%5C%5C%2FGetADResult%3E%22%2C%22%3CGetADResult%3E%7B%5C%22ret%5C%22%3A0%2C%5C%22msg%5C%22%3A%5C%22%E6%AD%A3%E5%B8%B8%5C%22%2C%5C%22err_code%5C%22%3A0%2C%5C%22data%5C%22%3A%7B%5C%22ad%5C%22%3A%5B%5D%7D%7D%3C%2FGetADResult%3E%22%5D%5D%5D%5D
 
 [MITM]
 hostname = %APPEND% api.zcool.com.cn, acs.m.goofish.com, acs.m.taobao.com, api-access.pangolin-sdk-toutiao*.com, api-access.pangolin-sdk-toutiao.com, api-mifit*.huami.com, api-mifit-cn2.huami.com, api-mifit.huami.com, api-overmind.youdao.com, api.ahmobile.cn, api.angkeduo.com, api.jr.mi.com, api.m.mi.com, api.pinduoduo.com, api.wfdata.club, apiwz.midukanshu.com, app.zhoudamozi.com, cdke.youdao.com, conf-darwin.xycdn.com, dict.youdao.com, ecard.shenzhentong.com, ether-pack.pangolin-sdk-toutiao.com, gromore.pangolin-sdk-toutiao.com, gw.alicdn.com, gw.chuangkit.com, hfapp-service.qweather.net, home.mi.com, home.umetrip.com, img.allahall.com, img.dailmo.com, iyes.youku.com, lfd?-analytics.bytescm.com, lfd?-cdn-tos.bytescm.com, m.qianbao.qq.com, mercury-gateway.ixiaochuan.cn, mob.mddcloud.com.cn, mobads-pre-config.cdn.bcebos.com, p0.pipi.cn, qiye.gaoding.com, sdk1xyajs.data.kuiniuca.com, sfd?-fe-tos.pglstatp-toutiao.com, sfo.mddcloud.com.cn, shopapi.io.mi.com, shealthyapi.senssun.com, t-dsp.pinduoduo.com, toblog.ctobsnssdk.com, tower.ubixioe.com, umerp.umetrip.com, us.l.qq.com, lanfanapp.com, api.xiachufang.com, info.mina.xiaoaisound.com, api.xiangji.qq.com, video-dsp.pddpic.com, images.pinduoduo.com, client.app.coc.10086.cn, cdn.cmgadx.com, qadx.qinlinad.com, watch.iot.mi.com, cdn.web.chelaile.net.cn, d.socdm.com, m.client.10010.com, cmds.omesoft.com, api.fenxianglife.com

@@ -10,7 +10,6 @@
 #!date=2024-11-28 00:00:00
 
 [URL Rewrite]
-# 无快捷键则默认使用Google搜索
 ^https:\/\/duckduckgo\.com\/\?q=bd\+([^&]+).+ https://www.baidu.com/s?wd=$1 307
 ^https:\/\/duckduckgo\.com\/\?q=bdimg\+([^&]+).+ https://image.baidu.com/search/index?tn=baiduimage&word=$1 307
 ^https:\/\/duckduckgo\.com\/\?q=gimg\+([^&]+).+ https://www.google.com/search?&tbm=isch&q=$1 307

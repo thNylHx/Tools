@@ -10,23 +10,17 @@
 #!date=2024-11-28 00:00:00
 
 [URL Rewrite]
-# 社区入口
 ^https:\/\/api\.feidee\.net\/v1\/configs\/client\/configs - reject
 
 [Map Local]
-# 开屏广告
 ^https:\/\/tg\.feidee\.com\/online_ad\/api\/search\.do$ data-type=text data="{}" status-code=200
 
-# 首页 - 为您推荐
 ^https:\/\/yunmk\.feidee\.net\/cab-market-ws\/market\/v2\/contents$ data-type=text data="{}" status-code=200
 
-# 神象云账本 - 推广通知横幅
 ^https:\/\/tg\.feidee\.com\/vis-ad-engine-ws\/api\/v2\/ads\/.+esultNum data-type=text data="{}" status-code=200
 
-# 其他广告 - 暂无有效广告数据
 ^https:\/\/tg\.feidee\.com\/vis-ad-engine-ws\/api\/show data-type=text data="{}" status-code=200
 
-# 我的页面 - 免广告会员
 ^https:\/\/yun\.feidee\.net\/cab-periodic-activity-ws\/terminal\/v1\/members\/status data-type=text data="{}" status-code=200
 
 [MITM]

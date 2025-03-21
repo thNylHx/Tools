@@ -10,7 +10,6 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-# 广告下发
 DOMAIN,adui.tg.meitu.com,REJECT,extended-matching,pre-matching
 AND,((DOMAIN-KEYWORD,-ad-,extended-matching),(DOMAIN-SUFFIX,byteimg.com,extended-matching)),REJECT,pre-matching
 AND,((DOMAIN-KEYWORD,-ttam-,extended-matching),(DOMAIN-SUFFIX,ibyteimg.com,extended-matching)),REJECT,pre-matching
@@ -60,7 +59,6 @@ DOMAIN-KEYWORD,log-api.pangolin-sdk-toutiao,REJECT,extended-matching,pre-matchin
 DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching,pre-matching
-# 百度联盟 - 广告服务商
 DOMAIN,als.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,bgg.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,cpro.baidustatic.com,REJECT,extended-matching,pre-matching
@@ -72,7 +70,6 @@ DOMAIN,nadvideo2.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,wn.pos.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,union.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,union.baidu.com,REJECT,extended-matching,pre-matching
-# 腾讯
 DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,c2.gdt.qq.com,REJECT,extended-matching,pre-matching
@@ -81,12 +78,10 @@ DOMAIN,info4.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching,pre-matching
-# DOMAIN,mazu.m.qq.com,REJECT // 误杀
 DOMAIN,mi.gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching,pre-matching
-# DOMAIN,qzonestyle.gtimg.cn,REJECT // 误杀
 DOMAIN,qzs.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,qzs.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,rmonitor.qq.com,REJECT,extended-matching,pre-matching
@@ -108,7 +103,6 @@ DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
 IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
-# 个推
 DOMAIN,b-gtc.getui.net,REJECT,extended-matching,pre-matching
 DOMAIN,c-gtc.getui.net,REJECT,extended-matching,pre-matching
 DOMAIN,c-hzgt2.getui.com,REJECT,extended-matching,pre-matching
@@ -119,28 +113,23 @@ DOMAIN,sdk-open-phone.getui.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mobileservice.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,getui.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,igexin.com,REJECT,extended-matching,pre-matching
-# 聚次方 - TopOn
 DOMAIN,api.mosspf.com,REJECT,extended-matching,pre-matching
 DOMAIN,da.mosspf.com,REJECT,extended-matching,pre-matching
 
 [URL Rewrite]
-# 拼多多广告平台
 ^https:\/\/video-dsp\.pddpic\.com\/market-dsp-video\/ - reject
 ^https:\/\/t-dsp\.pinduoduo\.com\/dspcb\/i\/mrk_union - reject
 ^https:\/\/images\.pinduoduo\.com\/mrk\/ - reject
 ^https:\/\/images\.pinduoduo\.com\/marketing_api\/ - reject
 
 [Map Local]
-# 首页轮播图
 ^https:\/\/api\.meiyan\.com\/operation\/home_banner\.json\? data-type=text data="{}" status-code=200
 
-# 弹窗和首页红点词
 ^https:\/\/api\.meiyan\.com\/vip\/permission_update_popup\.json\? data-type=text data="{}" status-code=200
 
 [Script]
-body_rewrite_132 = type=http-response, pattern=^https:\/\/api\.meiyan\.com\/operation\/get_config\.json\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22response.time_limit%22%2C%22response.bubble%22%2C%22response.person_center%22%5D%5D%2C%5B%22json-replace%22%2C%5B%5B%22response.function_pop.meiyan_style.is_pop%22%2Cfalse%5D%2C%5B%22response.onoff.vip_half_window_exit_remain_popup.open%22%2C0%5D%2C%5B%22response.onoff.vip_home_exit_remain_popup%22%2C0%5D%5D%5D%5D
+body_rewrite_120 = type=http-response, pattern=^https:\/\/api\.meiyan\.com\/operation\/get_config\.json\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22response.time_limit%22%2C%22response.bubble%22%2C%22response.person_center%22%5D%5D%2C%5B%22json-replace%22%2C%5B%5B%22response.function_pop.meiyan_style.is_pop%22%2Cfalse%5D%2C%5B%22response.onoff.vip_half_window_exit_remain_popup.open%22%2C0%5D%2C%5B%22response.onoff.vip_home_exit_remain_popup%22%2C0%5D%5D%5D%5D
 
-# 首页功能栏目和美颜推荐
 精简首页功能栏目并移除美颜推荐 = type=http-response, pattern=^https:\/\/api\.meiyan\.com\/operation\/home\.json\?, script-path=https://kelee.one/Resource/Script/MeituMYXJ/MeituMYXJ_remove_ads.js, requires-body=true
 
 [MITM]

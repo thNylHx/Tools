@@ -10,7 +10,6 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-# 开屏广告
 DOMAIN,ads.95516.com,REJECT,extended-matching,pre-matching
 DOMAIN,switch.cup.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN,tysdk.95516.com,REJECT,extended-matching,pre-matching

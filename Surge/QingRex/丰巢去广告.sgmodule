@@ -10,7 +10,6 @@
 #!date=2024-11-28 00:00:00
 
 [Rule]
-# 腾讯
 DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,c2.gdt.qq.com,REJECT,extended-matching,pre-matching
@@ -19,12 +18,10 @@ DOMAIN,info4.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.video.mpush.qq.com,REJECT,extended-matching,pre-matching
-# DOMAIN,mazu.m.qq.com,REJECT // 误杀
 DOMAIN,mi.gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,otheve.beacon.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching,pre-matching
-# DOMAIN,qzonestyle.gtimg.cn,REJECT // 误杀
 DOMAIN,qzs.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,qzs.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,rmonitor.qq.com,REJECT,extended-matching,pre-matching
@@ -46,7 +43,6 @@ DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
 IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
-# 百度联盟 - 广告服务商
 DOMAIN,als.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,bgg.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,cpro.baidustatic.com,REJECT,extended-matching,pre-matching
@@ -61,7 +57,6 @@ DOMAIN,wn.pos.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,miniapp-ad.cdn.bcebos.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,union.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,union.baidu.com,REJECT,extended-matching,pre-matching
-# 个推
 DOMAIN,b-gtc.getui.net,REJECT,extended-matching,pre-matching
 DOMAIN,c-gtc.getui.net,REJECT,extended-matching,pre-matching
 DOMAIN,c-hzgt2.getui.com,REJECT,extended-matching,pre-matching
@@ -74,7 +69,6 @@ DOMAIN,sdk-open-phone.getui.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mobileservice.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,getui.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,igexin.com,REJECT,extended-matching,pre-matching
-# 友盟
 DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,errnewlog.umeng.com,REJECT,extended-matching,pre-matching
@@ -89,22 +83,16 @@ DOMAIN,aaid.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,log.umsns.com,REJECT,extended-matching,pre-matching
 
 [Map Local]
-# 首页 - 各类服务推广
 ^https:\/\/consumer\.fcbox\.com\/fcboxactivityweb\/api\/v\d\/clientPage\/modulesAggregated\? data-type=text data="{}" status-code=200
 
-# 首页 - 丰巢商城
 ^https:\/\/consumer\.fcbox\.com\/v2\/home\/mallInfo$ data-type=text data="{}" status-code=200
 
-# 广告配置及横幅推广
 ^https:\/\/dsp\.fcbox\.com\/adSearch\/ data-type=text data="{}" status-code=200
 
-# 生活服务
 ^https:\/\/consumer\.fcbox\.com\/hs-portal\/app\/config\/page\/home\/v2\? data-type=text data="{}" status-code=200
 
-# 订单页面 - 邀请开通会员横幅
 ^https:\/\/consumer\.fcbox\.com\/post\/suggestion\/query$ data-type=text data="{}" status-code=200
 
-# 弹窗配置
 ^https:\/\/consumer\.fcbox\.com\/fcboxactivityweb\/marketingEntrance\/retentionPopup$ data-type=text data="{}" status-code=200
 
 ^https:\/\/consumer\.fcbox\.com\/fcboxactivityweb\/api\/clientPopup\/v\d\/queryPopupWithPriority$ data-type=text data="{}" status-code=200
@@ -112,7 +100,7 @@ DOMAIN,log.umsns.com,REJECT,extended-matching,pre-matching
 ^https:\/\/consumer\.fcbox\.com\/fcboxactivityweb\/api\/guidePopup\/popup$ data-type=text data="{}" status-code=200
 
 [Script]
-body_rewrite_102 = type=http-response, pattern=^https:\/\/consumer\.fcbox\.com\/v1\/dynamicConfig\/findTabbarConfig\/mainPage$, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.lifeService%22%2C%22data.mall%22%5D%5D%5D
+body_rewrite_90 = type=http-response, pattern=^https:\/\/consumer\.fcbox\.com\/v1\/dynamicConfig\/findTabbarConfig\/mainPage$, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.lifeService%22%2C%22data.mall%22%5D%5D%5D
 
 [MITM]
 hostname = %APPEND% consumer.fcbox.com, dsp.fcbox.com

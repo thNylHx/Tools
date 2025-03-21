@@ -13,10 +13,8 @@
 IP-CIDR,203.107.1.1/24,REJECT,no-resolve,pre-matching
 
 [Map Local]
-# 首页活动日历
 ^https:\/\/member\.alipan\.com\/v2\/activity\/sign_in_luckyBottle data-type=text data="{}" status-code=200
 
-# 首页板块入口
 ^https:\/\/api\.alipan\.com\/adrive\/v1\/file\/getTopFolders data-type=text data="{}" status-code=200
 
 [Script]

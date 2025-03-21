@@ -10,32 +10,25 @@
 #!date=2024-11-28 00:00:00
 
 [Map Local]
-# 记录 - 悬浮部件
 ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/page_float_bubbles\? data-type=text data="{}" status-code=200
 
-# 记录 - 发布
 ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/tool_buttons\? data-type=text data="{}" status-code=200
 
-# 记录 - 搜索发现
 ^https:\/\/api\.boohee\.com\/app-interface\/v1\/search\/search\? data-type=text data="{}" status-code=200
 
-# 记录 - 消息 - 通知 - 横幅推广
 ^https:\/\/status\.boohee\.com\/api\/v1\/merged_messages$ data-type=text data="{}" status-code=200
 
-# 弹窗配置
 ^https:\/\/bohe\.sfo-tx-shanghai-01\.saas\.sensorsdata\.cn\/api\/v2\/sfo\/user_popup_configs\? data-type=text data="{}" status-code=200
 
-# 绑定设备 - 横幅推广
 ^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/sensor-banners\? data-type=text data="{}" status-code=200
 
 [Script]
-body_rewrite_13 = type=http-response, pattern=^https:\/\/api\.boohee\.com\/meta-interface\/v2\/index\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.recom_cards%22%2C%22data.recom_btns%22%5D%5D%5D
+body_rewrite_12 = type=http-response, pattern=^https:\/\/api\.boohee\.com\/meta-interface\/v2\/index\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.recom_cards%22%2C%22data.recom_btns%22%5D%5D%5D
 
-body_rewrite_25 = type=http-response, pattern=^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/plaza\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.tabs%5B1%5D.badge%22%2C%22data.recommend_ads%22%5D%5D%5D
+body_rewrite_18 = type=http-response, pattern=^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/plaza\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.tabs%5B1%5D.badge%22%2C%22data.recommend_ads%22%5D%5D%5D
 
-body_rewrite_27 = type=http-response, pattern=^https:\/\/api\.boohee\.com\/open-interface\/v1\/string\/market_page\?title=metabolism_config$, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22top_banner%22%2C%22diagnos_config%22%2C%22partner_hospital%22%2C%22question_answer%22%2C%22product%22%2C%22brand_story%22%5D%5D%5D
+body_rewrite_19 = type=http-response, pattern=^https:\/\/api\.boohee\.com\/open-interface\/v1\/string\/market_page\?title=metabolism_config$, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22top_banner%22%2C%22diagnos_config%22%2C%22partner_hospital%22%2C%22question_answer%22%2C%22product%22%2C%22brand_story%22%5D%5D%5D
 
-# 广场 - 推荐 - 横幅
 移除广场推荐页面横幅 = type=http-response, pattern=^https:\/\/api\.boohee\.com\/meta-interface\/v1\/index\/plaza-flow\?, script-path=https://kelee.one/Resource/Script/BooHee/BooHee_remove_ads.js, requires-body=true
 
 [MITM]

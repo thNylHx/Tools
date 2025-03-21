@@ -7,15 +7,27 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-03-07 17:11:02
+#!date=2025-03-18 01:05:32
+
+[Rule]
+AND,((IP-CIDR,110.249.199.75/32,no-resolve),(DEST-PORT,6443)),REJECT,pre-matching
+AND,((IP-CIDR,111.225.147.191/32,no-resolve),(DEST-PORT,6443)),REJECT,pre-matching
+AND,((IP-CIDR,111.63.61.101/32,no-resolve),(DEST-PORT,6443)),REJECT,pre-matching
+AND,((IP-CIDR,220.243.141.0/32,no-resolve),(DEST-PORT,6443)),REJECT,pre-matching
+AND,((OR,((DOMAIN-SUFFIX,bytegecko.com,extended-matching),(DOMAIN-SUFFIX,byteeffecttos.com,extended-matching))),(DOMAIN-KEYWORD,ncdn,extended-matching)),REJECT,pre-matching
+
+[URL Rewrite]
+^https:\/\/api5-normal-lq\.amemv\.com\/api\/ad\/ - reject
+^https:\/\/(aweme\.snssdk\.com|api5-normal-m\.amemv\.com)\/api\/ad\/ - reject
+^https:\/\/zlink\.ugsdk\.cn\/ad\/ - reject
 
 [Script]
-body_rewrite_13 = type=http-response, pattern=^https:\/\/aweme\.snssdk\.com\/aweme\/homepage\/sidebar_data\/\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data_map.recently_apps%22%2C%22data_map.recently_users%22%5D%5D%5D
+body_rewrite_21 = type=http-response, pattern=^https:\/\/((aweme\.snssdk\.com|api5-normal-m\.amemv\.com)|api5-normal-m\.amemv\.com)\/aweme\/homepage\/sidebar_data\/\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data_map.recently_apps%22%2C%22data_map.recently_users%22%5D%5D%5D
 
-body_rewrite_17 = type=http-response, pattern=^https:\/\/aweme\.snssdk\.com\/aweme\/homepage\/render\/\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.tab_config%22%5D%5D%5D
+body_rewrite_22 = type=http-response, pattern=^https:\/\/(aweme\.snssdk\.com|api5-normal-m\.amemv\.com)\/aweme\/homepage\/render\/\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.tab_config%22%5D%5D%5D
 
-body_rewrite_21 = type=http-response, pattern=^https:\/\/aweme\.snssdk\.com\/tfe\/api\/request_combine\/v1\/\?need_personal_recommend, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-replace%22%2C%5B%5B%22data%5B%5C%22%2Fservice%2Fsettings%2Fv3%2F%5C%22%5D.body.data.settings.homepage_two_session_tab_skin_2025%22%2Cfalse%5D%2C%5B%22data%5B%5C%22%2Fservice%2Fsettings%2Fv3%2F%5C%22%5D.body.data.settings.homepage_tab_skin_enable%22%2Cfalse%5D%5D%5D%5D
+body_rewrite_24 = type=http-response, pattern=^https:\/\/(aweme\.snssdk\.com|api5-normal-m\.amemv\.com)\/tfe\/api\/request_combine\/v1\/\?need_personal_recommend, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-replace%22%2C%5B%5B%22data%5B%5C%22%2Fservice%2Fsettings%2Fv3%2F%5C%22%5D.body.data.settings.homepage_two_session_tab_skin_2025%22%2Cfalse%5D%2C%5B%22data%5B%5C%22%2Fservice%2Fsettings%2Fv3%2F%5C%22%5D.body.data.settings.homepage_tab_skin_enable%22%2Cfalse%5D%5D%5D%5D
 
 [MITM]
-hostname = %APPEND% aweme.snssdk.com
+hostname = %APPEND% aweme.snssdk.com, api5-normal-m.amemv.com
 
