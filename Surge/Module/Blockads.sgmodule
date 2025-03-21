@@ -1,5 +1,5 @@
 #!name = Block ads | 自用广告拦截合集
-#!desc = 名称： 自用广告拦截合集 \n作者： RuCu6 Keywos fmz200 可莉🅥 QingRex \n说明： 自用广告拦截合集 \n包含： 12306 交管12123 大师兄 爱思助手 阿里云盘 快递100 汽水音乐 什么值得买 米家 闲鱼等
+#!desc = 名称： 自用广告拦截合集 \n作者： RuCu6 Keywos fmz200 可莉🅥 QingRex \n说明： 自用广告拦截合集 \n包含： 12306 交管12123 大师兄 爱思助手 京东比价 阿里云盘 快递100 汽水音乐 什么值得买 米家 闲鱼等
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 广告拦截
@@ -550,6 +550,7 @@ IT之家去广告 = type=http-response,pattern=^https:\/\/napi\.ithome\.com\/api
 # 京东
 移除京东广告 = type=http-response,pattern=^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=(deliverLayer|getTabHomeInfo|myOrderInfo|orderTrackBusiness|personinfoBusiness|start|welcomeHome),script-path=https://kelee.one/Resource/Script/JD/JD_remove_ads.js,requires-body=true
 #京东比价 = type=http-response,pattern=^https?:\/\/api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig|basicConfig),script-path=https://kelee.one/Resource/Script/JD/JD_Price.js,requires-body=true
+京东比价 = type=http-response,pattern=^https:\/\/in\.m\.jd\.com\/product\/graphext\/\d+\.html,requires-body=1,max-size=0,binary-body-mode=0,script-path=https://raw.githubusercontent.com/githubdulong/Script/master/jd_price.js,timeout=30
 
 # ======= S ======= #
 # 什么值得买
