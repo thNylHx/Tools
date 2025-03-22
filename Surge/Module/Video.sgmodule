@@ -1,9 +1,9 @@
 #!name = Block ads | 视频广告拦截合集
-#!desc = 名称： 视频广告拦截合集 \n作者： RuCu6 Keywos fmz200 可莉🅥 QingRex \n说明： 555电影 爱奇艺 腾讯视频 优酷 芒果 萤石云视频
+#!desc = 名称： 视频广告拦截合集 \n作者： RuCu6 Keywos fmz200 可莉🅥 QingRex \n说明： 555电影 CC直播 爱奇艺 腾讯视频 优酷 芒果 萤石云视频
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 广告拦截
-#!date = 2025-03-22 10:00
+#!date = 2025-03-22 15:10
 
 
 [Rule]
@@ -123,7 +123,6 @@ http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/entpage\/live_navbar_mobile\
 ^http:\/\/mshare\.cc\.163\.com\/mshare\/startadv_mobile_v\d\? data-type=text data="{}" status-code=200
 ^https:\/\/appapi\.cc\.163\.com\/v\d\/mixfloatingwindow\/floating_windows\? data-type=text data="{}" status-code=200
 ^http:\/\/api\.cc\.163\.com\/v1\/mpopuprecommend\/exit_room_conf$ data-type=text data="{}" status-code=200
-
 # 芒果
 ^https:\/\/damang\.api\.mgtv\.com\/station\/album\/red\/dot\? data-type=text data="{}" status-code=200
 ^https:\/\/hb-boom\.api\.mgtv\.com\/release\/pullReleaseInfo data-type=text data="{}" status-code=200
