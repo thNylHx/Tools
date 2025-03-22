@@ -1,18 +1,20 @@
 #!name = Block ads | 视频广告拦截合集
-#!desc = 名称： 视频广告拦截合集 \n作者： RuCu6 Keywos fmz200 可莉🅥 QingRex \n说明： 腾讯视频 爱奇艺 优酷 芒果
+#!desc = 名称： 视频广告拦截合集 \n作者： RuCu6 Keywos fmz200 可莉🅥 QingRex \n说明： 555电影 爱奇艺 腾讯视频 优酷 芒果 萤石云视频
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 广告拦截
-#!date = 2025-03-14 10:00
+#!date = 2025-03-22 10:00
+
 
 [Rule]
-## 爱奇艺
-# 放行地址
+# 爱奇艺
+IP-CIDR,103.44.59.54/32,REJECT,no-resolve,pre-matching
+IP-CIDR,111.63.147.158/32,REJECT,no-resolve,pre-matching
+IP-CIDR,116.211.198.237/32,REJECT,no-resolve,pre-matching
 DOMAIN-SUFFIX,cupid.iqiyi.com,DIRECT,extended-matching
-# 拦截地址
 DOMAIN,api.iqiyi.com,REJECT,extended-matching,pre-matching
-
-## 芒果
+DOMAIN,access.if.iqiyi.com,REJECT,extended-matching,pre-matching
+# 芒果
 DOMAIN,credits.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,credits2.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,credits3.bz.mgtv.com,REJECT,extended-matching,pre-matching
@@ -26,16 +28,11 @@ DOMAIN,rprain.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,rprain.log.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,vip.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,da.mgtv.com,REJECT,extended-matching,pre-matching
-# 无用请求
 URL-REGEX,"^http:\/\/[\d\.]+:\d{5}\/\?cmd=indexes",REJECT,extended-matching
-# 首页左上角推广
 URL-REGEX,"^http:\/\/[\d\.]+\/odin\/c1\/(channel\/ads|skin\/config)\?",REJECT-TINYGIF,extended-matching
-# 播放详情页
 URL-REGEX,"^http:\/\/mobile-thor\.api\.mgtv\.com\/v1\/vod\/cms\/list\?",REJECT-TINYGIF,extended-matching
-# 搜索框填充词
 URL-REGEX,"^http:\/\/mobileso\.bz\.mgtv\.com\/spotlight\/search\/v1\?",REJECT-TINYGIF,extended-matching
-
-## 腾讯视频
+# 腾讯视频
 DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,info4.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
@@ -52,13 +49,10 @@ IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
 URL-REGEX,"^http:\/\/[\d\.:]*\/?(defaultts\.tc|vmind\.qqvideo\.tc|finderpdd\.video)\.qq\.com\/\w+",REJECT,extended-matching
 URL-REGEX,"^http:\/\/apd-vlive\.apdcdn\.tc\.qq\.com\/vmind\.qqvideo\.tc\.qq\.com\/\w+",REJECT,extended-matching
 URL-REGEX,"^http:\/\/apd-\w+\.v\.smtcdns\.com\/(defaultts|omts|vmind\.qqvideo)\.tc\.qq\.com\/\w+",REJECT,extended-matching
-
-## 优酷
-# 放行地址
+# 优酷
 DOMAIN,push.m.youku.com,DIRECT,extended-matching
 DOMAIN,un-acs.youku.com,DIRECT,extended-matching
 DOMAIN,dorangesource.alicdn.com,DIRECT,extended-matching
-# 拦截地址
 DOMAIN,acs4baichuan.m.taobao.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,amdc.m.youku.com,REJECT,extended-matching,pre-matching
@@ -80,90 +74,92 @@ DOMAIN,ykad-data.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN,youku-acs.m.taobao.com,REJECT,extended-matching,pre-matching
 
 
+[URL Rewrite]
+# CC直播
+^https:\/\/cc\.163\.com\/act\/m\/daily\/ad_ - reject
+# 萤石云视频
+^https:\/\/api\.ys7\.com\/api\/ads - reject
+
+
+[Body Rewrite]
+# 555电影
+http-response-jq ^https:\/\/(app-v1\.ecoliving168\.com|852b95d36\.xwlpk\.cn)\/api\/v1\/movie\/index_recommend\? '.data[].list |= map(select(.type != 3)) | .data |= map(select(.layout != "advert_self"))'
+# 爱奇艺
+http-response-jq ^https:\/\/cards\.iqiyi\.com\/views_home\/3\.0\/qy_home\? 'delpaths([["base","statistics"]])'
+http-response-jq ^https:\/\/cards\.iqiyi\.com\/views_home\/3\.0\/qy_home\? 'del(.cards[] | select(.alias_name == "focus" or .alias_name == "ad_mobile_flow" or .alias_name == "ad_trueview"))'
+http-response-jq ^https:\/\/cards\.iqiyi\.com\/views_category\/3\.0\/category_home\? 'del(.base.statistics | select(.ad_str)) | del(.cards[] | select(.alias_name == "entrence_focus" or .alias_name == "ad_trueview"))'
+http-response-jq ^https:\/\/cards\.iqiyi\.com\/waterfall(-plt)?\/3\.0\/feed\? 'del(.base.statistics | select(.ad_str)) | del(.. | select(.block_class?))'
+http-response-jq ^https:\/\/cards\.iqiyi\.com\/views_plt\/3\.0\/player_tabs_v2\? 'delpaths([["kv_pair","activity_tab"]])'
+http-response-jq ^https:\/\/cards\.iqiyi\.com\/views_plt\/3\.0\/player_tabs_v2\? 'del(.cards[] | select(.alias_name == "play_vip_promotion" or .alias_name == "play_detail_tag" or .alias_name == "play_chat_entrance" or .alias_name == "play_ad_no_vip" or .alias_name == "play_vertical_short_video" or .alias_name == "play_rap_custom" or .alias_name == "play_topical_tab" or .alias_name == "play_vertical" or .alias_name == "play_water_fall_like")) | del(.. | select(.block_class?))'
+http-response-jq ^https:\/\/comment-card\.iqiyi\.com\/views_comment\/3\.0\/long_video_comments\? ''
+http-response-jq ^https:\/\/cards\.iqiyi\.com\/views_search\/3\.0\/hot_query_search\? '.cards |= map(select(.alias_name as $name | $name != "ad_trueview" and $name != "ad_mobile_flow" and $name != "search_mid_text_ad")) | if .base.statistics.ad_str? then del(.base.statistics) else . end'
+http-response-jq ^https?:\/\/comment-card\.iqiyi\.com\/views_comment\/3\.0\/long_video_comments\? '.cards |= map(select(has("alias_name")))'
+http-response-jq ^https?:\/\/iface2\.iqiyi\.com\/views_menus\/3\.0\/bottom_theme\? 'delpaths([["theme_list"]])'
+http-response-jq ^https?:\/\/iface2\.iqiyi\.com\/views_menus\/3\.0\/bottom_theme\? '.cards |= map(.items |= map(select(.other.bottom_tab_type == "rec" or .other.bottom_tab_type == "my")))'
+http-response-jq ^https?:\/\/iface2\.iqiyi\.com\/views_menus\/3\.0\/home_top_menu\? '.nav_group_data[].nav_list |= map(select(. == "0" or . == "2" or . == "1007" or . == "1" or . == "6" or . == "3"))'
+http-response-jq ^https?:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/common_switch\? 'delpaths([["content","resource","cast_device_ad"]])'
+http-response-jq ^https?:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/common_switch\? 'if (getpath(["content","switchs","app_ad"]) | has("app_ad_enable")) then (setpath(["content","switchs","app_ad","app_ad_enable"]; 0)) else . end'
+http-response-jq ^https?:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/common_switch\? 'if (getpath(["content","switchs","app_ad"]) | has("app_ad_duration")) then (setpath(["content","switchs","app_ad","app_ad_duration"]; 0)) else . end'
+http-response-jq ^https?:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/common_switch\? 'if (getpath(["content","switchs","ios_tech"]) | has("kPreadAdHintSwitch")) then (setpath(["content","switchs","ios_tech","kPreadAdHintSwitch"]; 0)) else . end'
+http-response-jq ^https?:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/common_switch\? 'if (getpath(["content","switchs","ios_tech"]) | has("ad_download")) then (setpath(["content","switchs","ios_tech","ad_download"]; 0)) else . end'
+http-response-jq ^https?:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/common_switch\? 'if (getpath(["content","switchs","m_qiyi_ios_tech"]) | has("KFocusAdVideoPlayTimesIn4G")) then (setpath(["content","switchs","m_qiyi_ios_tech","KFocusAdVideoPlayTimesIn4G"]; 0)) else . end'
+http-response-jq ^https?:\/\/(kjp|t7z)\.cupid\.iqiyi\.com\/mixer\? 'delpaths([["adSlots"]])'
+http-response-jq ^https?:\/\/search\.video\.iqiyi\.com\/q\? 'delpaths([["data"]])'
+http-response-jq ^https?:\/\/iface2\.iqiyi\.com\/aggregate\/3\.0\/getMyMenus\? '.data |= map(select(.statistic.block != "wd_liebiao_2") | select(all(.menuList[]?.statistic2.block; . != "wd_liebiao_3")))'
+# CC直播
+http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/mgamenavigation\/navigation_list\? '.data.info_list |= map(select(.name == "关注" or .name == "推荐" or .name == "视频" or .name == "全部"))'
+http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/mgamerecpage\/recommend_page\? '.data.plugins|=map(select(.module_type!="banner"))|.data.plugins|=map(select(.module_type!="show_list"))|.data.plugins|=map(select(.title!="推荐品类"))'
+http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/entpage\/live_navbar_mobile\/ios\? '.data.top_nav |= map(select(.cn_name == "推荐" or .cn_name == "星秀" or .cn_name == "心动交友"))'
+
+
 [Map Local]
-## 爱奇艺
-# 播放页开通会员提示
-^https:\/\/act\.vip\.iqiyi\.com\/interact\/api\/v2\/show\? data-type=text data="{}" status-code=200
-# 播放页多余动效
-^https:\/\/iface2\.iqiyi\.com\/ivos\/interact\/video\/data\? data-type=text data="{}" status-code=200
-# 播放页升级白金会员按钮
-^https:\/\/iface2\.iqiyi\.com\/video\/3\.0\/v_interface_proxy\? data-type=text data="{}" status-code=200
-# 青少年弹窗
-^https:\/\/iface2\.iqiyi\.com\/views_pop\/3\.0\/pop_control\? data-type=text data="{}" status-code=200
+# 爱奇艺
+^https?:\/\/iface2\.iqiyi\.com\/control\/3\.0\/init_proxy\? data-type=text data="{}" status-code=200
+^https?:\/\/act\.vip\.iqiyi\.com\/interact\/api\/v2\/show\? data-type=text data="{}" status-code=200
+^https?:\/\/iface2\.iqiyi\.com\/ivos\/interact\/video\/data\? data-type=text data="{}" status-code=200
+^https?:\/\/iface2\.iqiyi\.com\/video\/3\.0\/v_interface_proxy\? data-type=text data="{}" status-code=200
+^https?:\/\/iface2\.iqiyi\.com\/views_pop\/3\.0\/pop_control\? data-type=text data="{}" status-code=200
+# CC直播
+^http:\/\/mshare\.cc\.163\.com\/mshare\/startadv_mobile_v\d\? data-type=text data="{}" status-code=200
+^https:\/\/appapi\.cc\.163\.com\/v\d\/mixfloatingwindow\/floating_windows\? data-type=text data="{}" status-code=200
+^http:\/\/api\.cc\.163\.com\/v1\/mpopuprecommend\/exit_room_conf$ data-type=text data="{}" status-code=200
 
-## 芒果
-# 底部tab红点
+# 芒果
 ^https:\/\/damang\.api\.mgtv\.com\/station\/album\/red\/dot\? data-type=text data="{}" status-code=200
-# 播放器界面
 ^https:\/\/hb-boom\.api\.mgtv\.com\/release\/pullReleaseInfo data-type=text data="{}" status-code=200
-# 升级弹窗
 ^https:\/\/mobile\.api\.mgtv\.com\/v2\/mobile\/checkUpdate\? data-type=text data="{}" status-code=200
-
-## 腾讯视频
+# 腾讯视频
 ^https?:\/\/vv\.video\.qq\.com\/(diff|get)vmind data-type=text data="{}" status-code=200
-
-## 优酷
-# 播放页弹窗动图
+# 优酷
 ^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.(pisp\.scripts\.get|xspace\.play\.position\.preload\.query|xspace\.poplayer\.position\.query) data-type=text data="{}" status-code=200
+# 萤石云视频
+^https:\/\/i\.ys7\.com\/api\/user\/tabList data-type=text data="{}" status-code=200
+^https:\/\/api\.ys7\.com\/v3\/config\/service\/entrance\/bannerInfo data-type=text data="{}" status-code=200
+^https:\/\/api\.ys7\.com\/v3\/intelligent-app\/apps\/linkage data-type=text data="{}" status-code=200
+^https:\/\/api\.ys7\.com\/v3\/configurations\/gray\/info\?grayTypes=185 data-type=text data="{}" status-code=200
+^https:\/\/api\.ys7\.com\/v3\/videoclips\/square\/video\/query data-type=text data="{}" status-code=200
 
 
 [Script]
-##### 爱奇艺 #####
-# 首页信息流广告
-移除首页信息流广告 = type=http-response, pattern=^http:\/\/[\d\.]+\/3f1\/cards\.iqiyi\.com\/(views_home\/3\.0\/qy_home|waterfall\/3\.0\/feed)\?, script-path=https://kelee.one/Resource/Script/iQiYi_Video/iQiYi_Video_remove_ads.js, requires-body=true
-移除首页信息流广告 = type=http-response, pattern=^http:\/\/access\.if\.iqiyi\.com\/3f1\/cards\.iqiyi\.com\/(views_category\/3\.0\/category_home|views_home\/3\.0\/qy_home|waterfall\/3\.0\/feed)\?, script-path=https://kelee.one/Resource/Script/iQiYi_Video/iQiYi_Video_remove_ads.js, requires-body=true
-移除首页信息流广告 = type=http-response, pattern=^https:\/\/cards\.iqiyi\.com\/views_category\/3\.0\/(category_home|categorylib_content|film_hybrid)\?, script-path=https://kelee.one/Resource/Script/iQiYi_Video/iQiYi_Video_remove_ads.js, requires-body=true
-移除首页信息流广告 = type=http-response, pattern=^https:\/\/cards\.iqiyi\.com\/(views_home\/3\.0\/qy_home|waterfall\/3\.0\/feed)\?, script-path=https://kelee.one/Resource/Script/iQiYi_Video/iQiYi_Video_remove_ads.js, requires-body=true
-# 播放详情页
-移除播放详情页广告 = type=http-response, pattern=^https:\/\/cards\.iqiyi\.com\/views_plt\/3\.0\/player_tabs_v2\?, script-path=https://kelee.one/Resource/Script/iQiYi_Video/iQiYi_Video_remove_ads.js, requires-body=true
-# 搜索页列表
-移除搜索页列表推广 = type=http-response, pattern=^https:\/\/cards\.iqiyi\.com\/views_search\/3\.0\/(hot_query_)?search\?, script-path=https://kelee.one/Resource/Script/iQiYi_Video/iQiYi_Video_remove_ads.js, requires-body=true
-# 评论区
-移除评论区推广 = type=http-response, pattern=^https:\/\/comment-card\.iqiyi\.com\/views_comment\/3\.0\/long_video_comments\?, script-path=https://kelee.one/Resource/Script/iQiYi_Video/iQiYi_Video_remove_ads.js, requires-body=true
-# 我的页面菜单
-移除我的页面菜单推广 = type=http-response, pattern=^https:\/\/iface2\.iqiyi\.com\/aggregate\/3\.0\/getMyMenus\?, script-path=https://kelee.one/Resource/Script/iQiYi_Video/iQiYi_Video_remove_ads.js, requires-body=true
-# 首页左上角天气
-移除首页左上角天气 = type=http-response, pattern=^https:\/\/iface2\.iqiyi\.com\/control\/3\.0\/init_proxy\?, script-path=https://kelee.one/Resource/Script/iQiYi_Video/iQiYi_Video_remove_ads.js, requires-body=true
-# 通用控制 - 各标签页二楼
-移除各标签页页二楼推广 = type=http-response, pattern=^https:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/common_switch\?, script-path=https://kelee.one/Resource/Script/iQiYi_Video/iQiYi_Video_remove_ads.js, requires-body=true
-# 底栏和顶部标签页推广
-移除底栏和顶部标签页推广 = type=http-response, pattern=^https:\/\/iface2\.iqiyi\.com\/views\/3\.0\/(bottom_theme|home_top_menu)\?, script-path=https://kelee.one/Resource/Script/iQiYi_Video/iQiYi_Video_remove_ads.js, requires-body=true
-# 搜索框填充词
-移除搜索框填充词 = type=http-response, pattern=^https:\/\/search\.video\.iqiyi\.com\/q\?, script-path=https://kelee.one/Resource/Script/iQiYi_Video/iQiYi_Video_remove_ads.js, requires-body=true
-# 开屏和播放广告
-移除开屏和播放广告 = type=http-response, pattern=^https?:\/\/(kjp|t7z)\.cupid\.iqiyi\.com\/mixer\?, script-path=https://kelee.one/Resource/Script/iQiYi_Video/iQiYi_Video_remove_ads.js, requires-body=true
-
-##### 芒果 #####
-# 我的页面
+# 芒果
 移除我的页面广告 = type=http-response, pattern=^https:\/\/me\.bz\.mgtv\.com\/v3\/module\/list\?, script-path=https://kelee.one/Resource/Script/MangoTV/MangoTV_remove_ads.js, requires-body=true
-# 首页信息流、顶部标签
 移除首页广告 = type=http-response, pattern=^http:\/\/mob-st\.bz\.mgtv\.com\/odin\/c1\/channel\/index\?, script-path=https://kelee.one/Resource/Script/MangoTV/MangoTV_remove_ads.js, requires-body=true
 移除首页广告 = type=http-response, pattern=^https?:\/\/dc2?\.bz\.mgtv\.com\/dynamic\/v1\/channel\/(index|vrsList)\/\w, script-path=https://kelee.one/Resource/Script/MangoTV/MangoTV_remove_ads.js, requires-body=true
-# 底部标签
 移除底部多余标签 = type=http-response, pattern=^https:\/\/mobile\.api\.mgtv\.com\/mobile\/config\?, script-path=https://kelee.one/Resource/Script/MangoTV/MangoTV_remove_ads.js, requires-body=true
-# 播放详情页
 移除播放详情页广告 = type=http-response, pattern=^https:\/\/mobile\.api\.mgtv\.com\/v10\/video\/info\?, script-path=https://kelee.one/Resource/Script/MangoTV/MangoTV_remove_ads.js, requires-body=true
 移除播放详情页广告 = type=http-response, pattern=^https:\/\/mobile-thor\.api\.mgtv\.com\/v1\/vod\/info\?, script-path=https://kelee.one/Resource/Script/MangoTV/MangoTV_remove_ads.js, requires-body=true
-# 搜索框填充词
 移除搜索填充词 = type=http-response, pattern=^https?:\/\/mobileso\.bz\.mgtv\.com\/mobile\/recommend\/v2\?, script-path=https://kelee.one/Resource/Script/MangoTV/MangoTV_remove_ads.js, requires-body=true
-
-##### 腾讯视频 #####
+# 腾讯视频
 移除广告 = type=http-request, pattern=^https?:\/\/vv\.video\.qq\.com\/getvinfo, script-path=https://kelee.one/Resource/Script/CommonScript/replace-body.js, requires-body=true, argument="&sppreviewtype=\d(.*)&spsrt=\d->&sppreviewtype=0$1&spsrt=0"
-
-##### 优酷 #####
-# 播放详情页、首页信息流、顶部标签页、我的页面、评论区
+# 优酷
 移除首页广告 = type=http-response, pattern=^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.columbus\.(gateway\.new\.execute|home\.feed|home\.query|uc\.query|ycp\.query), script-path=https://kelee.one/Resource/Script/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
-# 底栏
 移除无用底栏 = type=http-response, pattern=^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.haidai\.lantern\.appconfig\.get, script-path=https://kelee.one/Resource/Script/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
-# 青少年模式弹窗
 移除青少年模式弹窗 = type=http-response, pattern=^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.huluwa\.dispatcher\.youthmode\.config2, script-path=https://kelee.one/Resource/Script/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
-# 搜索列表
 移除搜索列表推广 = type=http-response, pattern=^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.soku\.yksearch, script-path=https://kelee.one/Resource/Script/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
-# 热剧弹窗
 移除热剧弹窗 = type=http-response, pattern=^https:\/\/push\.m\.youku\.com\/collect-api\/get_push_interval_config_wx\?, script-path=https://kelee.one/Resource/Script/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
-# 开屏广告
 移除开屏广告 = type=http-response, pattern=^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get, script-path=https://kelee.one/Resource/Script/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
 
 
 [MITM]
-hostname = %APPEND% acs.youku.com, push.m.youku.com, un-acs.youku.com, -i.vip.iqiyi.com, *.iqiyi.com, vv.video.qq.com, *.mgtv.com
+hostname = %APPEND% acs.youku.com, push.m.youku.com, un-acs.youku.com, -i.vip.iqiyi.com, *.iqiyi.com, vv.video.qq.com, *.mgtv.com, api.ys7.com, i.ys7.com, app-v1.ecoliving168.com, 852b95d36.xwlpk.cn, api.cc.163.com, cc.163.com, mshare.cc.163.com, appapi.cc.163.com
+
