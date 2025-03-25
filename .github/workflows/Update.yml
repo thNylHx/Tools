@@ -6,7 +6,7 @@ on:
     - cron: '0 16,22,4,10 * * *'  # 注：以上时间均为上海时间（0:00、6:00、12:00、18:00 执行）
 
 jobs:
-  SyncUpstreamRules:
+  Update:
     runs-on: ubuntu-latest
     env:
       TZ: 'Asia/Shanghai'
@@ -20,22 +20,24 @@ jobs:
       - name: 下载 Surge 规则  # 下载并合并 Surge 规则文件
         shell: bash
         run: |
-          # 开启严格模式，遇到错误立即退出
           set -euo pipefail
+          echo "开始下载 Surge 规则文件..."
           repo_name=$(basename "$GITHUB_REPOSITORY")
           if [[ "$repo_name" != "Tools" ]]; then
               echo "当前仓库不是 Tools，跳过执行。"
               exit 0
           fi
           echo "在 Tools 仓库中运行任务"
+
           # 创建规则目录
-          mkdir -p Tools-repo/Ruleset/Surge/{Block,Media,Other} Tools-repo/Ruleset/mihomo/Block
+          echo "创建规则目录..."
+          mkdir -p "Tools-repo/Ruleset/Surge/Block" "Tools-repo/Ruleset/Surge/Media" "Tools-repo/Ruleset/Surge/Other" "Tools-repo/Ruleset/mihomo/Block"
 
           # 定义下载函数：参数1为目标文件，其余参数为 URL 列表
           download_urls() {
             local target_file="$1"
             shift
-            # 清空目标文件内容
+            echo "清空目标文件：$target_file"
             : > "$target_file"
             for url in "$@"; do
               echo "下载 URL：$url"
@@ -44,7 +46,7 @@ jobs:
             done
           }
 
-          # 合并 广告规则
+          # 合并 广告 规则
           download_urls "Tools-repo/Ruleset/Surge/Block/Ads_Block.list" \
             "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list" \
             "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list" \
@@ -57,44 +59,44 @@ jobs:
           # 同步广告规则到 mihomo 目录
           cp Tools-repo/Ruleset/Surge/Block/Ads_Block.list Tools-repo/Ruleset/mihomo/Block/Ads_Block.list
 
-          # 合并 脸书规则
+          # 合并 脸书 规则
           download_urls "Tools-repo/Ruleset/Surge/Media/Facebook.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
 
-          # 合并 奈飞规则
+          # 合并 奈飞 规则
           download_urls "Tools-repo/Ruleset/Surge/Media/Netflix.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
 
-          # 合并 推特规则
+          # 合并 推特 规则
           download_urls "Tools-repo/Ruleset/Surge/Media/Twitter.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
 
-          # 合并 油管规则
+          # 合并 油管 规则
           download_urls "Tools-repo/Ruleset/Surge/Media/YouTube.list" \
             "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
 
-          # 合并 谷歌规则
+          # 合并 谷歌 规则
           download_urls "Tools-repo/Ruleset/Surge/Other/Google.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
 
-          # 合并 海外规则
+          # 合并 海外 规则
           download_urls "Tools-repo/Ruleset/Surge/Other/Global.list" \
             "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list" \
             "https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/ruleset/gfw.txt" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
 
-          # 合并 游戏规则
+          # 合并 游戏 规则
           download_urls "Tools-repo/Ruleset/Surge/Other/Game.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.list"
 
-          # 下载其他单独规则文件（示例部分，可按需求补充完整）
+          # 下载其他单独规则文件
           files=(
             ##### Ads #####
             # MetaCubeX
@@ -209,14 +211,10 @@ jobs:
                 s/^([^#])/DOMAIN,\1/
               ' "$file"
               # 删除注释、空行及行内注释内容
-              sed -i -E '
-                /^\s*[#;]/d;
-                /^\s*\/\//d;
-                /^$/d;
-                s| //.*||
-              ' "$file"
-              # 删除指定的规则及 ",reject" 后缀内容
+              sed -i -E '/^\s*[#;]/d; /^\s*\/\//d; /^$/d; s| //.*||' "$file"
+              # 删除指定域名
               sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
+              # 删除指定的规则及 ",reject" 及其后缀内容
               sed -i -E 's/,reject(,[^,]+)*$//I' "$file"
               # 格式化逗号分隔符
               sed -i 's/, */,/g' "$file"
@@ -399,9 +397,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          echo "检查仓库更新状态..."
           cd "${{ github.workspace }}/Tools-repo"
           git pull --rebase --autostash origin main
           if [[ -n $(git status --porcelain) ]]; then
+            echo "检测到变更，开始提交更新..."
             git pull --rebase --autostash origin main
             git config --local user.name "GitHub Actions"
             git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -426,7 +426,7 @@ jobs:
             📢 通知
             🚀 来源：GitHub Actions
             ✉️ 标题：同步上游规则和模块
-            📦 仓库：JK567
+            📦 仓库：JK_567
             ⏰ 时间：${{ env.time }}
             🎉 状态：全部任务成功执行
 
@@ -434,4 +434,5 @@ jobs:
         uses: Mattraks/delete-workflow-runs@main
         with:
           retain_days: 0
-          keep_minimum_runs: 5
+          keep_minimum_runs: 2
+          
