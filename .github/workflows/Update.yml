@@ -254,7 +254,7 @@ jobs:
                                    { print "15 " $0; next }
               ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
               # 为 CIDR 规则添加 "no-resolve" 后缀，但跳过 China_ip.list
-              if [[ $(basename "$file") == "China_ip.list" ]]; then
+              if [[ $(basename "$file") == "China_ip.list" || $(basename "$file") == "Ads_Block.sgmodule" ]]; then
                   echo "Skipping $file for no-resolve addition"
               else
                   awk '/^(IP-CIDR,|IP-CIDR6,|IP-ASN,)/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile && mv tmpfile "$file"
@@ -293,19 +293,37 @@ jobs:
           shopt -s globstar
           for file in Tools-repo/Surge/Module/Ads_Block.sgmodule; do
             if [[ -f "$file" ]]; then
-              file_names=$(basename "$file" .list)
               line_count=$(wc -l < "$file")
-              # 在第一行添加规则名称
-              awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
-              # 在第二行添加规则统计信息
-              awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
-              # 在第二行后插入空行
-              sed -i '2a\\' "$file"
-              # 
-              sed -i '2a\\' "$file"
+              {
+                # 添加表头信息
+                echo "#!name = Block ads | 自用广告拦截规则合集"
+                echo "#!desc = 名称： 自用广告拦截规则合集"
+                echo "#!author = RuCu6 Keywos fmz200 可莉🅥 QingRex"
+                echo "#!category = 🚫 Block ads"
+                echo "#!tag = 广告拦截规则合集"
+                echo "# 规则统计: $line_count"
+                echo ""             # 空行
+                echo "[Rule]"       # 在空行下插入 [Rule]
+                # 处理原有规则并转换格式
+                awk -F, '{
+                  rule = $1
+                  if(rule=="DOMAIN-KEYWORD" || rule=="DOMAIN-SUFFIX" || rule=="DOMAIN"){
+                    print $0",REJECT,extended-matching,pre-matching"
+                  } else if(rule=="URL-REGEX"){
+                    print $0",REJECT,extended-matching"
+                  } else if(rule=="AND"){
+                    print $0",REJECT,pre-matching"
+                  } else if(rule=="IP-CIDR"){
+                    print $0",REJECT,no-resolve,pre-matching"
+                  } else {
+                    print $0
+                  }
+                }' "$file"
+              } > tmpfile && mv tmpfile "$file"
+              echo "已更新文件：$file"
             else
               echo "文件不存在：$file"
-            fi
+              fi
           done
 
       - name: 下载 mihomo 规则  # 下载并保存 mihomo 规则文件
