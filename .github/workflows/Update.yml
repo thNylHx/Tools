@@ -309,11 +309,11 @@ jobs:
                   rule = $1
                   if(rule=="DOMAIN-KEYWORD" || rule=="DOMAIN-SUFFIX" || rule=="DOMAIN"){
                     print $0",REJECT,extended-matching,pre-matching"
-                  } else if(rule=="URL-REGEX"){
+                  } else if(rule=="URL-REGEX" || rule=="USER-AGENT"){
                     print $0",REJECT,extended-matching"
                   } else if(rule=="AND"){
                     print $0",REJECT,pre-matching"
-                  } else if(rule=="IP-CIDR"){
+                  } else if(rule=="IP-CIDR" || rule=="IP-CIDR6"){
                     print $0",REJECT,no-resolve,pre-matching"
                   } else {
                     print $0
