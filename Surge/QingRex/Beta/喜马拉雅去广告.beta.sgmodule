@@ -7,10 +7,11 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-12-02 16:37:35
+#!date=2025-03-26 12:10:14
 
 [Rule]
 DOMAIN,adse.ximalaya.com,REJECT,extended-matching,pre-matching
+DOMAIN,adsehera.ximalaya.com,REJECT,extended-matching,pre-matching
 DOMAIN,adse.wsa.ximalaya.com,REJECT,extended-matching,pre-matching
 DOMAIN,adbehavior.ximalaya.com,REJECT,extended-matching,pre-matching
 DOMAIN,adbehavior.wsa.ximalaya.com,REJECT,extended-matching,pre-matching
