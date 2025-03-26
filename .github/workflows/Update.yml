@@ -195,7 +195,7 @@ jobs:
         run: |
           set -euo pipefail
           shopt -s globstar
-          for file in Tools-repo/Ruleset/Surge/**/*.list Tools-repo/Ruleset/mihomo/Block/*.list; do
+          for file in Tools-repo/Ruleset/Surge/**/*.list Tools-repo/Ruleset/mihomo/Block/*.list Tools-repo/Surge/Module/Ads_Block.sgmodule; do
             if [[ -f "$file" ]]; then
               # 删除以 "DOMAIN-REGEX," 开头的行
               sed -i '/^DOMAIN-REGEX,/d' "$file"
@@ -229,7 +229,7 @@ jobs:
         run: |
           set -euo pipefail
           shopt -s globstar
-          for file in Tools-repo/Ruleset/Surge/**/*.list Tools-repo/Ruleset/mihomo/Block/*.list; do
+          for file in Tools-repo/Ruleset/Surge/**/*.list Tools-repo/Ruleset/mihomo/Block/*.list Tools-repo/Surge/Module/Ads_Block.sgmodule; do
             if [[ -f "$file" ]]; then
               # 为 IPv4 和 IPv6 CIDR 规则添加前缀
               sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^/IP-CIDR,/}' "$file"
@@ -280,6 +280,28 @@ jobs:
               # 在第二行添加规则统计信息
               awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
               # 在第二行后插入空行
+              sed -i '2a\\' "$file"
+            else
+              echo "文件不存在：$file"
+            fi
+          done
+
+      - name: 处理 Surge 模块  # 添加规则名称和统计信息到文件头
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s globstar
+          for file in Tools-repo/Surge/Module/Ads_Block.sgmodule; do
+            if [[ -f "$file" ]]; then
+              file_names=$(basename "$file" .list)
+              line_count=$(wc -l < "$file")
+              # 在第一行添加规则名称
+              awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在第二行添加规则统计信息
+              awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在第二行后插入空行
+              sed -i '2a\\' "$file"
+              # 
               sed -i '2a\\' "$file"
             else
               echo "文件不存在：$file"
