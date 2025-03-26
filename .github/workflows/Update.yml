@@ -31,8 +31,8 @@ jobs:
 
           # 创建规则目录
           echo "创建规则目录..."
-          mkdir -p "Tools-repo/Ruleset/Surge/Block" "Tools-repo/Ruleset/Surge/Media" "Tools-repo/Ruleset/Surge/Other" "Tools-repo/Ruleset/mihomo/Block"
-
+          mkdir -p "Tools-repo/Ruleset/Surge/{Block,Media,Other}"  "Tools-repo/Ruleset/mihomo/Block" "Tools-repo/Surge/Module"
+          
           # 定义下载函数：参数1为目标文件，其余参数为 URL 列表
           download_urls() {
             local target_file="$1"
@@ -58,6 +58,7 @@ jobs:
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
           # 同步广告规则到 mihomo 目录
           cp Tools-repo/Ruleset/Surge/Block/Ads_Block.list Tools-repo/Ruleset/mihomo/Block/Ads_Block.list
+          cp Tools-repo/Ruleset/Surge/Block/Ads_Block.list Tools-repo/Surge/Module/Ads_Block.sgmodule
 
           # 合并 脸书 规则
           download_urls "Tools-repo/Ruleset/Surge/Media/Facebook.list" \
