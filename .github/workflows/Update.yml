@@ -229,7 +229,7 @@ jobs:
         run: |
           set -euo pipefail
           shopt -s globstar
-          for file in Tools-repo/Ruleset/Surge/**/*.list Tools-repo/Ruleset/mihomo/Block/*.list; do
+          for file in Tools-repo/Ruleset/Surge/**/*.list Tools-repo/Ruleset/mihomo/Block/*.list Tools-repo/Surge/Module/Ads_Block.sgmodule; do
             if [[ -f "$file" ]]; then
               # 为 IPv4 和 IPv6 CIDR 规则添加前缀
               sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^/IP-CIDR,/}' "$file"
@@ -254,7 +254,7 @@ jobs:
                                    { print "15 " $0; next }
               ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
               # 为 CIDR 规则添加 "no-resolve" 后缀，但跳过 China_ip.list
-              if [[ $(basename "$file") == "China_ip.list" ]]; then
+              if [[ $(basename "$file") == "China_ip.list" || $(basename "$file") == "Ads_Block.sgmodule" ]]; then
                   echo "Skipping $file for no-resolve addition"
               else
                   awk '/^(IP-CIDR,|IP-CIDR6,|IP-ASN,)/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile && mv tmpfile "$file"
