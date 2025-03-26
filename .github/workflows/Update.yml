@@ -307,7 +307,8 @@ jobs:
                 # 处理原有规则并转换格式
                 awk -F, '{
                   rule = $1
-                  if ($0 ~ /^AND,\(\(IP-CIDR,/){
+                  # 排除 AND,((IP-CIDR, 和 AND,((IP-CIDR6, 行
+                  if ($0 ~ /^AND,\(\(IP-CIDR,/ || $0 ~ /^AND,\(\(IP-CIDR6,/){
                     print $0
                     next
                   }
