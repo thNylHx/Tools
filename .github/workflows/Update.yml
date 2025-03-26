@@ -307,6 +307,12 @@ jobs:
                 # 处理原有规则并转换格式
                 awk -F, '{
                   rule = $1
+                  # 先去掉 IP-CIDR 和 IP-CIDR6 中的 ",no-resolve"
+                  sub(/,no-resolve/, "", $0)
+                  # if (rule == "IP-CIDR" || rule == "IP-CIDR6") {
+                  #     sub(/,no-resolve$/, "", $0)
+                  # }
+                  # 现在为不同规则添加对应后缀
                   if(rule=="DOMAIN-KEYWORD" || rule=="DOMAIN-SUFFIX" || rule=="DOMAIN"){
                     print $0",REJECT,extended-matching,pre-matching"
                   } else if(rule=="URL-REGEX" || rule=="USER-AGENT"){
