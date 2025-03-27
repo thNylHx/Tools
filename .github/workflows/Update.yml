@@ -287,7 +287,6 @@ jobs:
                 # 在第三行后插入空行
                 sed -i '3a\\' "$file"  # 在时间戳后插入空行
               fi
-              original_content=$(tail -n +5 "$file")
               new_content=$(tail -n +5 "$file")
               if [[ "$original_content" != "$new_content" ]]; then
                 current_time=$(date "+%Y-%m-%d %H:%M:%S")
