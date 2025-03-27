@@ -467,11 +467,11 @@ jobs:
         run: |
           set -euo pipefail
           echo "更新文件头中的日期字段..."
-          modified_files=$(git diff --name-only --diff-filter=M)
+          modified_files=$(git ls-files -m)
           for file in $modified_files; do
-              if [ -f "$file" ] && grep -q "^# 规则统计: " "$file"; then
+              if [ -f "$file" ] && grep -q "^# 更新时间: " "$file"; then
                   # 更新文件中现有的 #!date 字段
-                  sed -i "s/^# 规则统计: .*/# 规则统计: $(date +'%Y-%m-%d %H:%M:%S')/" "$file"
+                  sed -i "s/^# 更新时间: .*/# 更新时间: $(date +'%Y-%m-%d %H:%M:%S')/" "$file"
                   echo "已更新文件 $file 的日期字段"
               fi
           done
