@@ -306,12 +306,16 @@ jobs:
           set -euo pipefail
           shopt -s globstar
           for file in Tools-repo/Surge/Module/Ads_Block.sgmodule; do
-            if [[ -f "$file" ]]; then
+              if [[ -f "$file" ]]; then
+              # 获取当前规则数量
               line_count=$(wc -l < "$file")
+              # 获取文件的最后修改时间
               last_mod_time=$(stat -c %Y "$file")
+              # 获取当前推送时间
               update_time=$(date "+%Y-%m-%d %H:%M:%S")
               # 创建临时文件用于存储更新后的内容
-              tmpfile=$(mktemp)
+                tmpfile=$(mktemp)
+              # 处理原有规则并转换格式
               {
                 # 添加表头信息
                 echo "#!name = Block ads | 自用广告拦截规则合集"
@@ -323,7 +327,7 @@ jobs:
                 echo "#!date = $update_time"
                 echo ""             # 空行
                 echo "[Rule]"       # 在空行下插入 [Rule]
-                # 处理原有规则并转换格式
+                # 处理每一行规则并转换格式
                 awk -F, '{
                   rule = $1
                   # 排除 AND,((IP-CIDR, 和 AND,((IP-CIDR6, 行
@@ -344,15 +348,13 @@ jobs:
                     print $0",REJECT,no-resolve,pre-matching"
                   } else {
                     print $0
-                    print $0
                   }
                 }' "$file"
               } > "$tmpfile"
-        
               # 比较原文件和更新后的临时文件内容
               if ! diff "$file" "$tmpfile" > /dev/null; then
-                mv "$tmpfile" "$file"  # 如果文件内容有变更，替换原文件
-                echo "已更新文件：$file"
+                mv "$tmpfile" "$file"  # 如果文件内容有变化，替换原文件
+                echo "文件已更新：$file"
               else
                 rm "$tmpfile"  # 如果没有变化，删除临时文件
                 echo "文件未更新，保留原时间：$file"
