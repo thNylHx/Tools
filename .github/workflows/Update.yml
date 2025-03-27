@@ -282,6 +282,13 @@ jobs:
               awk -v count="$line_count" 'NR==3 {print "# 更新时间: " } {print}' "$file" > tmpfile && mv tmpfile "$file"
               # 在第二行后插入空行
               sed -i '3a\\' "$file"
+              original_content=$(tail -n +5 "$file")
+              sed -i '4a\\' "$file"  # 在时间戳后插入空行
+              new_content=$(tail -n +5 "$file")
+              if [[ "$original_content" != "$new_content" ]]; then
+                current_time=$(date "+%Y-%m-%d %H:%M:%S")
+                sed -i "1s|^# 更新时间: .*|# 更新时间: $current_time|" "$file"
+              fi
             else
               echo "文件不存在：$file"
             fi
@@ -461,20 +468,6 @@ jobs:
           else
             echo "没有变更，无需同步。"
           fi
-
-      - name: 更新文件头日期字段
-        shell: bash
-        run: |
-          set -euo pipefail
-          echo "更新文件头中的日期字段..."
-          modified_files=$(git ls-files -m)
-          for file in $modified_files; do
-              if [ -f "$file" ] && grep -q "^# 更新时间: " "$file"; then
-                  # 更新文件中现有的 #!date 字段
-                  sed -i "s/^# 更新时间: .*/# 更新时间: $(date +'%Y-%m-%d %H:%M:%S')/" "$file"
-                  echo "已更新文件 $file 的日期字段"
-              fi
-          done
 
       - name: 设置当前时间变量  # 保存当前时间到环境变量中
         shell: bash
