@@ -282,7 +282,7 @@ jobs:
               # 获取当前推送时间
               update_time=$(date "+%Y-%m-%d %H:%M:%S")
               # 创建临时文件用于存储更新后的内容
-                tmpfile=$(mktemp)
+              tmpfile=$(mktemp)
               # 处理原有规则并转换格式
               {
                 # 添加表头信息
@@ -447,14 +447,16 @@ jobs:
               sed -i -e '/^URL-REGEX/d' "$file"
               sed -i -e '/^AND,((IP-CIDR/d' "$file"
               sed -i -e '/^AND,((URL-REGEX/d' "$file"
+              # 获取当前规则名称
               file_names=$(basename "$file" .list)
+              # 获取当前规则数量
               line_count=$(wc -l < "$file")
               # 获取文件的最后修改时间
               last_mod_time=$(stat -c %Y "$file")
               # 获取当前推送时间
               update_time=$(date "+%Y-%m-%d %H:%M:%S")
               # 创建临时文件用于存储更新后的内容
-                tmpfile=$(mktemp)
+              tmpfile=$(mktemp)
               # 处理原有规则并转换格式
               {
                 # 添加表头信息
