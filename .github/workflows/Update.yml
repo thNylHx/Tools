@@ -285,9 +285,9 @@ jobs:
                 sed -i '3a\\' "$file"  # 在时间戳后插入空行
               fi
               # 获取文件的原始内容（从第四行开始为规则内容）
-              original_content=$(tail -n +3 "$file")
+              original_content=$(tail -n +5 "$file")
               # 获取当前文件的最新规则内容
-              new_content=$(tail -n +3 "$file")
+              new_content=$(tail -n +5 "$file")
               # 如果规则内容发生了变化，则更新时间戳
               if [[ "$original_content" != "$new_content" ]]; then
                 current_time=$(date "+%Y-%m-%d %H:%M:%S")
