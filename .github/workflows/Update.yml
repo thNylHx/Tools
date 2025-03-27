@@ -271,7 +271,7 @@ jobs:
         run: |
           set -euo pipefail
           shopt -s globstar
-          for file in Tools-repo/Surge/Module/Ads_Block.sgmodule; do
+          for file in Tools-repo/Ruleset/Surge/**/*.list; do
               if [[ -f "$file" ]]; then
               # 获取当前规则数量
               line_count=$(wc -l < "$file")
@@ -311,7 +311,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          shopt -s globstar
           for file in Tools-repo/Surge/Module/Ads_Block.sgmodule; do
               if [[ -f "$file" ]]; then
               # 获取当前规则数量
