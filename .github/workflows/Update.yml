@@ -290,10 +290,13 @@ jobs:
               fi
               # 统计规则部分的行数
               line_count=$(echo "$rules_original" | wc -l)
+              # 当前时间
               current_time=$(date "+%Y-%m-%d %H:%M:%S")
               update_needed=false
               if $header_exists; then
+                # 获取文件的修改时间（精确到秒）
                 file_mtime=$(stat -c "%y" "$file" | cut -d'.' -f1)
+                # 如果文件修改时间和 header 中的日期不一致，则说明规则部分有更新
                 if [[ "$file_mtime" != "$old_date" ]]; then
                   update_needed=true
                 fi
@@ -302,12 +305,14 @@ jobs:
               update_needed=true
               fi
               if $update_needed; then
+                # 构造新的 header，刷新日期和统计信息
                 new_header=$(printf "#!name = %s\n#!count = %s\n#!date = %s\n\n" "$file_names" "$line_count" "$current_time")
                 {
                   echo "$new_header"
                   echo ""
                   echo "$rules_original"
                 } > "$file"
+                # 同步更新文件修改时间
                 touch -m -d "$current_time" "$file"
                 echo "文件已更新：$file"
               else
@@ -324,28 +329,38 @@ jobs:
           set -euo pipefail
           for file in Tools-repo/Surge/Module/Ads_Block.sgmodule; do
             if [[ -f "$file" ]]; then
-              # 提取原文件中的规则部分（从 [Rule] 开始）
-              rules_original=$(mktemp)
-              awk '/^\[Rule\]/{flag=1; print; next} flag' "$file" > "$rules_original"
-              # 计算当前规则数量
-              line_count=$(wc -l < "$rules_original")
-              # 获取当前推送时间（用于新的 header）
-              update_time=$(date "+%Y-%m-%d %H:%M:%S")
-              # 构造新文件内容：新的 header + 处理后的规则部分
-              tmpfile=$(mktemp)
-              {
-                # 添加 header
-                echo "#!name = Block ads | 自用广告拦截规则合集"
-                echo "#!desc = 名称： 自用广告拦截规则合集"
-                echo "#!author = RuCu6 Keywos fmz200 可莉🅥 QingRex"
-                echo "#!category = 🚫 Block ads"
-                echo "#!tag = 广告拦截规则合集"
-                echo "#!count = $line_count"
-                echo "#!date = $update_time"
-                echo ""            # 空行
-                # 添加 [Rule] 部分
-                echo "[Rule]"
+              # 判断文件是否已经有 header（第一行以 "#!name" 开头）
+              if [[ $(head -n1 "$file") == "#!name"* ]]; then
+                header_exists=true
+                # 提取 header（直到第一空行为止）
+                header=$(sed '/^$/q' "$file")
+                # 提取 header 后的规则部分
+                rules_original=$(sed '1,/^$/d' "$file")
+                # 从 header 中获取旧的日期
+                old_date=$(echo "$header" | grep '^#!date' | cut -d'=' -f2- | xargs)
+              else
+                header_exists=false
+                rules_original=$(cat "$file")
+              fi
+              # 统计规则部分的行数
+              line_count=$(echo "$rules_original" | wc -l)
+              # 当前时间
+              current_time=$(date "+%Y-%m-%d %H:%M:%S")
+              update_needed=false
+              if $header_exists; then
+                # 获取文件的修改时间（精确到秒）
+                file_mtime=$(stat -c "%y" "$file" | cut -d'.' -f1)
+                # 如果文件修改时间和 header 中的日期不一致，则说明规则部分有更新
+                if [[ "$file_mtime" != "$old_date" ]]; then
+                  update_needed=true
+                fi
+              else
+              # 文件没有 header，则需要添加 header
+              update_needed=true
+              fi
+              if $update_needed; then
                 # 处理规则部分
+                tmpfile=$(mktemp)
                 awk -F, '{
                   rule = $1
                   if ($0 ~ /^AND,\(\(IP-CIDR,/ || $0 ~ /^AND,\(\(IP-CIDR6,/) {
@@ -362,23 +377,29 @@ jobs:
                     print $0",REJECT,no-resolve,pre-matching"
                   } else {
                     print $0
-                  }
-                }' "$rules_original"
-              } > "$tmpfile"
-              # 从新文件中提取规则部分
-              rules_new=$(mktemp)
-              awk '/^\[Rule\]/{flag=1; print; next} flag' "$tmpfile" > "$rules_new"
-              # 仅比较规则部分
-              if diff "$rules_original" "$rules_new" > /dev/null; then
-                # 规则部分没有变化，不更新文件
-                rm "$tmpfile" "$rules_original" "$rules_new"
-                echo "文件未更新，保留原时间：$file"
-              else
-                # 规则部分有变化，更新整个文件
-                mv "$tmpfile" "$file"
-                touch -m -d "$update_time" "$file"
+                }' <<< "$rules_original" > "$tmpfile"
+                # 构造新的 header，刷新日期和统计信息
+                new_header=$(cat <<EOF
+                #!name = Block ads | 自用广告拦截规则合集
+                #!category = 🚫 Block ads
+                #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
+                #!desc = 名称: 自用广告拦截规则合集
+                #!tag = 广告拦截规则合集
+                #!count = $line_count
+                #!date = $current_time
+                
+                [Rule]
+                EOF
+                )
+                {
+                  echo "$new_header"
+                  echo "$rules_original"
+                } > "$file"
+                # 同步更新文件修改时间
+                touch -m -d "$current_time" "$file"
                 echo "文件已更新：$file"
-                rm "$rules_original" "$rules_new"
+              else
+                echo "规则无变动，保留原时间：$file"
               fi
             else
               echo "文件不存在：$file"
@@ -470,10 +491,13 @@ jobs:
               fi
               # 统计规则部分的行数
               line_count=$(echo "$rules_original" | wc -l)
+              # 当前时间
               current_time=$(date "+%Y-%m-%d %H:%M:%S")
               update_needed=false
               if $header_exists; then
+                # 获取文件的修改时间（精确到秒）
                 file_mtime=$(stat -c "%y" "$file" | cut -d'.' -f1)
+                # 如果文件修改时间和 header 中的日期不一致，则说明规则部分有更新
                 if [[ "$file_mtime" != "$old_date" ]]; then
                   update_needed=true
                 fi
@@ -482,12 +506,14 @@ jobs:
               update_needed=true
               fi
               if $update_needed; then
+                # 构造新的 header，刷新日期和统计信息
                 new_header=$(printf "#!name = %s\n#!count = %s\n#!date = %s\n\n" "$file_names" "$line_count" "$current_time")
                 {
                   echo "$new_header"
                   echo ""
                   echo "$rules_original"
                 } > "$file"
+                # 同步更新文件修改时间
                 touch -m -d "$current_time" "$file"
                 echo "文件已更新：$file"
               else
