@@ -365,7 +365,8 @@ jobs:
                 awk -F, '{
                   rule = $1
                   if ($0 ~ /^AND,\(\(IP-CIDR,/ || $0 ~ /^AND,\(\(IP-CIDR6,/) {
-                    print $0; next
+                    print $0
+                    next
                   }
                   sub(/,no-resolve/, "", $0)
                   if (rule=="DOMAIN-KEYWORD" || rule=="DOMAIN-SUFFIX" || rule=="DOMAIN") {
@@ -378,6 +379,7 @@ jobs:
                     print $0",REJECT,no-resolve,pre-matching"
                   } else {
                     print $0
+                  }
                 }' <<< "$rules_original" > "$tmpfile"
                 # 构造新的 header，刷新日期和统计信息
                 {
