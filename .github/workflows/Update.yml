@@ -419,7 +419,7 @@ jobs:
               awk -v count="$line_count" 'NR==2 {print "#!count = " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
               # 在第三行添加规则更新时间
               awk -v time="$update_time" 'NR==3 {print "#!date = " time} {print}' "$file" > tmpfile && mv tmpfile "$file"
-              # 在第二行后插入空行
+              # 在第三行后插入空行
               sed -i '3a\\' "$file"
             else
               echo "文件不存在：$file"
