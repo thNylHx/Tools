@@ -275,24 +275,12 @@ jobs:
             if [[ -f "$file" ]]; then
               file_names=$(basename "$file" .list)
               line_count=$(wc -l < "$file")
-              current_time=$(date "+%Y-%m-%d %H:%M:%S")
-              # 检查文件是否已包含规则名称、规则统计和更新时间戳
-              if ! grep -q "^# 规则名称:" "$file"; then
-                # 如果没有表头，首先添加规则名称、规则统计和时间戳
-                awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
-                awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
-                sed -i "3s|^|# 更新时间: $current_time\n|" "$file"  # 在第三行添加时间戳
-                sed -i '3a\\' "$file"  # 在时间戳后插入空行
-              fi
-              # 获取文件的原始内容（从第四行开始为规则内容）
-              original_content=$(tail -n +5 "$file")
-              # 获取当前文件的最新规则内容
-              new_content=$(tail -n +5 "$file")
-              # 如果规则内容发生了变化，则更新时间戳
-              if [[ "$original_content" != "$new_content" ]]; then
-                current_time=$(date "+%Y-%m-%d %H:%M:%S")
-                sed -i "3s|^# 更新时间: .*|# 更新时间: $current_time|" "$file"  # 更新第三行的时间戳
-              fi
+              # 在文件头添加规则名称
+              awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在文件头添加规则统计信息
+              awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在第二行后插入空行
+              sed -i '2a\\' "$file"
             else
               echo "文件不存在：$file"
             fi
