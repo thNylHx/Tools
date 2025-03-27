@@ -276,20 +276,22 @@ jobs:
               file_names=$(basename "$file" .list)
               line_count=$(wc -l < "$file")
               current_time=$(date "+%Y-%m-%d %H:%M:%S")
+              original_content=$(tail -n +5 "$file")
               if ! grep -q "^# 更新时间:" "$file"; then
                 # 在文件头添加规则名称
                 awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
                 # 在文件头添加规则统计信息
                 awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
-                sed -i "3s|^|# 更新时间: $current_time\n|" "$file"
+                # 在文件头添加规则更新时间
+                sed -i "3s|^|# 更新时间: $current_time\n|" "$file"  # 将时间戳添加到第三行
                 # 在第三行后插入空行
-                sed -i '4a\\' "$file"  # 在时间戳后插入空行
+                sed -i '3a\\' "$file"  # 在时间戳后插入空行
               fi
               original_content=$(tail -n +5 "$file")
               new_content=$(tail -n +5 "$file")
               if [[ "$original_content" != "$new_content" ]]; then
                 current_time=$(date "+%Y-%m-%d %H:%M:%S")
-                sed -i "1s|^# 更新时间: .*|# 更新时间: $current_time|" "$file"
+                sed -i "3s|^# 更新时间: .*|# 更新时间: $current_time|" "$file"  # 更新第三行的时间戳
               fi
             else
               echo "文件不存在：$file"
