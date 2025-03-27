@@ -302,9 +302,10 @@ jobs:
               update_needed=true
               fi
               if $update_needed; then
-                new_header=$(printf "#!name = %s\n#!count = %s\n#!date = %s\n\n\n" "$file_names" "$line_count" "$current_time")
+                new_header=$(printf "#!name = %s\n#!count = %s\n#!date = %s\n\n" "$file_names" "$line_count" "$current_time")
                 {
                   echo "$new_header"
+                  echo ""
                   echo "$rules_original"
                 } > "$file"
                 touch -m -d "$current_time" "$file"
@@ -481,9 +482,10 @@ jobs:
               update_needed=true
               fi
               if $update_needed; then
-                new_header=$(printf "#!name = %s\n#!count = %s\n#!date = %s\n\n\n" "$file_names" "$line_count" "$current_time")
+                new_header=$(printf "#!name = %s\n#!count = %s\n#!date = %s\n\n" "$file_names" "$line_count" "$current_time")
                 {
                   echo "$new_header"
+                  echo ""
                   echo "$rules_original"
                 } > "$file"
                 touch -m -d "$current_time" "$file"
