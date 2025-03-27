@@ -275,16 +275,15 @@ jobs:
             if [[ -f "$file" ]]; then
               file_names=$(basename "$file" .list)
               line_count=$(wc -l < "$file")
-              original_content=$(grep -v "^# 更新时间: " "$file")
+              original_content=$(tail -n +3 "$file")
               # 在第一行添加规则名称
               awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
               # 在第二行添加规则统计信息
               awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
-              awk -v count="$line_count" 'NR==3 {print "# 更新时间: " } {print}' "$file" > tmpfile && mv tmpfile "$file"
               # 在第二行后插入空行
               sed -i '3a\\' "$file"
               # 获取修改后的内容
-              new_content=$(grep -v "^# 更新时间: " "$file")
+              new_content=$(tail -n +3 "$file")
               # 如果文件内容发生了变化，则更新时间戳
               if [[ "$original_content" != "$new_content" ]]; then
                 current_time=$(date "+%Y-%m-%d %H:%M:%S")
