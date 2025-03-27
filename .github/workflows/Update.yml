@@ -307,7 +307,7 @@ jobs:
                 sed -i "s/^#!date = .*/#!date = $update_time/" "$file"
                 echo "文件已更新：$file"
               else
-                # 如果没有变化，删除临时文件，保持原时间戳
+                # 如果没有变化，保持原时间戳，并删除临时文件
                 rm "$tmpfile"
                 rm "$tmpfile_no_date"
                 rm "$tmpfile_with_no_date"
@@ -382,7 +382,7 @@ jobs:
                 sed -i "s/^#!date = .*/#!date = $update_time/" "$file"
                 echo "文件已更新：$file"
               else
-                # 如果没有变化，删除临时文件，保持原时间戳
+                # 如果没有变化，保持原时间戳，并删除临时文件
                 rm "$tmpfile"
                 rm "$tmpfile_no_date"
                 rm "$tmpfile_with_no_date"
@@ -495,7 +495,7 @@ jobs:
                 sed -i "s/^#!date = .*/#!date = $update_time/" "$file"
                 echo "文件已更新：$file"
               else
-                # 如果没有变化，删除临时文件，保持原时间戳
+                # 如果没有变化，保持原时间戳，并删除临时文件
                 rm "$tmpfile"
                 rm "$tmpfile_no_date"
                 rm "$tmpfile_with_no_date"
