@@ -3,10 +3,11 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 广告拦截规则合集
-# 规则统计: 4247
+# 规则统计: 4248
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
+DOMAIN,180.76.76.200,REJECT,extended-matching,pre-matching
 DOMAIN,4lke.online,REJECT,extended-matching,pre-matching
 DOMAIN,643108e7617ef.cdn.sohucs.com,REJECT,extended-matching,pre-matching
 DOMAIN,a-remad.qm989.com,REJECT,extended-matching,pre-matching
