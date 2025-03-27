@@ -316,7 +316,7 @@ jobs:
         run: |
           set -euo pipefail
           for file in Tools-repo/Surge/Module/Ads_Block.sgmodule; do
-              if [[ -f "$file" ]]; then
+            if [[ -f "$file" ]]; then
               # 提取原文件中的规则部分（假设头部为连续若干行以 "#!" 开头，直到第一空行）
               rules_original=$(mktemp)
               sed '1,/^$/d' "$file" > "$rules_original"
@@ -324,7 +324,7 @@ jobs:
               line_count=$(wc -l < "$rules_original")
               # 获取当前推送时间（用于新 header）
               update_time=$(date "+%Y-%m-%d %H:%M:%S")
-              # 构造新文件内容：新 header + 原规则部分
+              # 构造新文件内容：新 header + 处理后的规则部分
               tmpfile=$(mktemp)
               {
                 # 添加表头信息
@@ -340,26 +340,23 @@ jobs:
                 # 处理每一行规则并转换格式
                 awk -F, '{
                   rule = $1
-                  # 排除 AND,((IP-CIDR, 和 AND,((IP-CIDR6, 行
-                  if ($0 ~ /^AND,\(\(IP-CIDR,/ || $0 ~ /^AND,\(\(IP-CIDR6,/){
+                  if ($0 ~ /^AND,\(\(IP-CIDR,/ || $0 ~ /^AND,\(\(IP-CIDR6,/) {
                     print $0
                     next
                   }
-                  # 先去掉 IP-CIDR 和 IP-CIDR6 中的 ",no-resolve"
                   sub(/,no-resolve/, "", $0)
-                  # 现在为不同规则添加对应后缀
-                  if(rule=="DOMAIN-KEYWORD" || rule=="DOMAIN-SUFFIX" || rule=="DOMAIN"){
+                  if (rule=="DOMAIN-KEYWORD" || rule=="DOMAIN-SUFFIX" || rule=="DOMAIN") {
                     print $0",REJECT,extended-matching,pre-matching"
-                  } else if(rule=="URL-REGEX" || rule=="USER-AGENT"){
+                  } else if (rule=="URL-REGEX" || rule=="USER-AGENT") {
                     print $0",REJECT,extended-matching"
-                  } else if(rule=="AND"){
+                  } else if (rule=="AND") {
                     print $0",REJECT,pre-matching"
-                  } else if(rule=="IP-CIDR" || rule=="IP-CIDR6"){
+                  } else if (rule=="IP-CIDR" || rule=="IP-CIDR6") {
                     print $0",REJECT,no-resolve,pre-matching"
                   } else {
                     print $0
                   }
-                cat "$rules_original"
+                }' "$rules_original"
               } > "$tmpfile"
               # 从新文件中提取规则部分
               rules_new=$(mktemp)
