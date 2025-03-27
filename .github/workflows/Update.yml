@@ -275,36 +275,42 @@ jobs:
             if [[ -f "$file" ]]; then
               # 获取当前规则名称
               file_names=$(basename "$file" .list)
-              # 提取原文件中的规则部分（假设头部为连续若干行以 "#!" 开头，直到第一空行）
-              rules_original=$(mktemp)
-              sed '1,/^$/d' "$file" > "$rules_original"
-              # 获取当前规则数量，按规则部分计算行数
-              line_count=$(wc -l < "$rules_original")
-              # 获取当前推送时间（用于新 header）
-              update_time=$(date "+%Y-%m-%d %H:%M:%S")
-              # 构造新文件内容：新 header + 原规则部分
-              tmpfile=$(mktemp)
-              {
-                echo "#!name = $file_names"
-                echo "#!count = $line_count"
-                echo "#!date = $update_time"
-                echo ""  # 空行作为 header 结束标志
-                cat "$rules_original"
-              } > "$tmpfile"
-              # 从新文件中提取规则部分
-              rules_new=$(mktemp)
-              sed '1,/^$/d' "$tmpfile" > "$rules_new"
-              # 仅比较规则部分
-              if diff "$rules_original" "$rules_new" > /dev/null; then
-                # 如果规则部分没有变化，则不更新整个文件，保留原有 header 和时间戳
-                rm "$tmpfile" "$rules_original" "$rules_new"
-                echo "文件未更新，保留原时间：$file"
+              # 判断文件是否已经有 header（第一行以 "#!name" 开头）
+              if [[ $(head -n1 "$file") == "#!name"* ]]; then
+                header_exists=true
+                # 提取 header（直到第一空行为止）
+                header=$(sed '/^$/q' "$file")
+                # 提取 header 后的规则部分
+                rules_original=$(sed '1,/^$/d' "$file")
+                # 从 header 中获取旧的日期
+                old_date=$(echo "$header" | grep '^#!date' | cut -d'=' -f2- | xargs)
               else
-                # 如果规则部分有变化，则更新整个文件并更新文件的修改时间
-                mv "$tmpfile" "$file"
-                touch -m -d "$update_time" "$file"
+                header_exists=false
+                rules_original=$(cat "$file")
+              fi
+              # 统计规则部分的行数
+              line_count=$(echo "$rules_original" | wc -l)
+              current_time=$(date "+%Y-%m-%d %H:%M:%S")
+              update_needed=false
+              if $header_exists; then
+                file_mtime=$(stat -c "%y" "$file" | cut -d'.' -f1)
+                if [[ "$file_mtime" != "$old_date" ]]; then
+                  update_needed=true
+                fi
+              else
+              # 文件没有 header，则需要添加 header
+              update_needed=true
+              fi
+              if $update_needed; then
+                new_header=$(printf "#!name = %s\n#!count = %s\n#!date = %s\n\n\n" "$file_names" "$line_count" "$current_time")
+                {
+                  echo "$new_header"
+                  echo "$rules_original"
+                } > "$file"
+                touch -m -d "$current_time" "$file"
                 echo "文件已更新：$file"
-                rm "$rules_original" "$rules_new"
+              else
+                echo "规则无变动，保留原时间：$file"
               fi
             else
               echo "文件不存在：$file"
@@ -448,36 +454,42 @@ jobs:
               sed -i -e '/^AND,((URL-REGEX/d' "$file"
               # 获取当前规则名称
               file_names=$(basename "$file" .list)
-              # 提取原文件中的规则部分（假设头部为连续若干行以 "#!" 开头，直到第一空行）
-              rules_original=$(mktemp)
-              sed '1,/^$/d' "$file" > "$rules_original"
-              # 获取当前规则数量，按规则部分计算行数
-              line_count=$(wc -l < "$rules_original")
-              # 获取当前推送时间（用于新 header）
-              update_time=$(date "+%Y-%m-%d %H:%M:%S")
-              # 构造新文件内容：新 header + 原规则部分
-              tmpfile=$(mktemp)
-              {
-                echo "#!name = $file_names"
-                echo "#!count = $line_count"
-                echo "#!date = $update_time"
-                echo ""  # 空行作为 header 结束标志
-                cat "$rules_original"
-              } > "$tmpfile"
-              # 从新文件中提取规则部分
-              rules_new=$(mktemp)
-              sed '1,/^$/d' "$tmpfile" > "$rules_new"
-              # 仅比较规则部分
-              if diff "$rules_original" "$rules_new" > /dev/null; then
-                # 如果规则部分没有变化，则不更新整个文件，保留原有 header 和时间戳
-                rm "$tmpfile" "$rules_original" "$rules_new"
-                echo "文件未更新，保留原时间：$file"
+              # 判断文件是否已经有 header（第一行以 "#!name" 开头）
+              if [[ $(head -n1 "$file") == "#!name"* ]]; then
+                header_exists=true
+                # 提取 header（直到第一空行为止）
+                header=$(sed '/^$/q' "$file")
+                # 提取 header 后的规则部分
+                rules_original=$(sed '1,/^$/d' "$file")
+                # 从 header 中获取旧的日期
+                old_date=$(echo "$header" | grep '^#!date' | cut -d'=' -f2- | xargs)
               else
-                # 如果规则部分有变化，则更新整个文件并更新文件的修改时间
-                mv "$tmpfile" "$file"
-                touch -m -d "$update_time" "$file"
+                header_exists=false
+                rules_original=$(cat "$file")
+              fi
+              # 统计规则部分的行数
+              line_count=$(echo "$rules_original" | wc -l)
+              current_time=$(date "+%Y-%m-%d %H:%M:%S")
+              update_needed=false
+              if $header_exists; then
+                file_mtime=$(stat -c "%y" "$file" | cut -d'.' -f1)
+                if [[ "$file_mtime" != "$old_date" ]]; then
+                  update_needed=true
+                fi
+              else
+              # 文件没有 header，则需要添加 header
+              update_needed=true
+              fi
+              if $update_needed; then
+                new_header=$(printf "#!name = %s\n#!count = %s\n#!date = %s\n\n\n" "$file_names" "$line_count" "$current_time")
+                {
+                  echo "$new_header"
+                  echo "$rules_original"
+                } > "$file"
+                touch -m -d "$current_time" "$file"
                 echo "文件已更新：$file"
-                rm "$rules_original" "$rules_new"
+              else
+                echo "规则无变动，保留原时间：$file"
               fi
             else
               echo "文件不存在：$file"
