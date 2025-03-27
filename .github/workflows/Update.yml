@@ -273,6 +273,8 @@ jobs:
           shopt -s globstar
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
               if [[ -f "$file" ]]; then
+              # 获取当前规则名称
+              file_names=$(basename "$file" .list)
               # 获取当前规则数量
               line_count=$(wc -l < "$file")
               # 获取文件的最后修改时间
