@@ -281,14 +281,15 @@ jobs:
                 # 添加规则名称、规则统计信息和时间戳
                 awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
                 awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
-                sed -i "1s|^|# 更新时间: $current_time\n|" "$file"  # 添加时间戳行
-                sed -i '3a\\' "$file"  # 在时间戳后添加空行
+                sed -i "1s|^|# 更新时间: $current_time\n|" "$file"
+                sed -i '4a\\' "$file"
               fi
-              original_content=$(tail -n +4 "$file")
+              # 读取原始文件内容（从第三行开始，即规则内容部分）
+              original_content=$(tail -n +5 "$file")
               awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
               awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
-              sed -i '3a\\' "$file"  # 在时间戳后插入空行
-              new_content=$(tail -n +4 "$file")
+              sed -i '4a\\' "$file"  # 在时间戳后插入空行
+              new_content=$(tail -n +5 "$file")
               # 如果文件内容发生了变化，则更新时间戳
               if [[ "$original_content" != "$new_content" ]]; then
                 current_time=$(date "+%Y-%m-%d %H:%M:%S")
