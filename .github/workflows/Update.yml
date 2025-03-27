@@ -288,7 +288,7 @@ jobs:
               if [[ "$original_content" != "$new_content" ]]; then
                 current_time=$(date "+%Y-%m-%d %H:%M:%S")
                 # 更新文件头部的日期
-                sed -i "2a#!date = $current_time" "$file"
+                sed -i "1s|^#!date = .*|#!date = $current_time|" "$file"
               fi
             else
               echo "文件不存在：$file"
