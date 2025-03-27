@@ -363,6 +363,8 @@ jobs:
                 rm "$tmpfile"  # 如果没有变化，删除临时文件
                 echo "文件未更新，保留原时间：$file"
               fi
+              # 删除临时文件
+              rm "$tmpfile_without_date" "$file_without_date"
             else
               echo "文件不存在：$file"
             fi
