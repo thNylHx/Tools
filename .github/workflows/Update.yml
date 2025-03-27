@@ -273,14 +273,20 @@ jobs:
           shopt -s globstar
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
             if [[ -f "$file" ]]; then
+              # 获取当前规则名称
               file_names=$(basename "$file" .list)
+              # 获取当前规则数量
               line_count=$(wc -l < "$file")
+              # 获取当前推送时间
+              update_time=$(date "+%Y-%m-%d %H:%M:%S")
               # 在第一行添加规则名称
-              awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              awk -v fname="$file_names" 'NR==1 {print "#!name = " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
               # 在第二行添加规则统计信息
-              awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
-              # 在第二行后插入空行
-              sed -i '2a\\' "$file"
+              awk -v count="$line_count" 'NR==2 {print "#!count = " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在第三行添加规则更新时间
+              awk -v time="$update_time" 'NR==3 {print "#!date = " time} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在第三行后插入空行
+              sed -i '3a\\' "$file"
             else
               echo "文件不存在：$file"
             fi
@@ -294,6 +300,7 @@ jobs:
           for file in Tools-repo/Surge/Module/Ads_Block.sgmodule; do
             if [[ -f "$file" ]]; then
               line_count=$(wc -l < "$file")
+              update_time=$(date "+%Y-%m-%d %H:%M:%S")
               {
                 # 添加表头信息
                 echo "#!name = Block ads | 自用广告拦截规则合集"
@@ -301,7 +308,8 @@ jobs:
                 echo "#!author = RuCu6 Keywos fmz200 可莉🅥 QingRex"
                 echo "#!category = 🚫 Block ads"
                 echo "#!tag = 广告拦截规则合集"
-                echo "# 规则统计: $line_count"
+                echo "#!count = $line_count"
+                echo "#!date = $update_time"
                 echo ""             # 空行
                 echo "[Rule]"       # 在空行下插入 [Rule]
                 # 处理原有规则并转换格式
@@ -404,12 +412,15 @@ jobs:
               sed -i -e '/^AND,((URL-REGEX/d' "$file"
               file_names=$(basename "$file" .list)
               line_count=$(wc -l < "$file")
+              update_time=$(date "+%Y-%m-%d %H:%M:%S")
               # 在文件头添加规则名称
-              awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              awk -v fname="$file_names" 'NR==1 {print "#!name = " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
               # 在文件头添加规则统计信息
-              awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              awk -v count="$line_count" 'NR==2 {print "#!count = " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在第三行添加规则更新时间
+              awk -v time="$update_time" 'NR==3 {print "#!date = " time} {print}' "$file" > tmpfile && mv tmpfile "$file"
               # 在第二行后插入空行
-              sed -i '2a\\' "$file"
+              sed -i '3a\\' "$file"
             else
               echo "文件不存在：$file"
             fi
