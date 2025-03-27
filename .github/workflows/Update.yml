@@ -293,8 +293,13 @@ jobs:
                 # 读取规则并保持原格式
                 cat "$file"
               } > "$tmpfile"
-              # 比较原文件与更新后的临时文件内容
-              if ! diff "$file" "$tmpfile" > /dev/null; then
+              # 使用 sed 临时移除原文件中的 #!date 行进行对比
+              tmpfile_no_date=$(mktemp)
+              sed '/^#!date =/d' "$file" > "$tmpfile_no_date"
+              tmpfile_with_no_date=$(mktemp)
+              sed '/^#!date =/d' "$tmpfile" > "$tmpfile_with_no_date"
+              # 比较原文件与更新后的临时文件内容，忽略 #!date
+              if ! diff "$tmpfile_no_date" "$tmpfile_with_no_date" > /dev/null; then
                 # 如果文件内容有变化，替换原文件并更新文件时间戳
                 mv "$tmpfile" "$file"  # 更新文件内容
                 touch -m -d "$update_time" "$file"  # 更新文件的修改时间
@@ -304,6 +309,8 @@ jobs:
               else
                 # 如果没有变化，删除临时文件，保持原时间戳
                 rm "$tmpfile"
+                rm "$tmpfile_no_date"
+                rm "$tmpfile_with_no_date"
                 echo "文件未更新，保留原时间：$file"
               fi
             else
@@ -361,8 +368,13 @@ jobs:
                   }
                 }' "$file"
               } > "$tmpfile"
-              # 比较原文件与更新后的临时文件内容
-              if ! diff "$file" "$tmpfile" > /dev/null; then
+              # 使用 sed 临时移除原文件中的 #!date 行进行对比
+              tmpfile_no_date=$(mktemp)
+              sed '/^#!date =/d' "$file" > "$tmpfile_no_date"
+              tmpfile_with_no_date=$(mktemp)
+              sed '/^#!date =/d' "$tmpfile" > "$tmpfile_with_no_date"
+              # 比较原文件与更新后的临时文件内容，忽略 #!date
+              if ! diff "$tmpfile_no_date" "$tmpfile_with_no_date" > /dev/null; then
                 # 如果文件内容有变化，替换原文件并更新文件时间戳
                 mv "$tmpfile" "$file"  # 更新文件内容
                 touch -m -d "$update_time" "$file"  # 更新文件的修改时间
@@ -372,6 +384,8 @@ jobs:
               else
                 # 如果没有变化，删除临时文件，保持原时间戳
                 rm "$tmpfile"
+                rm "$tmpfile_no_date"
+                rm "$tmpfile_with_no_date"
                 echo "文件未更新，保留原时间：$file"
               fi
             else
@@ -467,8 +481,13 @@ jobs:
                 # 读取规则并保持原格式
                 cat "$file"
               } > "$tmpfile"
-              # 比较原文件与更新后的临时文件内容
-              if ! diff "$file" "$tmpfile" > /dev/null; then
+              # 使用 sed 临时移除原文件中的 #!date 行进行对比
+              tmpfile_no_date=$(mktemp)
+              sed '/^#!date =/d' "$file" > "$tmpfile_no_date"
+              tmpfile_with_no_date=$(mktemp)
+              sed '/^#!date =/d' "$tmpfile" > "$tmpfile_with_no_date"
+              # 比较原文件与更新后的临时文件内容，忽略 #!date
+              if ! diff "$tmpfile_no_date" "$tmpfile_with_no_date" > /dev/null; then
                 # 如果文件内容有变化，替换原文件并更新文件时间戳
                 mv "$tmpfile" "$file"  # 更新文件内容
                 touch -m -d "$update_time" "$file"  # 更新文件的修改时间
@@ -478,6 +497,8 @@ jobs:
               else
                 # 如果没有变化，删除临时文件，保持原时间戳
                 rm "$tmpfile"
+                rm "$tmpfile_no_date"
+                rm "$tmpfile_with_no_date"
                 echo "文件未更新，保留原时间：$file"
               fi
             else
