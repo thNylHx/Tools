@@ -306,15 +306,11 @@ jobs:
               fi
               if $update_needed; then
                 # 构造新的 header，刷新日期和统计信息
-                new_header=$(cat <<EOF
-#!name = $file_names
-#!count = $line_count
-#!date = 2025-03-27 17:17:33
-
-EOF
-)
                 {
-                  echo "$new_header"
+                  echo "#!name = $file_names"
+                  echo "#!count = $line_count"
+                  echo "#!date = $current_time"
+                  echo ""
                   echo "$rules_original"
                 } > "$file"
                 # 同步更新文件修改时间
@@ -384,20 +380,16 @@ EOF
                     print $0
                 }' <<< "$rules_original" > "$tmpfile"
                 # 构造新的 header，刷新日期和统计信息
-                new_header=$(cat <<EOF
-#!name = Block ads | 自用广告拦截规则合集
-#!category = 🚫 Block ads
-#!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
-#!desc = 名称: 自用广告拦截规则合集
-#!tag = 广告拦截规则合集
-#!count = $line_count
-#!date = 2025-03-27 17:17:33
-
-[Rule]
-EOF
-)
                 {
-                  echo "$new_header"
+                  echo "#!name = Block ads | 自用广告拦截规则合集"
+                  echo "#!desc = 名称： 自用广告拦截规则合集"
+                  echo "#!tag = 广告拦截规则合集"
+                  echo "#!author = RuCu6 Keywos fmz200 可莉🅥 QingRex"
+                  echo "#!category = 🚫 Block ads"
+                  echo "#!count = $line_count"
+                  echo "#!date = $current_time"
+                  echo ""
+                  echo "[Rule]"
                   echo "$rules_original"
                 } > "$file"
                 # 同步更新文件修改时间
@@ -512,15 +504,11 @@ EOF
               fi
               if $update_needed; then
                 # 构造新的 header，刷新日期和统计信息
-                new_header=$(cat <<EOF
-#!name = $file_names
-#!count = $line_count
-#!date = 2025-03-27 17:17:33
-
-EOF
-)
                 {
-                  echo "$new_header"
+                  echo "#!name = $file_names"
+                  echo "#!count = $line_count"
+                  echo "#!date = $current_time"
+                  echo ""
                   echo "$rules_original"
                 } > "$file"
                 # 同步更新文件修改时间
