@@ -293,9 +293,11 @@ jobs:
               } > "$tmpfile"
               # 比较原文件与更新后的临时文件内容
               if ! diff "$file" "$tmpfile" > /dev/null; then
-                # 如果文件内容有变化，替换原文件并更新文件时间
+                # 如果文件内容有变化，替换原文件并更新文件时间戳
                 mv "$tmpfile" "$file"  # 更新文件内容
                 touch -m -d "$update_time" "$file"  # 更新文件的修改时间
+                # 更新文件中的 #!date 字段
+                sed -i "s/^#!date = .*/#!date = $update_time/" "$file"
                 echo "文件已更新：$file"
               else
                 # 如果没有变化，删除临时文件，保持原时间戳
@@ -357,20 +359,19 @@ jobs:
                   }
                 }' "$file"
               } > "$tmpfile"
-              # 去除临时文件和原文件的 `#!date =` 行再进行比较
-              tmpfile_without_date=$(mktemp)
-              sed '/#!date =/d' "$tmpfile" > "$tmpfile_without_date"
-              sed '/#!date =/d' "$file" > "$file_without_date"
-              # 比较原文件和更新后的临时文件内容
-              if ! diff "$file_without_date" "$tmpfile_without_date" > /dev/null; then
-                mv "$tmpfile" "$file"  # 如果文件内容有变化，替换原文件
+              # 比较原文件与更新后的临时文件内容
+              if ! diff "$file" "$tmpfile" > /dev/null; then
+                # 如果文件内容有变化，替换原文件并更新文件时间戳
+                mv "$tmpfile" "$file"  # 更新文件内容
+                touch -m -d "$update_time" "$file"  # 更新文件的修改时间
+                # 更新文件中的 #!date 字段
+                sed -i "s/^#!date = .*/#!date = $update_time/" "$file"
                 echo "文件已更新：$file"
               else
-                rm "$tmpfile"  # 如果没有变化，删除临时文件
+                # 如果没有变化，删除临时文件，保持原时间戳
+                rm "$tmpfile"
                 echo "文件未更新，保留原时间：$file"
               fi
-              # 删除临时文件
-              rm "$tmpfile_without_date" "$file_without_date"
             else
               echo "文件不存在：$file"
             fi
@@ -464,9 +465,11 @@ jobs:
               } > "$tmpfile"
               # 比较原文件与更新后的临时文件内容
               if ! diff "$file" "$tmpfile" > /dev/null; then
-                # 如果文件内容有变化，替换原文件并更新文件时间
+                # 如果文件内容有变化，替换原文件并更新文件时间戳
                 mv "$tmpfile" "$file"  # 更新文件内容
                 touch -m -d "$update_time" "$file"  # 更新文件的修改时间
+                # 更新文件中的 #!date 字段
+                sed -i "s/^#!date = .*/#!date = $update_time/" "$file"
                 echo "文件已更新：$file"
               else
                 # 如果没有变化，删除临时文件，保持原时间戳
