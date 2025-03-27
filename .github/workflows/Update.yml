@@ -276,7 +276,8 @@ jobs:
               file_names=$(basename "$file" .list)
               line_count=$(wc -l < "$file")
               current_time=$(date "+%Y-%m-%d %H:%M:%S")
-              original_content=$(tail -n +5 "$file")
+              # 获取文件的原始内容（排除时间戳行，假设时间戳在第三行）
+              original_content=$(sed '1,3d' "$file")
               if ! grep -q "^# 更新时间:" "$file"; then
                 # 在文件头添加规则名称
                 awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
@@ -287,7 +288,8 @@ jobs:
                 # 在第三行后插入空行
                 sed -i '3a\\' "$file"  # 在时间戳后插入空行
               fi
-              new_content=$(tail -n +5 "$file")
+              # 获取文件的最新内容（排除时间戳行，假设时间戳在第三行）
+              new_content=$(sed '1,3d' "$file")
               if [[ "$original_content" != "$new_content" ]]; then
                 current_time=$(date "+%Y-%m-%d %H:%M:%S")
                 sed -i "3s|^# 更新时间: .*|# 更新时间: $current_time|" "$file"  # 更新第三行的时间戳
