@@ -275,30 +275,13 @@ jobs:
             if [[ -f "$file" ]]; then
               file_names=$(basename "$file" .list)
               line_count=$(wc -l < "$file")
-              if ! grep -q "^# 更新时间:" "$file"; then
-                # 首先添加规则名称、规则统计和时间戳
-                current_time=$(date "+%Y-%m-%d %H:%M:%S")
-                # 添加规则名称、规则统计信息和时间戳
-                awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
-                awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
-                # 添加时间戳
-                sed -i "1s|^|# 更新时间: $current_time\n|" "$file"
-                # 在时间戳后添加空行
-                sed -i '4a\\' "$file"
-              fi
-              # 读取原始文件内容
-              original_content=$(tail -n +5 "$file")
+              # 在文件头添加规则名称
               awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在文件头添加规则统计信息
               awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
-              # 获取修改后的内容
-              sed -i '4a\\' "$file"
-              new_content=$(tail -n +5 "$file")
-              # 如果规则内容发生了变化，则更新时间戳
-              if [[ "$original_content" != "$new_content" ]]; then
-                current_time=$(date "+%Y-%m-%d %H:%M:%S")
-                # 更新时间戳
-                sed -i "1s|^# 更新时间: .*|# 更新时间: $current_time|" "$file"
-              fi
+              awk -v count="$line_count" 'NR==3 {print "# 更新时间: " } {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在第二行后插入空行
+              sed -i '3a\\' "$file"
             else
               echo "文件不存在：$file"
             fi
@@ -478,6 +461,20 @@ jobs:
           else
             echo "没有变更，无需同步。"
           fi
+
+      - name: 更新文件头日期字段
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "更新文件头中的日期字段..."
+          modified_files=$(git diff --name-only --diff-filter=M)
+          for file in $modified_files; do
+              if [ -f "$file" ] && grep -q "^# 规则统计: " "$file"; then
+                  # 更新文件中现有的 #!date 字段
+                  sed -i "s/^# 规则统计: .*/# 规则统计: $(date +'%Y-%m-%d %H:%M:%S')/" "$file"
+                  echo "已更新文件 $file 的日期字段"
+              fi
+          done
 
       - name: 设置当前时间变量  # 保存当前时间到环境变量中
         shell: bash
