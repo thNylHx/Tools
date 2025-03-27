@@ -54,7 +54,7 @@ jobs:
             "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Tracking.list" \
             "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Malicious.list" \
             "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Advertising.list" \
-            "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge-RULE-SET.list" \
+            "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
           # 同步广告规则到 mihomo 目录
           cp Tools-repo/Ruleset/Surge/Block/Ads_Block.list Tools-repo/Ruleset/mihomo/Block/Ads_Block.list
@@ -117,7 +117,7 @@ jobs:
             # dler-io TG-Twilight geekdada Abcd789JK
             "Block/Ads_BlockAds.list https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Ruleset/Surge/Block/BlockAds.list"
             "Block/Ads_Dlerio.list https://raw.githubusercontent.com/dler-io/Rules/main/Surge/Surge%203/Provider/AdBlock.list"
-            "Block/Ads_AWAvenue.list https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge-RULE-SET.list"
+            "Block/Ads_AWAvenue.list https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge.list"
             "Block/Ads_Chinese.list https://raw.githubusercontent.com/geekdada/surge-list/master/domain-set/chinese-filter.txt"
             ##### Other #####
             # 本地/局域网
@@ -273,51 +273,14 @@ jobs:
           shopt -s globstar
           for file in Tools-repo/Ruleset/Surge/**/*.list; do
             if [[ -f "$file" ]]; then
-              # 获取当前规则名称
               file_names=$(basename "$file" .list)
-              # 判断文件是否已经有 header（第一行以 "#!name" 开头）
-              if [[ $(head -n1 "$file") == "#!name"* ]]; then
-                header_exists=true
-                # 提取 header（直到第一空行为止）
-                header=$(sed '/^$/q' "$file")
-                # 提取 header 后的规则部分
-                rules_original=$(sed '1,/^$/d' "$file")
-                # 从 header 中获取旧的日期
-                old_date=$(echo "$header" | grep '^#!date' | cut -d'=' -f2- | xargs)
-              else
-                header_exists=false
-                rules_original=$(cat "$file")
-              fi
-              # 统计规则部分的行数
-              line_count=$(echo "$rules_original" | wc -l)
-              # 当前时间
-              current_time=$(date "+%Y-%m-%d %H:%M:%S")
-              update_needed=false
-              if $header_exists; then
-                # 获取文件的修改时间（精确到秒）
-                file_mtime=$(stat -c "%y" "$file" | cut -d'.' -f1)
-                # 如果文件修改时间和 header 中的日期不一致，则说明规则部分有更新
-                if [[ "$file_mtime" != "$old_date" ]]; then
-                  update_needed=true
-                fi
-              else
-              # 文件没有 header，则需要添加 header
-              update_needed=true
-              fi
-              if $update_needed; then
-                # 构造新的 header，刷新日期和统计信息
-                new_header=$(printf "#!name = %s\n#!count = %s\n#!date = %s\n\n" "$file_names" "$line_count" "$current_time")
-                {
-                  echo "$new_header"
-                  echo ""
-                  echo "$rules_original"
-                } > "$file"
-                # 同步更新文件修改时间
-                touch -m -d "$current_time" "$file"
-                echo "文件已更新：$file"
-              else
-                echo "规则无变动，保留原时间：$file"
-              fi
+              line_count=$(wc -l < "$file")
+              # 在第一行添加规则名称
+              awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在第二行添加规则统计信息
+              awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在第二行后插入空行
+              sed -i '2a\\' "$file"
             else
               echo "文件不存在：$file"
             fi
@@ -327,75 +290,48 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          shopt -s globstar
           for file in Tools-repo/Surge/Module/Ads_Block.sgmodule; do
             if [[ -f "$file" ]]; then
-              # 判断文件是否已经有 header（第一行以 "#!name" 开头）
-              if [[ $(head -n1 "$file") == "#!name"* ]]; then
-                header_exists=true
-                # 提取 header（直到第一空行为止）
-                header=$(sed '/^$/q' "$file")
-                # 获取 header 之后的规则部分（包含 [Rule]）
-                rules_original=$(tail -n +$(grep -n "^$" "$file" | head -n 1 | cut -d: -f1) "$file")
-                # 从 header 中获取旧的日期
-                old_date=$(echo "$header" | grep '^#!date' | cut -d'=' -f2- | xargs)
-              else
-                header_exists=false
-                rules_original=$(cat "$file")
-              fi
-              # 统计规则部分的行数
-              line_count=$(echo "$rules_original" | grep -v "^\[Rule\]$" | wc -l)
-              # 当前时间
-              current_time=$(date "+%Y-%m-%d %H:%M:%S")
-              update_needed=false
-              if $header_exists; then
-                # 获取文件的修改时间（精确到秒）
-                file_mtime=$(stat -c "%y" "$file" | cut -d'.' -f1)
-                # 如果文件修改时间和 header 中的日期不一致，则说明规则部分有更新
-                if [[ "$file_mtime" != "$old_date" ]]; then
-                  update_needed=true
-                fi
-              else
-              # 文件没有 header，则需要添加 header
-              update_needed=true
-              fi
-              if $update_needed; then
-                # 处理规则部分
-                tmpfile=$(mktemp)
+              line_count=$(wc -l < "$file")
+              {
+                # 添加表头信息
+                echo "#!name = Block ads | 自用广告拦截规则合集"
+                echo "#!desc = 名称： 自用广告拦截规则合集"
+                echo "#!author = RuCu6 Keywos fmz200 可莉🅥 QingRex"
+                echo "#!category = 🚫 Block ads"
+                echo "#!tag = 广告拦截规则合集"
+                echo "# 规则统计: $line_count"
+                echo ""             # 空行
+                echo "[Rule]"       # 在空行下插入 [Rule]
+                # 处理原有规则并转换格式
                 awk -F, '{
                   rule = $1
-                  if ($0 ~ /^AND,\(\(IP-CIDR,/ || $0 ~ /^AND,\(\(IP-CIDR6,/) {
+                  # 排除 AND,((IP-CIDR, 和 AND,((IP-CIDR6, 行
+                  if ($0 ~ /^AND,\(\(IP-CIDR,/ || $0 ~ /^AND,\(\(IP-CIDR6,/){
                     print $0
                     next
                   }
+                  # 先去掉 IP-CIDR 和 IP-CIDR6 中的 ",no-resolve"
                   sub(/,no-resolve/, "", $0)
-                  if (rule=="DOMAIN-KEYWORD" || rule=="DOMAIN-SUFFIX" || rule=="DOMAIN") {
+                  # 现在为不同规则添加对应后缀
+                  if(rule=="DOMAIN-KEYWORD" || rule=="DOMAIN-SUFFIX" || rule=="DOMAIN"){
                     print $0",REJECT,extended-matching,pre-matching"
-                  } else if (rule=="URL-REGEX" || rule=="USER-AGENT") {
+                  } else if(rule=="URL-REGEX" || rule=="USER-AGENT"){
                     print $0",REJECT,extended-matching"
-                  } else if (rule=="AND") {
+                  } else if(rule=="AND"){
                     print $0",REJECT,pre-matching"
-                  } else if (rule=="IP-CIDR" || rule=="IP-CIDR6") {
+                  } else if(rule=="IP-CIDR" || rule=="IP-CIDR6"){
                     print $0",REJECT,no-resolve,pre-matching"
                   } else {
                     print $0
                   }
-                }' <<< "$rules_original" > "$tmpfile"
-                # 构造新的 header，刷新日期和统计信息
-                new_header=$(printf "#!name = %s\n#!count = %s\n#!date = %s\n\n" "Block ads | 自用广告拦截规则合集" "$line_count" "$current_time")
-                {
-                  echo "$new_header"
-                  echo ""
-                  echo "$rules_original"
-                } > "$file"
-                # 同步更新文件修改时间
-                touch -m -d "$current_time" "$file"
-                echo "文件已更新：$file"
-              else
-                echo "规则无变动，保留原时间：$file"
-              fi
+                }' "$file"
+              } > tmpfile && mv tmpfile "$file"
+              echo "已更新文件：$file"
             else
               echo "文件不存在：$file"
-            fi
+              fi
           done
 
       - name: 下载 mihomo 规则  # 下载并保存 mihomo 规则文件
@@ -466,51 +402,14 @@ jobs:
               sed -i -e '/^URL-REGEX/d' "$file"
               sed -i -e '/^AND,((IP-CIDR/d' "$file"
               sed -i -e '/^AND,((URL-REGEX/d' "$file"
-              # 获取当前规则名称
               file_names=$(basename "$file" .list)
-              # 判断文件是否已经有 header（第一行以 "#!name" 开头）
-              if [[ $(head -n1 "$file") == "#!name"* ]]; then
-                header_exists=true
-                # 提取 header（直到第一空行为止）
-                header=$(sed '/^$/q' "$file")
-                # 提取 header 后的规则部分
-                rules_original=$(sed '1,/^$/d' "$file")
-                # 从 header 中获取旧的日期
-                old_date=$(echo "$header" | grep '^#!date' | cut -d'=' -f2- | xargs)
-              else
-                header_exists=false
-                rules_original=$(cat "$file")
-              fi
-              # 统计规则部分的行数
-              line_count=$(echo "$rules_original" | wc -l)
-              # 当前时间
-              current_time=$(date "+%Y-%m-%d %H:%M:%S")
-              update_needed=false
-              if $header_exists; then
-                # 获取文件的修改时间（精确到秒）
-                file_mtime=$(stat -c "%y" "$file" | cut -d'.' -f1)
-                # 如果文件修改时间和 header 中的日期不一致，则说明规则部分有更新
-                if [[ "$file_mtime" != "$old_date" ]]; then
-                  update_needed=true
-                fi
-              else
-              # 文件没有 header，则需要添加 header
-              update_needed=true
-              fi
-              if $update_needed; then
-                # 构造新的 header，刷新日期和统计信息
-                new_header=$(printf "#!name = %s\n#!count = %s\n#!date = %s\n\n" "$file_names" "$line_count" "$current_time")
-                {
-                  echo "$new_header"
-                  echo ""
-                  echo "$rules_original"
-                } > "$file"
-                # 同步更新文件修改时间
-                touch -m -d "$current_time" "$file"
-                echo "文件已更新：$file"
-              else
-                echo "规则无变动，保留原时间：$file"
-              fi
+              line_count=$(wc -l < "$file")
+              # 在文件头添加规则名称
+              awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在文件头添加规则统计信息
+              awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
+              # 在第二行后插入空行
+              sed -i '2a\\' "$file"
             else
               echo "文件不存在：$file"
             fi
