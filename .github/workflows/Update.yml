@@ -351,8 +351,12 @@ jobs:
                   }
                 }' "$file"
               } > "$tmpfile"
+              # 去除临时文件和原文件的 `#!date =` 行再进行比较
+              tmpfile_without_date=$(mktemp)
+              sed '/#!date =/d' "$tmpfile" > "$tmpfile_without_date"
+              sed '/#!date =/d' "$file" > "$file_without_date"
               # 比较原文件和更新后的临时文件内容
-              if ! diff "$file" "$tmpfile" > /dev/null; then
+              if ! diff "$file_without_date" "$tmpfile_without_date" > /dev/null; then
                 mv "$tmpfile" "$file"  # 如果文件内容有变化，替换原文件
                 echo "文件已更新：$file"
               else
