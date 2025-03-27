@@ -280,11 +280,10 @@ jobs:
               awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
               # 在文件头添加规则统计信息
               awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
-              awk -v time="$current_time" 'NR==3 {print "# 更新时间: " } {print}' "$file" > tmpfile && mv tmpfile "$file"
-              # 在第二行后插入空行
-              sed -i '3a\\' "$file"
-              original_content=$(tail -n +5 "$file")
+              sed -i "1s|^|# 更新时间: $current_time\n|" "$file"
+              # 在第三行后插入空行
               sed -i '4a\\' "$file"  # 在时间戳后插入空行
+              original_content=$(tail -n +5 "$file")
               new_content=$(tail -n +5 "$file")
               if [[ "$original_content" != "$new_content" ]]; then
                 current_time=$(date "+%Y-%m-%d %H:%M:%S")
