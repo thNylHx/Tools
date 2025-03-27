@@ -2,11 +2,11 @@
 
 #!name = mihomo 一键更新脚本
 #!desc = 更新
-#!date = 2024-11-03 22:30
+#!date = 2025-03-27 11:29:46
 #!author = ChatGPT
 
 set -e -o pipefail
-
+ 
 red="\033[31m"  ## 红色
 green="\033[32m"  ## 绿色 
 yellow="\033[33m"  ## 黄色
