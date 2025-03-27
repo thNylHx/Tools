@@ -276,7 +276,7 @@ jobs:
               file_names=$(basename "$file" .list)
               line_count=$(wc -l < "$file")
               current_time=$(date "+%Y-%m-%d %H:%M:%S")
-              # 获取文件的原始内容（排除时间戳行，假设时间戳在第三行）
+              # 获取文件的原始内容
               original_content=$(tail -n +4 "$file")
               if ! grep -q "^# 更新时间:" "$file"; then
                 # 在文件头添加规则名称
@@ -288,7 +288,7 @@ jobs:
                 # 在第三行后插入空行
                 sed -i '3a\\' "$file"  # 在时间戳后插入空行
               fi
-              # 获取文件的最新内容（排除时间戳行，假设时间戳在第三行）
+              # 获取文件的最新内容
               new_content=$(tail -n +4 "$file")
               if [[ "$original_content" != "$new_content" ]]; then
                 current_time=$(date "+%Y-%m-%d %H:%M:%S")
