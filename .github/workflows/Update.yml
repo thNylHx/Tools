@@ -271,28 +271,35 @@ jobs:
         run: |
           set -euo pipefail
           shopt -s globstar
-          for file in Tools-repo/Ruleset/Surge/**/*.list; do
-            if [[ -f "$file" ]]; then
-              # 获取当前规则名称
-              file_names=$(basename "$file" .list)
+          for file in Tools-repo/Surge/Module/Ads_Block.sgmodule; do
+              if [[ -f "$file" ]]; then
               # 获取当前规则数量
               line_count=$(wc -l < "$file")
               # 获取文件的最后修改时间
               last_mod_time=$(stat -c %Y "$file")
               # 获取当前推送时间
               update_time=$(date "+%Y-%m-%d %H:%M:%S")
-              # 如果文件有更新，则修改文件的更新时间
-              if [[ "$last_mod_time" -gt $(date -d "$update_time" +%s) ]]; then
-                # 在第一行添加规则名称
-                awk -v fname="$file_names" 'NR==1 {print "#!name = " fname} {print}' "$file" > tmpfile && mv tmpfile "$file"
-                # 在第二行添加规则统计信息
-                awk -v count="$line_count" 'NR==2 {print "#!count = " count} {print}' "$file" > tmpfile && mv tmpfile "$file"
-                # 在第三行添加规则更新时间
-                awk -v time="$update_time" 'NR==3 {print "#!date = " time} {print}' "$file" > tmpfile && mv tmpfile "$file"
-                # 在第三行后插入空行
-                sed -i '3a\\' "$file"
+              # 创建临时文件用于存储更新后的内容
+                tmpfile=$(mktemp)
+              # 处理原有规则并转换格式
+              {
+                # 添加表头信息
+                echo "#!name = $file_names"
+                echo "#!count = $line_count"
+                echo "#!date = $update_time"
+                echo ""  # 空行
+                # 读取规则并保持原格式
+                cat "$file"
+              } > "$tmpfile"
+              # 比较原文件与更新后的临时文件内容
+              if ! diff "$file" "$tmpfile" > /dev/null; then
+                # 如果文件内容有变化，替换原文件并更新文件时间
+                mv "$tmpfile" "$file"  # 更新文件内容
+                touch -m -d "$update_time" "$file"  # 更新文件的修改时间
                 echo "文件已更新：$file"
               else
+                # 如果没有变化，删除临时文件，保持原时间戳
+                rm "$tmpfile"
                 echo "文件未更新，保留原时间：$file"
               fi
             else
