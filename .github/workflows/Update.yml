@@ -306,10 +306,15 @@ jobs:
               fi
               if $update_needed; then
                 # 构造新的 header，刷新日期和统计信息
-                new_header=$(printf "#!name = %s\n#!count = %s\n#!date = %s\n\n" "$file_names" "$line_count" "$current_time")
+                new_header=$(cat <<EOF
+                #!name = $file_names
+                #!count = $line_count
+                #!date = $current_time
+                
+                EOF
+                )
                 {
                   echo "$new_header"
-                  echo ""
                   echo "$rules_original"
                 } > "$file"
                 # 同步更新文件修改时间
@@ -334,8 +339,8 @@ jobs:
                 header_exists=true
                 # 提取 header（直到第一空行为止）
                 header=$(sed '/^$/q' "$file")
-                # 提取 header 后的规则部分
-                rules_original=$(sed '1,/^$/d' "$file")
+                # 获取 header 之后的规则部分（包含 [Rule]）
+                rules_original=$(tail -n +$(grep -n "^$" "$file" | head -n 1 | cut -d: -f1) "$file")
                 # 从 header 中获取旧的日期
                 old_date=$(echo "$header" | grep '^#!date' | cut -d'=' -f2- | xargs)
               else
@@ -343,7 +348,7 @@ jobs:
                 rules_original=$(cat "$file")
               fi
               # 统计规则部分的行数
-              line_count=$(echo "$rules_original" | wc -l)
+              line_count=$(echo "$rules_original" | grep -v "^\[Rule\]$" | wc -l)
               # 当前时间
               current_time=$(date "+%Y-%m-%d %H:%M:%S")
               update_needed=false
@@ -507,10 +512,15 @@ jobs:
               fi
               if $update_needed; then
                 # 构造新的 header，刷新日期和统计信息
-                new_header=$(printf "#!name = %s\n#!count = %s\n#!date = %s\n\n" "$file_names" "$line_count" "$current_time")
+                new_header=$(cat <<EOF
+                #!name = $file_names
+                #!count = $line_count
+                #!date = $current_time
+
+                EOF
+                )
                 {
                   echo "$new_header"
-                  echo ""
                   echo "$rules_original"
                 } > "$file"
                 # 同步更新文件修改时间
