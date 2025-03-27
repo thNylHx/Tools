@@ -307,12 +307,12 @@ jobs:
               if $update_needed; then
                 # 构造新的 header，刷新日期和统计信息
                 new_header=$(cat <<EOF
-                #!name = $file_names
-                #!count = $line_count
-                #!date = $current_time
-                
-                EOF
-                )
+#!name = $file_names
+#!count = $line_count
+#!date = 2025-03-27 17:17:33
+
+EOF
+)
                 {
                   echo "$new_header"
                   echo "$rules_original"
@@ -385,17 +385,17 @@ jobs:
                 }' <<< "$rules_original" > "$tmpfile"
                 # 构造新的 header，刷新日期和统计信息
                 new_header=$(cat <<EOF
-                #!name = Block ads | 自用广告拦截规则合集
-                #!category = 🚫 Block ads
-                #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
-                #!desc = 名称: 自用广告拦截规则合集
-                #!tag = 广告拦截规则合集
-                #!count = $line_count
-                #!date = $current_time
-                
-                [Rule]
-                EOF
-                )
+#!name = Block ads | 自用广告拦截规则合集
+#!category = 🚫 Block ads
+#!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
+#!desc = 名称: 自用广告拦截规则合集
+#!tag = 广告拦截规则合集
+#!count = $line_count
+#!date = 2025-03-27 17:17:33
+
+[Rule]
+EOF
+)
                 {
                   echo "$new_header"
                   echo "$rules_original"
@@ -513,12 +513,12 @@ jobs:
               if $update_needed; then
                 # 构造新的 header，刷新日期和统计信息
                 new_header=$(cat <<EOF
-                #!name = $file_names
-                #!count = $line_count
-                #!date = $current_time
+#!name = $file_names
+#!count = $line_count
+#!date = 2025-03-27 17:17:33
 
-                EOF
-                )
+EOF
+)
                 {
                   echo "$new_header"
                   echo "$rules_original"
