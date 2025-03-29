@@ -402,6 +402,7 @@ jobs:
               sed -i -e '/^URL-REGEX/d' "$file"
               sed -i -e '/^AND,((IP-CIDR/d' "$file"
               sed -i -e '/^AND,((URL-REGEX/d' "$file"
+              sed -i 's/DEST-PORT/DST-PORT/g' "$file"
               file_names=$(basename "$file" .list)
               line_count=$(wc -l < "$file")
               # 在文件头添加规则名称
