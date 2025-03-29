@@ -296,12 +296,12 @@ jobs:
               line_count=$(wc -l < "$file")
               {
                 # 添加表头信息
-                echo "#!name = Block ads | 自用广告拦截规则合集"
-                echo "#!desc = 名称： 自用广告拦截规则合集"
+                echo "#!name = Block ads | 自用广告拦截合集规则"
+                echo "#!desc = 名称: 自用广告拦截合集规则"
                 echo "#!author = RuCu6 Keywos fmz200 可莉🅥 QingRex"
                 echo "#!category = 🚫 Block ads"
-                echo "#!tag = 广告拦截规则合集"
-                echo "# 规则统计: $line_count"
+                echo "#!tag = 自用广告拦截合集规则"
+                echo "#!Rule = $line_count"
                 echo ""             # 空行
                 echo "[Rule]"       # 在空行下插入 [Rule]
                 # 处理原有规则并转换格式

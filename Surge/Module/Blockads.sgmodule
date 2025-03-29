@@ -1,10 +1,9 @@
-#!name = Block ads | 自用广告拦截合集
-#!desc = 名称： 自用广告拦截合集 \n作者： RuCu6 Keywos fmz200 可莉🅥 QingRex
+#!name = Block ads | 自用广告拦截合集模块
+#!desc = 名称: 自用广告拦截合集模块
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 广告拦截
-#!date = 2025-03-27 11:36:47
-
+#!date = 2025-03-29 10:08:30
 
 [Rule]
 # ======= 0 ======= #
@@ -469,7 +468,7 @@ http-response-jq ^https:\/\/api\.zhihu\.com\/search\/recommend_query\/v2\? "reco
 
 # ======= k ======= #
 # 酷安
-^https:\/\/api\.coolapk\.com\/v6\/search\? data-type=text data="{}" status-code=200
+^https:\/\/api\.coolapk\.com\/v6\/search\?.*type=hotSearch data-type=text data="{}" status-code=200
 # 酷我音乐
 ^https:\/\/vip\d\.kuwo\.cn\/commercia\/vipconf\/projectPage\/getPageContent data-type=text data="{}" status-code=200
 ^https:\/\/tingshu\.kuwo\.cn\/v2\/api\/pay\/user\/info data-type=text data="{}" status-code=200
