@@ -1,5 +1,5 @@
 # 规则名称: Google_ip
-# 规则统计: 3308
+# 规则统计: 3323
 
 IP-CIDR,1.179.112.0/21,no-resolve
 IP-CIDR,101.102.103.0/24,no-resolve
@@ -89,6 +89,8 @@ IP-CIDR,134.231.224.0/20,no-resolve
 IP-CIDR,134.231.240.0/23,no-resolve
 IP-CIDR,134.231.243.0/24,no-resolve
 IP-CIDR,134.231.244.0/22,no-resolve
+IP-CIDR,134.231.250.0/23,no-resolve
+IP-CIDR,134.231.252.0/24,no-resolve
 IP-CIDR,135.84.69.0/24,no-resolve
 IP-CIDR,136.124.0.0/15,no-resolve
 IP-CIDR,136.22.0.0/23,no-resolve
@@ -1240,8 +1242,19 @@ IP-CIDR,136.62.102.48/28,no-resolve
 IP-CIDR,136.62.102.64/26,no-resolve
 IP-CIDR,136.62.103.0/24,no-resolve
 IP-CIDR,136.62.104.0/21,no-resolve
-IP-CIDR,136.62.112.0/20,no-resolve
+IP-CIDR,136.62.112.0/23,no-resolve
+IP-CIDR,136.62.114.0/24,no-resolve
+IP-CIDR,136.62.115.0/27,no-resolve
+IP-CIDR,136.62.115.128/25,no-resolve
+IP-CIDR,136.62.115.32/32,no-resolve
+IP-CIDR,136.62.115.34/31,no-resolve
+IP-CIDR,136.62.115.36/30,no-resolve
+IP-CIDR,136.62.115.40/29,no-resolve
+IP-CIDR,136.62.115.48/28,no-resolve
+IP-CIDR,136.62.115.64/26,no-resolve
+IP-CIDR,136.62.116.0/22,no-resolve
 IP-CIDR,136.62.12.0/23,no-resolve
+IP-CIDR,136.62.120.0/21,no-resolve
 IP-CIDR,136.62.128.0/24,no-resolve
 IP-CIDR,136.62.129.0/30,no-resolve
 IP-CIDR,136.62.129.128/25,no-resolve
@@ -1435,6 +1448,7 @@ IP-CIDR,141.202.254.0/24,no-resolve
 IP-CIDR,142.147.12.0/24,no-resolve
 IP-CIDR,142.147.14.0/24,no-resolve
 IP-CIDR,142.250.0.0/15,no-resolve
+IP-CIDR,144.125.0.0/18,no-resolve
 IP-CIDR,144.203.144.0/24,no-resolve
 IP-CIDR,144.49.128.0/18,no-resolve
 IP-CIDR,144.49.200.0/22,no-resolve
@@ -1529,6 +1543,7 @@ IP-CIDR,172.110.44.0/24,no-resolve
 IP-CIDR,172.217.0.0/16,no-resolve
 IP-CIDR,172.253.0.0/16,no-resolve
 IP-CIDR,172.68.158.0/24,no-resolve
+IP-CIDR,172.98.18.0/23,no-resolve
 IP-CIDR,173.194.0.0/16,no-resolve
 IP-CIDR,173.255.112.0/20,no-resolve
 IP-CIDR,176.116.16.0/24,no-resolve

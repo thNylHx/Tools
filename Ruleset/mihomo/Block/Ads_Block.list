@@ -1,5 +1,5 @@
 # 规则名称: Ads_Block
-# 规则统计: 4241
+# 规则统计: 4247
 
 DOMAIN,118.89.204.198
 DOMAIN,180.76.76.200
@@ -118,6 +118,7 @@ DOMAIN,ads.pinger.com
 DOMAIN,ads.pinterest.com
 DOMAIN,ads.play.cbsi.video
 DOMAIN,ads.pubmatic.com
+DOMAIN,ads.reader.yueyouxs.com
 DOMAIN,ads.reembed.com
 DOMAIN,ads.service.kugou.com
 DOMAIN,ads.snapchat.com
@@ -138,8 +139,9 @@ DOMAIN,adsebs.ximalaya.com
 DOMAIN,adsehera.ximalaya.com
 DOMAIN,adserver.pandora.com
 DOMAIN,adservice.google.com
+DOMAIN,adservice.kugou.com
 DOMAIN,adservice.tohsoft.com
-DOMAIN,adserviceretry.kglink.cn,DIRECT
+DOMAIN,adserviceretry.kglink.cn
 DOMAIN,adserviceretry.kugou.com
 DOMAIN,adsfile.bssdlbig.kugou.com
 DOMAIN,adsfilebssdlbig.tx.kugou.com
@@ -296,8 +298,6 @@ DOMAIN,devs-data.dutils.com
 DOMAIN,df.tanx.com
 DOMAIN,dflow.bz.mgtv.com
 DOMAIN,dgstatic.jd.com
-DOMAIN,dig.bdurl.net
-DOMAIN,dig.zjurl.cn
 DOMAIN,dispatcher.360in.com
 DOMAIN,dm.bytedance.com
 DOMAIN,dm.pstatp.com
@@ -444,7 +444,6 @@ DOMAIN,info6.video.qq.com
 DOMAIN,init.supersonicads.com
 DOMAIN,ios.bugly.qq.com
 DOMAIN,ios.video.mpush.qq.com
-DOMAIN,is.snssdk.com
 DOMAIN,itad.linetv.tw
 DOMAIN,ivy.pchouse.com.cn
 DOMAIN,iyes.youku.com
@@ -621,6 +620,7 @@ DOMAIN,sis-ipv6.jpush.cn
 DOMAIN,smartop-sdkapi.jiguang.cn
 DOMAIN,soul-ad.soulapp.cn
 DOMAIN,splashimgbssdl.yun.kugou.com
+DOMAIN,splashimgretrybssdl.cloud.kugou.com
 DOMAIN,splashqqlive.gtimg.com
 DOMAIN,ssp.maplehaze.cn
 DOMAIN,st.appsad.cn
@@ -4055,6 +4055,8 @@ DOMAIN-KEYWORD,bdsp.x.jd.com
 DOMAIN-KEYWORD,bjimp.voiceads.cn
 DOMAIN-KEYWORD,client-dmp.suishenyun.cn
 DOMAIN-KEYWORD,clk.gentags.net
+DOMAIN-KEYWORD,dig.bdurl.net
+DOMAIN-KEYWORD,dig.zjurl.cn
 DOMAIN-KEYWORD,dm.bytedance.com
 DOMAIN-KEYWORD,dm.pstatp.com
 DOMAIN-KEYWORD,dm.toutiao.com
@@ -4066,6 +4068,7 @@ DOMAIN-KEYWORD,hoisin.coocaa.com
 DOMAIN-KEYWORD,hoisin.coocaatv.com
 DOMAIN-KEYWORD,iflyad.bj.openstorage.cn
 DOMAIN-KEYWORD,in-page-push
+DOMAIN-KEYWORD,is.snssdk.com
 DOMAIN-KEYWORD,kepler.jd.com
 DOMAIN-KEYWORD,keplerapi.jd.com
 DOMAIN-KEYWORD,lkme.cc
@@ -4201,6 +4204,7 @@ IP-CIDR,59.111.239.61/32,no-resolve
 IP-CIDR,59.111.239.62/32,no-resolve
 IP-CIDR,60.28.172.100/32,no-resolve
 IP-CIDR,61.151.231.157/32,no-resolve
+IP-CIDR,81.71.61.216/32,no-resolve
 IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,no-resolve
 IP-CIDR6,2402:4e00:1900:1700:0:9554:1ad9:c3a/128,no-resolve
 IP-CIDR6,2402:4e00:8030:1::17/128,no-resolve
@@ -4240,5 +4244,7 @@ AND,((DOMAIN-KEYWORD,ssdk-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-
 AND,((DOMAIN-KEYWORD,tnc,extended-matching),(AND,((OR,((DOMAIN-KEYWORD,-bjlgy,extended-matching),(DOMAIN-KEYWORD,-alisc,extended-matching),(DOMAIN-KEYWORD,-aliec,extended-matching),(DOMAIN-KEYWORD,-alisg,extended-matching))),(OR,((DOMAIN-SUFFIX,snssdk.com,extended-matching),(DOMAIN-SUFFIX,isnssdk.com,extended-matching),(DOMAIN-SUFFIX,toutiaoapi.com,extended-matching),(DOMAIN-SUFFIX,bytedance.com,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching))))))
 AND,((DOMAIN-KEYWORD,v,extended-matching),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com,extended-matching))
 AND,((DOMAIN-KEYWORD,webcast100-ws-c-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching))
+AND,((DOMAIN-KEYWORD,zijieapi),(DOMAIN-KEYWORD,ad))
 AND,((IP-ASN,45090,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP))
 AND,((IP-ASN,63646,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP))
+AND,((OR,((DOMAIN-SUFFIX,bytegecko.com,extended-matching),(DOMAIN-SUFFIX,byteeffecttos.com,extended-matching))),(DOMAIN-KEYWORD,ncdn,extended-matching))

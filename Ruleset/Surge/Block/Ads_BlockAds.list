@@ -1,5 +1,5 @@
 # 规则名称: Ads_BlockAds
-# 规则统计: 825
+# 规则统计: 832
 
 DOMAIN,180.76.76.200
 DOMAIN,4lke.online
@@ -48,12 +48,14 @@ DOMAIN,ads.95516.com
 DOMAIN,ads.cup.com.cn
 DOMAIN,ads.exoclick.com
 DOMAIN,ads.pubmatic.com
+DOMAIN,ads.reader.yueyouxs.com
 DOMAIN,ads.service.kugou.com
 DOMAIN,adse.wsa.ximalaya.com
 DOMAIN,adse.ximalaya.com
 DOMAIN,adsehera.ximalaya.com
 DOMAIN,adservice.google.com
-DOMAIN,adserviceretry.kglink.cn,DIRECT
+DOMAIN,adservice.kugou.com
+DOMAIN,adserviceretry.kglink.cn
 DOMAIN,adserviceretry.kugou.com
 DOMAIN,adshows.21cn.com
 DOMAIN,adsmind.gdtimg.com
@@ -159,8 +161,6 @@ DOMAIN,devs-data.dutils.com
 DOMAIN,df.tanx.com
 DOMAIN,dflow.bz.mgtv.com
 DOMAIN,dgstatic.jd.com
-DOMAIN,dig.bdurl.net
-DOMAIN,dig.zjurl.cn
 DOMAIN,dm.bytedance.com
 DOMAIN,dm.pstatp.com
 DOMAIN,dm.toutiao.com
@@ -281,7 +281,6 @@ DOMAIN,info6.video.qq.com
 DOMAIN,init.supersonicads.com
 DOMAIN,ios.bugly.qq.com
 DOMAIN,ios.video.mpush.qq.com
-DOMAIN,is.snssdk.com
 DOMAIN,iyes.youku.com
 DOMAIN,janapi.jd.com
 DOMAIN,jump.admobile.top
@@ -395,6 +394,7 @@ DOMAIN,sin3-ib.adnxs.com
 DOMAIN,sis-ipv6.jpush.cn
 DOMAIN,smartop-sdkapi.jiguang.cn
 DOMAIN,soul-ad.soulapp.cn
+DOMAIN,splashimgretrybssdl.cloud.kugou.com
 DOMAIN,ssp.maplehaze.cn
 DOMAIN,st.appsad.cn
 DOMAIN,stat.y.qq.com
@@ -621,11 +621,14 @@ DOMAIN-KEYWORD,bdsp.x.jd.com
 DOMAIN-KEYWORD,bjimp.voiceads.cn
 DOMAIN-KEYWORD,client-dmp.suishenyun.cn
 DOMAIN-KEYWORD,clk.gentags.net
+DOMAIN-KEYWORD,dig.bdurl.net
+DOMAIN-KEYWORD,dig.zjurl.cn
 DOMAIN-KEYWORD,dm.bytedance.com
 DOMAIN-KEYWORD,dm.pstatp.com
 DOMAIN-KEYWORD,dm.toutiao.com
 DOMAIN-KEYWORD,iflyad.bj.openstorage.cn
 DOMAIN-KEYWORD,in-page-push
+DOMAIN-KEYWORD,is.snssdk.com
 DOMAIN-KEYWORD,kepler.jd.com
 DOMAIN-KEYWORD,keplerapi.jd.com
 DOMAIN-KEYWORD,lkme.cc
@@ -730,6 +733,7 @@ IP-CIDR,59.111.239.61/32,no-resolve
 IP-CIDR,59.111.239.62/32,no-resolve
 IP-CIDR,60.28.172.100/32,no-resolve
 IP-CIDR,61.151.231.157/32,no-resolve
+IP-CIDR,81.71.61.216/32,no-resolve
 IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,no-resolve
 IP-CIDR6,2402:4e00:1900:1700:0:9554:1ad9:c3a/128,no-resolve
 IP-CIDR6,2402:4e00:8030:1::17/128,no-resolve
@@ -748,6 +752,7 @@ URL-REGEX,^http:\/\/116\.63\.10\.135\/resolve
 URL-REGEX,^http:\/\/116\.63\.10\.31\/resolve
 URL-REGEX,^http:\/\/117\.144\.238\.29\/resolve
 URL-REGEX,^http:\/\/117\.185\.228\.108\/resolve
+URL-REGEX,^http:\/\/119\.29\.29\.98\/d\?
 URL-REGEX,^http:\/\/120\.46\.169\.234\/resolve
 URL-REGEX,^http:\/\/121\.36\.72\.124\/resolve
 URL-REGEX,^http:\/\/122\.9\.13\.79\/resolve
@@ -766,12 +771,12 @@ URL-REGEX,^http:\/\/apd-\w+\.v\.smtcdns\.com\/(defaultts|omts|vmind\.qqvideo)\.t
 URL-REGEX,^http:\/\/apd-vlive\.apdcdn\.tc\.qq\.com\/vmind\.qqvideo\.tc\.qq\.com\/\w+
 URL-REGEX,^http:\/\/api\.weibo\.cn\/2\/httpdns\/config
 URL-REGEX,^http:\/\/api\.weibo\.cn\/httpdns\/config
+URL-REGEX,^http:\/\/log\.stat\.kugou\.com\/mobile\/ad\.html
 URL-REGEX,^http:\/\/mobile-thor\.api\.mgtv\.com\/v1\/vod\/cms\/list\?
 URL-REGEX,^http:\/\/mobilead\.kuwo\.cn\/EcomResourceServer
 URL-REGEX,^http:\/\/mobilead\.kuwo\.cn\/MobileAdServer
 URL-REGEX,^http:\/\/mobileso\.bz\.mgtv\.com\/spotlight\/search\/v1\?
 URL-REGEX,^http:\/\/p\d+-be-pack-sign\.pglstatp-toutiao\.com\/(ad-app-package|web\.business\.image)\/
-URL-REGEX,^http:\/\/rich\.kuwo\.cn\/AdService
 URL-REGEX,^http:\/\/rich\.kuwo\.cn\/AdService\/
 URL-REGEX,^http:\/\/rich\.kuwo\.cn\/EcomResourceServer\/
 URL-REGEX,^http:\/\/searchrecterm\.kuwo\.cn\/recterm\.s
@@ -815,12 +820,14 @@ AND,((DOMAIN-KEYWORD,ssdk-,extended-matching),(DOMAIN-SUFFIX,pangle.io,extended-
 AND,((DOMAIN-KEYWORD,tnc,extended-matching),(AND,((OR,((DOMAIN-KEYWORD,-bjlgy,extended-matching),(DOMAIN-KEYWORD,-alisc,extended-matching),(DOMAIN-KEYWORD,-aliec,extended-matching),(DOMAIN-KEYWORD,-alisg,extended-matching))),(OR,((DOMAIN-SUFFIX,snssdk.com,extended-matching),(DOMAIN-SUFFIX,isnssdk.com,extended-matching),(DOMAIN-SUFFIX,toutiaoapi.com,extended-matching),(DOMAIN-SUFFIX,bytedance.com,extended-matching),(DOMAIN-SUFFIX,zijieapi.com,extended-matching))))))
 AND,((DOMAIN-KEYWORD,v,extended-matching),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com,extended-matching))
 AND,((DOMAIN-KEYWORD,webcast100-ws-c-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching))
+AND,((DOMAIN-KEYWORD,zijieapi),(DOMAIN-KEYWORD,ad))
 AND,((IP-ASN,45090,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP))
 AND,((IP-ASN,63646,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP))
 AND,((IP-CIDR,110.249.199.75/32,no-resolve),(DEST-PORT,6443))
 AND,((IP-CIDR,111.225.147.191/32,no-resolve),(DEST-PORT,6443))
 AND,((IP-CIDR,111.63.61.101/32,no-resolve),(DEST-PORT,6443))
 AND,((IP-CIDR,220.243.141.0/32,no-resolve),(DEST-PORT,6443))
+AND,((OR,((DOMAIN-SUFFIX,bytegecko.com,extended-matching),(DOMAIN-SUFFIX,byteeffecttos.com,extended-matching))),(DOMAIN-KEYWORD,ncdn,extended-matching))
 AND,((URL-REGEX,^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/d,extended-matching),(USER-AGENT,*com.xunmeng.pinduoduo*))
 AND,((URL-REGEX,^http:\/\/.+\/amdc\/mobileDispatch,extended-matching),(USER-AGENT,%E9%97%B2%E9%B1%BC*))
 AND,((URL-REGEX,^http:\/\/.+\/amdc\/mobileDispatch,extended-matching),(USER-AGENT,Cainiao4iPhone*))
