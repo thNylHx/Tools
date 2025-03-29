@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4304
+#!Rule = 4302
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -2713,7 +2713,6 @@ DOMAIN-SUFFIX,mobileservice.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mobilityware.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mobisage.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mobjump.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,mobvista.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mobwithad.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mojiva.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mon.zijieapi.com,REJECT,extended-matching,pre-matching
@@ -2819,7 +2818,6 @@ DOMAIN-SUFFIX,nsclick.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,nsclick.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,nsclickvideo.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,nstat.tudou.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,ntalker.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ntfsformac.cc,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ntfsformac.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ntv.io,REJECT,extended-matching,pre-matching
