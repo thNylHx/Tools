@@ -4243,6 +4243,6 @@ AND,((DOMAIN-KEYWORD,tnc,extended-matching),(AND,((OR,((DOMAIN-KEYWORD,-bjlgy,ex
 AND,((DOMAIN-KEYWORD,v,extended-matching),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com,extended-matching))
 AND,((DOMAIN-KEYWORD,webcast100-ws-c-,extended-matching),(DOMAIN-SUFFIX,amemv.com,extended-matching))
 AND,((DOMAIN-KEYWORD,zijieapi),(DOMAIN-KEYWORD,ad))
-AND,((IP-ASN,45090,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP))
-AND,((IP-ASN,63646,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP))
+AND,((IP-ASN,45090,no-resolve),(DST-PORT,25641),(PROTOCOL,TCP))
+AND,((IP-ASN,63646,no-resolve),(DST-PORT,25641),(PROTOCOL,TCP))
 AND,((OR,((DOMAIN-SUFFIX,bytegecko.com,extended-matching),(DOMAIN-SUFFIX,byteeffecttos.com,extended-matching))),(DOMAIN-KEYWORD,ncdn,extended-matching))
