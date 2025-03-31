@@ -7,11 +7,9 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
+#!date=2025-03-27 23:04:43
 
 [Rule]
-URL-REGEX,"^https:\/\/patientgate\.91160\.com\/advert-api\/v1\/advert\/homepage_icon\?",DIRECT,extended-matching
-URL-REGEX,"^https:\/\/patientgate\.91160\.com\/advert-api\/",REJECT-TINYGIF,extended-matching
 DOMAIN,httpdns.music.163.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.n.netease.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns-sdk.n.netease.com,REJECT,extended-matching,pre-matching
@@ -101,11 +99,21 @@ DOMAIN-SUFFIX,igexin.com,REJECT,extended-matching,pre-matching
 [Map Local]
 ^https:\/\/msglb\.91160\.com\/msg\/outer\/broker\/get$ data-type=text data="{}" status-code=200
 
+^https:\/\/patientgate\.91160\.com\/advert-api\/ data-type=text data="{}" status-code=200
+
+^https:\/\/snsapi\.91160\.com\/vipmemberapi\/mbCombo\/mbComboWords\? data-type=text data="{}" status-code=200
+
 ^https:\/\/patientgate\.91160\.com\/rec\/homepage\/open\/getUserGoodsList\? data-type=text data="{}" status-code=200
 
+^https:\/\/snsapi\.91160\.com\/hotword\/open\/v1\/getSearchExplore\? data-type=text data="{}" status-code=200
+
+^https:\/\/snsapi\.91160\.com\/hotword\/open\/v1\/getHotWordPlate\? data-type=text data="{}" status-code=200
+
+^https:\/\/snsapi\.91160\.com\/engine\/backgroundWord\/queryForFrontend\? data-type=text data="{}" status-code=200
+
 [Script]
-body_rewrite_100 = type=http-response, pattern=^https:\/\/soapi\.91160\.com\/homepage-recommendation\/recommendation\/medical\/complex\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.checkupList%22%5D%5D%5D
+body_rewrite_97 = type=http-response, pattern=^https:\/\/soapi\.91160\.com\/homepage-recommendation\/recommendation\/medical\/complex\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.checkupList%22%5D%5D%5D
 
 [MITM]
-hostname = %APPEND% patientgate.91160.com, soapi.91160.com, msglb.91160.com, patientappapi.91160.com
+hostname = %APPEND% patientgate.91160.com, soapi.91160.com, snsapi.91160.com, msglb.91160.com, patientappapi.91160.com
 
