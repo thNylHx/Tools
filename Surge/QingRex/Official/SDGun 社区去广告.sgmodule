@@ -1,17 +1,25 @@
-#!name=SDGun 社区去广告
-#!desc=去开屏, 轮播等
+#!name=SDGun 社区 Tablet 访问
+#!desc=替换 User-Agent, 修改 JS/CSS
 #!category=xream
 
-[General]
+[Header Rewrite]
 
-force-http-engine-hosts = %APPEND% mag1.sdgun.net
+http-request ^https?:\/\/bbs\.sdgun\.com\.cn header-del User-Agent
+http-request ^https?:\/\/bbs\.sdgun\.com\.cn header-add User-Agent "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1 Edg/135.0.0.0"
+
+
+# [URL Rewrite]
+
+# (^https?:\/\/bbs\.sdgun\.com\.cn\/forum\.php\?mod=viewthread&.*?mobile=)1(&.*?$|$) $1no$2 302
+# (^https?:\/\/bbs\.sdgun\.com\.cn\/forum-.*?\.html)(?!.*mobile=1) $1?mobile=1 302
+# (^https?:\/\/bbs\.sdgun\.com\.cn\/forum\.php\?gid=\d+)(?!.*mobile=1) $1&mobile=1 302
+
+
+[Body Rewrite]
+
+http-response "^https?:\/\/bbs\.sdgun\.com\.cn\/template\/.*?\/image\/common\.js" "(supporttouch\s*=\s*).*?(\r?\n)" "$1true;$2"
+http-response "^https?:\/\/bbs\.sdgun\.com\.cn\/template\/.*?\/image\/style\.css" "\/\*\ common\ \*\/" "html { font-size: 5vw !important; } img, video { max-width: 50vw !important; max-height: 50vh !important; }"
 
 [MITM]
 
-hostname = %APPEND%, mag1.sdgun.net
-
-[Map Local]
-
-^https?:\/\/mag1\.sdgun\.net\/mag\/operative\/v1\/ad\/listNotEndByPlace data-type=text data='{"success":true,"code":100,"msg":null,"list":[]}' header='Content-Type:application/json'
-
-^https?:\/\/mag1\.sdgun\.net\/mag\/operative\/v1\/Ad\/listNotEndByPlaceWap data-type=text data='{"success":true,"code":100,"data":{"themeTop":[],"wap_topic_content_ad":[],"themeBottom":[],"appThemeTopStyle":"1","userBehindAdStyle":"1","appThemeBottom":[],"cloud_ad_type":"","commentTop":[],"userBehindAd":[],"themeTopStyle":"1","appThemeTop":[],"appThemeBottomStyle":"1"},"msg":null}' header='Content-Type:application/json'
+hostname = %APPEND% bbs.sdgun.com.cn
