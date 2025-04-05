@@ -1,9 +1,0 @@
-services:
-  ddns-go:
-    image: jeessy/ddns-go
-    container_name: ddns-go
-    restart: always
-    network_mode: host
-    volumes:
-      - ./data:/root
-    detach: true
