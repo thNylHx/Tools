@@ -74,13 +74,14 @@ DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,asiad.byteactivity,REJECT,extended-matching,pre-matching
 
+[Body Rewrite]
+http-response-jq ^https:\/\/mbd\.baidu\.com\/ccs\/v1\/start\/confsync\? 'delpaths([["data","service","config","advertisement"]])'
+http-response-jq ^https:\/\/mbd\.baidu\.com\/ccs\/v1\/start\/confsync\? 'delpaths([["data","service","config","youa","pm_config_ad"]])'
+
 [Map Local]
 ^https:\/\/pan\.baidu\.com\/act\/api\/conf\?.*conf_key=youa_core_config_ios data-type=text data="{}" status-code=200
 
 ^https:\/\/pan\.baidu\.com\/youai\/material\/v1\/getbynavid\?.*nav_id=1 data-type=text data="{}" status-code=200
-
-[Script]
-body_rewrite_78 = type=http-response, pattern=^https:\/\/mbd\.baidu\.com\/ccs\/v1\/start\/confsync\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.service.config.advertisement%22%2C%22data.service.config.youa.pm_config_ad%22%5D%5D%5D
 
 [MITM]
 hostname = %APPEND% pan.baidu.com, mbd.baidu.com

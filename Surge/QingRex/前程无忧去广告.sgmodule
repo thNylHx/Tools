@@ -9,6 +9,11 @@
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!date=2024-12-29 00:13:17
 
+[Body Rewrite]
+http-response-jq ^https:\/\/cupid\.51job(app)?\.com\/open\/noauth\/recommend\/job-tab-dynamic\? 'delpaths([["resultbody","adsTabFeeds"]])'
+http-response-jq ^https:\/\/cupid\.51job(app)?\.com\/open\/user-task\/user\/task\/ 'delpaths([["resultbody","availableTaskList"]])'
+http-response-jq ^https:\/\/cupid\.51job(app)?\.com\/open\/tab\/good-job\/modules 'delpaths([["resultbody","bannerList"]])'
+
 [Map Local]
 ^https:\/\/appapi\.51job\.com\/api\/market\/get_launch\.php\? data-type=text data="{}" status-code=200
 
@@ -21,13 +26,6 @@
 ^https:\/\/cupid\.51job(app)?\.com\/open\/noauth\/popUp\/ data-type=text data="{}" status-code=200
 
 ^https:\/\/cupid\.51job(app)?\.com\/open\/operation\/get\/banner-list\? data-type=text data="{}" status-code=200
-
-[Script]
-body_rewrite_14 = type=http-response, pattern=^https:\/\/cupid\.51job(app)?\.com\/open\/noauth\/recommend\/job-tab-dynamic\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22resultbody.adsTabFeeds%22%5D%5D%5D
-
-body_rewrite_16 = type=http-response, pattern=^https:\/\/cupid\.51job(app)?\.com\/open\/user-task\/user\/task\/, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22resultbody.availableTaskList%22%5D%5D%5D
-
-body_rewrite_19 = type=http-response, pattern=^https:\/\/cupid\.51job(app)?\.com\/open\/tab\/good-job\/modules, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22resultbody.bannerList%22%5D%5D%5D
 
 [MITM]
 hostname = %APPEND% appapi.51job.com, cupid.51job.com, cupid.51jobapp.com

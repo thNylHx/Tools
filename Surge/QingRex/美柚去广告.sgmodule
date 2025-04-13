@@ -144,8 +144,8 @@ DOMAIN,ad-evods.tianya.tv,REJECT,extended-matching,pre-matching
 ^https:\/\/images\.pinduoduo\.com\/mrk\/ - reject
 ^https:\/\/images\.pinduoduo\.com\/marketing_api\/ - reject
 
-[Script]
-body_rewrite_140 = type=http-response, pattern=^https:\/\/common\.seeyouyima\.com\/v2\/conf_list$, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.confList.Minor_mode_card%22%5D%5D%5D
+[Body Rewrite]
+http-response-jq ^https:\/\/common\.seeyouyima\.com\/v2\/conf_list$ 'delpaths([["data","confList","Minor_mode_card"]])'
 
 [MITM]
 hostname = %APPEND% circle.seeyouyima.com, circle.xmseeyouyima.com, common.seeyouyima.com, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com

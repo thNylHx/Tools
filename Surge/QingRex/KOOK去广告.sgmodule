@@ -9,8 +9,10 @@
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!date=2024-12-13 06:49:26
 
-[Script]
-body_rewrite_12 = type=http-response, pattern=^https:\/\/(m|www)\.kookapp\.cn\/api\/v\d\/user\/settings$, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22ad_banner%22%2C%22advertise_on_off%22%5D%5D%2C%5B%22json-replace%22%2C%5B%5B%22ios_mall_switch%22%2Cfalse%5D%5D%5D%5D
+[Body Rewrite]
+http-response-jq ^https:\/\/(m|www)\.kookapp\.cn\/api\/v\d\/user\/settings$ 'delpaths([["ad_banner"]])'
+http-response-jq ^https:\/\/(m|www)\.kookapp\.cn\/api\/v\d\/user\/settings$ 'delpaths([["advertise_on_off"]])'
+http-response-jq ^https:\/\/(m|www)\.kookapp\.cn\/api\/v\d\/user\/settings$ 'if (getpath([]) | has("ios_mall_switch")) then (setpath(["ios_mall_switch"]; false)) else . end'
 
 [MITM]
 hostname = %APPEND% m.kookapp.cn, www.kookapp.cn

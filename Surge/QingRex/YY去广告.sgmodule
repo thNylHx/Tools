@@ -66,15 +66,18 @@ DOMAIN,janapi.jd.com,REJECT,extended-matching,pre-matching
 DOMAIN,sdk.tianmu.mobi,REJECT,extended-matching,pre-matching
 DOMAIN,sdk.beizi.biz,REJECT,extended-matching,pre-matching
 
+[Body Rewrite]
+http-response-jq ^https:\/\/yyapp-idx\.yy\.com\/mobyy\/nav\/index\/idx\? '.data[].modules |= map(select(.name != "新版本滚动条" and .name != "通栏轮播" and .name != "新静默位"))'
+http-response-jq ^https:\/\/tab\.yy\.com\/tabs\? 'delpaths([["data","tabsForSelect"]])'
+http-response-jq ^https:\/\/tab\.yy\.com\/tabs\? '.data.tabs |= map(select(.name != "直播" and .name != "短剧")) | {data: .data, message: .message, code: .code}'
+http-response-jq ^https:\/\/personal-center\.yy\.com\/personalCenter\/list\? '.data.modules |= map(select(.moduleName != "Banner轮播")) | .data.modules[] |= if .entrances != null then .entrances |= map(select(.name != "度小满借钱" and .name != "手机充值" and .name != "免流量")) else . end'
+
 [Map Local]
 ^https:\/\/yyapp-fastnet\.yy\.com\/dispatch\? data-type=text data="{}" status-code=200
 
 ^https:\/\/data\.3g\.yy\.com\/popup\/topLiveCardPopup\? data-type=text data="{}" status-code=200
 
 ^https:\/\/yyapp-act-entrance\.yy\.com\/entrance\/list\? data-type=text data="{}" status-code=200
-
-[Script]
-body_rewrite_72 = type=http-response, pattern=^https:\/\/tab\.yy\.com\/tabs\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.tabsForSelect%22%5D%5D%5D
 
 [MITM]
 hostname = %APPEND% yyapp-act-entrance.yy.com, yyapp-fastnet.yy.com, personal-center.yy.com, tab.yy.com, data.3g.yy.com, yyapp-idx.yy.com

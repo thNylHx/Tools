@@ -9,6 +9,20 @@
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!date=2024-12-08 00:49:15
 
+[Body Rewrite]
+http-response-jq ^https:\/\/app\.missevan\.com\/site\/launch\? 'delpaths([["info"]])'
+http-response-jq ^https:\/\/app\.missevan\.com\/site\/config$ 'delpaths([["info","homepage_top_task_button"]])'
+http-response-jq ^https:\/\/app\.missevan\.com\/site\/config$ 'delpaths([["info","teenager_popup_mode"]])'
+http-response-jq ^https:\/\/app\.missevan\.com\/site\/get-top$ 'delpaths([["info","search_words"]])'
+http-response-jq ^https:\/\/app\.missevan\.com\/site\/get-top$ 'delpaths([["info","extra_banners"]])'
+http-response-jq ^https:\/\/app\.missevan\.com\/you-might-like\/my-favors\? 'delpaths([["info","video_card"]])'
+http-response-jq ^https:\/\/app\.missevan\.com\/you-might-like\/my-favors\? '.info.ranks.data|=map(select(.name!="直播榜"))'
+http-response-jq ^https:\/\/fm\.missevan\.com\/api\/v2\/recommended\/top\? 'delpaths([["info"]])'
+http-response-jq ^https:\/\/app\.missevan\.com\/drama\/catalog-homepage\? 'delpaths([["info","extra_banners"]])'
+http-response-jq ^https:\/\/app\.missevan\.com\/catalog\/sound-homepage\? 'delpaths([["info","extra_banners"]])'
+http-response-jq ^https:\/\/fm\.missevan\.com\/api\/v\d\/chatroom\/sound\/recommend\? 'delpaths([["info"]])'
+http-response-jq ^https:\/\/app\.missevan\.com\/site\/icons\? '.info.icons |= (if . == null then null else map(select(.title != "直播" and .title != "周边商城")) end)'
+
 [Map Local]
 ^https:\/\/fm\.missevan\.com\/api\/v\d\/chatroom\/open\/search-recommend-list$ data-type=text data="{}" status-code=200
 
@@ -17,23 +31,6 @@
 ^https:\/\/app\.missevan\.com\/drama\/get-recommend-by-id\? data-type=text data="{}" status-code=200
 
 ^https:\/\/fm\.missevan\.com\/api\/v\d\/meta\/banner$ data-type=text data="{}" status-code=200
-
-[Script]
-body_rewrite_12 = type=http-response, pattern=^https:\/\/app\.missevan\.com\/site\/launch\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22info%22%5D%5D%5D
-
-body_rewrite_13 = type=http-response, pattern=^https:\/\/app\.missevan\.com\/site\/config$, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22info.homepage_top_task_button%22%2C%22info.teenager_popup_mode%22%5D%5D%5D
-
-body_rewrite_14 = type=http-response, pattern=^https:\/\/app\.missevan\.com\/site\/get-top$, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22info.search_words%22%2C%22info.extra_banners%22%5D%5D%5D
-
-body_rewrite_15 = type=http-response, pattern=^https:\/\/app\.missevan\.com\/you-might-like\/my-favors\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22info.video_card%22%5D%5D%5D
-
-body_rewrite_17 = type=http-response, pattern=^https:\/\/fm\.missevan\.com\/api\/v2\/recommended\/top\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22info%22%5D%5D%5D
-
-body_rewrite_18 = type=http-response, pattern=^https:\/\/app\.missevan\.com\/drama\/catalog-homepage\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22info.extra_banners%22%5D%5D%5D
-
-body_rewrite_20 = type=http-response, pattern=^https:\/\/app\.missevan\.com\/catalog\/sound-homepage\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22info.extra_banners%22%5D%5D%5D
-
-body_rewrite_21 = type=http-response, pattern=^https:\/\/fm\.missevan\.com\/api\/v\d\/chatroom\/sound\/recommend\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22info%22%5D%5D%5D
 
 [MITM]
 hostname = %APPEND% app.missevan.com, fm.missevan.com

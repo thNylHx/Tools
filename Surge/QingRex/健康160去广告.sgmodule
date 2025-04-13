@@ -96,6 +96,11 @@ DOMAIN-SUFFIX,igexin.com,REJECT,extended-matching,pre-matching
 [URL Rewrite]
 ^https:\/\/patientappapi\.91160\.com\/cus_index\.php\?c=adver - reject
 
+[Body Rewrite]
+http-response-jq ^https:\/\/soapi\.91160\.com\/homepage-recommendation\/recommendation\/medical\/complex\? 'delpaths([["data","checkupList"]])'
+http-response-jq ^https:\/\/soapi\.91160\.com\/homepage-recommendation\/homepage\/flow\? '.data.rows |= map(select(.type as $type | ["GOOD", "ARTICLE"] | index($type) | not))'
+http-response-jq ^https:\/\/patientgate\.91160\.com\/cube\/v1\/unit_page\/page_data\? '.data.modules |= map(select(.name == "announcement" or .name == "guide" or .name == "expert" or .name == "featuredDepartments" or .name == "featureDevice" or .name == "featureTech" or .name == "familyDoctor" or .name == "introduction" or .name == "bus" or .name == "classicCase" or .name == "askEveryone" or .name == "reviews" or .name == "notes"))'
+
 [Map Local]
 ^https:\/\/msglb\.91160\.com\/msg\/outer\/broker\/get$ data-type=text data="{}" status-code=200
 
@@ -110,9 +115,6 @@ DOMAIN-SUFFIX,igexin.com,REJECT,extended-matching,pre-matching
 ^https:\/\/snsapi\.91160\.com\/hotword\/open\/v1\/getHotWordPlate\? data-type=text data="{}" status-code=200
 
 ^https:\/\/snsapi\.91160\.com\/engine\/backgroundWord\/queryForFrontend\? data-type=text data="{}" status-code=200
-
-[Script]
-body_rewrite_97 = type=http-response, pattern=^https:\/\/soapi\.91160\.com\/homepage-recommendation\/recommendation\/medical\/complex\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.checkupList%22%5D%5D%5D
 
 [MITM]
 hostname = %APPEND% patientgate.91160.com, soapi.91160.com, snsapi.91160.com, msglb.91160.com, patientappapi.91160.com

@@ -150,6 +150,10 @@ DOMAIN,api.verify.mob.com,REJECT,extended-matching,pre-matching
 DOMAIN,log-verify.mob.com,REJECT,extended-matching,pre-matching
 DOMAIN,sdk.push.mob.com,REJECT,extended-matching,pre-matching
 
+[Body Rewrite]
+http-response-jq ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/banner\/common\/getBannerByTypeV2\? 'del(.list[] | select(.bannerChannelName == "活动"))'
+http-response-jq ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/banner\/common\/getAllBannerPage\? 'del(.data[] | select(.bannerChannelName == "活动"))'
+
 [Map Local]
 ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/resource\/get\? data-type=text data="{}" status-code=200
 

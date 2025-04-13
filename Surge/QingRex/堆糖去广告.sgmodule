@@ -98,15 +98,27 @@ DOMAIN,toblog.ctobsnssdk.com,REJECT,extended-matching,pre-matching
 ^https:\/\/images\.pinduoduo\.com\/mrk\/ - reject
 ^https:\/\/images\.pinduoduo\.com\/marketing_api\/ - reject
 
+[Body Rewrite]
+http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","REWARD_AD_PLACES"]])'
+http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","SPLASH_SWING_OPEN"]])'
+http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","REWARD_AD_PHOTO_EDITOR"]])'
+http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","REWARD_AD_PAG_EDITOR"]])'
+http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","AD_PRICE_SHOW"]])'
+http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","AD_SCREEN_WAKEUP_TIME"]])'
+http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","REWARD_AD_CUTOUT_NUM"]])'
+http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","AD_HOME_ENTER_POP_COUNT"]])'
+http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","SHARE_BANNER"]])'
+http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","AD_MENU_SELECTIONS"]])'
+http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","ME_TAB","ANNOUNCEMENT"]])'
+http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","ME_TAB","MEMBERSHIP"]])'
+http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","ME_TAB","MEMBERSHIP2"]])'
+
 [Map Local]
 ^https:\/\/(www|api)\.duitang\.com\/napi\/(ad|ads)\/ data-type=text data="{}" status-code=200
 
 ^https:\/\/api\.duitang\.com\/napi\/infra\/settings\/ data-type=text data="{}" status-code=200
 
 ^https:\/\/api\.duitang\.com\/napi\/vienna\/daren\/daren\/recommend\/ data-type=text data="{}" status-code=200
-
-[Script]
-body_rewrite_102 = type=http-response, pattern=^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.REWARD_AD_PLACES%22%2C%22data.SPLASH_SWING_OPEN%22%2C%22data.REWARD_AD_PHOTO_EDITOR%22%2C%22data.REWARD_AD_PAG_EDITOR%22%2C%22data.AD_PRICE_SHOW%22%2C%22data.AD_SCREEN_WAKEUP_TIME%22%2C%22data.REWARD_AD_CUTOUT_NUM%22%2C%22data.AD_HOME_ENTER_POP_COUNT%22%2C%22data.SHARE_BANNER%22%2C%22data.AD_MENU_SELECTIONS%22%2C%22data.ME_TAB.ANNOUNCEMENT%22%2C%22data.ME_TAB.MEMBERSHIP%22%2C%22data.ME_TAB.MEMBERSHIP2%22%5D%5D%5D
 
 [MITM]
 hostname = %APPEND% api.duitang.com, www.duitang.com, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com

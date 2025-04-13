@@ -109,11 +109,11 @@ URL-REGEX,"^https:\/\/(ask|cgate)\.zhaopin\.com\/operation\/ad\/",REJECT,extende
 [URL Rewrite]
 ^https:\/\/cgate\.zhaopin\.com\/bdp\/commercial\/queryLinkData$ - reject
 
+[Body Rewrite]
+http-response-jq ^https:\/\/ask\.zhaopin\.com\/plat-zqa-server\/home\/\d\.\d\.\d\/getHomeContents\? 'delpaths([["data","templates",0,"data","banner"]])'
+
 [Map Local]
 ^https:\/\/cgate\.zhaopin\.com\/resumeapi\/resumeCheck\/positionDetailBottomTipCheck$ data-type=text data="{}" status-code=200
-
-[Script]
-body_rewrite_108 = type=http-response, pattern=^https:\/\/ask\.zhaopin\.com\/plat-zqa-server\/home\/\d\.\d\.\d\/getHomeContents\?, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/scripts/body-rewrite.js, requires-body=true, max-size=-1, timeout=30, argument=%5B%5B%22json-del%22%2C%5B%22data.templates%5B0%5D.data.banner%22%5D%5D%5D
 
 [MITM]
 hostname = %APPEND% ask.zhaopin.com, cgate.zhaopin.com

@@ -10,6 +10,9 @@
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!date=2025-03-06 22:30:00
 
+[Body Rewrite]
+http-response-jq ^https:\/\/(app-v1\.ecoliving168\.com|852b95d36\.xwlpk\.cn)\/api\/v1\/movie\/index_recommend\? '.data[].list |= map(select(.type != 3)) | .data |= map(select(.layout != "advert_self"))'
+
 [MITM]
 hostname = %APPEND% app-v1.ecoliving168.com, 852b95d36.xwlpk.cn
 
