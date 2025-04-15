@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4338
+#!Rule = 4340
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1052,6 +1052,8 @@ DOMAIN-SUFFIX,adivery.ir,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adjust.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adjust.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adjust.io,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,adjust.net.in,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,adjust.world,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adk2x.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adkernel.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adkmob.com,REJECT,extended-matching,pre-matching
