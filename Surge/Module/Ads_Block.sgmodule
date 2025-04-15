@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4340
+#!Rule = 4337
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -864,11 +864,8 @@ DOMAIN-SUFFIX,ad-cdn.qingting.fm,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad-center.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad-channel.wikawika.xyz,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad-cloud.jp,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,ad-cmp.hismarttv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad-delivery.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad-display.wikawika.xyz,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,ad-download.hismarttv.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,ad-imp.hismarttv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad-locus.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad-maven.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad-move.jp,REJECT,extended-matching,pre-matching
@@ -2217,7 +2214,6 @@ DOMAIN-SUFFIX,heads-ak.spotify.com.edgesuite.net,REJECT,extended-matching,pre-ma
 DOMAIN-SUFFIX,heads-fa.spotify.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hexagon-analytics.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,heyzap.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,hismarttv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,histats.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hitslink.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hivecn.cn,REJECT,extended-matching,pre-matching
@@ -2674,6 +2670,7 @@ DOMAIN-SUFFIX,miam4.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,miao.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,miaozhen.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,miav-cse.avlyun.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,micro-xdb.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,microad-cn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,microad.co.jp,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,microad.jp,REJECT,extended-matching,pre-matching
