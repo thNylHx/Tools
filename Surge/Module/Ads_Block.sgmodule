@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4382
+#!Rule = 4435
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -303,6 +303,8 @@ DOMAIN,devs-data.dutils.com,REJECT,extended-matching,pre-matching
 DOMAIN,df.tanx.com,REJECT,extended-matching,pre-matching
 DOMAIN,dflow.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,dgstatic.jd.com,REJECT,extended-matching,pre-matching
+DOMAIN,dig.bdurl.net,REJECT,extended-matching,pre-matching
+DOMAIN,dig.zjurl.cn,REJECT,extended-matching,pre-matching
 DOMAIN,dispatcher.360in.com,REJECT,extended-matching,pre-matching
 DOMAIN,dm.bytedance.com,REJECT,extended-matching,pre-matching
 DOMAIN,dm.pstatp.com,REJECT,extended-matching,pre-matching
@@ -314,7 +316,10 @@ DOMAIN,dns.qiyipic.iqiyi.com,REJECT,extended-matching,pre-matching
 DOMAIN,dns.weibo.cn,REJECT,extended-matching,pre-matching
 DOMAIN,dns.weixin.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,dns.weixin.qq.com.cn,REJECT,extended-matching,pre-matching
+DOMAIN,dns2.q2cdn.com,REJECT,extended-matching,pre-matching
 DOMAIN,doh.iqiyi.com,REJECT,extended-matching,pre-matching
+DOMAIN,doh.ptqy.gitv.tv,REJECT,extended-matching,pre-matching
+DOMAIN,dotserver.douyucdn.cn,REJECT,extended-matching,pre-matching
 DOMAIN,dsp-x.jd.com,REJECT,extended-matching,pre-matching
 DOMAIN,dsp.fcbox.com,REJECT,extended-matching,pre-matching
 DOMAIN,dsp.toutiao.com,REJECT,extended-matching,pre-matching
@@ -383,6 +388,7 @@ DOMAIN,h-adashx.ut.taobao.com,REJECT,extended-matching,pre-matching
 DOMAIN,h.trace.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,hc-ssp.sm.cn,REJECT,extended-matching,pre-matching
 DOMAIN,hd.xiaojukeji.com,REJECT,extended-matching,pre-matching
+DOMAIN,hdns.ksyun.com,REJECT,extended-matching,pre-matching
 DOMAIN,hhbypdoecp.com,REJECT,extended-matching,pre-matching
 DOMAIN,hm.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,hmma.baidu.com,REJECT,extended-matching,pre-matching
@@ -400,19 +406,26 @@ DOMAIN,httpdns.bilivideo.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.browser.miui.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.c.cdnhwc2.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.calorietech.com,REJECT,extended-matching,pre-matching
+DOMAIN,httpdns.cctv.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.danuoyi.tbcache.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.huaweicloud.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.kg.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.kwd.inkuai.com,REJECT,extended-matching,pre-matching
+DOMAIN,httpdns.meituan.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.music.163.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.n.netease.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.n.shifen.com,REJECT,extended-matching,pre-matching
+DOMAIN,httpdns.ocloud.heytapmobi.com,REJECT,extended-matching,pre-matching
+DOMAIN,httpdns.ocloud.oppomobile.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.platform.dbankcloud.cn,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.platform.dbankcloud.com,REJECT,extended-matching,pre-matching
+DOMAIN,httpdns.push.heytapmobi.com,REJECT,extended-matching,pre-matching
+DOMAIN,httpdns.push.oppomobile.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.volcengineapi.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.yunxindns.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.zybang.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns1.cc.cdnhwc5.com,REJECT,extended-matching,pre-matching
+DOMAIN,httpdnsmultiapivip.meituan.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpsdns.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,huatuocode.huatuo.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,hudong.alicdn.com,REJECT,extended-matching,pre-matching
@@ -539,6 +552,7 @@ DOMAIN,pagead2.googlesyndication.com,REJECT,extended-matching,pre-matching
 DOMAIN,pageviewp.icbc.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN,pangolin.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN,partwithner.com,REJECT,extended-matching,pre-matching
+DOMAIN,paydns.wechatpay.cn,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.gtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,pgdt.ugdtimg.com,REJECT,extended-matching,pre-matching
@@ -4287,6 +4301,7 @@ IP-CIDR,59.111.239.61/32,REJECT,no-resolve,pre-matching
 IP-CIDR,59.111.239.62/32,REJECT,no-resolve,pre-matching
 IP-CIDR,60.28.172.100/32,REJECT,no-resolve,pre-matching
 IP-CIDR,61.151.231.157/32,REJECT,no-resolve,pre-matching
+IP-CIDR,8.134.241.67/32,REJECT,no-resolve,pre-matching
 IP-CIDR,81.71.61.216/32,REJECT,no-resolve,pre-matching
 IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,REJECT,no-resolve,pre-matching
 IP-CIDR6,2402:4e00:1900:1700:0:9554:1ad9:c3a/128,REJECT,no-resolve,pre-matching
@@ -4296,9 +4311,47 @@ IP-CIDR6,2405:1480:3000:303f::303f/128,REJECT,no-resolve,pre-matching
 IP-CIDR6,2408:8711:10:10::20/128,REJECT,no-resolve,pre-matching
 IP-CIDR6,2409:8702:4860:10::4d/128,REJECT,no-resolve,pre-matching
 IP-CIDR6,240e:928:1400:10::25/128,REJECT,no-resolve,pre-matching
+URL-REGEX,"^http:\/\/101\.35\.204\.35\/d",REJECT,extended-matching
+URL-REGEX,"^http:\/\/101\.35\.212\.35\/d",REJECT,extended-matching
+URL-REGEX,"^http:\/\/101\.91\.140\.124\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/101\.91\.140\.224\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/103\.37\.155\.60\/fetch",REJECT,extended-matching
+URL-REGEX,"^http:\/\/103\.41\.167\.237\/v2\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/103\.44\.58\.64\/md\?",REJECT,extended-matching
+URL-REGEX,"^http:\/\/112\.64\.218\.119\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/112\.65\.200\.117\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/114\.110\.96\.26\/d",REJECT,extended-matching
+URL-REGEX,"^http:\/\/114\.110\.96\.6\/d",REJECT,extended-matching
+URL-REGEX,"^http:\/\/114\.110\.97\.30\/d",REJECT,extended-matching
+URL-REGEX,"^http:\/\/114\.110\.97\.97\/d",REJECT,extended-matching
+URL-REGEX,"^http:\/\/114\.116\.215\.110\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/116\.63\.10\.135\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/116\.63\.10\.31\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/117\.144\.238\.29\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/117\.185\.228\.108\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/120\.46\.169\.234\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/121\.36\.72\.124\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/121\.5\.84\.85\/d",REJECT,extended-matching
+URL-REGEX,"^http:\/\/122\.9\.13\.79\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/122\.9\.15\.129\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/122\.9\.7\.134\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/162\.14\.3\.250\/v4",REJECT,extended-matching
+URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/",REJECT,extended-matching
+URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/180\.76\.76\.220\/v\d\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/182\.254\.116\.116\/d",REJECT,extended-matching
+URL-REGEX,"^http:\/\/182\.256\.116\.116\/d",REJECT,extended-matching
+URL-REGEX,"^http:\/\/47\.100\.123\.169\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/47\.101\.175\.206\/resolve",REJECT,extended-matching
+URL-REGEX,"^http:\/\/81\.69\.130\.131\/d",REJECT,extended-matching
+URL-REGEX,"^http:\/\/\[2402:4e00:1411:201:0:9964:ba21:5a41\]\/d",REJECT,extended-matching
+URL-REGEX,"^http:\/\/api\.weibo\.cn\/2\/httpdns\/config",REJECT,extended-matching
+URL-REGEX,"^http:\/\/api\.weibo\.cn\/httpdns\/config",REJECT,extended-matching
+URL-REGEX,"^http:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns",REJECT,extended-matching
+URL-REGEX,"^http:\/\/xmc\.ximalaya\.com\/xmlymain-login-web\/login\/",REJECT,extended-matching
 URL-REGEX,^http:\/\/101\.91\.140\.124\/resolve,REJECT,extended-matching
 URL-REGEX,^http:\/\/101\.91\.140\.224\/resolve,REJECT,extended-matching
-URL-REGEX,^http:\/\/103\.41\.167\.237\/v2\/resolv,REJECT,extended-matching
+URL-REGEX,^http:\/\/103\.41\.167\.237\/v2\/resolve,REJECT,extended-matching
 URL-REGEX,^http:\/\/112\.64\.218\.119\/resolve,REJECT,extended-matching
 URL-REGEX,^http:\/\/112\.65\.200\.117\/resolve,REJECT,extended-matching
 URL-REGEX,^http:\/\/114\.116\.215\.110\/resolve,REJECT,extended-matching

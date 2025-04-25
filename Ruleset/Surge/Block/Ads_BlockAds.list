@@ -1,5 +1,5 @@
 # 规则名称: Ads_BlockAds
-# 规则统计: 832
+# 规则统计: 885
 
 DOMAIN,180.76.76.200
 DOMAIN,4lke.online
@@ -161,6 +161,8 @@ DOMAIN,devs-data.dutils.com
 DOMAIN,df.tanx.com
 DOMAIN,dflow.bz.mgtv.com
 DOMAIN,dgstatic.jd.com
+DOMAIN,dig.bdurl.net
+DOMAIN,dig.zjurl.cn
 DOMAIN,dm.bytedance.com
 DOMAIN,dm.pstatp.com
 DOMAIN,dm.toutiao.com
@@ -171,7 +173,10 @@ DOMAIN,dns.qiyipic.iqiyi.com
 DOMAIN,dns.weibo.cn
 DOMAIN,dns.weixin.qq.com
 DOMAIN,dns.weixin.qq.com.cn
+DOMAIN,dns2.q2cdn.com
 DOMAIN,doh.iqiyi.com
+DOMAIN,doh.ptqy.gitv.tv
+DOMAIN,dotserver.douyucdn.cn
 DOMAIN,dsp-x.jd.com
 DOMAIN,dsp.toutiao.com
 DOMAIN,e-u1.ubixioe.com
@@ -227,6 +232,7 @@ DOMAIN,gwp.xiaojukeji.com
 DOMAIN,h-adashx.ut.taobao.com
 DOMAIN,h.trace.qq.com
 DOMAIN,hd.xiaojukeji.com
+DOMAIN,hdns.ksyun.com
 DOMAIN,hhbypdoecp.com
 DOMAIN,ht.youporn.com
 DOMAIN,httpdns-api.aliyuncs.com
@@ -242,19 +248,26 @@ DOMAIN,httpdns.bilivideo.com
 DOMAIN,httpdns.browser.miui.com
 DOMAIN,httpdns.c.cdnhwc2.com
 DOMAIN,httpdns.calorietech.com
+DOMAIN,httpdns.cctv.com
 DOMAIN,httpdns.danuoyi.tbcache.com
 DOMAIN,httpdns.huaweicloud.com
 DOMAIN,httpdns.kg.qq.com
 DOMAIN,httpdns.kwd.inkuai.com
+DOMAIN,httpdns.meituan.com
 DOMAIN,httpdns.music.163.com
 DOMAIN,httpdns.n.netease.com
 DOMAIN,httpdns.n.shifen.com
+DOMAIN,httpdns.ocloud.heytapmobi.com
+DOMAIN,httpdns.ocloud.oppomobile.com
 DOMAIN,httpdns.platform.dbankcloud.cn
 DOMAIN,httpdns.platform.dbankcloud.com
+DOMAIN,httpdns.push.heytapmobi.com
+DOMAIN,httpdns.push.oppomobile.com
 DOMAIN,httpdns.volcengineapi.com
 DOMAIN,httpdns.yunxindns.com
 DOMAIN,httpdns.zybang.com
 DOMAIN,httpdns1.cc.cdnhwc5.com
+DOMAIN,httpdnsmultiapivip.meituan.com
 DOMAIN,httpsdns.baidu.com
 DOMAIN,huatuocode.huatuo.qq.com
 DOMAIN,hudong.alicdn.com
@@ -341,6 +354,7 @@ DOMAIN,pagead2.googlesyndication.com
 DOMAIN,pageviewp.icbc.com.cn
 DOMAIN,pangolin.snssdk.com
 DOMAIN,partwithner.com
+DOMAIN,paydns.wechatpay.cn
 DOMAIN,pgdt.gtimg.cn
 DOMAIN,pgdt.ugdtimg.com
 DOMAIN,plbslog.umeng.com
@@ -733,6 +747,7 @@ IP-CIDR,59.111.239.61/32,no-resolve
 IP-CIDR,59.111.239.62/32,no-resolve
 IP-CIDR,60.28.172.100/32,no-resolve
 IP-CIDR,61.151.231.157/32,no-resolve
+IP-CIDR,8.134.241.67/32,no-resolve
 IP-CIDR,81.71.61.216/32,no-resolve
 IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,no-resolve
 IP-CIDR6,2402:4e00:1900:1700:0:9554:1ad9:c3a/128,no-resolve
@@ -742,9 +757,47 @@ IP-CIDR6,2405:1480:3000:303f::303f/128,no-resolve
 IP-CIDR6,2408:8711:10:10::20/128,no-resolve
 IP-CIDR6,2409:8702:4860:10::4d/128,no-resolve
 IP-CIDR6,240e:928:1400:10::25/128,no-resolve
+URL-REGEX,"^http:\/\/101\.35\.204\.35\/d"
+URL-REGEX,"^http:\/\/101\.35\.212\.35\/d"
+URL-REGEX,"^http:\/\/101\.91\.140\.124\/resolve"
+URL-REGEX,"^http:\/\/101\.91\.140\.224\/resolve"
+URL-REGEX,"^http:\/\/103\.37\.155\.60\/fetch"
+URL-REGEX,"^http:\/\/103\.41\.167\.237\/v2\/resolve"
+URL-REGEX,"^http:\/\/103\.44\.58\.64\/md\?"
+URL-REGEX,"^http:\/\/112\.64\.218\.119\/resolve"
+URL-REGEX,"^http:\/\/112\.65\.200\.117\/resolve"
+URL-REGEX,"^http:\/\/114\.110\.96\.26\/d"
+URL-REGEX,"^http:\/\/114\.110\.96\.6\/d"
+URL-REGEX,"^http:\/\/114\.110\.97\.30\/d"
+URL-REGEX,"^http:\/\/114\.110\.97\.97\/d"
+URL-REGEX,"^http:\/\/114\.116\.215\.110\/resolve"
+URL-REGEX,"^http:\/\/116\.63\.10\.135\/resolve"
+URL-REGEX,"^http:\/\/116\.63\.10\.31\/resolve"
+URL-REGEX,"^http:\/\/117\.144\.238\.29\/resolve"
+URL-REGEX,"^http:\/\/117\.185\.228\.108\/resolve"
+URL-REGEX,"^http:\/\/120\.46\.169\.234\/resolve"
+URL-REGEX,"^http:\/\/121\.36\.72\.124\/resolve"
+URL-REGEX,"^http:\/\/121\.5\.84\.85\/d"
+URL-REGEX,"^http:\/\/122\.9\.13\.79\/resolve"
+URL-REGEX,"^http:\/\/122\.9\.15\.129\/resolve"
+URL-REGEX,"^http:\/\/122\.9\.7\.134\/resolve"
+URL-REGEX,"^http:\/\/162\.14\.3\.250\/v4"
+URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/"
+URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/resolve"
+URL-REGEX,"^http:\/\/180\.76\.76\.220\/v\d\/resolve"
+URL-REGEX,"^http:\/\/182\.254\.116\.116\/d"
+URL-REGEX,"^http:\/\/182\.256\.116\.116\/d"
+URL-REGEX,"^http:\/\/47\.100\.123\.169\/resolve"
+URL-REGEX,"^http:\/\/47\.101\.175\.206\/resolve"
+URL-REGEX,"^http:\/\/81\.69\.130\.131\/d"
+URL-REGEX,"^http:\/\/\[2402:4e00:1411:201:0:9964:ba21:5a41\]\/d"
+URL-REGEX,"^http:\/\/api\.weibo\.cn\/2\/httpdns\/config"
+URL-REGEX,"^http:\/\/api\.weibo\.cn\/httpdns\/config"
+URL-REGEX,"^http:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns"
+URL-REGEX,"^http:\/\/xmc\.ximalaya\.com\/xmlymain-login-web\/login\/"
 URL-REGEX,^http:\/\/101\.91\.140\.124\/resolve
 URL-REGEX,^http:\/\/101\.91\.140\.224\/resolve
-URL-REGEX,^http:\/\/103\.41\.167\.237\/v2\/resolv
+URL-REGEX,^http:\/\/103\.41\.167\.237\/v2\/resolve
 URL-REGEX,^http:\/\/112\.64\.218\.119\/resolve
 URL-REGEX,^http:\/\/112\.65\.200\.117\/resolve
 URL-REGEX,^http:\/\/114\.116\.215\.110\/resolve

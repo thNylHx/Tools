@@ -1,5 +1,5 @@
 # 规则名称: Ads_Block
-# 规则统计: 4323
+# 规则统计: 4338
 
 DOMAIN,118.89.204.198
 DOMAIN,180.76.76.200
@@ -298,6 +298,8 @@ DOMAIN,devs-data.dutils.com
 DOMAIN,df.tanx.com
 DOMAIN,dflow.bz.mgtv.com
 DOMAIN,dgstatic.jd.com
+DOMAIN,dig.bdurl.net
+DOMAIN,dig.zjurl.cn
 DOMAIN,dispatcher.360in.com
 DOMAIN,dm.bytedance.com
 DOMAIN,dm.pstatp.com
@@ -309,7 +311,10 @@ DOMAIN,dns.qiyipic.iqiyi.com
 DOMAIN,dns.weibo.cn
 DOMAIN,dns.weixin.qq.com
 DOMAIN,dns.weixin.qq.com.cn
+DOMAIN,dns2.q2cdn.com
 DOMAIN,doh.iqiyi.com
+DOMAIN,doh.ptqy.gitv.tv
+DOMAIN,dotserver.douyucdn.cn
 DOMAIN,dsp-x.jd.com
 DOMAIN,dsp.fcbox.com
 DOMAIN,dsp.toutiao.com
@@ -378,6 +383,7 @@ DOMAIN,h-adashx.ut.taobao.com
 DOMAIN,h.trace.qq.com
 DOMAIN,hc-ssp.sm.cn
 DOMAIN,hd.xiaojukeji.com
+DOMAIN,hdns.ksyun.com
 DOMAIN,hhbypdoecp.com
 DOMAIN,hm.baidu.com
 DOMAIN,hmma.baidu.com
@@ -395,19 +401,26 @@ DOMAIN,httpdns.bilivideo.com
 DOMAIN,httpdns.browser.miui.com
 DOMAIN,httpdns.c.cdnhwc2.com
 DOMAIN,httpdns.calorietech.com
+DOMAIN,httpdns.cctv.com
 DOMAIN,httpdns.danuoyi.tbcache.com
 DOMAIN,httpdns.huaweicloud.com
 DOMAIN,httpdns.kg.qq.com
 DOMAIN,httpdns.kwd.inkuai.com
+DOMAIN,httpdns.meituan.com
 DOMAIN,httpdns.music.163.com
 DOMAIN,httpdns.n.netease.com
 DOMAIN,httpdns.n.shifen.com
+DOMAIN,httpdns.ocloud.heytapmobi.com
+DOMAIN,httpdns.ocloud.oppomobile.com
 DOMAIN,httpdns.platform.dbankcloud.cn
 DOMAIN,httpdns.platform.dbankcloud.com
+DOMAIN,httpdns.push.heytapmobi.com
+DOMAIN,httpdns.push.oppomobile.com
 DOMAIN,httpdns.volcengineapi.com
 DOMAIN,httpdns.yunxindns.com
 DOMAIN,httpdns.zybang.com
 DOMAIN,httpdns1.cc.cdnhwc5.com
+DOMAIN,httpdnsmultiapivip.meituan.com
 DOMAIN,httpsdns.baidu.com
 DOMAIN,huatuocode.huatuo.qq.com
 DOMAIN,hudong.alicdn.com
@@ -534,6 +547,7 @@ DOMAIN,pagead2.googlesyndication.com
 DOMAIN,pageviewp.icbc.com.cn
 DOMAIN,pangolin.snssdk.com
 DOMAIN,partwithner.com
+DOMAIN,paydns.wechatpay.cn
 DOMAIN,pgdt.gtimg.cn
 DOMAIN,pgdt.gtimg.com
 DOMAIN,pgdt.ugdtimg.com
@@ -4282,6 +4296,7 @@ IP-CIDR,59.111.239.61/32,no-resolve
 IP-CIDR,59.111.239.62/32,no-resolve
 IP-CIDR,60.28.172.100/32,no-resolve
 IP-CIDR,61.151.231.157/32,no-resolve
+IP-CIDR,8.134.241.67/32,no-resolve
 IP-CIDR,81.71.61.216/32,no-resolve
 IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,no-resolve
 IP-CIDR6,2402:4e00:1900:1700:0:9554:1ad9:c3a/128,no-resolve
