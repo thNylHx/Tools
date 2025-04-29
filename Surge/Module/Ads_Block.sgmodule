@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4435
+#!Rule = 4440
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -915,6 +915,7 @@ DOMAIN-SUFFIX,ad.duapps.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.duomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.e.waimai.sankuai.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.g.daum.net,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ad.gameley.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.games.dmm.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.ganji.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.gt,REJECT,extended-matching,pre-matching
@@ -1125,6 +1126,7 @@ DOMAIN-SUFFIX,ads-api.twitter.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-img-qc.xhscdn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-marketing-vivofs.vivo.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-pixiv.net,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ads-sdk-api.ranfenghd.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-sg.tiktok.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-twitter.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-uo.api.leiniao.com,REJECT,extended-matching,pre-matching
@@ -1191,6 +1193,7 @@ DOMAIN-SUFFIX,adscdn.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adscdn.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adsclick.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adsco.re,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,adsdk.vivo.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adse.test.ximalaya.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adse.wsa.ximalaya.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adse.ximalaya.com,REJECT,extended-matching,pre-matching
@@ -1307,6 +1310,7 @@ DOMAIN-SUFFIX,adx.ads.heytapmobi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx.ads.oppomobile.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx.appsdk.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx.sogaha.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,adx.tuia.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx.xiaodutv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adxadserv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adxlog-adnet.vivo.com.cn,REJECT,extended-matching,pre-matching
@@ -2234,6 +2238,7 @@ DOMAIN-SUFFIX,hao123union.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,haoghost.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,haoshengtoys.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hbssjd.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,hc-ssp.sm.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hc.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hc.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hdswgc.com,REJECT,extended-matching,pre-matching
@@ -2792,6 +2797,7 @@ DOMAIN-SUFFIX,ms4.applovin.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ms4.applvn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,msads.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,msclick2.kuwo.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,msdk.voiceads.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,msg.71.am,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,msg.m.letv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,msg.mobile.kugou.com,REJECT,extended-matching,pre-matching
@@ -3945,7 +3951,6 @@ DOMAIN-SUFFIX,wl.hd.sohu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wm.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wm.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wmlog.meituan.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,wn.x.jd.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wooboo.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,woocall.sina.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,woopra.com,REJECT,extended-matching,pre-matching
