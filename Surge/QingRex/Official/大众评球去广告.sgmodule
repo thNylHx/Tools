@@ -1,6 +1,10 @@
 #!name=大众评球去广告
 #!desc=使用前需要卸载重装软件 by sliverkiss
 
-[Rule]
-DOMAIN,api-tx.dsocial.xyz,REJECT
-DOMAIN,api.wxcjgg.cn,REJECT
+[Map Local]
+^https:\/\/api\.wxcjgg\.cn\/ad\/map data-type=text data="{}" status-code=200
+
+^http:\/\/api-tx\.dsocial\.xyz\/api\/v2\/ad_config data-type=text data="{}" status-code=200
+
+[MITM]
+hostname = %APPEND% api.wxcjgg.cn, api-tx.dsocial.xyz
