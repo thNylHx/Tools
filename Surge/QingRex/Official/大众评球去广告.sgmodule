@@ -1,0 +1,6 @@
+#!name=大众评球去广告
+#!desc=使用前需要卸载重装软件 by sliverkiss
+
+[Rule]
+DOMAIN,api-tx.dsocial.xyz,REJECT
+DOMAIN,api.wxcjgg.cn,REJECT
