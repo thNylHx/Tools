@@ -5,18 +5,22 @@
 #!homepage = https://NSRingo.github.io/guide/apple-tv
 #!icon = https://developer.apple.com/assets/elements/icons/apple-tv/apple-tv-128x128.png
 #!category =  iRingo
-#!date = 2024-12-27 08:11:56
-#!version = 3.4.3
-#!arguments = ThirdParty:false,HLSUrl:"play-edge.itunes.apple.com",FPSUrl:"play.itunes.apple.com",LogLevel:"WARN"
-#!arguments-desc = ThirdParty: 启用第三方 App 与 TV app 关联功能\n是否将桌面版/macOS版/app版等平台的 TV app 转换至 iPad 版，以启用第三方 App 与 TV app 关联功能(如: Disney+, Prime Video 等)。\n\nHLSUrl: [主机名] HTTP实时流(HLS)地址\n    ├ : OFF(不修改)\n    ├ play.itunes.apple.com: play.itunes.apple.com (不推荐，与播放服务域名重叠)\n    └ play-edge.itunes.apple.com: play-edge.itunes.apple.com (默认)\n因为FPS服务域名禁止MitM，修改此地址可以分离HLS与FPS的域名，从而恢复对DualSubs的双语字幕支持。\n\nFPSUrl: [主机名] FairPlay流(FPS)地址\n    ├ : OFF(不修改)\n    ├ play.itunes.apple.com: play.itunes.apple.com (默认)\n    └ play-edge.itunes.apple.com: play-edge.itunes.apple.com (不推荐，与播放服务域名重叠)\n因为FPS服务域名禁止MitM，修改此地址可以分离HLS与FPS的域名，从而恢复对DualSubs的双语字幕支持。\n\nLogLevel: [调试] 日志等级\n    ├ OFF: 🔴 关闭\n    ├ ERROR: ❌ 错误\n    ├ WARN: ⚠️ 警告\n    ├ INFO: ℹ️ 信息\n    ├ DEBUG: 🅱️ 调试\n    └ ALL: 全部\n选择脚本日志的输出等级，低于所选等级的日志将全部输出。\n
+#!date = 2025-04-17 03:19:05
+#!version = 3.4.4
+#!arguments = ThirdParty:false,isWorkaroundSSLPinning:true,LogLevel:"WARN"
+#!arguments-desc = ThirdParty: 启用第三方 App 与 TV app 关联功能\n是否将桌面版/macOS版/app版等平台的 TV app 转换至 iPad 版，以启用第三方 App 与 TV app 关联功能(如: Disney+, Prime Video 等)。\n\nisWorkaroundSSLPinning: 启用绕过 SSL 证书固定校验\n是否绕过播放列表所使用域名的证书固定校验功能，从而恢复对DualSubs的双语字幕支持。\n\nLogLevel: [调试] 日志等级\n    ├ OFF: 🔴 关闭\n    ├ ERROR: ❌ 错误\n    ├ WARN: ⚠️ 警告\n    ├ INFO: ℹ️ 信息\n    ├ DEBUG: 🅱️ 调试\n    └ ALL: 全部\n选择脚本日志的输出等级，低于所选等级的日志将全部输出。\n
+
+[Rule]
+DOMAIN,known-issues.apple.com,REJECT-DROP
+
+[URL Rewrite]
+^https?:\/\/play-cdn\.itunes\.apple\.com https://play.itunes.apple.com header
+^https?:\/\/play-edge-cdn\.itunes\.apple\.com https://play-edge.itunes.apple.com header
 
 [Script]
-📺 TV.uts.request = type=http-request, pattern=^https?:\/\/uts-api\.itunes\.apple\.com\/uts\/(v1|v2|v3)\/, requires-body=1, script-path=https://github.com/NSRingo/TV/releases/download/v3.4.3/request.bundle.js, argument=ThirdParty="{{{ThirdParty}}}"&HLSUrl="{{{HLSUrl}}}"&FPSUrl="{{{FPSUrl}}}"&LogLevel="{{{LogLevel}}}"
-📺 TV.uts.response = type=http-response, pattern=^https?:\/\/uts-api\.itunes\.apple\.com\/uts\/(v1|v2|v3)\/, requires-body=1, script-path=https://github.com/NSRingo/TV/releases/download/v3.4.3/response.bundle.js, argument=ThirdParty="{{{ThirdParty}}}"&HLSUrl="{{{HLSUrl}}}"&FPSUrl="{{{FPSUrl}}}"&LogLevel="{{{LogLevel}}}"
-📺 TV.umc.request = type=http-request, pattern=^https?:\/\/umc-tempo-api\.apple\.com\/(v1|v2|v3)\/, requires-body=1, script-path=https://github.com/NSRingo/TV/releases/download/v3.4.3/request.bundle.js, argument=
-
-📺 TV.hls.request = type=http-request, pattern=^https?:\/\/play(-edge)?\.itunes\.apple\.com\/WebObjects\/MZPlay(Local)?\.woa\/hls(\/(subscription|workout))?\/playlist\.m3u8, script-path=https://github.com/NSRingo/TV/releases/download/v3.4.3/request.bundle.js, argument=
-📺 TV.wa.request = type=http-request, pattern=^https?:\/\/play(-edge)?\.itunes\.apple\.com\/WebObjects\/MZPlay(Local)?\.woa\/wa\/(fpsRequest|checkInNonceRequest), script-path=https://github.com/NSRingo/TV/releases/download/v3.4.3/request.bundle.js, argument=
+📺 TV.uts.request = type=http-request, pattern=^https?:\/\/uts-api\.itunes\.apple\.com\/uts\/(v1|v2|v3)\/, requires-body=1, script-path=https://github.com/NSRingo/TV/releases/download/v3.4.4/request.bundle.js, argument=ThirdParty="{{{ThirdParty}}}"&isWorkaroundSSLPinning="{{{isWorkaroundSSLPinning}}}"&LogLevel="{{{LogLevel}}}"
+📺 TV.uts.response = type=http-response, pattern=^https?:\/\/uts-api\.itunes\.apple\.com\/uts\/(v1|v2|v3)\/, requires-body=1, script-path=https://github.com/NSRingo/TV/releases/download/v3.4.4/response.bundle.js, argument=ThirdParty="{{{ThirdParty}}}"&isWorkaroundSSLPinning="{{{isWorkaroundSSLPinning}}}"&LogLevel="{{{LogLevel}}}"
+📺 TV.umc.request = type=http-request, pattern=^https?:\/\/umc-tempo-api\.apple\.com\/(v1|v2|v3)\/, requires-body=1, script-path=https://github.com/NSRingo/TV/releases/download/v3.4.4/request.bundle.js, argument=
 
 [MITM]
-hostname = %APPEND% uts-api.itunes.apple.com, umc-tempo-api.apple.com
+hostname = %APPEND% uts-api.itunes.apple.com, umc-tempo-api.apple.com, play-cdn.itunes.apple.com, play-edge-cdn.itunes.apple.com
