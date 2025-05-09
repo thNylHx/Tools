@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4440
+#!Rule = 4443
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1123,6 +1123,7 @@ DOMAIN-SUFFIX,ads-api-o.api.leiniao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-api.duolingo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-api.tiktok.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-api.twitter.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ads-img-al.xhscdn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-img-qc.xhscdn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-marketing-vivofs.vivo.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-pixiv.net,REJECT,extended-matching,pre-matching
@@ -1138,7 +1139,6 @@ DOMAIN-SUFFIX,ads.api.my7v.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads.cdn.tvb.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads.csdn.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads.feedly.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,ads.flurry.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads.genieessp.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads.gmodules.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads.google.cn,REJECT,extended-matching,pre-matching
@@ -1156,6 +1156,7 @@ DOMAIN-SUFFIX,ads.oppomobile.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads.pinterest.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads.prd.ie.internal.unity3d.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads.pubmatic.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ads.raidrive.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads.roku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads.servebom.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads.service.kugou.com,REJECT,extended-matching,pre-matching
@@ -3002,6 +3003,7 @@ DOMAIN-SUFFIX,passport-log.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,passwordrecovery.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,patriot.cs.pp.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pay.mobile.sina.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,pay.sboot.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pb.hd.sohu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pb.sogou.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pbmp.ali213.net,REJECT,extended-matching,pre-matching
@@ -3951,6 +3953,7 @@ DOMAIN-SUFFIX,wl.hd.sohu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wm.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wm.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wmlog.meituan.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,wn.x.jd.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wooboo.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,woocall.sina.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,woopra.com,REJECT,extended-matching,pre-matching
