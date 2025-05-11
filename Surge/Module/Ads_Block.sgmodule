@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4443
+#!Rule = 4449
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -213,6 +213,8 @@ DOMAIN,api-p0.yksdks.com,REJECT,extended-matching,pre-matching
 DOMAIN,api.ad.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN,api.adnet.mob.com,REJECT,extended-matching,pre-matching
 DOMAIN,api.anythinktech.com,REJECT,extended-matching,pre-matching
+DOMAIN,api.biliapi.com,REJECT,extended-matching,pre-matching
+DOMAIN,api.biliapi.net,REJECT,extended-matching,pre-matching
 DOMAIN,api.bridgeoos.com,REJECT,extended-matching,pre-matching
 DOMAIN,api.helloclue.com,REJECT,extended-matching,pre-matching
 DOMAIN,api.htp.hubcloud.com.cn,REJECT,extended-matching,pre-matching
@@ -231,6 +233,8 @@ DOMAIN,apidns.kwd.inkuai.com,REJECT,extended-matching,pre-matching
 DOMAIN,apilog-web.acfun.cn,REJECT,extended-matching,pre-matching
 DOMAIN,apiv4-iyes.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN,app-ad.variflight.com,REJECT,extended-matching,pre-matching
+DOMAIN,app.biliapi.com,REJECT,extended-matching,pre-matching
+DOMAIN,app.biliapi.net,REJECT,extended-matching,pre-matching
 DOMAIN,appcloud.zhihu.com,REJECT,extended-matching,pre-matching
 DOMAIN,appcloud2.in.zhihu.com,REJECT,extended-matching,pre-matching
 DOMAIN,apple.comscoreresearch.com,REJECT,extended-matching,pre-matching
@@ -4352,10 +4356,12 @@ URL-REGEX,"^http:\/\/182\.256\.116\.116\/d",REJECT,extended-matching
 URL-REGEX,"^http:\/\/47\.100\.123\.169\/resolve",REJECT,extended-matching
 URL-REGEX,"^http:\/\/47\.101\.175\.206\/resolve",REJECT,extended-matching
 URL-REGEX,"^http:\/\/81\.69\.130\.131\/d",REJECT,extended-matching
+URL-REGEX,"^http:\/\/[\d\.]+:8000\/v1\/resource\/\w{32}-1-SPLASH",REJECT,extended-matching
 URL-REGEX,"^http:\/\/\[2402:4e00:1411:201:0:9964:ba21:5a41\]\/d",REJECT,extended-matching
 URL-REGEX,"^http:\/\/api\.weibo\.cn\/2\/httpdns\/config",REJECT,extended-matching
 URL-REGEX,"^http:\/\/api\.weibo\.cn\/httpdns\/config",REJECT,extended-matching
 URL-REGEX,"^http:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns",REJECT,extended-matching
+URL-REGEX,"^http:\/\/upos-sz-static\.bilivideo\.com\/ssaxcode\/\w{2}\/\w{2}\/\w{32}-1-SPLASH",REJECT,extended-matching
 URL-REGEX,"^http:\/\/xmc\.ximalaya\.com\/xmlymain-login-web\/login\/",REJECT,extended-matching
 URL-REGEX,^http:\/\/101\.91\.140\.124\/resolve,REJECT,extended-matching
 URL-REGEX,^http:\/\/101\.91\.140\.224\/resolve,REJECT,extended-matching

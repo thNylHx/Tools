@@ -1,5 +1,5 @@
 # 规则名称: Ads_BlockAds
-# 规则统计: 885
+# 规则统计: 891
 
 DOMAIN,180.76.76.200
 DOMAIN,4lke.online
@@ -92,6 +92,8 @@ DOMAIN,api-d.dutils.com
 DOMAIN,api-htp.beizi.biz
 DOMAIN,api-p0.yksdks.com
 DOMAIN,api.anythinktech.com
+DOMAIN,api.biliapi.com
+DOMAIN,api.biliapi.net
 DOMAIN,api.bridgeoos.com
 DOMAIN,api.helloclue.com
 DOMAIN,api.htp.hubcloud.com.cn
@@ -106,6 +108,8 @@ DOMAIN,api.zuihuimai.com
 DOMAIN,apidns-js.kwd.inkuai.com
 DOMAIN,apidns.kwd.inkuai.com
 DOMAIN,apiv4-iyes.youku.com
+DOMAIN,app.biliapi.com
+DOMAIN,app.biliapi.net
 DOMAIN,appcloud.zhihu.com
 DOMAIN,appcloud2.in.zhihu.com
 DOMAIN,apple.comscoreresearch.com
@@ -790,10 +794,12 @@ URL-REGEX,"^http:\/\/182\.256\.116\.116\/d"
 URL-REGEX,"^http:\/\/47\.100\.123\.169\/resolve"
 URL-REGEX,"^http:\/\/47\.101\.175\.206\/resolve"
 URL-REGEX,"^http:\/\/81\.69\.130\.131\/d"
+URL-REGEX,"^http:\/\/[\d\.]+:8000\/v1\/resource\/\w{32}-1-SPLASH"
 URL-REGEX,"^http:\/\/\[2402:4e00:1411:201:0:9964:ba21:5a41\]\/d"
 URL-REGEX,"^http:\/\/api\.weibo\.cn\/2\/httpdns\/config"
 URL-REGEX,"^http:\/\/api\.weibo\.cn\/httpdns\/config"
 URL-REGEX,"^http:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns"
+URL-REGEX,"^http:\/\/upos-sz-static\.bilivideo\.com\/ssaxcode\/\w{2}\/\w{2}\/\w{32}-1-SPLASH"
 URL-REGEX,"^http:\/\/xmc\.ximalaya\.com\/xmlymain-login-web\/login\/"
 URL-REGEX,^http:\/\/101\.91\.140\.124\/resolve
 URL-REGEX,^http:\/\/101\.91\.140\.224\/resolve
