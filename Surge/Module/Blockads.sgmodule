@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 广告拦截
-#!date = 2025-04-25 19:44:19
+#!date = 2025-05-11 20:14:18
 
 [Rule]
 # ======= 0 ======= #
@@ -52,11 +52,10 @@ AND,((IP-ASN,63646,no-resolve), (DEST-PORT,25641), (PROTOCOL,TCP)),REJECT
 
 # ======= J ======= #
 # 京东
-DOMAIN,dns.jd.com,REJECT,extended-matching,pre-matching
-AND,((PROTOCOL,TCP),(DOMAIN,api.m.jd.com,extended-matching)),REJECT-NO-DROP
-URL-REGEX,"^http:\/\/\w{32}\.jddebug\.com\/diagnose\?",REJECT,extended-matching
-IP-CIDR,101.124.19.122/32,REJECT,no-resolve,pre-matching
-IP-CIDR6,2402:db40:5100:1011::5/128,REJECT,no-resolve,pre-matching
+DOMAIN,dns.jd.com,REJECT
+URL-REGEX,"^http:\/\/\w{32}\.jddebug\.com\/diagnose\?",REJECT
+IP-CIDR,101.124.19.122/32,REJECT,no-resolve
+IP-CIDR6,2402:db40:5100:1011::5/128,REJECT,no-resolve
 
 # ======= K ======= #
 # 酷我音乐
