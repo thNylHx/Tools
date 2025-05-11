@@ -21,6 +21,27 @@ URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/",REJECT,extended-matching
 DOMAIN,abyss.cyapi.cn,REJECT,extended-matching,pre-matching
 DOMAIN,ad.cyapi.cn,REJECT,extended-matching,pre-matching
 DOMAIN,gather.colorfulclouds.net,REJECT,extended-matching,pre-matching
+# 菜鸟
+AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"),(USER-AGENT,"Cainiao4iPhone*")),REJECT
+DOMAIN,acs4baichuan.m.taobao.com,REJECT
+DOMAIN,adsmind.ugdtimg.com,REJECT
+DOMAIN,amdc.m.youku.com,REJECT
+DOMAIN,api.sm.cn,REJECT
+DOMAIN,apiv4-iyes.youku.com,REJECT
+DOMAIN,baichuan-sdk.alicdn.com,REJECT
+DOMAIN,cad.youku.com,REJECT
+DOMAIN,huichuan-mc.sm.cn,REJECT
+DOMAIN,huichuan.sm.cn,REJECT
+DOMAIN,iyes.youku.com,REJECT
+DOMAIN,m-vali.cp31.ott.cibntv.net,REJECT
+DOMAIN,mc.atm.youku.com,REJECT
+DOMAIN,nbsdk-baichuan.alicdn.com,REJECT
+DOMAIN,pre-acs.youku.com,REJECT
+DOMAIN,vali-g1.cp31.ott.cibntv.net,REJECT
+DOMAIN,vali-ugc.cp31.ott.cibntv.net,REJECT
+DOMAIN,yk-ssp.ad.youku.com,REJECT
+DOMAIN,ykad-data.youku.com,REJECT
+DOMAIN,youku-acs.m.taobao.com,REJECT
 
 # ======= D ======= #
 # 滴滴出行
@@ -28,6 +49,14 @@ DOMAIN,hd.xiaojukeji.com,REJECT,extended-matching,pre-matching
 DOMAIN,gwp.xiaojukeji.com,REJECT,extended-matching,pre-matching
 AND,((IP-ASN,45090,no-resolve), (DEST-PORT,25641), (PROTOCOL,TCP)),REJECT
 AND,((IP-ASN,63646,no-resolve), (DEST-PORT,25641), (PROTOCOL,TCP)),REJECT
+
+# ======= J ======= #
+# 京东
+DOMAIN,dns.jd.com,REJECT,extended-matching,pre-matching
+AND,((PROTOCOL,TCP),(DOMAIN,api.m.jd.com,extended-matching)),REJECT-NO-DROP
+URL-REGEX,"^http:\/\/\w{32}\.jddebug\.com\/diagnose\?",REJECT,extended-matching
+IP-CIDR,101.124.19.122/32,REJECT,no-resolve,pre-matching
+IP-CIDR6,2402:db40:5100:1011::5/128,REJECT,no-resolve,pre-matching
 
 # ======= K ======= #
 # 酷我音乐
@@ -257,6 +286,10 @@ http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpat
 http-response-jq ^https:\/\/soapi\.91160\.com\/homepage-recommendation\/recommendation\/medical\/complex\? 'delpaths([["data","checkupList"]])'
 http-response-jq ^https:\/\/soapi\.91160\.com\/homepage-recommendation\/homepage\/flow\? '.data.rows |= map(select(.type as $type | ["GOOD", "ARTICLE"] | index($type) | not))'
 http-response-jq ^https:\/\/patientgate\.91160\.com\/cube\/v1\/unit_page\/page_data\? '.data.modules |= map(select(.name == "announcement" or .name == "guide" or .name == "expert" or .name == "featuredDepartments" or .name == "featureDevice" or .name == "featureTech" or .name == "familyDoctor" or .name == "introduction" or .name == "bus" or .name == "classicCase" or .name == "askEveryone" or .name == "reviews" or .name == "notes"))'
+# 京东
+http-response-jq ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=basicConfig 'if (getpath(["data","JDMessage","socketmonitor"]) | has("isSocketEstablishedAhead")) then (setpath(["data","JDMessage","socketmonitor","isSocketEstablishedAhead"]; 0)) else . end'
+http-response-jq ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=basicConfig 'if (getpath(["data","JDMessage","socketmonitor"]) | has("isSocketReport")) then (setpath(["data","JDMessage","socketmonitor","isSocketReport"]; 0)) else . end'
+http-response-jq ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=basicConfig 'if (getpath(["data","JDHttpToolKit","httpdns"]) | has("httpdns")) then (setpath(["data","JDHttpToolKit","httpdns","httpdns"]; 0)) else . end'
 
 # ======= K ======= #
 # 快递100
@@ -328,12 +361,13 @@ http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/philo\/personal\/hub\? 'de
 http-response-jq ^https:\/\/api\.pinduoduo\.com\/search 'delpaths([["expansion"]])'
 
 # ======= Q ======= #
-# 汽水音乐去广告
+# 汽水音乐
 http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/me\? 'delpaths([["reward_ad_banner"]])'
-http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? 'if (getpath(["card_items",0]) | has("priority_display")) then (setpath(["card_items",0,"priority_display"]; false)) else . end'
-http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? 'if (getpath(["card_items",0]) | has("is_show")) then (setpath(["card_items",0,"is_show"]; false)) else . end'
-http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? 'if (getpath([]) | has("preview_guide")) then (setpath(["preview_guide"]; null)) else . end'
-http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/more-panel\? 'delpaths([["blocks",1]])'
+http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/me\/recently-played-media\? '.media |= map(select(.type != "video"))'
+http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/feed\/song-tab\? 'del(.items[] | select(.type == "video_track_mix"))'
+http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? 'delpaths([["preview_guide"]])'
+http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? 'del(.card_items[] | select(has("priority_display")))'
+http-response-jq ^https:\/\/beta-luna\.douyin\.com\/luna\/more-panel\? '.blocks |= map(select(.type != "related_video"))'
 
 # ======= R ======= #
 # Reddit
@@ -421,10 +455,11 @@ http-response-jq ^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|
 ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.app\.home\.tabbar\.marketing\.get\.cn data-type=text data="{}" status-code=200
 ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.adkeyword\.get\.cn data-type=text data="{}" status-code=200
 ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.cncommunity\.my\.station\.query\.cn data-type=text data="{}" status-code=200
-^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.(batch\.show\.v2|expose\.mreply|index)\.cn data-type=text data="{}" status-code=200
 ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.nbopen\.miniapp\.recommend\.cpc\.cn data-type=text data="{}" status-code=200
-^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.nbmensa\.research\.researchservice\.(acquire|event|close)\.cn data-type=text data="{}" status-code=200
-^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.nbpresentation\.(homepage\.merge|tabbar\.marketing)\.get\.cn data-type=text data="{}" status-code=200
+^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.nbmensa\.research\.researchservice\.(?:acquire|event|close)\.cn data-type=text data="{}" status-code=200
+^https:\/\/(?:cn-acs\.m|netflow-mtop)\.cainiao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.(?:batch\.show\.v2|click\.reply|expose\.m?reply|index)\.cn data-type=text data="{}" status-code=200
+^https:\/\/(?:cn-acs\.m|mtop-bff-mtop)\.cainiao\.com\/gw\/mtop\.cainiao\.nbpresentation\.(?:homepage\.merge|tabbar\.marketing)\.get\.cn data-type=text data="{}" status-code=200
+^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.nbcps\.presentation\.fetch\.cn data-type=text data="{}" status-code=200
 ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.com\.cainiao\.cnactivitycenter data-type=text data="{}" status-code=200
 ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.com\.cainiao\.cncreditmarket\.hit\.getactivityhit\.cn data-type=text data="{}" status-code=200
 ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.com\.cainiao\.longquan\.place\.getpageresourcecontent\.cn data-type=text data="{}" status-code=200
@@ -581,7 +616,12 @@ http-response-jq ^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|
 ^https:\/\/recpage-c\.qtfm\.cn\/v\d\/favorites$ data-type=text data="{}" status-code=200
 ^https:\/\/user\.qtfm\.cn\/u\d\/api\/v\d\/user\/following_podcaster\? data-type=text data="{}" status-code=200
 # 汽水音乐
+^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/upsells_config\? data-type=text data="{}" status-code=200
+^https:\/\/api\.qishui\.com\/luna\/ads\/config\? data-type=text data="{}" status-code=200
 ^https:\/\/webcast-open\.douyin\.com\/webcast\/openapi\/feed\/\? data-type=text data="{}" status-code=200
+^https:\/\/beta-luna\.douyin\.com\/luna\/treasure\/entrance\/config\? data-type=text data="{}" status-code=200
+^https:\/\/beta-luna\.douyin\.com\/luna\/activities\? data-type=text data="{}" status-code=200
+^https:\/\/beta-luna\.douyin\.com\/luna\/media_ads\? data-type=text data="{}" status-code=200
 ^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/upsells\? data-type=text data="{}" status-code=200
 ^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/v2\/commerce_info\? data-type=text data="{}" status-code=200
 
@@ -728,10 +768,12 @@ http-response-jq ^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|
 # 穿山甲广告联盟 修改加密广告配置/阻止上传等 汽水音乐/酷安/网易邮箱等
 广告联盟 = type=http-response,pattern=^https:\/\/api-access\.pangolin-sdk-toutiao(\d|-\w)??\.com\/api\/ad\/union\/sdk\/settings,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/Keywos/rule/main/JS/adsdk_chj.js
 # 菜鸟
+菜鸟 = type=http-response, pattern=^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.app\.e2e\.engine\.page\.fetch\.cn, script-path=https://kelee.one/Resource/Script/Cainiao/Cainiao_remove_ads.js, requires-body=true
 菜鸟 = type=http-response, pattern=^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.app\.mine\.main\.cn, script-path=https://kelee.one/Resource/Script/Cainiao/Cainiao_remove_ads.js, requires-body=true
-菜鸟 = type=http-response, pattern=^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.m?show\.cn, script-path=https://kelee.one/Resource/Script/Cainiao/Cainiao_remove_ads.js, requires-body=true
-菜鸟 = type=http-response, pattern=^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.nbpresentation\.(pickup\.empty\.page|protocol\.homepage)\.get\.cn, script-path=https://kelee.one/Resource/Script/Cainiao/Cainiao_remove_ads.js, requires-body=true
+菜鸟 = type=http-response, pattern=^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.nbpresentation\.(?:pickup\.empty\.page|protocol\.homepage)\.get\.cn, script-path=https://kelee.one/Resource/Script/Cainiao/Cainiao_remove_ads.js, requires-body=true
 菜鸟 = type=http-response, pattern=^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.nbfriend\.message\.conversation\.list\.cn, script-path=https://kelee.one/Resource/Script/Cainiao/Cainiao_remove_ads.js, requires-body=true
+菜鸟 = type=http-response, pattern=^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.mshow, script-path=https://kelee.one/Resource/Script/Cainiao/Cainiao_remove_ads.js, requires-body=true
+菜鸟 = type=http-response, pattern=^https:\/\/(?:cn-acs\.m|netflow-mtop)\.cainiao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.m?show\.cn, script-path=https://kelee.one/Resource/Script/Cainiao/Cainiao_remove_ads.js, requires-body=true
 # 支付宝 - 菜鸟小程序
 菜鸟小程序 = type=http-response, pattern=^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.mshow, script-path=https://kelee.one/Resource/Script/Cainiao/Cainiao_remove_ads.js, requires-body=true
 # 彩云天气
@@ -855,4 +897,4 @@ Spotify = type=http-response, pattern=^https:\/\/spclient\.wg\.spotify\.com\/(bo
 
 [MITM]
 h2 = true
-hostname = %APPEND% client.app.coc.10086.cn, list-app-m.i4.cn, search-app-m.i4.cn, mp.weixin.qq.com, webappcfg.paas.cmbchina.com, rescdn.qqmail.com, us.l.qq.com, napi.ithome.com, api.zuihuimai.com,mobads.baidu.com,dsp-x.jd.comdat.ruanmei.com,appconf.mail.163.com,home.mi.com, wrapper.cyapi.cn,api.caiyunapp.com, api-access.pangolin-sdk-toutiao*.com, ad.12306.cn, mobile.12306.cn, napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com, api*.soulapp.cn, gateway-mobile-gray.soulapp.cn, post.soulapp.cn, ssp.soulapp.cn, spclient.wg.spotify.com, v0-client-lz.rili.cn, client-lz.rili.cn, zgrb.epicc.com.cn, jzts.cmpassport.com, ad.mcloud.139.com, consumer.fcbox.com, dsp.fcbox.com, webchatapp.fcbox.com, api.m.jd.com, sdk1xyajs.data.kuiniuca.com, tower.ubixioe.com, client.app.coc.10086.cn, ump.ems.com.cn, htwkop.xiaojukeji.com, ad.maoyan.com, wx.maoyan.com, vod-movie.maoyan.com, api.maoyan.com, api.kuaidihelp.com, wxproj.seeyouyima.com, m.ctrip.com, mxsa.mxbc.net, hdgateway.zto.com, fscdn.zto.com, app.95504.net, minipro.95504.net, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, capi.lkcoffee.com, cn-acs.m.cainiao.com, guide-acs.m.taobao.com, app.qtfm.cn, entry.qtfm.cn, recpage-c.qtfm.cn, user.qtfm.cn, search.qtfm.cn, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, app.zhuanzhuan.com, api.coolapk.com, appi.kuwo.cn, mc.tencentmusic.com, vip*.kuwo.cn, tingshu.kuwo.cn, api.ring.kugou.com, acs.m.goofish.com, g-acs.m.goofish.com, api.alipan.com, member.alipan.com, bizapi.alipan.com, ccsp-egmas.sf-express.com, ucmp.sf-express.com, api.douban.com, frodo.douban.com, m.douban.com, in.m.jd.com, api.m.mi.com, api.jr.mi.com, api-mifit.huami.com, info.mina.xiaoaisound.com, acs.m.taobao.com, common.diditaxi.com.cn, freight.xiaojukeji.com, daijia.kuaidadi.com, 162.14.157.*, ct.xiaojukeji.com, res.xiaojukeji.com, conf.diditaxi.com.cn, api.udache.com, p.kuaidi100.com, mcsp.cloudpnr.com, saas-ad.cloudpnr.com, rms.meituan.com, api.pinduoduo.com, api.yangkeduo.com, webcast-open.douyin.com, beta-luna.douyin.com, haojia-api.smzdm.com, homepage-api.smzdm.com, app-api.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, qianbao.smzdm.com, s3.zdmimg.com, api.gotokeep.com, kad.gotokeep.com, account.95516.com, base.95516.com, content.95516.com, gslbali.ximalaya.com, search.ximalaya.com, searchwsa.ximalaya.com, mobile.ximalaya.com, mobilehera.ximalaya.com, mobwsa.ximalaya.com, m.ximalaya.com, mwsa.ximalaya.com, m.kookapp.cn, www.kookapp.cn, gql.reddit.com, gql-fed.reddit.com, *.zhihu.com, api.meiyan.com, circle.seeyouyima.com, circle.xmseeyouyima.com, common.seeyouyima.com, api.xiuxiu.meitu.com, tool.xiuxiu.meitu.com, api.posters.meitu.com, appconf.mail.163.com, dashi.163.com, weixin110.qq.com, security.wechat.com, m.baidu.com, www.baidu.com, nex.163.com, interface.music.163.com, c.m.163.com, client.mail.163.com, g1.163.com, support.you.163.com, interface3?.music.163.com, gw.m.163.com, 114.115.217.129, home.umetrip.com, fcard.api.moji.com, vdo.api.moji.com, sns.api.moji.com, mme.api.moji.com, psnlz.api.moji.com, jiaxiao-awd.kakamobi.cn, cheyouquan.kakamobi.com, swallow.kakamobi.cn, monkey.kakamobi.cn, mcbd.maiche.com, jiakao-misc.kakamobi.cn, squirrel.kakamobi.cn, scs.kakamobi.cn, richmanrules.ksedt.com, gouche.ksedt.com, muses.ksedt.com, op.ksedt.com, api.ksedt.com, shopapi.io.mi.com, huichuan.sm.cn, stars.shuqireader.com, open-cms-api.quark.cn, www.123pan.com, api.xiachufang.com, aiqicha.baidu.com, patientgate.91160.com, soapi.91160.com, snsapi.91160.com, msglb.91160.com, patientappapi.91160.com, *.hupu.com, *.cyapi.cn, api.caiyunapp.com, cdn-w.caiyunapp.com, tianshu.qq.com, h5.qzone.qq.com, 119.29.29.29, 203.107.1.1, 203.107.1.33, 203.107.1.66, 203.107.1.67, 203.107.1.97, 2401:b180:2000:30::1c, 2401:b180:2000:20::10, amdc.alipay.com, 180.76.76.200, 180.76.76.112
+hostname = %APPEND% client.app.coc.10086.cn, list-app-m.i4.cn, search-app-m.i4.cn, mp.weixin.qq.com, webappcfg.paas.cmbchina.com, rescdn.qqmail.com, us.l.qq.com, napi.ithome.com, api.zuihuimai.com,mobads.baidu.com,dsp-x.jd.comdat.ruanmei.com,appconf.mail.163.com,home.mi.com, wrapper.cyapi.cn,api.caiyunapp.com, api-access.pangolin-sdk-toutiao*.com, ad.12306.cn, mobile.12306.cn, napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com, api*.soulapp.cn, gateway-mobile-gray.soulapp.cn, post.soulapp.cn, ssp.soulapp.cn, spclient.wg.spotify.com, v0-client-lz.rili.cn, client-lz.rili.cn, zgrb.epicc.com.cn, jzts.cmpassport.com, ad.mcloud.139.com, consumer.fcbox.com, dsp.fcbox.com, webchatapp.fcbox.com, api.m.jd.com, sdk1xyajs.data.kuiniuca.com, tower.ubixioe.com, client.app.coc.10086.cn, ump.ems.com.cn, htwkop.xiaojukeji.com, ad.maoyan.com, wx.maoyan.com, vod-movie.maoyan.com, api.maoyan.com, api.kuaidihelp.com, wxproj.seeyouyima.com, m.ctrip.com, mxsa.mxbc.net, hdgateway.zto.com, fscdn.zto.com, app.95504.net, minipro.95504.net, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, capi.lkcoffee.com, cn-acs.m.cainiao.com, guide-acs.m.taobao.com, app.qtfm.cn, entry.qtfm.cn, recpage-c.qtfm.cn, user.qtfm.cn, search.qtfm.cn, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, app.zhuanzhuan.com, api.coolapk.com, appi.kuwo.cn, mc.tencentmusic.com, vip*.kuwo.cn, tingshu.kuwo.cn, api.ring.kugou.com, acs.m.goofish.com, g-acs.m.goofish.com, api.alipan.com, member.alipan.com, bizapi.alipan.com, ccsp-egmas.sf-express.com, ucmp.sf-express.com, api.douban.com, frodo.douban.com, m.douban.com, in.m.jd.com, api.m.mi.com, api.jr.mi.com, api-mifit.huami.com, info.mina.xiaoaisound.com, acs.m.taobao.com, common.diditaxi.com.cn, freight.xiaojukeji.com, daijia.kuaidadi.com, 162.14.157.*, ct.xiaojukeji.com, res.xiaojukeji.com, conf.diditaxi.com.cn, api.udache.com, p.kuaidi100.com, mcsp.cloudpnr.com, saas-ad.cloudpnr.com, rms.meituan.com, api.pinduoduo.com, api.yangkeduo.com, webcast-open.douyin.com, beta-luna.douyin.com, api.qishui.com, haojia-api.smzdm.com, homepage-api.smzdm.com, app-api.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, qianbao.smzdm.com, s3.zdmimg.com, api.gotokeep.com, kad.gotokeep.com, account.95516.com, base.95516.com, content.95516.com, gslbali.ximalaya.com, search.ximalaya.com, searchwsa.ximalaya.com, mobile.ximalaya.com, mobilehera.ximalaya.com, mobwsa.ximalaya.com, m.ximalaya.com, mwsa.ximalaya.com, m.kookapp.cn, www.kookapp.cn, gql.reddit.com, gql-fed.reddit.com, *.zhihu.com, api.meiyan.com, circle.seeyouyima.com, circle.xmseeyouyima.com, common.seeyouyima.com, api.xiuxiu.meitu.com, tool.xiuxiu.meitu.com, api.posters.meitu.com, appconf.mail.163.com, dashi.163.com, weixin110.qq.com, security.wechat.com, m.baidu.com, www.baidu.com, nex.163.com, interface.music.163.com, c.m.163.com, client.mail.163.com, g1.163.com, support.you.163.com, interface3?.music.163.com, gw.m.163.com, 114.115.217.129, home.umetrip.com, fcard.api.moji.com, vdo.api.moji.com, sns.api.moji.com, mme.api.moji.com, psnlz.api.moji.com, jiaxiao-awd.kakamobi.cn, cheyouquan.kakamobi.com, swallow.kakamobi.cn, monkey.kakamobi.cn, mcbd.maiche.com, jiakao-misc.kakamobi.cn, squirrel.kakamobi.cn, scs.kakamobi.cn, richmanrules.ksedt.com, gouche.ksedt.com, muses.ksedt.com, op.ksedt.com, api.ksedt.com, shopapi.io.mi.com, huichuan.sm.cn, stars.shuqireader.com, open-cms-api.quark.cn, www.123pan.com, api.xiachufang.com, aiqicha.baidu.com, patientgate.91160.com, soapi.91160.com, snsapi.91160.com, msglb.91160.com, patientappapi.91160.com, *.hupu.com, *.cyapi.cn, api.caiyunapp.com, cdn-w.caiyunapp.com, tianshu.qq.com, h5.qzone.qq.com, 119.29.29.29, 203.107.1.1, 203.107.1.33, 203.107.1.66, 203.107.1.67, 203.107.1.97, 2401:b180:2000:30::1c, 2401:b180:2000:20::10, amdc.alipay.com, 180.76.76.200, 180.76.76.112
