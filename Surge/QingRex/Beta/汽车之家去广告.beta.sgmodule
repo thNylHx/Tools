@@ -7,13 +7,7 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
-
-[Rule]
-IP-CIDR,119.29.29.98/32,REJECT,no-resolve,pre-matching
-IP-CIDR,119.29.29.99/32,REJECT,no-resolve,pre-matching
-URL-REGEX,"^http:\/\/182\.254\.116\.116\/d",REJECT,extended-matching
-DOMAIN,adproxy.autohome.com.cn,REJECT,extended-matching,pre-matching
+#!date=2025-05-13 15:17:08
 
 [Map Local]
 ^https:\/\/(a\.athm\.cn\/)?mobile\.app\.autohome\.com\.cn\/platform\/carserver\/carcard\/findEquitysV5 data-type=text data="{}" status-code=200

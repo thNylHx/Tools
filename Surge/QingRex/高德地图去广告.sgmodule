@@ -1,13 +1,13 @@
 #!name=高德地图去广告
 #!desc=过滤高德地图开屏广告、各页面推广，精简我的页面。
-#!author=RuCu6[https://github.com/RuCu6],kokoryh[https://github.com/kokoryh]
+#!author=RuCu6[https://github.com/RuCu6], kokoryh[https://github.com/kokoryh]
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Amap.png
 #!category=iKeLee
 #!openUrl=https://apps.apple.com/app/id461703208
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-03-31 12:16:54
+#!date=2025-05-13 15:17:08
 
 [Rule]
 AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch",extended-matching),(USER-AGENT,"AMapiPhone*")),REJECT

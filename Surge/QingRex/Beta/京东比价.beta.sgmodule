@@ -1,16 +1,16 @@
 #!name=京东比价
 #!desc=首次使用需安装慢慢买应用，之后点击进入[我的]页面以捕获Cookie，捕获成功后方可在商品详情页面查看比价内容。
-#!author=wf021325[https://github.com/wf021325],githubdulong[https://github.com/githubdulong],mw418[https://github.com/mw418]
+#!author=wf021325[https://github.com/wf021325], githubdulong[https://github.com/githubdulong], mw418[https://github.com/mw418]
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/JD.png
 #!category=BetaModule
 #!openUrl=https://apps.apple.com/app/id414245413
 #!tag=功能增强
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-04-22 00:22:22
+#!date=2025-05-13 15:17:08
 
 [Script]
-捕获令牌 = type=http-response, pattern=^https?:\/\/apapia-sqk-weblogic\.manmanbuy\.com\/baoliao\/center\/menu$, script-path=https://kelee.one/Resource/Script/JD/JD_Price.js, requires-body=true, timeout=10
+捕获令牌 = type=http-request, pattern=^https?:\/\/apapia-sqk-weblogic\.manmanbuy\.com\/baoliao\/center\/menu$, script-path=https://kelee.one/Resource/Script/JD/JD_Price.js, requires-body=true, timeout=10
 
 京东比价 = type=http-response, pattern=^https?:\/\/in\.m\.jd\.com\/product\/graphext\/\d+\.html, script-path=https://kelee.one/Resource/Script/JD/JD_Price.js, requires-body=true, timeout=10
 

@@ -1,13 +1,13 @@
 #!name=小红书去广告
 #!desc=过滤信息流推广，移除图片及视频水印，如有异常，请先清除缓存再尝试。
-#!author=RuCu6[https://github.com/RuCu6],fmz200[https://github.com/fmz200]
+#!author=RuCu6[https://github.com/RuCu6], fmz200[https://github.com/fmz200]
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/RedPaper.png
 #!category=BetaModule
 #!openUrl=https://apps.apple.com/app/id741292507
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-04-04 13:09:08
+#!date=2025-05-13 15:17:08
 
 [Rule]
 AND,((PROTOCOL,QUIC),(DOMAIN-SUFFIX,xiaohongshu.com,extended-matching)),REJECT

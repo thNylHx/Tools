@@ -7,30 +7,7 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
-
-[Rule]
-DOMAIN,httpdns.music.163.com,REJECT,extended-matching,pre-matching
-DOMAIN,httpdns.n.netease.com,REJECT,extended-matching,pre-matching
-DOMAIN,httpdns-sdk.n.netease.com,REJECT,extended-matching,pre-matching
-DOMAIN,httpdns.yunxindns.com,REJECT,extended-matching,pre-matching
-DOMAIN,lofter.httpdns.c.163.com,REJECT,extended-matching,pre-matching
-DOMAIN,music.httpdns.c.163.com,REJECT,extended-matching,pre-matching
-IP-CIDR,59.111.239.61/32,REJECT,no-resolve,pre-matching
-IP-CIDR,59.111.239.62/32,REJECT,no-resolve,pre-matching
-IP-CIDR,115.236.121.51/32,REJECT,no-resolve,pre-matching
-IP-CIDR,115.236.121.195/32,REJECT,no-resolve,pre-matching
-DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,errnewlog.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,ucc.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,ulogs.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,utoken.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,deeplink.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,aspect-upush.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,plbslog.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN,log.umtrack.com,REJECT,extended-matching,pre-matching
-DOMAIN,aaid.umeng.com,REJECT,extended-matching,pre-matching
+#!date=2025-05-13 15:17:08
 
 [Body Rewrite]
 http-response-jq ^https:\/\/dict\.youdao\.com\/homepage\/toolbar\/get\? 'delpaths([["data","vipTag"]])'

@@ -1,19 +1,13 @@
 #!name=朴朴超市去广告
 #!desc=移除超市去开屏广告，移除首页顶部轮播图和图标广告、启动小弹图广告、首页右下角悬浮动画、搜索热搜榜、搜索建议词、搜索发现热词、订单页面商，精简我的页面。
-#!author=kelv1n1n[https://github.com/kelv1n1n],可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!author=kelv1n1n[https://github.com/kelv1n1n], 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/PuPuMall.png
 #!category=iKeLee
 #!openUrl=https://apps.apple.com/app/id1144025167
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
-
-[Rule]
-URL-REGEX,"^http:\/\/54\.222\.159\.138:8053\/httpdns\/",REJECT,extended-matching
-URL-REGEX,"^http:\/\/101\.42\.130\.147:8053\/httpdns\/",REJECT,extended-matching
-URL-REGEX,"^http:\/\/106\.55\.220\.18:8053\/httpdns\/",REJECT,extended-matching
-URL-REGEX,"^http:\/\/139\.196\.12\.179:8053\/httpdns\/",REJECT,extended-matching
+#!date=2025-05-13 15:17:08
 
 [URL Rewrite]
 ^https:\/\/j1\.pupuapi\.com\/client\/account\/discount\/order - reject

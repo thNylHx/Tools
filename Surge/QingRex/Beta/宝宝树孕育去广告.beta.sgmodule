@@ -7,7 +7,7 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
+#!date=2025-05-13 15:17:08
 
 [Rule]
 URL-REGEX,"^http:\/\/go\.babytree\.com\/go_pregnancy\/api\/(index_activity\/get_app_index_activity|sign\/sign_h_5)\?",REJECT-TINYGIF,extended-matching
@@ -22,4 +22,7 @@ URL-REGEX,"^http:\/\/plough\.babytree\.com\/plough\.do",REJECT-TINYGIF,extended-
 移除各页面推广 = type=http-response, pattern=^http:\/\/go\.babytree\.com\/go_pregnancy\/api\/(app_index\/get_app_tab|cms_column\/get_column_list|feeds\/get_index_feeds_list|user\/get_user_info)\?, script-path=https://kelee.one/Resource/Script/BabyTree/BabyTree_remove_ads.js, requires-body=true
 
 移除搜索列表推广 = type=http-response, pattern=^http:\/\/go\.babytree\.com\/go_search\/api\/mobile_search_new\/search_index, script-path=https://kelee.one/Resource/Script/BabyTree/BabyTree_remove_ads.js, requires-body=true
+
+[MITM]
+hostname = %APPEND% api.babytree.com, go.babytree.com
 

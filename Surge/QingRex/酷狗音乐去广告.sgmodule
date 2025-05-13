@@ -7,7 +7,7 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-03-09 03:19:39
+#!date=2025-05-13 15:17:08
 
 [Rule]
 DOMAIN,ads.service.kugou.com,REJECT,extended-matching,pre-matching
@@ -18,11 +18,6 @@ DOMAIN,adserviceretry.kglink.cn,REJECT,extended-matching,pre-matching
 DOMAIN,ad.tencentmusic.com,REJECT,extended-matching,pre-matching
 DOMAIN,adservice.kugou.com,REJECT,extended-matching,pre-matching
 DOMAIN,splashimgretrybssdl.cloud.kugou.com,REJECT,extended-matching,pre-matching
-DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,sdk.e.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,us.l.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
 URL-REGEX,"^http:\/\/log\.stat\.kugou\.com\/mobile\/ad\.html",REJECT,extended-matching
 
 [Body Rewrite]

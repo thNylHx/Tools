@@ -7,10 +7,7 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2024-11-28 00:00:00
-
-[Rule]
-URL-REGEX,"^http:\/\/119\.29\.29\.98\/d\?",REJECT,extended-matching
+#!date=2025-05-13 15:17:08
 
 [Map Local]
 ^https:\/\/api\.xueqiu\.com\/snowpard\/launch_strategy\/query\.json\?channel=1&height=932 data-type=text data="{}" status-code=200

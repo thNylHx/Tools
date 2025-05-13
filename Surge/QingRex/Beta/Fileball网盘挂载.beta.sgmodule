@@ -7,8 +7,11 @@
 #!tag=功能增强
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/Resource/Markdown/Fileball/README.md
-#!date=2024-11-28 00:00:00
+#!date=2025-05-13 15:17:08
 
 [Script]
 三合一网盘挂载 = type=http-request, pattern=^http:\/\/(aliyun|quark|pikpak)\.example\.com, script-path=https://kelee.one/Resource/Script/Fileball/Fileball_mount.js, requires-body=true
+
+[MITM]
+hostname = %APPEND% aliyun.example.com, quark.example.com, pikpak.example.com
 

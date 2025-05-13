@@ -1,13 +1,13 @@
 #!name=微博去广告
 #!desc=过滤微博广告及去除各部分推广模块
-#!author=RuCu6[https://github.com/RuCu6],zmqcherish[https://github.com/zmqcherish]
+#!author=RuCu6[https://github.com/RuCu6], zmqcherish[https://github.com/zmqcherish]
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Weibo.png
 #!category=iKeLee
 #!openUrl=https://apps.apple.com/app/id350962117
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-02-28 19:53:25
+#!date=2025-05-13 15:17:08
 
 [Rule]
 DOMAIN-SUFFIX,uve.weibo.com,DIRECT,extended-matching

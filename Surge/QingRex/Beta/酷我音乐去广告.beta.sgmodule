@@ -7,24 +7,9 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-03-09 03:18:30
+#!date=2025-05-13 15:17:08
 
 [Rule]
-DOMAIN,serveraddr.service.kugou.com,REJECT,extended-matching,pre-matching
-DOMAIN,twns.p2ptun.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,tp2p.kg.qq.com,REJECT,extended-matching,pre-matching
-IP-CIDR,81.71.61.216/32,REJECT,no-resolve,pre-matching
-DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,sdk.e.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,us.l.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,gdt.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,tmeadcomm.y.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,mobilead.kuwo.cn,REJECT,extended-matching,pre-matching
-DOMAIN,adstats.tencentmusic.com,REJECT,extended-matching,pre-matching
-DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
-DOMAIN,ad.tencentmusic.com,REJECT,extended-matching,pre-matching
-DOMAIN,mc.tencentmusic.com,REJECT,extended-matching,pre-matching
 URL-REGEX,"^http:\/\/rich\.kuwo\.cn\/AdService\/",REJECT-TINYGIF,extended-matching
 URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/user\/freeMode\/",REJECT-TINYGIF,extended-matching
 URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/pasterAdvert\/",REJECT-TINYGIF,extended-matching
