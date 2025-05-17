@@ -3,14 +3,14 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 广告拦截
-#!date = 2025-05-17 17:15:14
+#!date = 2025-05-17 17:25:46
 
 [Rule]
 # 爱奇艺
 IP-CIDR,103.44.59.54/32,REJECT,no-resolve,pre-matching
 IP-CIDR,111.63.147.158/32,REJECT,no-resolve,pre-matching
 IP-CIDR,116.211.198.237/32,REJECT,no-resolve,pre-matching
-DOMAIN-SUFFIX,cupid.iqiyi.com,DIRECT,extended-matching
+DOMAIN-SUFFIX,cupid.iqiyi.com,DIRECT,extended-matching,pre-matching
 DOMAIN,api.iqiyi.com,REJECT,extended-matching,pre-matching
 DOMAIN,access.if.iqiyi.com,REJECT,extended-matching,pre-matching
 # 芒果
@@ -49,9 +49,9 @@ URL-REGEX,"^http:\/\/[\d\.:]*\/?(defaultts\.tc|vmind\.qqvideo\.tc|finderpdd\.vid
 URL-REGEX,"^http:\/\/apd-vlive\.apdcdn\.tc\.qq\.com\/vmind\.qqvideo\.tc\.qq\.com\/\w+",REJECT,extended-matching
 URL-REGEX,"^http:\/\/apd-\w+\.v\.smtcdns\.com\/(defaultts|omts|vmind\.qqvideo)\.tc\.qq\.com\/\w+",REJECT,extended-matching
 # 优酷
-DOMAIN,push.m.youku.com,DIRECT,extended-matching
-DOMAIN,un-acs.youku.com,DIRECT,extended-matching
-DOMAIN,dorangesource.alicdn.com,DIRECT,extended-matching
+DOMAIN,push.m.youku.com,DIRECT
+DOMAIN,un-acs.youku.com,DIRECT
+DOMAIN,dorangesource.alicdn.com,DIRECT
 DOMAIN,acs4baichuan.m.taobao.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,amdc.m.youku.com,REJECT,extended-matching,pre-matching
@@ -105,6 +105,7 @@ http-response-jq ^https?:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/common_switch\? '
 http-response-jq ^https?:\/\/(kjp|t7z)\.cupid\.iqiyi\.com\/mixer\? 'delpaths([["adSlots"]])'
 http-response-jq ^https?:\/\/search\.video\.iqiyi\.com\/q\? 'delpaths([["data"]])'
 http-response-jq ^https?:\/\/iface2\.iqiyi\.com\/aggregate\/3\.0\/getMyMenus\? '.data |= map(select(.statistic.block != "wd_liebiao_2") | select(all(.menuList[]?.statistic2.block; . != "wd_liebiao_3")))'
+
 # CC直播
 http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/mgamenavigation\/navigation_list\? '.data.info_list |= map(select(.name == "关注" or .name == "推荐" or .name == "视频" or .name == "全部"))'
 http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/mgamerecpage\/recommend_page\? '.data.plugins|=map(select(.module_type!="banner"))|.data.plugins|=map(select(.module_type!="show_list"))|.data.plugins|=map(select(.title!="推荐品类"))'
