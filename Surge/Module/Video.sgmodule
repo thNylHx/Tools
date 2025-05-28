@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 广告拦截
-#!date = 2025-05-17 17:25:46
+#!date = 2025-05-28 10:47:06
 
 [Rule]
 # 爱奇艺
@@ -32,6 +32,43 @@ URL-REGEX,"^http:\/\/[\d\.]+\/odin\/c1\/(channel\/ads|skin\/config)\?",REJECT-TI
 URL-REGEX,"^http:\/\/mobile-thor\.api\.mgtv\.com\/v1\/vod\/cms\/list\?",REJECT-TINYGIF,extended-matching
 URL-REGEX,"^http:\/\/mobileso\.bz\.mgtv\.com\/spotlight\/search\/v1\?",REJECT-TINYGIF,extended-matching
 # 腾讯视频
+DOMAIN,ugchsy.gtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,btrace.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,api.poll.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,activity.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,p.l.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,rpt.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,trace.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,tetrack.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,tpns.tencent.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,stat.tpns.tencent.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,static-res.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,omgmta.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,omgmta1.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,tux.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,iacc.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,p2.l.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,v3.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,xs.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,aegis.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,rdelivery.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,wallpaper-1258344696.file.myqcloud.com,REJECT,extended-matching,pre-matching
+DOMAIN,wallpaper-test-1258344696.file.myqcloud.com,REJECT,extended-matching,pre-matching
+DOMAIN,c2.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,huatuocode.huatuo.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,pro.bugly.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
+DOMAIN,qzs.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,rmonitor.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdkconfig.video.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,t.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,v.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,v2.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,win.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,wup.imtt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,tpstelemetry.tencent.com,REJECT,extended-matching,pre-matching
+DOMAIN,ii.gdt.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,wxs.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,info4.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
@@ -45,6 +82,9 @@ DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,trace.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,trace.video.qq.com,REJECT,extended-matching,pre-matching
 IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
+IP-CIDR,183.201.213.194/24,REJECT,no-resolve,pre-matching
+IP-CIDR,119.29.29.98/32,REJECT,no-resolve,pre-matching
+IP-CIDR,119.29.29.99/32,REJECT,no-resolve,pre-matching
 URL-REGEX,"^http:\/\/[\d\.:]*\/?(defaultts\.tc|vmind\.qqvideo\.tc|finderpdd\.video)\.qq\.com\/\w+",REJECT,extended-matching
 URL-REGEX,"^http:\/\/apd-vlive\.apdcdn\.tc\.qq\.com\/vmind\.qqvideo\.tc\.qq\.com\/\w+",REJECT,extended-matching
 URL-REGEX,"^http:\/\/apd-\w+\.v\.smtcdns\.com\/(defaultts|omts|vmind\.qqvideo)\.tc\.qq\.com\/\w+",REJECT,extended-matching
