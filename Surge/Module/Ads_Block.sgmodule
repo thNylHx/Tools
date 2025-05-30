@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4503
+#!Rule = 4507
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -849,6 +849,7 @@ DOMAIN-SUFFIX,86.cc,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,888.tv.sohu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,8le8le.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,8ox.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,8rn1y79f02-1.algolianet.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,915.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,91veg.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,92x.tumblr.com,REJECT,extended-matching,pre-matching
@@ -911,6 +912,8 @@ DOMAIN-SUFFIX,ad-scope.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad-score.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad-sdk-config.youdao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad-sdk.huxiu.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ad-splash-tracking.hktvmall.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ad-splash.hktvmall.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad-srv.co,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad-srv.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad-stir.com,REJECT,extended-matching,pre-matching
@@ -2576,6 +2579,7 @@ DOMAIN-SUFFIX,lianmeng.360.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,lijit.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,linkeye.ximalaya.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,litchiads.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,live-api.hktvmall.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,liveadvert.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,liveats-vod.video.ptqy.gitv.tv,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,livemonitor.huan.tv,REJECT,extended-matching,pre-matching
