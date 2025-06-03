@@ -1,5 +1,5 @@
 #!name=Spotify去广告
-#!desc=移除播放广告，恢复歌手和专辑列表的正常展示。
+#!desc=移除播放广告，恢复歌手和专辑列表的正常展示。修改插件自定义配置项需要重新登陆方可生效。
 #!author=001ProMax[https://github.com/001ProMax]
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Spotify.png
 #!category=iKeLee
@@ -7,7 +7,7 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-06-01 00:10:38
+#!date=2025-06-02 19:39:26
 
 [Rule]
 AND,((DOMAIN,spclient.wg.spotify.com,extended-matching),(PROTOCOL,QUIC)),REJECT
