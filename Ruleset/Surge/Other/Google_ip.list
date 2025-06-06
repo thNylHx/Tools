@@ -1,5 +1,5 @@
 # 规则名称: Google_ip
-# 规则统计: 3769
+# 规则统计: 3772
 
 IP-CIDR,1.179.112.0/21,no-resolve
 IP-CIDR,103.10.108.0/24,no-resolve
@@ -1701,6 +1701,7 @@ IP-CIDR,156.77.128.0/20,no-resolve
 IP-CIDR,156.77.176.0/23,no-resolve
 IP-CIDR,156.93.224.0/23,no-resolve
 IP-CIDR,158.51.129.0/24,no-resolve
+IP-CIDR,159.137.32.0/20,no-resolve
 IP-CIDR,160.30.211.0/24,no-resolve
 IP-CIDR,161.223.186.0/24,no-resolve
 IP-CIDR,161.38.184.0/24,no-resolve
@@ -1724,7 +1725,7 @@ IP-CIDR,162.247.96.0/21,no-resolve
 IP-CIDR,162.251.20.0/22,no-resolve
 IP-CIDR,162.33.231.0/24,no-resolve
 IP-CIDR,164.18.48.0/24,no-resolve
-IP-CIDR,165.130.63.0/24,no-resolve
+IP-CIDR,165.130.62.0/23,no-resolve
 IP-CIDR,165.85.151.0/24,no-resolve
 IP-CIDR,165.85.248.0/24,no-resolve
 IP-CIDR,165.85.252.0/24,no-resolve
@@ -2043,6 +2044,7 @@ IP-CIDR,67.219.246.0/23,no-resolve
 IP-CIDR,67.219.250.0/24,no-resolve
 IP-CIDR,69.48.216.0/24,no-resolve
 IP-CIDR,69.48.232.0/23,no-resolve
+IP-CIDR,69.87.54.0/24,no-resolve
 IP-CIDR,70.32.128.0/19,no-resolve
 IP-CIDR,72.14.192.0/18,no-resolve
 IP-CIDR,72.22.92.0/23,no-resolve
@@ -3769,4 +3771,5 @@ IP-CIDR6,2a0f:f4c1:2::/48,no-resolve
 IP-CIDR6,2a12:7280::/29,no-resolve
 IP-CIDR6,2a14:2a00::/40,no-resolve
 IP-CIDR6,2a14:2ec0:edea::/48,no-resolve
+IP-CIDR6,2a14:b580::/40,no-resolve
 IP-CIDR6,2c0f:fb50::/32,no-resolve
