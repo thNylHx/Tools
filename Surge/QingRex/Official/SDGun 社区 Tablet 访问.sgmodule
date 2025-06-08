@@ -1,6 +1,8 @@
 #!name=SDGun 社区 Tablet 访问
-#!desc=替换 User-Agent, 修改 JS/CSS
+#!desc=替换 User-Agent, 修改 JS/CSS, 允许不安全的图片/视频资源
 #!category=xream
+#!arguments=fontSize:5vw,imageVideoMaxWidth:50vw,imageVideoMaxHeight:50vh
+#!arguments-desc=fontSize: 字体大小\nimageVideoMaxWidth: 图片视频最大宽度\nimageVideoMaxHeight: 图片视频最大高度
 
 [Header Rewrite]
 
@@ -18,8 +20,8 @@ http-request ^https?:\/\/bbs\.sdgun\.com\.cn header-add User-Agent "Mozilla/5.0 
 [Body Rewrite]
 
 http-response "^https?:\/\/bbs\.sdgun\.com\.cn\/template\/.*?\/image\/common\.js" "(supporttouch\s*=\s*).*?(\r?\n)" "$1true;$2"
-http-response "^https?:\/\/bbs\.sdgun\.com\.cn\/template\/.*?\/image\/style\.css" "\/\*\ common\ \*\/" "html { font-size: 5vw !important; } img { max-width: 50vw !important; max-height: 50vh !important; }"
+http-response "^https?:\/\/bbs\.sdgun\.com\.cn\/template\/.*?\/image\/style\.css" "\/\*\ common\ \*\/" "html { font-size: {{{fontSize}}} !important; } img, video { max-width: {{{imageVideoMaxWidth}}} !important; max-height: {{{imageVideoMaxHeight}}} !important; }"
 
 [MITM]
 
-hostname = %APPEND% bbs.sdgun.com.cn
+hostname = %APPEND% bbs.sdgun.com.cn, picapp.sdgun.net
