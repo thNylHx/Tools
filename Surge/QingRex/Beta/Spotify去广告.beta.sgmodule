@@ -7,20 +7,20 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-06-02 19:39:26
+#!date=2025-06-08 03:40:18
 
 [Rule]
 AND,((DOMAIN,spclient.wg.spotify.com,extended-matching),(PROTOCOL,QUIC)),REJECT
 
 [URL Rewrite]
-^https:\/\/spclient\.wg\.spotify\.com\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/(.*)platform=iphone https://spclient.wg.spotify.com/$1/$2platform=ipad header
+^https:\/\/(.+)\.spotify\.com(:443)?\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/(.*)platform=iphone https://$1.spotify.com$2/$3/$4platform=ipad header
 
 [Map Local]
-^https:\/\/spclient\.wg\.spotify\.com\/pendragon\/ data-type=text data="{}" status-code=200
+^https:\/\/.+\.spotify\.com\/pendragon\/ data-type=text data="{}" status-code=200
 
 [Script]
-Protobuf处理 = type=http-response, pattern=^https:\/\/spclient\.wg\.spotify\.com\/(?:bootstrap|user-customization-service), script-path=https://kelee.one/Resource/Script/Spotify/Spotify_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=10, argument="[{tab},{useractivity}]"
+Protobuf处理 = type=http-response, pattern=^https:\/\/.+\.spotify\.com(:443)?\/(?:bootstrap|user-customization-service), script-path=https://kelee.one/Resource/Script/Spotify/Spotify_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=10, argument="[{tab},{useractivity}]"
 
 [MITM]
-hostname = %APPEND% spclient.wg.spotify.com
+hostname = %APPEND% *.spotify.com
 

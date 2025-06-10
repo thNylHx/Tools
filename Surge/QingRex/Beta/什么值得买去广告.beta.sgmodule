@@ -7,7 +7,7 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-06-03 18:12:18
+#!date=2025-06-10 00:02:18
 
 [Rule]
 DOMAIN,adx-api.zdmimg.com,REJECT,extended-matching,pre-matching
@@ -31,6 +31,7 @@ http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","activ
 http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","big_banner"]])'
 http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","top_banner"]])'
 http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","banner_switch"]])'
+http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/list_v10\? '.data.rows |= map(select(.model_type != "ads")) | .data.top_aladdin |= map(select(has("ad") | not))'
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","search_faxian"]])'
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","tonglan"]])'
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","hongbao"]])'
