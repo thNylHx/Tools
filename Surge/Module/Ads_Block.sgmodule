@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4508
+#!Rule = 4507
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1411,7 +1411,6 @@ DOMAIN-SUFFIX,analytics.126.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analytics.163.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analytics.adjust.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analytics.ganji.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,analytics.google.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analytics.meituan.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analytics.pinterest.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analytics.pointdrive.linkedin.com,REJECT,extended-matching,pre-matching
