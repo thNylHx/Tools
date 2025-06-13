@@ -1,12 +1,11 @@
 # 规则名称: Facebook_ip
-# 规则统计: 102
+# 规则统计: 100
 
 IP-CIDR,102.132.112.0/24,no-resolve
 IP-CIDR,102.132.114.0/23,no-resolve
 IP-CIDR,102.132.116.0/23,no-resolve
 IP-CIDR,102.132.119.0/24,no-resolve
-IP-CIDR,102.132.120.0/23,no-resolve
-IP-CIDR,102.132.123.0/24,no-resolve
+IP-CIDR,102.132.120.0/22,no-resolve
 IP-CIDR,102.132.125.0/24,no-resolve
 IP-CIDR,102.132.126.0/23,no-resolve
 IP-CIDR,102.132.96.0/20,no-resolve
@@ -98,7 +97,6 @@ IP-CIDR6,2a03:2887:ff64::/46,no-resolve
 IP-CIDR6,2a03:2887:ff68::/47,no-resolve
 IP-CIDR6,2a03:2887:ff70::/48,no-resolve
 IP-CIDR6,2c0f:ef78:10::/47,no-resolve
-IP-CIDR6,2c0f:ef78:12::/48,no-resolve
 IP-CIDR6,2c0f:ef78:3::/48,no-resolve
 IP-CIDR6,2c0f:ef78:5::/48,no-resolve
 IP-CIDR6,2c0f:ef78:9::/48,no-resolve
