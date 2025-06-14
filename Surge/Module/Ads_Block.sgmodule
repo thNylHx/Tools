@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4507
+#!Rule = 4509
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -3222,6 +3222,7 @@ DOMAIN-SUFFIX,r.l.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,rabbit.meitustat.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,rabbit.tg.meitu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,rads.msn.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ranfenghd.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,rating6.kingsoft-office-service.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,rayjump.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,rcgi.video.qq.com,REJECT,extended-matching,pre-matching
@@ -3672,6 +3673,7 @@ DOMAIN-SUFFIX,theta.sogoucdn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,thetrafficstat.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,thoughtleadr.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tianmidian.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,tianmu.mobi,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tidaltv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tiqcdn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tj.b.qq.com,REJECT,extended-matching,pre-matching
