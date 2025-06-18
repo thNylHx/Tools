@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4509
+#!Rule = 4512
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1884,6 +1884,7 @@ DOMAIN-SUFFIX,daoyoudao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,das-rpt-log.ucloud.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,das.api.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,das.mobile.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,data-sdk-uuid-log.d.meituan.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,data.ads.oppomobile.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,data.chsmarttv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,data.flurry.com,REJECT,extended-matching,pre-matching
@@ -2268,6 +2269,7 @@ DOMAIN-SUFFIX,h-adashx.ut.taobao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,h-adashx.ut.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,h-adashx4yt.ut.taobao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,h.trace.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,h5.analytics.126.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,h5.hpplay.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,haitaoad.nosdn.127.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,haloapps.com,REJECT,extended-matching,pre-matching
@@ -2619,6 +2621,7 @@ DOMAIN-SUFFIX,log.byteoversea.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.cs.pp.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.fc.yahoo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.hunantv.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,log.iflytek.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.kuwo.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.mix.sina.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.moji.com,REJECT,extended-matching,pre-matching
