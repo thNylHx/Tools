@@ -15,3 +15,7 @@ hostname = %APPEND%, mag1.sdgun.net
 ^https?:\/\/mag1\.sdgun\.net\/mag\/operative\/v1\/ad\/listNotEndByPlace data-type=text data='{"success":true,"code":100,"msg":null,"list":[]}' header='Content-Type:application/json'
 
 ^https?:\/\/mag1\.sdgun\.net\/mag\/operative\/v1\/Ad\/listNotEndByPlaceWap data-type=text data='{"success":true,"code":100,"data":{"themeTop":[],"wap_topic_content_ad":[],"themeBottom":[],"appThemeTopStyle":"1","userBehindAdStyle":"1","appThemeBottom":[],"cloud_ad_type":"","commentTop":[],"userBehindAd":[],"themeTopStyle":"1","appThemeTop":[],"appThemeBottomStyle":"1"},"msg":null}' header='Content-Type:application/json'
+
+[Body Rewrite]
+
+http-response-jq ^https?:\/\/mag1.sdgun.net\/mag\/info\/v2\/channel\/infoListByCatId '.list |= map(select(._type != "pic_ad"))'
