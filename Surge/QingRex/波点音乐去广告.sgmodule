@@ -16,14 +16,18 @@ http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/search\/topic\/word\/list\? '
 http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/search\/topic\/word\/list\? 'delpaths([["data","hotWord"]])'
 
 [Map Local]
+# 广告下发
 ^https:\/\/bd-api\.kuwo\.cn\/api\/play\/advert\/ data-type=text data="{}" status-code=200
 
+# 弹窗
 ^https:\/\/bd-api\.kuwo\.cn\/api\/popup\/ data-type=text data="{}" status-code=200
 
+# 首页和搜索页面 - 横幅推广
 ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/banner\/ data-type=text data="{}" status-code=200
 
 ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/home\/module\?.*&moduleId=6 data-type=text data="{}" status-code=200
 
+# 首页 - 低价会员推广文本
 ^https:\/\/bd-api\.kuwo\.cn\/api\/pay\/vip\/lowPriceText\? data-type=text data="{}" status-code=200
 
 ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/global\/config\/vipEnter\? data-type=text data="{}" status-code=200

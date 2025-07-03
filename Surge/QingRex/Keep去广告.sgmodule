@@ -10,6 +10,7 @@
 #!date=2025-05-23 13:32:55
 
 [Rule]
+# 信息流广告
 DOMAIN,kad.gotokeep.com,REJECT,extended-matching,pre-matching
 
 [Body Rewrite]
@@ -60,18 +61,25 @@ http-response-jq ^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/entryDetail\? '
 http-response-jq ^https:\/\/api\.gotokeep\.com\/config\/v3\/basic\? '.data.bottomBarControl.tabs |= map(select(.tabType | . == "home" or . == "dynamic_sports" or . == "personal")) | .data.homeTabs |= map(select(.type | . == "socialTab" or . == "union_feed_all" or . == "homeRecommend" or . == "suitTab" or . == "union_feed_route"))'
 
 [Map Local]
+# 开屏广告
 ^https:\/\/api\.gotokeep\.com\/op-engine-webapp\/v1\/ad\/ data-type=text data="{}" status-code=200
 
+# 搜索填充词
 ^https:\/\/api\.gotokeep\.com\/search\/v6\/default\/keyword\/list\? data-type=text data="{}" status-code=200
 
+# 关注 - 关注推荐
 ^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/followPage\? data-type=text data="{}" status-code=200
 
+# 弹窗
 ^https:\/\/api\.gotokeep\.com\/guide-webapp\/v1\/popup\/getPopUp\? data-type=text data="{}" status-code=200
 
+# 搜索 - 榜单
 ^https:\/\/api\.gotokeep\.com\/search\/v5\/hotCourse\/list$ data-type=text data="{}" status-code=200
 
+# 搜索 - 热门话题
 ^https:\/\/api\.gotokeep\.com\/search\/v4\/hotHashtag\/list$ data-type=text data="{}" status-code=200
 
+# 搜索 - 热搜推荐词
 ^https:\/\/api\.gotokeep\.com\/search\/v4\/hotword\/list\? data-type=text data="{}" status-code=200
 
 [MITM]

@@ -10,11 +10,14 @@
 #!date=2025-05-13 15:17:08
 
 [Map Local]
+# 首页 - 轮播图
 ^https:\/\/m\.riskbird\.com\/prod-qbb-api\/user\/getBannerList data-type=text data="{}" status-code=200
 
+# 首页 - 热门企业
 ^https:\/\/m\.riskbird\.com\/prod-qbb-api\/searchHotEnt data-type=text data="{}" status-code=200
 
 [Script]
+# 查老板 - 推荐老板
 移除推荐老板 = type=http-response, pattern=^https:\/\/m\.riskbird\.com\/prod-qbb-api\/query\/person\/personRecommend, script-path=https://kelee.one/Resource/Script/RiskBird/RiskBird_remove_ads.js, requires-body=true
 
 [MITM]

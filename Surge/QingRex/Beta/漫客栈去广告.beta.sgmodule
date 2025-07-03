@@ -10,15 +10,19 @@
 #!date=2025-05-13 15:17:08
 
 [Map Local]
+# 阅读页面视频广告
 ^https:\/\/base\.mkzcdn\.com\/advert\/app\/read\/v\d data-type=text data="{}" status-code=200
 
 ^https:\/\/base\.mkzcdn\.com\/advert\/app\/story\/read\/v\d data-type=text data="{}" status-code=200
 
+# 任务激励视频
 ^https:\/\/base\.mkzcdn\.com\/advert\/app\/task\/motivate\/v\d data-type=text data="{}" status-code=200
 
+# 我的页面 - 邀请好友、客栈魔法屋
 ^https:\/\/base\.mkzcdn\.com\/advert\/app\/user\/slide\d\/v\d\/ data-type=text data="{}" status-code=200
 
 [Script]
+# 配置修改
 配置修改 = type=http-response, pattern=^https:\/\/base\.mkzcdn\.com\/app\/config\/, script-path=https://kelee.one/Resource/Script/MKZ/MKZ_remove_ads.js, requires-body=true
 
 [MITM]

@@ -10,6 +10,7 @@
 #!date=2025-05-13 15:17:08
 
 [Rule]
+# 广告下发
 DOMAIN,adui.tg.meitu.com,REJECT,extended-matching,pre-matching
 
 [Body Rewrite]
@@ -21,11 +22,14 @@ http-response-jq ^https:\/\/api\.meiyan\.com\/operation\/get_config\.json\? 'if 
 http-response-jq ^https:\/\/api\.meiyan\.com\/operation\/get_config\.json\? 'if (getpath(["response","onoff"]) | has("vip_home_exit_remain_popup")) then (setpath(["response","onoff","vip_home_exit_remain_popup"]; 0)) else . end'
 
 [Map Local]
+# 首页轮播图
 ^https:\/\/api\.meiyan\.com\/operation\/home_banner\.json\? data-type=text data="{}" status-code=200
 
+# 弹窗和首页红点词
 ^https:\/\/api\.meiyan\.com\/vip\/permission_update_popup\.json\? data-type=text data="{}" status-code=200
 
 [Script]
+# 首页功能栏目和美颜推荐
 精简首页功能栏目并移除美颜推荐 = type=http-response, pattern=^https:\/\/api\.meiyan\.com\/operation\/home\.json\?, script-path=https://kelee.one/Resource/Script/MeituMYXJ/MeituMYXJ_remove_ads.js, requires-body=true
 
 [MITM]

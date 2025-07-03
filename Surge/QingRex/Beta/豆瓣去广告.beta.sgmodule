@@ -10,16 +10,21 @@
 #!date=2025-05-13 15:17:08
 
 [Map Local]
+# 开屏广告
 ^https:\/\/api\.douban\.com\/v\d\/app_ads\/splash data-type=text data="{}" status-code=200
 
+# 信息流广告
 ^https:\/\/frodo\.douban\.com\/api\/v\d\/erebor\/feed_ad data-type=text data="{}" status-code=200
 
+# 电影板块广告
 ^https:\/\/m\.douban\.com\/rexxar\/api\/v\d\/market\/products\/ data-type=text data="{}" status-code=200
 
 ^https:\/\/frodo\.douban\.com\/api\/v\d\/movie\/ad data-type=text data="{}" status-code=200
 
+# 首页横幅
 ^https:\/\/frodo\.douban\.com\/api\/v\d\/home_banner data-type=text data="{}" status-code=200
 
+# 搜索填充词
 ^https:\/\/frodo\.douban\.com\/api\/v\d\/search\/found_words data-type=text data="{}" status-code=200
 
 [MITM]

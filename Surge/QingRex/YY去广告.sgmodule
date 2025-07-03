@@ -10,7 +10,9 @@
 #!date=2025-06-02 01:02:42
 
 [Rule]
+# 开屏广告
 DOMAIN,splash.yy.com,REJECT,extended-matching,pre-matching
+# 广告下发
 DOMAIN,dsp-ad.yy.com,REJECT,extended-matching,pre-matching
 DOMAIN,ysad.yy.com,REJECT,extended-matching,pre-matching
 
@@ -21,8 +23,10 @@ http-response-jq ^https:\/\/tab\.yy\.com\/tabs\? '.data.tabs |= map(select(.alia
 http-response-jq ^https:\/\/personal-center\.yy\.com\/personalCenter\/list\? '.data.modules |= map(select(.moduleName != "Banner轮播")) | .data.modules |= map(if has("entrances") then .entrances |= map(select(.bizCode|IN("jishijiedaikuan","duxiaoman2","chongzhi","freeData")|not)) else . end)'
 
 [Map Local]
+# 首页 - 下拉进入直播间
 ^https:\/\/yyapp-fastnet\.yy\.com\/dispatch\? data-type=text data="{}" status-code=200
 
+# 首页 - 弹窗
 ^https:\/\/data\.3g\.yy\.com\/popup\/topLiveCardPopup\? data-type=text data="{}" status-code=200
 
 ^https:\/\/yyapp-act-entrance\.yy\.com\/entrance\/list\? data-type=text data="{}" status-code=200

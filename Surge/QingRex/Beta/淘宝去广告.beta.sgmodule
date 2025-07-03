@@ -10,6 +10,7 @@
 #!date=2025-05-13 15:17:08
 
 [Rule]
+AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch",extended-matching),(USER-AGENT,"%E6%B7%98%E5%AE%9D*")),REJECT
 DOMAIN,adashx.m.taobao.com,REJECT,extended-matching,pre-matching
 DOMAIN,ossgw.alicdn.com,REJECT,extended-matching,pre-matching
 DOMAIN,ems.youku.com,REJECT,extended-matching,pre-matching
@@ -18,6 +19,7 @@ DOMAIN,h-adashx.ut.taobao.com,REJECT,extended-matching,pre-matching
 DOMAIN,ut.taobao.com,REJECT,extended-matching,pre-matching
 
 [Map Local]
+# 阿里巴巴 //acs.m.taobao.com,heic.alicdn.com,guide-acs.m.taobao.com,poplayer.template.alibaba.com
 ^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.fliggy\.crm\.screen\.(allresource|predict) data-type=text data="{}" status-code=200
 
 ^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.alibaba\.advertisementservice\.getadv data-type=text data="{}" status-code=200

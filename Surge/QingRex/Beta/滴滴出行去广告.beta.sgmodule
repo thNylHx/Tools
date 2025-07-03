@@ -10,6 +10,7 @@
 #!date=22025-06-03 19:47:21
 
 [Rule]
+# 拦截广告下发
 DOMAIN,gwp.xiaojukeji.com,REJECT,extended-matching,pre-matching
 AND,((IP-ASN,45090,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT
 AND,((IP-ASN,63646,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT
@@ -28,14 +29,19 @@ http-response-jq ^https:\/\/common\.diditaxi\.com\.cn\/common\/v5\/usercenter\/l
 http-response-jq ^https:\/\/common\.diditaxi\.com\.cn\/common\/v5\/usercenter\/layout$ '.data.instances.center_wallet_finance_card.data.view_info |= map(select(.title == "优惠卡券" or .title == "余额" or .title == "福利金"))'
 
 [Map Local]
+# 活动弹窗
 ^https:\/\/res\.xiaojukeji\.com\/resapi\/activity\/mget data-type=text data="{}" status-code=200
 
+# 顶部活动通知
 ^https:\/\/lion\.didialift\.com\/broker\/\? data-type=text data="{}" status-code=200
 
+# 重逢专属福利
 ^https:\/\/conf\.diditaxi\.com\.cn\/homepage\/v1\/other\/slow\? data-type=text data="{}" status-code=200
 
+# 首页 - 拼车功能运营卡片配置数据
 ^https:\/\/ct\.xiaojukeji\.com\/agent\/v3\/feeds\? data-type=text data="{}" status-code=200
 
+# 打车页面 - 运营卡片配置数据
 ^https:\/\/conf\.diditaxi\.com\.cn\/dynamic\/conf data-type=text data="{}" status-code=200
 
 [MITM]

@@ -1,5 +1,5 @@
 #!name=什么值得买去广告
-#!desc=移除开屏广告、信息流广告、各类横幅广告、搜索页广告，精简我的页面。
+#!desc=移除开屏广告、信息流广告、各类横幅广告、搜索页广告，移除活动皮肤，精简我的页面。
 #!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/smzdm.png
 #!category=iKeLee
@@ -7,12 +7,14 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-06-10 00:02:18
+#!date=2025-06-29 18:19:35
 
 [Rule]
+# 广告下发
 DOMAIN,adx-api.zdmimg.com,REJECT,extended-matching,pre-matching
 
 [URL Rewrite]
+# 好价 - 今日好券
 ^https:\/\/h5\.smzdm\.com\/user\/coupon\/coupon_list\? - reject
 
 [Body Rewrite]
@@ -22,8 +24,10 @@ http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'delpaths([["data
 http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'delpaths([["data","video_cache_num_configs"]])'
 http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'delpaths([["data","haojia_widget"]])'
 http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'delpaths([["data","widget"]])'
+http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'delpaths([["data","operation_float"]])'
 http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'def r: if type=="object" then if has("ad_campaign_name") and (.ad_campaign_name|type=="string") and (.ad_campaign_name|test("\\S")) then empty else . end elif type=="array" then map(r) else . end; .data.operation_float |= map(map(r))'
-http-response-jq ^https:\/\/homepage-api\.smzdm\.com\/v3\/home\? '    .data.component |= map(    if (.zz_content | type) == "array" then     .zz_content |= map(       select(         ( (.ad_campaign_id? | type == "string" and length > 0)// false ) or         ( (.tag? | type == "string" and length > 0)// false ) or         ( (.model_type? == "ads" and (type == "string"))// false )         | not       )     )   else . end )  | .data.component |= map(   select(     if has("zz_type") then        .zz_type | IN(["circular_banner", "filter", "list"][])      else true end   ) )'
+http-response-jq ^https:\/\/homepage-api\.smzdm\.com\/v3\/home\? '    .data.component |= map(    if (.zz_content | type) == "array" then     .zz_content |= map(       select(         ( (.ad_campaign_id? | type == "string" and length > 0)// false ) or         ( (.tag? | type == "string" and length > 0)// false ) or         ( (.model_type? == "ads" and (type == "string"))// false )         | not       )     )   else . end )  | .data.component |= map(   select(     if has("zz_type") then        .zz_type | IN(["circular_banner", "filter", "list"][])      else true end   ) )   | del(.data.theme) |  .data.component |= map(   if .zz_content | type == "object" then     .zz_content |= del(.circular_banner_option)   else     .   end )'
+http-response-jq ^https:\/\/haojia-api\.smzdm\.com\/home\/list\? 'delpaths([["data","header_operation","theme"]])'
 http-response-jq ^https:\/\/haojia-api\.smzdm\.com\/home\/list\? '.data.rows |= map(select(.cell_type == "39001")) | .data.banner_v2 |= map(select(.cell_type == "21028"))'
 http-response-jq ^https:\/\/haojia\.m\.smzdm\.com\/detail_modul\/user_related_modul\? 'delpaths([["data","super_coupon"]])'
 http-response-jq ^https:\/\/haojia\.m\.smzdm\.com\/detail_modul\/other_modul\? 'delpaths([["data","banner"]])'
@@ -36,18 +40,28 @@ http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'de
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","tonglan"]])'
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","hongbao"]])'
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? '.data.search_hot.home |= map(select(.article_tag.article_title != "广告"))'
+http-response-jq ^https:\/\/haojia-api\.smzdm\.com\/detail\/\d+\? 'delpaths([["data","quan_log"]])'
+http-response-jq ^https:\/\/haojia-cdn\.smzdm\.com\/preload\/\d+\/fiphone\/v\d+_\d+_\d+\/wx\d+\/im\d+\/[0-9a-z]+\/[0-9a-z]+\.json$ 'delpaths([["data","quan_log"]])'
 
 [Map Local]
+# 开屏广告
 ^https:\/\/app-api\.smzdm\.com\/util\/loading\? data-type=text data="{}" status-code=200
 
+# 首页 - 顶部频道
 ^https:\/\/app-api\.smzdm\.com\/mychannel\/list$ data-type=text data="{}" status-code=200
 
+# 我的 - 服务卡片
 ^https:\/\/user-api\.smzdm\.com\/vip\/bottom_card_list\? data-type=text data="{}" status-code=200
 
+# 气泡提示
 ^https:\/\/article-api\.smzdm\.com\/publish\/get_bubble\? data-type=text data="{}" status-code=200
 
+# 搜索 - 填充词
 ^https:\/\/s-api\.smzdm\.com\/sou\/search_default_keyword\? data-type=text data="{}" status-code=200
 
+# 搜索 - 弹窗
+^https:\/\/s-api\.smzdm\.com\/sou\/popup_coupon\? data-type=text data="{}" status-code=200
+
 [MITM]
-hostname = %APPEND% app-api.smzdm.com, homepage-api.smzdm.com, h5.smzdm.com, haojia-api.smzdm.com, haojia.m.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, s-api.smzdm.com
+hostname = %APPEND% app-api.smzdm.com, homepage-api.smzdm.com, h5.smzdm.com, haojia-api.smzdm.com, haojia.m.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, s-api.smzdm.com, haojia-cdn.smzdm.com
 

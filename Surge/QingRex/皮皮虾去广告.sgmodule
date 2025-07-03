@@ -14,10 +14,13 @@ http-response-jq ^https:\/\/api(5-lq)?\.pipix\.com\/bds\/feed\/stream\/v2\/ '.da
 http-response-jq ^https:\/\/api(5-lq)?\.pipix\.com\/bds\/user\/check_in\/ '.data.profile_entrances |= map(select(.title != "放心借" and .title != "洋钱罐借款")) | del(.data.pet_interface_message)'
 
 [Map Local]
+# 广告下发
 ^https:\/\/api(5-lq)?\.pipix\.com\/api\/ad\/ data-type=text data="{}" status-code=200
 
+# 横幅
 ^https:\/\/api(5-lq)?\.pipix\.com\/bds\/banner\/ data-type=text data="{}" status-code=200
 
+# 关注 - 近期热门皮友
 ^https:\/\/api(5-lq)?\.pipix\.com\/bds\/feed\/follow_feed\/ data-type=text data="{}" status-code=200
 
 [MITM]

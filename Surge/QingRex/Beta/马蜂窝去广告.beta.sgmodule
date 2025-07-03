@@ -10,6 +10,7 @@
 #!date=2025-05-13 15:17:08
 
 [Rule]
+# 首页 - 发现 - 横幅广告
 DOMAIN,advert.mafengwo.cn,REJECT,extended-matching,pre-matching
 
 [Body Rewrite]
@@ -17,6 +18,7 @@ http-response-jq ^https:\/\/mapi\.mafengwo\.cn\/discovery\/get_index\/v7\? '.dat
 http-response-jq ^https:\/\/mapi\.mafengwo\.cn\/sales\/home\/get_header\/v3\? '.data.list[] |= ( .data |= del(.banners) )'
 
 [Map Local]
+# 我的 - 打卡成就勋章弹窗
 ^https:\/\/mapi\.mafengwo\.cn\/user\/growth\/get_growth_tip\/v1\? data-type=text data="{}" status-code=200
 
 [MITM]

@@ -14,16 +14,22 @@ http-response-jq ^https:\/\/consumer\.fcbox\.com\/v1\/dynamicConfig\/findTabbarC
 http-response-jq ^https:\/\/consumer\.fcbox\.com\/v1\/dynamicConfig\/findTabbarConfig\/mainPage$ 'delpaths([["data","mall"]])'
 
 [Map Local]
+# 首页 - 各类服务推广
 ^https:\/\/consumer\.fcbox\.com\/fcboxactivityweb\/api\/v\d\/clientPage\/modulesAggregated\? data-type=text data="{}" status-code=200
 
+# 首页 - 丰巢商城
 ^https:\/\/consumer\.fcbox\.com\/v2\/home\/mallInfo$ data-type=text data="{}" status-code=200
 
+# 广告配置及横幅推广
 ^https:\/\/dsp\.fcbox\.com\/adSearch\/ data-type=text data="{}" status-code=200
 
+# 生活服务
 ^https:\/\/consumer\.fcbox\.com\/hs-portal\/app\/config\/page\/home\/v2\? data-type=text data="{}" status-code=200
 
+# 订单页面 - 邀请开通会员横幅
 ^https:\/\/consumer\.fcbox\.com\/post\/suggestion\/query$ data-type=text data="{}" status-code=200
 
+# 弹窗配置
 ^https:\/\/consumer\.fcbox\.com\/fcboxactivityweb\/marketingEntrance\/retentionPopup$ data-type=text data="{}" status-code=200
 
 ^https:\/\/consumer\.fcbox\.com\/fcboxactivityweb\/api\/clientPopup\/v\d\/queryPopupWithPriority$ data-type=text data="{}" status-code=200

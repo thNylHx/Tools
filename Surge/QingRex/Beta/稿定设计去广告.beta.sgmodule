@@ -15,10 +15,13 @@ http-response-jq ^https:\/\/www\.gaoding\.com\/api\/v\d\/oc\/exhibitions\/app_mi
 http-response-jq ^https:\/\/www\.gaoding\.com\/api\/v\d\/oc\/exhibitions\/(templates|all_editor_tools)\/resources$ 'walk(if type == "object" and .badge_img_url? then .badge_img_url="" else . end)'
 
 [Map Local]
+# 开屏广告
 ^https:\/\/www\.gaoding\.com\/api\/v\d\/oc\/v\d\/delivery-pits\/ios-splash\/modules$ data-type=text data="{}" status-code=200
 
+# 模板中心弹窗
 ^https:\/\/www\.gaoding\.com\/api\/v\d\/oc\/delivery-pits\/(template|mine|home)-page-dialog\/modules$ data-type=text data="{}" status-code=200
 
+# 搜索栏填充词
 ^https:\/\/www\.gaoding\.com\/api\/v\d\/cp\/search-words\/v2\/placeholder data-type=text data="{}" status-code=200
 
 [MITM]

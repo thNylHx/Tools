@@ -24,14 +24,19 @@ http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpat
 http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpaths([["result","examPageLoadADSwitch"]])'
 
 [Map Local]
+# 广告配置
 ^https:\/\/richmanrules\.ksedt\.com\/serverConfig\/3\/adConfig\.json data-type=text data="{}" status-code=200
 
+# 弹窗广告
 ^https:\/\/gouche\.ksedt\.com\/config\/popup\/info$ data-type=text data="{}" status-code=200
 
+# 考试 - 信息流广告、右上角免费领秘籍入口
 ^https:\/\/richmanrules\.ksedt\.com\/intellectWaterfallBidding\/find$ data-type=text data="{}" status-code=200
 
+# 考试 - 满分通关技巧直播课入口
 ^https:\/\/op\.ksedt\.com\/jxedtLive\/liveIntroduceResource data-type=text data="{}" status-code=200
 
+# 我的页面广告
 ^https:\/\/richmanrules\.ksedt\.com\/intellectWaterfall\/find$ data-type=text data="{}" status-code=200
 
 [MITM]

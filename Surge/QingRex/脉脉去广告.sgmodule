@@ -13,13 +13,17 @@
 http-response-jq ^https:\/\/(h3\.)?open\.taou\.com\/maimai\/feed\/v6\/detail_recommend_feeds\? 'delpaths([["feeds"]])'
 
 [Map Local]
+# 开屏广告、职位页面横幅
 ^https:\/\/(h3\.)?open\.taou\.com\/maimai\/adshow\? data-type=text data="{}" status-code=200
 
+# 赠送礼物 - 横幅
 ^https:\/\/(h3\.)?open\.taou\.com\/maimai\/pay\/v5\/check_gift\? data-type=text data="{}" status-code=200
 
+# 帖子文末推广卡片
 ^https:\/\/(h3\.)?open\.taou\.com\/maimai\/go_gossip_darwin\/external\/v2\/query_flow_cards\? data-type=text data="{}" status-code=200
 
 [Script]
+# 移除信息流和评论区大块广告 - 信息流广告focus_feed / 评论区广告gossip_detail_comment / 评论区广告feed_detail_comment?
 移除信息流和评论区大块广告 = type=http-response, pattern=^https:\/\/(h3\.)?open\.taou\.com\/maimai\/(feed|gossip)\/v\d\/(focus_feed|gossip_detail_comment|feed_detail_comment?)\?, script-path=https://kelee.one/Resource/Script/MaiMai/MaiMai_remove_ads.js, requires-body=true
 
 [MITM]

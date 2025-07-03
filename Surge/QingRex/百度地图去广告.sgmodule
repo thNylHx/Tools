@@ -20,16 +20,20 @@ http-response-jq ^https:\/\/newclient\.map\.baidu\.com\/living\/nearby\/api\? 'd
 http-response-jq ^https:\/\/newclient\.map\.baidu\.com\/living\/nearby\/api\? 'delpaths([["Result","cards",9]])'
 
 [Map Local]
+# 开屏广告
 ^https:\/\/afd\.baidu\.com\/afd\/entry\?action=(update|query) data-type=text data="{}" status-code=200
 
+# 打车 - 弹窗
 ^https:\/\/yongche\.baidu\.com\/gomarketing\/api\/popup\/getentrancecordovaurl$ data-type=text data="{}" status-code=200
 
+# 打车 - 推广
 ^https:\/\/yongche\.baidu\.com\/goorder\/passenger\/cobuild\/pull\? data-type=text data="{}" status-code=200
 
 ^https:\/\/yongche\.baidu\.com\/goorder\/passenger\/operationgirdle$ data-type=text data="{}" status-code=200
 
 ^https:\/\/yongche\.baidu\.com\/goorder\/passenger\/baseinfo$ data-type=text data="{}" status-code=200
 
+# 酒店 - 弹窗、推广
 ^https:\/\/ecom\.map\.baidu\.com\/ad-ops\/afd\/popup\? data-type=text data="{}" status-code=200
 
 ^https:\/\/maphotel\.baidu\.com\/hotel\/goextranet\/activity\/detail\? data-type=text data="{}" status-code=200

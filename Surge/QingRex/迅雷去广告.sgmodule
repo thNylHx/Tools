@@ -10,9 +10,11 @@
 #!date=2025-05-13 15:17:08
 
 [Map Local]
+# 首页 - 横幅推广
 ^https:\/\/api-shoulei-ssl\.xunlei\.com\/flowhub\/v1\/slots:batchGet$ data-type=text data="{}" status-code=200
 
 [Script]
+# 精简我的页面
 精简我的页面 = type=http-response, pattern=^https:\/\/conf-m-ssl\.xunlei\.com\/external\/, script-path=https://kelee.one/Resource/Script/XunLei/XunLei_remove_ads.js, requires-body=true
 
 [MITM]

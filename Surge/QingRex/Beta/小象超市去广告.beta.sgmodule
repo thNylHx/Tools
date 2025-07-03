@@ -10,21 +10,29 @@
 #!date=2025-05-13 15:17:08
 
 [Map Local]
+# 开屏广告
 ^https:\/\/mall\.meituan\.com\/api\/c\/homepage\/splash data-type=text data="{}" status-code=200
 
+# 首页 - 领券悬浮红包
 ^https:\/\/mall\.meituan\.com\/api\/c\/homepage\/bubble\/operate\/info data-type=text data="{}" status-code=200
 
+# 分类 - 横幅推广
 ^https:\/\/mall\.meituan\.com\/api\/c\/jigsaw\/code\/category-banner-\d+\/ data-type=text data="{}" status-code=200
 
+# 购物车 - 您可能想买
 ^https:\/\/mall\.meituan\.com\/api\/c\/poi\/\d+\/order\/recommend\/v\d data-type=text data="{}" status-code=200
 
+# 我的页面 - 轮播图
 ^https:\/\/mall\.meituan\.com\/api\/c\/banner\/ data-type=text data="{}" status-code=200
 
+# 我的页面 - 您可能想买
 ^https:\/\/mall\.meituan\.com\/api\/c\/poi\/\d+\/personal\/recommend data-type=text data="{}" status-code=200
 
+# 报名 - 驾校推荐列表
 ^https:\/\/businessapi\.ksedt\.com\/signupindex\/jxlist data-type=text data="{}" status-code=200
 
 [Script]
+# 下发广告
 移除下发广告 = type=http-response, pattern=^https:\/\/portal-portm\.meituan\.com\/horn_ios\/mergeRequest, script-path=https://kelee.one/Resource/Script/iMaiCai/iMaiCai_remove_ads.js, requires-body=true
 
 [MITM]
