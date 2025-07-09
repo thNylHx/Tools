@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4512
+#!Rule = 4511
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -3659,7 +3659,6 @@ DOMAIN-SUFFIX,tellapart.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,temai.taobao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tencent-dtv.m.cn.miaozhen.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tend.io,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,terms-drcn.platform.dbankcloud.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,terraclicks.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,terren.cntv.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,test.ad.xiaomi.com,REJECT,extended-matching,pre-matching
