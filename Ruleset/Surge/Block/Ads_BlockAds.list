@@ -1,5 +1,5 @@
 # 规则名称: Ads_BlockAds
-# 规则统计: 910
+# 规则统计: 904
 
 DOMAIN,180.76.76.200
 DOMAIN,4lke.online
@@ -124,7 +124,6 @@ DOMAIN,b-gtc.getui.net
 DOMAIN,babel-statistics-android.d.meituan.net
 DOMAIN,baichuan-sdk.alicdn.com
 DOMAIN,banners.itunes.apple.com
-DOMAIN,bds.snssdk.com
 DOMAIN,beacon-api.aliyuncs.com
 DOMAIN,bgg.baidu.com
 DOMAIN,brahe.apptimize.com
@@ -168,8 +167,6 @@ DOMAIN,devs-data.dutils.com
 DOMAIN,df.tanx.com
 DOMAIN,dflow.bz.mgtv.com
 DOMAIN,dgstatic.jd.com
-DOMAIN,dig.bdurl.net
-DOMAIN,dig.zjurl.cn
 DOMAIN,dm.bytedance.com
 DOMAIN,dm.pstatp.com
 DOMAIN,dm.toutiao.com
@@ -197,7 +194,6 @@ DOMAIN,et.tanx.com
 DOMAIN,etahub.com
 DOMAIN,ether-pack.pangolin-sdk-toutiao.com
 DOMAIN,evtubescms.phncdn.com
-DOMAIN,extlog.snssdk.com
 DOMAIN,ezozojawg.com
 DOMAIN,fcapi-ipv6.jpush.cn
 DOMAIN,feed-image.baidu.com
@@ -279,7 +275,6 @@ DOMAIN,huatuocode.huatuo.qq.com
 DOMAIN,hudong.alicdn.com
 DOMAIN,huichuan-mc.sm.cn
 DOMAIN,huichuan.sm.cn
-DOMAIN,i.snssdk.com
 DOMAIN,iacc.qq.com
 DOMAIN,iad.apple.com
 DOMAIN,iad.g.163.com
@@ -301,7 +296,6 @@ DOMAIN,info6.video.qq.com
 DOMAIN,init.supersonicads.com
 DOMAIN,ios.bugly.qq.com
 DOMAIN,ios.video.mpush.qq.com
-DOMAIN,is.snssdk.com
 DOMAIN,iyes.youku.com
 DOMAIN,janapi.jd.com
 DOMAIN,jump.admobile.top
@@ -314,7 +308,6 @@ DOMAIN,lf-cdn-tos.bytescm.com
 DOMAIN,lofter.httpdns.c.163.com
 DOMAIN,log-verify.dutils.com
 DOMAIN,log-verify.mob.com
-DOMAIN,log.snssdk.com
 DOMAIN,log.umsns.com
 DOMAIN,log.umtrack.com
 DOMAIN,lookup.api.bsb.baidu.com
@@ -362,7 +355,6 @@ DOMAIN,p.l.qq.com
 DOMAIN,p2.l.qq.com
 DOMAIN,pagead2.googlesyndication.com
 DOMAIN,pageviewp.icbc.com.cn
-DOMAIN,pangolin.snssdk.com
 DOMAIN,partwithner.com
 DOMAIN,paydns.wechatpay.cn
 DOMAIN,pgdt.gtimg.cn
@@ -398,7 +390,6 @@ DOMAIN,s3a.pstatp.com
 DOMAIN,safebrowsing.g.applimg.com
 DOMAIN,safebrowsing.googleapis.com
 DOMAIN,safebrowsing.urlsec.qq.com
-DOMAIN,sdfp.snssdk.com
 DOMAIN,sdk-conf.getui.com
 DOMAIN,sdk-data.ubixioe.com
 DOMAIN,sdk-open-phone.getui.com
@@ -656,6 +647,7 @@ DOMAIN-KEYWORD,-cdn2.adtng.com
 DOMAIN-KEYWORD,a3.bytecdn.cn
 DOMAIN-KEYWORD,a3.pstatp.com
 DOMAIN-KEYWORD,ad.toutiao.com
+DOMAIN-KEYWORD,ads
 DOMAIN-KEYWORD,adservice.google.com.
 DOMAIN-KEYWORD,adshare.toutiao.com
 DOMAIN-KEYWORD,adv.ccb.com
@@ -666,6 +658,8 @@ DOMAIN-KEYWORD,bdsp.x.jd.com
 DOMAIN-KEYWORD,bjimp.voiceads.cn
 DOMAIN-KEYWORD,client-dmp.suishenyun.cn
 DOMAIN-KEYWORD,clk.gentags.net
+DOMAIN-KEYWORD,dig.bdurl
+DOMAIN-KEYWORD,dig.zjurl
 DOMAIN-KEYWORD,dm.bytedance.com
 DOMAIN-KEYWORD,dm.pstatp.com
 DOMAIN-KEYWORD,dm.toutiao.com
@@ -688,12 +682,12 @@ DOMAIN-KEYWORD,rich.kuwo.cn
 DOMAIN-KEYWORD,s1.pstatp.com
 DOMAIN-KEYWORD,s2.pstatp.com
 DOMAIN-KEYWORD,s3.pstatp.com
+DOMAIN-KEYWORD,snssdk.com
 DOMAIN-KEYWORD,trace.qq.com
 DOMAIN-KEYWORD,trace.video.qq.com
 DOMAIN-KEYWORD,tunion-api.m.taobao.com
 DOMAIN-KEYWORD,uop.umeng.com
 DOMAIN-KEYWORD,v0-client-lz.rili.cn
-DOMAIN-KEYWORD,video-cn.snssdk.com
 IP-CIDR,101.124.19.122/32,no-resolve
 IP-CIDR,101.32.104.104/32,no-resolve
 IP-CIDR,101.50.8.64/32,no-resolve
@@ -902,8 +896,8 @@ AND,((DOMAIN-KEYWORD,sf),(DOMAIN-KEYWORD,-fe-tos.pglstatp-toutiao.com))
 AND,((DOMAIN-KEYWORD,sf),(DOMAIN-KEYWORD,-static.i18n-pglstatp.com))
 AND,((DOMAIN-KEYWORD,sf),(DOMAIN-KEYWORD,-ttcdn-tos.pstatp.com))
 AND,((DOMAIN-KEYWORD,ssdk-),(DOMAIN-SUFFIX,pangle.io))
-AND,((DOMAIN-KEYWORD,tnc),(AND,((OR,((DOMAIN-KEYWORD,-bjlgy),(DOMAIN-KEYWORD,-alisc),(DOMAIN-KEYWORD,-aliec),(DOMAIN-KEYWORD,-alisg))),(OR,((DOMAIN-SUFFIX,snssdk.com),(DOMAIN-SUFFIX,isnssdk.com),(DOMAIN-SUFFIX,toutiaoapi.com),(DOMAIN-SUFFIX,bytedance.com),(DOMAIN-SUFFIX,zijieapi.com))))))
 AND,((DOMAIN-KEYWORD,v),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com))
+AND,((DOMAIN-KEYWORD,zijieapi),(DOMAIN-KEYWORD,ads))
 AND,((IP-ASN,45090),(DEST-PORT,25641),(PROTOCOL,TCP))
 AND,((IP-ASN,63646),(DEST-PORT,25641),(PROTOCOL,TCP))
 AND,((URL-REGEX,^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/d,extended-matching),(USER-AGENT,*com.xunmeng.pinduoduo*))
