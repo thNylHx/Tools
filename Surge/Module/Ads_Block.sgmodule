@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4506
+#!Rule = 4507
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1883,6 +1883,7 @@ DOMAIN-SUFFIX,data.flurry.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,data.mistat.india.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,data.mistat.rus.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,data.mistat.xiaomi.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,datacollection.uve.weibo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,datax.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,datk.anythinktech.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,datouniao.com,REJECT,extended-matching,pre-matching
