@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥
 #!category = 🚫 Block ads
 #!tag = 广告拦截
-#!date = 2025-05-11 20:09:29
+#!date = 2025-07-12 13:06:49
 
 [Rule]
 DOMAIN,api.biliapi.com,REJECT
@@ -31,9 +31,9 @@ http-response-jq ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo\? '.data.
 ^https:\/\/ap[ip]\.bilibili\.com\/x\/(?:resource\/(?:top\/activity|patch\/tab)|v2\/search\/square|vip\/ads\/materials)\? data-type=text data="{"code":-404,"message":"-404","ttl":1,"data":null}" status-code=200 header="Content-Type:text/plain"
 
 [Script]
-哔哩哔哩 = type=http-request, pattern=^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.playerunite\.v1\.Player\/PlayViewUnite$, script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_airborne_kokoryh.js, requires-body=true, binary-body-mode=true
-哔哩哔哩 = type=http-request, pattern=^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$, script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_airborne_kokoryh.js, requires-body=true, binary-body-mode=true
-哔哩哔哩 = type=http-response, pattern=^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(?:app\.(?:interface\.v1\.(?:Teenagers\/ModeStatus|Search\/DefaultWords)|show\.v1\.Popular\/Index|dynamic\.v2\.Dynamic\/DynAll|view(?:unite)?\.v1\.View\/(?:View|ViewProgress|TFInfo|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|community\.service\.dm\.v1\.DM\/DmView|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$, script-path=https://kelee.one/Resource/Script/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, argument="[{showUpList}, {filterTopReplies}]"
+哔哩哔哩 = type=http-request, pattern=^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.playerunite\.v1\.Player\/PlayViewUnite$, script-path=https://kelee.one/Resource/JavaScript/Bilibili/Bilibili_airborne_kokoryh.js, requires-body=true, binary-body-mode=true
+哔哩哔哩 = type=http-request, pattern=^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.community\.service\.dm\.v1\.DM\/DmSegMobile$, script-path=https://kelee.one/Resource/JavaScript/Bilibili/Bilibili_airborne_kokoryh.js, requires-body=true, binary-body-mode=true
+哔哩哔哩 = type=http-response, pattern=^https:\/\/(?:grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(?:app\.(?:interface\.v1\.(?:Teenagers\/ModeStatus|Search\/DefaultWords)|show\.v1\.Popular\/Index|dynamic\.v2\.Dynamic\/DynAll|view(?:unite)?\.v1\.View\/(?:View|ViewProgress|TFInfo|RelatesFeed)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|community\.service\.dm\.v1\.DM\/DmView|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$, script-path=https://kelee.one/Resource/JavaScript/Bilibili/Bilibili_proto_kokoryh.js, requires-body=true, binary-body-mode=true, argument="[{showUpList}, {filterTopReplies}]"
 
 [MITM]
 hostname = %APPEND% grpc.biliapi.net, app.bilibili.com, api.bilibili.com, api.live.bilibili.com
