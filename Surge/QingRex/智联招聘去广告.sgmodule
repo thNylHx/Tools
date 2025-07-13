@@ -10,18 +10,15 @@
 #!date=2025-05-13 15:17:08
 
 [Rule]
-# 广告下发
 URL-REGEX,"^https:\/\/(ask|cgate)\.zhaopin\.com\/operation\/ad\/",REJECT,extended-matching
 
 [URL Rewrite]
-# 职位详情 - 竞争力分析、简历置顶推广
 ^https:\/\/cgate\.zhaopin\.com\/bdp\/commercial\/queryLinkData$ - reject
 
 [Body Rewrite]
 http-response-jq ^https:\/\/ask\.zhaopin\.com\/plat-zqa-server\/home\/\d\.\d\.\d\/getHomeContents\? 'delpaths([["data","templates",0,"data","banner"]])'
 
 [Map Local]
-# 弹窗 - 补充最新工作经历
 ^https:\/\/cgate\.zhaopin\.com\/resumeapi\/resumeCheck\/positionDetailBottomTipCheck$ data-type=text data="{}" status-code=200
 
 [MITM]

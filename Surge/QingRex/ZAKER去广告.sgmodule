@@ -17,10 +17,8 @@ http-response-jq ^https:\/\/iphone\.myzaker\.com\/zaker\/follow_promote\.php\? '
 http-response-jq ^https:\/\/iphone\.myzaker\.com\/zaker\/car_tab\/index\.php\? '.data.gallery |= map(select(.type != "web"))'
 
 [Map Local]
-# 开屏广告
 ^https:\/\/iphone\.myzaker\.com\/zaker\/cover\.php\? data-type=text data="{}" status-code=200
 
-# 热点 - 信息流广告
 ^https:\/\/iphone\.myzaker\.com\/zaker\/block_top_ad\.php\? data-type=text data="{}" status-code=200
 
 [MITM]

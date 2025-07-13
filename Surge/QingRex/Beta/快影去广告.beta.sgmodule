@@ -14,16 +14,12 @@ http-response-jq ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/ban
 http-response-jq ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/banner\/common\/getAllBannerPage\? 'del(.data[] | select(.bannerChannelName == "活动"))'
 
 [Map Local]
-# 开屏广告
 ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/resource\/get\? data-type=text data="{}" status-code=200
 
-# 剪同款 - 横幅推广
 ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/banner\/common\/getBannerByType\? data-type=text data="{}" status-code=200
 
-# 剪同款 - 信息流广告
 ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/merchant\/ad\/ data-type=text data="{}" status-code=200
 
-# 悬浮部件 - 多品类模板师招募
 ^https:\/\/api\.kmovie\.gifshow\.com\/rest\/n\/kmovie\/app\/resource\/activity\/pendant\? data-type=text data="{}" status-code=200
 
 [MITM]

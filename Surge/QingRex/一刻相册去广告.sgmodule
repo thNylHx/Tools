@@ -14,10 +14,8 @@ http-response-jq ^https:\/\/mbd\.baidu\.com\/ccs\/v1\/start\/confsync\? 'delpath
 http-response-jq ^https:\/\/mbd\.baidu\.com\/ccs\/v1\/start\/confsync\? 'delpaths([["data","service","config","youa","pm_config_ad"]])'
 
 [Map Local]
-# 一刻核心经常变更的配置
 ^https:\/\/pan\.baidu\.com\/act\/api\/conf\?.*conf_key=youa_core_config_ios data-type=text data="{}" status-code=200
 
-# 弹窗推广
 ^https:\/\/pan\.baidu\.com\/youai\/material\/v1\/getbynavid\?.*nav_id=1 data-type=text data="{}" status-code=200
 
 [MITM]

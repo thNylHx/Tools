@@ -13,10 +13,8 @@
 DOMAIN-SUFFIX,wxs.qq.com,REJECT,extended-matching,pre-matching
 
 [Map Local]
-# ^http:\/\/\w+\.wxs\.qq\.com\/\d+\/\d+\/(snscosdownload|snssvpdownload)\/(SH|SZ)\/reserved\/\w+ reject-dict
 ^https:\/\/mp\.weixin\.qq\.com\/mp\/(cps_product_info|getappmsgad|jsmonitor|masonryfeed|relatedarticle)\? data-type=text data="{}" status-code=200
 
-# 移除微信公众号文章底栏都在搜 @wish
 ^https:\/\/mp\.weixin\.qq\.com\/mp\/relatedsearchword data-type=text data="{}" status-code=200
 
 [MITM]

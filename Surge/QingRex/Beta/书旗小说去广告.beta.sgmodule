@@ -10,25 +10,20 @@
 #!date=2025-05-13 15:17:08
 
 [Rule]
-# 移除福利页面
 DOMAIN,render-web.11222.cn,REJECT,extended-matching,pre-matching
 
 [URL Rewrite]
-# 移除渲染资源 - 移除福利入口、悬浮窗资源、我的页面推广、推荐搜索词
 ^https:\/\/ocean\.shuqireader\.com\/api\/render\/load\/resource - reject
 
 [Map Local]
-# 开屏广告
 ^https:\/\/huichuan\.sm\.cn\/nativead data-type=text data="{}" status-code=200
 
-# 阅读页面广告
 ^https:\/\/ocean\.shuqireader\.com\/api\/route\/iosReadPage\/adV2 data-type=text data="{}" status-code=200
 
 ^https:\/\/ocean\.shuqireader\.com\/api\/route\/ios\/readPage$ data-type=text data="{}" status-code=200
 
 [Script]
-# 书城横幅和阅读广告
-移除书城横幅和阅读广告 = type=http-response, pattern=^https:\/\/ocean\.shuqireader\.com\/sqios\/render\/render\/page\/bookstore$, script-path=https://kelee.one/Resource/Script/ShuQiCenterReader/ShuQiCenterReader_remove_ads.js, requires-body=true
+移除书城横幅和阅读广告 = type=http-response, pattern=^https:\/\/ocean\.shuqireader\.com\/sqios\/render\/render\/page\/bookstore$, script-path=https://kelee.one/Resource/JavaScript/ShuQiCenterReader/ShuQiCenterReader_remove_ads.js, requires-body=true
 
 [MITM]
 hostname = %APPEND% ocean.shuqireader.com, huichuan.sm.cn

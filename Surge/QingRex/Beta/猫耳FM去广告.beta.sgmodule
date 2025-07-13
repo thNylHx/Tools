@@ -27,19 +27,14 @@ http-response-jq ^https:\/\/app\.missevan\.com\/discovery\/list$ '.info |= map(m
 http-response-jq ^https:\/\/app\.missevan\.com\/site\/get-top$ 'delpaths([["info","search_words"]])'
 
 [Map Local]
-# 广告跟踪
 ^https:\/\/data\.missevan\.com\/site\/ad-track$ data-type=text data="{}" status-code=200
 
-# 弹窗
 ^https:\/\/app\.missevan\.com\/x\/recommend\/get-popup$ data-type=text data="{}" status-code=200
 
-# 横幅广告
 ^https:\/\/fm\.missevan\.com\/api\/v2\/meta\/banner$ data-type=text data="{}" status-code=200
 
-# 首页 - 主播推荐列表
 ^https:\/\/fm\.missevan\.com\/api\/v2\/recommended\/top\? data-type=text data="{}" status-code=200
 
-# 播放器 - 右上角直播入口
 ^https:\/\/fm\.missevan\.com\/api\/v2\/chatroom\/sound\/recommend\? data-type=text data="{}" status-code=200
 
 [MITM]

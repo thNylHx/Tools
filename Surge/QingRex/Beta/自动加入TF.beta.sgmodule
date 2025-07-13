@@ -10,11 +10,11 @@
 #!date=2025-05-13 15:17:08
 
 [Script]
-获取账号令牌 = type=http-request, pattern=^https?:\/\/testflight\.apple\.com\/v3\/accounts\/.*\/apps$, script-path=https://kelee.one/Resource/Script/TestFlight/TF_keys.js
+获取账号令牌 = type=http-request, pattern=^https?:\/\/testflight\.apple\.com\/v3\/accounts\/.*\/apps$, script-path=https://kelee.one/Resource/JavaScript/TestFlight/TF_keys.js
 
-应用ID捕获 = type=http-request, pattern=^https://testflight.apple.com/join/(.*), script-path=https://kelee.one/Resource/Script/TestFlight/TF_keys.js
+应用ID捕获 = type=http-request, pattern=^https://testflight.apple.com/join/(.*), script-path=https://kelee.one/Resource/JavaScript/TestFlight/TF_keys.js
 
-自动加入TF = type=cron, cronexp={TimingParameters}, script-path=https://kelee.one/Resource/Script/TestFlight/Auto_join_TF.js, timeout=180
+自动加入TF = type=cron, cronexp={TimingParameters}, script-path=https://kelee.one/Resource/JavaScript/TestFlight/Auto_join_TF.js, timeout=180
 
 [MITM]
 hostname = %APPEND% testflight.apple.com

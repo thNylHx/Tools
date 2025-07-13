@@ -20,43 +20,30 @@ http-response-jq ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v2\/dailyrecomm
 http-response-jq ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v3\/user\/getaccountpage\? 'delpaths([["Data","BenefitButtonList"]])'
 
 [Map Local]
-# 开屏广告
 ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v4\/client\/getsplashscreen\? data-type=text data="{}" status-code=200
 
-# 广告下发
 ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/adv\/ data-type=text data="{}" status-code=200
 
-# 腾讯阅读广告
 ^https:\/\/ywab\.reader\.qq\.com\/user\/experiments\/v2\? data-type=text data="{}" status-code=200
 
-# 签到
 ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/checkin\/simpleinfo\? data-type=text data="{}" status-code=200
 
-# 通知提醒
 ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/push\/getdialog\? data-type=text data="{}" status-code=200
 
-# 书架 - 顶部 - 大咖荐书
 ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/message\/getpushedmessagelist$ data-type=text data="{}" status-code=200
 
-# 书架 - 顶部 - 养书提醒
 ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/maintain\/playstrip$ data-type=text data="{}" status-code=200
 
-# 书架 - 猜你喜欢
 ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/dailyrecommend\/recommendBook\? data-type=text data="{}" status-code=200
 
-# 书架 - 推广按钮
 ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/freshman\/bookshelfbtn$ data-type=text data="{}" status-code=200
 
-# 书架 - 顶部活动
 ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/bookshelf\/getTopOperation$ data-type=text data="{}" status-code=200
 
-# 搜索 - 填充词
 ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/booksearch\/hotWords\? data-type=text data="{}" status-code=200
 
-# 阅读页面 - 章末广告
 ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/followsubscribe\/showChapterEndModule\? data-type=text data="{}" status-code=200
 
-# 青少年弹窗
 ^https:\/\/magev6\.if\.qidian\.com\/argus\/api\/v1\/young\/getconf$ data-type=text data="{}" status-code=200
 
 [MITM]

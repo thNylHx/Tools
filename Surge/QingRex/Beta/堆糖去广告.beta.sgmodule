@@ -25,13 +25,10 @@ http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths(
 http-response-jq ^https:\/\/(www|api)\.duitang\.com\/napi\/settings\/ 'delpaths([["data","ME_TAB","MEMBERSHIP2"]])'
 
 [Map Local]
-# 信息流广告
 ^https:\/\/(www|api)\.duitang\.com\/napi\/(ad|ads)\/ data-type=text data="{}" status-code=200
 
-# 其他广告
 ^https:\/\/api\.duitang\.com\/napi\/infra\/settings\/ data-type=text data="{}" status-code=200
 
-# 达人推荐
 ^https:\/\/api\.duitang\.com\/napi\/vienna\/daren\/daren\/recommend\/ data-type=text data="{}" status-code=200
 
 [MITM]

@@ -10,11 +10,9 @@
 #!date=2025-05-13 15:17:08
 
 [Script]
-# 捕获Cookie
-捕获Cookie = type=http-request, pattern=^https:\/\/moapi\.wps\.cn\/app\/ios\/v1\/app$, script-path=https://kelee.one/Resource/Script/WPS/WPS_checkin.js, requires-body=true
+捕获Cookie = type=http-request, pattern=^https:\/\/moapi\.wps\.cn\/app\/ios\/v1\/app$, script-path=https://kelee.one/Resource/JavaScript/WPS/WPS_checkin.js, requires-body=true
 
-# 定时签到
-WPS每日签到 = type=cron, cronexp={CRONEXP}, script-path=https://kelee.one/Resource/Script/WPS/WPS_checkin.js, timeout=120, argument="[{AK},{SK},{MAX_RETRIES}]"
+WPS每日签到 = type=cron, cronexp={CRONEXP}, script-path=https://kelee.one/Resource/JavaScript/WPS/WPS_checkin.js, timeout=120, argument="[{AK},{SK},{MAX_RETRIES}]"
 
 [MITM]
 hostname = %APPEND% moapi.wps.cn

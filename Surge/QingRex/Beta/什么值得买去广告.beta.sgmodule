@@ -10,11 +10,9 @@
 #!date=2025-06-29 18:19:35
 
 [Rule]
-# 广告下发
 DOMAIN,adx-api.zdmimg.com,REJECT,extended-matching,pre-matching
 
 [URL Rewrite]
-# 好价 - 今日好券
 ^https:\/\/h5\.smzdm\.com\/user\/coupon\/coupon_list\? - reject
 
 [Body Rewrite]
@@ -44,22 +42,16 @@ http-response-jq ^https:\/\/haojia-api\.smzdm\.com\/detail\/\d+\? 'delpaths([["d
 http-response-jq ^https:\/\/haojia-cdn\.smzdm\.com\/preload\/\d+\/fiphone\/v\d+_\d+_\d+\/wx\d+\/im\d+\/[0-9a-z]+\/[0-9a-z]+\.json$ 'delpaths([["data","quan_log"]])'
 
 [Map Local]
-# 开屏广告
 ^https:\/\/app-api\.smzdm\.com\/util\/loading\? data-type=text data="{}" status-code=200
 
-# 首页 - 顶部频道
 ^https:\/\/app-api\.smzdm\.com\/mychannel\/list$ data-type=text data="{}" status-code=200
 
-# 我的 - 服务卡片
 ^https:\/\/user-api\.smzdm\.com\/vip\/bottom_card_list\? data-type=text data="{}" status-code=200
 
-# 气泡提示
 ^https:\/\/article-api\.smzdm\.com\/publish\/get_bubble\? data-type=text data="{}" status-code=200
 
-# 搜索 - 填充词
 ^https:\/\/s-api\.smzdm\.com\/sou\/search_default_keyword\? data-type=text data="{}" status-code=200
 
-# 搜索 - 弹窗
 ^https:\/\/s-api\.smzdm\.com\/sou\/popup_coupon\? data-type=text data="{}" status-code=200
 
 [MITM]

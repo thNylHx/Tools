@@ -10,11 +10,9 @@
 #!date=2025-05-13 15:17:08
 
 [URL Rewrite]
-# 开屏广告
 ^https:\/\/api1\.zongheng\.com\/iosapi\/system\/startup$ - reject
 
 [Map Local]
-# 弹窗
 ^https:\/\/api2\.zongheng\.com\/api\/giftBag\/bindingBag$ data-type=text data="{}" status-code=200
 
 [MITM]

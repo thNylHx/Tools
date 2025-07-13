@@ -10,13 +10,10 @@
 #!date=2025-05-13 15:17:08
 
 [Map Local]
-# 开屏广告
 ^https:\/\/pan-api\.bitqiu\.com\/activity\/getPromoteGuide$ data-type=text data="{}" status-code=200
 
-# 我的页面 - 横幅推广
 ^http:\/\/pan-api\.bitqiu\.com\/activity\/getUrlList$ data-type=text data="{}" status-code=200
 
-# 上传 - 横幅推广
 ^https:\/\/pan-api\.bitqiu\.com\/activity\/guides$ data-type=text data="{}" status-code=200
 
 [MITM]

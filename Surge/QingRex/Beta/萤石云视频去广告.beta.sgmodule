@@ -15,15 +15,12 @@
 [Map Local]
 ^https:\/\/i\.ys7\.com\/api\/user\/tabList data-type=text data="{}" status-code=200
 
-# 我的页面 - 轮播图推广
 ^https:\/\/api\.ys7\.com\/v3\/config\/service\/entrance\/bannerInfo data-type=text data="{}" status-code=200
 
-# 智能 - 玩法 - 精选专题
 ^https:\/\/api\.ys7\.com\/v3\/intelligent-app\/apps\/linkage data-type=text data="{}" status-code=200
 
 ^https:\/\/api\.ys7\.com\/v3\/configurations\/gray\/info\?grayTypes=185 data-type=text data="{}" status-code=200
 
-# 天气视频
 ^https:\/\/api\.ys7\.com\/v3\/videoclips\/square\/video\/query data-type=text data="{}" status-code=200
 
 [MITM]

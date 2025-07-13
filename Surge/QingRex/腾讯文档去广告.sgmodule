@@ -10,10 +10,8 @@
 #!date=2025-05-13 15:17:08
 
 [Map Local]
-# 弹窗广告
 ^https:\/\/tianshu\.qq\.com\/open\/ts_access\/GetAds\? data-type=text data="{}" status-code=200
 
-# 首页横幅推广
 ^https:\/\/h5\.qzone\.qq\.com\/p\/adboss\/api\/json\/ts_access\/GetAds$ data-type=text data="{}" status-code=200
 
 [MITM]

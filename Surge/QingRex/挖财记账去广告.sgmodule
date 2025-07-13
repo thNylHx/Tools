@@ -10,13 +10,10 @@
 #!date=2025-06-30 21:53:43
 
 [Map Local]
-# 右下角悬浮广告
 ^https:\/\/jz\.wacaijizhang\.com\/api\/banners\/ribbon\? data-type=text data="{}" status-code=200
 
-# 弹窗广告
 ^https:\/\/jz\.wacaijizhang\.com\/api\/banners\/list\? data-type=text data="{}" status-code=200
 
-# 首页 - 横幅推广语
 ^https:\/\/jz\.wacaijizhang\.com\/api\/resource\/universal\/fetch$ data-type=text data="{}" status-code=200
 
 [MITM]
