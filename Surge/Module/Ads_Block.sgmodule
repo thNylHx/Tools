@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4514
+#!Rule = 4517
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -257,6 +257,7 @@ DOMAIN,banners.itunes.apple.com,REJECT,extended-matching,pre-matching
 DOMAIN,beacon-api.aliyuncs.com,REJECT,extended-matching,pre-matching
 DOMAIN,bgg.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,bloodhound.spotify.com,REJECT,extended-matching,pre-matching
+DOMAIN,bootpreload.uve.weibo.com,REJECT,extended-matching,pre-matching
 DOMAIN,brahe.apptimize.com,REJECT,extended-matching,pre-matching
 DOMAIN,bravetense.com,REJECT,extended-matching,pre-matching
 DOMAIN,browsercfg-drcn.cloud.dbankcloud.cn,REJECT,extended-matching,pre-matching
@@ -3717,6 +3718,7 @@ DOMAIN-SUFFIX,tongji.meizu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tongji.qidian.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,toolbar.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,topitme.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,touch-moblie.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,touclick.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tpa-hcdn.iqiyi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tpc.googlesyndication-cn.com,REJECT,extended-matching,pre-matching
@@ -4068,6 +4070,7 @@ DOMAIN-SUFFIX,xcultur.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,xcy8.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,xdcs-collector.ximalaya.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,xdrig.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,xdrun.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,xgcsr.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,xhsbpza.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,xiaohuau.xyz,REJECT,extended-matching,pre-matching
