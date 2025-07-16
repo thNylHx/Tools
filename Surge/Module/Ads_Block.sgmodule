@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4517
+#!Rule = 4516
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -4217,7 +4217,6 @@ DOMAIN-KEYWORD,a3.pstatp.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,ad.toutiao.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,admarvel,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,admaster,REJECT,extended-matching,pre-matching
-DOMAIN-KEYWORD,ads,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,adsage,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,adsensor,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,adservice,REJECT,extended-matching,pre-matching
