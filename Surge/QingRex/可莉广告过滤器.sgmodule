@@ -6,7 +6,7 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-07-07 19:27:38
+#!date=2025-07-16 02:25:05
 
 [Rule]
 DOMAIN,acdn.adnxs.com,REJECT,extended-matching,pre-matching
@@ -63,7 +63,6 @@ DOMAIN,open-pixon.ads-pixiv.net,REJECT,extended-matching,pre-matching
 ^https:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/init\/startInit$ - reject
 ^https?:\/\/tower\.ubixioe\.com\/mob\/mediation - reject
 ^https?:\/\/sdk1xyajs\.data\.kuiniuca\.com - reject
-^https:\/\/api\.wfdata\.club\/v2\/yesfeng\/yesList - reject
 ^https:\/\/app\.10099\.com\.cn\/contact-web\/api\/version\/getFlashScreenPage - reject
 
 [Body Rewrite]
