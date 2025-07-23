@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4515
+#!Rule = 4521
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1374,6 +1374,8 @@ DOMAIN-SUFFIX,alexametrics.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,algovid.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ali-ad.a.yximgs.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ali-p2p-v2.pull.yximgs.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,alicoccdncnc-xn.inter.71edge.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,alicoccdnct-xn.inter.71edge.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,alienskins.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,alipaylog.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,alitui.weibo.com,REJECT,extended-matching,pre-matching
@@ -1570,6 +1572,7 @@ DOMAIN-SUFFIX,bdad.123pan.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bdapi-ads.realmemobile.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bdapi-in-ads.realmemobile.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bdapi.ads.oppomobile.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,bdcdncnc.inter.71edge.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bdj.tianya.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bdj.tianyaui.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bdplus.baidu.com,REJECT,extended-matching,pre-matching
@@ -2398,6 +2401,7 @@ DOMAIN-SUFFIX,img.taotaosou.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,img01.taotaosou.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,img1.126.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,img2.126.net,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,img2.360buyimg.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,imgapp.yeyou.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,imglnkc.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,imglnkd.com,REJECT,extended-matching,pre-matching
@@ -2666,6 +2670,7 @@ DOMAIN-SUFFIX,m.12306media.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,m.ad.zhangyue.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,m.atm.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,m.intl.taobao.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,m.iqiyipic.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,m.ourlj.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,m.simba.taobao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,m.txtxr.com,REJECT,extended-matching,pre-matching
@@ -3526,6 +3531,7 @@ DOMAIN-SUFFIX,stat.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,statcounter.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,stathat.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,static-res.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,static-s.iqiyi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,static.ads-twitter.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,static.app.m.letv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,static.duoshuo.com,REJECT,extended-matching,pre-matching
