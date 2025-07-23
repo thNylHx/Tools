@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4512
+#!Rule = 4515
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1342,6 +1342,7 @@ DOMAIN-SUFFIX,adyun.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adzerk.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ae.bdstatic.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,aegis.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,aem.dentsuchina.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,afd.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,afd.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,afd.l.google.com,REJECT,extended-matching,pre-matching
@@ -4123,7 +4124,9 @@ DOMAIN-SUFFIX,yiqifa.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,yitaopt.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,yiwk.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,yjqiqi.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,yk-ssp-ad.cp31.ott.cibntv.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,yk-ssp.ad.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ykad-data.cp31.ott.cibntv.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ykad-data.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ykad-gateway.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ykatr.youku.com,REJECT,extended-matching,pre-matching
