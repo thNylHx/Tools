@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4521
+#!Rule = 4519
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -2817,7 +2817,6 @@ DOMAIN-SUFFIX,mobisage.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mobjump.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mobwithad.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mojiva.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,mon.zijieapi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,monitor-ads-test.huan.tv,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,monitor-uu.play.aiseet.atianqi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,monitor.music.qq.com,REJECT,extended-matching,pre-matching
@@ -3699,7 +3698,6 @@ DOMAIN-SUFFIX,tnc3-aliec1.toutiaoapi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tnc3-aliec2.bytedance.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tnc3-aliec2.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tnc3-aliec2.toutiaoapi.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,tnc3-aliec2.zijieapi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tnc3-alisc1.bytedance.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tnc3-alisc1.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tnc3-alisc1.toutiaoapi.com,REJECT,extended-matching,pre-matching
