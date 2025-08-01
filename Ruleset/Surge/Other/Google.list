@@ -1,5 +1,5 @@
 # 规则名称: Google
-# 规则统计: 5390
+# 规则统计: 5395
 
 DOMAIN,265.com
 DOMAIN,2mdn-cn.net
@@ -1141,7 +1141,7 @@ IP-CIDR,104.135.16.0/21,no-resolve
 IP-CIDR,104.135.160.0/20,no-resolve
 IP-CIDR,104.135.224.0/20,no-resolve
 IP-CIDR,104.135.253.0/24,no-resolve
-IP-CIDR,104.135.254.0/23,no-resolve
+IP-CIDR,104.135.254.0/24,no-resolve
 IP-CIDR,104.135.32.0/19,no-resolve
 IP-CIDR,104.135.64.0/18,no-resolve
 IP-CIDR,104.154.0.0/15,no-resolve
@@ -1189,8 +1189,7 @@ IP-CIDR,136.22.12.0/22,no-resolve
 IP-CIDR,136.22.122.0/23,no-resolve
 IP-CIDR,136.22.128.0/23,no-resolve
 IP-CIDR,136.22.135.0/24,no-resolve
-IP-CIDR,136.22.136.0/23,no-resolve
-IP-CIDR,136.22.138.0/24,no-resolve
+IP-CIDR,136.22.136.0/22,no-resolve
 IP-CIDR,136.22.140.0/23,no-resolve
 IP-CIDR,136.22.16.0/22,no-resolve
 IP-CIDR,136.22.160.0/20,no-resolve
@@ -3119,6 +3118,7 @@ IP-CIDR,172.68.158.0/24,no-resolve
 IP-CIDR,172.98.18.0/23,no-resolve
 IP-CIDR,173.194.0.0/16,no-resolve
 IP-CIDR,173.255.112.0/20,no-resolve
+IP-CIDR,174.128.128.0/19,no-resolve
 IP-CIDR,176.116.16.0/24,no-resolve
 IP-CIDR,176.126.58.0/24,no-resolve
 IP-CIDR,178.249.140.0/23,no-resolve
@@ -3164,6 +3164,8 @@ IP-CIDR,185.92.208.0/24,no-resolve
 IP-CIDR,185.94.240.0/22,no-resolve
 IP-CIDR,188.92.121.0/24,no-resolve
 IP-CIDR,188.92.136.0/23,no-resolve
+IP-CIDR,190.129.112.0/22,no-resolve
+IP-CIDR,190.129.116.0/24,no-resolve
 IP-CIDR,192.104.160.0/23,no-resolve
 IP-CIDR,192.104.36.0/24,no-resolve
 IP-CIDR,192.107.133.0/24,no-resolve
@@ -3177,6 +3179,7 @@ IP-CIDR,192.200.190.0/23,no-resolve
 IP-CIDR,192.200.224.0/19,no-resolve
 IP-CIDR,192.231.134.0/24,no-resolve
 IP-CIDR,192.245.102.0/24,no-resolve
+IP-CIDR,192.52.228.0/24,no-resolve
 IP-CIDR,192.69.115.0/24,no-resolve
 IP-CIDR,193.102.32.0/22,no-resolve
 IP-CIDR,193.108.15.0/24,no-resolve
@@ -3513,6 +3516,8 @@ IP-CIDR6,2604:ca00:f029::/48,no-resolve
 IP-CIDR6,2604:ca00:f032::/47,no-resolve
 IP-CIDR6,2604:ca00:f041::/48,no-resolve
 IP-CIDR6,2604:ca00:f::/48,no-resolve
+IP-CIDR6,2605:48c0::/32,no-resolve
+IP-CIDR6,2605:8cc0::/32,no-resolve
 IP-CIDR6,2605:a600::/32,no-resolve
 IP-CIDR6,2605:a601:8000::/45,no-resolve
 IP-CIDR6,2605:a601:8008::/46,no-resolve
