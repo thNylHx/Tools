@@ -1,5 +1,5 @@
 # 规则名称: Ads_BlockAds
-# 规则统计: 910
+# 规则统计: 953
 
 DOMAIN,4lke.online
 DOMAIN,a-remad.qm989.com
@@ -151,6 +151,7 @@ DOMAIN,config-junion.jpush.cn
 DOMAIN,config.inmobi.cn
 DOMAIN,config.jpush.cn
 DOMAIN,cpro.baidustatic.com
+DOMAIN,cr-status.iqiyi.com
 DOMAIN,crash2.zhihu.com
 DOMAIN,creative.bbrdbr.com
 DOMAIN,creative.myavlive.com
@@ -169,6 +170,7 @@ DOMAIN,devs-data.dutils.com
 DOMAIN,df.tanx.com
 DOMAIN,dflow.bz.mgtv.com
 DOMAIN,dgstatic.jd.com
+DOMAIN,dig.bdurl.net
 DOMAIN,dm.bytedance.com
 DOMAIN,dm.pstatp.com
 DOMAIN,dm.toutiao.com
@@ -185,6 +187,7 @@ DOMAIN,dsp.toutiao.com
 DOMAIN,e-u1.ubixioe.com
 DOMAIN,e.jparking.cn
 DOMAIN,eclick.baidu.com
+DOMAIN,ef-dongfeng.tanx.com
 DOMAIN,ems.youku.com
 DOMAIN,encounter.bz.mgtv.com
 DOMAIN,errlog.umeng.com
@@ -194,6 +197,7 @@ DOMAIN,etahub.com
 DOMAIN,ether-pack.pangolin-sdk-toutiao.com
 DOMAIN,evtubescms.phncdn.com
 DOMAIN,ezozojawg.com
+DOMAIN,f74f7f7765f8a2f6.ngaa.net.cn
 DOMAIN,fcapi-ipv6.jpush.cn
 DOMAIN,feed-image.baidu.com
 DOMAIN,floor.bz.mgtv.com
@@ -295,6 +299,7 @@ DOMAIN,info6.video.qq.com
 DOMAIN,init.supersonicads.com
 DOMAIN,ios.bugly.qq.com
 DOMAIN,ios.video.mpush.qq.com
+DOMAIN,iqiyim.adtrack.enlightent.cn
 DOMAIN,iyes.youku.com
 DOMAIN,janapi.jd.com
 DOMAIN,jump.admobile.top
@@ -425,6 +430,8 @@ DOMAIN,swallowcrockerybless.com
 DOMAIN,switch.cup.com.cn
 DOMAIN,t.fanglinad.com
 DOMAIN,t.gdt.qq.com
+DOMAIN,t7z.cupid.iqiyi.com
+DOMAIN,t7z.cupid.ptqy.gitv.tv
 DOMAIN,ta-a.pinduoduo.com
 DOMAIN,ta.pinduoduo.com
 DOMAIN,tangram.e.qq.com
@@ -503,9 +510,11 @@ DOMAIN-SUFFIX,-normal-lq.zijieapi.com
 DOMAIN-SUFFIX,123.sogou.com
 DOMAIN-SUFFIX,163jiasu.com
 DOMAIN-SUFFIX,66mobi.com
+DOMAIN-SUFFIX,a.ckm.iqiyi.com
 DOMAIN-SUFFIX,a1click.cpc.sogou.com
 DOMAIN-SUFFIX,ad.cmvideo.cn
 DOMAIN-SUFFIX,ad.e.waimai.sankuai.com
+DOMAIN-SUFFIX,ad.m.iqiyi.com
 DOMAIN-SUFFIX,adashbc.ut.taobao.com
 DOMAIN-SUFFIX,adbkwai.com
 DOMAIN-SUFFIX,admgr.qingting.fm
@@ -519,10 +528,13 @@ DOMAIN-SUFFIX,adstream.123.sogoucdn.com
 DOMAIN-SUFFIX,adukwai.com
 DOMAIN-SUFFIX,advp.apple.com
 DOMAIN-SUFFIX,adxadserv.com
+DOMAIN-SUFFIX,afp.iqiyi.com
 DOMAIN-SUFFIX,alexametrics.com
 DOMAIN-SUFFIX,amazon-adsystem.com
 DOMAIN-SUFFIX,amfi.gou.sogou.com
 DOMAIN-SUFFIX,analytics.meituan.net
+DOMAIN-SUFFIX,api.cupid.iqiyi.com
+DOMAIN-SUFFIX,api.cupid.qiyi.com
 DOMAIN-SUFFIX,api.poll.video.qq.com
 DOMAIN-SUFFIX,appier.net
 DOMAIN-SUFFIX,appiersig.com
@@ -539,10 +551,15 @@ DOMAIN-SUFFIX,bsiet.husky.sogou.com
 DOMAIN-SUFFIX,byteorge.com
 DOMAIN-SUFFIX,c-nfa.jd.com
 DOMAIN-SUFFIX,c.kuwo.cn
+DOMAIN-SUFFIX,c.uaa.iqiyi.com
 DOMAIN-SUFFIX,chaturbate.com
 DOMAIN-SUFFIX,clarity.ms
+DOMAIN-SUFFIX,cloudpush.iqiyi.com
 DOMAIN-SUFFIX,cm.jd.com
+DOMAIN-SUFFIX,cm.passport.iqiyi.com
+DOMAIN-SUFFIX,count.game.pps.tv
 DOMAIN-SUFFIX,criteo.com
+DOMAIN-SUFFIX,cupid.iqiyi.com
 DOMAIN-SUFFIX,d.meituan.net
 DOMAIN-SUFFIX,da.mgtv.com
 DOMAIN-SUFFIX,default.ixigua.com
@@ -552,9 +569,11 @@ DOMAIN-SUFFIX,doppiocdn.live
 DOMAIN-SUFFIX,dreport.meituan.net
 DOMAIN-SUFFIX,du.jd.com
 DOMAIN-SUFFIX,ehaier.com
+DOMAIN-SUFFIX,emoticon.sns.iqiyi.com
 DOMAIN-SUFFIX,epro.sogou.com
 DOMAIN-SUFFIX,faphouse.com
 DOMAIN-SUFFIX,game.kuwo.cn
+DOMAIN-SUFFIX,gamecenter.iqiyi.com
 DOMAIN-SUFFIX,gdt.qq.com
 DOMAIN-SUFFIX,getui.com
 DOMAIN-SUFFIX,golden1.sogou.com
@@ -562,6 +581,7 @@ DOMAIN-SUFFIX,googleads.g.doubleclick.net
 DOMAIN-SUFFIX,gorgon.youdao.com
 DOMAIN-SUFFIX,iad-apple.com
 DOMAIN-SUFFIX,iadsdk.apple.com
+DOMAIN-SUFFIX,ifacelog.iqiyi.com
 DOMAIN-SUFFIX,igexin.com
 DOMAIN-SUFFIX,img-x.jd.com
 DOMAIN-SUFFIX,imtmp.net
@@ -585,6 +605,7 @@ DOMAIN-SUFFIX,lu.sogoucdn.com
 DOMAIN-SUFFIX,m1.ad.10010.com
 DOMAIN-SUFFIX,mads.meituan.com
 DOMAIN-SUFFIX,mall.icbc.com.cn
+DOMAIN-SUFFIX,mbdlog.iqiyi.com
 DOMAIN-SUFFIX,meituan.xn
 DOMAIN-SUFFIX,meituan.yoga
 DOMAIN-SUFFIX,meituangov.cn
@@ -594,16 +615,26 @@ DOMAIN-SUFFIX,mnaspm.com
 DOMAIN-SUFFIX,mobileservice.cn
 DOMAIN-SUFFIX,motowoo.com
 DOMAIN-SUFFIX,msclick2.kuwo.cn
+DOMAIN-SUFFIX,msg.iqiyi.com
+DOMAIN-SUFFIX,msg.video.qiyi.com
+DOMAIN-SUFFIX,msg2.video.qiyi.com
+DOMAIN-SUFFIX,msga.cupid.iqiyi.com
 DOMAIN-SUFFIX,msphoneclick.kuwo.cn
 DOMAIN-SUFFIX,new.xiongzhangad.com
 DOMAIN-SUFFIX,nex.163.com
+DOMAIN-SUFFIX,nl.notice.iqiyi.com
+DOMAIN-SUFFIX,nl.rcd.iqiyi.com
+DOMAIN-SUFFIX,notice.iqiyi.com
 DOMAIN-SUFFIX,novelapp.ixigua.com
+DOMAIN-SUFFIX,noxagile.duapp.com
 DOMAIN-SUFFIX,o1098464.ingest.sentry.io
 DOMAIN-SUFFIX,omgmta.qq.com
 DOMAIN-SUFFIX,omgmta1.qq.com
 DOMAIN-SUFFIX,openinstall.io
 DOMAIN-SUFFIX,pangolin-sdk-toutiao-b.com
 DOMAIN-SUFFIX,pangolin-sdk-toutiao.com
+DOMAIN-SUFFIX,paopao.iqiyi.com
+DOMAIN-SUFFIX,policy.video.iqiyi.com
 DOMAIN-SUFFIX,pos.baidu.com
 DOMAIN-SUFFIX,pubmatic.com
 DOMAIN-SUFFIX,report.meituan.com
@@ -617,14 +648,20 @@ DOMAIN-SUFFIX,shuzilm.cn
 DOMAIN-SUFFIX,smaato.net
 DOMAIN-SUFFIX,stat.tpns.tencent.com
 DOMAIN-SUFFIX,static-res.qq.com
+DOMAIN-SUFFIX,static-s.iqiyi.com
+DOMAIN-SUFFIX,static.g.iqiyi.com
+DOMAIN-SUFFIX,static.g.ppstream.com
+DOMAIN-SUFFIX,store.iqiyi.com
 DOMAIN-SUFFIX,stripchat.com
 DOMAIN-SUFFIX,stripchat.ooo
+DOMAIN-SUFFIX,t7z.cupid.iqiyi.com
 DOMAIN-SUFFIX,tappx.com
 DOMAIN-SUFFIX,tetrack.qq.com
 DOMAIN-SUFFIX,theta.sogoucdn.com
 DOMAIN-SUFFIX,toblog.ctobsnssdk.com
 DOMAIN-SUFFIX,tpns.tencent.com
 DOMAIN-SUFFIX,trace.qq.com
+DOMAIN-SUFFIX,tracker.sns.iqiyi.com
 DOMAIN-SUFFIX,trafficjunky.com
 DOMAIN-SUFFIX,trafficjunky.net
 DOMAIN-SUFFIX,u3.ucweb.com
@@ -644,6 +681,7 @@ DOMAIN-SUFFIX,webstat.kuwo.cn
 DOMAIN-SUFFIX,wmlog.meituan.com
 DOMAIN-SUFFIX,wss.haoyundmn.com
 DOMAIN-SUFFIX,wxs.qq.com
+DOMAIN-SUFFIX,yuedu.iqiyi.com
 DOMAIN-KEYWORD,-ad-sign.byteimg.com
 DOMAIN-KEYWORD,-ad.byteoversea.com
 DOMAIN-KEYWORD,-adsystem.com
@@ -692,6 +730,9 @@ DOMAIN-KEYWORD,tunion-api.m.taobao.com
 DOMAIN-KEYWORD,uop.umeng.com
 DOMAIN-KEYWORD,v0-client-lz.rili.cn
 IP-CIDR,101.124.19.122/32,no-resolve
+IP-CIDR,101.227.200.11/32,no-resolve
+IP-CIDR,101.227.200.28/32,no-resolve
+IP-CIDR,101.227.97.240/32,no-resolve
 IP-CIDR,101.32.104.104/32,no-resolve
 IP-CIDR,101.36.166.16/32,no-resolve
 IP-CIDR,101.50.8.64/32,no-resolve
@@ -737,6 +778,7 @@ IP-CIDR,123.151.48.171/32,no-resolve
 IP-CIDR,123.151.48.193/32,no-resolve
 IP-CIDR,123.151.48.208/32,no-resolve
 IP-CIDR,123.151.54.50/32,no-resolve
+IP-CIDR,124.192.153.42/32,no-resolve
 IP-CIDR,180.153.202.85/32,no-resolve
 IP-CIDR,180.76.76.200/32,no-resolve
 IP-CIDR,180.96.2.114/32,no-resolve
@@ -746,6 +788,7 @@ IP-CIDR,186.76.76.200/32,no-resolve
 IP-CIDR,202.90.110.8/32,no-resolve
 IP-CIDR,203.107.1.0/24,no-resolve
 IP-CIDR,203.107.1.1/24,no-resolve
+IP-CIDR,203.107.63.154/32,no-resolve
 IP-CIDR,203.205.129.102/32,no-resolve
 IP-CIDR,203.205.234.132/32,no-resolve
 IP-CIDR,203.76.217.241/32,no-resolve
