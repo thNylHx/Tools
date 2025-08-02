@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4544
+#!Rule = 4548
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1335,6 +1335,7 @@ DOMAIN-SUFFIX,adx-os.anythinktech.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx.36kr.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx.ads.heytapmobi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx.ads.oppomobile.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,adx.adwangmai.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx.appsdk.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx.sogaha.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx.tuia.cn,REJECT,extended-matching,pre-matching
@@ -1894,6 +1895,7 @@ DOMAIN-SUFFIX,data-sdk-uuid-log.d.meituan.net,REJECT,extended-matching,pre-match
 DOMAIN-SUFFIX,data.ads.oppomobile.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,data.chsmarttv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,data.flurry.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,data.hicloud.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,data.mistat.india.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,data.mistat.rus.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,data.mistat.xiaomi.com,REJECT,extended-matching,pre-matching
@@ -2621,6 +2623,7 @@ DOMAIN-SUFFIX,log-verify.dutils.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log-verify.hiaiabc.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.ad.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.aispeech.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,log.aliyuncs.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.amemv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.appstore3.huan.tv,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.avlyun.com,REJECT,extended-matching,pre-matching
@@ -4201,6 +4204,7 @@ DOMAIN-SUFFIX,zemanta.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zestads.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zeus.ad.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zeustechnology.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,zhangyuyidong.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zhaozecheng.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zhenxinet.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zhidian3g.cn,REJECT,extended-matching,pre-matching
