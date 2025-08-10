@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4548
+#!Rule = 4547
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -4071,7 +4071,6 @@ DOMAIN-SUFFIX,ws.sj.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wsgblw.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wsod.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wss.haoyundmn.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,wtradv.market.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wudejia.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wumii.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wuyicom.top,REJECT,extended-matching,pre-matching
