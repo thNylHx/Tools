@@ -1,5 +1,5 @@
 # 规则名称: Google
-# 规则统计: 5340
+# 规则统计: 5355
 
 DOMAIN,265.com
 DOMAIN,2mdn-cn.net
@@ -1181,6 +1181,7 @@ IP-CIDR,134.231.248.0/24,no-resolve
 IP-CIDR,134.231.250.0/23,no-resolve
 IP-CIDR,134.231.252.0/22,no-resolve
 IP-CIDR,135.84.69.0/24,no-resolve
+IP-CIDR,136.120.0.0/22,no-resolve
 IP-CIDR,136.124.0.0/15,no-resolve
 IP-CIDR,136.22.0.0/23,no-resolve
 IP-CIDR,136.22.113.0/24,no-resolve
@@ -2149,7 +2150,14 @@ IP-CIDR,136.50.38.212/32,no-resolve
 IP-CIDR,136.50.38.214/31,no-resolve
 IP-CIDR,136.50.38.216/29,no-resolve
 IP-CIDR,136.50.38.224/27,no-resolve
-IP-CIDR,136.50.39.0/24,no-resolve
+IP-CIDR,136.50.39.0/29,no-resolve
+IP-CIDR,136.50.39.10/32,no-resolve
+IP-CIDR,136.50.39.12/30,no-resolve
+IP-CIDR,136.50.39.128/25,no-resolve
+IP-CIDR,136.50.39.16/28,no-resolve
+IP-CIDR,136.50.39.32/27,no-resolve
+IP-CIDR,136.50.39.64/26,no-resolve
+IP-CIDR,136.50.39.8/31,no-resolve
 IP-CIDR,136.50.40.0/22,no-resolve
 IP-CIDR,136.50.44.0/24,no-resolve
 IP-CIDR,136.50.45.0/30,no-resolve
@@ -2988,6 +2996,7 @@ IP-CIDR,142.147.14.0/24,no-resolve
 IP-CIDR,142.250.0.0/15,no-resolve
 IP-CIDR,144.125.110.0/23,no-resolve
 IP-CIDR,144.125.112.0/20,no-resolve
+IP-CIDR,144.125.128.0/19,no-resolve
 IP-CIDR,144.125.96.0/21,no-resolve
 IP-CIDR,144.203.144.0/24,no-resolve
 IP-CIDR,144.49.128.0/18,no-resolve
@@ -3353,6 +3362,7 @@ IP-CIDR,50.115.213.0/24,no-resolve
 IP-CIDR,50.115.218.0/23,no-resolve
 IP-CIDR,50.115.222.0/23,no-resolve
 IP-CIDR,50.151.212.0/23,no-resolve
+IP-CIDR,50.151.218.0/24,no-resolve
 IP-CIDR,50.202.50.0/24,no-resolve
 IP-CIDR,50.202.95.0/24,no-resolve
 IP-CIDR,50.218.248.0/24,no-resolve
@@ -5330,6 +5340,11 @@ IP-CIDR6,2620:127:f00a::/47,no-resolve
 IP-CIDR6,2620:15c::/36,no-resolve
 IP-CIDR6,2620:ce:e000::/48,no-resolve
 IP-CIDR6,2800:3f0::/32,no-resolve
+IP-CIDR6,2803:f340:1400::/40,no-resolve
+IP-CIDR6,2803:f340:2000::/35,no-resolve
+IP-CIDR6,2803:f340:4000::/34,no-resolve
+IP-CIDR6,2803:f340:8000::/33,no-resolve
+IP-CIDR6,2803:f340::/36,no-resolve
 IP-CIDR6,2a00:1450::/32,no-resolve
 IP-CIDR6,2a00:1588:d801::/48,no-resolve
 IP-CIDR6,2a00:1588:d802::/48,no-resolve
