@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4548
+#!Rule = 4551
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -2301,6 +2301,7 @@ DOMAIN-SUFFIX,hitslink.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hivecn.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hivedata.cc,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hl2rcv.adobe.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,hlog.bigda.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hlrcv.stage.adobe.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hm.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hm.baidu.com,REJECT,extended-matching,pre-matching
@@ -2793,6 +2794,7 @@ DOMAIN-SUFFIX,mixpanel.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mjmobi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mkitgfs.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mlnbike.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,mlog.bigda.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mlog.hiido.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mlt01.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mmgame.qpic.cn,REJECT,extended-matching,pre-matching
@@ -3862,6 +3864,7 @@ DOMAIN-SUFFIX,umini.shujupie.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,umtrack.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,undertone.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,unimhk.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,union-mlog.bigda.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,union-wifi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,union.6.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,union.baidu.cn,REJECT,extended-matching,pre-matching
