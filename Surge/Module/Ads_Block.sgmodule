@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4551
+#!Rule = 4552
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1437,6 +1437,7 @@ DOMAIN-SUFFIX,anydeskchina.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,anysdk.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,anythinktech.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,aoodoo.feng.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ap.dongdianqiu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ap.dongqiudi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,apd-pcdnwxlogin.teg.tencent-cloud.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,apd-pcdnwxnat.teg.tencent-cloud.net,REJECT,extended-matching,pre-matching
