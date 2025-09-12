@@ -1,5 +1,5 @@
 # 规则名称: Facebook
-# 规则统计: 571
+# 规则统计: 570
 
 DOMAIN,fbcdn-a.akamaihd.net
 DOMAIN-SUFFIX,aboutfacebook.com
@@ -495,10 +495,7 @@ IP-CIDR,129.134.156.0/22,no-resolve
 IP-CIDR,129.134.160.0/22,no-resolve
 IP-CIDR,129.134.164.0/23,no-resolve
 IP-CIDR,129.134.168.0/21,no-resolve
-IP-CIDR,129.134.176.0/21,no-resolve
-IP-CIDR,129.134.184.0/24,no-resolve
-IP-CIDR,129.134.186.0/23,no-resolve
-IP-CIDR,129.134.188.0/22,no-resolve
+IP-CIDR,129.134.176.0/20,no-resolve
 IP-CIDR,129.134.194.0/24,no-resolve
 IP-CIDR,157.240.0.0/17,no-resolve
 IP-CIDR,157.240.128.0/23,no-resolve
@@ -550,6 +547,7 @@ IP-CIDR6,2a03:2887:ff23::/48,no-resolve
 IP-CIDR6,2a03:2887:ff27::/48,no-resolve
 IP-CIDR6,2a03:2887:ff28::/46,no-resolve
 IP-CIDR6,2a03:2887:ff2f::/48,no-resolve
+IP-CIDR6,2a03:2887:ff30::/48,no-resolve
 IP-CIDR6,2a03:2887:ff33::/48,no-resolve
 IP-CIDR6,2a03:2887:ff37::/48,no-resolve
 IP-CIDR6,2a03:2887:ff38::/46,no-resolve
@@ -562,6 +560,7 @@ IP-CIDR6,2a03:2887:ff4e::/47,no-resolve
 IP-CIDR6,2a03:2887:ff50::/45,no-resolve
 IP-CIDR6,2a03:2887:ff58::/47,no-resolve
 IP-CIDR6,2a03:2887:ff5a::/48,no-resolve
+IP-CIDR6,2a03:2887:ff60::/48,no-resolve
 IP-CIDR6,2a03:2887:ff62::/47,no-resolve
 IP-CIDR6,2a03:2887:ff64::/46,no-resolve
 IP-CIDR6,2a03:2887:ff68::/47,no-resolve

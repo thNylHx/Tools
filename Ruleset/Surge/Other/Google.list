@@ -1,5 +1,5 @@
 # 规则名称: Google
-# 规则统计: 5415
+# 规则统计: 5418
 
 DOMAIN,265.com
 DOMAIN,2mdn-cn.net
@@ -2992,6 +2992,7 @@ IP-CIDR,136.62.95.224/27,no-resolve
 IP-CIDR,136.62.96.0/22,no-resolve
 IP-CIDR,136.63.0.0/16,no-resolve
 IP-CIDR,137.75.122.0/24,no-resolve
+IP-CIDR,137.83.192.0/24,no-resolve
 IP-CIDR,140.209.252.0/23,no-resolve
 IP-CIDR,140.209.255.0/24,no-resolve
 IP-CIDR,140.235.248.0/24,no-resolve
@@ -3022,6 +3023,7 @@ IP-CIDR,147.185.132.0/22,no-resolve
 IP-CIDR,147.189.238.0/23,no-resolve
 IP-CIDR,148.64.0.0/19,no-resolve
 IP-CIDR,148.80.64.0/21,no-resolve
+IP-CIDR,149.126.64.0/22,no-resolve
 IP-CIDR,151.193.0.0/24,no-resolve
 IP-CIDR,151.193.105.0/24,no-resolve
 IP-CIDR,151.193.106.0/24,no-resolve
@@ -3089,6 +3091,7 @@ IP-CIDR,167.103.171.0/24,no-resolve
 IP-CIDR,167.103.172.0/22,no-resolve
 IP-CIDR,167.103.176.0/21,no-resolve
 IP-CIDR,167.103.184.0/24,no-resolve
+IP-CIDR,167.103.236.0/24,no-resolve
 IP-CIDR,168.100.24.0/23,no-resolve
 IP-CIDR,168.100.26.0/24,no-resolve
 IP-CIDR,168.149.128.0/18,no-resolve
@@ -3096,7 +3099,6 @@ IP-CIDR,168.235.224.0/20,no-resolve
 IP-CIDR,169.224.140.0/22,no-resolve
 IP-CIDR,170.10.143.0/24,no-resolve
 IP-CIDR,170.10.222.0/23,no-resolve
-IP-CIDR,170.114.50.0/24,no-resolve
 IP-CIDR,170.176.201.0/24,no-resolve
 IP-CIDR,170.176.240.0/21,no-resolve
 IP-CIDR,172.102.8.0/21,no-resolve
@@ -3142,6 +3144,7 @@ IP-CIDR,185.241.47.0/24,no-resolve
 IP-CIDR,185.249.220.0/24,no-resolve
 IP-CIDR,185.25.28.0/23,no-resolve
 IP-CIDR,185.25.30.0/24,no-resolve
+IP-CIDR,185.251.52.0/22,no-resolve
 IP-CIDR,185.30.28.0/22,no-resolve
 IP-CIDR,185.46.233.0/24,no-resolve
 IP-CIDR,185.48.80.0/23,no-resolve
@@ -3149,7 +3152,6 @@ IP-CIDR,185.51.228.0/24,no-resolve
 IP-CIDR,185.56.84.0/22,no-resolve
 IP-CIDR,185.73.224.0/24,no-resolve
 IP-CIDR,185.81.120.0/23,no-resolve
-IP-CIDR,185.88.148.0/22,no-resolve
 IP-CIDR,185.9.1.0/24,no-resolve
 IP-CIDR,185.92.208.0/24,no-resolve
 IP-CIDR,185.94.240.0/22,no-resolve
@@ -3168,6 +3170,7 @@ IP-CIDR,192.200.190.0/23,no-resolve
 IP-CIDR,192.200.224.0/19,no-resolve
 IP-CIDR,192.231.134.0/24,no-resolve
 IP-CIDR,192.245.102.0/24,no-resolve
+IP-CIDR,192.35.85.0/24,no-resolve
 IP-CIDR,192.52.228.0/24,no-resolve
 IP-CIDR,192.69.115.0/24,no-resolve
 IP-CIDR,193.102.32.0/22,no-resolve
@@ -3276,6 +3279,7 @@ IP-CIDR,212.11.79.0/24,no-resolve
 IP-CIDR,216.114.76.0/24,no-resolve
 IP-CIDR,216.153.30.0/23,no-resolve
 IP-CIDR,216.162.200.0/24,no-resolve
+IP-CIDR,216.180.246.0/24,no-resolve
 IP-CIDR,216.21.160.0/20,no-resolve
 IP-CIDR,216.239.32.0/19,no-resolve
 IP-CIDR,216.252.220.0/22,no-resolve
@@ -3362,13 +3366,12 @@ IP-CIDR,50.202.50.0/24,no-resolve
 IP-CIDR,50.202.95.0/24,no-resolve
 IP-CIDR,50.203.166.0/24,no-resolve
 IP-CIDR,50.218.241.0/24,no-resolve
-IP-CIDR,50.218.243.0/24,no-resolve
+IP-CIDR,50.218.242.0/23,no-resolve
 IP-CIDR,50.218.244.0/24,no-resolve
 IP-CIDR,50.218.248.0/24,no-resolve
 IP-CIDR,50.218.250.0/23,no-resolve
 IP-CIDR,50.218.252.0/24,no-resolve
 IP-CIDR,52.119.11.0/24,no-resolve
-IP-CIDR,57.140.12.0/23,no-resolve
 IP-CIDR,57.140.184.0/22,no-resolve
 IP-CIDR,57.140.192.0/18,no-resolve
 IP-CIDR,62.122.31.0/24,no-resolve
@@ -5403,7 +5406,7 @@ IP-CIDR6,2620:120:e000::/40,no-resolve
 IP-CIDR6,2620:121:5050::/44,no-resolve
 IP-CIDR6,2620:127:f00a::/47,no-resolve
 IP-CIDR6,2620:15c::/36,no-resolve
-IP-CIDR6,2620:ce:e000::/48,no-resolve
+IP-CIDR6,2620:ce:e000::/47,no-resolve
 IP-CIDR6,2800:3f0::/32,no-resolve
 IP-CIDR6,2a00:1450::/32,no-resolve
 IP-CIDR6,2a00:1588:d801::/48,no-resolve
