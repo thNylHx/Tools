@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4549
+#!Rule = 4551
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1639,6 +1639,8 @@ DOMAIN-SUFFIX,brandshow.58.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bridgeoos.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,brightcom.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bro.flyme.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,browser.events.data.msn.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,browser.events.data.msn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,browsercfg-drcn.cloud.dbankcloud.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,brucelead.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bryonypie.com,REJECT,extended-matching,pre-matching
