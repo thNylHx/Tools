@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4550
+#!Rule = 4554
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1118,6 +1118,7 @@ DOMAIN-SUFFIX,admob.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,admobile.top,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,admon.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,admusicpic.music.126.net,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,adnet.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adnet.sohu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adnetwork.vn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adnxs.com,REJECT,extended-matching,pre-matching
@@ -3060,6 +3061,9 @@ DOMAIN-SUFFIX,palmnews.sina.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pangle.io,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pangolin-dsp-toutiao-b.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pangolin-dsp-toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,pangolin-hl.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,pangolin-lf.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,pangolin-lq.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pangolin-sdk-toutiao-b.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pangolin-sdk-toutiao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pangolin-sdk-toutiao1.com,REJECT,extended-matching,pre-matching
