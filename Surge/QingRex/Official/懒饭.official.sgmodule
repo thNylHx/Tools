@@ -1,0 +1,8 @@
+#!name=懒饭Unlock
+#!desc=懒饭功能扩展，如侵权联删 @sliverkiss
+
+[Body Rewrite]
+http-response ^https?:\/\/lanfanapp\.com\/api\/v1 '"is_purchased":\w+' '"is_purchased":true' '"is_prime":\w+' '"is_prime":true' '"unlocked":\w+' '"unlocked":true' '"watch_type":\d+' '"watch_type":1'
+
+[MITM]
+hostname = %APPEND% lanfanapp.com
