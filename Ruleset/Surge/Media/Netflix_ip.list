@@ -1,5 +1,5 @@
 # 规则名称: Netflix_ip
-# 规则统计: 76
+# 规则统计: 79
 
 IP-CIDR,108.175.32.0/20,no-resolve
 IP-CIDR,185.2.220.0/22,no-resolve
@@ -36,17 +36,20 @@ IP-CIDR6,2a03:5640:f041::/48,no-resolve
 IP-CIDR6,2a03:5640:f043::/48,no-resolve
 IP-CIDR6,2a03:5640:f044::/48,no-resolve
 IP-CIDR6,2a03:5640:f04b::/48,no-resolve
-IP-CIDR6,2a03:5640:f04e::/47,no-resolve
+IP-CIDR6,2a03:5640:f04f::/48,no-resolve
 IP-CIDR6,2a03:5640:f050::/44,no-resolve
 IP-CIDR6,2a03:5640:f060::/43,no-resolve
 IP-CIDR6,2a03:5640:f080::/41,no-resolve
 IP-CIDR6,2a03:5640:f140::/47,no-resolve
 IP-CIDR6,2a03:5640:f142::/48,no-resolve
-IP-CIDR6,2a03:5640:f14e::/47,no-resolve
+IP-CIDR6,2a03:5640:f14f::/48,no-resolve
 IP-CIDR6,2a03:5640:f150::/44,no-resolve
 IP-CIDR6,2a03:5640:f160::/43,no-resolve
 IP-CIDR6,2a03:5640:f180::/41,no-resolve
-IP-CIDR6,2a03:5640:f230::/44,no-resolve
+IP-CIDR6,2a03:5640:f231::/48,no-resolve
+IP-CIDR6,2a03:5640:f232::/47,no-resolve
+IP-CIDR6,2a03:5640:f234::/46,no-resolve
+IP-CIDR6,2a03:5640:f238::/45,no-resolve
 IP-CIDR6,2a03:5640:f240::/42,no-resolve
 IP-CIDR6,2a03:5640:f280::/41,no-resolve
 IP-CIDR6,2a03:5640:f300::/47,no-resolve
