@@ -1,13 +1,13 @@
 #!name=芒果TV去广告
-#!desc=过滤芒果TV客户端广告
-#!author=RuCu6[https://github.com/RuCu6]
-#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MangoTV.png
+#!desc=移除开屏广告、信息流广告、播放页广告，精简我的页面。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md], RuCu6[https://github.com/RuCu6]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Mango_TV.png
 #!category=iKeLee
 #!openUrl=https://apps.apple.com/app/id629774477
 #!tag=去广告
 #!loon_version=3.2.4(787)
-#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-05-13 15:17:08
+#!homepage=https://hub.kelee.one
+#!date=2025-11-09 07:45:13
 
 [Rule]
 DOMAIN,credits.bz.mgtv.com,REJECT,extended-matching,pre-matching
@@ -23,33 +23,47 @@ DOMAIN,rprain.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,rprain.log.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,vip.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,da.mgtv.com,REJECT,extended-matching,pre-matching
-URL-REGEX,"^http:\/\/[\d\.]+:\d{5}\/\?cmd=indexes",REJECT,extended-matching
-URL-REGEX,"^http:\/\/[\d\.]+\/odin\/c1\/(channel\/ads|skin\/config)\?",REJECT-TINYGIF,extended-matching
-URL-REGEX,"^http:\/\/mobile-thor\.api\.mgtv\.com\/v1\/vod\/cms\/list\?",REJECT-TINYGIF,extended-matching
-URL-REGEX,"^http:\/\/mobileso\.bz\.mgtv\.com\/spotlight\/search\/v1\?",REJECT-TINYGIF,extended-matching
+
+[Body Rewrite]
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("dc_adConfig")) then (setpath(["data","dc_adConfig"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("XmsellSwitch")) then (setpath(["data","XmsellSwitch"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("screenshot_share_switch")) then (setpath(["data","screenshot_share_switch"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("playerUseHttpDNS")) then (setpath(["data","playerUseHttpDNS"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("damang_tab")) then (setpath(["data","damang_tab"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("relative_ads")) then (setpath(["data","relative_ads"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("second_floor_guide_switch")) then (setpath(["data","second_floor_guide_switch"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("progress_bar_ad_switch")) then (setpath(["data","progress_bar_ad_switch"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("XmVideoB")) then (setpath(["data","XmVideoB"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("damang_duanju_tab")) then (setpath(["data","damang_duanju_tab"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("playview_box_ad_switch")) then (setpath(["data","playview_box_ad_switch"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("topBarSwitch")) then (setpath(["data","topBarSwitch"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("VIPSDKB2")) then (setpath(["data","VIPSDKB2"]; 0)) else . end'
+http-response-jq ^https:\/\/me\.bz\.mgtv\.com\/v3\/module\/list\? '.data.list |= map(select(.id | IN(1, 2, 4, 7))) | .data.list |= map(if .moduleType == 2 then .data |= map(select(.moduleType == 11)) elif .moduleType == 4 then .data |= map(select(.moduleType == 14 or .moduleType == 23)) elif .moduleType == 7 then .data |= map(select(.moduleType == 16 and .title != "音乐广场")) else . end)'
+http-response-jq ^https:\/\/me\.bz\.mgtv\.com\/v4\/module\/list\? '.data.list |= (map(select(.id != 3 and .id != 7))|map(if .id==2 then .data|=map(select(.id!=65))elif .id==4 then .data|=map(select(.title!="追更banner" and .id!=57))elif .id==5 then .data|=(map(select(.id==9 or .id==13))|map(if .id==9 then .list|=map(select(.id==20 or .id==60 or .id==18)) else . end))elif .id==6 then .data|=map(select(.id==15)) else . end))'
+http-response-jq ^https?:\/\/dc\d?\.bz\.mgtv\.com\/dynamic\/v\d\/channel\/index\/\w 'delpaths([["adInfo"]])'
+http-response-jq ^https?:\/\/dc\d?\.bz\.mgtv\.com\/dynamic\/v\d\/channel\/index\/\w '.data |= map(select(.moduleEntityId != "10579" and .moduleEntityId != "9686")) | .moduleIDS |= map(select(.moduleEntityId != "10579" and .moduleEntityId != "9686"))'
+http-response-jq ^https:\/\/mobile-thor\.api\.mgtv\.com\/v\d+\/vod\/info\? 'delpaths([["data","config","ad"]])'
+http-response-jq ^https:\/\/mobile-thor\.api\.mgtv\.com\/v\d+\/vod\/info\? 'delpaths([["data","config","vipNav"]])'
+http-response-jq ^https:\/\/mobile-thor\.api\.mgtv\.com\/v\d+\/vod\/info\? 'delpaths([["data","template","skinList"]])'
+http-response-jq ^https:\/\/mobile-thor\.api\.mgtv\.com\/v\d+\/vod\/info\? 'delpaths([["data","template","theme"]])'
+http-response-jq ^https:\/\/mobile-thor\.api\.mgtv\.com\/v\d+\/vod\/info\? '.data.tabs |= map(select(.name == "视频" or .name == "讨论")) | .data.template.modules |= map(if .clipInfo.ext?.ipPublishEntrance then .clipInfo |= del(.ext) else . end) | .data.template.modules |= map(select(.dataType == 101 or .dataType == 201)) | .data.template.modules |= map(.media.list |= (if type == "array" then map(select(.type != 0)) else . end))'
+http-response-jq ^https:\/\/comment\.mgtv\.com\/v\d\/comment\/getCommentList\? '.data.list |= map(select(.type == 0))'
 
 [Map Local]
-^https:\/\/damang\.api\.mgtv\.com\/station\/album\/red\/dot\? data-type=text data="{}" status-code=200
+^https:\/\/dc\.bz\.mgtv\.com\/dynamic\/v\d\/skin\/config\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-^https:\/\/hb-boom\.api\.mgtv\.com\/release\/pullReleaseInfo data-type=text data="{}" status-code=200
+^https:\/\/dc\.bz\.mgtv\.com\/dynamic\/v\d\/channel\/ads\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-^https:\/\/mobile\.api\.mgtv\.com\/v2\/mobile\/checkUpdate\? data-type=text data="{}" status-code=200
+^http:\/\/mobileso\.bz\.mgtv\.com\/spotlight\/search\/v\d\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-[Script]
-移除我的页面广告 = type=http-response, pattern=^https:\/\/me\.bz\.mgtv\.com\/v3\/module\/list\?, script-path=https://kelee.one/Resource/JavaScript/MangoTV/MangoTV_remove_ads.js, requires-body=true
+^https:\/\/damang\.api\.mgtv\.com\/station\/album\/red\/dot\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-移除首页广告 = type=http-response, pattern=^http:\/\/mob-st\.bz\.mgtv\.com\/odin\/c1\/channel\/index\?, script-path=https://kelee.one/Resource/JavaScript/MangoTV/MangoTV_remove_ads.js, requires-body=true
+^https:\/\/hb-boom\.api\.mgtv\.com\/release\/pullReleaseInfo$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-移除首页广告 = type=http-response, pattern=^https?:\/\/dc2?\.bz\.mgtv\.com\/dynamic\/v1\/channel\/(index|vrsList)\/\w, script-path=https://kelee.one/Resource/JavaScript/MangoTV/MangoTV_remove_ads.js, requires-body=true
+^https:\/\/mobile\.api\.mgtv\.com\/v\d\/mobile\/checkUpdate\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-移除底部多余标签 = type=http-response, pattern=^https:\/\/mobile\.api\.mgtv\.com\/mobile\/config\?, script-path=https://kelee.one/Resource/JavaScript/MangoTV/MangoTV_remove_ads.js, requires-body=true
-
-移除播放详情页广告 = type=http-response, pattern=^https:\/\/mobile\.api\.mgtv\.com\/v10\/video\/info\?, script-path=https://kelee.one/Resource/JavaScript/MangoTV/MangoTV_remove_ads.js, requires-body=true
-
-移除播放详情页广告 = type=http-response, pattern=^https:\/\/mobile-thor\.api\.mgtv\.com\/v1\/vod\/info\?, script-path=https://kelee.one/Resource/JavaScript/MangoTV/MangoTV_remove_ads.js, requires-body=true
-
-移除搜索填充词 = type=http-response, pattern=^https?:\/\/mobileso\.bz\.mgtv\.com\/mobile\/recommend\/v2\?, script-path=https://kelee.one/Resource/JavaScript/MangoTV/MangoTV_remove_ads.js, requires-body=true
+^https?:\/\/mobileso\.bz\.mgtv\.com\/mobile\/recommend\/v\d\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 [MITM]
-hostname = %APPEND% *.mgtv.com
+hostname = %APPEND% dc?.bz.mgtv.com, mobileso.bz.mgtv.com, damang.api.mgtv.com, hb-boom.api.mgtv.com, mobile.api.mgtv.com, mobile.api.hunantv.com, me.bz.mgtv.com, mobile-thor.api.mgtv.com
 

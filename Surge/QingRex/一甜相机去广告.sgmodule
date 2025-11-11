@@ -6,7 +6,7 @@
 #!openUrl=https://apps.apple.com/app/id1415653267
 #!tag=去广告
 #!loon_version=3.2.4(787)
-#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!homepage=https://hub.kelee.one
 #!date=2025-07-04 23:22:46
 
 [Body Rewrite]
@@ -14,9 +14,9 @@ http-response-jq ^https:\/\/(m2u-api\.getkwai|api-m2u\.kuaishou)\.com\/api-serve
 http-response-jq ^https:\/\/(m2u-api\.getkwai|api-m2u\.kuaishou)\.com\/api-server\/api\/v1\/system\/configs\? 'delpaths([["data","incentiveCfgList"]])'
 
 [Map Local]
-^https:\/\/(m2u-api\.getkwai|api-m2u\.kuaishou)\.com\/api-server\/api\/v1\/ad\/ data-type=text data="{}" status-code=200
+^https:\/\/(m2u-api\.getkwai|api-m2u\.kuaishou)\.com\/api-server\/api\/v1\/ad\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-^https:\/\/(m2u-api\.getkwai|api-m2u\.kuaishou)\.com\/api-server\/api\/v4\/op\/actPositions\? data-type=text data="{}" status-code=200
+^https:\/\/(m2u-api\.getkwai|api-m2u\.kuaishou)\.com\/api-server\/api\/v4\/op\/actPositions\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 [MITM]
 hostname = %APPEND% m2u-api.getkwai.com, api-m2u.kuaishou.com

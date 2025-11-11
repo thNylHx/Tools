@@ -6,8 +6,8 @@
 #!openUrl=https://apps.apple.com/app/id443904275
 #!tag=去广告
 #!loon_version=3.2.4(787)
-#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
-#!date=2025-07-11 22:57:49
+#!homepage=https://hub.kelee.one
+#!date=2025-08-05 11:22:36
 
 [Rule]
 URL-REGEX,"^https:\/\/a\.line\.me\/lass\/api\/v\d\/ads$",REJECT-DROP,extended-matching
@@ -45,7 +45,7 @@ URL-REGEX,"^https:\/\/uts-front\.line-apps\.com\/settings$",REJECT-DROP,extended
 
 ^https:\/\/a\.line\.me\/er\/l.*\/v\d\/event\/image data-type=tiny-gif status-code=200
 
-^https:\/\/ec-bot-obs\.line-scdn\.net\/0h[0-9a-zA-Z_-]{50,} data-type=tiny-gif status-code=200
+^https:\/\/ec-bot-obs\.line-scdn\.net\/0h[-0-9a-zA-Z_]{50,} data-type=tiny-gif status-code=200
 
 ^https:\/\/web-mmap-pay\.line-apps\.com\/tw\/liff\/campaign\/v1\/aggregate\/ad\/banner\/ data-type=tiny-gif status-code=200
 

@@ -6,7 +6,7 @@
 #!openUrl=https://apps.apple.com/app/id462149227
 #!tag=去广告
 #!loon_version=3.2.4(787)
-#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!homepage=https://hub.kelee.one
 #!date=2025-06-30 23:34:19
 
 [Body Rewrite]
@@ -17,9 +17,9 @@ http-response-jq ^https:\/\/iphone\.myzaker\.com\/zaker\/follow_promote\.php\? '
 http-response-jq ^https:\/\/iphone\.myzaker\.com\/zaker\/car_tab\/index\.php\? '.data.gallery |= map(select(.type != "web"))'
 
 [Map Local]
-^https:\/\/iphone\.myzaker\.com\/zaker\/cover\.php\? data-type=text data="{}" status-code=200
+^https:\/\/iphone\.myzaker\.com\/zaker\/cover\.php\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-^https:\/\/iphone\.myzaker\.com\/zaker\/block_top_ad\.php\? data-type=text data="{}" status-code=200
+^https:\/\/iphone\.myzaker\.com\/zaker\/block_top_ad\.php\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 [MITM]
 hostname = %APPEND% iphone.myzaker.com, ggs.myzaker.com

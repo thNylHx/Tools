@@ -6,7 +6,7 @@
 #!openUrl=https://apps.apple.com/app/id1215210046
 #!tag=去广告
 #!loon_version=3.2.4(787)
-#!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
+#!homepage=https://hub.kelee.one
 #!date=2025-07-09 14:07:46
 
 [Body Rewrite]
@@ -26,13 +26,13 @@ http-response-jq ^https:\/\/api\.weibo\.cn\/2\/comments\/build_comments\? '.data
 http-response-jq ^https:\/\/api\.weibo\.cn\/2\/cardlist\?aid= '.cards |= map(select((.mblog?|(.ad_marked?|type=="boolean")and.ad_marked==true)or(.card_group?|type=="array"and any(.[]?;.mblog?|(.ad_marked?|type=="boolean")and.ad_marked==true))|not))'
 
 [Map Local]
-^https:\/\/bootpreload\.uve\.weibo\.com\/v1\/ad\/preload$ data-type=text data="{}" status-code=200
+^https:\/\/bootpreload\.uve\.weibo\.com\/v1\/ad\/preload$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-^https:\/\/api\.weibo\.cn\/2\/cardlist\?v_f=2 data-type=text data="{}" status-code=200
+^https:\/\/api\.weibo\.cn\/2\/cardlist\?v_f=2 data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-^https:\/\/api\.weibo\.cn\/2\/ad\/ data-type=text data="{}" status-code=200
+^https:\/\/api\.weibo\.cn\/2\/ad\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-^https:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=get_searching_info data-type=text data="{}" status-code=200
+^https:\/\/weibointl\.api\.weibo\.cn\/portal\.php\?a=get_searching_info data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 [MITM]
 hostname = %APPEND% bootpreload.uve.weibo.com, weibointl.api.weibo.cn, api.weibo.cn
