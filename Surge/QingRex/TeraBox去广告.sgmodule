@@ -7,12 +7,19 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://hub.kelee.one
-#!date=2025-10-09 12:38:19
+#!date=2025-11-12 06:09:13
+
+[Rule]
+DOMAIN,ymg-api.terabox.com,REJECT,extended-matching,pre-matching
 
 [Map Local]
 ^https:\/\/www\.terabox\.com\/adx\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 ^https:\/\/www\.terabox\.com\/api\/ad\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https:\/\/www\.terabox\.com\/api\/page\/tips\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https:\/\/www\.terabox\.com\/rest\/1\.0\/task\/common\/inttips\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 [MITM]
 hostname = %APPEND% www.terabox.com
