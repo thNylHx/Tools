@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4553
+#!Rule = 4543
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1234,7 +1234,6 @@ DOMAIN-SUFFIX,adserve.work,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adserver.unityads.unity3d.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adserver.yahoo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adservice.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,adservice.google.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adservice.google.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adservice.sigmob.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adserviceretry.kglink.cn,REJECT,extended-matching,pre-matching
@@ -1698,7 +1697,6 @@ DOMAIN-SUFFIX,cbjslog.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cbjslog.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ccc-x.jd.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ccs.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,cctv.adsunion.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdj99d.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn-ad.wtzw.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn-ads.oss-cn-shanghai.aliyuncs.com,REJECT,extended-matching,pre-matching
@@ -1878,7 +1876,6 @@ DOMAIN-SUFFIX,cudaojia.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cupid.iqiyi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,customer-security.online,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cvda.17173.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,cws-cctv.conviva.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,d.applovin.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,d.applvn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,d.g.mi.com,REJECT,extended-matching,pre-matching
@@ -2100,7 +2097,6 @@ DOMAIN-SUFFIX,fc-feed.cdn.bcebos.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,fclick.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,fclog.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,fds.api.moji.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,feed-image.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,feed.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,feedback.whalecloud.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,feih.com.cn,REJECT,extended-matching,pre-matching
@@ -2219,7 +2215,6 @@ DOMAIN-SUFFIX,googleadapis.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,googleads-cn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,googleads.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,googleads.g.doubleclick-cn.net,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,googleads.g.doubleclick.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,googleads.g.doubleclick.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,googleadservices-cn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,googleadservices.com,REJECT,extended-matching,pre-matching
@@ -2484,7 +2479,6 @@ DOMAIN-SUFFIX,iskyworker.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,istreamsche.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,its-dori.tumblr.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,itsdata.map.baidu.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,itv2-up.openspeech.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,iwan.sogou.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,iwanad.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,iwstat.tudou.com,REJECT,extended-matching,pre-matching
@@ -3284,7 +3278,6 @@ DOMAIN-SUFFIX,resolve.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,responsys.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,restartad.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,retargeter.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,rev.aiclk.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,revcontent.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,revdepo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,review.gdtimg.com,REJECT,extended-matching,pre-matching
@@ -3349,7 +3342,6 @@ DOMAIN-SUFFIX,salmonads.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,samba.tv,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,samsung-com.112.2o7.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,samsungads.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,sanme2.taisantech.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sanya1.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sape.ru,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sapi.sina.cn,REJECT,extended-matching,pre-matching
@@ -3458,7 +3450,6 @@ DOMAIN-SUFFIX,sifuhe.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sifuhu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sifuji.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sifuka.cn,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,sigmob.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sigmob.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,silvermob.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,simaba.m.taobao.com,REJECT,extended-matching,pre-matching
@@ -3487,7 +3478,6 @@ DOMAIN-SUFFIX,smac-ad.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,smad.ms.zhangyue.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,smadex.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,smart-c.jp,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,smart-tv.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,smartad.10010.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,smartadserver.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,smartclip.net,REJECT,extended-matching,pre-matching
