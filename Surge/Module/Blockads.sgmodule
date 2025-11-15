@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 广告拦截
-#!date = 2025-07-12 13:04:51
+#!date = 2025-11-15 09:48:32
 
 [Rule]
 # ======= 0 ======= #
@@ -56,6 +56,42 @@ AND,((IP-CIDR,111.63.61.101/32,no-resolve),(DEST-PORT,6443)),REJECT
 AND,((IP-CIDR,220.243.141.0/32,no-resolve),(DEST-PORT,6443)),REJECT
 AND,((OR,((DOMAIN-SUFFIX,bytegecko.com),(DOMAIN-SUFFIX,byteeffecttos.com))),(DOMAIN-KEYWORD,ncdn)),REJECT
 
+# ======= F ======= #
+DOMAIN,zlink.ugsdk.cn,REJECT
+DOMAIN,mon.toutiaocloud.net,REJECT
+DOMAIN,lf-normal-gr-sourcecdn.bytegecko.com,REJECT
+DOMAIN,lf-webcast-gr-sourcecdn.bytegecko.com,REJECT
+DOMAIN,p3-developer.bytemaimg.com,REJECT
+DOMAIN,webcast-open.douyin.com,REJECT
+DOMAIN,p11-webcast-sign.douyinpic.com,REJECT
+DOMAIN,p3-webcast-sign.douyinpic.com,REJECT
+DOMAIN,log3-applog.fqnovel.com,REJECT
+DOMAIN,log5-applog.fqnovel.com,REJECT
+DOMAIN,mon11-misc-lq.fqnovel.com,REJECT
+DOMAIN,mon11-misc.fqnovel.com,REJECT
+DOMAIN,mon3-misc.fqnovel.com,REJECT
+DOMAIN,rtlog3-applog.fqnovel.com,REJECT
+DOMAIN,rtlog5-applog.fqnovel.com,REJECT
+DOMAIN,effect.snssdk.com,REJECT
+DOMAIN,i.snssdk.com,REJECT
+DOMAIN,is-lq.snssdk.com,REJECT
+DOMAIN,is.snssdk.com,REJECT
+DOMAIN,security.snssdk.com,REJECT
+DOMAIN,vas.snssdk.com,REJECT
+DOMAIN,mon.toutiaocloud.com,REJECT
+DOMAIN,abtest3-misc.zijieapi.com,REJECT
+DOMAIN,ads3-normal.zijieapi.com,REJECT
+DOMAIN,ads5-normal.zijieapi.com,REJECT
+DOMAIN,feedback-c.zijieapi.com,REJECT
+DOMAIN,gecko3.zijieapi.com,REJECT
+DOMAIN,gecko5.zijieapi.com,REJECT
+DOMAIN,ma.zijieapi.com,REJECT
+DOMAIN,minigame3-normal.zijieapi.com,REJECT
+DOMAIN,minigame5-normal.zijieapi.com,REJECT
+DOMAIN,mssdk.zijieapi.com,REJECT
+DOMAIN,timon.zijieapi.com,REJECT
+DOMAIN,vcs.zijieapi.com,REJECT
+
 # ======= J ======= #
 # 京东
 DOMAIN,dns.jd.com,REJECT
@@ -82,14 +118,37 @@ DOMAIN,ad.maoyan.com,REJECT,extended-matching,pre-matching
 
 # ======= P ======= #
 # 拼多多广告平台
-DOMAIN,titan.pinduoduo.com,REJECT-NO-DROP,extended-matching,pre-matching
-DOMAIN,ta-a.pinduoduo.com,REJECT,extended-matching,pre-matching
-DOMAIN,ta.pinduoduo.com,REJECT,extended-matching,pre-matching
-DOMAIN,th-a.pinduoduo.com,REJECT,extended-matching,pre-matching
-DOMAIN,th-b.pinduoduo.com,REJECT,extended-matching,pre-matching
-DOMAIN,th.pinduoduo.com,REJECT,extended-matching,pre-matching
-AND,((URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/d",extended-matching),(USER-AGENT,"*com.xunmeng.pinduoduo*")),REJECT
-AND,((URL-REGEX,"^http:\/\/\[((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))\]\/d4\?",extended-matching),(USER-AGENT,"*com.xunmeng.pinduoduo*")),REJECT
+AND,((URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/d(\d)?"),(USER-AGENT,"*com.xunmeng.pinduoduo*")),REJECT
+AND,((URL-REGEX,"^http:\/\/\[((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))\]\/d(\d)?\?"),(USER-AGENT,"*com.xunmeng.pinduoduo*")),REJECT
+AND,((DOMAIN,api.pinduoduo.com),(PROTOCOL,QUIC)),REJECT
+DOMAIN,titan.pinduoduo.com,REJECT
+DOMAIN,xg.pinduoduo.com,REJECT
+DOMAIN,cdl-1.pddpic.com,REJECT
+DOMAIN,titan.pinduoduo.com,REJECT
+DOMAIN,cdl-p2.pddpic.com,REJECT
+DOMAIN,cd-1.pddpic.com,REJECT
+DOMAIN,apm.pinduoduo.com,REJECT
+DOMAIN,th-b.pinduoduo.com,REJECT
+DOMAIN,ta.pinduoduo.com,REJECT
+DOMAIN,th.pinduoduo.com,REJECT
+DOMAIN,th-a.pinduoduo.com,REJECT
+DOMAIN,ta-a.pinduoduo.com,REJECT
+DOMAIN,meta.pinduoduo.com,REJECT
+DOMAIN,apm-a.pinduoduo.com,REJECT
+
+# ======= Q ======= #
+# QQ音乐
+DOMAIN,adstats.tencentmusic.com,REJECT
+DOMAIN,ad.tencentmusic.com,REJECT
+DOMAIN,adcdn.tencentmusic.com,REJECT
+DOMAIN,adcdn6.tencentmusic.com,REJECT
+DOMAIN,adexpo.tencentmusic.com,REJECT
+DOMAIN,adclick.tencentmusic.com,REJECT
+DOMAIN,mc.tencentmusic.com,REJECT
+DOMAIN,monitor.music.qq.com,REJECT
+DOMAIN,tmead.y.qq.com,REJECT
+DOMAIN,tmeadbak.y.qq.com,REJECT
+DOMAIN,tmeadquic.y.qq.com,REJECT
 
 # ======= S ======= #
 # 什么值得买
@@ -137,12 +196,448 @@ IP-CIDR,118.89.204.198/32,REJECT,no-resolve
 IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,REJECT,no-resolve
 # 航旅纵横
 URL-REGEX,"^http?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native",REJECT,extended-matching
+# 中华万年历
+DOMAIN,sdk.ad.sfys365.com,REJECT
 
 # ======= Ohter ======= #
 # 直接拦截会暴力请求或者使用缓存广告数据
 DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao.com,DIRECT
 DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao1.com,DIRECT
 DOMAIN-KEYWORD,pangolin-sdk-toutiao,DIRECT
+
+DOMAIN,yyapp-httpdns.gslb.yy.com,REJECT
+DOMAIN,union-httpdns.gslb.yy.com,REJECT
+DOMAIN,httpdns-v6.gslb.yy.com,REJECT
+URL-REGEX,"^http:\/\/103\.44\.58\.64\/md\?",REJECT
+URL-REGEX,"^http:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns",REJECT
+DOMAIN,dns2.q2cdn.com,REJECT
+URL-REGEX,"^http:\/\/xmc\.ximalaya\.com\/xmlymain-login-web\/login\/",REJECT
+DOMAIN,dns.weixin.qq.com,REJECT
+DOMAIN,dns.weixin.qq.com.cn,REJECT
+DOMAIN,aedns.weixin.qq.com,REJECT
+IP-CIDR,39.156.140.30/32,REJECT,no-resolve
+IP-CIDR,39.156.140.47/32,REJECT,no-resolve
+IP-CIDR,39.156.140.245/32,REJECT,no-resolve
+IP-CIDR,42.81.232.18/32,REJECT,no-resolve
+IP-CIDR,42.187.182.106/32,REJECT,no-resolve
+IP-CIDR,42.187.182.123/32,REJECT,no-resolve
+IP-CIDR,42.187.184.154/32,REJECT,no-resolve
+IP-CIDR,43.130.30.237/32,REJECT,no-resolve
+IP-CIDR,43.130.30.240/32,REJECT,no-resolve
+IP-CIDR,43.137.153.151/32,REJECT,no-resolve
+IP-CIDR,43.137.159.31/32,REJECT,no-resolve
+IP-CIDR,43.152.112.101/32,REJECT,no-resolve
+IP-CIDR,43.153.248.120/32,REJECT,no-resolve
+IP-CIDR,60.28.172.100/32,REJECT,no-resolve
+IP-CIDR,61.151.231.157/32,REJECT,no-resolve
+IP-CIDR,101.32.104.104/32,REJECT,no-resolve
+IP-CIDR,106.39.206.21/32,REJECT,no-resolve
+IP-CIDR,106.39.206.25/32,REJECT,no-resolve
+IP-CIDR,106.39.206.70/32,REJECT,no-resolve
+IP-CIDR,111.31.201.194/32,REJECT,no-resolve
+IP-CIDR,111.31.241.76/32,REJECT,no-resolve
+IP-CIDR,111.31.241.140/32,REJECT,no-resolve
+IP-CIDR,111.206.147.156/32,REJECT,no-resolve
+IP-CIDR,111.206.147.210/32,REJECT,no-resolve
+IP-CIDR,111.206.148.27/32,REJECT,no-resolve
+IP-CIDR,116.128.177.249/32,REJECT,no-resolve
+IP-CIDR,116.130.224.150/32,REJECT,no-resolve
+IP-CIDR,116.130.224.205/32,REJECT,no-resolve
+IP-CIDR,117.185.247.73/32,REJECT,no-resolve
+IP-CIDR,123.151.48.171/32,REJECT,no-resolve
+IP-CIDR,123.151.48.193/32,REJECT,no-resolve
+IP-CIDR,123.151.48.208/32,REJECT,no-resolve
+IP-CIDR,123.151.54.50/32,REJECT,no-resolve
+IP-CIDR,180.153.202.85/32,REJECT,no-resolve
+IP-CIDR,183.192.196.31/32,REJECT,no-resolve
+IP-CIDR,203.205.129.102/32,REJECT,no-resolve
+IP-CIDR,203.205.234.132/32,REJECT,no-resolve
+IP-CIDR,220.196.159.73/32,REJECT,no-resolve
+IP-CIDR6,240e:928:1400:10::25/128,REJECT,no-resolve
+IP-CIDR6,2402:4e00:8030:1::17/128,REJECT,no-resolve
+IP-CIDR6,2402:4e00:1900:1700:0:9554:1ad9:c3a/128,REJECT,no-resolve
+IP-CIDR6,2408:8711:10:10::20/128,REJECT,no-resolve
+IP-CIDR6,2409:8702:4860:10::4d/128,REJECT,no-resolve
+DOMAIN,httpdns.kg.qq.com,REJECT
+URL-REGEX,"^http:\/\/182\.256\.116\.116\/d",REJECT
+DOMAIN,httpdns.bilivideo.com,REJECT
+URL-REGEX,"^http:\/\/47\.101\.175\.206\/resolve",REJECT
+URL-REGEX,"^http:\/\/47\.100\.123\.169\/resolve",REJECT
+URL-REGEX,"^http:\/\/120\.46\.169\.234\/resolve",REJECT
+URL-REGEX,"^http:\/\/121\.36\.72\.124\/resolve",REJECT
+URL-REGEX,"^http:\/\/116\.63\.10\.135\/resolve",REJECT
+URL-REGEX,"^http:\/\/117\.185\.228\.108\/resolve",REJECT
+URL-REGEX,"^http:\/\/117\.144\.238\.29\/resolve",REJECT
+URL-REGEX,"^http:\/\/122\.9\.7\.134\/resolve",REJECT
+URL-REGEX,"^http:\/\/101\.91\.140\.124\/resolve",REJECT
+URL-REGEX,"^http:\/\/101\.91\.140\.224\/resolve",REJECT
+URL-REGEX,"^http:\/\/122\.9\.13\.79\/resolve",REJECT
+URL-REGEX,"^http:\/\/122\.9\.15\.129\/resolve",REJECT
+URL-REGEX,"^http:\/\/112\.65\.200\.117\/resolve",REJECT
+URL-REGEX,"^http:\/\/112\.64\.218\.119\/resolve",REJECT
+URL-REGEX,"^http:\/\/114\.116\.215\.110\/resolve",REJECT
+URL-REGEX,"^http:\/\/116\.63\.10\.31\/resolve",REJECT
+URL-REGEX,"^http:\/\/203\.119\.206\.8\/\d+\/resolve\?",REJECT
+DOMAIN,httpdns.browser.miui.com,REJECT
+DOMAIN,resolver.msg.xiaomi.net,REJECT
+DOMAIN,httpdns.alicdn.com,REJECT
+DOMAIN,httpdns-api.aliyuncs.com,REJECT
+DOMAIN,httpdns-sc.aliyuncs.com,REJECT
+IP-CIDR,203.107.1.0/24,REJECT,no-resolve
+DOMAIN,httpdns.danuoyi.tbcache.com,REJECT
+DOMAIN,httpdns.cctv.com,REJECT
+DOMAIN,httpdns-browser.platform.dbankcloud.cn,REJECT
+DOMAIN,httpdns.huaweicloud.com,REJECT
+DOMAIN,httpdns.c.cdnhwc2.com,REJECT
+DOMAIN,httpdns.platform.dbankcloud.cn,REJECT
+DOMAIN,httpdns.platform.dbankcloud.com,REJECT
+DOMAIN,httpdns1.cc.cdnhwc5.com,REJECT
+DOMAIN,doh.ptqy.gitv.tv,REJECT
+DOMAIN,httpdns.baidu.com,REJECT
+DOMAIN,httpsdns.baidu.com,REJECT
+DOMAIN,httpdns.bcelive.com,REJECT
+DOMAIN,httpdns.baidubce.com,REJECT
+DOMAIN,dns.iqiyi.com,REJECT
+DOMAIN,doh.iqiyi.com,REJECT
+DOMAIN,dns.qiyipic.iqiyi.com,REJECT
+DOMAIN,httpdns.n.shifen.com,REJECT
+URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/",REJECT
+URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/resolve",REJECT
+URL-REGEX,"^http:\/\/180\.76\.76\.220\/v\d\/resolve",REJECT
+IP-CIDR,186.76.76.200/32,REJECT,no-resolve
+DOMAIN,httpdns.ocloud.heytapmobi.com,REJECT
+DOMAIN,httpdns.push.heytapmobi.com,REJECT
+DOMAIN,dns.jd.com,REJECT
+IP-CIDR,101.124.19.122/32,REJECT,no-resolve
+IP-CIDR6,2402:db40:5100:1011::5/128,REJECT,no-resolve
+IP-CIDR,103.224.222.208/32,REJECT,no-resolve
+IP-CIDR,119.29.29.98/32,REJECT,no-resolve
+IP-CIDR,119.29.29.99/32,REJECT,no-resolve
+URL-REGEX,"^http:\/\/182\.254\.116\.116\/d",REJECT
+URL-REGEX,"^http:\/\/119\.29\.29\.98\/d\?",REJECT
+DOMAIN,dotserver.douyucdn.cn,REJECT
+DOMAIN,hdns.ksyun.com,REJECT
+URL-REGEX,"^http:\/\/162\.14\.3\.250\/v4",REJECT
+DOMAIN,httpdns.push.oppomobile.com,REJECT
+DOMAIN,httpdns.ocloud.oppomobile.com,REJECT
+DOMAIN,kuaishou.httpdns.pro,REJECT
+DOMAIN,httpdns.kwd.inkuai.com,REJECT
+DOMAIN,apidns.kwd.inkuai.com,REJECT
+DOMAIN,apidns-js.kwd.inkuai.com,REJECT
+DOMAIN,httpdns.meituan.com,REJECT
+DOMAIN,httpdnsmultiapi.meituan.com,REJECT
+DOMAIN,httpdnsmultiapivip.meituan.com,REJECT
+URL-REGEX,"^http:\/\/103\.37\.155\.60\/fetch",REJECT
+URL-REGEX,"^http:\/\/81\.69\.130\.131\/d",REJECT
+URL-REGEX,"^http:\/\/101\.35\.204\.35\/d",REJECT
+URL-REGEX,"^http:\/\/101\.35\.212\.35\/d",REJECT
+URL-REGEX,"^http:\/\/114\.110\.96\.6\/d",REJECT
+URL-REGEX,"^http:\/\/114\.110\.96\.26\/d",REJECT
+URL-REGEX,"^http:\/\/114\.110\.97\.30\/d",REJECT
+URL-REGEX,"^http:\/\/114\.110\.97\.97\/d",REJECT
+URL-REGEX,"^http:\/\/121\.5\.84\.85\/d",REJECT
+URL-REGEX,"^http:\/\/\[2402:4e00:1411:201:0:9964:ba21:5a41\]\/d",REJECT
+DOMAIN,httpdns.music.163.com,REJECT
+DOMAIN,httpdns.n.netease.com,REJECT
+DOMAIN,httpdns-sdk.n.netease.com,REJECT
+DOMAIN,httpdns.yunxindns.com,REJECT
+DOMAIN,lofter.httpdns.c.163.com,REJECT
+DOMAIN,music.httpdns.c.163.com,REJECT
+DOMAIN,httpdns.yunxindns.com,REJECT
+IP-CIDR,59.111.239.61/32,REJECT,no-resolve
+IP-CIDR,59.111.239.62/32,REJECT,no-resolve
+IP-CIDR,115.236.121.51/32,REJECT,no-resolve
+IP-CIDR,115.236.121.195/32,REJECT,no-resolve
+DOMAIN,httpdns.zybang.com,REJECT
+DOMAIN,httpdns.calorietech.com,REJECT
+DOMAIN,dns.weibo.cn,REJECT
+IP-CIDR,39.97.130.51/32,REJECT,no-resolve
+IP-CIDR,39.97.128.148/32,REJECT,no-resolve
+URL-REGEX,"^http:\/\/api\.weibo\.cn\/2\/httpdns\/config",REJECT
+URL-REGEX,"^http:\/\/api\.weibo\.cn\/httpdns\/config",REJECT
+URL-REGEX,"^http:\/\/103\.41\.167\.237\/v2\/resolv",REJECT
+IP-CIDR,118.89.204.198/23,REJECT,no-resolve
+IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,REJECT,no-resolve
+DOMAIN,hd.xiaojukeji.com,REJECT
+DOMAIN,httpdns.zybang.com,REJECT
+URL-REGEX,"^http:\/\/203\.107\.1\.33\/191607\/resolve\?",REJECT
+URL-REGEX,"^http:\/\/119\.29\.29\.29\/d",REJECT
+DOMAIN,serveraddr.service.kugou.com,REJECT
+DOMAIN,twns.p2ptun.qq.com,REJECT
+DOMAIN,tp2p.kg.qq.com,REJECT
+IP-CIDR,81.71.61.216/32,REJECT,no-resolve
+URL-REGEX,"^http:\/\/54\.222\.159\.138:8053\/httpdns\/",REJECT
+URL-REGEX,"^http:\/\/101\.42\.130\.147:8053\/httpdns\/",REJECT
+URL-REGEX,"^http:\/\/106\.55\.220\.18:8053\/httpdns\/",REJECT
+URL-REGEX,"^http:\/\/139\.196\.12\.179:8053\/httpdns\/",REJECT
+
+AND,((DOMAIN-KEYWORD,tnc),(OR,((DOMAIN-SUFFIX,capcutapi.com),(DOMAIN-SUFFIX,zijieapi.com),(DOMAIN-SUFFIX,isnssdk.com),(DOMAIN-SUFFIX,toutiaoapi.com),(DOMAIN-SUFFIX,bytedance.com),(DOMAIN-SUFFIX,snssdk.com),(DOMAIN-SUFFIX,sgsnssdk.com)))),DIRECT
+AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com)),REJECT
+AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,-normal.zijieapi.com)),REJECT
+DOMAIN,lf-ad-ies.bytecdn.cn,REJECT
+DOMAIN,dig.bdurl.net,REJECT
+DOMAIN,extlog.snssdk.com,REJECT
+DOMAIN,mcs.snssdk.com,REJECT
+DOMAIN-SUFFIX,bds.snssdk.com,REJECT
+DOMAIN-SUFFIX,byteadverts.com,REJECT
+DOMAIN-SUFFIX,ctobsnssdk.com,REJECT
+DOMAIN-SUFFIX,pangle.io,REJECT
+DOMAIN-KEYWORD,pangolin,REJECT
+DOMAIN-KEYWORD,pglstatp,REJECT
+DOMAIN-KEYWORD,panplayable-toutiao,REJECT
+DOMAIN-KEYWORD,-ad-sign.byteimg.com,REJECT
+DOMAIN-KEYWORD,-ad.byteoversea.com,REJECT
+DOMAIN-KEYWORD,asiad.byteactivity,REJECT
+DOMAIN-KEYWORD,iflyad.bj.openstorage.cn,REJECT
+DOMAIN-KEYWORD,bjimp.voiceads.cn,REJECT
+DOMAIN-SUFFIX,1rtb.net,REJECT
+DOMAIN-SUFFIX,1rtb.com,REJECT
+DOMAIN-SUFFIX,halomobi.com,REJECT
+DOMAIN-SUFFIX,hubcloud.com.cn,REJECT
+DOMAIN-SUFFIX,inmobi.cn,REJECT
+DOMAIN-SUFFIX,uyunad.com,REJECT
+DOMAIN-SUFFIX,puata.info,REJECT
+DOMAIN,gdfp.gifshow.com,REJECT
+DOMAIN,open.e.kuaishou.com,REJECT
+DOMAIN,open.e.kuaishou.cn,REJECT
+DOMAIN,adtrack.e.kuaishou.com,REJECT
+DOMAIN-SUFFIX,partner.gifshow.com,REJECT
+DOMAIN-SUFFIX,adukwai.com,REJECT
+DOMAIN-SUFFIX,adkwai.com,REJECT
+DOMAIN-SUFFIX,supersonicads.com,REJECT
+DOMAIN-SUFFIX,appsad.cn,REJECT
+DOMAIN-SUFFIX,beizi.biz,REJECT
+DOMAIN-SUFFIX,ad-scope.com.cn,REJECT
+DOMAIN-SUFFIX,adn-plus.com.cn,REJECT
+DOMAIN-SUFFIX,beizi.biz,REJECT
+DOMAIN-SUFFIX,adhub.com.cn,REJECT
+DOMAIN-SUFFIX,adnplus.com.cn,REJECT
+DOMAIN-SUFFIX,adscope.com.cn,REJECT
+DOMAIN-SUFFIX,adscope.cn,REJECT
+DOMAIN-SUFFIX,adscope.xyz,REJECT
+DOMAIN-SUFFIX,beizi.info,REJECT
+DOMAIN-SUFFIX,beizi.online,REJECT
+DOMAIN-SUFFIX,miaozhen.com,REJECT
+DOMAIN-SUFFIX,admobile.top,REJECT
+DOMAIN-SUFFIX,tianmu.mobi,REJECT
+DOMAIN-SUFFIX,admobile.mobi,REJECT
+DOMAIN-SUFFIX,admobile.net.cn,REJECT
+DOMAIN-SUFFIX,popadshop.com,REJECT
+DOMAIN-SUFFIX,admobile.vip,REJECT
+DOMAIN-SUFFIX,yksdks.com,REJECT
+DOMAIN-SUFFIX,dutils.com,REJECT
+DOMAIN-SUFFIX,mob.com,REJECT
+DOMAIN-SUFFIX,jiguang.cn,REJECT
+DOMAIN-SUFFIX,jpush.cn,REJECT
+DOMAIN-SUFFIX,jpush.io,REJECT
+DOMAIN,afd.baidu.com,REJECT
+DOMAIN,als.baidu.com,REJECT
+DOMAIN,bgg.baidu.com,REJECT
+DOMAIN,cpro.baidustatic.com,REJECT
+DOMAIN,feed-image.baidu.com,REJECT
+DOMAIN,click-bes.baidu.com,REJECT
+DOMAIN,eclick.baidu.com,REJECT
+DOMAIN,mobads-logs.baidu.com,REJECT
+DOMAIN,mobads-pre-config.cdn.bcebos.com,REJECT
+DOMAIN,mobads.baidu.com,REJECT
+DOMAIN,nadvideo2.baidu.com,REJECT
+DOMAIN,wn.pos.baidu.com,REJECT
+DOMAIN,miniapp-ad.cdn.bcebos.com,REJECT
+DOMAIN,mobads-pre-config.cdn.bcebos.com,REJECT
+DOMAIN-SUFFIX,union.baidu.cn,REJECT
+DOMAIN-SUFFIX,union.baidu.com,REJECT
+DOMAIN,adsmind.gdtimg.com,REJECT
+DOMAIN,adsmind.ugdtimg.com,REJECT
+DOMAIN,ads.privacy.qq.com,REJECT
+DOMAIN,huatuocode.huatuo.qq.com,REJECT
+DOMAIN,info4.video.qq.com,REJECT
+DOMAIN,info6.video.qq.com,REJECT
+DOMAIN,ios.bugly.qq.com,REJECT
+DOMAIN,pro.bugly.qq.com,REJECT
+DOMAIN,ios.video.mpush.qq.com,REJECT
+DOMAIN,otheve.beacon.qq.com,REJECT
+DOMAIN,pgdt.gtimg.cn,REJECT
+DOMAIN,pgdt.ugdtimg.com,REJECT
+DOMAIN,qzs.gdtimg.com,REJECT
+DOMAIN,qzs.qq.com,REJECT
+DOMAIN,rmonitor.qq.com,REJECT
+DOMAIN,sdkconfig.video.qq.com,REJECT
+DOMAIN,tmead.y.qq.com,REJECT
+DOMAIN,tmeadbak.y.qq.com,REJECT
+DOMAIN,tmeadcomm.y.qq.com,REJECT
+DOMAIN,tpns.qq.com,REJECT
+DOMAIN,wup.imtt.qq.com,REJECT
+DOMAIN,tpstelemetry.tencent.com,REJECT
+DOMAIN,otheve.beacon.qq.com,REJECT
+DOMAIN,stat.y.qq.com,REJECT
+DOMAIN,stat6.y.qq.com,REJECT
+DOMAIN,oth.str.mdt.qq.com,REJECT
+DOMAIN,h.trace.qq.com,REJECT
+DOMAIN,sdk.e.qq.com,REJECT
+DOMAIN,tangram.e.qq.com,REJECT
+DOMAIN-KEYWORD,trace.qq.com,REJECT
+DOMAIN-KEYWORD,trace.video.qq.com,REJECT
+DOMAIN-KEYWORD,ad.hunyuan.tencent.com,REJECT
+DOMAIN-SUFFIX,gdt.qq.com,REJECT
+DOMAIN-SUFFIX,l.qq.com,REJECT
+DOMAIN-SUFFIX,imtmp.net,REJECT
+DOMAIN-SUFFIX,ugdtimg.com,REJECT
+IP-CIDR,47.110.187.87/32,REJECT,no-resolve
+DOMAIN-SUFFIX,openinstall.io,REJECT
+DOMAIN-SUFFIX,getui.com,REJECT
+DOMAIN-SUFFIX,getui.net,REJECT
+DOMAIN-SUFFIX,igexin.com,REJECT
+DOMAIN-SUFFIX,umtrack.com,REJECT
+DOMAIN-SUFFIX,umeng.com,REJECT
+DOMAIN-SUFFIX,umsns.com,REJECT
+DOMAIN-SUFFIX,lydass.net,REJECT
+DOMAIN-SUFFIX,lydass.com.cn,REJECT
+DOMAIN-SUFFIX,lydaas.net,REJECT
+DOMAIN-SUFFIX,lydass.cn,REJECT
+DOMAIN-SUFFIX,lydaas.cn,REJECT
+DOMAIN-SUFFIX,lydaas.com.cn,REJECT
+DOMAIN-SUFFIX,fwosapp.com,REJECT
+DOMAIN-SUFFIX,rhinokeen.com,REJECT
+DOMAIN-SUFFIX,lydaas.com,REJECT
+DOMAIN-SUFFIX,xixikf.com,REJECT
+DOMAIN-SUFFIX,wrating.com,REJECT
+DOMAIN-SUFFIX,puata.info,REJECT
+DOMAIN-SUFFIX,mobmore.com,REJECT
+DOMAIN-SUFFIX,um0.cn,REJECT
+DOMAIN-SUFFIX,umv0.com,REJECT
+DOMAIN-SUFFIX,umtrack1.com,REJECT
+DOMAIN-SUFFIX,eshiqi.com,REJECT
+DOMAIN-SUFFIX,umv5.com,REJECT
+DOMAIN-SUFFIX,dratio.com,REJECT
+DOMAIN-SUFFIX,umtrack0.com,REJECT
+DOMAIN-SUFFIX,uyunad.com,REJECT
+DOMAIN-SUFFIX,whalecloud.com,REJECT
+DOMAIN-SUFFIX,umtrack2.com,REJECT
+DOMAIN-SUFFIX,umengcloud.com,REJECT
+DOMAIN-SUFFIX,umeng.com,REJECT
+DOMAIN-SUFFIX,umtrack.com,REJECT
+DOMAIN-SUFFIX,um1.cn,REJECT
+DOMAIN-SUFFIX,umsns.com,REJECT
+DOMAIN-SUFFIX,adfunlink.com,REJECT
+DOMAIN-SUFFIX,tianmu.mobi,REJECT
+DOMAIN-SUFFIX,ubixioe.com,REJECT
+DOMAIN,ossgw.alicdn.com,REJECT
+DOMAIN,ems.youku.com,REJECT
+DOMAIN,hudong.alicdn.com,REJECT
+DOMAIN,et.tanx.com,REJECT
+DOMAIN,df.tanx.com,REJECT
+DOMAIN,opehs.tanx.com,REJECT
+DOMAIN,beacon-api.aliyuncs.com,REJECT
+DOMAIN,adash.man.aliyuncs.com,REJECT
+DOMAIN,applog.uc.cn,REJECT
+DOMAIN,atoken.m.taobao.com,REJECT
+AND,((DOMAIN-KEYWORD,adash),(DOMAIN-SUFFIX,ut.taobao.com)),REJECT
+URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch",REJECT
+DOMAIN,baichuan-sdk.alicdn.com,REJECT
+DOMAIN,acs4baichuan.m.taobao.com,REJECT
+DOMAIN,api.sm.cn,REJECT
+DOMAIN,c.sm.cn,REJECT
+DOMAIN,content-understand-strategy.sm.cn,REJECT
+DOMAIN,hc-ssp.sm.cn,REJECT
+DOMAIN,sdk-log.partner.sm.cn,REJECT
+DOMAIN,partner.uc.cn,REJECT
+DOMAIN,cpc-service-square.aiclk.com,REJECT
+DOMAIN,logrcv.aiclk.com,REJECT
+DOMAIN,acjs.aliyun.com,REJECT
+DOMAIN,retcode.alicdn.com,REJECT
+DOMAIN,arms-retcode.aliyuncs.com,REJECT
+DOMAIN,at.alicdn.com,REJECT
+DOMAIN,huichuan.sm.cn,REJECT
+DOMAIN,huichuan-mc.sm.cn,REJECT
+DOMAIN,api.sm.cn,REJECT
+DOMAIN,nex.163.com,REJECT
+DOMAIN,iad.g.163.com,REJECT
+DOMAIN,gorgon.youdao.com,REJECT
+DOMAIN-SUFFIX,ad.xiaomi.com,REJECT
+DOMAIN,al-log.d.meituan.net,REJECT
+DOMAIN,babel-statistics-android.d.meituan.net,REJECT
+DOMAIN,maplocatesdksnapshot.d.meituan.net,REJECT
+DOMAIN,metrics-picture.d.meituan.net,REJECT
+DOMAIN,route-stats.d.meituan.net,REJECT
+DOMAIN,dsp-x.jd.com,REJECT
+DOMAIN,im-x.jd.com,REJECT
+DOMAIN,xlog.jd.com,REJECT
+DOMAIN,janapi.jd.com,REJECT
+DOMAIN-SUFFIX,toponadss.com,REJECT
+DOMAIN-SUFFIX,motowoo.com,REJECT
+DOMAIN,guide2.bianxianmao.com,REJECT
+DOMAIN,sdk.zhangyuyidong.cn,REJECT
+DOMAIN,sdklog.zhangyuyidong.cn,REJECT
+DOMAIN-SUFFIX,adintl.cn,REJECT
+DOMAIN-SUFFIX,adtaipo.com,REJECT
+DOMAIN-SUFFIX,adx.yixin.im,REJECT
+DOMAIN-SUFFIX,kuaiyiad.com,REJECT
+DOMAIN-SUFFIX,adtianmai.com,REJECT
+DOMAIN-SUFFIX,readgps.com,REJECT
+DOMAIN-SUFFIX,fanglinad.com,REJECT
+DOMAIN-SUFFIX,17admob.com,REJECT
+DOMAIN-SUFFIX,slyxmobi.com,REJECT
+DOMAIN-SUFFIX,mobrtb.com,REJECT
+DOMAIN-SUFFIX,maplehaze.cn,REJECT
+DOMAIN-SUFFIX,lnk0.com,REJECT
+DOMAIN-SUFFIX,bridgeoos.com,REJECT
+DOMAIN-SUFFIX,anythinktech.com,REJECT
+DOMAIN,ad-evods.tianya.tv,REJECT
+DOMAIN-SUFFIX,tuia.cn,REJECT
+DOMAIN-SUFFIX,66mobi.com,REJECT
+DOMAIN-SUFFIX,xdplt.com,REJECT
+DOMAIN-SUFFIX,adjust.com,REJECT
+DOMAIN-SUFFIX,adjust.net.in,REJECT
+DOMAIN,app-analytics-services.com,REJECT
+DOMAIN,odm.app-ads-services.com,REJECT
+DOMAIN,firebaselogging-pa.googleapis.com,REJECT
+DOMAIN,firebaseinappmessaging.googleapis.com,REJECT
+DOMAIN,firebaseremoteconfig.googleapis.com,REJECT
+DOMAIN,fundingchoicesmessages.google.com,REJECT
+DOMAIN-SUFFIX,doubleclick-cn.net,REJECT
+DOMAIN-SUFFIX,googlesyndication-cn.com,REJECT
+DOMAIN-SUFFIX,xinduoad.com,REJECT
+DOMAIN-SUFFIX,kuaiyiad.com,REJECT
+DOMAIN,statis.miwuad.com,REJECT
+DOMAIN-SUFFIX,sigmob.cn,REJECT
+DOMAIN-SUFFIX,richmob.cn,REJECT
+DOMAIN-SUFFIX,66mobi.com,REJECT
+DOMAIN,ad.shunchangzhixing.com,REJECT
+DOMAIN,redirect.shunchangzhixing.com,REJECT
+DOMAIN,api.touch-moblie.com,REJECT
+DOMAIN-SUFFIX,api.touch-moblie.com,REJECT
+DOMAIN,mercury-gateway.ixiaochuan.cn,REJECT
+DOMAIN,adapi.izuiyou.com,REJECT
+DOMAIN-SUFFIX,domob.cn,REJECT
+DOMAIN-SUFFIX,adwangmai.com,REJECT
+DOMAIN-SUFFIX,bxsnews.com,REJECT
+DOMAIN-SUFFIX,ranfenghd.com,REJECT
+DOMAIN-SUFFIX,mmstat.com,REJECT
+DOMAIN-SUFFIX,miaozhen.com,REJECT
+DOMAIN-SUFFIX,qchannel01.cn,REJECT
+DOMAIN-SUFFIX,ad.xelements.cn,REJECT
+DOMAIN-SUFFIX,adsrvr.cn,REJECT
+DOMAIN-SUFFIX,adsrvr.org,REJECT
+DOMAIN-SUFFIX,fancydsp.com,REJECT
+DOMAIN-SUFFIX,tradplusad.com,REJECT
+DOMAIN-SUFFIX,fancyapi.com,REJECT
+DOMAIN-SUFFIX,medproad.com,REJECT
+DOMAIN-SUFFIX,applovin.com,REJECT
+DOMAIN-SUFFIX,iads.unity3d.com,REJECT
+DOMAIN-SUFFIX,unityads.unitychina.cn,REJECT
+DOMAIN-SUFFIX,tapjoy.com,REJECT
+DOMAIN-SUFFIX,ads.vungle.com,REJECT
+DOMAIN-SUFFIX,adsmoloco.com,REJECT
+DOMAIN-SUFFIX,smadex.com,REJECT
+DOMAIN-SUFFIX,tapad.com,REJECT
+DOMAIN-SUFFIX,adsappier.com,REJECT
+DOMAIN-SUFFIX,inmobi.com,REJECT
+DOMAIN-SUFFIX,inmobicdn.net,REJECT
+DOMAIN-SUFFIX,appsflyersdk.com,REJECT
+DOMAIN-SUFFIX,applvn.com,REJECT
+DOMAIN-SUFFIX,moloco.com,REJECT
+DOMAIN-SUFFIX,rayjump.com,REJECT
+DOMAIN-SUFFIX,rixengine.com,REJECT
 
 
 [URL Rewrite]
@@ -178,7 +673,6 @@ DOMAIN-KEYWORD,pangolin-sdk-toutiao,DIRECT
 
 # ======= I ======= #
 # it之家 api.zuihuimai.com, dat.ruanmei.com
-^https?:\/\/api\.zuihuimai\.com\/static\/.*\/hongbao - reject
 ^https?:\/\/dat\.ruanmei\.com\/ithome\/money\/acd\.json$ - reject
 
 # ======= K ======= #
@@ -205,10 +699,18 @@ DOMAIN-KEYWORD,pangolin-sdk-toutiao,DIRECT
 # ======= p ======= #
 # 拼多多广告平台
 ^https:\/\/video-dsp\.pddpic\.com\/market-dsp-video\/ - reject
-^https:\/\/t-dsp\.pinduoduo\.com\/dspcb\/i\/mrk_union - reject
+^https:\/\/t-dsp\.pinduoduo\.com\/dspcb\/i\/mrk_ - reject
 ^https:\/\/images\.pinduoduo\.com\/mrk\/ - reject
 ^https:\/\/images\.pinduoduo\.com\/marketing_api\/ - reject
-^https:\/\/api\.pinduoduo\.com\/api\/ktt_gateway\/activity\/feeds\/personal_home_page\/ - reject
+^https?:\/\/203\.107\.1\.1/\d+/ss - reject
+^https?:\/\/203\.107\.1\.33/\d+/ss - reject
+^https?:\/\/203\.107\.1\.66/\d+/ss - reject
+^https?:\/\/203\.107\.1\.67/\d+/ss - reject
+^https?:\/\/203\.107\.1\.97/\d+/ss - reject
+^https?:\/\/2401:b180:2000:30::1c\/\d+\/d - reject
+^https?:\/\/2401:b180:2000:20::10\/\d+\/d - reject
+^https?:\/\/cdn\.wup\.huya\.com\/monitor\/monitor\.jsp - reject
+^https:\/\/gslbali\.ximalaya\.com\/linkeye-cloud\/httpdns\/ - reject
 
 # ======= R ======= #
 # 瑞幸咖啡
@@ -390,15 +892,23 @@ http-response-jq ^https:\/\/app\.missevan\.com\/site\/get-top$ 'delpaths([["info
 
 # ======= P ======= #
 # 拼多多
-http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/oak\/integration\/render 'delpaths([["bottom_section_list"]])'
-http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/oak\/integration\/render 'delpaths([["ui","bottom_section"]])'
-http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/oak\/integration\/render 'delpaths([["ui","live_section","float_info"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub\? 'delpaths([["result","dy_module","irregular_banner_dy"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub\? 'delpaths([["result","icon_set"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub\? 'delpaths([["result","search_bar_hot_query"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub\? 'delpaths([["result","dy_module","irregular_banner_dy"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/alexa\/homepage\/hub\? '.result.bottom_tabs? |= map(select(.link | IN("index.html", "chat_list.html", "personal.html"))) | .result.buffer_bottom_tabs? |= map(select(.link | IN("index.html", "chat_list.html", "personal.html"))) | .result.all_top_opts |= map(del(.selected_image, .image, .height, .width))'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/search\? 'delpaths([["expansion"]])'
 http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/philo\/personal\/hub\? 'delpaths([["monthly_card_entrance"]])'
 http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/philo\/personal\/hub\? 'delpaths([["personal_center_style_v2_vo"]])'
 http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/philo\/personal\/hub\? 'delpaths([["icon_set","icons"]])'
 http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/philo\/personal\/hub\? 'delpaths([["icon_set","top_personal_icons"]])'
-http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/philo\/personal\/hub\? 'delpaths([["title_bar_items"]])'
-http-response-jq ^https:\/\/api\.pinduoduo\.com\/search 'delpaths([["expansion"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/oak\/integration\/render\? 'delpaths([["bottom_section_list"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/oak\/integration\/render\? 'delpaths([["ui","bottom_section"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/oak\/integration\/render\? 'delpaths([["ui","live_section","float_info"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/caterham\/v3\/query\/order_detail_group\? 'delpaths([["data","goods_list"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/order\/ 'delpaths([["marketing_banner_vo"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/order\/ 'delpaths([["shipping","banner_above_recommend"]])'
+http-response-jq ^https:\/\/api\.pinduoduo\.com\/api\/aristotle\/order_list_v4\? '.orders |= map(.order_buttons |= map(del(.order_growth_tip)))'
 
 # ======= Q ======= #
 # 汽水音乐
@@ -422,8 +932,10 @@ http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'delpaths([["data
 http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'delpaths([["data","video_cache_num_configs"]])'
 http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'delpaths([["data","haojia_widget"]])'
 http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'delpaths([["data","widget"]])'
+http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'delpaths([["data","operation_float"]])'
 http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'def r: if type=="object" then if has("ad_campaign_name") and (.ad_campaign_name|type=="string") and (.ad_campaign_name|test("\\S")) then empty else . end elif type=="array" then map(r) else . end; .data.operation_float |= map(map(r))'
-http-response-jq ^https:\/\/homepage-api\.smzdm\.com\/v3\/home\? '    .data.component |= map(    if (.zz_content | type) == "array" then     .zz_content |= map(       select(         ( (.ad_campaign_id? | type == "string" and length > 0)// false ) or         ( (.tag? | type == "string" and length > 0)// false ) or         ( (.model_type? == "ads" and (type == "string"))// false )         | not       )     )   else . end )  | .data.component |= map(   select(     if has("zz_type") then        .zz_type | IN(["circular_banner", "filter", "list"][])      else true end   ) )'
+http-response-jq ^https:\/\/homepage-api\.smzdm\.com\/v3\/home\? '   .data.component |= map(    if (.zz_content | type) == "array" then     .zz_content |= map(       select(         ( (.ad_campaign_id? | type == "string" and length > 0)// false ) or         ( (.tag? | type == "string" and length > 0)// false ) or         ( (.model_type? == "ads" and (type == "string"))// false )         | not       )     )   else . end )  | .data.component |= map(   select(.zz_type == "circular_banner" or .zz_type == "filter" or .zz_type == "list") )  | .data.component |= map(   .zz_content |= (     if type == "array" then       map(         if type == "object" and (.article_channel_type// "") == "questionnaire" then           empty         else           .         end       )     else       .     end   ) )   | del(.data.theme)  | .data.component |= map(   if .zz_content | type == "object" then     .zz_content |= del(.circular_banner_option)   else     .   end )'
+http-response-jq ^https:\/\/haojia-api\.smzdm\.com\/home\/list\? 'delpaths([["data","header_operation","theme"]])'
 http-response-jq ^https:\/\/haojia-api\.smzdm\.com\/home\/list\? '.data.rows |= map(select(.cell_type == "39001")) | .data.banner_v2 |= map(select(.cell_type == "21028"))'
 http-response-jq ^https:\/\/haojia\.m\.smzdm\.com\/detail_modul\/user_related_modul\? 'delpaths([["data","super_coupon"]])'
 http-response-jq ^https:\/\/haojia\.m\.smzdm\.com\/detail_modul\/other_modul\? 'delpaths([["data","banner"]])'
@@ -431,11 +943,16 @@ http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","activ
 http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","big_banner"]])'
 http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","top_banner"]])'
 http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","banner_switch"]])'
-http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/list_v10\? '.data.rows |= map(select(.model_type != "ads"))'
+http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","yaoqingshaiwu"]])'
+http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/list_v10\? '.data.rows |= map(select(.model_type != "ads")) | .data.top_aladdin |= map(select(has("ad") | not))'
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","search_faxian"]])'
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","tonglan"]])'
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","hongbao"]])'
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? '.data.search_hot.home |= map(select(.article_tag.article_title != "广告"))'
+http-response-jq ^https:\/\/haojia-api\.smzdm\.com\/detail\/\d+\? 'delpaths([["data","quan_log"]])'
+http-response-jq ^https:\/\/haojia-cdn\.smzdm\.com\/preload\/\d+\/fiphone\/v\d+_\d+_\d+\/wx\d+\/im\d+\/[0-9a-z]+\/[0-9a-z]+\.json$ 'delpaths([["data","quan_log"]])'
+http-response-jq ^https:\/\/post\.m\.smzdm\.com\/ajax_app\/ajax_get_footer_list\? 'delpaths([["data","tuiguang_ad"]])'
+http-response-jq ^https:\/\/post\.m\.smzdm\.com\/ajax_app\/ajax_get_footer_list\? 'delpaths([["data","activity_banner"]])'
 
 # ======= W ======= #
 # 微信小程序 mcsp.cloudpnr.com, saas-ad.cloudpnr.com, rms.meituan.com
@@ -482,7 +999,9 @@ http-response-jq ^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\? 'delpaths
 http-response-jq ^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\? 'delpaths([["vip_tip"]])'
 http-response ^https:\/\/api\.zhihu\.com\/search\/recommend_query\/v2\? "recommend_queries":\{.+\} "recommend_queries":{}
 http-response-jq ^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|\?include=) 'del(.ad_info, .data.ad_info?, .query_info) | if (.data | type) == "array" then .data |= map(select(.target?.answer_type?
-
+# 中华万年历
+http-response-jq ^https:\/\/v0-client-lz\.rili\.cn\/lizhi\/api\/zhwnl\/cal_module\/(datas|config)\? '.data |= map(select(.module_name as $name | ["实用工具","会员下icon","天气页面_右上角图标","天气页面_24小时","天气页面_15日","每日插屏","下拉屏保","星座Tab（黄历页）"] | index($name) != null))'
+http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |= map((.layout |= map(select(.key_name == "实用工具" or .key_name == "会员下icon" or .key_name == "天气页面_右上角图标" or .key_name == "天气页面_24小时" or .key_name == "天气页面_15日" or .key_name == "每日插屏" or .key_name == "下拉屏保" or .key_name == "星座Tab（黄历页）"))) | select(.layout | length > 0))'
 
 [Map Local]
 # ======= 0 ======= #
@@ -675,15 +1194,25 @@ http-response-jq ^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|
 
 # ======= P ======= #
 # 拼多多
-^https:\/\/api\.(?:pinduoduo|yangkeduo)\.com\/api\/cappuccino\/splash\? data-type=text data="{}" status-code=200
-^https:\/\/api\.pinduoduo\.com\/api\/alexa\/goods\/back_up\? data-type=text data="{}" status-code=200
-^https:\/\/api\.pinduoduo\.com\/api\/aquarius\/hungary\/global\/homepage\? data-type=text data="{}" status-code=200
-^https:\/\/api\.pinduoduo\.com\/api\/brand-olay\/goods_detail\/bybt_guide data-type=text data="{}" status-code=200
-^https:\/\/api\.pinduoduo\.com\/api\/caterham\/v3\/query\/(?:likes|my_order_group|new_chat_group|order_express_group|personal) data-type=text data="{}" status-code=200
-^https:\/\/api\.pinduoduo\.com\/api\/engels\/reviews\/require\/append data-type=text data="{}" status-code=200
-^https:\/\/api\.pinduoduo\.com\/api\/flow\/hungary\/window\/global\/v2\? data-type=text data="{}" status-code=200
-^https:\/\/api\.pinduoduo\.com\/api\/zaire_biz\/chat\/resource\/get_list_data data-type=text data="{}" status-code=200
-^https:\/\/api\.pinduoduo\.com\/search_hotquery\? data-type=text data="{}" status-code=200
+^https:\/\/api\.pinduoduo\.com\/api\/aristotle\/unrated_order_for_unreceived_tab\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/aristotle\/query_order_list_tabs_element\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/aquarius\/hungary\/global\/homepage\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/caterham\/v3\/query\/order_express_group\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/search_hotquery\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/zaire_biz\/chat\/resource\/get_list_data\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/caterham\/v3\/query\/new_chat_group\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/alexa\/goods\/back_up\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/caterham\/v3\/query\/personal\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/brand-olay\/goods_detail\/bybt_guide\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/engels\/reviews\/require\/append\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/caterham\/v3\/query\/my_order_group\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/caterham\/v3\/query\/likes\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/phantom\/gbdbpdv\/extra\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/manufacturer\/cross\/shortcut\/list\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/dunkirk\/liveactivity\/push\/create\/url\/report\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/growth\/nagato\/app\/index\/gather\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/engels\/wait\/receive\/review\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.pinduoduo\.com\/api\/buffon\/nasus\/recommend\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= Q ======= #
 # 蜻蜓FM
@@ -715,6 +1244,7 @@ http-response-jq ^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|
 ^https:\/\/user-api\.smzdm\.com\/vip\/bottom_card_list\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https:\/\/article-api\.smzdm\.com\/publish\/get_bubble\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https:\/\/s-api\.smzdm\.com\/sou\/search_default_keyword\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/s-api\.smzdm\.com\/sou\/popup_coupon\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 # Spotify
 ^https:\/\/spclient\.wg\.spotify\.com\/pendragon\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
@@ -780,10 +1310,11 @@ http-response-jq ^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|
 # 中国移动开屏 client.app.coc.10086.cn
 ^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(explorePage\/getAdverList|init\/startInit) data="https://raw.githubusercontent.com/Keywos/rule/main/mocks//reject-200.txt"
 # 中华万年历
-^https:\/\/client-lz\.rili\.cn\/lizhi\/api\/fortune\/question_spots\/panel\? data-type=text data="{}" status-code=200
-^https:\/\/client-lz\.rili\.cn\/lizhi\/api\/jujia\/flow\? data-type=text data="{}" status-code=200
-^https:\/\/client-lz\.rili\.cn\/lizhi\/api\/album\/hl_card\? data-type=text data="{}" status-code=200
-^https:\/\/client-lz\.rili\.cn\/lizhi\/api\/fortune\/overview\? data-type=text data="{}" status-code=200
+^https:\/\/client-lz\.rili\.cn\/lizhi\/api\/auth\/voice_room_entrance\/list\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/client-lz\.rili\.cn\/lizhi\/api\/fortune\/question_spots\/panel\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/client-lz\.rili\.cn\/lizhi\/api\/jujia\/flow\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/client-lz\.rili\.cn\/lizhi\/api\/album\/hl_card\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/client-lz\.rili\.cn\/lizhi\/api\/fortune\/overview\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 # 中国人保
 ^https:\/\/zgrb\.epicc\.com\.cn\/G-HAPP\/a\/update\/startupPage\/v1 data-type=text data="{}" status-code=200
 ^https:\/\/zgrb\.epicc\.com\.cn\/G-HAPP\/a\/config\/guessYouLike\/v3 data-type=text data="{}" status-code=200
@@ -820,6 +1351,11 @@ http-response-jq ^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|
 ^https:\/\/www\.zhihu\.com\/api\/v4/(?:answers|questions)\/\d+/related-readings data-type=text data="{}" status-code=200
 ^https:\/\/www\.zhihu\.com\/commercial_api\/banners_v3\/mobile_banner data-type=text data="{}" status-code=200
 ^https:\/\/zhuanlan\.zhihu\.com\/api\/articles\/\d+\/recommendation data-type=text data="{}" status-code=200
+
+# ======= Ohter ======= #
+^https?:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/http\/urlConfig\.do$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https?:\/\/amdc\.alipay\.com\/query data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/msglb\.91160\.com\/msg\/outer\/broker\/get$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 
 [Script]
@@ -875,7 +1411,7 @@ http-response-jq ^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|
 
 # ======= I ======= #
 # IT之家
-IT之家 = type=http-response, pattern=^https:\/\/napi\.ithome\.com\/api\/(?:news\/index|topmenu\/getfeeds\?|api\/douyin\/GetLiveInfo), script-path=https://kelee.one/Resource/JavaScript/IThome/IThome_remove_ads.js, requires-body=true, argument="[{removeTopSwitch},{removeBannerSwitch}]"
+IT之家去广告 = type=http-response, pattern=^https:\/\/napi\.ithome\.com\/api\/(news\/indexv2\/iphone\/\d+$|topmenu\/getfeeds\?), script-path=https://kelee.one/Resource/JavaScript/IThome/IThome_remove_ads.js, requires-body=true, argument="[{{{removeAllBanners}}},{{{removePinnedArticles}}}]"
 
 # ======= J ======= #
 # 京东
