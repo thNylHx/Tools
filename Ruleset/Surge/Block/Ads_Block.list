@@ -1,5 +1,5 @@
 # 规则名称: Ads_Block
-# 规则统计: 4533
+# 规则统计: 4531
 
 DOMAIN,118.89.204.198
 DOMAIN,4lke.online
@@ -327,7 +327,6 @@ DOMAIN,e.jparking.cn
 DOMAIN,e8aeb8bbdbbd7.cdn.sohucs.com
 DOMAIN,eclick.baidu.com
 DOMAIN,ef-dongfeng.tanx.com
-DOMAIN,effect.snssdk.com
 DOMAIN,ems.youku.com
 DOMAIN,encounter.bz.mgtv.com
 DOMAIN,errlog.umeng.com
@@ -431,7 +430,6 @@ DOMAIN,hudong.alicdn.com
 DOMAIN,hui.sohu.com
 DOMAIN,huichuan-mc.sm.cn
 DOMAIN,huichuan.sm.cn
-DOMAIN,i.snssdk.com
 DOMAIN,iacc.qq.com
 DOMAIN,iad.apple.com
 DOMAIN,iad.g.163.com
@@ -463,8 +461,6 @@ DOMAIN,init.supersonicads.com
 DOMAIN,ios.bugly.qq.com
 DOMAIN,ios.video.mpush.qq.com
 DOMAIN,iqiyim.adtrack.enlightent.cn
-DOMAIN,is-lq.snssdk.com
-DOMAIN,is.snssdk.com
 DOMAIN,itad.linetv.tw
 DOMAIN,ivy.pchouse.com.cn
 DOMAIN,iyes.youku.com
@@ -651,7 +647,6 @@ DOMAIN,sdkconfig.video.qq.com
 DOMAIN,sdkmonitor.biz.weibo.com
 DOMAIN,sdktmp.hubcloud.com.cn
 DOMAIN,sec.umeng.com
-DOMAIN,security.snssdk.com
 DOMAIN,serveraddr.service.kugou.com
 DOMAIN,sin3-ib.adnxs.com
 DOMAIN,sis-ipv6.jpush.cn
@@ -731,7 +726,6 @@ DOMAIN,v2.gdt.qq.com
 DOMAIN,v3.gdt.qq.com
 DOMAIN,vali-g1.cp31.ott.cibntv.net
 DOMAIN,vali-ugc.cp31.ott.cibntv.net
-DOMAIN,vas.snssdk.com
 DOMAIN,vcardsdkservice.vivo.com.cn
 DOMAIN,vcs.zijieapi.com
 DOMAIN,vdapprecv.app.cntvwb.cn
@@ -4277,6 +4271,8 @@ DOMAIN-KEYWORD,bdsp.x.jd.com
 DOMAIN-KEYWORD,bjimp.voiceads.cn
 DOMAIN-KEYWORD,client-dmp.suishenyun.cn
 DOMAIN-KEYWORD,clk.gentags.net
+DOMAIN-KEYWORD,dig.bdurl
+DOMAIN-KEYWORD,dig.zjurl
 DOMAIN-KEYWORD,dm.bytedance.com
 DOMAIN-KEYWORD,dm.pstatp.com
 DOMAIN-KEYWORD,dm.toutiao.com
@@ -4310,6 +4306,7 @@ DOMAIN-KEYWORD,rich.kuwo.cn
 DOMAIN-KEYWORD,s1.pstatp.com
 DOMAIN-KEYWORD,s2.pstatp.com
 DOMAIN-KEYWORD,s3.pstatp.com
+DOMAIN-KEYWORD,snssdk.com
 DOMAIN-KEYWORD,socdm
 DOMAIN-KEYWORD,stsdk.vivo.com.cn
 DOMAIN-KEYWORD,stsdk.vivoglobal.com
@@ -4527,6 +4524,7 @@ URL-REGEX,^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/user\/freeMode\/
 USER-AGENT,AVOS*
 AND,((DOMAIN-KEYWORD,adash),(DOMAIN-SUFFIX,ut.taobao.com))
 AND,((DOMAIN-KEYWORD,adash,extended-matching),(DOMAIN-SUFFIX,ut.taobao.com,extended-matching))
+AND,((DOMAIN-KEYWORD,zijieapi),(DOMAIN-KEYWORD,ads))
 AND,((IP-ASN,45090),(DEST-PORT,25641),(PROTOCOL,TCP))
 AND,((IP-ASN,63646),(DEST-PORT,25641),(PROTOCOL,TCP))
 AND,((URL-REGEX,^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/d,extended-matching),(USER-AGENT,*com.xunmeng.pinduoduo*))
