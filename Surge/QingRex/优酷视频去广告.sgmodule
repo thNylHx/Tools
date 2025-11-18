@@ -1,54 +1,47 @@
 #!name=优酷视频去广告
-#!desc=过滤优酷视频客户端广告，由于此插件不再维护，客户端版本高于11.0.48可能会导致此插件失效，请勿升级客户端。
-#!author=RuCu6[https://github.com/RuCu6]
+#!desc=移除开屏广告、视频广告、信息流广告。其余广告由于请求已加密，故无法移除。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md], RuCu6[https://github.com/RuCu6]
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/YouKu_Video.png
 #!category=iKeLee
 #!openUrl=https://apps.apple.com/app/id336141475
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://hub.kelee.one
-#!date=2025-05-13 15:17:08
+#!date=2025-11-14 22:56:21
 
 [Rule]
 DOMAIN,push.m.youku.com,DIRECT,extended-matching
 DOMAIN,un-acs.youku.com,DIRECT,extended-matching
 DOMAIN,dorangesource.alicdn.com,DIRECT,extended-matching
-DOMAIN,acs4baichuan.m.taobao.com,REJECT,extended-matching,pre-matching
-DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
-DOMAIN,amdc.m.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN,api.sm.cn,REJECT,extended-matching,pre-matching
-DOMAIN,apiv4-iyes.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN,baichuan-sdk.alicdn.com,REJECT,extended-matching,pre-matching
+DOMAIN,h-adashx.ut.taobao.com,REJECT,extended-matching,pre-matching
+DOMAIN,adx-core.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,adx-open-service.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,yk-ssp.ad.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN,cad.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN,huichuan-mc.sm.cn,REJECT,extended-matching,pre-matching
-DOMAIN,huichuan.sm.cn,REJECT,extended-matching,pre-matching
-DOMAIN,iyes.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN,m-vali.cp31.ott.cibntv.net,REJECT,extended-matching,pre-matching
-DOMAIN,mc.atm.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,ykad-data.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,yk-ssp.ad.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,amdc.m.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,cad.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN,nbsdk-baichuan.alicdn.com,REJECT,extended-matching,pre-matching
-DOMAIN,pre-acs.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,youku-crm-product.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,dr-danmu.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,group-ssl-danmu-ori.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,m.atm.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,mc.atm.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN,vali-g1.cp31.ott.cibntv.net,REJECT,extended-matching,pre-matching
 DOMAIN,vali-ugc.cp31.ott.cibntv.net,REJECT,extended-matching,pre-matching
-DOMAIN,yk-ssp.ad.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN,ykad-data.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,iyes.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,pre-acs.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN,youku-acs.m.taobao.com,REJECT,extended-matching,pre-matching
 
-[Map Local]
-^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.(pisp\.scripts\.get|xspace\.play\.position\.preload\.query|xspace\.poplayer\.position\.query) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-
-[Script]
-移除首页广告 = type=http-response, pattern=^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.columbus\.(gateway\.new\.execute|home\.feed|home\.query|uc\.query|ycp\.query), script-path=https://kelee.one/Resource/JavaScript/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
-
-移除无用底栏 = type=http-response, pattern=^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.haidai\.lantern\.appconfig\.get, script-path=https://kelee.one/Resource/JavaScript/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
-
-移除青少年模式弹窗 = type=http-response, pattern=^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.huluwa\.dispatcher\.youthmode\.config2, script-path=https://kelee.one/Resource/JavaScript/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
-
-移除搜索列表推广 = type=http-response, pattern=^https:\/\/acs\.youku\.com\/gw\/mtop\.youku\.soku\.yksearch, script-path=https://kelee.one/Resource/JavaScript/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
-
-移除热剧弹窗 = type=http-response, pattern=^https:\/\/push\.m\.youku\.com\/collect-api\/get_push_interval_config_wx\?, script-path=https://kelee.one/Resource/JavaScript/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
-
-移除开屏广告 = type=http-response, pattern=^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get, script-path=https://kelee.one/Resource/JavaScript/YouKu_Video/YouKu_Video_remove_ads.js, requires-body=true
+[Body Rewrite]
+http-response-jq ^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get 'delpaths([["data","data","ad"]])'
+http-response-jq ^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get 'delpaths([["data","data","watermark"]])'
+http-response-jq ^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get 'delpaths([["data","data","ykad"]])'
+http-response-jq ^https:\/\/push\.m\.youku\.com\/collect-api\/get_push_interval_config_wx\? 'delpaths([["data","tipContent"]])'
+http-response-jq ^https:\/\/push\.m\.youku\.com\/collect-api\/get_push_interval_config_wx\? 'delpaths([["data","tipContentNew"]])'
 
 [MITM]
-hostname = %APPEND% acs.youku.com, push.m.youku.com, un-acs.youku.com
+hostname = %APPEND% push.m.youku.com, un-acs.youku.com
 
