@@ -1,0 +1,9 @@
+#!name=飞猫管家去广告
+#!desc=移除开屏 by @sliverkiss
+#!icon=https://raw.githubusercontent.com/sliverkiss/QuantumultX/main/icon/fmgj.png
+
+[URL Rewrite]
+https://app.flymodem.com.cn/Appapi/Public/welecome - reject
+
+[MITM]
+hostname = %APPEND% app.flymodem.com.cn
