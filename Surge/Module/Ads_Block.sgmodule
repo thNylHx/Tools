@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4490
+#!Rule = 4488
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1472,7 +1472,6 @@ DOMAIN-SUFFIX,api.cupid.iqiyi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.cupid.qiyi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.e.kuaishou.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.fu.xcultur.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,api.game.letvstore.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.htp.hubcloud.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.hzsanjiaomao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.installer.xiaomi.com,REJECT,extended-matching,pre-matching
@@ -1511,6 +1510,7 @@ DOMAIN-SUFFIX,appget.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,appier.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,appiersig.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,appjiagu.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,apple.www.letv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,appliedq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,applifier.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,applift.com,REJECT,extended-matching,pre-matching
@@ -2560,7 +2560,6 @@ DOMAIN-SUFFIX,leak.360.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,leanplum.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,leju.sina.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,lenzmx.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,letv.allyes.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,lf3-ad-union-sdk.pglstatp-toutiao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,lf6-ad-union-sdk.pglstatp-toutiao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,lftxali.fancyapi.com,REJECT,extended-matching,pre-matching
@@ -2838,7 +2837,6 @@ DOMAIN-SUFFIX,msclick2.kuwo.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,msdk.voiceads.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,msg.71.am,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,msg.iqiyi.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,msg.m.letv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,msg.mobile.kugou.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,msg.video.qiyi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,msg.youku.com,REJECT,extended-matching,pre-matching
