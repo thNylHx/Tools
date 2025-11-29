@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4488
+#!Rule = 4490
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1723,7 +1723,6 @@ DOMAIN-SUFFIX,cdn.jiuzhilan.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn.liftoff-creatives.io,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn.moji002.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn.pocoiq.cn,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,cdn.segment.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn.ynuf.aliapp.org,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn2.moji002.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdnmaster.com,REJECT,extended-matching,pre-matching
@@ -1754,6 +1753,9 @@ DOMAIN-SUFFIX,cjmkt.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ck.ads.oppomobile.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,clarity.ms,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cleaner.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,clearbit.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,clearbitjs.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,clearbitscripts.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,click.ali213.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,click.bes.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,click.cheshi-img.com,REJECT,extended-matching,pre-matching
@@ -3375,6 +3377,7 @@ DOMAIN-SUFFIX,security.browser.miui.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,seewhy.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,segment.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,segment.io,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,segmenthub.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,segmentify.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sekindo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sensors-log.dongqiudi.com,REJECT,extended-matching,pre-matching
@@ -4059,7 +4062,6 @@ DOMAIN-SUFFIX,wxsnsad.tc.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wxsnsdy.tc.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wxsnsdy.wxs.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wxsnsdythumb.wxs.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,x.clearbitjs.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,xapads.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,xc.gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,xchmai.com,REJECT,extended-matching,pre-matching
