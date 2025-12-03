@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4514
+#!Rule = 4523
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -134,7 +134,9 @@ DOMAIN,ads.weilitoutiao.net,REJECT,extended-matching,pre-matching
 DOMAIN,ads.yahoo.com,REJECT,extended-matching,pre-matching
 DOMAIN,ads.yahoo.de,REJECT,extended-matching,pre-matching
 DOMAIN,ads.youtube.com,REJECT,extended-matching,pre-matching
+DOMAIN,ads3-normal-hl.zijieapi.com,REJECT,extended-matching,pre-matching
 DOMAIN,ads3-normal.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN,ads5-normal-hl.zijieapi.com,REJECT,extended-matching,pre-matching
 DOMAIN,ads5-normal.zijieapi.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsapi.manhuaren.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsapi.snapchat.com,REJECT,extended-matching,pre-matching
@@ -491,7 +493,9 @@ DOMAIN,log.51wnl-cq.com,REJECT,extended-matching,pre-matching
 DOMAIN,log.umsns.com,REJECT,extended-matching,pre-matching
 DOMAIN,log.umtrack.com,REJECT,extended-matching,pre-matching
 DOMAIN,log.ycapp.yiche.com,REJECT,extended-matching,pre-matching
+DOMAIN,log3-applog-hl.fqnovel.com,REJECT,extended-matching,pre-matching
 DOMAIN,log3-applog.fqnovel.com,REJECT,extended-matching,pre-matching
+DOMAIN,log5-applog-hl.fqnovel.com,REJECT,extended-matching,pre-matching
 DOMAIN,log5-applog.fqnovel.com,REJECT,extended-matching,pre-matching
 DOMAIN,logs.chelaile.net.cn,REJECT,extended-matching,pre-matching
 DOMAIN,lookup.api.bsb.baidu.com,REJECT,extended-matching,pre-matching
@@ -560,8 +564,11 @@ DOMAIN,ossgw.alicdn.com,REJECT,extended-matching,pre-matching
 DOMAIN,p.l.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,p11-webcast-sign.douyinpic.com,REJECT,extended-matching,pre-matching
 DOMAIN,p2.l.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,p3-ad-sign.byteimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,p3-developer.bytemaimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,p3-webcast-sign.douyinpic.com,REJECT,extended-matching,pre-matching
+DOMAIN,p6-ad-sign.byteimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,p9-ad-sign.byteimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,pagead2.googlesyndication.com,REJECT,extended-matching,pre-matching
 DOMAIN,pageviewp.icbc.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN,pangolin.snssdk.com,REJECT,extended-matching,pre-matching
@@ -618,7 +625,9 @@ DOMAIN,rprain.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,rprain.log.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,rpt.gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,rpt.hpplay.cn,REJECT,extended-matching,pre-matching
+DOMAIN,rtlog3-applog-hl.fqnovel.com,REJECT,extended-matching,pre-matching
 DOMAIN,rtlog3-applog.fqnovel.com,REJECT,extended-matching,pre-matching
+DOMAIN,rtlog5-applog-hl.fqnovel.com,REJECT,extended-matching,pre-matching
 DOMAIN,rtlog5-applog.fqnovel.com,REJECT,extended-matching,pre-matching
 DOMAIN,s.jpush.cn,REJECT,extended-matching,pre-matching
 DOMAIN,s.magsrv.com,REJECT,extended-matching,pre-matching
