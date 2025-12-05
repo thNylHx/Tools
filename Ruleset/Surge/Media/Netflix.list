@@ -1,5 +1,5 @@
 # 规则名称: Netflix
-# 规则统计: 103
+# 规则统计: 105
 
 DOMAIN,netflix.com.edgesuite.net
 DOMAIN-SUFFIX,fast.com
@@ -52,8 +52,10 @@ IP-CIDR6,2607:fb10::/32,no-resolve
 IP-CIDR6,2620:0:ef0::/48,no-resolve
 IP-CIDR6,2620:10c:7000::/44,no-resolve
 IP-CIDR6,2a00:86c0::/32,no-resolve
+IP-CIDR6,2a03:5640:1000::/36,no-resolve
+IP-CIDR6,2a03:5640:2000::/35,no-resolve
+IP-CIDR6,2a03:5640:4000::/34,no-resolve
 IP-CIDR6,2a03:5640:8000::/34,no-resolve
-IP-CIDR6,2a03:5640::/33,no-resolve
 IP-CIDR6,2a03:5640:c000::/35,no-resolve
 IP-CIDR6,2a03:5640:e000::/36,no-resolve
 IP-CIDR6,2a03:5640:f041::/48,no-resolve

@@ -1,5 +1,5 @@
 # 规则名称: Netflix_ip
-# 规则统计: 79
+# 规则统计: 81
 
 IP-CIDR,108.175.32.0/20,no-resolve
 IP-CIDR,185.2.220.0/22,no-resolve
@@ -28,8 +28,10 @@ IP-CIDR6,2607:fb10::/32,no-resolve
 IP-CIDR6,2620:0:ef0::/48,no-resolve
 IP-CIDR6,2620:10c:7000::/44,no-resolve
 IP-CIDR6,2a00:86c0::/32,no-resolve
+IP-CIDR6,2a03:5640:1000::/36,no-resolve
+IP-CIDR6,2a03:5640:2000::/35,no-resolve
+IP-CIDR6,2a03:5640:4000::/34,no-resolve
 IP-CIDR6,2a03:5640:8000::/34,no-resolve
-IP-CIDR6,2a03:5640::/33,no-resolve
 IP-CIDR6,2a03:5640:c000::/35,no-resolve
 IP-CIDR6,2a03:5640:e000::/36,no-resolve
 IP-CIDR6,2a03:5640:f041::/48,no-resolve

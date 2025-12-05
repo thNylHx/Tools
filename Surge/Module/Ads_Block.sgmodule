@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4523
+#!Rule = 4522
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -2144,7 +2144,6 @@ DOMAIN-SUFFIX,fpb.sohu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,fraudmetrix.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,freedrive.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,frontend-perf-service.e.kuaishou.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,fundingchoicesmessages.google.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,funnull.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,funnull01.vip,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,fxgate.baidu.com,REJECT,extended-matching,pre-matching
