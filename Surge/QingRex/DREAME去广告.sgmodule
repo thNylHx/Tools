@@ -1,0 +1,23 @@
+#!name=DREAME去广告
+#!desc=移除开屏广告、首页大图推广、横幅推广，精简底栏。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/DREAME.png
+#!category=iKeLee
+#!openUrl=https://apps.apple.com/app/id1564419343
+#!tag=去广告
+#!loon_version=3.2.4(787)
+#!homepage=https://hub.kelee.one
+#!date=2025-12-01 11:17:45
+
+[Map Local]
+^https:\/\/cn\.iot\.dreame\.tech:13267\/dreame-product\/public\/advertisement\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https:\/\/cn-mall\.dreame\.tech\/dreame-mall\/api\/v1\/tag\/list$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https:\/\/cn-wxmall\.dreame\.tech\/main\/goods\/get-topgoods$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+^https:\/\/cn\.iot\.dreame\.tech:13267\/dreame-product\/public\/common-plugin$ data-type=text data="{"code":0,"success":true,"data":{"version":881,"appVer":19,"url":"https://kelee.one/Resource/Zip/1fac49e02bbed88e594d6d7247469136_3f98a0c192ec2ba7962777a11d869c66___UNI__EDB922E.zip","md5":"a763cf226a81705b62908034c9e8cc72","validDate":"","changeLog":"","status":""},"msg":"操作成功"}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% cn-mall.dreame.tech, cn-wxmall.dreame.tech, cn.iot.dreame.tech
+
