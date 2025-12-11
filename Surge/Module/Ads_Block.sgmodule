@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4516
+#!Rule = 4518
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -2329,6 +2329,7 @@ DOMAIN-SUFFIX,hpd.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hpplay.cdn.cibn.cc,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hq-tracking.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hs-analytics.net,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,htrace.wetvinfo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,httpdns.bcelive.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,httpdns.ocloud.oppomobile.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,httpool.com,REJECT,extended-matching,pre-matching
@@ -3266,6 +3267,7 @@ DOMAIN-SUFFIX,relap.io,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,release.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,report.meituan.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,report.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,report.qqweb.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,report.tv.kohesport.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,res.gwifi.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,res.hubcloud.com.cn,REJECT,extended-matching,pre-matching
