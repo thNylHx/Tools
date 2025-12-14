@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4521
+#!Rule = 4523
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -2775,6 +2775,7 @@ DOMAIN-SUFFIX,micro-xdb.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,microad-cn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,microad.co.jp,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,microad.jp,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,microsoftads.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,migc.g.mi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,migcreport.g.mi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,miidi.net,REJECT,extended-matching,pre-matching
@@ -2911,6 +2912,7 @@ DOMAIN-SUFFIX,nc004x.corp.youdao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,nc045x.corp.youdao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ncaudienceexchange.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,neirong.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,nelreports.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,nend.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,netizen.co,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,netseer.com,REJECT,extended-matching,pre-matching
