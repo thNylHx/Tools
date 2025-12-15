@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4523
+#!Rule = 4520
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1959,7 +1959,6 @@ DOMAIN-SUFFIX,dl.2345.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,dl.client.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,dl.g.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,dl.ops.baidu.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,dl.zuimeitianqi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,dl1sw.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,dl2.bav.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,dload.qd.qingting.fm,REJECT,extended-matching,pre-matching
@@ -2078,8 +2077,6 @@ DOMAIN-SUFFIX,erdoscs.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ereg.adobe.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ero-advertising.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,eroadvertising.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,errlog.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,errnewlog.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ers.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,et-eus.w.inmobi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ethod.gzgmjcx.com,REJECT,extended-matching,pre-matching
@@ -3349,7 +3346,6 @@ DOMAIN-SUFFIX,saad.ms.zhangyue.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,saas.hpplay.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sabavision.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,safebrowsing.apple,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,safebrowsing.googleapis.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,safebrowsing.urlsec.gg.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,salmonads.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,samba.tv,REJECT,extended-matching,pre-matching
@@ -3615,6 +3611,7 @@ DOMAIN-SUFFIX,sv-video.play.aiseet.atianqi.com,REJECT,extended-matching,pre-matc
 DOMAIN-SUFFIX,switchadhub.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sycbbs.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,syh-imp.cdnjtzy.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,syh.zybang.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,synacast.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,syndication-o.twitter.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,syndication.twitter.com,REJECT,extended-matching,pre-matching
