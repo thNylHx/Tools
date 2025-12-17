@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4520
+#!Rule = 4526
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -28,7 +28,9 @@ DOMAIN,activity.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,ad-analysis.pconline.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN,ad-cdn. qingting.fm,REJECT,extended-matching,pre-matching
 DOMAIN,ad-cdn.qingting.fm,REJECT,extended-matching,pre-matching
+DOMAIN,ad-channel.diwodiwo.xyz,REJECT,extended-matching,pre-matching
 DOMAIN,ad-cn.jovcloud.com,REJECT,extended-matching,pre-matching
+DOMAIN,ad-display.diwodiwo.xyz,REJECT,extended-matching,pre-matching
 DOMAIN,ad-evods.tianya.tv,REJECT,extended-matching,pre-matching
 DOMAIN,ad-h5-cdn.soulapp.cn,REJECT,extended-matching,pre-matching
 DOMAIN,ad-h5-station-cdn.soulapp.cn,REJECT,extended-matching,pre-matching
@@ -349,7 +351,6 @@ DOMAIN,feedback-c.zijieapi.com,REJECT,extended-matching,pre-matching
 DOMAIN,flash.sec.miui.com,REJECT,extended-matching,pre-matching
 DOMAIN,floor.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,flowplus.meituan.net,REJECT,extended-matching,pre-matching
-DOMAIN,fundingchoicesmessages.google.com,REJECT,extended-matching,pre-matching
 DOMAIN,furiousfar.com,REJECT,extended-matching,pre-matching
 DOMAIN,g.koowo.com,REJECT,extended-matching,pre-matching
 DOMAIN,g.ousns.net,REJECT,extended-matching,pre-matching
@@ -1416,6 +1417,7 @@ DOMAIN-SUFFIX,allyes.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,allyes.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,alog.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,alog.umengcloud.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,alogs.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,alogus.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,als.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,als.baidu.com,REJECT,extended-matching,pre-matching
@@ -1546,6 +1548,7 @@ DOMAIN-SUFFIX,appversion.115.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,apsalar.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,apxadtracking.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,aqyad.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ar.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,aralego.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ard.yahoo.co.jp,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,aries.mzres.com,REJECT,extended-matching,pre-matching
@@ -2916,6 +2919,8 @@ DOMAIN-SUFFIX,netseer.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,netshelter.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,networkad.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,networkbench.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,new-aaid.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,new-aaid.umeng.com.gds.alibabadns.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,new.xiongzhangad.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,newapi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,newcrbpc.com,REJECT,extended-matching,pre-matching
@@ -2962,6 +2967,7 @@ DOMAIN-SUFFIX,o2o.api.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,o2omobi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,o333o.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,oadz.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,oc.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,oct.pocoiq.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,offerwall.yandex.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,officesoftcn.com,REJECT,extended-matching,pre-matching
