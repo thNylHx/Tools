@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4526
+#!Rule = 4529
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1312,6 +1312,7 @@ DOMAIN-SUFFIX,adthor.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adtongji.xyz,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adtrace.org,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adtrack.quark.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,adtracker.medproad.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adtrk.me,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adtrue.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adui.tg.meitu.com,REJECT,extended-matching,pre-matching
@@ -3223,6 +3224,7 @@ DOMAIN-SUFFIX,q.i.gdt.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,qchannel01.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,qchannel0d.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,qcl777.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,qcwx.medproad.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,qdp.qidian.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,qhupdate.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,qianchuanghr.com,REJECT,extended-matching,pre-matching
@@ -3625,6 +3627,7 @@ DOMAIN-SUFFIX,synergy-e.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sys.zhangyue.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sysdig.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,szbdyd.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,t-adx.52qumao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,t-dsp.pinduoduo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,t-e.flyme.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,t-flow.flyme.cn,REJECT,extended-matching,pre-matching
