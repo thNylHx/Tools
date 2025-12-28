@@ -8,7 +8,7 @@
 #!system_version=18
 #!loon_version=3.2.4(787)
 #!homepage=https://hub.kelee.one
-#!date=2025-12-05 23:16:02
+#!date=2025-12-20 22:21:24
 
 [Script]
 App Store API = type=http-request, pattern=^https:\/\/apple-api\.com, script-path=https://kelee.one/Resource/JavaScript/IPATool/AppStoreAPI.js, requires-body=true
