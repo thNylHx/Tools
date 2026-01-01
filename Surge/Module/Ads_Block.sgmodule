@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4529
+#!Rule = 4532
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1313,6 +1313,7 @@ DOMAIN-SUFFIX,adtongji.xyz,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adtrace.org,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adtrack.quark.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adtracker.medproad.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,adtrafficquality.google,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adtrk.me,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adtrue.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adui.tg.meitu.com,REJECT,extended-matching,pre-matching
@@ -1432,6 +1433,7 @@ DOMAIN-SUFFIX,an.facebook.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analysis.chatglm.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analysis.yozocloud.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analysys.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,analytics-alv.google.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analytics-api.samsunghealthcn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analytics-data.io,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analytics.126.net,REJECT,extended-matching,pre-matching
@@ -2116,6 +2118,7 @@ DOMAIN-SUFFIX,fc-.cdn.bcebos.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,fc-feed.cdn.bcebos.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,fclick.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,fclog.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,fcmatch.google.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,fds.api.moji.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,feed-image.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,feih.com.cn,REJECT,extended-matching,pre-matching
