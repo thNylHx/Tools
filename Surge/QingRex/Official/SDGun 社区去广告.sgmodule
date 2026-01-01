@@ -18,6 +18,8 @@ hostname = %APPEND%, mag1.sdgun.net
 
 [Body Rewrite]
 
-http-response-jq ^https?:\/\/mag1.sdgun.net\/mag\/info\/v2\/channel\/infoListByCatId '.list |= map(select(._type != "pic_ad"))'
+http-response-jq ^https?:\/\/mag1\.sdgun\.net\/mag\/info\/v2\/channel\/infoListByCatId '.list |= map(select(._type != "pic_ad"))'
 
-http-response-jq ^https?:\/\/mag1.sdgun.net\/mag\/circle\/v2\/forum\/forumViewV2 '.list |= map(select(.info_list_ad_style_type != 1))'
+http-response-jq ^https?:\/\/mag1\.sdgun\.net\/mag\/circle\/v2\/forum\/forumViewV2 '.list |= map(select(.info_list_ad_style_type != 1))'
+
+http-response-jq ^https?:\/\/mag1\.sdgun\.net\/mag\/circle\/v4\/show\/showView 'del(.ads)'
