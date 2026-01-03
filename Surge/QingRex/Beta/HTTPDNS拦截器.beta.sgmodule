@@ -6,7 +6,7 @@
 #!tag=去广告, 依赖
 #!loon_version=3.2.4(787)
 #!homepage=https://hub.kelee.one
-#!date=2025-11-23 22:49:40
+#!date=2025-12-29 17:33:55
 
 [Rule]
 DOMAIN,yyapp-httpdns.gslb.yy.com,REJECT,extended-matching,pre-matching
@@ -89,6 +89,7 @@ DOMAIN,httpdns.alicdn.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns-api.aliyuncs.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns-sc.aliyuncs.com,REJECT,extended-matching,pre-matching
 IP-CIDR,203.107.1.0/24,REJECT,no-resolve,pre-matching
+DOMAIN,ucdc.upaas.quark.cn,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.danuoyi.tbcache.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.cctv.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns-browser.platform.dbankcloud.cn,REJECT,extended-matching,pre-matching

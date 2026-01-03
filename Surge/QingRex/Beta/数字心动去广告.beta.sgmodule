@@ -7,9 +7,10 @@
 #!tag=去广告
 #!loon_version=3.2.4(787)
 #!homepage=https://hub.kelee.one
-#!date=2025-12-28 19:11:17
+#!date=2025-12-28 22:51:40
 
 [Body Rewrite]
+http-response-jq ^https:\/\/api-changzheng\.chinaath\.com\/changzheng-common-proxy-api\/api\/advertising\/proxy\/getOpenScreenAdvertising$ 'if (getpath(["data"]) | has("advertisingList")) then (setpath(["data","advertisingList"]; [])) else . end'
 http-response-jq ^https:\/\/api-changzheng\.chinaath\.com\/changzheng-race-proxy-api\/api\/home\/page\/getBrand$ '.data |= map(select(.advertisementName == "路跑赛事" or .advertisementName == "线上赛" or .advertisementName == "越野赛事"))'
 http-response-jq ^https:\/\/api-changzheng\.chinaath\.com\/changzheng-race-proxy-api\/api\/home\/page\/get$ 'delpaths([["data","topHotSearchList"]])'
 http-response-jq ^https:\/\/api-changzheng\.chinaath\.com\/changzheng-race-proxy-api\/api\/home\/page\/get$ 'delpaths([["data","bannerListTwo"]])'
@@ -17,8 +18,6 @@ http-response-jq ^https:\/\/api-changzheng\.chinaath\.com\/changzheng-race-proxy
 http-response-jq ^https:\/\/api-changzheng\.chinaath\.com\/changzheng-race-proxy-api\/api\/home\/page\/get$ '.data.recommendList |= map(select(.raceAdList | not or length == 0))'
 
 [Map Local]
-^https:\/\/api-changzheng\.chinaath\.com\/changzheng-common-proxy-api\/api\/advertising\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-
 ^https:\/\/api-changzheng\.chinaath\.com\/changzheng-basic-center-api\/api\/appConfigBanner\/listBannerRelease\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 ^https:\/\/api-changzheng\.chinaath\.com\/changzheng-content-center-api\/api\/global\/search\/hotSearch\/list$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
