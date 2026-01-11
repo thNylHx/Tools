@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4532
+#!Rule = 4538
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1574,6 +1574,7 @@ DOMAIN-SUFFIX,atm.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,atom-data.io,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,atomhike.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,atplay.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,atrace.chelaile.net.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,aty.hd.sohu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,aty.sohu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,auction.unityads.unity3d.com,REJECT,extended-matching,pre-matching
@@ -2671,6 +2672,7 @@ DOMAIN-SUFFIX,logoshejishi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,logrcv.aiclk.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,logrcv.yunxish.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,logs.amap.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,logs.chelaile.net.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,logservice.hicloud.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,logservice1.hicloud.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,logstat.t.sfht.com,REJECT,extended-matching,pre-matching
@@ -3144,6 +3146,7 @@ DOMAIN-SUFFIX,placelocal.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,plbslog.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,plista.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,plugrush.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,pmir.3g.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pms.mb.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,po.funshion.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,polarmobile.com,REJECT,extended-matching,pre-matching
@@ -3314,6 +3317,7 @@ DOMAIN-SUFFIX,rj.m.taobao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,rlcdn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,rlog.popin.cc,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,rlogs.youdao.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,rmonitor.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,rms-drcn.platform.dbankcloud.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,roi.soulapp.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,rotaban.ru,REJECT,extended-matching,pre-matching
@@ -3587,6 +3591,7 @@ DOMAIN-SUFFIX,stats-locations.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,stats.autohome.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,stats.chinaz.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,stats.developingperspective.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,stats.music.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,stats.tudou.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,stats.wp.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,statsigapi.net,REJECT,extended-matching,pre-matching
@@ -3781,6 +3786,7 @@ DOMAIN-SUFFIX,tracker.ai.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tracker.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tracker.gitee.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tracker.sns.iqiyi.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,tracker.xiaomixiaoai.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tracker.yhd.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tracking.miui.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tracking.rus.miui.com,REJECT,extended-matching,pre-matching
