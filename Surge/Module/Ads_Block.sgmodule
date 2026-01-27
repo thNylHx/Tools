@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4542
+#!Rule = 4546
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -983,6 +983,7 @@ DOMAIN-SUFFIX,ad.unimhk.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.us.sinaimg.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.v3mh.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.wang502.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ad.weibo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.weixin.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.winrar.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.wretch.cc,REJECT,extended-matching,pre-matching
@@ -1290,6 +1291,7 @@ DOMAIN-SUFFIX,adstats.tencentmusic.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adstestview.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adstore-1252524079.file.myqcloud.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adstore-index-1252524079.file.myqcloud.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,adstrategy.biz.weibo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adstream.123.sogoucdn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adstudio-assets.scdn.co,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adstudio.spotify.com,REJECT,extended-matching,pre-matching
@@ -1361,6 +1363,7 @@ DOMAIN-SUFFIX,adx-drcn.op.dbankcloud.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx-open-service.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx-os.anythinktech.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx-saas.advlion.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,adx-strategy-api-cn.statisticslinks.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx.36kr.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx.ads.heytapmobi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adx.ads.oppomobile.com,REJECT,extended-matching,pre-matching
@@ -2857,6 +2860,7 @@ DOMAIN-SUFFIX,moogos.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mookie1.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mopub.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,moquanad.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,mores.toponad.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,motowoo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mountain.zhidao.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mparticle.com,REJECT,extended-matching,pre-matching
