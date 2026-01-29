@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4546
+#!Rule = 4555
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -265,6 +265,7 @@ DOMAIN,bloodhound.spotify.com,REJECT,extended-matching,pre-matching
 DOMAIN,bootpreload.uve.weibo.com,REJECT,extended-matching,pre-matching
 DOMAIN,brahe.apptimize.com,REJECT,extended-matching,pre-matching
 DOMAIN,bravetense.com,REJECT,extended-matching,pre-matching
+DOMAIN,browser-intake-datadoghq.com,REJECT,extended-matching,pre-matching
 DOMAIN,browsercfg-drcn.cloud.dbankcloud.cn,REJECT,extended-matching,pre-matching
 DOMAIN,btrace.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,business-cdn.shouji.sogou.com,REJECT,extended-matching,pre-matching
@@ -317,6 +318,7 @@ DOMAIN,df.tanx.com,REJECT,extended-matching,pre-matching
 DOMAIN,dflow.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,dgstatic.jd.com,REJECT,extended-matching,pre-matching
 DOMAIN,dig.bdurl.net,REJECT,extended-matching,pre-matching
+DOMAIN,disney.my.sentry.io,REJECT,extended-matching,pre-matching
 DOMAIN,dispatcher.360in.com,REJECT,extended-matching,pre-matching
 DOMAIN,dnms.getui.com,REJECT,extended-matching,pre-matching
 DOMAIN,dns.jd.com,REJECT,extended-matching,pre-matching
@@ -556,6 +558,7 @@ DOMAIN,nfy.slyxmobi.com,REJECT,extended-matching,pre-matching
 DOMAIN,nsclick.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,o.clarity.ms,REJECT,extended-matching,pre-matching
 DOMAIN,o33249.ingest.sentry.io,REJECT,extended-matching,pre-matching
+DOMAIN,o4504926511693824.ingest.sentry.io,REJECT,extended-matching,pre-matching
 DOMAIN,open.e.kuaishou.com,REJECT,extended-matching,pre-matching
 DOMAIN,open.kuaishou.com,REJECT,extended-matching,pre-matching
 DOMAIN,optimus-ads.amap.com,REJECT,extended-matching,pre-matching
@@ -661,6 +664,7 @@ DOMAIN,sdkconfig.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,sdkmonitor.biz.weibo.com,REJECT,extended-matching,pre-matching
 DOMAIN,sdktmp.hubcloud.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN,sec.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,sentry.hetzner.company,REJECT,extended-matching,pre-matching
 DOMAIN,serveraddr.service.kugou.com,REJECT,extended-matching,pre-matching
 DOMAIN,sin3-ib.adnxs.com,REJECT,extended-matching,pre-matching
 DOMAIN,sis-ipv6.jpush.cn,REJECT,extended-matching,pre-matching
@@ -1793,6 +1797,7 @@ DOMAIN-SUFFIX,click.cheshi-img.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,click.cheshi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,click.chinaliftoff.io,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,click.dangdang.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,click.gamersky.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,click.ganji.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,click.googleanalytics.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,click.hd.sohu.com,REJECT,extended-matching,pre-matching
@@ -2502,6 +2507,9 @@ DOMAIN-SUFFIX,iyes.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,iyfbodn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,iyoowi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,j.br.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ja.gamersky.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ja1.gamersky.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ja2.gamersky.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,jads.co,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,janapi.jd.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,jddebug.com,REJECT,extended-matching,pre-matching
@@ -4082,6 +4090,7 @@ DOMAIN-SUFFIX,wkctj.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wl.hd.sohu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wm.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wm.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,wmbd.gamersky.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wmlog.meituan.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wn.x.jd.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wooboo.com.cn,REJECT,extended-matching,pre-matching
