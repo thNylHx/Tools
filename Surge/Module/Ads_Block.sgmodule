@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4555
+#!Rule = 4557
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -2401,6 +2401,7 @@ DOMAIN-SUFFIX,iadmatapk.nosdn.127.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,iadmatvideo.nosdn.127.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,iadmusicmat.music.126.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,iadmusicmatvideo.music.126.net,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,iads.unity3d.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,iadsdk.apple.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,iadworkbench.apple.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ic.ksosoft.com,REJECT,extended-matching,pre-matching
@@ -3207,6 +3208,7 @@ DOMAIN-SUFFIX,public.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,publicidad.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,publicidad.tv,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,publicidees.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,pubmatic.co.jp,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pubmatic.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pubmine.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pubnative.info,REJECT,extended-matching,pre-matching
