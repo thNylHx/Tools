@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4557
+#!Rule = 4560
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1570,7 +1570,6 @@ DOMAIN-SUFFIX,as.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,as.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,asimgs.pplive.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,aspect-upush.umeng.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,assets.growingio.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,assets.ps.easou.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,assp.sohu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,atanx.alicdn.com,REJECT,extended-matching,pre-matching
@@ -1943,6 +1942,7 @@ DOMAIN-SUFFIX,data.mistat.rus.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,data.mistat.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,datacollection.uve.weibo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,datax.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,datayi.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,datouniao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,dc.letv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,dc.meitustat.com,REJECT,extended-matching,pre-matching
@@ -2220,6 +2220,7 @@ DOMAIN-SUFFIX,ggx01.miguvideo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ggx03.miguvideo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gia.jd.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gimg.baidu.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,gio.ren,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,giocdn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,glispa.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,globalapi.ad.xiaomi.com,REJECT,extended-matching,pre-matching
@@ -2281,6 +2282,8 @@ DOMAIN-SUFFIX,gridsum.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gridsumdissector.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gridsumdissector.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gromore.pangolin-sdk-toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,growin.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,growingio.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,growingio.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,grs.dbankcloud.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,grs.hicloud.com,REJECT,extended-matching,pre-matching
