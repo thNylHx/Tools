@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 广告拦截
-#!date = 2026-01-19 09:41:12
+#!date = 2026-02-25 18:51:09
 
 [Rule]
 # ======= 0 ======= #
@@ -1769,8 +1769,8 @@ http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |
 # 支付宝 - 菜鸟小程序
 ^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.cainiao\.adx\.flyad\.getad data-type=text data="{}" status-code=200
 # 彩云天气
-^https:\/\/biz\.cyapi\.cn\/(p\/v1\/entries|p\/v1\/trial_card\/info|v2\/product) data-type=text data="{}" status-code=200
-^https:\/\/starplucker\.cyapi\.cn\/v3\/(config\/cypage\/\w+\/conditions|notification\/message_center|operation\/homefeatures) data-type=text data="{}" status-code=200
+^https:\/\/biz\.cyapi\.cn\/(p\/v1\/entries|p\/v1\/trial_card\/info|v2\/product) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/starplucker\.cyapi\.cn\/v3\/(config\/cypage\/\w+\/conditions|notification\/message_center|operation\/homefeatures) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= D ======= #
 # 大师兄 sdk.alibaba.com.ailbaba.me
@@ -1807,6 +1807,17 @@ http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |
 ^https:\/\/webchatapp\.fcbox\.com\/post\/suggestion\/query$ data-type=text data="{}" status-code=200
 ^https:\/\/webchatapp\.fcbox\.com\/fcboxactivityweb\/marketingEntrance\/v2\/infoWithItems$ data-type=text data="{}" status-code=200
 ^https:\/\/webchatapp\.fcbox\.com\/fcboxactivityweb\/marketingEntrance\/info$ data-type=text data="{}" status-code=200
+
+# ======= H ======= #
+# 虎扑
+^https:\/\/games\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/bplapi\/reddot\/v1\/app\/getReddot data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/bbs\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/(bbsallapi\/tag\/v1\/heatTag|bbsrankapi\/v1\/rating\/list) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/games\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/search\/v2\/(hintkeylist|hotkeylist) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/goblin\.hupu\.com\/\d\/\d\.\d\.\d+\/interfaceAd\/getOther\/v\d data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/goblin\.hupu\.com\/\d\/\d\.\d\.\d+\/interfaceAd\/getOther\/batch data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/fairy\.mobileapi\.hupu\.com\/gallery\/getmod2 data-type=text data=" " status-code=200
+^https:\/\/games\.mobileapi\.hupu\.com\/3\/8\.0\.86\/bplcommentapi\/bpl\/score_tab\/groups data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/games\.mobileapi\.hupu\.com\/3\/8\.0\.86\/bplapi\/banner\/getLocationBanners data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= J ======= #
 # 京东
@@ -2105,11 +2116,7 @@ http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |
 # 支付宝 - 菜鸟小程序
 菜鸟小程序 = type=http-response, pattern=^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.mshow, script-path=https://kelee.one/Resource/JavaScript/Cainiao/Cainiao_remove_ads.js, requires-body=true
 # 彩云天气
-彩云天气 = type=http-response, pattern=^https:\/\/(wrapper\.cyapi\.cn|api\.caiyunapp\.com|cdn-w\.caiyunapp\.com)\/v1\/activity\?, script-path=https://kelee.one/Resource/JavaScript/ColorfulClouds/ColorfulClouds_remove_ads.js, requires-body=true
-彩云天气 = type=http-response, pattern=^https:\/\/api\.caiyunapp\.com\/v1\/activity\?, script-path=https://raw.ananaskop.com/Scripts/Caiyun.js, requires-body=true
-彩云天气 = type=http-response, pattern=^https:\/\/biz\.cyapi\.cn\/(api\/v1\/user_detail|p\/v1\/vip_info|v2\/user), script-path=https://raw.ananaskop.com/Scripts/Caiyun.js, requires-body=true
-彩云天气 = type=http-response, pattern=^https:\/\/wrapper\.cyapi\.cn\/v1\/activity\?, script-path=https://raw.ananaskop.com/Scripts/Caiyun.js, requires-body=true
-彩云天气 = type=http-request, pattern=^https:\/\/wrapper\.cyapi\.cn\/v1\/(nafp\/origin_images|satellite)\?, script-path=https://raw.ananaskop.com/Scripts/Caiyun.js, timeout=60
+彩云天气去广告 = type=http-response, pattern=^https:\/\/(wrapper\.cyapi\.cn|api\.caiyunapp\.com|cdn-w\.caiyunapp\.com)\/v1\/activity\?, script-path=https://kelee.one/Resource/JavaScript/ColorfulClouds/ColorfulClouds_remove_ads.js, requires-body=true
 
 # ======= F ======= #
 # 丰巢
@@ -2117,10 +2124,10 @@ http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |
 
 # ======= H ======= #
 # 虎扑 //*.hupu.com
-虎扑 = type=http-response, pattern=^https:\/\/fairy\.mobileapi\.hupu\.com\/mang\/preview\/banners, script-path=https://raw.ananaskop.com/Scripts/Hupu.js, requires-body=true
-虎扑 = type=http-response, pattern=^https:\/\/bbs\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/bbsallapi\/lego\/data, script-path=https://raw.ananaskop.com/Scripts/Hupu.js, requires-body=true
-虎扑 = type=http-response, pattern=^https:\/\/games\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/buffer\/hotList, script-path=https://raw.ananaskop.com/Scripts/Hupu.js, requires-body=true
-虎扑 = type=http-response, pattern=^https:\/\/games\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/bplapi\/user\/v1\/more, script-path=https://raw.ananaskop.com/Scripts/Hupu.js, requires-body=true
+虎扑 = type=http-response, pattern=^https:\/\/fairy\.mobileapi\.hupu\.com\/mang\/preview\/banners, script-path=https://kelee.one/Resource/JavaScript/HUPU/HUPU_remove_ads.js, requires-body=true
+虎扑 = type=http-response, pattern=^https:\/\/bbs\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/bbsallapi\/lego\/data, script-path=https://kelee.one/Resource/JavaScript/HUPU/HUPU_remove_ads.js, requires-body=true
+虎扑 = type=http-response, pattern=^https:\/\/games\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/buffer\/hotList, script-path=https://kelee.one/Resource/JavaScript/HUPU/HUPU_remove_ads.js, requires-body=true
+虎扑 = type=http-response, pattern=^https:\/\/games\.mobileapi\.hupu\.com\/\d\/\d\.\d\.\d+\/bplapi\/user\/v1\/more, script-path=https://kelee.one/Resource/JavaScript/HUPU/HUPU_remove_ads.js, requires-body=true
 
 # ======= M ======= #
 # 美颜相机
