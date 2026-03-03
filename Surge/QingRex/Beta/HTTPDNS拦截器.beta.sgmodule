@@ -6,9 +6,17 @@
 #!tag=去广告, 依赖
 #!loon_version=3.2.4(787)
 #!homepage=https://hub.kelee.one
-#!date=2025-12-29 17:33:55
+#!date=2026-03-01 23:16:49
 
 [Rule]
+DOMAIN-KEYWORD,httpdns,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,httpsdns,REJECT,extended-matching,pre-matching
+USER-AGENT,"httpdns*",REJECT
+USER-AGENT,"httpsdns*",REJECT
+USER-AGENT,"Httpdns*",REJECT
+USER-AGENT,"Httpsdns*",REJECT
+URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\/v?[0-9]+)?\/(?:sign_)?(?:(?:d|ss)[46]?|resolve)\?",REJECT,extended-matching
+URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\](?:\/v?[0-9]+)?\/(?:sign_)?(?:(?:d|ss)[46]?|resolve)\?",REJECT,extended-matching
 DOMAIN,yyapp-httpdns.gslb.yy.com,REJECT,extended-matching,pre-matching
 DOMAIN,union-httpdns.gslb.yy.com,REJECT,extended-matching,pre-matching
 DOMAIN,yuyin-httpdns.gslb.yy.com,REJECT,extended-matching,pre-matching
@@ -64,31 +72,14 @@ IP-CIDR6,2402:4e00:1900:1700:0:9554:1ad9:c3a/128,REJECT,no-resolve,pre-matching
 IP-CIDR6,2408:8711:10:10::20/128,REJECT,no-resolve,pre-matching
 IP-CIDR6,2409:8702:4860:10::4d/128,REJECT,no-resolve,pre-matching
 DOMAIN,httpdns.kg.qq.com,REJECT,extended-matching,pre-matching
-URL-REGEX,"^http:\/\/182\.256\.116\.116\/d",REJECT,extended-matching
 DOMAIN,httpdns.bilivideo.com,REJECT,extended-matching,pre-matching
-URL-REGEX,"^http:\/\/47\.101\.175\.206\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/47\.100\.123\.169\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/120\.46\.169\.234\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/121\.36\.72\.124\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/116\.63\.10\.135\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/117\.185\.228\.108\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/117\.144\.238\.29\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/122\.9\.7\.134\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/101\.91\.140\.124\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/101\.91\.140\.224\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/122\.9\.13\.79\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/122\.9\.15\.129\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/112\.65\.200\.117\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/112\.64\.218\.119\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/114\.116\.215\.110\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/116\.63\.10\.31\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/203\.119\.206\.8\/\d+\/resolve\?",REJECT,extended-matching
 DOMAIN,httpdns.browser.miui.com,REJECT,extended-matching,pre-matching
 DOMAIN,resolver.msg.xiaomi.net,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.alicdn.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns-api.aliyuncs.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns-sc.aliyuncs.com,REJECT,extended-matching,pre-matching
 IP-CIDR,203.107.1.0/24,REJECT,no-resolve,pre-matching
+DOMAIN,amdc.alipay.com,REJECT,extended-matching,pre-matching
 DOMAIN,ucdc.upaas.quark.cn,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.danuoyi.tbcache.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.cctv.com,REJECT,extended-matching,pre-matching
@@ -107,10 +98,8 @@ DOMAIN,dns.iqiyi.com,REJECT,extended-matching,pre-matching
 DOMAIN,doh.iqiyi.com,REJECT,extended-matching,pre-matching
 DOMAIN,dns.qiyipic.iqiyi.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.n.shifen.com,REJECT,extended-matching,pre-matching
-URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/",REJECT,extended-matching
-URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/resolve",REJECT,extended-matching
-URL-REGEX,"^http:\/\/180\.76\.76\.220\/v\d\/resolve",REJECT,extended-matching
 IP-CIDR,186.76.76.200/32,REJECT,no-resolve,pre-matching
+IP-CIDR,180.76.76.200/32,REJECT,no-resolve,pre-matching
 DOMAIN,httpdns.ocloud.heytapmobi.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.push.heytapmobi.com,REJECT,extended-matching,pre-matching
 DOMAIN,dns.jd.com,REJECT,extended-matching,pre-matching
@@ -119,11 +108,8 @@ IP-CIDR6,2402:db40:5100:1011::5/128,REJECT,no-resolve,pre-matching
 IP-CIDR,103.224.222.208/32,REJECT,no-resolve,pre-matching
 IP-CIDR,119.29.29.98/32,REJECT,no-resolve,pre-matching
 IP-CIDR,119.29.29.99/32,REJECT,no-resolve,pre-matching
-URL-REGEX,"^http:\/\/182\.254\.116\.116\/d",REJECT,extended-matching
-URL-REGEX,"^http:\/\/119\.29\.29\.98\/d\?",REJECT,extended-matching
 DOMAIN,dotserver.douyucdn.cn,REJECT,extended-matching,pre-matching
 DOMAIN,hdns.ksyun.com,REJECT,extended-matching,pre-matching
-URL-REGEX,"^http:\/\/162\.14\.3\.250\/v4",REJECT,extended-matching
 DOMAIN,httpdns.push.oppomobile.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.ocloud.oppomobile.com,REJECT,extended-matching,pre-matching
 DOMAIN,kuaishou.httpdns.pro,REJECT,extended-matching,pre-matching
@@ -134,15 +120,6 @@ DOMAIN,httpdns.meituan.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdnsmultiapi.meituan.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdnsmultiapivip.meituan.com,REJECT,extended-matching,pre-matching
 URL-REGEX,"^http:\/\/103\.37\.155\.60\/fetch",REJECT,extended-matching
-URL-REGEX,"^http:\/\/81\.69\.130\.131\/d",REJECT,extended-matching
-URL-REGEX,"^http:\/\/101\.35\.204\.35\/d",REJECT,extended-matching
-URL-REGEX,"^http:\/\/101\.35\.212\.35\/d",REJECT,extended-matching
-URL-REGEX,"^http:\/\/114\.110\.96\.6\/d",REJECT,extended-matching
-URL-REGEX,"^http:\/\/114\.110\.96\.26\/d",REJECT,extended-matching
-URL-REGEX,"^http:\/\/114\.110\.97\.30\/d",REJECT,extended-matching
-URL-REGEX,"^http:\/\/114\.110\.97\.97\/d",REJECT,extended-matching
-URL-REGEX,"^http:\/\/121\.5\.84\.85\/d",REJECT,extended-matching
-URL-REGEX,"^http:\/\/\[2402:4e00:1411:201:0:9964:ba21:5a41\]\/d",REJECT,extended-matching
 DOMAIN,httpdns.music.163.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.n.netease.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns-sdk.n.netease.com,REJECT,extended-matching,pre-matching
@@ -159,42 +136,31 @@ DOMAIN,httpdns.calorietech.com,REJECT,extended-matching,pre-matching
 DOMAIN,dns.weibo.cn,REJECT,extended-matching,pre-matching
 IP-CIDR,39.97.130.51/32,REJECT,no-resolve,pre-matching
 IP-CIDR,39.97.128.148/32,REJECT,no-resolve,pre-matching
-URL-REGEX,"^http:\/\/api\.weibo\.cn\/2\/httpdns\/config",REJECT,extended-matching
+URL-REGEX,"^http:\/\/api\.weibo\.cn\/\d+\/httpdns\/config",REJECT,extended-matching
 URL-REGEX,"^http:\/\/api\.weibo\.cn\/httpdns\/config",REJECT,extended-matching
 URL-REGEX,"^http:\/\/103\.41\.167\.237\/v2\/resolv",REJECT,extended-matching
 IP-CIDR,118.89.204.198/23,REJECT,no-resolve,pre-matching
 IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,REJECT,no-resolve,pre-matching
 DOMAIN,hd.xiaojukeji.com,REJECT,extended-matching,pre-matching
 DOMAIN,httpdns.zybang.com,REJECT,extended-matching,pre-matching
-URL-REGEX,"^http:\/\/203\.107\.1\.33\/191607\/resolve\?",REJECT,extended-matching
-URL-REGEX,"^http:\/\/119\.29\.29\.29\/d",REJECT,extended-matching
 DOMAIN,serveraddr.service.kugou.com,REJECT,extended-matching,pre-matching
 DOMAIN,twns.p2ptun.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,tp2p.kg.qq.com,REJECT,extended-matching,pre-matching
 IP-CIDR,81.71.61.216/32,REJECT,no-resolve,pre-matching
-URL-REGEX,"^http:\/\/54\.222\.159\.138:8053\/httpdns\/",REJECT,extended-matching
-URL-REGEX,"^http:\/\/101\.42\.130\.147:8053\/httpdns\/",REJECT,extended-matching
-URL-REGEX,"^http:\/\/106\.55\.220\.18:8053\/httpdns\/",REJECT,extended-matching
-URL-REGEX,"^http:\/\/139\.196\.12\.179:8053\/httpdns\/",REJECT,extended-matching
+URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?):\d+\/httpdns\/",REJECT,extended-matching
+URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]:\d+\/httpdns\/",REJECT,extended-matching
 
 [URL Rewrite]
-^https?:\/\/203\.107\.1\.1/\d+/ss - reject
-^https?:\/\/203\.107\.1\.33/\d+/ss - reject
-^https?:\/\/203\.107\.1\.66/\d+/ss - reject
-^https?:\/\/203\.107\.1\.67/\d+/ss - reject
-^https?:\/\/203\.107\.1\.97/\d+/ss - reject
-^https?:\/\/2401:b180:2000:30::1c\/\d+\/d - reject
-^https?:\/\/2401:b180:2000:20::10\/\d+\/d - reject
 ^https?:\/\/cdn\.wup\.huya\.com\/monitor\/monitor\.jsp - reject
 ^https:\/\/gslbali\.ximalaya\.com\/linkeye-cloud\/httpdns\/ - reject
 
 [Map Local]
 ^https?:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/http\/urlConfig\.do$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-^https?:\/\/amdc\.alipay\.com\/query data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-
 ^https:\/\/msglb\.91160\.com\/msg\/outer\/broker\/get$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
+^https:\/\/ucdc\d?-upaas\.uc\.cn\/api\/v\d\/dns_query\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
 [MITM]
-hostname = %APPEND% 203.107.1.1, 203.107.1.33, 203.107.1.66, 203.107.1.67, 203.107.1.97, 2401:b180:2000:30::1c, 2401:b180:2000:20::10, amdc.alipay.com, appconf.mail.163.com, msglb.91160.com
+hostname = %APPEND% appconf.mail.163.com, msglb.91160.com, ucdc2-upaas.uc.cn
 
