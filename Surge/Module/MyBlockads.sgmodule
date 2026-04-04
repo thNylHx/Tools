@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 广告拦截
-#!date = 2026-04-04 10:54:29
+#!date = 2026-04-04 11:00:36
 
 [Rule]
 # ======= 0 ======= #
@@ -290,7 +290,7 @@ DOMAIN,sdk.ad.sfys365.com,REJECT,extended-matching,pre-matching
 ^https:\/\/conf\.diditaxi\.com\.cn\/dynamic\/conf data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https:\/\/poi\.map\.xiaojukeji\.com\/mapapi\/recommend\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 # 大师兄 
-^https?:\/\/sdk\.alibaba\.com\.ailbaba\.me\/(dsx|xgapp)\.php\/v\d\/(top_notice\?|app_config|search_hot|version|advert\?position=[^2]+) data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/reject-dict.json"
+^https?:\/\/sdk\.alibaba\.com\.ailbaba\.me\/(dsx|xgapp)\.php\/v\d\/(top_notice\?|app_config|search_hot|version|advert\?position=[^2]+) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= E ======= #
 
@@ -378,7 +378,7 @@ DOMAIN,sdk.ad.sfys365.com,REJECT,extended-matching,pre-matching
 ^https:\/\/mp\.weixin\.qq\.com\/mp\/(cps_product_info|getappmsgad|jsmonitor|masonryfeed|relatedarticle)\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https:\/\/mp\.weixin\.qq\.com\/mp\/relatedsearchword data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 # 微信公众号底部
-^https?:\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad data="https://raw.githubusercontent.com/Keywos/rule/main/mocks//WeChat.json"
+^https?:\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= X ======= #
 # 闲鱼
@@ -394,7 +394,7 @@ DOMAIN,sdk.ad.sfys365.com,REJECT,extended-matching,pre-matching
 ^https:\/\/marketing-aibox\.v\.mitvos\.com\/payGuide\/halfScreenMulti\/(home|cache)\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https:\/\/marketing-aibox\.v\.mitvos\.com\/payGuide\/tabPage\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 # 小米米家
-^https?:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/(banner|carousel\/banners|myTab|openingBanner) data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/reject-dict.json"
+^https?:\/\/home\.mi\.com\/cgi-op\/api\/v1\/recommendation\/(banner|carousel\/banners|myTab|openingBanner) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= Y ======= #
 
@@ -406,7 +406,7 @@ DOMAIN,sdk.ad.sfys365.com,REJECT,extended-matching,pre-matching
 ^https:\/\/client-lz\.rili\.cn\/lizhi\/api\/album\/hl_card\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https:\/\/client-lz\.rili\.cn\/lizhi\/api\/fortune\/overview\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 # 中国移动开屏
-^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(explorePage\/getAdverList|init\/startInit) data="https://raw.githubusercontent.com/Keywos/rule/main/mocks//reject-200.txt"
+^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(explorePage\/getAdverList|init\/startInit) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 
 [Body Rewrite]
