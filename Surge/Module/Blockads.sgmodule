@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 广告拦截
-#!date = 2026-04-06 09:55:01
+#!date = 2026-04-06 09:55:43
 
 [Rule]
 # ======= 0 ======= #
@@ -12,7 +12,7 @@ DOMAIN,ad.12306.cn,DIRECT
 
 # ======= A ======= #
 # 阿里云盘
-IP-CIDR,203.107.1.1/24,REJECT,no-resolve,pre-matching
+IP-CIDR,203.107.1.1/24,REJECT,no-resolve
 # 爱企查
 URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/",REJECT
 
@@ -106,7 +106,7 @@ IP-CIDR6,2402:db40:5100:1011::5/128,REJECT,no-resolve
 
 # ======= K ======= #
 # 酷我音乐
-IP-CIDR,111.206.98.63/32,REJECT,no-resolve,pre-matching
+IP-CIDR,111.206.98.63/32,REJECT,no-resolve
 URL-REGEX,"^http:\/\/rich\.kuwo\.cn\/AdService\/",REJECT-TINYGIF
 URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/user\/freeMode\/",REJECT-TINYGIF
 URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/pasterAdvert\/",REJECT-TINYGIF
