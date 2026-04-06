@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 广告拦截
-#!date = 2025-11-15 09:48:32
+#!date = 2026-04-06 09:51:51
 
 [Rule]
 # 爱奇艺
@@ -14,7 +14,7 @@ DOMAIN-SUFFIX,cupid.iqiyi.com,DIRECT,extended-matching,pre-matching
 DOMAIN,api.iqiyi.com,REJECT,extended-matching,pre-matching
 DOMAIN,access.if.iqiyi.com,REJECT,extended-matching,pre-matching
 
-# 芒果
+# 芒果TV
 DOMAIN,credits.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,credits2.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,credits3.bz.mgtv.com,REJECT,extended-matching,pre-matching
@@ -28,49 +28,8 @@ DOMAIN,rprain.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,rprain.log.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,vip.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,da.mgtv.com,REJECT,extended-matching,pre-matching
-URL-REGEX,"^http:\/\/[\d\.]+:\d{5}\/\?cmd=indexes",REJECT,extended-matching
-URL-REGEX,"^http:\/\/[\d\.]+\/odin\/c1\/(channel\/ads|skin\/config)\?",REJECT-TINYGIF,extended-matching
-URL-REGEX,"^http:\/\/mobile-thor\.api\.mgtv\.com\/v1\/vod\/cms\/list\?",REJECT-TINYGIF,extended-matching
-URL-REGEX,"^http:\/\/mobileso\.bz\.mgtv\.com\/spotlight\/search\/v1\?",REJECT-TINYGIF,extended-matching
 
 # 腾讯视频
-DOMAIN,ugchsy.gtimg.com,REJECT,extended-matching,pre-matching
-DOMAIN,btrace.video.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,api.poll.video.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,activity.video.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,p.l.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,rpt.gdt.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,trace.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,tetrack.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,tpns.tencent.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,stat.tpns.tencent.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,static-res.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,omgmta.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,omgmta1.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,tux.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,iacc.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,p2.l.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,v3.gdt.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,xs.gdt.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,aegis.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,rdelivery.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,wallpaper-1258344696.file.myqcloud.com,REJECT,extended-matching,pre-matching
-DOMAIN,wallpaper-test-1258344696.file.myqcloud.com,REJECT,extended-matching,pre-matching
-DOMAIN,c2.gdt.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,huatuocode.huatuo.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,pro.bugly.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,pgdt.gtimg.cn,REJECT,extended-matching,pre-matching
-DOMAIN,qzs.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,rmonitor.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,sdkconfig.video.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,t.gdt.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,v.gdt.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,v2.gdt.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,win.gdt.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,wup.imtt.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,tpstelemetry.tencent.com,REJECT,extended-matching,pre-matching
-DOMAIN,ii.gdt.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,wxs.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,info4.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
@@ -84,12 +43,9 @@ DOMAIN-SUFFIX,l.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,trace.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,trace.video.qq.com,REJECT,extended-matching,pre-matching
 IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
-IP-CIDR,183.201.213.194/24,REJECT,no-resolve,pre-matching
-IP-CIDR,119.29.29.98/32,REJECT,no-resolve,pre-matching
-IP-CIDR,119.29.29.99/32,REJECT,no-resolve,pre-matching
-URL-REGEX,"^http:\/\/[\d\.:]*\/?(defaultts\.tc|vmind\.qqvideo\.tc|finderpdd\.video)\.qq\.com\/\w+",REJECT,extended-matching
-URL-REGEX,"^http:\/\/apd-vlive\.apdcdn\.tc\.qq\.com\/vmind\.qqvideo\.tc\.qq\.com\/\w+",REJECT,extended-matching
-URL-REGEX,"^http:\/\/apd-\w+\.v\.smtcdns\.com\/(defaultts|omts|vmind\.qqvideo)\.tc\.qq\.com\/\w+",REJECT,extended-matching
+URL-REGEX,"^http:\/\/[\d\.:]*\/?(defaultts\.tc|vmind\.qqvideo\.tc|finderpdd\.video)\.qq\.com\/\w+",REJECT,extended-matching,pre-matching
+URL-REGEX,"^http:\/\/apd-vlive\.apdcdn\.tc\.qq\.com\/vmind\.qqvideo\.tc\.qq\.com\/\w+",REJECT,extended-matching,pre-matching
+URL-REGEX,"^http:\/\/apd-\w+\.v\.smtcdns\.com\/(defaultts|omts|vmind\.qqvideo)\.tc\.qq\.com\/\w+",REJECT,extended-matching,pre-matching
 
 # 优酷视频
 DOMAIN,push.m.youku.com,DIRECT,extended-matching,pre-matching
@@ -125,10 +81,14 @@ DOMAIN,youku-acs.m.taobao.com,REJECT,extended-matching,pre-matching
 # 萤石云视频
 ^https:\/\/api\.ys7\.com\/api\/ads - reject
 
-
 [Body Rewrite]
 # 555电影
 http-response-jq ^https:\/\/(app-v1\.ecoliving168\.com|852b95d36\.xwlpk\.cn)\/api\/v1\/movie\/index_recommend\? '.data[].list |= map(select(.type != 3)) | .data |= map(select(.layout != "advert_self"))'
+
+# CC直播
+http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/mgamenavigation\/navigation_list\? '.data.info_list |= map(select(.name == "关注" or .name == "推荐" or .name == "视频" or .name == "全部"))'
+http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/mgamerecpage\/recommend_page\? '.data.plugins|=map(select(.module_type!="banner"))|.data.plugins|=map(select(.module_type!="show_list"))|.data.plugins|=map(select(.title!="推荐品类"))'
+http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/entpage\/live_navbar_mobile\/ios\? '.data.top_nav |= map(select(.cn_name == "推荐" or .cn_name == "星秀" or .cn_name == "心动交友"))'
 
 # 爱奇艺
 http-response-jq ^https:\/\/cards\.iqiyi\.com\/views_home\/3\.0\/qy_home\? 'delpaths([["base","statistics"]])'
@@ -153,10 +113,30 @@ http-response-jq ^https?:\/\/(kjp|t7z)\.cupid\.iqiyi\.com\/mixer\? 'delpaths([["
 http-response-jq ^https?:\/\/search\.video\.iqiyi\.com\/q\? 'delpaths([["data"]])'
 http-response-jq ^https?:\/\/iface2\.iqiyi\.com\/aggregate\/3\.0\/getMyMenus\? '.data |= map(select(.statistic.block != "wd_liebiao_2") | select(all(.menuList[]?.statistic2.block; . != "wd_liebiao_3")))'
 
-# CC直播
-http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/mgamenavigation\/navigation_list\? '.data.info_list |= map(select(.name == "关注" or .name == "推荐" or .name == "视频" or .name == "全部"))'
-http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/mgamerecpage\/recommend_page\? '.data.plugins|=map(select(.module_type!="banner"))|.data.plugins|=map(select(.module_type!="show_list"))|.data.plugins|=map(select(.title!="推荐品类"))'
-http-response-jq ^https:\/\/api\.cc\.163\.com\/v\d\/entpage\/live_navbar_mobile\/ios\? '.data.top_nav |= map(select(.cn_name == "推荐" or .cn_name == "星秀" or .cn_name == "心动交友"))'
+# 芒果TV
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("dc_adConfig")) then (setpath(["data","dc_adConfig"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("XmsellSwitch")) then (setpath(["data","XmsellSwitch"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("screenshot_share_switch")) then (setpath(["data","screenshot_share_switch"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("playerUseHttpDNS")) then (setpath(["data","playerUseHttpDNS"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("damang_tab")) then (setpath(["data","damang_tab"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("relative_ads")) then (setpath(["data","relative_ads"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("second_floor_guide_switch")) then (setpath(["data","second_floor_guide_switch"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("progress_bar_ad_switch")) then (setpath(["data","progress_bar_ad_switch"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("XmVideoB")) then (setpath(["data","XmVideoB"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("damang_duanju_tab")) then (setpath(["data","damang_duanju_tab"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("playview_box_ad_switch")) then (setpath(["data","playview_box_ad_switch"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("topBarSwitch")) then (setpath(["data","topBarSwitch"]; 0)) else . end'
+http-response-jq ^https?:\/\/mobile\.api\.(mgtv|hunantv)\.com\/mobile\/config\? 'if (getpath(["data"]) | has("VIPSDKB2")) then (setpath(["data","VIPSDKB2"]; 0)) else . end'
+http-response-jq ^https:\/\/me\.bz\.mgtv\.com\/v3\/module\/list\? '.data.list |= map(select(.id | IN(1, 2, 4, 7))) | .data.list |= map(if .moduleType == 2 then .data |= map(select(.moduleType == 11)) elif .moduleType == 4 then .data |= map(select(.moduleType == 14 or .moduleType == 23)) elif .moduleType == 7 then .data |= map(select(.moduleType == 16 and .title != "音乐广场")) else . end)'
+http-response-jq ^https:\/\/me\.bz\.mgtv\.com\/v4\/module\/list\? '.data.list |= (map(select(.id != 3 and .id != 7))|map(if .id==2 then .data|=map(select(.id!=65))elif .id==4 then .data|=map(select(.title!="追更banner" and .id!=57))elif .id==5 then .data|=(map(select(.id==9 or .id==13))|map(if .id==9 then .list|=map(select(.id==20 or .id==60 or .id==18)) else . end))elif .id==6 then .data|=map(select(.id==15)) else . end))'
+http-response-jq ^https?:\/\/dc\d?\.bz\.mgtv\.com\/dynamic\/v\d\/channel\/index\/\w 'delpaths([["adInfo"]])'
+http-response-jq ^https?:\/\/dc\d?\.bz\.mgtv\.com\/dynamic\/v\d\/channel\/index\/\w '.data |= map(select(.moduleEntityId != "10579" and .moduleEntityId != "9686")) | .moduleIDS |= map(select(.moduleEntityId != "10579" and .moduleEntityId != "9686"))'
+http-response-jq ^https:\/\/mobile-thor\.api\.mgtv\.com\/v\d+\/vod\/info\? 'delpaths([["data","config","ad"]])'
+http-response-jq ^https:\/\/mobile-thor\.api\.mgtv\.com\/v\d+\/vod\/info\? 'delpaths([["data","config","vipNav"]])'
+http-response-jq ^https:\/\/mobile-thor\.api\.mgtv\.com\/v\d+\/vod\/info\? 'delpaths([["data","template","skinList"]])'
+http-response-jq ^https:\/\/mobile-thor\.api\.mgtv\.com\/v\d+\/vod\/info\? 'delpaths([["data","template","theme"]])'
+http-response-jq ^https:\/\/mobile-thor\.api\.mgtv\.com\/v\d+\/vod\/info\? '.data.tabs |= map(select(.name == "视频" or .name == "讨论")) | .data.template.modules |= map(if .clipInfo.ext?.ipPublishEntrance then .clipInfo |= del(.ext) else . end) | .data.template.modules |= map(select(.dataType == 101 or .dataType == 201)) | .data.template.modules |= map(.media.list |= (if type == "array" then map(select(.type != 0)) else . end))'
+http-response-jq ^https:\/\/comment\.mgtv\.com\/v\d\/comment\/getCommentList\? '.data.list |= map(select(.type == 0))'
 
 # 优酷视频
 http-response-jq ^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appinfo\.get 'delpaths([["data","data","ad"]])'
@@ -165,7 +145,13 @@ http-response-jq ^https:\/\/un-acs\.youku\.com\/gw\/mtop\.youku\.play\.ups\.appi
 http-response-jq ^https:\/\/push\.m\.youku\.com\/collect-api\/get_push_interval_config_wx\? 'delpaths([["data","tipContent"]])'
 http-response-jq ^https:\/\/push\.m\.youku\.com\/collect-api\/get_push_interval_config_wx\? 'delpaths([["data","tipContentNew"]])'
 
+
 [Map Local]
+# CC直播
+^http:\/\/mshare\.cc\.163\.com\/mshare\/startadv_mobile_v\d\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/appapi\.cc\.163\.com\/v\d\/mixfloatingwindow\/floating_windows\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^http:\/\/api\.cc\.163\.com\/v1\/mpopuprecommend\/exit_room_conf$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
 # 爱奇艺
 ^https?:\/\/iface2\.iqiyi\.com\/control\/3\.0\/init_proxy\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https?:\/\/act\.vip\.iqiyi\.com\/interact\/api\/v2\/show\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
@@ -173,39 +159,30 @@ http-response-jq ^https:\/\/push\.m\.youku\.com\/collect-api\/get_push_interval_
 ^https?:\/\/iface2\.iqiyi\.com\/video\/3\.0\/v_interface_proxy\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https?:\/\/iface2\.iqiyi\.com\/views_pop\/3\.0\/pop_control\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
-# CC直播
-^http:\/\/mshare\.cc\.163\.com\/mshare\/startadv_mobile_v\d\? data-type=text data="{}" status-code=200
-^https:\/\/appapi\.cc\.163\.com\/v\d\/mixfloatingwindow\/floating_windows\? data-type=text data="{}" status-code=200
-^http:\/\/api\.cc\.163\.com\/v1\/mpopuprecommend\/exit_room_conf$ data-type=text data="{}" status-code=200
-
-# 芒果
-^https:\/\/damang\.api\.mgtv\.com\/station\/album\/red\/dot\? data-type=text data="{}" status-code=200
-^https:\/\/hb-boom\.api\.mgtv\.com\/release\/pullReleaseInfo data-type=text data="{}" status-code=200
-^https:\/\/mobile\.api\.mgtv\.com\/v2\/mobile\/checkUpdate\? data-type=text data="{}" status-code=200
+# 芒果TV
+^https:\/\/dc\.bz\.mgtv\.com\/dynamic\/v\d\/skin\/config\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/dc\.bz\.mgtv\.com\/dynamic\/v\d\/channel\/ads\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^http:\/\/mobileso\.bz\.mgtv\.com\/spotlight\/search\/v\d\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/damang\.api\.mgtv\.com\/station\/album\/red\/dot\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/hb-boom\.api\.mgtv\.com\/release\/pullReleaseInfo$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/mobile\.api\.mgtv\.com\/v\d\/mobile\/checkUpdate\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https?:\/\/mobileso\.bz\.mgtv\.com\/mobile\/recommend\/v\d\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # 腾讯视频
-^https?:\/\/vv\.video\.qq\.com\/(diff|get)vmind data-type=text data="{}" status-code=200
+^https?:\/\/vv\.video\.qq\.com\/(diff|get)vmind data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # 萤石云视频
-^https:\/\/i\.ys7\.com\/api\/user\/tabList data-type=text data="{}" status-code=200
-^https:\/\/api\.ys7\.com\/v3\/config\/service\/entrance\/bannerInfo data-type=text data="{}" status-code=200
-^https:\/\/api\.ys7\.com\/v3\/intelligent-app\/apps\/linkage data-type=text data="{}" status-code=200
-^https:\/\/api\.ys7\.com\/v3\/configurations\/gray\/info\?grayTypes=185 data-type=text data="{}" status-code=200
-^https:\/\/api\.ys7\.com\/v3\/videoclips\/square\/video\/query data-type=text data="{}" status-code=200
+^https:\/\/i\.ys7\.com\/api\/user\/tabList data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.ys7\.com\/v3\/config\/service\/entrance\/bannerInfo data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.ys7\.com\/v3\/intelligent-app\/apps\/linkage data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.ys7\.com\/v3\/configurations\/gray\/info\?grayTypes=185 data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.ys7\.com\/v3\/videoclips\/square\/video\/query data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 
 [Script]
-# 芒果
-芒果 = type=http-response, pattern=^https:\/\/me\.bz\.mgtv\.com\/v3\/module\/list\?, script-path=https://kelee.one/Resource/JavaScript/MangoTV/MangoTV_remove_ads.js, requires-body=true
-芒果 = type=http-response, pattern=^http:\/\/mob-st\.bz\.mgtv\.com\/odin\/c1\/channel\/index\?, script-path=https://kelee.one/Resource/JavaScript/MangoTV/MangoTV_remove_ads.js, requires-body=true
-芒果 = type=http-response, pattern=^https?:\/\/dc2?\.bz\.mgtv\.com\/dynamic\/v1\/channel\/(index|vrsList)\/\w, script-path=https://kelee.one/Resource/JavaScript/MangoTV/MangoTV_remove_ads.js, requires-body=true
-芒果 = type=http-response, pattern=^https:\/\/mobile\.api\.mgtv\.com\/mobile\/config\?, script-path=https://kelee.one/Resource/JavaScript/MangoTV/MangoTV_remove_ads.js, requires-body=true
-芒果 = type=http-response, pattern=^https:\/\/mobile\.api\.mgtv\.com\/v10\/video\/info\?, script-path=https://kelee.one/Resource/JavaScript/MangoTV/MangoTV_remove_ads.js, requires-body=true
-芒果 = type=http-response, pattern=^https:\/\/mobile-thor\.api\.mgtv\.com\/v1\/vod\/info\?, script-path=https://kelee.one/Resource/JavaScript/MangoTV/MangoTV_remove_ads.js, requires-body=true
-芒果 = type=http-response, pattern=^https?:\/\/mobileso\.bz\.mgtv\.com\/mobile\/recommend\/v2\?, script-path=https://kelee.one/Resource/JavaScript/MangoTV/MangoTV_remove_ads.js, requires-body=true
+# 腾讯视频
+腾讯视频 = type=http-request, pattern=^https?:\/\/vv\.video\.qq\.com\/getvinfo, script-path=https://kelee.one/Resource/JavaScript/CommonScript/replace-body.js, requires-body=true, argument="&sppreviewtype=\d(.*)&spsrt=\d->&sppreviewtype=0$1&spsrt=0"
 
-# 腾讯
-腾讯 = type=http-request, pattern=^https?:\/\/vv\.video\.qq\.com\/getvinfo, script-path=https://kelee.one/Resource/JavaScript/CommonScript/replace-body.js, requires-body=true, argument="&sppreviewtype=\d(.*)&spsrt=\d->&sppreviewtype=0$1&spsrt=0"
 
 [MITM]
-hostname = %APPEND% push.m.youku.com, un-acs.youku.com, -i.vip.iqiyi.com, *.iqiyi.com, vv.video.qq.com, *.mgtv.com, api.ys7.com, i.ys7.com, app-v1.ecoliving168.com, 852b95d36.xwlpk.cn, api.cc.163.com, cc.163.com, mshare.cc.163.com, appapi.cc.163.com
+hostname = %APPEND% -i.vip.iqiyi.com, *.iqiyi.com, app-v1.ecoliving168.com, 852b95d36.xwlpk.cn, dc?.bz.mgtv.com, mobileso.bz.mgtv.com, damang.api.mgtv.com, hb-boom.api.mgtv.com, mobile.api.mgtv.com, mobile.api.hunantv.com, me.bz.mgtv.com, mobile-thor.api.mgtv.com, push.m.youku.com, un-acs.youku.com, vv.video.qq.com, api.ys7.com, i.ys7.com, api.cc.163.com, cc.163.com, mshare.cc.163.com, appapi.cc.163.com
