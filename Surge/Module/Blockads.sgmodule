@@ -3,49 +3,49 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 广告拦截
-#!date = 2026-02-25 18:51:09
+#!date = 2026-04-06 09:55:01
 
 [Rule]
 # ======= 0 ======= #
 # 12306
-DOMAIN,ad.12306.cn,DIRECT,extended-matching
+DOMAIN,ad.12306.cn,DIRECT
 
 # ======= A ======= #
 # 阿里云盘
 IP-CIDR,203.107.1.1/24,REJECT,no-resolve,pre-matching
 # 爱企查
-URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/",REJECT,extended-matching
+URL-REGEX,"^http:\/\/180\.76\.76\.112\/v\d\/",REJECT
 
 # ======= C ======= #
 # 彩云天气
-DOMAIN,abyss.cyapi.cn,REJECT,extended-matching,pre-matching
-DOMAIN,ad.cyapi.cn,REJECT,extended-matching,pre-matching
-DOMAIN,gather.colorfulclouds.net,REJECT,extended-matching,pre-matching
+DOMAIN,abyss.cyapi.cn,REJECT
+DOMAIN,ad.cyapi.cn,REJECT
+DOMAIN,gather.colorfulclouds.net,REJECT
 # 菜鸟
 AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"),(USER-AGENT,"Cainiao4iPhone*")),REJECT
-DOMAIN,acs4baichuan.m.taobao.com,REJECT,extended-matching,pre-matching
-DOMAIN,adsmind.ugdtimg.com,REJECT,extended-matching,pre-matching
-DOMAIN,amdc.m.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN,api.sm.cn,REJECT,extended-matching,pre-matching
-DOMAIN,apiv4-iyes.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN,baichuan-sdk.alicdn.com,REJECT,extended-matching,pre-matching
-DOMAIN,cad.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN,huichuan-mc.sm.cn,REJECT,extended-matching,pre-matching
-DOMAIN,huichuan.sm.cn,REJECT,extended-matching,pre-matching
-DOMAIN,iyes.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN,m-vali.cp31.ott.cibntv.net,REJECT,extended-matching,pre-matching
-DOMAIN,mc.atm.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN,nbsdk-baichuan.alicdn.com,REJECT,extended-matching,pre-matching
-DOMAIN,pre-acs.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN,vali-g1.cp31.ott.cibntv.net,REJECT,extended-matching,pre-matching
-DOMAIN,vali-ugc.cp31.ott.cibntv.net,REJECT,extended-matching,pre-matching
-DOMAIN,yk-ssp.ad.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN,ykad-data.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN,youku-acs.m.taobao.com,REJECT,extended-matching,pre-matching
+DOMAIN,acs4baichuan.m.taobao.com,REJECT
+DOMAIN,adsmind.ugdtimg.com,REJECT
+DOMAIN,amdc.m.youku.com,REJECT
+DOMAIN,api.sm.cn,REJECT
+DOMAIN,apiv4-iyes.youku.com,REJECT
+DOMAIN,baichuan-sdk.alicdn.com,REJECT
+DOMAIN,cad.youku.com,REJECT
+DOMAIN,huichuan-mc.sm.cn,REJECT
+DOMAIN,huichuan.sm.cn,REJECT
+DOMAIN,iyes.youku.com,REJECT
+DOMAIN,m-vali.cp31.ott.cibntv.net,REJECT
+DOMAIN,mc.atm.youku.com,REJECT
+DOMAIN,nbsdk-baichuan.alicdn.com,REJECT
+DOMAIN,pre-acs.youku.com,REJECT
+DOMAIN,vali-g1.cp31.ott.cibntv.net,REJECT
+DOMAIN,vali-ugc.cp31.ott.cibntv.net,REJECT
+DOMAIN,yk-ssp.ad.youku.com,REJECT
+DOMAIN,ykad-data.youku.com,REJECT
+DOMAIN,youku-acs.m.taobao.com,REJECT
 
 # ======= D ======= #
 # 滴滴出行
-DOMAIN,gwp.xiaojukeji.com,REJECT,extended-matching,pre-matching
+DOMAIN,gwp.xiaojukeji.com,REJECT
 AND,((IP-ASN,45090,no-resolve), (DEST-PORT,25641), (PROTOCOL,TCP)),REJECT
 AND,((IP-ASN,63646,no-resolve), (DEST-PORT,25641), (PROTOCOL,TCP)),REJECT
 # 香港抖音
@@ -58,43 +58,43 @@ AND,((OR,((DOMAIN-SUFFIX,bytegecko.com),(DOMAIN-SUFFIX,byteeffecttos.com))),(DOM
 
 # ======= F ======= #
 # 番茄小说
-DOMAIN,zlink.ugsdk.cn,REJECT,extended-matching,pre-matching
-DOMAIN,mon.toutiaocloud.net,REJECT,extended-matching,pre-matching
-DOMAIN,lf-normal-gr-sourcecdn.bytegecko.com,REJECT,extended-matching,pre-matching
-DOMAIN,lf-webcast-gr-sourcecdn.bytegecko.com,REJECT,extended-matching,pre-matching
-DOMAIN,p3-developer.bytemaimg.com,REJECT,extended-matching,pre-matching
-DOMAIN,webcast-open.douyin.com,REJECT,extended-matching,pre-matching
-DOMAIN,p11-webcast-sign.douyinpic.com,REJECT,extended-matching,pre-matching
-DOMAIN,p3-webcast-sign.douyinpic.com,REJECT,extended-matching,pre-matching
-DOMAIN,log3-applog.fqnovel.com,REJECT,extended-matching,pre-matching
-DOMAIN,log5-applog.fqnovel.com,REJECT,extended-matching,pre-matching
-DOMAIN,mon11-misc-lq.fqnovel.com,REJECT,extended-matching,pre-matching
-DOMAIN,mon11-misc.fqnovel.com,REJECT,extended-matching,pre-matching
-DOMAIN,mon3-misc.fqnovel.com,REJECT,extended-matching,pre-matching
-DOMAIN,rtlog3-applog.fqnovel.com,REJECT,extended-matching,pre-matching
-DOMAIN,rtlog5-applog.fqnovel.com,REJECT,extended-matching,pre-matching
-DOMAIN,effect.snssdk.com,REJECT,extended-matching,pre-matching
-DOMAIN,i.snssdk.com,REJECT,extended-matching,pre-matching
-DOMAIN,is-lq.snssdk.com,REJECT,extended-matching,pre-matching
-DOMAIN,is.snssdk.com,REJECT,extended-matching,pre-matching
-DOMAIN,security.snssdk.com,REJECT,extended-matching,pre-matching
-DOMAIN,vas.snssdk.com,REJECT,extended-matching,pre-matching
-DOMAIN,mon.toutiaocloud.com,REJECT,extended-matching,pre-matching
-DOMAIN,abtest3-misc.zijieapi.com,REJECT,extended-matching,pre-matching
-DOMAIN,ads3-normal.zijieapi.com,REJECT,extended-matching,pre-matching
-DOMAIN,ads5-normal.zijieapi.com,REJECT,extended-matching,pre-matching
-DOMAIN,feedback-c.zijieapi.com,REJECT,extended-matching,pre-matching
-DOMAIN,gecko3.zijieapi.com,REJECT,extended-matching,pre-matching
-DOMAIN,gecko5.zijieapi.com,REJECT,extended-matching,pre-matching
-DOMAIN,ma.zijieapi.com,REJECT,extended-matching,pre-matching
-DOMAIN,minigame3-normal.zijieapi.com,REJECT,extended-matching,pre-matching
-DOMAIN,minigame5-normal.zijieapi.com,REJECT,extended-matching,pre-matching
-DOMAIN,mssdk.zijieapi.com,REJECT,extended-matching,pre-matching
-DOMAIN,timon.zijieapi.com,REJECT,extended-matching,pre-matching
-DOMAIN,vcs.zijieapi.com,REJECT,extended-matching,pre-matching
-DOMAIN-KEYWORD,dig.zjurl,REJECT,extended-matching,pre-matching
-DOMAIN-KEYWORD,dig.bdurl,REJECT,extended-matching,pre-matching
-DOMAIN-KEYWORD,snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN,zlink.ugsdk.cn,REJECT
+DOMAIN,mon.toutiaocloud.net,REJECT
+DOMAIN,lf-normal-gr-sourcecdn.bytegecko.com,REJECT
+DOMAIN,lf-webcast-gr-sourcecdn.bytegecko.com,REJECT
+DOMAIN,p3-developer.bytemaimg.com,REJECT
+DOMAIN,webcast-open.douyin.com,REJECT
+DOMAIN,p11-webcast-sign.douyinpic.com,REJECT
+DOMAIN,p3-webcast-sign.douyinpic.com,REJECT
+DOMAIN,log3-applog.fqnovel.com,REJECT
+DOMAIN,log5-applog.fqnovel.com,REJECT
+DOMAIN,mon11-misc-lq.fqnovel.com,REJECT
+DOMAIN,mon11-misc.fqnovel.com,REJECT
+DOMAIN,mon3-misc.fqnovel.com,REJECT
+DOMAIN,rtlog3-applog.fqnovel.com,REJECT
+DOMAIN,rtlog5-applog.fqnovel.com,REJECT
+DOMAIN,effect.snssdk.com,REJECT
+DOMAIN,i.snssdk.com,REJECT
+DOMAIN,is-lq.snssdk.com,REJECT
+DOMAIN,is.snssdk.com,REJECT
+DOMAIN,security.snssdk.com,REJECT
+DOMAIN,vas.snssdk.com,REJECT
+DOMAIN,mon.toutiaocloud.com,REJECT
+DOMAIN,abtest3-misc.zijieapi.com,REJECT
+DOMAIN,ads3-normal.zijieapi.com,REJECT
+DOMAIN,ads5-normal.zijieapi.com,REJECT
+DOMAIN,feedback-c.zijieapi.com,REJECT
+DOMAIN,gecko3.zijieapi.com,REJECT
+DOMAIN,gecko5.zijieapi.com,REJECT
+DOMAIN,ma.zijieapi.com,REJECT
+DOMAIN,minigame3-normal.zijieapi.com,REJECT
+DOMAIN,minigame5-normal.zijieapi.com,REJECT
+DOMAIN,mssdk.zijieapi.com,REJECT
+DOMAIN,timon.zijieapi.com,REJECT
+DOMAIN,vcs.zijieapi.com,REJECT
+DOMAIN-KEYWORD,dig.zjurl,REJECT
+DOMAIN-KEYWORD,dig.bdurl,REJECT
+DOMAIN-KEYWORD,snssdk.com,REJECT
 AND,((DOMAIN-KEYWORD,zijieapi),(DOMAIN-KEYWORD,ads)),REJECT
 
 # ======= J ======= #
@@ -107,57 +107,57 @@ IP-CIDR6,2402:db40:5100:1011::5/128,REJECT,no-resolve
 # ======= K ======= #
 # 酷我音乐
 IP-CIDR,111.206.98.63/32,REJECT,no-resolve,pre-matching
-URL-REGEX,"^http:\/\/rich\.kuwo\.cn\/AdService\/",REJECT-TINYGIF,extended-matching
-URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/user\/freeMode\/",REJECT-TINYGIF,extended-matching
-URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/pasterAdvert\/",REJECT-TINYGIF,extended-matching
-URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/startup\/config",REJECT-TINYGIF,extended-matching
-URL-REGEX,"^http:\/\/rich\.kuwo\.cn\/EcomResourceServer\/",REJECT-TINYGIF,extended-matching
-URL-REGEX,"^http:\/\/searchrecterm\.kuwo\.cn\/recterm\.s",REJECT-TINYGIF,extended-matching
-URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/newMenuList\/menuListInfo",REJECT-TINYGIF,extended-matching
-URL-REGEX,"^http:\/\/vip\d\.kuwo\.cn\/vip\/v\d\/sysinfo\?op=getRePayAndDoPayBox",REJECT-TINYGIF,extended-matching
-URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/album\/adBar\/",REJECT-TINYGIF,extended-matching
+URL-REGEX,"^http:\/\/rich\.kuwo\.cn\/AdService\/",REJECT-TINYGIF
+URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/user\/freeMode\/",REJECT-TINYGIF
+URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/pasterAdvert\/",REJECT-TINYGIF
+URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/startup\/config",REJECT-TINYGIF
+URL-REGEX,"^http:\/\/rich\.kuwo\.cn\/EcomResourceServer\/",REJECT-TINYGIF
+URL-REGEX,"^http:\/\/searchrecterm\.kuwo\.cn\/recterm\.s",REJECT-TINYGIF
+URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/newMenuList\/menuListInfo",REJECT-TINYGIF
+URL-REGEX,"^http:\/\/vip\d\.kuwo\.cn\/vip\/v\d\/sysinfo\?op=getRePayAndDoPayBox",REJECT-TINYGIF
+URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/album\/adBar\/",REJECT-TINYGIF
 
 # ======= M ======= #
 # 猫眼电影
-DOMAIN,ad.maoyan.com,REJECT,extended-matching,pre-matching
+DOMAIN,ad.maoyan.com,REJECT
 
 # ======= P ======= #
 # 拼多多广告平台
 AND,((URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/d(\d)?"),(USER-AGENT,"*com.xunmeng.pinduoduo*")),REJECT
 AND,((URL-REGEX,"^http:\/\/\[((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))\]\/d(\d)?\?"),(USER-AGENT,"*com.xunmeng.pinduoduo*")),REJECT
 AND,((DOMAIN,api.pinduoduo.com),(PROTOCOL,QUIC)),REJECT
-DOMAIN,titan.pinduoduo.com,REJECT,extended-matching,pre-matching
-DOMAIN,xg.pinduoduo.com,REJECT,extended-matching,pre-matching
-DOMAIN,cdl-1.pddpic.com,REJECT,extended-matching,pre-matching
-DOMAIN,titan.pinduoduo.com,REJECT,extended-matching,pre-matching
-DOMAIN,cdl-p2.pddpic.com,REJECT,extended-matching,pre-matching
-DOMAIN,cd-1.pddpic.com,REJECT,extended-matching,pre-matching
-DOMAIN,apm.pinduoduo.com,REJECT,extended-matching,pre-matching
-DOMAIN,th-b.pinduoduo.com,REJECT,extended-matching,pre-matching
-DOMAIN,ta.pinduoduo.com,REJECT,extended-matching,pre-matching
-DOMAIN,th.pinduoduo.com,REJECT,extended-matching,pre-matching
-DOMAIN,th-a.pinduoduo.com,REJECT,extended-matching,pre-matching
-DOMAIN,ta-a.pinduoduo.com,REJECT,extended-matching,pre-matching
-DOMAIN,meta.pinduoduo.com,REJECT,extended-matching,pre-matching
-DOMAIN,apm-a.pinduoduo.com,REJECT,extended-matching,pre-matching
+DOMAIN,titan.pinduoduo.com,REJECT
+DOMAIN,xg.pinduoduo.com,REJECT
+DOMAIN,cdl-1.pddpic.com,REJECT
+DOMAIN,titan.pinduoduo.com,REJECT
+DOMAIN,cdl-p2.pddpic.com,REJECT
+DOMAIN,cd-1.pddpic.com,REJECT
+DOMAIN,apm.pinduoduo.com,REJECT
+DOMAIN,th-b.pinduoduo.com,REJECT
+DOMAIN,ta.pinduoduo.com,REJECT
+DOMAIN,th.pinduoduo.com,REJECT
+DOMAIN,th-a.pinduoduo.com,REJECT
+DOMAIN,ta-a.pinduoduo.com,REJECT
+DOMAIN,meta.pinduoduo.com,REJECT
+DOMAIN,apm-a.pinduoduo.com,REJECT
 
 # ======= Q ======= #
 # QQ音乐
-DOMAIN,adstats.tencentmusic.com,REJECT,extended-matching,pre-matching
-DOMAIN,ad.tencentmusic.com,REJECT,extended-matching,pre-matching
-DOMAIN,adcdn.tencentmusic.com,REJECT,extended-matching,pre-matching
-DOMAIN,adcdn6.tencentmusic.com,REJECT,extended-matching,pre-matching
-DOMAIN,adexpo.tencentmusic.com,REJECT,extended-matching,pre-matching
-DOMAIN,adclick.tencentmusic.com,REJECT,extended-matching,pre-matching
-DOMAIN,mc.tencentmusic.com,REJECT,extended-matching,pre-matching
-DOMAIN,monitor.music.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,tmead.y.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,tmeadbak.y.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,tmeadquic.y.qq.com,REJECT,extended-matching,pre-matching
+DOMAIN,adstats.tencentmusic.com,REJECT
+DOMAIN,ad.tencentmusic.com,REJECT
+DOMAIN,adcdn.tencentmusic.com,REJECT
+DOMAIN,adcdn6.tencentmusic.com,REJECT
+DOMAIN,adexpo.tencentmusic.com,REJECT
+DOMAIN,adclick.tencentmusic.com,REJECT
+DOMAIN,mc.tencentmusic.com,REJECT
+DOMAIN,monitor.music.qq.com,REJECT
+DOMAIN,tmead.y.qq.com,REJECT
+DOMAIN,tmeadbak.y.qq.com,REJECT
+DOMAIN,tmeadquic.y.qq.com,REJECT
 
 # ======= S ======= #
 # 什么值得买
-DOMAIN,adx-api.zdmimg.com,REJECT,extended-matching,pre-matching
+DOMAIN,adx-api.zdmimg.com,REJECT
 # Spotify
 AND,((DOMAIN,spclient.wg.spotify.com),(PROTOCOL,QUIC)),REJECT
 
@@ -168,39 +168,39 @@ DOMAIN-SUFFIX,gorgon.youdao.com,REJECT-NO-DROP
 DOMAIN-SUFFIX,nex.163.com,REJECT-NO-DROP
 DOMAIN-SUFFIX,mi.gdt.qq.com,REJECT-NO-DROP
 # 网易新闻
-DOMAIN,nex.163.com,DIRECT,extended-matching
-DOMAIN,gw.m.163.com,DIRECT,extended-matching
+DOMAIN,nex.163.com,DIRECT
+DOMAIN,gw.m.163.com,DIRECT
 # 微信小程序通用规则
-DOMAIN,wxsnsdy.wxs.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,wxsmsdy.video.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,wxsnsdythumb.wxs.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,ads-shopping.shouqianba.com,REJECT,extended-matching,pre-matching
-DOMAIN,ad.maoyan.com,REJECT,extended-matching,pre-matching
-DOMAIN,e.jparking.cn,REJECT,extended-matching,pre-matching
+DOMAIN,wxsnsdy.wxs.qq.com,REJECT
+DOMAIN,wxsmsdy.video.qq.com,REJECT
+DOMAIN,wxsnsdythumb.wxs.qq.com,REJECT
+DOMAIN,ads-shopping.shouqianba.com,REJECT
+DOMAIN,ad.maoyan.com,REJECT
+DOMAIN,e.jparking.cn,REJECT
 
 # ======= X ======= #
 # 闲鱼
 AND,((URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"),(USER-AGENT,"%E9%97%B2%E9%B1%BC*")),REJECT
 # 喜马拉雅
-DOMAIN,adse.ximalaya.com,REJECT,extended-matching,pre-matching
-DOMAIN,adsehera.ximalaya.com,REJECT,extended-matching,pre-matching
-DOMAIN,adse.wsa.ximalaya.com,REJECT,extended-matching,pre-matching
-DOMAIN,adbehavior.ximalaya.com,REJECT,extended-matching,pre-matching
-DOMAIN,adbehavior.wsa.ximalaya.com,REJECT,extended-matching,pre-matching
+DOMAIN,adse.ximalaya.com,REJECT
+DOMAIN,adsehera.ximalaya.com,REJECT
+DOMAIN,adse.wsa.ximalaya.com,REJECT
+DOMAIN,adbehavior.ximalaya.com,REJECT
+DOMAIN,adbehavior.wsa.ximalaya.com,REJECT
 
 # ======= Z ======= #
 # 知乎
-DOMAIN,appcloud.zhihu.com,REJECT,extended-matching,pre-matching
-DOMAIN,appcloud2.in.zhihu.com,REJECT,extended-matching,pre-matching
-DOMAIN,crash2.zhihu.com,REJECT,extended-matching,pre-matching
-DOMAIN,mqtt.zhihu.com,REJECT,extended-matching,pre-matching
-DOMAIN,sugar.zhihu.com,REJECT,extended-matching,pre-matching
-DOMAIN,zxid-m.mobileservice.cn,REJECT,extended-matching,pre-matching
+DOMAIN,appcloud.zhihu.com,REJECT
+DOMAIN,appcloud2.in.zhihu.com,REJECT
+DOMAIN,crash2.zhihu.com,REJECT
+DOMAIN,mqtt.zhihu.com,REJECT
+DOMAIN,sugar.zhihu.com,REJECT
+DOMAIN,zxid-m.mobileservice.cn,REJECT
 IP-CIDR,103.41.167.237/32,REJECT,no-resolve
 IP-CIDR,118.89.204.198/32,REJECT,no-resolve
 IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,REJECT,no-resolve
 # 航旅纵横
-URL-REGEX,"^http?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native",REJECT,extended-matching
+URL-REGEX,"^http?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native",REJECT
 # 中华万年历
 DOMAIN,sdk.ad.sfys365.com,REJECT
 
@@ -209,13 +209,13 @@ DOMAIN,sdk.ad.sfys365.com,REJECT
 DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao.com,DIRECT
 DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao1.com,DIRECT
 DOMAIN-KEYWORD,pangolin-sdk-toutiao,DIRECT
-DOMAIN,yyapp-httpdns.gslb.yy.com,REJECT,extended-matching,pre-matching
-DOMAIN,union-httpdns.gslb.yy.com,REJECT,extended-matching,pre-matching
-DOMAIN,httpdns-v6.gslb.yy.com,REJECT,extended-matching,pre-matching
-DOMAIN,dns.weixin.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,dns.weixin.qq.com.cn,REJECT,extended-matching,pre-matching
-DOMAIN,aedns.weixin.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN,dns2.q2cdn.com,REJECT,extended-matching,pre-matching
+DOMAIN,yyapp-httpdns.gslb.yy.com,REJECT
+DOMAIN,union-httpdns.gslb.yy.com,REJECT
+DOMAIN,httpdns-v6.gslb.yy.com,REJECT
+DOMAIN,dns.weixin.qq.com,REJECT
+DOMAIN,dns.weixin.qq.com.cn,REJECT
+DOMAIN,aedns.weixin.qq.com,REJECT
+DOMAIN,dns2.q2cdn.com,REJECT
 URL-REGEX,"^http:\/\/103\.44\.58\.64\/md\?",REJECT
 URL-REGEX,"^http:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns",REJECT
 URL-REGEX,"^http:\/\/xmc\.ximalaya\.com\/xmlymain-login-web\/login\/",REJECT
