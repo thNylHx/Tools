@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4608
+#!Rule = 4610
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1428,6 +1428,7 @@ DOMAIN-SUFFIX,ap.dongqiudi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,apd-pcdnwxlogin.teg.tencent-cloud.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,apd-pcdnwxnat.teg.tencent-cloud.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,apd-pcdnwxstat.teg.tencent-cloud.net,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao-b.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao1.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao2.com,REJECT,extended-matching,pre-matching
@@ -2831,6 +2832,7 @@ DOMAIN-SUFFIX,mobfox.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mobgi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mobile-pubt.ele.me,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mobile.da.mgtv.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,mobile.events.data.microsoft.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mobilead.kuwo.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mobileads.dx.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mobileads.google.com,REJECT,extended-matching,pre-matching
