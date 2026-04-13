@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 5164
+#!Rule = 5165
 
 [Rule]
 DOMAIN-KEYWORD,admarvel,REJECT,extended-matching,pre-matching
@@ -1613,6 +1613,7 @@ DOMAIN-SUFFIX,up.qingdaonews.com,REJECT,extended-matching,pre-matching
  
 DOMAIN,ad.jia.360.cn,REJECT,extended-matching,pre-matching
 DOMAIN,ad.iot.360.cn,REJECT,extended-matching,pre-matching
+ 
 DOMAIN,ca.iadsdk.apple.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,advp.apple.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,iad-apple.com,REJECT,extended-matching,pre-matching
