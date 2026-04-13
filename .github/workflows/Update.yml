@@ -386,6 +386,7 @@ jobs:
               }' "$file"
             } > tmpfile && mv tmpfile "$file"
             sed -i -E 's/\r$//; /^\s*#\s*规则(名称|统计):/d; /^\[Rule\]$/{n;/^$/d;}' "$file"
+            sed -i 's/\r$//' "$file"
           done
 
       - name: 同步 LoonKissSurge 模块到 Surge/QingRex
