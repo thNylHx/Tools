@@ -1,34 +1,43 @@
 name: 同步上游规则和模块
 
+# 权限设置：遵循最小权限原则
+permissions:
+  contents: write        # 允许推送规则更新
+  actions: read          # 允许读取 workflow 信息（用于清理任务）
+
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 16,22,4,10 * * *'   # 上海时间 00:00、06:00、12:00、18:00 执行
+    - cron: '0 */6 * * *'      # 每 6 小时执行一次
+      timezone: 'Asia/Shanghai' # 使用上海时区（GitHub 已支持）
 
 jobs:
-  Update:
+  sync-mihomo-rules:
     runs-on: ubuntu-latest
     env:
       TZ: 'Asia/Shanghai'
 
     steps:
       - name: 检出目标仓库
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: thNylHx/Tools
           path: Tools-repo
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1          # 仅拉取最新提交，提高速度
 
       - name: 下载并处理 Surge 规则
         shell: bash
+        working-directory: ${{ github.workspace }}/Tools-repo
         run: |
           set -euo pipefail
           echo "开始下载并处理 Surge 规则..."
 
           # 创建目录
-          mkdir -p "Tools-repo/Ruleset/Surge/{Block,Media,Other}" \
-                   "Tools-repo/Ruleset/mihomo/Block" \
-                   "Tools-repo/Surge/Module"
+          mkdir -p \
+          Ruleset/Surge/{Block,Media,Other} \
+          Ruleset/mihomo/Block \
+          Surge/Module
 
           # ==================== 定义下载函数 ====================
           download_urls() {
@@ -47,7 +56,7 @@ jobs:
           }
 
           # 合并主要规则集
-          download_urls "Tools-repo/Ruleset/Surge/Block/Ads_Block.list" \
+          download_urls "Ruleset/Surge/Block/Ads_Block.list" \
             "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list" \
             "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list" \
             "https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Ruleset/Surge/Block/BlockAds.list" \
@@ -58,37 +67,37 @@ jobs:
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
 
           # 同步广告规则到其他目录
-          cp "Tools-repo/Ruleset/Surge/Block/Ads_Block.list" "Tools-repo/Ruleset/mihomo/Block/Ads_Block.list"
-          cp "Tools-repo/Ruleset/Surge/Block/Ads_Block.list" "Tools-repo/Surge/Module/Ads_Block.sgmodule"
+          cp "Ruleset/Surge/Block/Ads_Block.list" "Ruleset/mihomo/Block/Ads_Block.list"
+          cp "Ruleset/Surge/Block/Ads_Block.list" "Surge/Module/Ads_Block.sgmodule"
 
           # 其他媒体与通用规则（合并下载）
-          download_urls "Tools-repo/Ruleset/Surge/Media/Facebook.list" \
+          download_urls "Ruleset/Surge/Media/Facebook.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
 
-          download_urls "Tools-repo/Ruleset/Surge/Media/Netflix.list" \
+          download_urls "Ruleset/Surge/Media/Netflix.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
 
-          download_urls "Tools-repo/Ruleset/Surge/Media/Twitter.list" \
+          download_urls "Ruleset/Surge/Media/Twitter.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
 
-          download_urls "Tools-repo/Ruleset/Surge/Media/YouTube.list" \
+          download_urls "Ruleset/Surge/Media/YouTube.list" \
             "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
 
-          download_urls "Tools-repo/Ruleset/Surge/Other/Google.list" \
+          download_urls "Ruleset/Surge/Other/Google.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
 
-          download_urls "Tools-repo/Ruleset/Surge/Other/Global.list" \
+          download_urls "Ruleset/Surge/Other/Global.list" \
             "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list" \
             "https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/ruleset/gfw.txt" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
 
-          download_urls "Tools-repo/Ruleset/Surge/Other/Game.list" \
+          download_urls "Ruleset/Surge/Other/Game.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list" \
             "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.list"
 
@@ -158,7 +167,7 @@ jobs:
             url=$(echo "$file" | awk '{print $2}')
             [[ "$url" =~ ^https?: ]] || url="https:${url}"
             echo "下载独立文件: $file_name"
-            curl -f -L --retry 3 --retry-delay 5 "$url" -o "Tools-repo/Ruleset/Surge/$file_name" || {
+            curl -f -L --retry 3 --retry-delay 5 "$url" -o "Ruleset/Surge/$file_name" || {
               echo "❌ 下载失败: $url"
               exit 1
             }
@@ -166,14 +175,15 @@ jobs:
 
       - name: 修正规则内容并标准化格式
         shell: bash
+        working-directory: ${{ github.workspace }}/Tools-repo
         run: |
           set -euo pipefail
           shopt -s globstar
           echo "开始修正规则格式..."
 
-          for file in Tools-repo/Ruleset/Surge/**/*.list \
-                      Tools-repo/Ruleset/mihomo/Block/*.list \
-                      Tools-repo/Surge/Module/Ads_Block.sgmodule; do
+          for file in Ruleset/Surge/**/*.list \
+                      Ruleset/mihomo/Block/*.list \
+                      Surge/Module/Ads_Block.sgmodule; do
             [[ -f "$file" ]] || { echo "文件不存在: $file"; continue; }
 
             echo "处理文件: $file"
@@ -202,14 +212,15 @@ jobs:
 
       - name: 对规则进行排序、去重与优化
         shell: bash
+        working-directory: ${{ github.workspace }}/Tools-repo
         run: |
           set -euo pipefail
           shopt -s globstar
           echo "开始排序与去重..."
 
-          for file in Tools-repo/Ruleset/Surge/**/*.list \
-                      Tools-repo/Ruleset/mihomo/Block/*.list \
-                      Tools-repo/Surge/Module/Ads_Block.sgmodule; do
+          for file in Ruleset/Surge/**/*.list \
+                      Ruleset/mihomo/Block/*.list \
+                      Surge/Module/Ads_Block.sgmodule; do
             [[ -f "$file" ]] || continue
 
             # 添加 IP-CIDR 前缀
@@ -247,10 +258,11 @@ jobs:
 
       - name: 处理 Surge 规则文件头部信息
         shell: bash
+        working-directory: ${{ github.workspace }}/Tools-repo
         run: |
           set -euo pipefail
           shopt -s globstar
-          for file in Tools-repo/Ruleset/Surge/**/*.list; do
+          for file in Ruleset/Surge/**/*.list; do
             [[ -f "$file" ]] || continue
             file_names=$(basename "$file" .list)
             line_count=$(wc -l < "$file")
@@ -261,9 +273,10 @@ jobs:
 
       - name: 处理 Surge 广告模块 sgmodule
         shell: bash
+        working-directory: ${{ github.workspace }}/Tools-repo
         run: |
           set -euo pipefail
-          for file in Tools-repo/Surge/Module/Ads_Block.sgmodule; do
+          for file in Surge/Module/Ads_Block.sgmodule; do
             [[ -f "$file" ]] || continue
             line_count=$(wc -l < "$file")
             {
@@ -296,69 +309,79 @@ jobs:
 
       - name: 下载 mihomo 规则文件
         shell: bash
+        working-directory: ${{ github.workspace }}/Tools-repo
         run: |
           set -euo pipefail
-          echo "开始下载 mihomo 规则文件..."
+          echo "开始下载 mihomo 规则"
 
           # 创建目录
-          mkdir -p Ruleset/mihomo/{geoip,geosite}
-          
-          mkdir -p Tools-repo/Ruleset/mihomo/{geoip,geosite}
-          echo "开始下载 mihomo 规则文件..."
+          mkdir -p \
+          Ruleset/mihomo/{geoip,geosite}
 
-          files=(
+          # 定义需要下载的文件列表
+          declare -A files=(
             # geosite
-            "geosite/Ads_all.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.mrs"
-            "geosite/Local.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
-            "geosite/China.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
-            "geosite/Openai.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs"
-            "geosite/PayPal.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs"
-            "geosite/Apple.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
-            "geosite/Global.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
-            "geosite/GlobalGFW.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"
-            "geosite/Google.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
-            "geosite/YouTube.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
-            "geosite/Steam.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
-            "geosite/Epic.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/epicgames.mrs"
-            "geosite/Facebook.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs"
-            "geosite/Instagram.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs"
-            "geosite/Twitter.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
-            "geosite/Telegram.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
-            "geosite/Line.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/line.mrs"
-            "geosite/GitHub.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
-            "geosite/OneDrive.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs"
-            "geosite/Microsoft.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
-            "geosite/Tiktok.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"
-            "geosite/Bilibili.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs"
-            "geosite/Disney.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs"
-            "geosite/Netflix.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
-            "geosite/Spotify.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs"
+            ["geosite/Ads_all.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.mrs"
+            ["geosite/Local.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+            ["geosite/China.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+            ["geosite/Openai.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs"
+            ["geosite/PayPal.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs"
+            ["geosite/Apple.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
+            ["geosite/Global.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
+            ["geosite/GlobalGFW.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"
+            ["geosite/Google.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
+            ["geosite/YouTube.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
+            ["geosite/Steam.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
+            ["geosite/Epic.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/epicgames.mrs"
+            ["geosite/Facebook.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs"
+            ["geosite/Instagram.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs"
+            ["geosite/Twitter.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
+            ["geosite/Telegram.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
+            ["geosite/Line.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/line.mrs"
+            ["geosite/GitHub.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
+            ["geosite/OneDrive.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs"
+            ["geosite/Microsoft.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
+            ["geosite/Tiktok.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"
+            ["geosite/Bilibili.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs"
+            ["geosite/Disney.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs"
+            ["geosite/Netflix.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
+            ["geosite/Spotify.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs"
             # geoip
-            "geoip/Local.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
-            "geoip/China.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
-            "geoip/Netflix.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"
-            "geoip/Twitter.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"
-            "geoip/Telegram.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
-            "geoip/Facebook.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.mrs"
-            "geoip/Google.mrs https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
+            ["geoip/Local.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
+            ["geoip/China.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
+            ["geoip/Netflix.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"
+            ["geoip/Twitter.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"
+            ["geoip/Telegram.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
+            ["geoip/Facebook.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.mrs"
+            ["geoip/Google.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
           )
 
-          for file in "${files[@]}"; do
-            file_name=$(echo "$file" | awk '{print $1}')
-            url=$(echo "$file" | awk '{print $2}')
-            [[ "$url" =~ ^https?: ]] || url="https:${url}"
-            echo "下载 mihomo 文件: $file_name"
-            curl -f -L --retry 3 --retry-delay 5 "$url" -o "Tools-repo/Ruleset/mihomo/$file_name" || {
-              echo "❌ 下载失败: $url"
-              exit 1
-            }
+          failures=0
+          for file_path in "${!files[@]}"; do
+            url="${files[$file_path]}"
+            echo "下载规则：$file_path"
+
+            if curl -f -L --retry 3 --retry-delay 5 --max-time 60 \
+              "$url" -o "Ruleset/mihomo/$file_path"; then
+              echo "下载成功: $file_path"
+            else
+              echo "下载失败: $url"
+              ((failures++))
+            fi
           done
+
+          if [[ $failures -gt 0 ]]; then
+            echo "共有 $failures 个规则下载失败, 继续执行脚本"
+          else
+            echo "所有 mihomo 规则文件下载完成。"
+          fi
 
       - name: 处理 mihomo Block 规则
         shell: bash
+        working-directory: ${{ github.workspace }}/Tools-repo
         run: |
           set -euo pipefail
-          for file in Tools-repo/Ruleset/mihomo/Block/*.list; do
+          for file in Ruleset/mihomo/Block/*.list; do
             [[ -f "$file" ]] || continue
             sed -i -e '/^USER-AGENT/d; /^URL-REGEX/d; /^AND,((IP-CIDR/d; /^AND,((IP-ASN/d; /^AND,((URL-REGEX/d' "$file"
             file_names=$(basename "$file" .list)
@@ -369,11 +392,12 @@ jobs:
           done
 
       - name: 同步 LoonKissSurge 模块到 Surge/QingRex
+        working-directory: ${{ github.workspace }}/Tools-repo
         run: |
           REPO_DIR="${{ github.workspace }}/LoonKissSurge"
           rm -rf "$REPO_DIR"
           git clone --depth=1 --single-branch "https://github.com/QingRex/LoonKissSurge.git" "$REPO_DIR"
-          TARGET_DIR="${{ github.workspace }}/Tools-repo/Surge/QingRex"
+          TARGET_DIR="${{ github.workspace }}/Surge/QingRex"
           rm -rf "$TARGET_DIR" && mkdir -p "$TARGET_DIR"
           cp -r "$REPO_DIR/Surge/." "$TARGET_DIR/"
           echo "✅ 已同步 LoonKissSurge 模块到 Surge/QingRex"
