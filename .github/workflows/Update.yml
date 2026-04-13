@@ -17,6 +17,7 @@ jobs:
         with:
           repository: thNylHx/Tools
           path: Tools-repo
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 下载并处理 Surge 规则
         shell: bash
@@ -235,7 +236,7 @@ jobs:
               { print "15 " $0; next }
             ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
 
-            # 添加 no-resolve（跳过 China_ip.list）
+            # 添加 no-resolve 跳过 China_ip.list
             if [[ "$(basename "$file")" != "China_ip.list" ]]; then
               awk '/^(IP-CIDR,|IP-CIDR6,|IP-ASN,)/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmp && mv tmp "$file"
             fi
@@ -258,7 +259,7 @@ jobs:
             sed -i '2a\\' "$file"
           done
 
-      - name: 处理 Surge 广告模块（sgmodule）
+      - name: 处理 Surge 广告模块 sgmodule
         shell: bash
         run: |
           set -euo pipefail
@@ -293,10 +294,15 @@ jobs:
             } > tmpfile && mv tmpfile "$file"
           done
 
-      - name: 下载 mihomo (.mrs) 规则
+      - name: 下载 mihomo 规则文件
         shell: bash
         run: |
           set -euo pipefail
+          echo "开始下载 mihomo 规则文件..."
+
+          # 创建目录
+          mkdir -p Ruleset/mihomo/{geoip,geosite}
+          
           mkdir -p Tools-repo/Ruleset/mihomo/{geoip,geosite}
           echo "开始下载 mihomo 规则文件..."
 
@@ -372,24 +378,51 @@ jobs:
           cp -r "$REPO_DIR/Surge/." "$TARGET_DIR/"
           echo "✅ 已同步 LoonKissSurge 模块到 Surge/QingRex"
 
-      - name: 配置 Git 并推送更新
+      - name: 提交并推送更新
         shell: bash
+        working-directory: ${{ github.workspace }}/Tools-repo
         run: |
           set -euo pipefail
-          cd "${{ github.workspace }}/Tools-repo"
-          git config --global user.name "${{ secrets.USERNAME }}"
-          git config --global user.email "${{ secrets.EMAIL }}"
-          git remote set-url origin "https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
 
           git pull --rebase --autostash origin main
 
           if [[ -n $(git status --porcelain) ]]; then
+            echo "检测到规则文件更新，开始提交..."
+            
+            git config --local user.name "GitHub Actions"
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            
             git add -A
-            git commit -m "Auto Update $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
-            git push origin main && echo "✅ 规则同步并推送成功"
+            git commit -m "Auto Update mihomo Rules $(date +'%Y-%m-%d %H:%M:%S %Z')"
+            
+            if git push origin main; then
+              echo "✅ 规则同步并推送成功！"
+            else
+              echo "❌ 推送失败，请检查仓库权限。"
+              exit 1
+            fi
           else
-            echo "ℹ️  没有检测到规则变更，无需推送"
+            echo "ℹ️ 规则文件无变更，无需提交。"
           fi
+
+      # - name: 配置 Git 并推送更新
+      #   shell: bash
+      #   run: |
+      #     set -euo pipefail
+      #     cd "${{ github.workspace }}/Tools-repo"
+      #     git config --global user.name "${{ secrets.USERNAME }}"
+      #     git config --global user.email "${{ secrets.EMAIL }}"
+      #     git remote set-url origin "https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ secrets.USERNAME }}/Tools.git"
+
+      #     git pull --rebase --autostash origin main
+
+      #     if [[ -n $(git status --porcelain) ]]; then
+      #       git add -A
+      #       git commit -m "Auto Update $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')"
+      #       git push origin main && echo "✅ 规则同步并推送成功"
+      #     else
+      #       echo "ℹ️  没有检测到规则变更，无需推送"
+      #     fi
 
       - name: 设置当前时间变量
         shell: bash
@@ -402,7 +435,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             📢 通知
-            🚀 来源：GitHub Actions
+            🚀 来源: GitHub Actions
             ✉️ 标题：同步上游规则和模块
             📦 仓库：${{ github.repository }}
             ⏰ 时间：${{ env.time }}
