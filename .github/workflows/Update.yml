@@ -202,7 +202,7 @@ jobs:
             echo "所有 Surge 规则文件下载完成。"
           fi
 
-      - name: 合并 Surge 规则
+      - name: 处理 Surge 规则
         shell: bash
         working-directory: ${{ github.workspace }}/Tools-repo
         run: |
@@ -346,7 +346,7 @@ jobs:
             echo "完成: $file"
           done
 
-      - name: 处理 Surge 广告模块
+      - name: 写入规则到 Surge 广告模块
         shell: bash
         working-directory: ${{ github.workspace }}/Tools-repo
         run: |
@@ -381,6 +381,7 @@ jobs:
                 }
               }' "$file"
             } > tmpfile && mv tmpfile "$file"
+            sed -i -E '/^\s*#\s*规则(名称|统计):/d; /^\[Rule\]$/{n;/^$/d;}' "$file"
           done
 
       - name: 同步 LoonKissSurge 模块到 Surge/QingRex
