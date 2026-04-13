@@ -259,12 +259,17 @@ jobs:
               Ruleset/Surge/Media/Google_ip.list \
               Ruleset/Surge/Media/Gemini.list
 
+            ## Global
+            merge_local "Ruleset/Surge/Media/Global.list" \
+              Ruleset/Surge/Media/GlobalGFW_1.list \
+              Ruleset/Surge/Media/GlobalGFW_2.list \
+              Ruleset/Surge/Media/GlobalGFW_4.list
+
             ## Facebook + Instagram
             merge_local "Ruleset/Surge/Media/Facebook.list" \
               Ruleset/Surge/Media/Facebook_1.list \
               Ruleset/Surge/Media/Facebook_ip.list \
               Ruleset/Surge/Media/Instagram.list
-
 
       - name: 对规则进行排序、去重与优化
         shell: bash
@@ -277,6 +282,9 @@ jobs:
                       Ruleset/mihomo/Block/*.list \
                       Surge/Module/Ads_Block.sgmodule; do
             [[ -f "$files" ]] || continue
+
+            # 删除无效规则
+            sed -i '/^DOMAIN-REGEX,/d' "$files"
 
             # 将以"."开头的行的第一个"."替换为 "DOMAIN-SUFFIX"
             sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$files"
@@ -291,9 +299,6 @@ jobs:
               /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^GEOIP,|^AND,|^OR,|^NOT,|^URL-REGEX,|^USER-AGENT,|^PROCESS-NAME,|^DEST-PORT,/b;
               s/^([^#])/DOMAIN,\1/
             ' "$files"
-
-            # 删除无效规则
-            sed -i '/^DOMAIN-REGEX,/d' "$files"
 
             # 删除文件中所有 [以 # 或 ; 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
             sed -i -e '/^\s*[#;]/d' -e '/^$/d' -e 's| //.*||'  "$files"
