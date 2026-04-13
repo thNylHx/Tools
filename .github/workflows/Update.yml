@@ -466,16 +466,8 @@ jobs:
 
             ${{ env.changed == 'true' && format('📈 变更统计\n  ➕ 新增: {0}\n  ✏️ 修改: {1}\n  ❌ 删除: {2}', env.added, env.modified, env.deleted) || '' }}
 
-            ${{ env.changed == 'true' && format('📂 *变更文件*\n{0}', env.files) || '' }}
-
       - name: 清理旧工作流运行记录
         uses: Mattraks/delete-workflow-runs@main
         with:
           retain_days: 5               # 保留最近 5 天記錄
           keep_minimum_runs: 3         # 至少保留 3 次運行
-
-
-
-
-
-
