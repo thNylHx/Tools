@@ -358,7 +358,8 @@ jobs:
           for file in Surge/Module/Ads_Block.sgmodule; do
             [[ -f "$file" ]] || continue
 
-            sed -i -E 's/\r$//; /规则名称:/d; /规则统计:/d; /^\s*$/d' "$file"
+            # 删除文件中 [规则名称] + [规则名称] + [空行]
+            sed -i -E '/^\s*[#;]/d; /^\s*$/d' "$file"
 
             line_count=$(wc -l < "$file")
             {
