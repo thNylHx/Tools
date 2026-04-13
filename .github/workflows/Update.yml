@@ -296,6 +296,59 @@ jobs:
         working-directory: ${{ github.workspace }}/Tools-repo
         run: |
           set -euo pipefail
+          shopt -s globstar nullglob
+          echo "开始对规则文件进行排序、去重与格式优化..."
+
+          # 处理纯规则列表文件
+          for file in Ruleset/Surge/**/*.list Ruleset/mihomo/Block/*.list; do
+            [[ -f "$file" ]] || continue
+
+            echo "处理规则文件: $file"
+
+            # 1. 删除无效或特定规则
+            sed -i '/^DOMAIN-REGEX,/d' "$file"
+
+            # 2. 清理注释、空行、行内注释及指定内容
+            sed -i -E '/^\s*[#;]/d; /^\s*\/\//d; /^$/d; s| //.*||' "$file"
+            sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
+            sed -i -E 's/,reject(,[^,]+)*$//I' "$file"
+            sed -i 's/, */,/g' "$file"
+
+            # 3. 按规则类型优先级排序
+            awk '
+              /^DOMAIN,/          { print "0 " $0; next }
+              /^DOMAIN-SUFFIX,/   { print "1 " $0; next }
+              /^DOMAIN-KEYWORD,/  { print "2 " $0; next }
+              /^DOMAIN-WILDCARD,/ { print "3 " $0; next }
+              /^IP-CIDR,/         { print "4 " $0; next }
+              /^IP-CIDR6,/        { print "5 " $0; next }
+              /^IP-ASN,/          { print "6 " $0; next }
+              /^PROCESS-NAME,/    { print "7 " $0; next }
+              /^URL-REGEX,/       { print "8 " $0; next }
+              /^USER-AGENT,/      { print "9 " $0; next }
+              /^GEOIP,/           { print "10 " $0; next }
+              /^AND,/             { print "11 " $0; next }
+              /^OR,/              { print "12 " $0; next }
+              /^NOT,/             { print "13 " $0; next }
+              /^DEST-PORT,/       { print "14 " $0; next }
+              { print "15 " $0; next }
+            ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
+
+            # 4. 去重（忽略大小写）
+            awk '!seen[tolower($0)]++' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+
+            echo "完成: $file （最终行数: $(wc -l < "$file")）"
+          done
+
+          echo "所有规则文件排序、去重与优化完成。"
+
+
+
+      - name: 对规则进行排序、去重与优化
+        shell: bash
+        working-directory: ${{ github.workspace }}/Tools-repo
+        run: |
+          set -euo pipefail
           shopt -s globstar
           echo "开始排序与去重 & 修正规则格式"
 
@@ -335,14 +388,20 @@ jobs:
 
             # 去重
             awk '!seen[tolower($0)]++' "$file" > temp && mv temp "$file"
-          done
 
-          # 处理 Surge 规则文件头部信息
-          file_names=$(basename "$file" .list)
-          line_count=$(wc -l < "$file")
-          awk -v fname="$file_names" 'NR==1 {print "# 规则名称: " fname} {print}' "$file" > tmp && mv tmp "$file"
-          awk -v count="$line_count" 'NR==2 {print "# 规则统计: " count} {print}' "$file" > tmp && mv tmp "$file"
-          sed -i '2a\\' "$file"
+            # 添加/更新头部信息（放在文件最前面）
+            filename=$(basename "$file" .list)
+            line_count=$(wc -l < "$file")
+
+            {
+              echo "# 规则名称: ${filename}"
+              echo "# 规则统计: ${line_count}"
+              echo ""
+              cat "$file"
+            } > "$file.tmp" && mv "$file.tmp" "$file"
+
+            echo "完成: $file"
+          done
 
       - name: 处理 Surge 广告模块 sgmodule
         shell: bash
