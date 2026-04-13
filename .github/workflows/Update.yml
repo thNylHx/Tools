@@ -237,6 +237,10 @@ jobs:
               Ruleset/Surge/Block/Ads_Advertising.list \
               Ruleset/Surge/Block/Ads_AWAvenue.list \
               Ruleset/Surge/Block/Ads_all.list
+              
+            # 同步广告规则到其他目录
+            cp "Ruleset/Surge/Block/Ads_Block.list" "Ruleset/mihomo/Block/Ads_Block.list"
+            cp "Ruleset/Surge/Block/Ads_Block.list" "Surge/Module/Ads_Block.sgmodule"
 
             ## Netflix
             merge_local "Ruleset/Surge/Media/Netflix.list" \
