@@ -1,6 +1,9 @@
 # 规则名称: Epic
-# 规则统计: 28
+# 规则统计: 31
 
+DOMAIN,DOMAIN-REGEX,^cdn\d-epicgames-\d+\.file\.myqcloud\.com$
+DOMAIN,DOMAIN-REGEX,^epicgames-download\d-\d+\.file\.myqcloud\.com$
+DOMAIN,DOMAIN-REGEX,^epicgames-download\d\.akamaized\.net$
 DOMAIN-SUFFIX,3lateral.com
 DOMAIN-SUFFIX,artstation.com
 DOMAIN-SUFFIX,battlebreakers.com

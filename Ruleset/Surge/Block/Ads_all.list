@@ -1,6 +1,7 @@
 # 规则名称: Ads_all
-# 规则统计: 802
+# 规则统计: 803
 
+DOMAIN,DOMAIN-REGEX,^speed\.(coe|open)\.ad\.[a-z]{2,6}\.prod\.hosts\.ooklaserver\.net$
 DOMAIN,ad-channel.diwodiwo.xyz
 DOMAIN,ad-display.diwodiwo.xyz
 DOMAIN,adeventtracker.spotify.com

@@ -3,9 +3,12 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = 🚫 Block ads
 #!tag = 自用广告拦截合集规则
-#!Rule = 4480
+#!Rule = 4483
 
 [Rule]
+# 规则名称: Ads_Block.sgmodule
+# 规则统计: 4480
+
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
 DOMAIN,1500020991.vodplayer.wxamedia.com,REJECT,extended-matching,pre-matching
 DOMAIN,1500022744.vodplayer.wxamedia.com,REJECT,extended-matching,pre-matching
