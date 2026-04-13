@@ -1,5 +1,5 @@
 # 规则名称: Ads_My_BlockAds
-# 规则统计: 635
+# 规则统计: 634
 
 DOMAIN,abtest3-misc.zijieapi.com
 DOMAIN,abyss.cyapi.cn
@@ -635,4 +635,3 @@ AND,((IP-CIDR,220.243.141.0/32,no-resolve),(DEST-PORT,6443))
 AND,((OR,((DOMAIN-SUFFIX,bytegecko.com),(DOMAIN-SUFFIX,byteeffecttos.com))),(DOMAIN-KEYWORD,ncdn))
 AND,((URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/d(\d)?"),(USER-AGENT,"*com.xunmeng.pinduoduo*"))
 AND,((URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]\/d(\d)?\?"),(USER-AGENT,"*com.xunmeng.pinduoduo*"))
- 
