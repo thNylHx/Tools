@@ -473,8 +473,7 @@ jobs:
             ⏰ 时间: ${{ env.time }}
             🎯 状态: ${{ job.status == 'success' && '恭喜你! 任务成功' || '很遗憾! 任务失败' }}
             📊 更新: ${{ env.changed == 'true' && '本次有更新' || '本次无更新' }}
-            
-            ${{ env.changed == 'true' && '  📈 <b>变更统计</b>' || '' }}
+            ${{ env.changed == 'true' && '📈 变更详细' || '' }}
             ${{ env.changed == 'true' && format(' ➕ 新增: {0}', env.added) || '' }}
             ${{ env.changed == 'true' && format(' ✏️ 修改: {0}', env.modified) || '' }}
             ${{ env.changed == 'true' && format(' ❌ 删除: {0}', env.deleted) || '' }}
