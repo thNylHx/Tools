@@ -300,7 +300,8 @@ jobs:
           echo "开始排序与去重 & 修正规则格式"
 
           for files in Ruleset/Surge/**/*.list \
-                      Ruleset/mihomo/Block/*.list; do
+                      Ruleset/mihomo/Block/*.list \
+                      Surge/Module/Ads_Block.sgmodule; do
             [[ -f "$files" ]] || continue
 
             # 删除无效规则
