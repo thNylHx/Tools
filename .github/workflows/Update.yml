@@ -238,12 +238,6 @@ jobs:
               Ruleset/Surge/Block/Ads_AWAvenue.list \
               Ruleset/Surge/Block/Ads_all.list
 
-            ## Facebook + Instagram
-            merge_local "Ruleset/Surge/Media/Facebook.list" \
-              Ruleset/Surge/Media/Facebook_1.list \
-              Ruleset/Surge/Media/Facebook_ip.list \
-              Ruleset/Surge/Media/Instagram.list
-
             ## Netflix
             merge_local "Ruleset/Surge/Media/Netflix.list" \
               Ruleset/Surge/Media/Netflix_1.list \
@@ -259,6 +253,19 @@ jobs:
               Ruleset/Surge/Media/YouTubeMusic.list \
               Ruleset/Surge/Media/YouTube_1.list
 
+            ## Google
+            merge_local "Ruleset/Surge/Media/Google.list" \
+              Ruleset/Surge/Media/Google_1.list \
+              Ruleset/Surge/Media/Google_ip.list \
+              Ruleset/Surge/Media/Gemini.list
+
+            ## Facebook + Instagram
+            merge_local "Ruleset/Surge/Media/Facebook.list" \
+              Ruleset/Surge/Media/Facebook_1.list \
+              Ruleset/Surge/Media/Facebook_ip.list \
+              Ruleset/Surge/Media/Instagram.list
+
+
       - name: 对规则进行排序、去重与优化
         shell: bash
         working-directory: ${{ github.workspace }}/Tools-repo
@@ -272,51 +279,50 @@ jobs:
                       Surge/Module/Ads_Block.sgmodule; do
             [[ -f "$files" ]] || continue
 
+            # 将以"."开头的行的第一个"."替换为 "DOMAIN-SUFFIX"
+            sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$files"
+
+            # 将除了以 "#" 开头、"空行" 开头之外的行, 在行首添加 "DOMAIN"
+            sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^GEOIP,|^AND,|^OR,|^NOT,|^URL-REGEX,|^USER-AGENT,|^PROCESS-NAME,|^DEST-PORT,/b; s/^([^#])/DOMAIN,\1/' "$files"
+
             # 删除无效规则
             sed -i '/^DOMAIN-REGEX,/d' "$files"
 
-            # 添加前缀
-            sed -i 's/^\s*\./DOMAIN-SUFFIX,/' "$files"
+            # 删除文件中所有 [以 # 或 ; 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
+            sed -i -e '/^\s*[#;]/d' -e '/^$/d' -e 's| //.*||'  "$files"
 
-            # 为无前缀规则添加 DOMAIN,
-            sed -i -E '
-              /^\s*$/b;
-              /^\s*[#;]/b;
-              /^\s*\/\//b;
-              /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b;
-              /^\s*[0-9A-Fa-f:]+\/[0-9]+/b;
-              /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^GEOIP,|^AND,|^OR,|^NOT,|^URL-REGEX,|^USER-AGENT,|^PROCESS-NAME,|^DEST-PORT,/b;
-              s/^([^#])/DOMAIN,\1/
-            ' "$files"
+            # 删除指定域名
+            sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$files"
+            sed -i -e '/DOMAIN,th1s_rule5et_1s_m4d3_by_5ukk4w_ruleset.skk.moe/d' "$files"
+            sed -i -e '/DOMAIN,this_rule_set_is_made_by_sukkaw.skk.moe/d' "$files"
+            sed -i -e '/DOMAIN,7h1s_rul35et_i5_mad3_by_5ukk4w-ruleset.skk.moe/d' "$files"
+            sed -i -E 's/,reject(,[^,]+)*$//I' "$files"
+
+            # 修正格式
+            sed -i 's/, */,/g' "$files"
 
             # 添加 IP-CIDR 前缀
             sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^/IP-CIDR,/}' "$files"
-            sed -i -E '/^IP-CIDR6,/!{/^([a-fA-F0-9]*:){2,}[a-fA-F0-9]*\/[0-9]+/s/^/IP-CIDR6,/}' "$files"
-
-            # 清理注释、空行、行内注释及指定内容
-            sed -i -E '/^\s*[#;]/d; /^\s*\/\//d; /^$/d; s| //.*||' "$files"
-            sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$files"
-            sed -i -E 's/,reject(,[^,]+)*$//I' "$files"
-            sed -i 's/, */,/g' "$files"
+            sed -i -E '/^IP-CIDR6,/!{/^[a-fA-F0-9]+:|([a-fA-F0-9]+:+)+[a-fA-F0-9]+\/[0-9]+/s/^/IP-CIDR6,/}' "$files"
 
             # 按规则类型排序
             awk '
-              /^DOMAIN,/ { print "0 " $0; next }
-              /^DOMAIN-SUFFIX,/ { print "1 " $0; next }
-              /^DOMAIN-KEYWORD,/ { print "2 " $0; next }
+              /^DOMAIN,/          { print "0 " $0; next }
+              /^DOMAIN-SUFFIX,/   { print "1 " $0; next }
+              /^DOMAIN-KEYWORD,/  { print "2 " $0; next }
               /^DOMAIN-WILDCARD,/ { print "3 " $0; next }
-              /^IP-CIDR,/ { print "4 " $0; next }
-              /^IP-CIDR6,/ { print "5 " $0; next }
-              /^IP-ASN,/ { print "6 " $0; next }
-              /^PROCESS-NAME,/ { print "7 " $0; next }
-              /^URL-REGEX,/ { print "8 " $0; next }
-              /^USER-AGENT,/ { print "9 " $0; next }
-              /^GEOIP,/ { print "10 " $0; next }
-              /^AND,/ { print "11 " $0; next }
-              /^OR,/ { print "12 " $0; next }
-              /^NOT,/ { print "13 " $0; next }
-              /^DEST-PORT,/ { print "14 " $0; next }
-              { print "15 " $0; next }
+              /^IP-CIDR,/         { print "4 " $0; next }
+              /^IP-CIDR6,/        { print "5 " $0; next }
+              /^IP-ASN,/          { print "6 " $0; next }
+              /^PROCESS-NAME,/    { print "7 " $0; next }
+              /^URL-REGEX,/       { print "8 " $0; next }
+              /^USER-AGENT,/      { print "9 " $0; next }
+              /^GEOIP,/           { print "10 " $0; next }
+              /^AND,/             { print "11 " $0; next }
+              /^OR,/              { print "12 " $0; next }
+              /^NOT,/             { print "13 " $0; next }
+              /^DEST-PORT,/       { print "14 " $0; next }
+                                  { print "15 " $0; next }
             ' "$files" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$files.sorted" && mv "$files.sorted" "$files"
 
             # 去重
@@ -343,15 +349,6 @@ jobs:
           set -euo pipefail
           for files in Surge/Module/Ads_Block.sgmodule; do
             [[ -f "$files" ]] || continue
-
-            # 删除无效规则
-            sed -i '/^DOMAIN-REGEX,/d' "$files"
-
-            # 清理注释、空行、行内注释及指定内容
-            sed -i -E '/^\s*[#;]/d; /^\s*\/\//d; /^$/d; s| //.*||' "$files"
-            sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$files"
-            sed -i -E 's/,reject(,[^,]+)*$//I' "$files"
-            sed -i 's/, */,/g' "$files"
 
             line_count=$(wc -l < "$files")
             {
