@@ -1,6 +1,7 @@
 # 规则名称: Private_ip
 # 规则统计: 18
 
+DOMAIN,::/127
 IP-CIDR,0.0.0.0/8
 IP-CIDR,10.0.0.0/8
 IP-CIDR,100.64.0.0/10
@@ -18,4 +19,3 @@ IP-CIDR,224.0.0.0/3
 IP-CIDR6,fc00::/7
 IP-CIDR6,fe80::/10
 IP-CIDR6,ff00::/8
-::/127
