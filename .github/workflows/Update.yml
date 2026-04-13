@@ -104,61 +104,7 @@ jobs:
 
           # 创建目录
           mkdir -p \
-          Ruleset/Surge/{Block,Media,Other} \
-          Ruleset/mihomo/Block \
-          Surge/Module
-
-          # 合并主要规则集
-          download_urls "Ruleset/Surge/Block/Ads_Block.list" \
-            "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list" \
-            "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list" \
-            "https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Ruleset/Surge/Block/BlockAds.list" \
-            "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Tracking.list" \
-            "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Malicious.list" \
-            "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Advertising.list" \
-            "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge-RULE-SET.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
-
-          # 同步广告规则到其他目录
-          cp "Ruleset/Surge/Block/Ads_Block.list" "Ruleset/mihomo/Block/Ads_Block.list"
-          cp "Ruleset/Surge/Block/Ads_Block.list" "Surge/Module/Ads_Block.sgmodule"
-
-          # 其他媒体与通用规则（合并下载）
-          download_urls "Ruleset/Surge/Media/Facebook.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/facebook.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
-
-          download_urls "Ruleset/Surge/Media/Netflix.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/netflix.list"
-
-          download_urls "Ruleset/Surge/Media/Twitter.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/twitter.list"
-
-          download_urls "Ruleset/Surge/Media/YouTube.list" \
-            "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
-
-          download_urls "Ruleset/Surge/Other/Google.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/google.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google-gemini.list"
-            
-          download_urls "Ruleset/Surge/Other/Global.list" \
-            "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list" \
-            "https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/ruleset/gfw.txt" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/gfw.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
-
-          download_urls "Ruleset/Surge/Other/Game.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.list"
-
-          download_urls "Ruleset/Surge/Other/Apple.list" \
-            "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Apple.list" \
-            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
+          Ruleset/Surge/{Block,Media,Other}
 
           # 定义需要下载的文件列表
           declare -A files=(
@@ -258,6 +204,93 @@ jobs:
             echo "所有 Surge 规则文件下载完成。"
           fi
           
+      - name: 合并 Surge 规则
+        shell: bash
+        working-directory: ${{ github.workspace }}/Tools-repo
+        run: |
+          set -euo pipefail
+
+          # 下载规则函数
+          download_urls() {
+            local target_file="$1"
+            shift
+
+            echo "开始处理 → $target_file"
+
+            # 确保目录存在
+            mkdir -p "$(dirname "$target_file")"
+
+            # 清空目标文件
+            : > "$target_file"
+
+            for url in "$@"; do
+              echo "  下载: $url"
+              if curl -f -L --retry 3 --retry-delay 5 \
+                      --connect-timeout 10 --max-time 30 \
+                      "$url" >> "$target_file"; then
+                echo "    下载成功"
+                echo "" >> "$target_file"          # 每个来源后添加空行分隔
+              else
+                echo "    下载失败: $url" >&2
+                # 继续执行，不中断整个流程
+              fi
+            done
+
+            echo "完成 → $target_file "
+          }
+
+          # 合并广告规则集
+          download_urls "Ruleset/Surge/Block/Ads_Block.list" \
+            "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list" \
+            "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list" \
+            "https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Ruleset/Surge/Block/BlockAds.list" \
+            "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Tracking.list" \
+            "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Malicious.list" \
+            "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Advertising.list" \
+            "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge-RULE-SET.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
+
+          # 同步广告规则到其他目录
+          cp "Ruleset/Surge/Block/Ads_Block.list" "Ruleset/mihomo/Block/Ads_Block.list"
+          cp "Ruleset/Surge/Block/Ads_Block.list" "Surge/Module/Ads_Block.sgmodule"
+
+          # 其他媒体与通用规则（合并下载）
+          download_urls "Ruleset/Surge/Media/Facebook.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/facebook.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
+
+          download_urls "Ruleset/Surge/Media/Netflix.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/netflix.list"
+
+          download_urls "Ruleset/Surge/Media/Twitter.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/twitter.list"
+
+          download_urls "Ruleset/Surge/Media/YouTube.list" \
+            "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
+
+          download_urls "Ruleset/Surge/Other/Google.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/google.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google-gemini.list"
+            
+          download_urls "Ruleset/Surge/Other/Global.list" \
+            "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list" \
+            "https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/ruleset/gfw.txt" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/gfw.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
+
+          download_urls "Ruleset/Surge/Other/Game.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.list"
+
+          download_urls "Ruleset/Surge/Other/Apple.list" \
+            "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Apple.list" \
+            "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
+
       - name: 对规则进行排序、去重与优化
         shell: bash
         working-directory: ${{ github.workspace }}/Tools-repo
@@ -300,7 +333,7 @@ jobs:
               { print "15 " $0; next }
             ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
 
-            # 去重（忽略大小写）
+            # 去重
             awk '!seen[tolower($0)]++' "$file" > temp && mv temp "$file"
           done
 
@@ -435,3 +468,9 @@ jobs:
         with:
           retain_days: 5               # 保留最近 5 天記錄
           keep_minimum_runs: 3         # 至少保留 3 次運行
+
+
+
+
+
+
