@@ -300,8 +300,7 @@ jobs:
           echo "开始排序与去重 & 修正规则格式"
 
           for files in Ruleset/Surge/**/*.list \
-                      Ruleset/mihomo/Block/*.list \
-                      Surge/Module/Ads_Block.sgmodule; do
+                      Ruleset/mihomo/Block/*.list; do
             [[ -f "$files" ]] || continue
 
             # 删除无效规则
@@ -357,6 +356,16 @@ jobs:
           set -euo pipefail
           for files in Surge/Module/Ads_Block.sgmodule; do
             [[ -f "$files" ]] || continue
+
+            # 删除无效规则
+            sed -i '/^DOMAIN-REGEX,/d' "$files"
+
+            # 清理注释、空行、行内注释及指定内容
+            sed -i -E '/^\s*[#;]/d; /^\s*\/\//d; /^$/d; s| //.*||' "$files"
+            sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$files"
+            sed -i -E 's/,reject(,[^,]+)*$//I' "$files"
+            sed -i 's/, */,/g' "$files"
+
             line_count=$(wc -l < "$files")
             {
               echo "#!name = Block ads | 自用广告拦截合集规则"
