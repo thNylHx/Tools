@@ -212,31 +212,31 @@ jobs:
 
           # 下载规则函数
           download_urls() {
-            local target_file="$1"
+            local files="$1"
             shift
 
-            echo "开始处理 → $target_file"
+            echo "开始处理 → $files"
 
             # 确保目录存在
-            mkdir -p "$(dirname "$target_file")"
+            mkdir -p "$(dirname "$files")"
 
             # 清空目标文件
-            : > "$target_file"
+            : > "$files"
 
             for url in "$@"; do
               echo "  下载: $url"
               if curl -f -L --retry 3 --retry-delay 5 \
                       --connect-timeout 10 --max-time 30 \
-                      "$url" >> "$target_file"; then
+                      "$url" >> "$files"; then
                 echo "    下载成功"
-                echo "" >> "$target_file"          # 每个来源后添加空行分隔
+                echo "" >> "$files"          # 每个来源后添加空行分隔
               else
                 echo "    下载失败: $url" >&2
                 # 继续执行，不中断整个流程
               fi
             done
 
-            echo "完成 → $target_file "
+            echo "完成 → $files "
           }
 
           # 合并广告规则集
@@ -296,75 +296,21 @@ jobs:
         working-directory: ${{ github.workspace }}/Tools-repo
         run: |
           set -euo pipefail
-          shopt -s globstar nullglob
-          echo "开始对规则文件进行排序、去重与格式优化..."
-
-          # 处理纯规则列表文件
-          for file in Ruleset/Surge/**/*.list Ruleset/mihomo/Block/*.list; do
-            [[ -f "$file" ]] || continue
-
-            echo "处理规则文件: $file"
-
-            # 1. 删除无效或特定规则
-            sed -i '/^DOMAIN-REGEX,/d' "$file"
-
-            # 2. 清理注释、空行、行内注释及指定内容
-            sed -i -E '/^\s*[#;]/d; /^\s*\/\//d; /^$/d; s| //.*||' "$file"
-            sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
-            sed -i -E 's/,reject(,[^,]+)*$//I' "$file"
-            sed -i 's/, */,/g' "$file"
-
-            # 3. 按规则类型优先级排序
-            awk '
-              /^DOMAIN,/          { print "0 " $0; next }
-              /^DOMAIN-SUFFIX,/   { print "1 " $0; next }
-              /^DOMAIN-KEYWORD,/  { print "2 " $0; next }
-              /^DOMAIN-WILDCARD,/ { print "3 " $0; next }
-              /^IP-CIDR,/         { print "4 " $0; next }
-              /^IP-CIDR6,/        { print "5 " $0; next }
-              /^IP-ASN,/          { print "6 " $0; next }
-              /^PROCESS-NAME,/    { print "7 " $0; next }
-              /^URL-REGEX,/       { print "8 " $0; next }
-              /^USER-AGENT,/      { print "9 " $0; next }
-              /^GEOIP,/           { print "10 " $0; next }
-              /^AND,/             { print "11 " $0; next }
-              /^OR,/              { print "12 " $0; next }
-              /^NOT,/             { print "13 " $0; next }
-              /^DEST-PORT,/       { print "14 " $0; next }
-              { print "15 " $0; next }
-            ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
-
-            # 4. 去重（忽略大小写）
-            awk '!seen[tolower($0)]++' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
-
-            echo "完成: $file （最终行数: $(wc -l < "$file")）"
-          done
-
-          echo "所有规则文件排序、去重与优化完成。"
-
-
-
-      - name: 对规则进行排序、去重与优化
-        shell: bash
-        working-directory: ${{ github.workspace }}/Tools-repo
-        run: |
-          set -euo pipefail
           shopt -s globstar
           echo "开始排序与去重 & 修正规则格式"
 
-          for file in Ruleset/Surge/**/*.list \
-                      Ruleset/mihomo/Block/*.list \
-                      Surge/Module/Ads_Block.sgmodule; do
-            [[ -f "$file" ]] || continue
+          for files in Ruleset/Surge/**/*.list \
+                      Ruleset/mihomo/Block/*.list; do
+            [[ -f "$files" ]] || continue
 
             # 删除无效规则
-            sed -i '/^DOMAIN-REGEX,/d' "$file"
+            sed -i '/^DOMAIN-REGEX,/d' "$files"
 
             # 清理注释、空行、行内注释及指定内容
-            sed -i -E '/^\s*[#;]/d; /^\s*\/\//d; /^$/d; s| //.*||' "$file"
-            sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
-            sed -i -E 's/,reject(,[^,]+)*$//I' "$file"
-            sed -i 's/, */,/g' "$file"
+            sed -i -E '/^\s*[#;]/d; /^\s*\/\//d; /^$/d; s| //.*||' "$files"
+            sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$files"
+            sed -i -E 's/,reject(,[^,]+)*$//I' "$files"
+            sed -i 's/, */,/g' "$files"
 
             # 按规则类型排序
             awk '
@@ -384,23 +330,23 @@ jobs:
               /^NOT,/ { print "13 " $0; next }
               /^DEST-PORT,/ { print "14 " $0; next }
               { print "15 " $0; next }
-            ' "$file" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$file.sorted" && mv "$file.sorted" "$file"
+            ' "$files" | sort -k1,1n -k2,2 | cut -d' ' -f2- > "$files.sorted" && mv "$files.sorted" "$files"
 
             # 去重
-            awk '!seen[tolower($0)]++' "$file" > temp && mv temp "$file"
+            awk '!seen[tolower($0)]++' "$files" > temp && mv temp "$files"
 
             # 添加/更新头部信息（放在文件最前面）
-            filename=$(basename "$file" .list)
-            line_count=$(wc -l < "$file")
+            file_name=$(basename "$files" .list)
+            line_count=$(wc -l < "$files")
 
             {
-              echo "# 规则名称: ${filename}"
+              echo "# 规则名称: ${file_name}"
               echo "# 规则统计: ${line_count}"
               echo ""
-              cat "$file"
-            } > "$file.tmp" && mv "$file.tmp" "$file"
+              cat "$files"
+            } > "$files.tmp" && mv "$files.tmp" "$files"
 
-            echo "完成: $file"
+            echo "完成: $files"
           done
 
       - name: 处理 Surge 广告模块 sgmodule
@@ -408,9 +354,9 @@ jobs:
         working-directory: ${{ github.workspace }}/Tools-repo
         run: |
           set -euo pipefail
-          for file in Surge/Module/Ads_Block.sgmodule; do
-            [[ -f "$file" ]] || continue
-            line_count=$(wc -l < "$file")
+          for files in Surge/Module/Ads_Block.sgmodule; do
+            [[ -f "$files" ]] || continue
+            line_count=$(wc -l < "$files")
             {
               echo "#!name = Block ads | 自用广告拦截合集规则"
               echo "#!desc = 名称: 自用广告拦截合集规则"
@@ -435,8 +381,8 @@ jobs:
                 } else {
                   print $0
                 }
-              }' "$file"
-            } > tmpfile && mv tmpfile "$file"
+              }' "$files"
+            } > tmpfile && mv tmpfile "$files"
           done
 
       - name: 同步 LoonKissSurge 模块到 Surge/QingRex
