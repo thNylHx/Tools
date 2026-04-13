@@ -286,19 +286,15 @@ jobs:
             # 删除无效规则
             sed -i '/^DOMAIN-REGEX,/d' "$files"
 
+            # 添加 IP-CIDR 前缀
+            sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^/IP-CIDR,/}' "$files"
+            sed -i -E '/^IP-CIDR6,/!{/^[a-fA-F0-9]+:|([a-fA-F0-9]+:+)+[a-fA-F0-9]+\/[0-9]+/s/^/IP-CIDR6,/}' "$files"
+
             # 将以"."开头的行的第一个"."替换为 "DOMAIN-SUFFIX"
             sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$files"
 
-            # 为无前缀规则添加 DOMAIN,
-            sed -i -E '
-              /^\s*$/b;
-              /^\s*[#;]/b;
-              /^\s*\/\//b;
-              /^\s*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/b;
-              /^\s*[0-9A-Fa-f:]+\/[0-9]+/b;
-              /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^GEOIP,|^AND,|^OR,|^NOT,|^URL-REGEX,|^USER-AGENT,|^PROCESS-NAME,|^DEST-PORT,/b;
-              s/^([^#])/DOMAIN,\1/
-            ' "$files"
+            # 将除了以 "#" 开头、"空行" 开头之外的行, 在行首添加 "DOMAIN"
+            sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^\s*\/\//b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^GEOIP,|^AND,|^OR,|^NOT,|^URL-REGEX,|^USER-AGENT,|^PROCESS-NAME,|^DEST-PORT,/b; s/^([^#])/DOMAIN,\1/' "$files"
 
             # 删除文件中所有 [以 # 或 ; 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
             sed -i -e '/^\s*[#;]/d' -e '/^$/d' -e 's| //.*||'  "$files"
@@ -312,10 +308,6 @@ jobs:
 
             # 修正格式
             sed -i 's/, */,/g' "$files"
-
-            # 添加 IP-CIDR 前缀
-            sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^/IP-CIDR,/}' "$files"
-            sed -i -E '/^IP-CIDR6,/!{/^[a-fA-F0-9]+:|([a-fA-F0-9]+:+)+[a-fA-F0-9]+\/[0-9]+/s/^/IP-CIDR6,/}' "$files"
 
             # 按规则类型排序
             awk '
