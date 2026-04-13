@@ -237,7 +237,7 @@ jobs:
               Ruleset/Surge/Block/Ads_Advertising.list \
               Ruleset/Surge/Block/Ads_AWAvenue.list \
               Ruleset/Surge/Block/Ads_all.list
-              
+
             # 同步广告规则到其他目录
             cp "Ruleset/Surge/Block/Ads_Block.list" "Ruleset/mihomo/Block/Ads_Block.list"
             cp "Ruleset/Surge/Block/Ads_Block.list" "Surge/Module/Ads_Block.sgmodule"
@@ -385,7 +385,7 @@ jobs:
                 }
               }' "$file"
             } > tmpfile && mv tmpfile "$file"
-            sed -i -E '/^\s*#\s*规则(名称|统计):/d; /^\[Rule\]$/{n;/^$/d;}' "$file"
+            sed -i -E 's/\r$//; /^\s*#\s*规则(名称|统计):/d; /^\[Rule\]$/{n;/^$/d;}' "$file"
           done
 
       - name: 同步 LoonKissSurge 模块到 Surge/QingRex
