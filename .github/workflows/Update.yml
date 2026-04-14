@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-14 08:26:41
+#!date = 2026-04-14 08:36:59
 
 on:
   workflow_dispatch:
@@ -331,7 +331,7 @@ jobs:
             # 去重
             awk '!seen[tolower($0)]++' "$file" > temp && mv temp "$file"
 
-            # 添加/更新头部信息（放在文件最前面）
+            # 添加/更新头部信息
             file_name=$(basename "$file" .list)
             line_count=$(wc -l < "$file")
 
@@ -353,16 +353,16 @@ jobs:
           for file in Surge/Module/Ads_Block.sgmodule; do
             [[ -f "$file" ]] || continue
 
-            # 删除文件中 [规则名称] + [规则名称] + [空行]
+            # 删除文件中所有 [以 # 或 ; 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
             sed -i -E 's/\r$//; /^\s*[#;]/d; /^\s*$/d; s| //.*||' "$file"
 
             line_count=$(wc -l < "$file")
             {
-              echo "#!name = Block ads | 自用广告拦截合集规则"
-              echo "#!desc = 名称: 自用广告拦截合集规则"
+              echo "#!name = Block ads | 自用广告拦截规则合集"
+              echo "#!desc = 名称: 自用广告拦截规则合集"
               echo "#!author = RuCu6 Keywos fmz200 可莉🅥 QingRex"
-              echo "#!category = 🚫 Block ads"
-              echo "#!tag = 自用广告拦截合集规则"
+              echo "#!category = Block ads"
+              echo "#!tag = 自用广告拦截规则合集"
               echo "#!Rule = $line_count"
               echo ""
               echo "[Rule]"
@@ -472,6 +472,6 @@ jobs:
       - name: 清理旧工作流运行记录
         uses: Mattraks/delete-workflow-runs@main
         with:
-          retain_days: 5               # 保留最近 5 天記錄
-          keep_minimum_runs: 3         # 至少保留 3 次運行
+          retain_days: 1
+          keep_minimum_runs: 3
  
