@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block ads
 #!tag = 自用广告拦截规则合集
-#!Rule = 4543
+#!Rule = 4542
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -4494,7 +4494,6 @@ IP-CIDR,59.111.239.62/32,REJECT,no-resolve,pre-matching
 IP-CIDR,60.28.172.100/32,REJECT,no-resolve,pre-matching
 IP-CIDR,61.151.231.157/32,REJECT,no-resolve,pre-matching
 IP-CIDR,81.71.61.216/32,REJECT,no-resolve,pre-matching
-IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,REJECT,no-resolve,pre-matching
 IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,REJECT,no-resolve,pre-matching
 IP-CIDR6,2402:4e00:1900:1700:0:9554:1ad9:c3a/128,REJECT,no-resolve,pre-matching
 IP-CIDR6,2402:4e00:8030:1::17/128,REJECT,no-resolve,pre-matching
