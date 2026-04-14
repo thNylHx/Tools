@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-14 20:53:08
+#!date = 2026-04-14 21:04:17
 
 on:
   workflow_dispatch:
@@ -371,7 +371,7 @@ jobs:
             sed -i -E '/^\s*(IP-CIDR6?|IP-ASN),/s/,no-resolve//g' "$file"
 
             # 删除文件中所有 [以 # 或 ; 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
-            sed -i -e '/^\s*[#;]/d' -e '/^$/d' -e 's| //.*||'  "$file"
+            sed -i -E '/^\s*[#;]/d; /^\s*\/\//d; /^\s*$/d; s|\s+//.*||' "$file"
 
             line_count=$(wc -l < "$file")
             {
