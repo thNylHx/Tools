@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-14 09:42:33
+#!date = 2026-04-14 09:55:01
 
 on:
   workflow_dispatch:
@@ -118,6 +118,32 @@ jobs:
             ["Block/Ads_AWAvenue.list"]="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge-RULE-SET.list"
             ["Block/Ads_all.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
             
+            # Media
+            ## YouTube
+            ["Media/YouTubeMusic.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
+            ["Media/YouTube_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
+            ## Twitter
+            ["Media/Twitter_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
+            ["Media/Twitter_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
+            ## Facebook & Instagram
+            ["Media/Facebook_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
+            ["Media/Facebook_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
+            ["Media/Instagram.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
+            ## Netflix
+            ["Media/Netflix_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
+            ["Media/Netflix_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
+            ## Telegram
+            ["Media/Telegram.list"]="https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
+            ## GlobalMedia
+            ["Media/GlobalMedia.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
+            ["Media/BilibiliHMT.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
+            ["Media/Disney.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/disney.list"
+            ["Media/Spotify.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.list"
+            ["Media/TikTok.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/tiktok.list"
+            ## ChinaMedia
+            ["Media/ChinaMedia.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
+            ["Media/Bilibili.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.list"
+
             # Other
             ## GFW
             ["Other/GlobalGFW_1.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
@@ -148,32 +174,6 @@ jobs:
             ["Other/China_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
             ["Other/China.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/cn.list"
             ["Other/Private_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
-
-            # Media
-            ## YouTube
-            ["Media/YouTubeMusic.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
-            ["Media/YouTube_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
-            ## Twitter
-            ["Media/Twitter_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
-            ["Media/Twitter_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
-            ## Facebook & Instagram
-            ["Media/Facebook_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
-            ["Media/Facebook_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
-            ["Media/Instagram.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
-            ## Netflix
-            ["Media/Netflix_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
-            ["Media/Netflix_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
-            ## Telegram
-            ["Media/Telegram.list"]="https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
-            ## GlobalMedia
-            ["Media/GlobalMedia.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
-            ["Media/BilibiliHMT.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
-            ["Media/Disney.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/disney.list"
-            ["Media/Spotify.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.list"
-            ["Media/TikTok.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/tiktok.list"
-            ## ChinaMedia
-            ["Media/ChinaMedia.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
-            ["Media/Bilibili.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.list"
           )
 
           failures=0
@@ -285,13 +285,13 @@ jobs:
             # 删除无效规则
             sed -i '/^DOMAIN-REGEX,/d' "$file"
 
-            # 开头是 IP-CIDR 或 IP-CIDR6 的规则移除 ,no-resolve
+            # 删除开头是 IP-CIDR 或 IP-CIDR6 的规则 ,no-resolve
             sed -i -E '/^IP-CIDR,/s/,no-resolve//; /^IP-CIDR6,/s/,no-resolve//' "$file"
 
             # 删除文件中所有 [以 # 或 ; 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
             sed -i -E 's/\r$//; s|\s*//.*||; /^\s*(#|;)\s*/d; /^\s*$/d' "$file"
 
-            # 添加 IP-CIDR 前缀
+            # 为添加 IP-CIDR 前缀
             sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^/IP-CIDR,/}' "$file"
             sed -i -E '/^IP-CIDR6,/!{/^[a-fA-F0-9]+:|([a-fA-F0-9]+:+)+[a-fA-F0-9]+\/[0-9]+/s/^/IP-CIDR6,/}' "$file"
 
