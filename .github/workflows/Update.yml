@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-14 11:09:45
+#!date = 2026-04-14 19:08:22
 
 on:
   workflow_dispatch:
@@ -133,7 +133,9 @@ jobs:
             ["Media/Netflix_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
             ["Media/Netflix_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
             ## Telegram
-            ["Media/Telegram.list"]="https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
+            ["Media/Telegram_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/telegram.list"
+            ["Media/Telegram_1.list"]="https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
+            ["Media/Telegram_2.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/telegram.list"
             ## GlobalMedia
             ["Media/GlobalMedia.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
             ["Media/BilibiliHMT.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
@@ -255,15 +257,21 @@ jobs:
             ## Facebook + Instagram
             merge_local "Ruleset/Surge/Media/Facebook.list" \
               Ruleset/Surge/Media/Facebook_1.list \
-              Ruleset/Surge/Media/Facebook_ip.list \
-              Ruleset/Surge/Media/Instagram.list
+              Ruleset/Surge/Media/Instagram.list \
+              Ruleset/Surge/Media/Facebook_ip.list
+              
+            ## Telegram
+            merge_local "Ruleset/Surge/Media/Telegram.list" \
+              Ruleset/Surge/Media/Telegram_1.list \
+              Ruleset/Surge/Media/Telegram_2.list \
+              Ruleset/Surge/Media/Telegram_ip.list
 
             ## Google
             merge_local "Ruleset/Surge/Other/Google.list" \
               Ruleset/Surge/Other/Google_1.list \
-              Ruleset/Surge/Other/Google_ip.list \
-              Ruleset/Surge/Other/Gemini.list
-
+              Ruleset/Surge/Other/Gemini.list \
+              Ruleset/Surge/Other/Google_ip.list
+              
             ## Global
             merge_local "Ruleset/Surge/Other/Global.list" \
               Ruleset/Surge/Other/GlobalGFW_1.list \
@@ -286,7 +294,7 @@ jobs:
             sed -i '/^DOMAIN-REGEX,/d' "$file"
 
             # 删除开头是 IP-CIDR 或 IP-CIDR6 的规则 ,no-resolve
-            sed -i -E '/^IP-CIDR,/s/,no-resolve//; /^IP-CIDR6,/s/,no-resolve//' "$file"
+            sed -i -E '/^\s*(IP-CIDR6?|IP-ASN),/s/,no-resolve//g' "$file"
 
             # 删除文件中所有 [以 # 或 ; 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
             sed -i -E 's/\r$//; s|\s*//.*||; /^\s*(#|;)\s*/d; /^\s*$/d' "$file"
