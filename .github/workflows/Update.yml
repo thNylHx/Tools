@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-14 10:49:37
+#!date = 2026-04-14 11:09:45
 
 on:
   workflow_dispatch:
@@ -452,16 +452,18 @@ jobs:
 
           echo "time=$(date +'%Y-%m-%d %H:%M:%S %Z')" >> $GITHUB_ENV
 
-          if [ "${{ env.changed }}" = "true" ]; then
-            echo "diff_text<<EOF" >> $GITHUB_ENV
-            echo "📈 <b>变更详细</b>" >> $GITHUB_ENV
-            echo "➕ <b>新增:</b> ${{ env.added }}" >> $GITHUB_ENV
-            echo "✏️ <b>修改:</b> ${{ env.modified }}" >> $GITHUB_ENV
-            echo "❌ <b>删除:</b> ${{ env.deleted }}" >> $GITHUB_ENV
-            echo "" >> $GITHUB_ENV
-            echo "📂 <b>变更文件</b>" >> $GITHUB_ENV
-            echo "<pre>${{ env.files }}</pre>" >> $GITHUB_ENV
-            echo "EOF" >> $GITHUB_ENV
+          if [ "$changed" = "true" ]; then
+            {
+              echo "diff_text<<EOF"
+              echo "📈 <b>变更详细</b>"
+              echo "➕ 新增: $added"
+              echo "✏️ 修改: $modified"
+              echo "❌ 删除: $deleted"
+              echo ""
+              echo "📂 <b>变更文件</b>"
+             echo "<pre>$files</pre>"
+              echo "EOF"
+            } >> $GITHUB_ENV
           else
             echo "diff_text=" >> $GITHUB_ENV
           fi
@@ -476,12 +478,12 @@ jobs:
           message: |
             📢 <b>GitHub Actions 自动化任务通知</b>
 
-            ✉️ <b>标题:</b> Surge 上游规则模块拉取
-            📦 <b>仓库:</b> thNylHx/Tools
-            ⏰ <b>时间:</b> ${{ env.time }}
+            ✉️ 标题: Surge 上游规则模块拉取
+            📦 仓库: thNylHx/Tools
+            ⏰ 时间: ${{ env.time }}
 
-            🎯 <b>状态:</b> ${{ job.status == 'success' && '恭喜你! 任务成功' || '很遗憾! 任务失败' }}
-            📊 <b>更新:</b> ${{ env.changed == 'true' && '本次有更新' || '本次无更新' }}
+            🎯 状态: ${{ job.status == 'success' && '恭喜你! 任务成功' || '很遗憾! 任务失败' }}
+            📊 更新: ${{ env.changed == 'true' && '本次有更新' || '本次无更新' }}
 
             ${{ env.diff_text }}
 
