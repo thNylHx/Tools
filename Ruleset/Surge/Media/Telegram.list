@@ -1,18 +1,6 @@
 # 规则名称: Telegram
-# 规则统计: 64
+# 规则统计: 56
 
-DOMAIN,149.154.160.0/20
-DOMAIN,185.76.151.0/24
-DOMAIN,2001:67c:4e8::/48
-DOMAIN,2001:b28:f23c::/47
-DOMAIN,2001:b28:f23f::/48
-DOMAIN,2a0a:f280::/32
-DOMAIN,91.105.192.0/23
-DOMAIN,91.108.16.0/21
-DOMAIN,91.108.4.0/22
-DOMAIN,91.108.56.0/22
-DOMAIN,91.108.8.0/21
-DOMAIN,95.161.64.0/20
 DOMAIN,api.mixpanel.com
 DOMAIN,events-gateway.ncdev.site
 DOMAIN-SUFFIX,cdn-telegram.org
@@ -50,12 +38,16 @@ IP-CIDR,185.76.151.0/24,no-resolve
 IP-CIDR,5.28.192.0/18,no-resolve
 IP-CIDR,91.105.192.0/23,no-resolve
 IP-CIDR,91.108.12.0/22,no-resolve
+IP-CIDR,91.108.16.0/21,no-resolve
 IP-CIDR,91.108.16.0/22,no-resolve
 IP-CIDR,91.108.20.0/22,no-resolve
 IP-CIDR,91.108.4.0/22,no-resolve
 IP-CIDR,91.108.56.0/22,no-resolve
+IP-CIDR,91.108.8.0/21,no-resolve
 IP-CIDR,91.108.8.0/22,no-resolve
+IP-CIDR,95.161.64.0/20,no-resolve
 IP-CIDR6,2001:67c:4e8::/48,no-resolve
+IP-CIDR6,2001:b28:f23c::/47,no-resolve
 IP-CIDR6,2001:b28:f23c::/48,no-resolve
 IP-CIDR6,2001:b28:f23d::/48,no-resolve
 IP-CIDR6,2001:b28:f23f::/48,no-resolve
