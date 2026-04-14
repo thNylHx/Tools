@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-14 20:49:42
+#!date = 2026-04-14 20:50:41
 
 on:
   workflow_dispatch:
@@ -295,7 +295,6 @@ jobs:
 
             # 删除文件中所有 [以 # 或 ; 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
             sed -i -E '/^\s*[#;]/d; /^\s*\/\//d; /^$/d; s| //.*||' "$file"
-            sed -i -e '/^\s*[#;]/d' -e '/^$/d' -e 's| //.*||'  "$file"
 
             # 删除开头是 IP-CIDR IP-CIDR6 IP-ASN 的规则 ,no-resolve
             sed -i -E '/^\s*(IP-CIDR6?|IP-ASN),/s/,no-resolve//g' "$file"
