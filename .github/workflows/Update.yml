@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-14 09:55:01
+#!date = 2026-04-14 09:58:19
 
 on:
   workflow_dispatch:
@@ -469,6 +469,9 @@ jobs:
             ${{ env.changed == 'true' && format('➕ 新增: {0}', env.added) || '' }}
             ${{ env.changed == 'true' && format('✏️ 修改: {0}', env.modified) || '' }}
             ${{ env.changed == 'true' && format('❌ 删除: {0}', env.deleted) || '' }}
+
+            ${{ env.changed == 'true' && '📂 变更文件:' || '' }}
+            ${{ env.changed == 'true' && env.files || '' }}
 
       - name: 清理旧工作流运行记录
         uses: Mattraks/delete-workflow-runs@main
