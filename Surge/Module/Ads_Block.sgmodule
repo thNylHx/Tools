@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block ads
 #!tag = 自用广告拦截规则合集
-#!Rule = 4604
+#!Rule = 4603
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1388,7 +1388,6 @@ DOMAIN,yk-ssp.ad.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN,ykad-data.cp31.ott.cibntv.net,REJECT,extended-matching,pre-matching
 DOMAIN,ykad-data.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN,ykad-gateway.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN,ymg-api.terabox.com,REJECT,extended-matching,pre-matching
 DOMAIN,youku-acs.m.taobao.com,REJECT,extended-matching,pre-matching
 DOMAIN,youku-crm-product.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN,yt-adp.nosdn.127.net,REJECT,extended-matching,pre-matching
