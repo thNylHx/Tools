@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-14 20:14:34
+#!date = 2026-04-14 20:21:01
 
 on:
   workflow_dispatch:
@@ -300,8 +300,8 @@ jobs:
             sed -i -E 's/\r$//; s|\s*//.*||; /^\s*(#|;)\s*/d; /^\s*$/d' "$file"
 
             # 为 IP 添加 IP-CIDR IP-CIDR6 前缀
-            sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+$/s/^/IP-CIDR,/}' "$file"
-            sed -i -E '/^IP-CIDR6,/!{/^([0-9a-fA-F:]+:+)+[0-9a-fA-F]+\/[0-9]+$/s/^/IP-CIDR6,/}' "$file"
+            sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^/IP-CIDR,/}' "$file"
+            sed -i -E '/^IP-CIDR6,/!{/^[a-fA-F0-9]+:|([a-fA-F0-9]+:+)+[a-fA-F0-9]+\/[0-9]+/s/^/IP-CIDR6,/}' "$file"
 
             # 将以"."开头的行的第一个"."替换为 "DOMAIN-SUFFIX"
             sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
