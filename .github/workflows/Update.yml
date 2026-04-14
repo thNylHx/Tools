@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-14 20:05:53
+#!date = 2026-04-14 20:14:34
 
 on:
   workflow_dispatch:
@@ -303,9 +303,6 @@ jobs:
             sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+$/s/^/IP-CIDR,/}' "$file"
             sed -i -E '/^IP-CIDR6,/!{/^([0-9a-fA-F:]+:+)+[0-9a-fA-F]+\/[0-9]+$/s/^/IP-CIDR6,/}' "$file"
 
-            # 为前缀是 IP-CIDR IP-CIDR6 IP-ASN 添加后缀 ,no-resolve
-            sed -i -E '/^\s*(IP-CIDR6?|IP-ASN),/ s/^((IP-CIDR6?|IP-ASN),[^,()]+)/\1,no-resolve/' "$file"
-
             # 将以"."开头的行的第一个"."替换为 "DOMAIN-SUFFIX"
             sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
 
@@ -318,6 +315,9 @@ jobs:
             sed -i -e '/DOMAIN,this_rule_set_is_made_by_sukkaw.skk.moe/d' "$file"
             sed -i -e '/DOMAIN,7h1s_rul35et_i5_mad3_by_5ukk4w-ruleset.skk.moe/d' "$file"
             sed -i -E 's/,reject(,[^,]+)*$//I' "$file"
+
+            # 为前缀是 IP-CIDR IP-CIDR6 IP-ASN 添加后缀 ,no-resolve
+            sed -i -E '/^\s*(IP-CIDR6?|IP-ASN),/ s/^((IP-CIDR6?|IP-ASN),[^,()]+)/\1,no-resolve/' "$file"
 
             # 修正格式
             sed -i 's/, */,/g' "$file"
