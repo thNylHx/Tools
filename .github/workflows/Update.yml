@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-14 09:58:19
+#!date = 2026-04-14 10:28:04
 
 on:
   workflow_dispatch:
@@ -456,22 +456,23 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          format: markdown
+          format: html
           message: |
-            📢 GitHub Actions 自动化任务通知
-            ✉️ 标题: Surge 上游规则模块拉取
-            📦 仓库: thNylHx/Tools
-            ⏰ 时间: ${{ env.time }}
-            🎯 状态: ${{ job.status == 'success' && '恭喜你! 任务成功' || '很遗憾! 任务失败' }}
-            📊 更新: ${{ env.changed == 'true' && '本次有更新' || '本次无更新' }}
+            📢 <b>GitHub Actions 自动化任务通知</b>
 
-            ${{ env.changed == 'true' && '📈 变更详细' || '' }}
-            ${{ env.changed == 'true' && format('➕ 新增: {0}', env.added) || '' }}
-            ${{ env.changed == 'true' && format('✏️ 修改: {0}', env.modified) || '' }}
-            ${{ env.changed == 'true' && format('❌ 删除: {0}', env.deleted) || '' }}
+            ✉️ <b>标题:</b> Surge 上游规则模块拉取
+            📦 <b>仓库:</b> thNylHx/Tools
+            ⏰ <b>时间:</b> ${{ env.time }}
+            🎯 <b>状态:</b> ${{ job.status == 'success' && '恭喜你! 任务成功' || '很遗憾! 任务失败' }}
+            📊 <b>更新:</b> ${{ env.changed == 'true' && '本次有更新' || '本次无更新' }}
 
-            ${{ env.changed == 'true' && '📂 变更文件:' || '' }}
-            ${{ env.changed == 'true' && env.files || '' }}
+            ${{ env.changed == 'true' && '📈 <b>变更详细</b>' || '' }}
+            ${{ env.changed == 'true' && format('➕ <b>新增:</b> {0}', env.added) || '' }}
+            ${{ env.changed == 'true' && format('✏️ <b>修改:</b> {0}', env.modified) || '' }}
+            ${{ env.changed == 'true' && format('❌ <b>删除:</b> {0}', env.deleted) || '' }}
+
+            ${{ env.changed == 'true' && '📂 <b>变更文件:</b>' || '' }}
+            ${{ env.changed == 'true' && format('<pre>%s</pre>', env.files) || '' }}
 
       - name: 清理旧工作流运行记录
         uses: Mattraks/delete-workflow-runs@main
