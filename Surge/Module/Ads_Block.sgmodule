@@ -4541,11 +4541,11 @@ AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,-normal.zijieapi.com)),REJECT,pre-matc
 AND,((IP-ASN,45090),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT,pre-matching
 AND,((IP-ASN,55990),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT,pre-matching
 AND,((IP-ASN,63646),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT,pre-matching
-AND,((IP-CIDR,101.126.58.201/32,no-resolve),(DEST-PORT,6443))
-AND,((IP-CIDR,110.249.199.75/32,no-resolve),(DEST-PORT,6443))
-AND,((IP-CIDR,111.225.147.191/32,no-resolve),(DEST-PORT,6443))
-AND,((IP-CIDR,111.63.61.101/32,no-resolve),(DEST-PORT,6443))
-AND,((IP-CIDR,220.243.141.0/32,no-resolve),(DEST-PORT,6443))
+AND,((IP-CIDR,101.126.58.201/32),(DEST-PORT,6443)),REJECT,pre-matching
+AND,((IP-CIDR,110.249.199.75/32),(DEST-PORT,6443)),REJECT,pre-matching
+AND,((IP-CIDR,111.225.147.191/32),(DEST-PORT,6443)),REJECT,pre-matching
+AND,((IP-CIDR,111.63.61.101/32),(DEST-PORT,6443)),REJECT,pre-matching
+AND,((IP-CIDR,220.243.141.0/32),(DEST-PORT,6443)),REJECT,pre-matching
 AND,((OR,((DOMAIN-SUFFIX,bytegecko.com),(DOMAIN-SUFFIX,byteeffecttos.com))),(DOMAIN-KEYWORD,ncdn)),REJECT,pre-matching
 AND,((URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/d(\d)?"),(USER-AGENT,"*com.xunmeng.pinduoduo*")),REJECT,pre-matching
 AND,((URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]\/d(\d)?\?"),(USER-AGENT,"*com.xunmeng.pinduoduo*")),REJECT,pre-matching
