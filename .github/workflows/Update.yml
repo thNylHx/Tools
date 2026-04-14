@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-14 09:41:42
+#!date = 2026-04-14 09:42:33
 
 on:
   workflow_dispatch:
@@ -285,11 +285,11 @@ jobs:
             # 删除无效规则
             sed -i '/^DOMAIN-REGEX,/d' "$file"
 
-            # 删除文件中所有 [以 # 或 ; 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
-            sed -i -E 's/\r$//; s|\s*//.*||; /^\s*(#|;)\s*/d; /^\s*$/d' "$file"
-
             # 开头是 IP-CIDR 或 IP-CIDR6 的规则移除 ,no-resolve
             sed -i -E '/^IP-CIDR,/s/,no-resolve//; /^IP-CIDR6,/s/,no-resolve//' "$file"
+
+            # 删除文件中所有 [以 # 或 ; 开头的注释行] + [空行] + [每行中 // 及其后面的内容]
+            sed -i -E 's/\r$//; s|\s*//.*||; /^\s*(#|;)\s*/d; /^\s*$/d' "$file"
 
             # 添加 IP-CIDR 前缀
             sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^/IP-CIDR,/}' "$file"
