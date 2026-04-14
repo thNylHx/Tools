@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-14 08:36:59
+#!date = 2026-04-14 09:15:34
 
 on:
   workflow_dispatch:
@@ -367,8 +367,8 @@ jobs:
               echo ""
               echo "[Rule]"
               awk -F, '{
-                if ($0 ~ /^AND,\(\(IP-CIDR,/ || $0 ~ /^AND,\(\(IP-CIDR6,/) { print $0; next }
-                sub(/,no-resolve/, "", $0)
+                gsub(/,no-resolve/, "", $0)
+                if ($0 ~ /^AND,\(\(IP-CIDR,/ || $0 ~ /^AND,\(\(IP-CIDR6,/) { print $0 ",REJECT,pre-matching" next }
                 rule = $1
                 if (rule=="DOMAIN-KEYWORD" || rule=="DOMAIN-SUFFIX" || rule=="DOMAIN") {
                   print $0",REJECT,extended-matching,pre-matching"
