@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block ads
 #!tag = 自用广告拦截规则合集
-#!Rule = 4603
+#!Rule = 4606
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -13,6 +13,7 @@ DOMAIN,1500026601.vodplayer.wxamedia.com,REJECT,extended-matching,pre-matching
 DOMAIN,180.76.76.200,REJECT,extended-matching,pre-matching
 DOMAIN,8le8le.com,REJECT,extended-matching,pre-matching
 DOMAIN,8rn1y79f02-1.algolianet.com,REJECT,extended-matching,pre-matching
+DOMAIN,DOMAIN-REGEX,^speed\.(coe|open)\.ad\.[a-z]{2,6}\.prod\.hosts\.ooklaserver\.net$,REJECT,extended-matching,pre-matching
 DOMAIN,a.wkanx.com,REJECT,extended-matching,pre-matching
 DOMAIN,a0.app.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN,aaid.umeng.com,REJECT,extended-matching,pre-matching
@@ -4609,3 +4610,5 @@ AND,((OR,((DOMAIN-SUFFIX,bytegecko.com),(DOMAIN-SUFFIX,byteeffecttos.com))),(DOM
 AND,((PROTOCOL,QUIC),(DOMAIN-SUFFIX,xiaohongshu.com,extended-matching)),REJECT,extended-matching,pre-matching
 AND,((URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/d(\d)?"),(USER-AGENT,"*com.xunmeng.pinduoduo*")),REJECT,extended-matching,pre-matching
 AND,((URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]\/d(\d)?\?"),(USER-AGENT,"*com.xunmeng.pinduoduo*")),REJECT,extended-matching,pre-matching
+ 
+    
