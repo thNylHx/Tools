@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-14 10:32:34
+#!date = 2026-04-14 10:49:37
 
 on:
   workflow_dispatch:
@@ -448,7 +448,23 @@ jobs:
       - name: 设置当前时间变量
         shell: bash
         run: |
+          set -euo pipefail
+
           echo "time=$(date +'%Y-%m-%d %H:%M:%S %Z')" >> $GITHUB_ENV
+
+          if [ "${{ env.changed }}" = "true" ]; then
+            echo "diff_text<<EOF" >> $GITHUB_ENV
+            echo "📈 <b>变更详细</b>" >> $GITHUB_ENV
+            echo "➕ <b>新增:</b> ${{ env.added }}" >> $GITHUB_ENV
+            echo "✏️ <b>修改:</b> ${{ env.modified }}" >> $GITHUB_ENV
+            echo "❌ <b>删除:</b> ${{ env.deleted }}" >> $GITHUB_ENV
+            echo "" >> $GITHUB_ENV
+            echo "📂 <b>变更文件</b>" >> $GITHUB_ENV
+            echo "<pre>${{ env.files }}</pre>" >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
+          else
+            echo "diff_text=" >> $GITHUB_ENV
+          fi
 
       - name: 发送 Telegram 通知
         uses: appleboy/telegram-action@master
@@ -463,16 +479,11 @@ jobs:
             ✉️ <b>标题:</b> Surge 上游规则模块拉取
             📦 <b>仓库:</b> thNylHx/Tools
             ⏰ <b>时间:</b> ${{ env.time }}
+
             🎯 <b>状态:</b> ${{ job.status == 'success' && '恭喜你! 任务成功' || '很遗憾! 任务失败' }}
             📊 <b>更新:</b> ${{ env.changed == 'true' && '本次有更新' || '本次无更新' }}
 
-            ${{ env.changed == 'true' && '📈 <b>变更详细</b>' || '' }}
-            ${{ env.changed == 'true' && format('➕ <b>新增:</b> {0}', env.added) || '' }}
-            ${{ env.changed == 'true' && format('✏️ <b>修改:</b> {0}', env.modified) || '' }}
-            ${{ env.changed == 'true' && format('❌ <b>删除:</b> {0}', env.deleted) || '' }}
-
-            ${{ env.changed == 'true' && '📂 <b>变更文件:</b>' || '' }}
-            ${{ env.changed == 'true' && '<pre>' || '' }}${{ env.files }}${{ env.changed == 'true' && '</pre>' || '' }}
+            ${{ env.diff_text }}
 
       - name: 清理旧工作流运行记录
         uses: Mattraks/delete-workflow-runs@main
