@@ -1,30 +1,25 @@
 name: 拉取上游规则和模块
 
-# 权限设置：遵循最小权限原则
-permissions:
-  contents: write        # 允许推送规则更新
-  actions: read          # 允许读取 workflow 信息（用于清理任务）
+#!date = 2026-04-14 08:26:41
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */6 * * *'      # 每 6 小时执行一次
-      timezone: 'Asia/Shanghai' # 使用上海时区
+    - cron: '25 */12 * * *'
 
 jobs:
-  sync-mihomo-rules:
-    runs-on: ubuntu-latest        #使用系统
+  git-surge:
+    runs-on: ubuntu-latest
     env:
-      TZ: 'Asia/Shanghai'         # 使用上海时区
+      TZ: 'Asia/Shanghai'
 
     steps:
-      - name: 目标仓库
+      - name: 检查当前仓库
         uses: actions/checkout@v6
         with:
           repository: thNylHx/Tools
           path: Tools-repo
           token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 1          # 仅拉取最新提交，提高速度
 
       - name: 下载 mihomo 规则
         shell: bash
@@ -468,6 +463,7 @@ jobs:
             ⏰ 时间: ${{ env.time }}
             🎯 状态: ${{ job.status == 'success' && '恭喜你! 任务成功' || '很遗憾! 任务失败' }}
             📊 更新: ${{ env.changed == 'true' && '本次有更新' || '本次无更新' }}
+
             ${{ env.changed == 'true' && '📈 变更详细' || '' }}
             ${{ env.changed == 'true' && format('➕ 新增: {0}', env.added) || '' }}
             ${{ env.changed == 'true' && format('✏️ 修改: {0}', env.modified) || '' }}
