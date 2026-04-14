@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block ads
 #!tag = 自用广告拦截规则合集
-#!Rule = 4583
+#!Rule = 4603
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -4569,6 +4569,26 @@ URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/user\/freeMode\/",REJECT,exte
 URL-REGEX,"^http:\/\/xmc\.ximalaya\.com\/xmlymain-login-web\/login\/",REJECT,extended-matching
 URL-REGEX,"^http:\/\/y\.gtimg\.cn\/music\/common\/upload\/t_k_main_page_banner\/",REJECT,extended-matching
 URL-REGEX,"^http?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native",REJECT,extended-matching
+URL-REGEX,"^https:\/\/a\.line\.me\/cs\/v\d\/oa$",REJECT,extended-matching
+URL-REGEX,"^https:\/\/a\.line\.me\/er\/l.*\/v\d\/event\/image",REJECT,extended-matching
+URL-REGEX,"^https:\/\/a\.line\.me\/er\/lads\/v\d\/ei\?",REJECT,extended-matching
+URL-REGEX,"^https:\/\/a\.line\.me\/lass\/api\/v\d\/ads$",REJECT,extended-matching
+URL-REGEX,"^https:\/\/a\.line\.me\/oa\/v\d\/e$",REJECT,extended-matching
+URL-REGEX,"^https:\/\/crs-event\.line\.me\/v\d\/imp",REJECT,extended-matching
+URL-REGEX,"^https:\/\/d\.line-scdn\.net\/lcp-prod-photo\/20.+\.(jpg|jpeg|png)",REJECT,extended-matching
+URL-REGEX,"^https:\/\/ec-bot-obs\.line-scdn\.net\/0h[0-9a-zA-Z_-]{50}[0-9a-zA-Z_-]*",REJECT,extended-matching
+URL-REGEX,"^https:\/\/obs\.line-scdn\.net\/0h.+\/(o|m)\d+x\d+$",REJECT,extended-matching
+URL-REGEX,"^https:\/\/obs\.line-scdn\.net\/0h.+\/\d+p\.mp4$",REJECT,extended-matching
+URL-REGEX,"^https:\/\/obs\.line-scdn\.net\/0hGH\d",REJECT,extended-matching
+URL-REGEX,"^https:\/\/obs\.line-scdn\.net\/0h[a-zA-Z0-9_-]{50}[a-zA-Z0-9_-]*",REJECT,extended-matching
+URL-REGEX,"^https:\/\/obs\.line-scdn\.net\/r\/linecrs\/.+\/m180x180$",REJECT,extended-matching
+URL-REGEX,"^https:\/\/scdn\.line-apps\.com\/lan\/document\/pageEvent\/line\/ios\/",REJECT,extended-matching
+URL-REGEX,"^https:\/\/scdn\.line-apps\.com\/lan\/image\/line\/bannerImageEvent\/",REJECT,extended-matching
+URL-REGEX,"^https:\/\/sch\.line\.me\/api\/v\d\/ads$",REJECT,extended-matching
+URL-REGEX,"^https:\/\/uts-front\.line-apps\.com\/event$",REJECT,extended-matching
+URL-REGEX,"^https:\/\/uts-front\.line-apps\.com\/settings$",REJECT,extended-matching
+URL-REGEX,"^https:\/\/w\.line\.me\/adp\/api\/ad\/v\d\/",REJECT,extended-matching
+URL-REGEX,"^https:\/\/web-mmap-pay\.line-apps\.com\/tw\/liff\/campaign\/v\d\/aggregate\/ad\/banner\/",REJECT,extended-matching
 USER-AGENT,"Httpdns*",REJECT,extended-matching
 USER-AGENT,"Httpsdns*",REJECT,extended-matching
 USER-AGENT,AVOS*,REJECT,extended-matching
