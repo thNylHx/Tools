@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-15 09:10:10
+#!date = 2026-04-15 09:10:35
 
 on:
   workflow_dispatch:
@@ -290,7 +290,7 @@ jobs:
                       Surge/Module/Ads_Block.sgmodule; do
             [[ -f "$file" ]] || continue
 
-            # 统一清理注释、空行、行内注释、reject、无效规则
+            # 统一删除 注释、空行、行内注释、reject、无效规则
             sed -i -E '
               /^DOMAIN-REGEX,/d;                    # 删除无效的 DOMAIN-REGEX
               /^\s*[#;]/d;                          # 删除 # 或 ; 开头的注释行
