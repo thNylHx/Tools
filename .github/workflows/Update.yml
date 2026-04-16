@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-15 09:10:35
+#!date = 2026-04-16 11:16:53
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ jobs:
   git-surge:
     runs-on: ubuntu-latest
     env:
-      TZ: 'Asia/Shanghai'
+      TZ: 'Asia/Hong_Kong'
 
     steps:
       - name: 检查当前仓库
@@ -421,8 +421,10 @@ jobs:
           # 默认无更新
           echo "changed=false" >> $GITHUB_ENV
 
+          # 拉取远程 main 分支代码，使用 rebase 保持提交历史干净，并自动暂存/恢复本地未提交修改（避免 pull 失败）
           git pull --rebase --autostash origin main
 
+          # 添加所有变更（新增、修改、删除）到暂存区
           git add -A
 
           if ! git diff --cached --quiet; then
@@ -441,7 +443,7 @@ jobs:
             echo "deleted=$deleted" >> $GITHUB_ENV
 
             # 获取文件列表
-            files=$(git diff --cached --name-only | head -n 10 | sed 's/^/- /')
+            files=$(git diff --cached --name-only | head -n 20 | sed 's/^/- /')
             echo "files<<EOF" >> $GITHUB_ENV
             echo "$files" >> $GITHUB_ENV
             echo "EOF" >> $GITHUB_ENV
@@ -449,7 +451,7 @@ jobs:
             git config --local user.name "GitHub Actions"
             git config --local user.email "github-actions[bot]@users.noreply.github.com"
       
-            git commit -m "Auto Update Ruleset $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S %Z')"
+            git commit -m "Auto Update Ruleset $(TZ='Asia/Hong_Kong' date +'%Y-%m-%d %H:%M:%S %Z')"
       
             if git push origin main; then
               echo "规则同步并推送成功！"
@@ -461,12 +463,12 @@ jobs:
             echo "规则文件无变更，无需提交。"
           fi
 
-      - name: 设置当前时间变量
+      - name: 设置时间 & 变更信息
         shell: bash
         run: |
           set -euo pipefail
 
-          echo "time=$(date +'%Y-%m-%d %H:%M:%S %Z')" >> $GITHUB_ENV
+          echo "time=$(TZ='Asia/Hong_Kong' date +'%Y-%m-%d %H:%M:%S %Z')" >> $GITHUB_ENV
 
           if [ "$changed" = "true" ]; then
             {
