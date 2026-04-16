@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-16 11:16:53
+#!date = 2026-04-16 11:20:56
 
 on:
   workflow_dispatch:
@@ -12,6 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TZ: 'Asia/Hong_Kong'
+
+    # 最小权限声明
+    permissions:
+      contents: write
 
     steps:
       - name: 检查当前仓库
