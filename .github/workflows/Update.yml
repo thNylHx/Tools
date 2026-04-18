@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-18 19:13:26
+#!date = 2026-04-18 19:18:20
 
 on:
   workflow_dispatch:
@@ -59,6 +59,7 @@ jobs:
             ["geosite/Disney.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs"
             ["geosite/Netflix.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
             ["geosite/Spotify.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs"
+            ["geosite/Talkatone.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/talkatone.mrs"
             # geoip
             ["geoip/Local.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
             ["geoip/China.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
@@ -172,7 +173,7 @@ jobs:
             ## Openai
             ["Other/Openai.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.list"
             ## Talkatone
-            ["Other/Talkatone_1.list"]="https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
+            ["Other/Talkatone_1.list"]="https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Talkatone.list"
             ["Other/Talkatone_2.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/talkatone.list"
             ## China
             ["Other/ChinaASN.list"]="https://raw.githubusercontent.com/missuo/ASN-China/main/ASN.China.list"
@@ -272,7 +273,7 @@ jobs:
             ## Talkatone
             merge_local "Ruleset/Surge/Other/Talkatone.list" \
               Ruleset/Surge/Other/Talkatone_1.list \
-              Ruleset/Surge/Other/Talkatone_1.list
+              Ruleset/Surge/Other/Talkatone_2.list
 
             ## Google
             merge_local "Ruleset/Surge/Other/Google.list" \
