@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-16 11:20:56
+#!date = 2026-04-18 09:56:05
 
 on:
   workflow_dispatch:
@@ -501,7 +501,7 @@ jobs:
             📢 <b>GitHub Actions 自动化任务通知</b>
 
             ✉️ 标题: Surge 上游规则模块拉取
-            📦 仓库: thNylHx/Tools
+            📦 仓库: 梨花香
             ⏰ 时间: ${{ env.time }}
 
             🎯 状态: ${{ job.status == 'success' && '恭喜你! 任务成功' || '很遗憾! 任务失败' }}
