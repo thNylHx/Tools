@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-18 15:43:51
+#!date = 2026-04-18 19:13:26
 
 on:
   workflow_dispatch:
@@ -171,6 +171,9 @@ jobs:
             ["Other/PayPal.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/paypal.list"
             ## Openai
             ["Other/Openai.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.list"
+            ## Talkatone
+            ["Other/Talkatone_1.list"]="https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
+            ["Other/Talkatone_2.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/talkatone.list"
             ## China
             ["Other/ChinaASN.list"]="https://raw.githubusercontent.com/missuo/ASN-China/main/ASN.China.list"
             ["Other/China_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
@@ -259,19 +262,24 @@ jobs:
               Ruleset/Surge/Media/Facebook_1.list \
               Ruleset/Surge/Media/Instagram.list \
               Ruleset/Surge/Media/Facebook_ip.list
-              
+
             ## Telegram
             merge_local "Ruleset/Surge/Media/Telegram.list" \
               Ruleset/Surge/Media/Telegram_1.list \
               Ruleset/Surge/Media/Telegram_2.list \
               Ruleset/Surge/Media/Telegram_ip.list
 
+            ## Talkatone
+            merge_local "Ruleset/Surge/Other/Talkatone.list" \
+              Ruleset/Surge/Other/Talkatone_1.list \
+              Ruleset/Surge/Other/Talkatone_1.list
+
             ## Google
             merge_local "Ruleset/Surge/Other/Google.list" \
               Ruleset/Surge/Other/Google_1.list \
               Ruleset/Surge/Other/Gemini.list \
               Ruleset/Surge/Other/Google_ip.list
-              
+
             ## Global
             merge_local "Ruleset/Surge/Other/Global.list" \
               Ruleset/Surge/Other/GlobalGFW_1.list \
