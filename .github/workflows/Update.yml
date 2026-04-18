@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-18 09:56:05
+#!date = 2026-04-18 13:21:16
 
 on:
   workflow_dispatch:
@@ -12,10 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TZ: 'Asia/Hong_Kong'
-
-    # 最小权限声明
-    permissions:
-      contents: write
 
     steps:
       - name: 检查当前仓库
@@ -499,7 +495,7 @@ jobs:
           format: html
           message: |
             📢 <b>GitHub Actions 自动化任务通知</b>
-
+            ========================================
             ✉️ 标题: Surge 上游规则模块拉取
             📦 仓库: 梨花香
             ⏰ 时间: ${{ env.time }}
