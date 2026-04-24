@@ -3,14 +3,14 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截
-#!date = 2026-04-24 17:20:42
+#!date = 2026-04-24 17:24:52
 
 
 [Rule]
 # ======= 0 ======= #
 # 12306
 DOMAIN,ad.12306.cn,DIRECT
-
+ 
 # ======= A ======= #
 # 阿里云盘
 IP-CIDR,203.107.1.1/24,REJECT,no-resolve,pre-matching
