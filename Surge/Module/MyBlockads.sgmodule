@@ -1,9 +1,9 @@
 #!name = Block ads | 软件去广告合集模块
-#!desc = 自用的常用软件去广告合集
+#!desc = 自用软件去广告合集
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截
-#!date = 2026-04-12 10:20:34
+#!date = 2026-04-24 17:20:42
 
 [Rule]
 # ======= 0 ======= #
@@ -12,9 +12,12 @@ DOMAIN,ad.12306.cn,DIRECT
 
 # ======= A ======= #
 # 阿里云盘
-IP-CIDR,203.107.1.1/24,REJECT,no-resolve
+IP-CIDR,203.107.1.1/24,REJECT,no-resolve,pre-matching
 
 # ======= B ======= #
+# 百度贴吧
+DOMAIN,180.76.76.200,REJECT,extended-matching,pre-matching
+IP-CIDR,180.76.76.200/32,REJECT,no-resolve,pre-matching
 
 # ======= C ======= #
 # 彩云天气
@@ -28,6 +31,10 @@ DOMAIN,gwp.xiaojukeji.com,REJECT,pre-matching,extended-matching
 AND,((IP-ASN,45090,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT,pre-matching,extended-matching
 AND,((IP-ASN,55990,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT,pre-matching,extended-matching
 AND,((IP-ASN,63646,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT,pre-matching,extended-matching
+# 叮咚买菜
+DOMAIN,trackercollect.ddxq.mobi,REJECT,extended-matching,pre-matching
+DOMAIN,ddfs-public.ddimg.mobi,REJECT,extended-matching,pre-matching
+DOMAIN,rttrack.ddxq.mobi,REJECT,extended-matching,pre-matching
 
 # ======= E ======= #
 
@@ -88,6 +95,10 @@ DOMAIN,kad.gotokeep.com,REJECT,pre-matching,extended-matching
 # 美柚
 DOMAIN,ad.seeyouyima.com,REJECT,pre-matching,extended-matching
 DOMAIN,axxd.xmseeyouyima.com,REJECT,pre-matching,extended-matching
+# 美图秀秀
+DOMAIN,adui.tg.meitu.com,REJECT,extended-matching,pre-matching
+# 美颜相机
+DOMAIN,adui.tg.meitu.com,REJECT,extended-matching,pre-matching
 
 # ======= N ======= #
 
@@ -129,6 +140,23 @@ DOMAIN,tmeadquic.y.qq.com,REJECT,pre-matching,extended-matching
 # ======= R ======= #
 
 # ======= S ======= #
+# Soul
+DOMAIN-SUFFIX,soulapp.cn,DIRECT,extended-matching
+IP-CIDR,8.210.3.170/32,DIRECT,no-resolve
+IP-CIDR,47.75.72.47/32,DIRECT,no-resolve
+DOMAIN,ad-h5-cdn.soulapp.cn,REJECT,extended-matching,pre-matching
+DOMAIN,ad-h5-station-cdn.soulapp.cn,REJECT,extended-matching,pre-matching
+DOMAIN,ad-r.soulapp.cn,REJECT,extended-matching,pre-matching
+DOMAIN,soul-ad.soulapp.cn,REJECT,extended-matching,pre-matching
+IP-CIDR,47.56.131.76/32,REJECT,no-resolve,pre-matching
+IP-CIDR,47.97.215.55/32,REJECT,no-resolve,pre-matching
+IP-CIDR,47.99.42.29/32,REJECT,no-resolve,pre-matching
+IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
+IP-CIDR,47.243.147.125/32,REJECT,no-resolve,pre-matching
+IP-CIDR,120.27.235.201/32,REJECT,no-resolve,pre-matching
+IP-CIDR,121.196.197.147/32,REJECT,no-resolve,pre-matching
+# 什么值得买
+DOMAIN,adx-api.zdmimg.com,REJECT,extended-matching,pre-matching
 
 # ======= T ======= #
 # 淘宝
@@ -170,6 +198,17 @@ AND,((OR,((DOMAIN-SUFFIX,bytegecko.com),(DOMAIN-SUFFIX,byteeffecttos.com))),(DOM
 DOMAIN,sdk.ad.sfys365.com,REJECT,pre-matching,extended-matching
 # 航旅纵横
 URL-REGEX,"^http?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native",REJECT,pre-matching,extended-matching
+# 知乎
+DOMAIN,appcloud.zhihu.com,REJECT,extended-matching,pre-matching
+DOMAIN,appcloud2.in.zhihu.com,REJECT,extended-matching,pre-matching
+DOMAIN,crash2.zhihu.com,REJECT,extended-matching,pre-matching
+DOMAIN,mqtt.zhihu.com,REJECT,extended-matching,pre-matching
+DOMAIN,sugar.zhihu.com,REJECT,extended-matching,pre-matching
+DOMAIN,zxid-m.mobileservice.cn,REJECT,extended-matching,pre-matching
+IP-CIDR,103.41.167.237/32,REJECT,no-resolve,pre-matching
+IP-CIDR,118.89.204.198/32,REJECT,no-resolve,pre-matching
+IP-CIDR,182.61.194.7/32,REJECT,no-resolve,pre-matching
+IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,REJECT,no-resolve,pre-matching
 
 # ======= other ======= #
 DOMAIN-KEYWORD,adstrategy,REJECT,pre-matching,extended-matching
@@ -612,6 +651,8 @@ URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]:\d+\/httpdns\/",REJECT,pre-matching,exten
 # ======= A ======= #
 # 爱思开屏
 ^https?:\/\/list-app-m\.i4\.cn\/getopfstadinfo\.xhtml - reject
+# 爱企查
+^https:\/\/aiqicha\.baidu\.com\/app\/commonstatusAjax - reject
 
 # ======= B ======= #
 
@@ -623,6 +664,9 @@ URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]:\d+\/httpdns\/",REJECT,pre-matching,exten
 ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.m?show - reject
 
 # ======= D ======= #
+# 叮咚买菜
+^https?:\/\/maicai\.api\.ddxq\.mobi\/advert\/ - reject
+^https?:\/\/maicai\.api\.ddxq\.mobi\/homeApi\/getHomeAdPop - reject
 
 # ======= E ======= #
 
@@ -633,6 +677,8 @@ URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]:\d+\/httpdns\/",REJECT,pre-matching,exten
 # ======= H ======= #
 
 # ======= I ======= #
+# IT之家
+^https?:\/\/dat\.ruanmei\.com\/ithome\/money\/acd\.json$ - reject
 
 # ======= J ======= #
 
@@ -657,6 +703,8 @@ URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]:\d+\/httpdns\/",REJECT,pre-matching,exten
 # ======= R ======= #
 
 # ======= S ======= #
+# 什么值得买
+^https:\/\/h5\.smzdm\.com\/user\/coupon\/coupon_list\? - reject
 
 # ======= T ======= #
 
@@ -701,6 +749,10 @@ URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]:\d+\/httpdns\/",REJECT,pre-matching,exten
 # ======= Z ======= #
 # 中国移动开屏
 ^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(init\/startInit|emotionMarket) - reject
+# 知乎
+^https:\/\/api\.zhihu\.com\/unlimited\/go\/my_card - reject
+^https:\/\/www\.zhihu\.com\/appview\/v3\/zhmore - reject
+^https:\/\/link\.zhihu\.com\/\?target=(?:https?)?(?:%3A|:)?(?:\/\/|%2F%2F)?(.*) http://$1 302
 
 
 [Body Rewrite]
@@ -712,6 +764,132 @@ http-response-jq ^https:\/\/ad\.12306\.cn\/ad\/ser\/getAdList$ 'delpaths([["adve
 # ======= A ======= #
 
 # ======= B ======= #
+#  波点音乐
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/conf\/all\? 'delpaths([["data","groupSign","adStartAppDialog"]])'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/conf\/all\? 'delpaths([["data","groupSign","adGuideTest"]])'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/conf\/all\? 'delpaths([["data","groupSign","playTips"]])'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/conf\/all\? 'delpaths([["data","groupSign","adExitChange"]])'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/conf\/all\? 'delpaths([["data","conf","adGuidePopCount"]])'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/conf\/all\? 'delpaths([["data","conf","adDownListOpen"]])'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/conf\/all\? 'if (getpath(["data","conf","flowControlConfig"]) | has("uploadEnable")) then (setpath(["data","conf","flowControlConfig","uploadEnable"]; false)) else . end'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/conf\/all\? 'if (getpath(["data","conf","flowControlConfig"]) | has("p2pEnable")) then (setpath(["data","conf","flowControlConfig","p2pEnable"]; false)) else . end'
+http-response-jq ^https:\/\/ab-bodian\.kuwo\.cn\/abtest\/ui\/info\? 'delpaths([["data","mapTestInfo","CommentADPosition"]])'
+http-response-jq ^https:\/\/ab-bodian\.kuwo\.cn\/abtest\/ui\/info\? 'delpaths([["data","mapTestInfo","DiscoverADPosition"]])'
+http-response-jq ^https:\/\/ab-bodian\.kuwo\.cn\/abtest\/ui\/info\? 'delpaths([["data","mapTestInfo","DownloadAd"]])'
+http-response-jq ^https:\/\/ab-bodian\.kuwo\.cn\/abtest\/ui\/info\? 'delpaths([["data","mapTestInfo","FreeModVoiceReminder"]])'
+http-response-jq ^https:\/\/ab-bodian\.kuwo\.cn\/abtest\/ui\/info\? 'delpaths([["data","mapTestInfo","GamesTrans"]])'
+http-response-jq ^https:\/\/ab-bodian\.kuwo\.cn\/abtest\/ui\/info\? 'delpaths([["data","mapTestInfo","bodianmvdialog"]])'
+http-response-jq ^https:\/\/ab-bodian\.kuwo\.cn\/abtest\/ui\/info\? 'delpaths([["data","mapTestInfo","MvTryShowAds"]])'
+http-response-jq ^https:\/\/ab-bodian\.kuwo\.cn\/abtest\/ui\/info\? 'delpaths([["data","mapTestInfo","insert"]])'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/global\/config\/scene\? 'delpaths([["data","iosP2PCacheEnable"]])'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/global\/config\/scene\? 'delpaths([["data","warmStartDialog"]])'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/global\/config\/scene\? 'delpaths([["data","adsNotFinishVipPop4DayInterval"]])'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/global\/config\/scene\? 'if (getpath(["data"]) | has("showShopEntry")) then (setpath(["data","showShopEntry"]; false)) else . end'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/global\/config\/scene\? 'if (getpath(["data"]) | has("iosP2pEnableSendDataLimit")) then (setpath(["data","iosP2pEnableSendDataLimit"]; 1)) else . end'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/search\/topic\/word\/list\? 'delpaths([["data","hotTopic"]])'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/search\/topic\/word\/list\? 'delpaths([["data","searchFind"]])'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/search\/topic\/word\/list\? 'delpaths([["data","globalJumpInfo"]])'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/search\/topic\/word\/list\? 'delpaths([["data","hotWord"]])'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/home\/index\? '.data.moduleList |= map(select(.type | tostring | (. != "8" and . != "1")))'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/music\/recommendList\? '.data.musicList[] |= del(.showAd)'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/comments\/v3\/topInfo\? 'delpaths([["data","putao"]])'
+http-response-jq ^https:\/\/bd-api\.kuwo\.cn\/api\/comments\/v3\/topInfo\? 'delpaths([["data","bannerVos"]])'
+# 百度地图
+http-response-jq ^https:\/\/newclient\.map\.baidu\.com\/feed\/govui\/rich_content 'delpaths([["data"]])'
+http-response-jq ^https:\/\/newclient\.map\.baidu\.com\/client\/noticebar\/get\? 'delpaths([["content","multi_data"]])'
+http-response-jq ^https:\/\/newclient\.map\.baidu\.com\/(client\/)?usersystem\/mine\/page\? 'if (getpath([]) | has("data")) then (setpath(["data"]; {})) else . end'
+http-response-jq ^https:\/\/newclient\.map\.baidu\.com\/client\/phpui2\/\?qt=ads&type=user_home_new_service 'delpaths([["ads"]])'
+http-response-jq ^https:\/\/newclient\.map\.baidu\.com\/living\/nearby\/api\? 'delpaths([["Result","cards",1]])'
+http-response-jq ^https:\/\/newclient\.map\.baidu\.com\/living\/nearby\/api\? 'delpaths([["Result","cards",4]])'
+http-response-jq ^https:\/\/newclient\.map\.baidu\.com\/living\/nearby\/api\? 'delpaths([["Result","cards",5]])'
+http-response-jq ^https:\/\/newclient\.map\.baidu\.com\/living\/nearby\/api\? 'delpaths([["Result","cards",9]])'
+# 百度文库
+http-response-jq ^https:\/\/appwk\.baidu\.com\/appapi\/index\/home\? 'delpaths([["data","bannerInfo"]])'
+http-response-jq ^https:\/\/appwk\.baidu\.com\/appapi\/index\/home\? 'delpaths([["data","bannerList"]])'
+http-response-jq ^https:\/\/appwk\.baidu\.com\/appapi\/index\/home\? 'delpaths([["data","bannerListV2"]])'
+http-response-jq ^https:\/\/(appwk|tanbi)\.baidu\.com\/gsula\/sula\/syncmrecall$ 'delpaths([["data","items"]])'
+http-response-jq ^https:\/\/appwk\.baidu\.com\/appapi\/index\/tab\? 'delpaths([["data"]])'
+http-response-jq ^https:\/\/appwk\.baidu\.com\/appapi\/forum\/feed\?reqMode=wenkuapp_main_feed 'delpaths([["data"]])'
+# 百度网盘
+http-response-jq ^https:\/\/pan\.baidu\.com\/feed\/kingkongdistrict\? '.data.data |= map(select(.type != "novel" and .type != "shortplay" and .type != "print" and .type != "job_hunt"))'
+# 百度贴吧
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["activity_switch"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["video_report_config"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["advertisement_config"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["next_start"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["push_strategy_new"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["live_activity_guide"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["h5_pop_ups"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["duxiaoman_url"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["is_need_remind_live_rooms"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["floating_icon"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["ad_stlog_switch"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["first_time_motivate"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["windowStrategyList"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["ad_adsense"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["ad_config"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["videoup_guide_pop"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["ad_origin_config_switch"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["needNewUserLead"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["h5_pop_ups_config"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["alaTabColor"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["search_guide"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["ad_sdk_priority"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["low_version_pop_config"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["ad_num_competition_frs"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["live_new_user_guide_day"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["screen_fill_data_result"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["yy_live_tab"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["ad_num_competition_personalize"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["complete_apk_url"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["user_activity"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["homepage_guide"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["bottom_bubble_config"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["home_screen_ad"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["afSearch_tab"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["recent_client_info"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["video_activity"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["namoaixud_url"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["yy_live_config"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["user_growth_task_list"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["cloud_control_data_info"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["wl_config","pb_banner_funad_cache_strategy"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["wl_config","pb_comment_asyncafd_cache_strategy"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["wl_config","download_edge_float"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["wl_config","download_pause_retain_dialog_conf"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["wl_config","download_mobile_dialog_conf"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["wl_config","download_fake_progress_config_a"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["wl_config","download_fake_progress_config_b"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'delpaths([["scheme_whitelist"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'if (getpath(["wl_config"]) | has("home_ad_num")) then (setpath(["wl_config","home_ad_num"]; 0)) else . end'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'if (getpath(["wl_config"]) | has("frs_ad_num")) then (setpath(["wl_config","frs_ad_num"]; 0)) else . end'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'if (getpath(["wl_config"]) | has("pb_comment_ad_num")) then (setpath(["wl_config","pb_comment_ad_num"]; 0)) else . end'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'if (getpath(["wl_config"]) | has("index_bear_density")) then (setpath(["wl_config","index_bear_density"]; 0)) else . end'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'if (getpath(["wl_config"]) | has("frs_bear_density")) then (setpath(["wl_config","frs_bear_density"]; 0)) else . end'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'if (getpath(["wl_config"]) | has("index_bear_first_floor_max")) then (setpath(["wl_config","index_bear_first_floor_max"]; 999999999)) else . end'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ 'if (getpath(["wl_config"]) | has("index_bear_first_floor_min")) then (setpath(["wl_config","index_bear_first_floor_min"]; 999999999)) else . end'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/s\/sync$ '.index_tab_info |= map(select(.tab_name == "推荐")) | .top_level_navi |= {"推荐": .["推荐"], "侧边栏": .["侧边栏"], "关注": .["关注"]}'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile$ 'delpaths([["url_map"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile$ 'delpaths([["user_agent_info"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile$ 'delpaths([["bubble_info"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile$ 'delpaths([["duxiaoman_entry"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile$ 'delpaths([["uc_card"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile$ 'delpaths([["finance_tab"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile$ 'delpaths([["vip_banner"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile$ 'delpaths([["ala_live_info"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile$ 'delpaths([["recom_naws_list"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile$ 'delpaths([["duxiaoman"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile$ 'delpaths([["user","consume_info"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile$ 'delpaths([["namoaixud_entry"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile$ 'if (getpath(["user","shake_ad_switch"]) | has("is_show")) then (setpath(["user","shake_ad_switch","is_show"]; 0)) else . end'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/u\/user\/profile$ '.custom_grid |= map(select(.title != "游戏大厅" and .title != "预约管理" and .title != "领话费" and .title != "短故事")) | .zone_info |= map(.common_func |= (if .common_func_noraml then .common_func_noraml |= map(select(.name != "创建智能体")) else . end)) | .zone_info |= map(select(.type != "commerce" and .type != "banner" and .type != "game"))'
+http-response-jq ^https?:\/\/tieba\.baidu\.com\/c\/f\/forum\/forumGuide$ 'delpaths([["hot_search"]])'
+http-response-jq ^https?:\/\/tieba\.baidu\.com\/c\/f\/frs\/frsBottom\? 'delpaths([["card_activity"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/f\/frs\/frsBottom$ 'delpaths([["card_activity"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/f\/sidebar\/home$ 'delpaths([["game_center"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/f\/sidebar\/home$ 'delpaths([["tools"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/f\/sidebar\/home$ 'delpaths([["task_list"]])'
+http-response-jq ^https?:\/\/tiebac\.baidu\.com\/c\/f\/sidebar\/home$ 'delpaths([["vip_banner"]])'
 
 # ======= C ======= #
 # 菜鸟
@@ -740,6 +918,15 @@ http-response-jq ^https:\/\/api\.udache\.com\/intercity\/ticket\/api\/v1\/core\/
 http-response-jq ^https:\/\/htwkop\.xiaojukeji\.com:443\/gateway\? 'delpaths([["data","didi-bike-homepage-popup"]])'
 http-response-jq ^https:\/\/htwkop\.xiaojukeji\.com:443\/gateway\? 'delpaths([["data","variantInfo"]])'
 http-response-jq ^https:\/\/as\.xiaojukeji\.com\/ep\/as\/toggles\? '.data |= map(if .name|IN("daijia_journey_new_tcp_switch","daijia_tcp_init","daijia_tcp_msg_encrypt","daijia_tcp_site_info","daijia_tcp_site_report")then.allow=false else. end)'
+# 叮咚买菜
+http-response-jq ^https:\/\/maicai\.api\.ddxq\.mobi\/homeApi\/categoriesNewDetail\? 'delpaths([["data","ad_info"]])'
+http-response-jq ^https:\/\/maicai\.api\.ddxq\.mobi\/tool\/getConfig\? 'delpaths([["data","ai_enter_config"]])'
+http-response-jq ^https?:\/\/maicai\.api\.ddxq\.mobi\/homeApi\/newDetails\? 'delpaths([["data","top_advert_data"]])'
+http-response-jq ^https?:\/\/maicai\.api\.ddxq\.mobi\/homeApi\/newDetails\? 'delpaths([["data","suspension"]])'
+http-response-jq ^https?:\/\/maicai\.api\.ddxq\.mobi\/homeApi\/newDetails\? '.data.list |= map(select(has("capsule_freedom_zone") | not))'
+http-response-jq ^https:\/\/maicai\.api\.ddxq\.mobi\/guide-service\/productApi\/productDetail\/info\? 'delpaths([["data","detail","chatEntry"]])'
+http-response-jq ^https?:\/\/maicai\.api\.ddxq\.mobi\/homeApi\/bottomNavi 'del(.data.adId?) | if (.data.bottom_list? | length > 0) then .data.bottom_list |= map(select(.type != "eatwhat")) else . end'
+http-response-jq ^https?:\/\/maicai\.api\.ddxq\.mobi\/homeApi\/homeFlowDetail 'walk(if type == "object" and has("list") then .list |= map(if type == "object" and has("multi_advertise_data_list") then del(.multi_advertise_data_list) else . end) else . end)'
 
 # ======= E ======= #
 
@@ -762,6 +949,19 @@ http-response-jq ^https:\/\/color\.jddj\.com\/client\.action\?functionId=wmHome$
 http-response-jq ^https:\/\/api\.m\.jd\.com\/client\.action$ 'delpaths([["data","searchDTO","searchWords"]])'
 http-response-jq ^https:\/\/api\.m\.jd\.com\/client\.action$ 'delpaths([["data","wishlistDTO","bubbleTip"]])'
 http-response-jq ^https:\/\/api\.m\.jd\.com\/client\.action$ '.data.tabList |= (map(select(.code == "recommendation" or .code == "find_food")) | map(if .code == "recommendation" then .dpHomeFeedTabResultDTOList = .dpHomeFeedTabResultDTOList[0:2] else . end | .dpHomeBannerResultDTOList = []))'
+# 驾校一点通
+http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpaths([["result","homead"]])'
+http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpaths([["result","h5_promotion_page"]])'
+http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpaths([["result","advert_interval"]])'
+http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpaths([["result","abtest_h5url"]])'
+http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpaths([["result","launchApp"]])'
+http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpaths([["result","goucheConfig"]])'
+http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpaths([["result","gouche"]])'
+http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpaths([["result","mainLiveConfig"]])'
+http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpaths([["result","discover"]])'
+http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpaths([["result","adSdkSwitch4testPointVideo"]])'
+http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpaths([["result","adSdkSwitch4simulationExam"]])'
+http-response-jq http-response ^https:\/\/api\.ksedt\.com\/api\/config\/ 'delpaths([["result","examPageLoadADSwitch"]])'
 
 # ======= K ======= #
 # 快递100
@@ -827,12 +1027,28 @@ http-response-jq ^https:\/\/api\.gotokeep\.com\/twins\/union\/feed\/union_feed_a
 http-response-jq ^https:\/\/api\.gotokeep\.com\/twins\/v4\/feed\/entryDetail\? 'if (getpath([]) | has("data")) then (setpath(["data"]; {})) else . end'
 http-response-jq ^https:\/\/api\.gotokeep\.com\/config\/v3\/basic\? '.data.bottomBarControl.tabs |= map(select(.tabType | . == "home" or . == "schedule" or . == "dynamic_sports" or . == "personal")) | .data.homeTabs |= map(select(.type | . == "socialTab" or . == "union_feed_all" or . == "homeRecommend" or . == "suitTab" or . == "union_feed_route"))'
 http-response-jq ^https:\/\/api\.gotokeep\.com\/pencil-webapp\/play\/v1\/games\? '.data.games[].microGames[] |= if .leftIcon? and .leftIcon.type == "aiMode" then del(.leftIcon) else . end'
+# 酷安
+http-response-jq ^https:\/\/api\.coolapk\.com\/v6\/feed\/detail\? '.data.hotReplyRows |= if . then map(select(.id?)) else . end | .data.topReplyRows |= if . then map(select(.id?)) else . end | reduce ("detailSponsorCard", "include_goods", "include_goods_ids") as $key (.; .data[$key]=[])'
+http-response-jq ^https:\/\/api\.coolapk\.com\/v6\/feed\/replyList 'if .data? and ((.data | type) == "array") and (.data | length > 0) then .data |= map(select(.id?)) else . end'
+http-response-jq ^https:\/\/api\.coolapk\.com\/v6\/main\/dataList '.data |= (if (type=="array" and length>0) then map(select((.entityTemplate!="sponsorCard") and (.title!="精选配件"))) else . end)'
+http-response-jq ^https:\/\/api\.coolapk\.com\/v6\/page\/dataList 'if (.data | length > 0) then .data |= map(select((.title? != "酷安热搜") and (.entityTemplate? != "imageScaleCard") and (.entityTemplate? != "sponsorCard"))) else . end'
+http-response-jq ^https:\/\/api\.coolapk\.com\/v6\/main\/indexV8 '.data |= (if length > 0 then map(select((.entityTemplate != "sponsorCard") and ([8639,29349,33006,32557] | index(.entityId) | not) and ((.title// "" | test("值得买|红包")) | not))) else . end)'
+http-response-jq ^https:\/\/api\.coolapk\.com\/v6\/main\/init '.data |= map(select(.entityId? | [944,945,6390] | index(.) | not) | if .entityId == 20131 then .entities |= map(select(.title != "酷品")) else . end)'
 
 # ======= L ======= #
 
 # ======= M ======= #
 # 美柚
 http-response-jq ^https:\/\/common\.seeyouyima\.com\/v2\/conf_list$ 'delpaths([["data","confList","Minor_mode_card"]])'
+# 美图秀秀
+http-response-jq ^https:\/\/api\.posters\.meitu\.com\/common\/init\.json 'delpaths([["data","vip"]])'
+# 美颜相机
+http-response-jq ^https:\/\/api\.meiyan\.com\/operation\/get_config\.json\? 'delpaths([["response","time_limit"]])'
+http-response-jq ^https:\/\/api\.meiyan\.com\/operation\/get_config\.json\? 'delpaths([["response","bubble"]])'
+http-response-jq ^https:\/\/api\.meiyan\.com\/operation\/get_config\.json\? 'delpaths([["response","person_center"]])'
+http-response-jq ^https:\/\/api\.meiyan\.com\/operation\/get_config\.json\? 'if (getpath(["response","function_pop","meiyan_style"]) | has("is_pop")) then (setpath(["response","function_pop","meiyan_style","is_pop"]; false)) else . end'
+http-response-jq ^https:\/\/api\.meiyan\.com\/operation\/get_config\.json\? 'if (getpath(["response","onoff","vip_half_window_exit_remain_popup"]) | has("open")) then (setpath(["response","onoff","vip_half_window_exit_remain_popup","open"]; 0)) else . end'
+http-response-jq ^https:\/\/api\.meiyan\.com\/operation\/get_config\.json\? 'if (getpath(["response","onoff"]) | has("vip_home_exit_remain_popup")) then (setpath(["response","onoff","vip_home_exit_remain_popup"]; 0)) else . end'
 
 # ======= N ======= #
 
@@ -870,10 +1086,744 @@ http-response-jq ^https:\/\/(beta-luna\.douyin|api5-lq\.qishui)\.com\/luna\/feed
 http-response-jq ^https:\/\/(beta-luna\.douyin|api5-lq\.qishui)\.com\/luna\/card\? 'delpaths([["preview_guide"]])'
 http-response-jq ^https:\/\/(beta-luna\.douyin|api5-lq\.qishui)\.com\/luna\/card\? 'del(.card_items[] | select(has("priority_display")))'
 http-response-jq ^https:\/\/(beta-luna\.douyin|api5-lq\.qishui)\.com\/luna\/more-panel\? '.blocks |= map(select(.type != "related_video"))'
+# 夸克
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_homepage_push_banner_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_as_home_capsule_entry"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_navi_category"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_shortcut"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_home_appstore_comment"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_home_festival_style_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_sK_home_top_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","scan_king_home_tools_new"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_skills"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_home_options"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_search_direct_link"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_maizeng_feature_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_buygive_home_modal_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_buygive_documentation_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_lottery_maizeng_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_activity_window"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_vip_pop_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qk_vip_pay_modal"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camear_vip_retain_pop"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_year_modal_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_lottery_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_member_lottery_on_off"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_login_dialog_privacy_alert_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_transport_download_pop"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_share_dialog_universal_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_pay_give30d_newstyle"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_asset_popup_activity_new"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_vip_url_panel"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_vip_member_page_basic"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_vip_product_skin"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_member_center_ai_card"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_video_app_grade_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_video_cloud_play_app_grade_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_video_quality_panel_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_worker_clouddrive_video_cloud_setting"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_transport_video_guide"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_transport_offline_backup_guide"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_normal_space_guide"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_realtime_ai_subtitle_tip_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_vip_pay_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","vip_half_recharge_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","quark_vipfull_recharge_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_vip_rights_and_interests_text"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_keep_wangpan_rights"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_action_bar_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_coupon_experiment"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qkscan_member_coupon"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_backup_free_benefit_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qk_novel_noah_sdk_slot_chapter_middle"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qk_novel_noah_sdk_slot_bottom_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qk_novel_noah_sdk_slot_chapter_middle_reward"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_member_activity"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_bookshelf_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_download_banner_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_speaker_page_banner_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_bookstore_top_tab_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_continue_read_tips_limit_per_day"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","novel_paid_book_ad_density_newuser"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_svipup_loop_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_svipup_loopani_show"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_rocket_ui_style"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_video_player_customize_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","video_player_applayer_url_tb_aac"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_reward_advideo_auto_trigger"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","webvideo_show_pay_before_login"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_home_nu_card_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_home_tool_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_file_page_share_backup_guide"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","quark_wenku_doc_activity_tpl"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_full_pan_new_year"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_planet_tab_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","h5_ai_studio_past_activity_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_user_center_welfare_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_user_center_welfare_farm_entry_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_babafarm_gray_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_utoken_direct_jump_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_ios_panel_alipay_coupon_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_share_benefit"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_bind_phone_fail_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_bind_conflict_guide"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_group_helper_guide_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_long_pic_share_operation_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","noah_search_mid_ad_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_search_page_input_history_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_push_lead_manage"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_limited_time_free_operating"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cloud_drive_tool_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_utoken_blocking_dialog_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_skip_button_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_offline_common_guide"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_video_player_preview_tips_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_vip_product_price_style"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","questionscpagebanner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qkscan_coupon_time"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_listen_act_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_vip_product_banner_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_as_zone_operation_banner_create"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_user_center_vip_page_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_pay_detention"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cps_pfc"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ucv_cloud_buoy_show_interval"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_novice_gift_strategy"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_ios_alipay_coupon_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_transport_offline_topbar_title"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qks_paisou_video_vip_type"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qks_ab_vip_year_default"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_homepage_abtest"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_export_pay_guide_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_tools_download_scanking_tips_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","book_bean_info_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_member_lottery_on_off_new"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","learning_home_popup_op_test"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_pullactive_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_user_year_sku"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ab_clouddrive_backup_free_share"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_doodle"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_asset_activity_banner_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_keep_modal"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_88vip_verify_modal"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_compress_pay_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_relate_live_book_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_svip_resolution_toast_count"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_enable_evo_search_recom_q_start_icon"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_tool_history_type_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_bookstore_home_toolbar_point"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_save_success_toast_ui"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_qkvip_panel_go_pay_success"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ucv_cloud_video_entry"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_app_act_mgr_data"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_member_center"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","minipg_ads_whitelist"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_clouddrive_background_lead_visible"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_video_app_grade_operaion_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_coin_reward_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","sk_quark_learning_logo_deeplink"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_alipay_marketing_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qks_vip_center_pay_ab"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qkscan_payment"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_bizentry_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_youku_ent"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_novel_notice_dialog"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","airship_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_cloud_yxxx_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_enable_cloud_drive_entrance_video"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_home_tool_new"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_bookstore_hottab_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_repurchase"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_trial_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","enable_miniframe_prefetch_ad"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_member_skin"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","walle_enable_regist_ecmodel"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_smart_toolbox_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qks_paisou_vip_charges_ab"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_zvip_tab_show_full"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_pre_order_on_agreement"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_big_float_window"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_svipup_enterani_show"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_history_login_banner_and_bubble_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","clouddrive_backup_benefit_config_album"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_secret_limit_label"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_vip_union_activity"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_booklist"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_panel_coupon_archive"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_spotlight_cms"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_qkvf_rec_request_inverse_pos"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_question_search_toolbar_op"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_video_player_cloud_toast_show_delay"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_user_center_feature_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_bookmarkAndHistory_banner_ad"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_write_operation_banner_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","novel_ad_flbanner_close"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_ultraman_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","noah_content_embed_ad_hc_vertical_scale_style"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_scanking_home_bubble"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_user_center"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_page_translate_enable_recommend"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_poplayer_main"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","sk_enable_edit_page_recommend_data_opt"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_big_float_window"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ucv_cloud_playback_operational"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_scanking_sign_in_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_vip_coupon_discount_test"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","idfa_auth_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_videoplayer_op_tips"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","webvideo_buffer_new_tips_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","h5_ai_studio_activity_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qks_tools_market"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_homepage_bubble_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_search_keyword_alter_link"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","novel_farm_reader_remain_dialog_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_counter_svipplus_monthly_price"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_scanking_pay_vip_retain_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_glasses_interceptor_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ai_quark_chat_ios_navbar_model_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","chat_toolbar_live_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_search_page_invitation_code_panel_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_move_home_navigation_digger_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qks_deep_souti_pop"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_share_link_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_share_link_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_user_center_renewal_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_home_ui_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_user_center_health_record_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_share_icon"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_search_result_card_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","export_file_tips"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_chat_vertical_instructions"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_diamond_navi_area_multipage"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_web_picture_long_click_menu"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qk_aidesign_member_rights"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qkscan_svip_member_rights"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_member_center_pay_success_card"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_newux_show_svip_entry_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","clouddrive_backup_benefit_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_reward_trace_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_push_lead_head_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_vip_lottery_checked_goods"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","pay_detainment_stack_bond_styles"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_home_backup_card_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_vip_url_full"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_video_ai_guide_setting"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_device_unbackup_text"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_audio_reward_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_luckin_coupon_text"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","as_publisher_activity_entry"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_nu_space_rights"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_vipupgrade"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_web_player_dml_enhance_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_backup_album_guide_control"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_web_content_type_price_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_reflow_activity_jump_deeplink"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_homepage_searchbar_left_btn_lottie"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_user_center_welfare_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","paisou_benefit_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_vip_price_not_use"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_share_detail_space_overrun_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","scan_svip_first_buy_pop"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_asr_equity_h5_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_djtest_choujiang"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_file_page_close_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_bucha"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_subscribre_renew_modal_experimental"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cloud_collect_fast_save_title"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_vip_full_page_text"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_border_poster"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_svipplus_pay_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_qurak_clouddrive_full_page_exit_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","copy_ab_clouddrive_nu_unzip_try"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_scan_card_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cloud_video_privilege_panel_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_mobile_binding_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_auto_buy"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_reward_video_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_clouddrive_vip_extra_pay_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","gaokao_zhiyuan_export_svip"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_vip_enable_new_pay_style"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_resolution_toast_count"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_djtest_tianmao"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_vip_product_activity_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_activity_id"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_home_user_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qks_paisou_ab_video_free_times"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_pay_full_page_first_modal_month"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","video_cloud_play_normal_loading_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_vip_venue_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_wenku_vip_pop_experiment"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_as_zone_operation_banner_creat"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_pdf_image_pay_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","appworker_offline_config_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_intelligent_protect_tip_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_home_appstore_comment_native_item"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_recommend_hot_search_tab"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_pay_scene_window"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_dialog_header"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_user_agreement_activity"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","minipg_ads_switch_quark"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_member_center_header"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","gaokao_nu_vip_grant"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_vip_product_price_style"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_free_ad_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_matrix_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_home_navi_shortcuts_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","novel_farm_welfare_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","as_home_idea_card_img_static"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_res_trial_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","copy_ab_bookcity_feed"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_space_growth"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qkscan_year_more_coupon"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_pdflimit"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_mini_login_panel"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ucv_cloud_drive_video_entry_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_right_fixed_resolution_list_show"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_coin_read_task_idle_interval"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ucv_cloud_buoy_start_interval"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_custom_module_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_home_menu_header_top"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","sk_home_vip_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_assets_membership_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_reader_insert_page_banner_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qks_paisou_vip_charges"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_pay_modal_down_taobao"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_top_bo_taobao_not_aac_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_file_tree_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_msfugou"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","quark_miaosha_c_test"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_2sku"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","not_in_use_jiasuquan"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_common_page_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_nvp_cloud_welcome_ui"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_cloud_paytypes_expect_zvip"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_home_toolbar_baby"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cloud_drive_share_notification_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ipad_lead"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","aidesign_svip_member_center"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_vip_superposition_ticket"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_clouddrive_aigc_pic_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_vip_ios_alipay"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qk_bookstore_rankpage_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_file_page_clean_guide"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_post_share_code"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_feed_bubble_in_home_page_bottom"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_home_operate_widget"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_sm_ad_request_handle_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_asr_main_activity_window"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_download_entry_show"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qkscan_member_rights"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","webvideo_content_type_price_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qkscan_member_style"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qk_correction_recommend_modal"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_none_space_control_new"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_backup_free_space_benefit"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_annual_repurchase_coupon"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","quark_study_enable_new_vip_pay_component"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qks_pay_strategy_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_player_av_quailty_88vip_uselimit"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_cloud_member_pay_qa"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","novel_ad_space_count"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","sk_idphoto_show_cloud_print"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","quark-countdown-2025"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_sug_card"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cloud_drive_home_tool_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_zvip_tab_show"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_Login_guide_encomcor"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_vip_price"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qks_ab_vip_pay_combo"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_savetonum"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_tool_set_pic"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_web_page_export_recom_tips_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_cuxiao"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_duguang_freetrial"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_navi_study_bubble_booklist"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_navi_add_operation_new"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_hot_search_type"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_vip_year_goods_ctrl"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_search_ai_tool_recommend_word_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_bookstore_tab_blue_dot_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","webvideo_toast_save_click_return"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_djtest_zc"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_home_navigation_olduser"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_zvip_pay_update_operation"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_web_picmode_guide_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_pdf_office_pay_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_pay_panel_video_banner_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","vip_half_experience_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_share_subtitle"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_anniversary_2023_main"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_paint_free_count"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_qkvip_go_pay_success"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_miaosha_test"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_max_menu_widgets_center_guide_dis_times"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_dongfeng_common_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_djtest_shougou"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qks_feedback_lottery_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","duguang_word_2sku"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qks_vip_index_state"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_navi_business_operation"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","webvideo_content_type_price_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_tools_navi_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_agent_list_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_home_navigation_alter"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_mobilize_external_app_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_comic_video_home_page_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_homepage_ai_tool_dynamic_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_chat_default_welcome"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_cloud_tool"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_navi_intelligence_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_transport_header_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_alltools_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_search_page_ai_image_genneration"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_download_scanking_app_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_user_center_welfare_farm_new_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_member_center_bannerList"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_my_list_part_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_audio_tree_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_search_page_ai_scholarship_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_teachers_day_goods_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","chat_ai_chat_with_uvlckfargcmaqryx_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ai_camera_wjk_act"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_share_bookmark_black_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_navisync_blacklist"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_web_page_print_pdf_render_allow_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_video_detect_t0_js"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","noah_search_mid_page_ad_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qk_novel_noah_sdk_chapter_middle_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","webvideo_thread_speed_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_vip_member_panel_header_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_none_space_guide"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_chat_enable_alg_recommend_paa"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","quark_study_home_cards_style"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_home_navigation"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","test_zhifubao_miaosha"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_video_upload_vip_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_alltools_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_share_pc_guide"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","sk_export_frombiz_homeurl"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_bind_conflict_guide_v2"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","sk_bilingual_comparison_page_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_table_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_sgi_search_web_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_home_novel"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","picture_editor_entrance"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_pc_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_as_creator_tabs"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_tips_dialog"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_user_center_login_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ai_generate_bar_global_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_offline_save_trace_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_search_entry_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_toolbar_lottie"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_trytab_default"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_homepage_navigation_ai_tool_config_v2"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_navi_modify_operation"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_video_resolution_download_select"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_download_play_video_replace"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","as_cut_option_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","sk_assets_editor_ocr_page_url_new"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_pan_stay"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_sniffer_float_view_action_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_common_prefetch_proxy_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cloud_drive_document_pdf_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_unsupport_book_tips"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_user_center_message_landing_page_key"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_client_verify_time_stamp_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_editor_lottie_res"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_cloud_anniversary_modal_show"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_clouddrive_nologin_header"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_sgi_web_window_pars_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_shortcut_game_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","sk_translate_view_time_count"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_app_monitor_event_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","system_short_web_middlware_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_shelf_pre_load"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_cloud_drive_first_screen_monthly_popup_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_sniff_compliance_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qk_bookstore_homepage_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_intercept_switch_new"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_reader_user_no_ad_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_publish_success_jump"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_sgi_container_pars_config_v2"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","chat_ai_chat_with__config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_nvp_dolby_vision_black_fmt"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_novel_livebg_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_login_bind_phone"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_search_page_input_hint"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","enable_url_security_sign"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_word_use_app_state"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_clean_backup_dump_file_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_appllo_peload_wwan_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_reader_nav_search_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_backup_guide"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","web_perf_whitescreen_detechtime"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_web_sniffer_ui_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_aivqa_history_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","study_camera_correct_sample_list_data"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","vc_transcode_video_playlet_ctrl"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_asr_feedback_group_num"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","voice_speech_abtest"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_search_page_ai_writer_config_v2"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_chat_enable_welcome_recommend_paa"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_empty_tingji_realtime"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","chat_aicam_upload_in_ahead"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_web_verify_itms_service_link_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ucdc_probe_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_float_view"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","unet_tcp_socket_send_buffer_hosts"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_subtab_default_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","test_for_platform_v2"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","quark_study_xuanfuchuangsouti_guide"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","short_cut_new_covid_news"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qk_enable_quarkbaby_hint"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_enable_study_main_page_open_itcp"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cloud_drive_referer"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qk_planet_detail_native"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","uccv_episode_autoplay_preload"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_tts_speaker_default"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_debug_task_name"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_cutting_on_cloud"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_word_enbale_demand_ocr"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_delete_download_directly_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","apollo_cloud_play_race_speed_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","no_effect_quarkcd_paixu5"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_sandbox_scan_max_dir_maxDirHierarchy"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_studio_tem_h5_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_dl_low_speed_detect_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_sgi_search_perfetch_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_asr_manaual_stream_stop"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_auto_translate_tip_display_time"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_bookmark_prefetch_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","miracast_start_pos_impl_on_sdk"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_web_link_long_click_menu"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_web_load_stat_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_tool_history_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_common_prefetch_white_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cloud_drive_backup_invalid_record_clear"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_idphoto_filters"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_show_loading_toast_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_djtest_cms_player_top_bo_taobao_not_aac_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","general_search_user_research_survey"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","video_player_appworker_host_black_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","nvp_ai_vision_use_mode"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_universal_use_app_state_data"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_home_page_navi_editor_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","u_vsibkre"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_enable_flutter_scanking_photo_sniffer"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qk_player_disable_apollo"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_cloud_drive_downgrade_code_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_boost_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_search_version_202512"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_apollo_pip_auto_start"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_search_page_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_agreement_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_audiobook_cover_square"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_enable_sandbox_space_scan"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_idcard_show_cloud_print"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","sk_camera_office_in_all"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","web_video_apollo_detect_play_info_params"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_new_doc_preview_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_wk_net_thread_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","upaas_stat_self_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_upgrade_download_content"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","pre_words"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_as_zone_operation_banner_feed"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_read_time_guide_nu_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_read_mode_ts_transcode"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ulive_msg_cache_purge_count"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_enable_online_table"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","u_vsibkrh"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_svip_pay_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_feiNU"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_chat_live_prerender_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_home_chat_guide_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloudrive_presuccess_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","web_video_detect_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_js_common_white_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quick_translate_badge_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ucv_webvideo_buoy_show_interval"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_save_manual_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_qkaccount_appeal"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_clouddrive_delete_check_option_dialog"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_user_center_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_titlepage_turn_animate_key"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_novel_chat_realname_auth"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_my_activity_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_web_preload_forward_limit"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_navi_choice_lottie"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","clouddrive_share_new_version_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_tab_funcs_list_auto_show"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","chat_ai_health_with__config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ucv_cloud_buoy_operational"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","navi_dynamic_operation"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_aieditor_toolbar"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_user_center_message_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_home_toolbar"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_word_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_download_zero_timelimit"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_gather_tab_v2"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_bookstore_tab_new"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","webvideo_ignore_ts_hash_when_save"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ai_studio_search_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cast_use_flutter_page_e"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_enable_smartwipe_screenshot_sheild"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_book_barcode_assistant_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_bookmark_user_data_isolation_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_deeplink_mapper"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","clouddrive_album_category_card_style"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_web_smart_toolbox_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_home_doodle_res_font"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","not_in_use_fgtest2"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_mobile_auth_global_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ulive_preload_liveroom_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_flutter_bookstore_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","asr_model_type"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_html_extract_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_panel_acitve_onoff"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_keep_default_ua_biz_host_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_search_enable_cache"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_membership_page_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","upgrade_notify_control"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_offline_to_cloud_exit_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_apollo_core_config_str"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_web_video_global_hybrider_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_setting_usercenter_mode_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_uiapplication_openurl_hook_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_chat_tab_container_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_enhance_entry_bef_prepard"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","personal_folder_env"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_proxy_report_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ucdc_server_ip"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_init_weex_checkupdate_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ta_embedwebview_white_domain_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","webvideo_apollo_str_hp_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_aieditor_panel"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_wk_net_agency_mode_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","webvideo_ignore_download_hash_when_apollo"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_unet_enable_fail_fast"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_enable_web_video_emabed_play"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qks_souti_ai_video_option"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_search_page_ai_writer_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ai_chat_image_query_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_myhistory_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_img_history_forward_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_browser_3d_nu"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_send_page_to_pc_blacklist"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_float_screenshoot_answer_guide_page"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_asset_host"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ucv_backup_series_to_dj_player"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_as_create_req_edit_content"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_web_href_load_guard_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_as_inputbar"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","file_detect_strategy"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_ocr_pdf_2_txt_way"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_group_active_days_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","sniff_float_ball_anim_repeat_count"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_http_scheme_intercept_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_request_cloud_save_permission_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_new_player_stop_last_video"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_album_content"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_user_agreement"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_pan_scene"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_user_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_new_user_guide"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_novice_gift_pack"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_clouddrive_member_anniversay"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_pan_activity"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_qkvip_act_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_qkvip_full_only_selected"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_svip_panel_ui_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_cloudsave_tip_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_player_cloud_hdtrial_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_sniffer_bar_freezes_speed_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ucv_cloud_drive_video_freewatch_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_video_ai_guide_setting1"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_end_recommend_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_end_recommend_clouddrive_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_tts_ad_cover_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_tts_cover_ad_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_read_tips_show_seconds"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_reader_webnovel_recommend_switch"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_novel_book_score_tip_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_member_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_asset_activity_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_asset_popup_activity"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_show_coupon_popup"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_vip_lottie_universal_popup"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_vip_year_goods_ctrl_new_logic"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_camera_scandoc_filters"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","camera_footer_study_tips_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_vip_product_floating_angle"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_aieditor_user_guide"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_quarkman_entry_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_ai_tool_login_guide_time"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","aidesign_homepage_bigtool"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_navi_delete_operation_new"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_navi_delete_operation_new2"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_home_navigation_new"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_transport_svip_banner_show_top"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_offline_backup_sheet"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_single_backup_guide"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_drive_live_photo_backup_guide"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_cloud_main_hot_search_tab"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_user_center_bussiness_banner_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_pay_update_banner"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_cloud_pay_types_list"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_cloud_avg_price_display"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_subscribe_entry"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_show_toolbox_upgrade_banner_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_sc_ad_request_handle_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","noah_content_embed_ad_vertical_scale_style"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_modal_year_modal_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_keep_modal_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_entity_migration_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","glass_bluetooth_scan"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_bubble"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cloud_drive_home_user_guide_text"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cloud_series_video_play_guide_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_web_sniff_float_tool_enable"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","ab_clouddrive_backup_free_cloudsave"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_not_in_use_counter_lottery"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_quark_alipay_tag"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cd_tinyapp_share_url"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_web_accs_err_guide_config"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","cms_link_search_direct"]])'
+http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qks_ab_paisou_sc_entry"]])'
 
 # ======= R ======= #
 
 # ======= S ======= #
+# Soul
+http-response-jq ^https:\/\/(?:api-\w+|gateway-mobile-gray|post)\.soulapp\.cn\/(?:furion\/position\/content|hot\/soul\/rank|mobile\/app\/version\/queryIos|official\/scene\/module|teenager\/config|v2\/post\/gift\/list|v\d\/post\/homepage\/guide\/card) 'delpaths([["data"]])'
+# 什么值得买
+http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'if (getpath(["data"]) | has("silence_local_push")) then (setpath(["data","silence_local_push"]; 0)) else . end'
+http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'if (getpath(["data"]) | has("baichuan_redirect_switch")) then (setpath(["data","baichuan_redirect_switch"]; 0)) else . end'
+http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'delpaths([["data","silence_local_push_msg"]])'
+http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'delpaths([["data","video_cache_num_configs"]])'
+http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'delpaths([["data","haojia_widget"]])'
+http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'delpaths([["data","widget"]])'
+http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'delpaths([["data","operation_float"]])'
+http-response-jq ^https:\/\/app-api\.smzdm\.com\/util\/update$ 'def r: if type=="object" then if has("ad_campaign_name") and (.ad_campaign_name|type=="string") and (.ad_campaign_name|test("\\S")) then empty else . end elif type=="array" then map(r) else . end; .data.operation_float |= map(map(r))'
+http-response-jq ^https:\/\/homepage-api\.smzdm\.com\/v3\/home\? '   .data.component |= map(    if (.zz_content | type) == "array" then     .zz_content |= map(       select(         ( (.ad_campaign_id? | type == "string" and length > 0)// false ) or         ( (.tag? | type == "string" and length > 0)// false ) or         ( (.model_type? == "ads" and (type == "string"))// false )         | not       )     )   else . end )  | .data.component |= map(   select(.zz_type == "circular_banner" or .zz_type == "filter" or .zz_type == "list") )  | .data.component |= map(   .zz_content |= (     if type == "array" then       map(         if type == "object" and (.article_channel_type// "") == "questionnaire" then           empty         else           .         end       )     else       .     end   ) )   | del(.data.theme)  | .data.component |= map(   if .zz_content | type == "object" then     .zz_content |= del(.circular_banner_option)   else     .   end )'
+http-response-jq ^https:\/\/haojia-api\.smzdm\.com\/home\/list\? 'delpaths([["data","header_operation","theme"]])'
+http-response-jq ^https:\/\/haojia-api\.smzdm\.com\/home\/list\? '.data.rows |= map(select(.cell_type == "39001")) | .data.banner_v2 |= map(select(.cell_type == "21028"))'
+http-response-jq ^https:\/\/haojia\.m\.smzdm\.com\/detail_modul\/user_related_modul\? 'delpaths([["data","super_coupon"]])'
+http-response-jq ^https:\/\/haojia\.m\.smzdm\.com\/detail_modul\/other_modul\? 'delpaths([["data","banner"]])'
+http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","activity_entrance_info"]])'
+http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","big_banner"]])'
+http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","top_banner"]])'
+http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","banner_switch"]])'
+http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","yaoqingshaiwu"]])'
+http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/list_v10\? '.data.rows |= map(select(.model_type != "ads")) | .data.top_aladdin |= map(select(has("ad") | not))'
+http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","search_faxian"]])'
+http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","tonglan"]])'
+http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","hongbao"]])'
+http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? '.data.search_hot.home |= map(select(.article_tag.article_title != "广告")) | .data.search_hot.home |= map(select(has("pos")))'
+http-response-jq ^https:\/\/haojia-api\.smzdm\.com\/detail\/\d+\? 'delpaths([["data","quan_log"]])'
+http-response-jq ^https:\/\/haojia-cdn\.smzdm\.com\/preload\/\d+\/fiphone\/v\d+_\d+_\d+\/wx\d+\/im\d+\/[0-9a-z]+\/[0-9a-z]+\.json$ 'delpaths([["data","quan_log"]])'
+http-response-jq ^https:\/\/post\.m\.smzdm\.com\/ajax_app\/ajax_get_footer_list\? 'delpaths([["data","tuiguang_ad"]])'
+http-response-jq ^https:\/\/post\.m\.smzdm\.com\/ajax_app\/ajax_get_footer_list\? 'delpaths([["data","activity_banner"]])'
 
 # ======= T ======= #
 # 淘票票
@@ -933,17 +1883,91 @@ http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.trade\
 # 中华万年历
 http-response-jq ^https:\/\/v0-client-lz\.rili\.cn\/lizhi\/api\/zhwnl\/cal_module\/(datas|config)\? '.data |= map(select(.module_name as $name | ["实用工具","会员下icon","天气页面_右上角图标","天气页面_24小时","天气页面_15日","每日插屏","下拉屏保","星座Tab（黄历页）"] | index($name) != null))'
 http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |= map((.layout |= map(select(.key_name == "实用工具" or .key_name == "会员下icon" or .key_name == "天气页面_右上角图标" or .key_name == "天气页面_24小时" or .key_name == "天气页面_15日" or .key_name == "每日插屏" or .key_name == "下拉屏保" or .key_name == "星座Tab（黄历页）"))) | select(.layout | length > 0))'
+# 知乎
+http-response-jq ^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\? 'delpaths([["activity_banner"]])'
+http-response-jq ^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\? 'delpaths([["activity_window"]])'
+http-response-jq ^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\? 'delpaths([["vip_tip"]])'
+http-response ^https:\/\/api\.zhihu\.com\/search\/recommend_query\/v2\? "recommend_queries":\{.+\} "recommend_queries":{}
+http-response-jq ^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|\?include=) 'del(.ad_info, .data.ad_info?, .query_info) | if (.data | type) == "array" then .data |= map(select(.target?.answer_type?// "" | tostring | contains("paid") | not)) else . end'
+# 转转
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\? 'delpaths([["respData","topOpera","leftOpera"]])'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\? 'delpaths([["respData","topOpera","rightOpera2"]])'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\? 'delpaths([["respData","topActBanner"]])'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\? 'delpaths([["respData","bmArea"]])'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zzx\/transfer\/getConfigInfo\? 'delpaths([["respData","freeMarketTabLeadPop"]])'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zzx\/transfer\/getConfigInfo\? 'delpaths([["respData","topOperations"]])'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/getfeedflowinfo\? 'if .respData.userRed.campName == "OCD挂件" then del(.respData.userRed) else . end | .respData.infoData |= map(del(.rotateResource,.appRecommendResource,."cargoGroupCardV2"))'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmymoretools$ 'walk(if type == "object" and .name == "免流量特权" then empty else . end) | del(.respData.groupList[] | select(.groupName == "活动参与" or .groupName == "金融工具"))'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmyprofilev3$ 'delpaths([["respData","bmNewInfo"]])'
+http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmyprofilev3$ 'del(.respData.itemGroupList[].itemList[] | select(.name == "天天赚钱" or .name == "借钱")) | del(.respData.itemGroupList[] | select(.groupType == 15))'
 
 
 [Map Local]
 # ======= 0 ======= #
+# 123云盘
+^https:\/\/www\.123pan\.com\/api\/config\/get data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= A ======= #
 # 阿里云盘
 ^https:\/\/member\.alipan\.com\/v2\/activity\/sign_in_luckyBottle data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https:\/\/api\.alipan\.com\/adrive\/v1\/file\/getTopFolders data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 爱企查
+^https:\/\/aiqicha\.baidu\.com\/app\/bannerPicAjax data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/aiqicha\.baidu\.com\/app\/getPopConfigAjax data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/aiqicha\.baidu\.com\/app\/getHotTopicAjax data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/aiqicha\.baidu\.com\/app\/getNewsReportAjax data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/aiqicha\.baidu\.com\/app\/getExpertVideoAjax data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/aiqicha\.baidu\.com\/apps\/getHotRecommendV2Ajax data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/aiqicha\.baidu\.com\/m\/getLoginWordsAjax data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/aiqicha\.baidu\.com\/app\/getAppPopSettingAjax data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/aiqicha\.baidu\.com\/apps\/getHomeMonitorDataAjax data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/aiqicha\.baidu\.com\/apps\/searchRecommendAjax data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= B ======= #
+# 波点音乐
+^https:\/\/bd-api\.kuwo\.cn\/api\/(play|service|advert)\/advert\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/bd-api\.kuwo\.cn\/api\/service\/banner\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/bd-api\.kuwo\.cn\/api\/ucenter\/vip\/give\/config\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/bd-api\.kuwo\.cn\/api\/service\/home\/module\?.*&moduleId=6 data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/bd-api\.kuwo\.cn\/api\/pay\/vip\/lowPriceText\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/bd-api\.kuwo\.cn\/api\/service\/global\/config\/vipEnter\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/bd-api\.kuwo\.cn\/api\/popup\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/bd-api\.kuwo\.cn\/api\/pay\/vip\/invitation\/swell\/popup\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/bd-api\.kuwo\.cn\/api\/service\/version\/popup\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/bd-api\.kuwo\.cn\/api\/pay\/vip\/invitation\/assist\/popup\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/bd-api\.kuwo\.cn\/api\/pay\/h5\/common\/popup\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 百度地图
+^https:\/\/afd\.baidu\.com\/afd\/entry\?action=(update|query) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/yongche\.baidu\.com\/gomarketing\/api\/popup\/getentrancecordovaurl$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/yongche\.baidu\.com\/goorder\/passenger\/cobuild\/pull\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/yongche\.baidu\.com\/goorder\/passenger\/operationgirdle$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/yongche\.baidu\.com\/goorder\/passenger\/baseinfo$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/ecom\.map\.baidu\.com\/ad-ops\/afd\/popup\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/maphotel\.baidu\.com\/hotel\/goextranet\/activity\/detail\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 百度文库
+^https:\/\/appwk\.baidu\.com\/xpage\/interface\/wknaad\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/appwk\.baidu\.com\/appapi\/search\/hot\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/appwk\.baidu\.com\/naapi\/search\/wkhotwords\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/appwk\.baidu\.com\/appapi\/task\/viptasklist\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/appwk\.baidu\.com\/activity\/interface\/wkapppopup\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/appwk\.baidu\.com\/appapi\/abg\/index\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/appwk\.baidu\.com\/naapi\/recommend\/recommenddoc\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/appwk\.baidu\.com\/naapi\/recommend\/vipdoccard\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+#百度网盘
+^https:\/\/pan\.baidu\.com\/api\/getconfig\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/pan\.baidu\.com\/api\/getsyscfg\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/pan\.baidu\.com\/api\/taskscore\/tasklist\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/pan\.baidu\.com\/act\/api\/activityentry\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/pan\.baidu\.com\/rest\/\d\.\d\/pcs\/adv\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/pan\.baidu\.com\/api\/plugin\/get\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/pan\.baidu\.com\/recommend\/query\/list\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 百度贴吧
+^https?:\/\/tiebac\.baidu\.com\/c\/f\/forum\/getInterestClassList$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https?:\/\/tiebac\.baidu\.com\/c\/f\/search\/discover$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https?:\/\/tieba\.baidu\.com\/c\/f\/search\/discover$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/tieba\.baidu\.com\/c\/f\/forum\/getForumAlbum$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^http:\/\/c\.tieba\.baidu\.com\/c\/f\/forum\/hotforum$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https?:\/\/tieba\.baidu\.com\/mo\/q\/search\/startPage\? data-type=text data="{"no":0,"error":"success"}" status-code=200 header="Content-Type:application/json"
 
 # ======= C ======= #
 # 彩云天气
@@ -962,6 +1986,18 @@ http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |
 ^https:\/\/poi\.map\.xiaojukeji\.com\/mapapi\/recommend\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 # 大师兄 
 ^https?:\/\/sdk\.alibaba\.com\.ailbaba\.me\/(dsx|xgapp)\.php\/v\d\/(top_notice\?|app_config|search_hot|version|advert\?position=[^2]+) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 叮咚买菜
+^https?:\/\/119\.29\.29\.\d+\/d data-type=text data=" " status-code=200
+
+^https:\/\/maicai\.api\.ddxq\.mobi\/vip\/getVipAd\/\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/maicai\.api\.ddxq\.mobi\/homeApi\/marketingNotice\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/maicai\.api\.ddxq\.mobi\/search\/rollHotKeyword\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/maicai\.api\.ddxq\.mobi\/search\/rankingList\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/maicai\.api\.ddxq\.mobi\/search\/hotKeyword\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/maicai\.api\.ddxq\.mobi\/order\/getRecommend$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/maicai\.api\.ddxq\.mobi\/homeApi\/userLike\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/user\.api\.ddxq\.mobi\/userportal-service\/api\/v1\/user\/queryMyPage\/\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/maicai\.api\.ddxq\.mobi\/guide-service\/userLike\/flowData$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= E ======= #
 
@@ -985,6 +2021,24 @@ http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |
 # 京东外卖
 ^https:\/\/color\.jddj\.com\/client\.action\?functionId=uniformRecommend data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https:\/\/color\.jddj\.com\/client\.action\?functionId=search_recommendRanking$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 驾考宝典
+^https:\/\/scs\.kakamobi\.cn\/api\/open\/v3\/advert-sdk\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/cheyouquan\.kakamobi\.com\/api\/open\/group\/recommend-subscribe-tag\.htm data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/swallow\.kakamobi\.cn\/api\/open\/config\/get-config\.htm data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/monkey\.kakamobi\.cn\/api\/open\/live\/get-recommend-live-protocol\.htm data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/jiaxiao-awd\.kakamobi\.cn\/api\/h5\/v4\/home-lead-advertise\/abtest\.htm data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/mcbd\.maiche\.com\/api\/open\/v3\/user\/get-popup-window\.htm data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/jiakao-misc\.kakamobi\.cn\/api\/open\/my-tab-config\/selection-list\.htm data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/jiakao-misc\.kakamobi\.cn\/api\/open\/my-tab-config\/banner-list\.htm data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/squirrel\.kakamobi\.cn\/api\/open\/recommend-goods\/get-my-page-banner\.htm data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/mcbd\.maiche\.com\/api\/open\/v2\/jiakao-business\/get-naben-advert\.htm data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/monkey\.kakamobi\.cn\/api\/open\/live-room\/get-resource\.htm data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 驾校一点通
+^https:\/\/richmanrules\.ksedt\.com\/serverConfig\/3\/adConfig\.json data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/gouche\.ksedt\.com\/config\/popup\/info$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/richmanrules\.ksedt\.com\/intellectWaterfallBidding\/find$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/op\.ksedt\.com\/jxedtLive\/liveIntroduceResource data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/richmanrules\.ksedt\.com\/intellectWaterfall\/find$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= K ======= #
 # 快递100
@@ -1000,10 +2054,15 @@ http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |
 ^https:\/\/api\.gotokeep\.com\/search\/v5\/hotCourse\/list$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https:\/\/api\.gotokeep\.com\/search\/v4\/hotHashtag\/list$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https:\/\/api\.gotokeep\.com\/search\/v4\/hotword\/list\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 酷安
+^https:\/\/api\.coolapk\.com\/v6\/search\?.*type=hotSearch data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= L ======= #
 
 # ======= M ======= #
+# 美颜相机
+^https:\/\/api\.meiyan\.com\/operation\/home_banner\.json\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.meiyan\.com\/vip\/permission_update_popup\.json\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= N ======= #
 
@@ -1043,10 +2102,43 @@ http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |
 ^https:\/\/(beta-luna\.douyin|api5-lq\.qishui)\.com\/luna\/commerce\/upsells\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https:\/\/(beta-luna\.douyin|api5-lq\.qishui)\.com\/luna\/commerce\/v2\/commerce_info\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https:\/\/(beta-luna\.douyin|api5-lq\.qishui)\.com\/luna\/listen-video\/reminder\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 夸克
+^https:\/\/stars\.shuqireader\.com\/kkios\/render\/load\/resource\/app$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/stars\.shuqireader\.com\/kkios\/render\/load\/resource\/appConfig$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 汽车之家
+^https:\/\/(a\.athm\.cn\/)?mobile\.app\.autohome\.com\.cn\/platform\/carserver\/carcard\/findEquitysV5 data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/(a\.athm\.cn\/)?mobile\.app\.autohome\.com\.cn\/platform\/carserver\/carcard\/mycardv6 data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/(a\.athm\.cn\/)?mobile\.app\.autohome\.com\.cn\/platform\/carserver\/usercenter\/chat\/gse\/recquery data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/autoapi\.autohome\.com\.cn\/ypttd\/yjc\/web\/mkgt\/act\/seckillInfo data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/(a\.athm\.cn\/)?mobile\.app\.autohome\.com\.cn\/platform\/carserver\/usercenter\/gethotactcards data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/(a\.athm\.cn\/)?mobile\.app\.autohome\.com\.cn\/platform\/carserver\/carcard\/extendedcards data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/(a\.athm\.cn\/)?mobile\.app\.autohome\.com\.cn\/platform\/carserver\/usercenter\/getwashcarlist data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/(a\.athm\.cn\/)?mobile\.app\.autohome\.com\.cn\/platform\/carserver\/usercenter\/getdealertab data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/(a\.athm\.cn\/)?mobile\.app\.autohome\.com\.cn\/platform\/carserver\/usercenter\/getoillist data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/pcmx\.autohome\.com\.cn\/queryCreativeList data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/maam\.pingan\.com\.cn\/maam\/buoy\/getBuoyList\.do data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/news\.app\.autohome\.com\.cn\/cont_v\d+(?:\.\d+){2}\/api\/article\/extenddata data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/adproxy\.autohome\.com\.cn\/AdvertiseService\/AppHandler\.ashx data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/club\.app\.autohome\.com\.cn\/club_v\d+(?:\.\d+){2}\/club\/channelqa\/header data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/dealer\.m\.autohome\.com\.cn\/handler\/other\/getdata\?__action=super\.list data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/autoapi\.autohome\.com\.cn\/arvr-dealercloud-api\/online\/aggregation\/exhibitionList data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/dealer\.m\.autohome\.com\.cn\/handler\/other\/getdata\?__action=vrcore\.list data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/dealer\.m\.autohome\.com\.cn\/handler\/other\/getdata\?__action=platform\.search data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/a\.athm\.cn\/clientlive\.api\.autohome\.com\.cn\/api\/live\/getserieswindowsinfo data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= R ======= #
 
 # ======= S ======= #
+# Soul
+^https:\/\/ssp\.soulapp\.cn\/api\/q data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/chat-live\.soulapp\.cn\/live\/planet\/recListV2 data-type=text data=" " status-code=200
+# 什么值得买
+^https:\/\/app-api\.smzdm\.com\/util\/loading\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/app-api\.smzdm\.com\/mychannel\/list$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/user-api\.smzdm\.com\/vip\/bottom_card_list\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/article-api\.smzdm\.com\/publish\/get_bubble\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/s-api\.smzdm\.com\/sou\/search_default_keyword\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/s-api\.smzdm\.com\/sou\/popup_coupon\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= T ======= #
 # 淘宝
@@ -1065,6 +2157,9 @@ http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |
 ^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.film\.life\.popup\.get\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.film\.mtopindependentadvertiseapi\.queryadvertise\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.film\.mtopitemadvertiseapi\.queryadvertise\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 腾讯文档
+^https:\/\/tianshu\.qq\.com\/open\/ts_access\/GetAds\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/h5\.qzone\.qq\.com\/p\/adboss\/api\/json\/ts_access\/GetAds$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= U ======= #
 
@@ -1104,7 +2199,40 @@ http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |
 ^https:\/\/client-lz\.rili\.cn\/lizhi\/api\/fortune\/overview\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 # 中国移动开屏
 ^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(explorePage\/getAdverList|init\/startInit) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-
+# 知乎
+^https:\/\/api\.zhihu\.com\/commercial_api\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/content-distribution-core\/bubble\/common\/settings data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/(?:moments\/lastread|drama\/hot-drama-list) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/root\/window data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/(?:bazaar\/float_window|market\/popovers_v2) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/me\/guides data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/people\/homepage_entry_v2 data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/search\/(hot_search|preset_words) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/www\.zhihu\.com\/api\/v4\/search\/clicked_recommendation\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/www\.zhihu\.com\/api\/v4\/search\/related_queries\/(?:article|answer)\/\d+ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/comment_v5\/(?:articles|answers)\/\d+\/list-headers data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/prague\/related_suggestion_native\/feed\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/v5\.1\/topics\/answer\/\d+\/relation data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/ab\/api\/v1\/products\/zhihu\/platforms\/ios\/config data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/ad-style-service\/request data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/appcloud2\.zhihu\.com\/v3\/resource\?group_name=mp data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/distribute\/rhea\/qa_ad_card\/h5\/recommendation\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/www\.zhihu\.com\/api\/v4\/hot_recommendation data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/www\.zhihu\.com\/api\/v4\/mcn\/v2\/linkcards\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/www\.zhihu\.com\/api\/v4/(?:answers|questions)\/\d+/related-readings data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/www\.zhihu\.com\/commercial_api\/banners_v3\/mobile_banner data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/zhuanlan\.zhihu\.com\/api\/articles\/\d+\/recommendation data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 转转
+^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/getOpenScreen$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/getwindvanecardv2$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/app\.zhuanzhuan\.com\/zzopen\/popwindow\/getallpopwin\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/app\.zhuanzhuan\.com\/zzopen\/zzbmlogic\/queryFrontPageWindowInfo\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/app\.zhuanzhuan\.com\/zzopen\/ptuserlogic\/subscribehotrecommend$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/app\.zhuanzhuan\.com\/zzopen\/ypmall\/listData$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzusercenter\/myprofilevariouscards$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/app\.zhuanzhuan\.com\/zzopen\/ptsimpleshow\/recommendbymyloveinfo\? data-type=text data="{"respCode":0,"errorMsg":"null","errMsg":""}" status-code=200 header="Content-Type:application/json"
+^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/footprintsamerecommend\? data-type=text data="{"respCode":0,"errorMsg":"","errMsg":""}" status-code=200 header="Content-Type:application/json"
+^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/getchoicegoodsinfos\? data-type=text data="{"respCode":0,"respData":{},"errorMsg":"","errMsg":""}" status-code=200 header="Content-Type:application/json"
 
 [Script]
 # ======= 0 ======= #
@@ -1119,6 +2247,10 @@ http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |
 爱思助手 = type=http-response,pattern=^https?:\/\/(search|list)-app-m\.i4\.cn\/(getHotSearchList|getAppList)\.xhtml,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/Keywos/rule/main/JS/aisi.js
 
 # ======= B ======= #
+# 百度网页
+百度网页 = type=http-response, pattern="^https?:\/\/(www|m)\.baidu\.com\/?($|\?from=\w{8,9})", script-path=https://kelee.one/Resource/JavaScript/BaiduSearch/BaiduSearchHomePage_remove_ads.js, requires-body=true
+# 百度贴吧
+百度贴吧 = type=http-response, pattern=^https?:\/\/tieba(?:c)?\.baidu\.com\/c\/(f\/excellent\/personalized|f\/frs\/page|b\/ad\/adBid|f\/ad\/getFeedAd|f\/pb\/page|f\/frs\/generalTabList)\?cmd=\d+&format=protobuf, script-path=https://kelee.one/Resource/JavaScript/Tieba/tieba-proto.js, requires-body=true, binary-body-mode=true, timeout=10, argument=[{{{per_filter_video_thread}}}]
 
 # ======= C ======= #
 # 彩云天气
@@ -1135,6 +2267,8 @@ http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |
 # ======= H ======= #
 
 # ======= I ======= #
+# IT之家
+IT之家 = type=http-response, pattern=^https:\/\/napi\.ithome\.com\/api\/(news\/indexv2\/iphone\/\d+|topmenu\/getfeeds\?), script-path=https://kelee.one/Resource/JavaScript/IThome/IThome_remove_ads.js, requires-body=true, argument="[{{{removeAllBanners}}},{{{removePinnedArticles}}}]"
 
 # ======= J ======= #
 # 京东
@@ -1145,6 +2279,8 @@ http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |
 # ======= L ======= #
 
 # ======= M ======= #
+# 美颜相机
+美颜相机 = type=http-response, pattern=^https:\/\/api\.meiyan\.com\/operation\/home\.json\?, script-path=https://kelee.one/Resource/JavaScript/MeituMYXJ/MeituMYXJ_remove_ads.js, requires-body=true
 
 # ======= N ======= #
 
@@ -1155,10 +2291,19 @@ http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |
 # ======= Q ======= #
 # 汽水音乐
 汽水音乐 = type=http-response, pattern=^https:\/\/(beta-luna\.douyin|api5-lq\.qishui)\.com\/luna\/me\/recently-played-media\?, script-path=https://kelee.one/Resource/JavaScript/SodaMusic/SodaMusic_remove_ads.js, requires-body=true
+# 汽车之家
+汽车之家 = type=http-response, pattern=^https:\/\/news\.app\.autohome\.com\.cn\/news_v\d+(?:\.\d+){2}\/news\/homenavigation, script-path=https://kelee.one/Resource/JavaScript/AutoHome/AutoHome_remove_ads.js, requires-body=true
+汽车之家 = type=http-response, pattern=^https:\/\/(a\.athm\.cn\/)?mobile\.app\.autohome\.com\.cn\/platform\/carserver\/((usercenter\/getservicecards)|(carcard\/allcard)|(carcard\/mycardv\d+)|(carcard\/cards)), script-path=https://kelee.one/Resource/JavaScript/AutoHome/AutoHome_remove_ads.js, requires-body=true
+汽车之家 = type=http-response, pattern=^https:\/\/(a\.athm\.cn\/)?club\.app\.autohome\.com\.cn\/club_v\d+(?:\.\d+){2}\/club\/index\/businessv\d+, script-path=https://kelee.one/Resource/JavaScript/AutoHome/AutoHome_remove_ads.js, requires-body=true
+汽车之家 = type=http-response, pattern=^https:\/\/(a\.athm\.cn\/)?cars\.app\.autohome\.com\.cn\/carstreaming\/selectcarportal\/reclist, script-path=https://kelee.one/Resource/JavaScript/AutoHome/AutoHome_remove_ads.js, requires-body=true
+汽车之家 = type=http-response, pattern=^https:\/\/(a\.athm\.cn\/)?cars\.app\.autohome\.com\.cn\/carstreaming\/selectcarportal\/seriestopwithtagscard, script-path=https://kelee.one/Resource/JavaScript/AutoHome/AutoHome_remove_ads.js, requires-body=true
+汽车之家 = type=http-response, pattern=^https:\/\/(a\.athm\.cn\/)?apiautoappusc\.che168\.com\/apic\/v\d+\/gethomepagefeed, script-path=https://kelee.one/Resource/JavaScript/AutoHome/AutoHome_remove_ads.js, requires-body=true
 
 # ======= R ======= #
 
 # ======= S ======= #
+# Soul
+Soul = type=http-response, pattern=^https:\/\/(?:api-\w+|chat-live|post)\.soulapp\.cn\/(?:chat\/limitInfo|chatroom\/chatClassifyRoomList|homepage\/diamond\/position\/info|v2\/post\/recSquare\/subTabs|v6\/planet\/config), script-path=https://kelee.one/Resource/JavaScript/Soul/Soul_remove_ads.js, requires-body=true
 
 # ======= T ======= #
 # 淘宝
@@ -1178,7 +2323,19 @@ http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |
 # ======= Z ======= #
 # 航旅纵横
 航旅纵横 = type=http-response, pattern=^http?:\/\/(114\.115\.217\.129)|(home\.umetrip\.com)\/gateway\/api\/umetrip\/native$, script-path=https://kelee.one/Resource/JavaScript/Umetrip/Umetrip_remove_ads.js
+# 知乎
+知乎 = type=http-response, pattern=^https:\/\/(?:api|page-info)\.zhihu\.com\/(?:answers|articles)\/v2\/\d+, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
+知乎 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/commercial_api\/app_float_layer, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
+知乎 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/feed\/render\/tab\/config\?, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
+知乎 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/(?:moments_v3|topstory\/hot-lists\/total|topstory\/recommend), script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
+
+知乎 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/root\/tab, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
+知乎 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/v2\/topstory\/hot-lists\/everyone-seeing\?, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
+知乎 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/next-(?:bff|data|render), script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
+知乎 = type=http-response, pattern=^https:\/\/www\.zhihu\.com\/api\/v4\/(?:articles|answers)\/\d+\/recommendations?\?, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
+知乎 config = type=http-response, pattern=^https:\/\/appcloud2\.zhihu\.com\/v3\/config, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
+知乎 config all = type=http-response, pattern=^https:\/\/m-cloud\.zhihu\.com\/api\/cloud\/zhihu\/config\/all\?, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
 
 
 [MITM]
-hostname = %APPEND% ad.12306.cn, mobile.12306.cn, api.alipan.com, member.alipan.com, bizapi.alipan.com, netflow-mtop.cainiao.com, nbcps-mtop.cainiao.com, cn-acs.m.cainiao.com, e2e-mtop.cainiao.com, longquan-mtop.cainiao.com, biz.cyapi.cn, starplucker.cyapi.cn, api.caiyunapp.com, cdn-w.caiyunapp.com, capis.didapinche.com, as.xiaojukeji.com, common.diditaxi.com.cn, conf.diditaxi.com.cn, lion.didialift.com, api.udache.com, ct.xiaojukeji.com, res.xiaojukeji.com, 112.53.55.225, 139.199.240.84, 113.46.225.*, 162.14.157.*, 123.207.209.*, 120.241.142.*, 120.241.143.*, 116.85.*, api.m.jd.com, color.jddj.com, api.m.jd.com, p.kuaidi100.com, circle.seeyouyima.com, circle.xmseeyouyima.com, common.seeyouyima.com, api.pinduoduo.com, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, acs.m.taobao.com, mp.weixin.qq.com, aweme.snssdk.com, api5-normal-m.amemv.com, acs.m.goofish.com, g-acs.m.goofish.com, marketing-aibox.v.mitvos.com, v0-client-lz.rili.cn, client-lz.rili.cn, list-app-m.i4.cn, search-app-m.i4.cn, client.app.coc.10086.cn, mp.weixin.qq.com, sdk.alibaba.com.ailbaba.me, home.mi.com, acs.m.taobao.com, 114.115.217.129, home.umetrip.com, api.gotokeep.com, webcast-open.douyin.com, beta-luna.douyin.com, api.qishui.com, api5-lq.qishui.com, tnc*-*.zijieapi.com
+hostname = %APPEND% ad.12306.cn, mobile.12306.cn, api.alipan.com, member.alipan.com, bizapi.alipan.com, netflow-mtop.cainiao.com, nbcps-mtop.cainiao.com, cn-acs.m.cainiao.com, e2e-mtop.cainiao.com, longquan-mtop.cainiao.com, biz.cyapi.cn, starplucker.cyapi.cn, api.caiyunapp.com, cdn-w.caiyunapp.com, capis.didapinche.com, as.xiaojukeji.com, common.diditaxi.com.cn, conf.diditaxi.com.cn, lion.didialift.com, api.udache.com, ct.xiaojukeji.com, res.xiaojukeji.com, 112.53.55.225, 139.199.240.84, 113.46.225.*, 162.14.157.*, 123.207.209.*, 120.241.142.*, 120.241.143.*, 116.85.*, api.m.jd.com, color.jddj.com, api.m.jd.com, p.kuaidi100.com, circle.seeyouyima.com, circle.xmseeyouyima.com, common.seeyouyima.com, api.pinduoduo.com, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, acs.m.taobao.com, mp.weixin.qq.com, aweme.snssdk.com, api5-normal-m.amemv.com, acs.m.goofish.com, g-acs.m.goofish.com, marketing-aibox.v.mitvos.com, v0-client-lz.rili.cn, client-lz.rili.cn, list-app-m.i4.cn, search-app-m.i4.cn, client.app.coc.10086.cn, mp.weixin.qq.com, sdk.alibaba.com.ailbaba.me, home.mi.com, acs.m.taobao.com, 114.115.217.129, home.umetrip.com, api.gotokeep.com, webcast-open.douyin.com, beta-luna.douyin.com, api.qishui.com, api5-lq.qishui.com, tnc*-*.zijieapi.com, open-cms-api.quark.cn, stars.shuqireader.com, www.123pan.com, api*.soulapp.cn, gateway-mobile-gray.soulapp.cn, post.soulapp.cn, ssp.soulapp.cn, napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com, app-api.smzdm.com, homepage-api.smzdm.com, h5.smzdm.com, haojia-api.smzdm.com, haojia.m.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, s-api.smzdm.com, haojia-cdn.smzdm.com, post.m.smzdm.com, 119.29.29.*, maicai.api.ddxq.mobi, user.api.ddxq.mobi, a.athm.cn, adproxy.autohome.com.cn, apiautoappusc.che168.com, autoapi.autohome.com.cn, cars.app.autohome.com.cn, clientlive.api.autohome.com.cn, club.app.autohome.com.cn, dealer.m.autohome.com.cn, maam.pingan.com.cn, mobile.app.autohome.com.cn, news.app.autohome.com.cn, pcmx.autohome.com.cn, bd-api.kuwo.cn, aiqicha.baidu.com, afd.baidu.com, newclient.map.baidu.com, yongche.baidu.com, ecom.map.baidu.com, m.baidu.com, www.baidu.com, appwk.baidu.com, tanbi.baidu.com, pan.baidu.com, tiebac.baidu.com, tieba.baidu.com, *.zhihu.com, api.posters.meitu.com, api.meiyan.com, app.zhuanzhuan.com, tianshu.qq.com, h5.qzone.qq.com, api.coolapk.com, richmanrules.ksedt.com, gouche.ksedt.com, muses.ksedt.com, op.ksedt.com, api.ksedt.com, jiaxiao-awd.kakamobi.cn, cheyouquan.kakamobi.com, swallow.kakamobi.cn, monkey.kakamobi.cn, mcbd.maiche.com, jiakao-misc.kakamobi.cn, squirrel.kakamobi.cn, scs.kakamobi.cn
