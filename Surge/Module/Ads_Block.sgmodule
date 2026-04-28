@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block ads
 #!tag = 自用广告拦截规则合集
-#!Rule = 4607
+#!Rule = 4608
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -4345,6 +4345,7 @@ DOMAIN-SUFFIX,yumimobi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,yunjiasu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,yunpifu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,yunqingugm.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,yunxish.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,z.gds.cnzz.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zampdsp.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zamplus.com,REJECT,extended-matching,pre-matching
