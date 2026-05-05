@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block ads
 #!tag = 自用广告拦截规则合集
-#!Rule = 4608
+#!Rule = 4611
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -1215,6 +1215,7 @@ DOMAIN,sentry-ng.g.smailru.net,REJECT,extended-matching,pre-matching
 DOMAIN,sentry.dev-my.com,REJECT,extended-matching,pre-matching
 DOMAIN,sentry.dev-my.games,REJECT,extended-matching,pre-matching
 DOMAIN,sentry.hetzner.company,REJECT,extended-matching,pre-matching
+DOMAIN,sentry.iptv.rt.ru,REJECT,extended-matching,pre-matching
 DOMAIN,sentry.kontur.host,REJECT,extended-matching,pre-matching
 DOMAIN,sentry.mindbox.ru,REJECT,extended-matching,pre-matching
 DOMAIN,sentry.music.163.com,REJECT,extended-matching,pre-matching
@@ -1617,6 +1618,7 @@ DOMAIN-SUFFIX,a.dangdang.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,a.ki,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,a.koudai.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,a.market.xiaomi.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,a.mts.ru,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,a.youdao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,a1.itc.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,a3p4.net,REJECT,extended-matching,pre-matching
@@ -3337,6 +3339,7 @@ DOMAIN-SUFFIX,o.if.qidian.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,o2omobi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,o333o.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,oadz.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,obs.mts.ru,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,oc.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,oct.pocoiq.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,officesoftcn.com,REJECT,extended-matching,pre-matching
