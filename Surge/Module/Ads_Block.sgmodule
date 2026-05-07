@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block ads
 #!tag = 自用广告拦截规则合集
-#!Rule = 4611
+#!Rule = 4612
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -554,6 +554,8 @@ DOMAIN,config.chsmarttv.com,REJECT,extended-matching,pre-matching
 DOMAIN,config.inmobi.com,REJECT,extended-matching,pre-matching
 DOMAIN,config.unityads.unity3d.com,REJECT,extended-matching,pre-matching
 DOMAIN,content-understand-strategy.sm.cn,REJECT,extended-matching,pre-matching
+DOMAIN,copilot-telemetry-service.githubusercontent.com,REJECT,extended-matching,pre-matching
+DOMAIN,copilot-telemetry.githubusercontent.com,REJECT,extended-matching,pre-matching
 DOMAIN,counter.kingsoft.com,REJECT,extended-matching,pre-matching
 DOMAIN,counter.ksosoft.com,REJECT,extended-matching,pre-matching
 DOMAIN,cpc-service-square.aiclk.com,REJECT,extended-matching,pre-matching
@@ -2400,7 +2402,6 @@ DOMAIN-SUFFIX,conv.youdao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,coocaatv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cooguo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,coolguang.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,copilot-telemetry.githubusercontent.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,coreldrawchina.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,coremetrics.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,corp.meitu.com,REJECT,extended-matching,pre-matching
