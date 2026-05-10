@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block ads
 #!tag = 自用广告拦截规则合集
-#!Rule = 4612
+#!Rule = 4616
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
@@ -3075,6 +3075,7 @@ DOMAIN-SUFFIX,log1.17173.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log2.sina.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,logger.baofeng.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,logger.qingting.fm,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,logger.qmai.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,logic.cpm.cm.kankan.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,logoshejishi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,logs.amap.com,REJECT,extended-matching,pre-matching
@@ -3989,9 +3990,12 @@ DOMAIN-SUFFIX,tracker.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tracker.my.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tracker.xiaomixiaoai.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tracker.yhd.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,tracking.mcdonalds.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tracking.miui.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,trackingio.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,trackingprd.hwwt8.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tracklog.58.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,trackserver.shuxinyc.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tradplusad.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,trafficfactory.biz,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,traffichunt.com,REJECT,extended-matching,pre-matching
