@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-05-20 08:56:19
+#!date = 2026-05-20 09:00:37
 
 on:
   workflow_dispatch:
@@ -116,7 +116,7 @@ jobs:
             ["Block/Ads_MyBlockAds.list"]="https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Ruleset/Surge/Block/BlockAds.list"
             ["Block/Ads_EasyPrivacysurge.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easyprivacy_surge.list"
             ["Block/Ads_Advertising.list"]="https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Advertising.list"
-            ["Block/Ads_Adblock4limbo_surge.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/Surge/rule/Adblock4limbo_surge.list"
+            ["Block/Ads_Adblock4limbosurge.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/Surge/rule/Adblock4limbo_surge.list"
             ["Block/Ads_AWAvenue.list"]="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge-RULE-SET.list"
             ["Block/Ads_all.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
             
