@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-04-18 19:18:20
+#!date = 2026-05-20 08:53:59
 
 on:
   workflow_dispatch:
@@ -108,12 +108,13 @@ jobs:
             ["Block/Ads_BanProgramAD.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
             ["Block/Ads_Dlerio.list"]="https://raw.githubusercontent.com/dler-io/Rules/main/Surge/Surge%203/Provider/AdBlock.list"
             ["Block/Ads_Chinese.list"]="https://raw.githubusercontent.com/geekdada/surge-list/master/domain-set/chinese-filter.txt"
-            ["Block/Ads_Easylist_surge.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easylist_surge.list"
+            ["Block/Ads_Easylistsurge.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easylist_surge.list"
             ["Block/Ads_Tracking.list"]="https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Tracking.list"
+            ["Block/Ads_AdBlockSurgeLite.list"]="https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksurgelite.list"
             ["Block/Ads_Malicious.list"]="https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Malicious.list"
             ["Block/Ads_EasyListChina.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easylistchina_surge.list"
-            ["Block/Ads_My_BlockAds.list"]="https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Ruleset/Surge/Block/BlockAds.list"
-            ["Block/Ads_EasyPrivacy_surge.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easyprivacy_surge.list"
+            ["Block/Ads_MyBlockAds.list"]="https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Ruleset/Surge/Block/BlockAds.list"
+            ["Block/Ads_EasyPrivacysurge.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easyprivacy_surge.list"
             ["Block/Ads_Advertising.list"]="https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Advertising.list"
             ["Block/Ads_Adblock4limbo_surge.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/Surge/rule/Adblock4limbo_surge.list"
             ["Block/Ads_AWAvenue.list"]="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge-RULE-SET.list"
@@ -228,17 +229,18 @@ jobs:
               echo "完成: $output"
             }
 
-            # Block
+            # Block 
             merge_local "Ruleset/Surge/Block/Ads_Block.list" \
+              Ruleset/Surge/Block/Ads_all.list \
               Ruleset/Surge/Block/Ads_BanAD.list \
-              Ruleset/Surge/Block/Ads_BanProgramAD.list \
-              Ruleset/Surge/Block/Ads_My_BlockAds.list \
               Ruleset/Surge/Block/Ads_Tracking.list \
-              Ruleset/Surge/Block/Ads_Malicious.list \
-              Ruleset/Surge/Block/Ads_Advertising.list \
               Ruleset/Surge/Block/Ads_AWAvenue.list \
-              Ruleset/Surge/Block/Ads_all.list
-
+              Ruleset/Surge/Block/Ads_Malicious.list \
+              Ruleset/Surge/Block/Ads_MyBlockAds.list \
+              Ruleset/Surge/Block/Ads_Advertising.list \
+              Ruleset/Surge/Block/Ads_BanProgramAD.list \
+              Ruleset/Surge/Block/Ads_AdBlockSurgeLite.list
+              
             # 同步广告规则到其他目录
             cp "Ruleset/Surge/Block/Ads_Block.list" "Ruleset/mihomo/Block/Ads_Block.list"
             cp "Ruleset/Surge/Block/Ads_Block.list" "Surge/Module/Ads_Block.sgmodule"
