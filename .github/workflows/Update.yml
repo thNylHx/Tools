@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-05-20 09:00:37
+#!date = 2026-05-20 09:03:14
 
 on:
   workflow_dispatch:
@@ -118,7 +118,7 @@ jobs:
             ["Block/Ads_Advertising.list"]="https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Advertising.list"
             ["Block/Ads_Adblock4limbosurge.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/Surge/rule/Adblock4limbo_surge.list"
             ["Block/Ads_AWAvenue.list"]="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge-RULE-SET.list"
-            ["Block/Ads_all.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
+            ["Block/Ads_All.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
             
             # Media
             ## YouTube
@@ -231,7 +231,7 @@ jobs:
 
             # Block 
             merge_local "Ruleset/Surge/Block/Ads_Block.list" \
-              Ruleset/Surge/Block/Ads_all.list \
+              Ruleset/Surge/Block/Ads_All.list \
               Ruleset/Surge/Block/Ads_BanAD.list \
               Ruleset/Surge/Block/Ads_Tracking.list \
               Ruleset/Surge/Block/Ads_AWAvenue.list \
