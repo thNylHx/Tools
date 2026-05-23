@@ -1,9 +1,10 @@
 #!name = Block ads | 软件去广告合集模块
-#!desc = 自用软件去广告合集
+#!desc = 常用软件去广告合集
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截
-#!date = 2026-04-24 17:30:05
+#!date = 2026-05-23 08:21:27
+
 
 [Rule]
 # ======= 0 ======= #
@@ -181,6 +182,16 @@ DOMAIN,wxsnsdythumb.wxs.qq.com,REJECT,pre-matching,extended-matching
 DOMAIN,ads-shopping.shouqianba.com,REJECT,pre-matching,extended-matching
 DOMAIN,ad.maoyan.com,REJECT,pre-matching,extended-matching
 DOMAIN,e.jparking.cn,REJECT,pre-matching,extended-matching
+# 网易新闻
+DOMAIN,nex.163.com,DIRECT
+DOMAIN,gw.m.163.com,DIRECT
+# 网易云音乐
+DOMAIN,iadmat.nosdn.127.net,REJECT,pre-matching,extended-matching
+DOMAIN,iadmatapk.nosdn.127.net,REJECT,pre-matching,extended-matching
+DOMAIN,iadmusicmat.music.126.net,REJECT,pre-matching,extended-matching
+DOMAIN,iadmusicmatvideo.music.126.net,REJECT,pre-matching,extended-matching
+DOMAIN,ipv4.music.163.com,REJECT,pre-matching,extended-matching
+DOMAIN,ipv6.music.163.com,REJECT,pre-matching,extended-matching
 
 # ======= X ======= #
 # 香港抖音
@@ -198,17 +209,6 @@ AND,((OR,((DOMAIN-SUFFIX,bytegecko.com),(DOMAIN-SUFFIX,byteeffecttos.com))),(DOM
 DOMAIN,sdk.ad.sfys365.com,REJECT,pre-matching,extended-matching
 # 航旅纵横
 URL-REGEX,"^http?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native",REJECT,pre-matching,extended-matching
-# 知乎
-DOMAIN,appcloud.zhihu.com,REJECT,extended-matching,pre-matching
-DOMAIN,appcloud2.in.zhihu.com,REJECT,extended-matching,pre-matching
-DOMAIN,crash2.zhihu.com,REJECT,extended-matching,pre-matching
-DOMAIN,mqtt.zhihu.com,REJECT,extended-matching,pre-matching
-DOMAIN,sugar.zhihu.com,REJECT,extended-matching,pre-matching
-DOMAIN,zxid-m.mobileservice.cn,REJECT,extended-matching,pre-matching
-IP-CIDR,103.41.167.237/32,REJECT,no-resolve,pre-matching
-IP-CIDR,118.89.204.198/32,REJECT,no-resolve,pre-matching
-IP-CIDR,182.61.194.7/32,REJECT,no-resolve,pre-matching
-IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,REJECT,no-resolve,pre-matching
 
 # ======= other ======= #
 DOMAIN-KEYWORD,adstrategy,REJECT,pre-matching,extended-matching
@@ -701,6 +701,15 @@ URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]:\d+\/httpdns\/",REJECT,pre-matching,exten
 ^https:\/\/rescdn\.qqmail\.com\/qqmail\/images\/.+\.(png|jpg)$ - reject
 
 # ======= R ======= #
+# 瑞幸咖啡
+^https:\/\/capi\.lkcoffee\.com\/resource\/m\/growUp\/calendarList - reject
+^https:\/\/capi\.lkcoffee\.com\/resource\/m\/promotion\/giftCard\/topPage - reject
+^https:\/\/capi\.lkcoffee\.com\/resource\/m\/sys\/base\/myLittleLuck - reject
+^https:\/\/capi\.lkcoffee\.com\/resource\/core\/v2\/menu\/ordinaryUserLayeredArea - reject
+^https:\/\/capi\.lkcoffee\.com\/resource\/m\/sys\/common\/modules - reject
+^https:\/\/capi\.lkcoffee\.com\/resource\/core\/v2\/homepage\/homePageCoffeeList - reject
+^https:\/\/capi\.lkcoffee\.com\/resource\/m\/eorder\/product\/popAppTagProductList - reject
+^https:\/\/capi\.lkcoffee\.com\/resource\/m\/sys\/app\/adposNew - reject
 
 # ======= S ======= #
 # 什么值得买
@@ -737,6 +746,14 @@ URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]:\d+\/httpdns\/",REJECT,pre-matching,exten
 ^https:\/\/ccmsupport-sz\.tenpay\.com\/cgi-bin\/common\/ccm_page_element.cgi - reject
 ^https:\/\/api\.pinduoduo\.com\/api\/ktt_gateway\/activity\/feeds\/personal_home_page\/ - reject
 ^https:\/\/api\.szbgcx\.cn\/account\/adv\/ - reject
+# 网易新闻
+^https?:\/\/interface\.music\.163\.com\/eapi\/ad - reject
+^https?:\/\/c\.m\.163\.com\/nc\/gl\/ - reject
+^https?:\/\/client\.mail\.163\.com\/apptrack\/confinfo\/searchMultiAds - reject
+^https?:\/\/g1\.163\.com\/madfeedback - reject
+^https?:\/\/interface\.music\.163\.com\/eapi\/ad\/ - reject
+^https?:\/\/support\.you\.163\.com\/xhr\/boot\/getBootMedia\.json - reject
+^https?:\/\/interface3?\.music\.163\.com/eapi/(ad|abtest|sp|hot|store|search/(specialkeyword|defaultkeyword|hot)) - reject
 
 # ======= X ======= #
 # 香港抖音
@@ -749,10 +766,6 @@ URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]:\d+\/httpdns\/",REJECT,pre-matching,exten
 # ======= Z ======= #
 # 中国移动开屏
 ^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(init\/startInit|emotionMarket) - reject
-# 知乎
-^https:\/\/api\.zhihu\.com\/unlimited\/go\/my_card - reject
-^https:\/\/www\.zhihu\.com\/appview\/v3\/zhmore - reject
-^https:\/\/link\.zhihu\.com\/\?target=(?:https?)?(?:%3A|:)?(?:\/\/|%2F%2F)?(.*) http://$1 302
 
 
 [Body Rewrite]
@@ -1034,6 +1047,11 @@ http-response-jq ^https:\/\/api\.coolapk\.com\/v6\/main\/dataList '.data |= (if 
 http-response-jq ^https:\/\/api\.coolapk\.com\/v6\/page\/dataList 'if (.data | length > 0) then .data |= map(select((.title? != "酷安热搜") and (.entityTemplate? != "imageScaleCard") and (.entityTemplate? != "sponsorCard"))) else . end'
 http-response-jq ^https:\/\/api\.coolapk\.com\/v6\/main\/indexV8 '.data |= (if length > 0 then map(select((.entityTemplate != "sponsorCard") and ([8639,29349,33006,32557] | index(.entityId) | not) and ((.title// "" | test("值得买|红包")) | not))) else . end)'
 http-response-jq ^https:\/\/api\.coolapk\.com\/v6\/main\/init '.data |= map(select(.entityId? | [944,945,6390] | index(.) | not) | if .entityId == 20131 then .entities |= map(select(.title != "酷品")) else . end)'
+# KOOK
+http-response-jq ^https:\/\/(m|www)\.kookapp\.cn\/api\/v\d\/user\/settings$ 'delpaths([["ad_banner"]])'
+http-response-jq ^https:\/\/(m|www)\.kookapp\.cn\/api\/v\d\/user\/settings$ 'delpaths([["advertise_on_off"]])'
+http-response-jq ^https:\/\/(m|www)\.kookapp\.cn\/api\/v\d\/user\/settings$ 'if (getpath([]) | has("ios_mall_switch")) then (setpath(["ios_mall_switch"]; false)) else . end'
+http-response-jq ^https:\/\/www\.kookapp\.cn\/api\/v3\/discover\/tab-list\? '.data.items |= map(select(.id == 472 or .id == 473 or .id == 475))'
 
 # ======= L ======= #
 
@@ -1792,6 +1810,8 @@ http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["res
 http-response-jq ^https:\/\/open-cms-api\.quark\.cn\/open-cms\? 'delpaths([["result","qks_ab_paisou_sc_entry"]])'
 
 # ======= R ======= #
+# Reddit
+http-response-jq ^https?:\/\/gql(-fed)?\.reddit\.com ' walk(   if type == "object" then      (if .isNsfw == true then .isNsfw = false else . end)     | (if .isNsfwMediaBlocked == true then .isNsfwMediaBlocked = false else . end)     | (if .isNsfwContentShown == false then .isNsfwContentShown = true else . end)      | (if (.commentsPageAds | type == "array") then (.commentsPageAds = []) else . end)      | (if ( (.node | type == "object") and (.node.cells | type == "array") and (.node.cells | any(.__typename? == "AdMetadataCell" or .isAdPost? == true)) ) then empty else . end)     | (if (.node | type == "object") and (.node.adPayload | type == "object") then empty else . end)     | (if .__typename == "AdPost" then empty else . end)   else .  end)'
 
 # ======= S ======= #
 # Soul
@@ -1815,11 +1835,12 @@ http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","big_b
 http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","top_banner"]])'
 http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","banner_switch"]])'
 http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","yaoqingshaiwu"]])'
+http-response-jq ^https:\/\/user-api\.smzdm\.com\/vip$ 'delpaths([["data","right_info"]])'
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/list_v10\? '.data.rows |= map(select(.model_type != "ads")) | .data.top_aladdin |= map(select(has("ad") | not))'
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","search_faxian"]])'
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","tonglan"]])'
 http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? 'delpaths([["data","hongbao"]])'
-http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? '.data.search_hot.home |= map(select(.article_tag.article_title != "广告")) | .data.search_hot.home |= map(select(has("pos")))'
+http-response-jq ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? '.data.hot_tab |= (if type == "array" then map(select(.search_method != "热点主题榜")) else . end) | if .data.hot_tab then .data.hot_tab |= map(if .search_method == "热搜榜搜索热榜" and .rows then .rows |= map(select(.pos != null and ((.pos | tonumber) != null))) else . end) else . end'
 http-response-jq ^https:\/\/haojia-api\.smzdm\.com\/detail\/\d+\? 'delpaths([["data","quan_log"]])'
 http-response-jq ^https:\/\/haojia-cdn\.smzdm\.com\/preload\/\d+\/fiphone\/v\d+_\d+_\d+\/wx\d+\/im\d+\/[0-9a-z]+\/[0-9a-z]+\.json$ 'delpaths([["data","quan_log"]])'
 http-response-jq ^https:\/\/post\.m\.smzdm\.com\/ajax_app\/ajax_get_footer_list\? 'delpaths([["data","tuiguang_ad"]])'
@@ -1849,6 +1870,13 @@ http-response-jq ^https:\/\/chong\.qq\.com\/tws\/usernumberinfo\/GetUserInfo\? '
 http-response-jq ^https:\/\/chong\.qq\.com\/tws\/usernumberinfo\/GetUserInfo\? 'delpaths([["data","request","number","servicehallOperList"]])'
 http-response-jq ^https:\/\/chong\.qq\.com\/tws\/usernumberinfo\/GetUserInfo\? 'delpaths([["data","request","number","markSeat","servicehallFuncList"]])'
 http-response-jq ^https:\/\/chong\.qq\.com\/tws\/usernumberinfo\/GetUserInfo\? 'delpaths([["data","request","number","servicehallFuncList"]])'
+# 网易有道词典
+http-response-jq ^https:\/\/dict\.youdao\.com\/homepage\/toolbar\/get\/ 'delpaths([["data","vipTag"]])'
+# 网易邮箱大师
+http-response-jq ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/page\/v2\/conf\.do$ 'delpaths([["data","functionOperatorInfoList"]])'
+http-response-jq ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/page\/v2\/conf\.do$ 'delpaths([["data","memberOperator"]])'
+http-response-jq ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/page\/v2\/conf\.do$ 'delpaths([["data","activityTabInfoList"]])'
+http-response-jq ^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/config\/function\.do$ '.data.config[] |= if .result.tools then .result.tools |= map(select(.name == "邮件追踪" or .name == "替身邮箱")) else . end | del(.data.config[] | select(.functionName == "Function-AD"))'
 
 # ======= X ======= #
 # 香港抖音
@@ -1884,11 +1912,22 @@ http-response-jq ^https:\/\/acs\.m\.goofish\.com\/gw\/mtop\.taobao\.idle\.trade\
 http-response-jq ^https:\/\/v0-client-lz\.rili\.cn\/lizhi\/api\/zhwnl\/cal_module\/(datas|config)\? '.data |= map(select(.module_name as $name | ["实用工具","会员下icon","天气页面_右上角图标","天气页面_24小时","天气页面_15日","每日插屏","下拉屏保","星座Tab（黄历页）"] | index($name) != null))'
 http-response-jq ^http:\/\/pc\.suishenyun\.net\/peacock\/api\/adspool\? '.data |= map((.layout |= map(select(.key_name == "实用工具" or .key_name == "会员下icon" or .key_name == "天气页面_右上角图标" or .key_name == "天气页面_24小时" or .key_name == "天气页面_15日" or .key_name == "每日插屏" or .key_name == "下拉屏保" or .key_name == "星座Tab（黄历页）"))) | select(.layout | length > 0))'
 # 知乎
-http-response-jq ^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\? 'delpaths([["activity_banner"]])'
-http-response-jq ^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\? 'delpaths([["activity_window"]])'
-http-response-jq ^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\? 'delpaths([["vip_tip"]])'
-http-response ^https:\/\/api\.zhihu\.com\/search\/recommend_query\/v2\? "recommend_queries":\{.+\} "recommend_queries":{}
-http-response-jq ^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|\?include=) 'del(.ad_info, .data.ad_info?, .query_info) | if (.data | type) == "array" then .data |= map(select(.target?.answer_type?// "" | tostring | contains("paid") | not)) else . end'
+http-response-jq ^https:\/\/m-cloud\.zhihu\.com\/api\/cloud\/zhihu\/config\/all\? 'def drop_keys: {"km_httpdns_new_config_tars":true,"preFetchHttpDns":true,"httpdns_detector_use_concurrent":true,"httpdns_use_memory_cache":true,"httpdns_new_config_tars":true,"coreNetworkConf_useTars":true,"km_coreNetworkConf_useTars":true,"sugarQuicConfig":true,"quic_dns_detect_enable":true,"quicMixAB":true,"quic_downgrade_enable":true,"quic_priority_strategy":true,"quic_check_health_enable":true,"tquic_configuration":true,"networkExprimentList":true,"tars_ab_list":true,"zaSetExtraRequestHeader":true}; .data.configs |= map(select((drop_keys[.configKey]// false) | not) | if (.configValue | type) == "object" then del(.configValue.delayHttpdns, .configValue.dnsParser, .configValue.HTTPDNS) else . end)'
+http-response-jq ^https:\/\/api\.zhihu\.com\/root\/tab\/v\d(?:\?.+)?$ '.tab_list |= map(select(.tab_type == "follow" or .tab_type == "recommend" or .tab_type == "hot" or .tab_type == "ring_tab"))'
+http-response-jq ^https:\/\/api\.zhihu\.com\/topstory\/recommend\? '.data |= map(select(.type == "ComponentCard"))'
+http-response-jq ^https:\/\/api\.zhihu\.com\/questions\/\d+\/feeds\? 'delpaths([["ad_info"]])'
+http-response-jq ^https:\/\/api\.zhihu\.com\/comment_v\d\/(answers|pins)\/\d+\/root_comment\? 'delpaths([["atmosphere_voting_config"]])'
+http-response-jq ^https:\/\/(api|page-info)\.zhihu\.com\/(articles|answers)\/v\d\/\d+$ 'delpaths([["third_business"]])'
+http-response-jq ^https:\/\/(api|page-info)\.zhihu\.com\/(articles|answers)\/v\d\/\d+$ '.structured_content.segments |= map(select(.type != "card"))'
+http-response-jq ^https:\/\/api\.zhihu\.com\/topstory\/recommend\? '.data[]?.children |= (if type == "array" then map(select(.id != "ring")) else . end)'
+http-response-jq ^https:\/\/api\.zhihu\.com\/(articles|answers|pins)\/v\d\/\d+\? 'delpaths([["third_business"]])'
+http-response-jq ^https:\/\/api\.zhihu\.com\/(articles|answers|pins)\/v\d\/\d+\? 'delpaths([["ring_info"]])'
+http-response-jq ^https:\/\/api\.zhihu\.com\/(articles|answers|pins)\/v\d\/\d+\? 'delpaths([["interaction_bar_plugins"]])'
+http-response-jq ^https:\/\/api\.zhihu\.com\/comment_v\d\/answers\/\d+\/list-headers$ 'delpaths([["continuous_consumption_module"]])'
+http-response-jq ^https:\/\/api\.zhihu\.com\/podcasts\/hub\/v\d$ 'delpaths([["banners"]])'
+http-response-jq ^https:\/\/api\.zhihu\.com\/search\/recommend_query\/v\d\? '.recommend_queries.queries |= map(select(.type == "normal"))'
+http-response-jq ^https:\/\/api\.zhihu\.com\/people\/self$ 'delpaths([["vip_info","entrance_new","right_button"]])'
+http-response-jq ^https:\/\/api\.zhihu\.com\/people\/self$ 'delpaths([["vip_info","entrance_v2"]])'
 # 转转
 http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\? 'delpaths([["respData","topOpera","leftOpera"]])'
 http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/mycontinenthomepage\? 'delpaths([["respData","topOpera","rightOpera2"]])'
@@ -2056,6 +2095,9 @@ http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmyprofilev3$ 
 ^https:\/\/api\.gotokeep\.com\/search\/v4\/hotword\/list\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 # 酷安
 ^https:\/\/api\.coolapk\.com\/v6\/search\?.*type=hotSearch data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# KOOK
+^https:\/\/www\.kookapp\.cn\/api\/v3\/ad\/config$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/www\.kookapp\.cn\/api\/v3\/promotion\/ongoing$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= L ======= #
 
@@ -2171,6 +2213,23 @@ http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmyprofilev3$ 
 ^https:\/\/mp\.weixin\.qq\.com\/mp\/relatedsearchword data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 # 微信公众号底部
 ^https?:\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 网易有道词典
+^https:\/\/dict\.youdao\.com\/vip\/activity\/startup\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/dict\.youdao\.com\/vip\/activity\/retention\/configs\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/dict\.youdao\.com\/vip\/activity\/retention\/match\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/dict\.youdao\.com\/vip\/user\/paid\/guide\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 网易邮箱大师
+^https:\/\/appconf\.mail\.163\.com\/mailmaster\/api\/http\/urlConfig\.do$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/dashi\.163\.com\/task-center-api\/fapi\/task\/list$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/appconf\.mail\.163\.com\/mailoperating\/mailmaster\/api\/operator\/get$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 网易云音乐
+^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:delivery\/(batch-)?deliver|moment\/tab\/info\/|side-bar\/mini-program\/music-service\/account|yunbei\/account\/entrance\/) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:community\/friends\/fans-group\/artist\/group\/|mine\/applet\/redpoint|music\/songshare\/text\/recommend\/|resniche\/position\/play\/new\/|resniche\/tspopup\/show|resource\/comments?\/musiciansaid\/|user\/sub\/artist) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:ios\/version|mlivestream\/entrance\/playpage\/|link\/position\/show\/strategy|link\/scene\/show\/resource|v1\/content\/exposure\/comment\/banner\/) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https?:\/\/interface\d?\.music\.163\.com\/w?eapi\/(?:activity\/bonus\/playpage\/time\/query|resource-exposure\/|search\/(?:chart\/|rcmd\/keyword\/|specialkeyword\/)) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/interface\d\.music\.163\.com\/eapi\/my\/podcast\/tab\/recommend data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https?:\/\/interface\d?\.music\.163\.com\/e?api\/(ocpc\/)?ad\/ data-type=text data="" header="Content-Type:text/plain"
+^https?:\/\/interface\d?\.music\.163.com\/w?e?api\/search\/default data-type=text data="" header="Content-Type:text/plain"
 
 # ======= X ======= #
 # 闲鱼
@@ -2201,27 +2260,14 @@ http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmyprofilev3$ 
 ^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(explorePage\/getAdverList|init\/startInit) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 # 知乎
 ^https:\/\/api\.zhihu\.com\/commercial_api\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/api\.zhihu\.com\/content-distribution-core\/bubble\/common\/settings data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/api\.zhihu\.com\/(?:moments\/lastread|drama\/hot-drama-list) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/api\.zhihu\.com\/root\/window data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/api\.zhihu\.com\/(?:bazaar\/float_window|market\/popovers_v2) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/api\.zhihu\.com\/me\/guides data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/api\.zhihu\.com\/people\/homepage_entry_v2 data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/api\.zhihu\.com\/search\/(hot_search|preset_words) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/www\.zhihu\.com\/api\/v4\/search\/clicked_recommendation\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/www\.zhihu\.com\/api\/v4\/search\/related_queries\/(?:article|answer)\/\d+ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/api\.zhihu\.com\/comment_v5\/(?:articles|answers)\/\d+\/list-headers data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/api\.zhihu\.com\/prague\/related_suggestion_native\/feed\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/api\.zhihu\.com\/v5\.1\/topics\/answer\/\d+\/relation data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/api\.zhihu\.com\/ab\/api\/v1\/products\/zhihu\/platforms\/ios\/config data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/api\.zhihu\.com\/ad-style-service\/request data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/appcloud2\.zhihu\.com\/v3\/resource\?group_name=mp data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/api\.zhihu\.com\/distribute\/rhea\/qa_ad_card\/h5\/recommendation\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/www\.zhihu\.com\/api\/v4\/hot_recommendation data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/www\.zhihu\.com\/api\/v4\/mcn\/v2\/linkcards\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/www\.zhihu\.com\/api\/v4/(?:answers|questions)\/\d+/related-readings data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/www\.zhihu\.com\/commercial_api\/banners_v3\/mobile_banner data-type=text data="{}" status-code=200 header="Content-Type:application/json"
-^https:\/\/zhuanlan\.zhihu\.com\/api\/articles\/\d+\/recommendation data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/next-render\?id=\d+&type=answer data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/search\/preset_words\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/zhida\.zhihu\.com\/ai_ingress\/knowledge\/square\/categories\/feeds\?categoryId=1%7D$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/zhida\.zhihu\.com\/ai_ingress\/ai_chat\/guidance$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/www\.zhihu\.com\/api\/v\d\/members\/homepage_card$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/people\/homepage_entry_v\d$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/kvip\/right\/my_card\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api\.zhihu\.com\/unlimited\/go\/my_card\/v\d\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 # 转转
 ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzlogic\/getOpenScreen$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 ^https:\/\/app\.zhuanzhuan\.com\/zz\/v2\/zzinfoshow\/getwindvanecardv2$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
@@ -2315,6 +2361,17 @@ Soul = type=http-response, pattern=^https:\/\/(?:api-\w+|chat-live|post)\.soulap
 # ======= V ======= #
 
 # ======= W ======= #
+# 网易新闻
+网易新闻 = type=http-response, pattern=^https:\/\/nex\.163\.com\/q, script-path=https://kelee.one/Resource/JavaScript/NeteaseNews/NeteaseNews_remove_ads.js, requires-body=true
+网易新闻 = type=http-response, pattern=^https:\/\/gw\.m\.163\.com\/nc\/api\/v1\/feed\/dynamic\/headline-list\?, script-path=https://kelee.one/Resource/JavaScript/NeteaseNews/NeteaseNews_remove_ads.js, requires-body=true
+网易新闻 = type=http-response, pattern=^https:\/\/gw\.m\.163\.com\/nc\/api\/v1\/search\/hot-word, script-path=https://kelee.one/Resource/JavaScript/NeteaseNews/NeteaseNews_remove_ads.js, requires-body=true
+# 网易云音乐
+网易云音乐 = type=http-response, pattern=^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:batch|v2\/resource\/comment\/floor\/get), script-path=https://kelee.one/Resource/JavaScript/NeteaseCloudMusic/NeteaseCloudMusic_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=20
+网易云音乐 = type=http-response, pattern=^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:homepage\/block\/page|link\/page\/rcmd\/(?:block\/resource\/multi\/refresh|resource\/show)), script-path=https://kelee.one/Resource/JavaScript/NeteaseCloudMusic/NeteaseCloudMusic_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=20, argument=PRGG="{{{PRGG}}}"&PRRK="{{{PRRK}}}"&PRDRD="{{{PRDRD}}}"&PRSCVPT="{{{PRSCVPT}}}"&PRST="{{{PRST}}}"&PRRR="{{{PRRR}}}"&HMPR="{{{HMPR}}}"&PRMST="{{{PRMST}}}"&PRCN="{{{PRCN}}}"
+网易云音乐 = type=http-response, pattern=^https?:\/\/interface\d?\.music\.163\.com\/eapi\/link\/home\/framework\/tab, script-path=https://kelee.one/Resource/JavaScript/NeteaseCloudMusic/NeteaseCloudMusic_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=20, argument=MY="{{{MY}}}"&DT="{{{DT}}}"&FX="{{{FX}}}"
+网易云音乐 = type=http-response, pattern=^https?:\/\/interface\d?\.music\.163\.com\/eapi\/link\/page\/discovery\/resource\/show, script-path=https://kelee.one/Resource/JavaScript/NeteaseCloudMusic/NeteaseCloudMusic_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=20
+网易云音乐 = type=http-response, pattern=^https?:\/\/interface\d?\.music\.163\.com\/eapi\/link\/position\/show\/resource, script-path=https://kelee.one/Resource/JavaScript/NeteaseCloudMusic/NeteaseCloudMusic_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=20
+网易云音乐 = type=http-response, pattern=^https?:\/\/interface\d?\.music\.163\.com\/eapi\/user\/follow\/users\/mixed\/get, script-path=https://kelee.one/Resource/JavaScript/NeteaseCloudMusic/NeteaseCloudMusic_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=20
 
 # ======= X ======= #
 
@@ -2323,18 +2380,7 @@ Soul = type=http-response, pattern=^https:\/\/(?:api-\w+|chat-live|post)\.soulap
 # ======= Z ======= #
 # 航旅纵横
 航旅纵横 = type=http-response, pattern=^http?:\/\/(114\.115\.217\.129)|(home\.umetrip\.com)\/gateway\/api\/umetrip\/native$, script-path=https://kelee.one/Resource/JavaScript/Umetrip/Umetrip_remove_ads.js
-# 知乎
-知乎 = type=http-response, pattern=^https:\/\/(?:api|page-info)\.zhihu\.com\/(?:answers|articles)\/v2\/\d+, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
-知乎 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/commercial_api\/app_float_layer, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
-知乎 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/feed\/render\/tab\/config\?, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
-知乎 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/(?:moments_v3|topstory\/hot-lists\/total|topstory\/recommend), script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
-知乎 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/root\/tab, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
-知乎 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/v2\/topstory\/hot-lists\/everyone-seeing\?, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
-知乎 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/next-(?:bff|data|render), script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
-知乎 = type=http-response, pattern=^https:\/\/www\.zhihu\.com\/api\/v4\/(?:articles|answers)\/\d+\/recommendations?\?, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
-知乎 = type=http-response, pattern=^https:\/\/appcloud2\.zhihu\.com\/v3\/config, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
-知乎 = type=http-response, pattern=^https:\/\/m-cloud\.zhihu\.com\/api\/cloud\/zhihu\/config\/all\?, script-path=https://kelee.one/Resource/JavaScript/Zhihu/Zhihu_remove_ads.js, requires-body=true
 
 
 [MITM]
-hostname = %APPEND% ad.12306.cn, mobile.12306.cn, api.alipan.com, member.alipan.com, bizapi.alipan.com, netflow-mtop.cainiao.com, nbcps-mtop.cainiao.com, cn-acs.m.cainiao.com, e2e-mtop.cainiao.com, longquan-mtop.cainiao.com, biz.cyapi.cn, starplucker.cyapi.cn, api.caiyunapp.com, cdn-w.caiyunapp.com, capis.didapinche.com, as.xiaojukeji.com, common.diditaxi.com.cn, conf.diditaxi.com.cn, lion.didialift.com, api.udache.com, ct.xiaojukeji.com, res.xiaojukeji.com, 112.53.55.225, 139.199.240.84, 113.46.225.*, 162.14.157.*, 123.207.209.*, 120.241.142.*, 120.241.143.*, 116.85.*, api.m.jd.com, color.jddj.com, api.m.jd.com, p.kuaidi100.com, circle.seeyouyima.com, circle.xmseeyouyima.com, common.seeyouyima.com, api.pinduoduo.com, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, acs.m.taobao.com, mp.weixin.qq.com, aweme.snssdk.com, api5-normal-m.amemv.com, acs.m.goofish.com, g-acs.m.goofish.com, marketing-aibox.v.mitvos.com, v0-client-lz.rili.cn, client-lz.rili.cn, list-app-m.i4.cn, search-app-m.i4.cn, client.app.coc.10086.cn, mp.weixin.qq.com, sdk.alibaba.com.ailbaba.me, home.mi.com, acs.m.taobao.com, 114.115.217.129, home.umetrip.com, api.gotokeep.com, webcast-open.douyin.com, beta-luna.douyin.com, api.qishui.com, api5-lq.qishui.com, tnc*-*.zijieapi.com, open-cms-api.quark.cn, stars.shuqireader.com, www.123pan.com, api*.soulapp.cn, gateway-mobile-gray.soulapp.cn, post.soulapp.cn, ssp.soulapp.cn, napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com, app-api.smzdm.com, homepage-api.smzdm.com, h5.smzdm.com, haojia-api.smzdm.com, haojia.m.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, s-api.smzdm.com, haojia-cdn.smzdm.com, post.m.smzdm.com, 119.29.29.*, maicai.api.ddxq.mobi, user.api.ddxq.mobi, a.athm.cn, adproxy.autohome.com.cn, apiautoappusc.che168.com, autoapi.autohome.com.cn, cars.app.autohome.com.cn, clientlive.api.autohome.com.cn, club.app.autohome.com.cn, dealer.m.autohome.com.cn, maam.pingan.com.cn, mobile.app.autohome.com.cn, news.app.autohome.com.cn, pcmx.autohome.com.cn, bd-api.kuwo.cn, aiqicha.baidu.com, afd.baidu.com, newclient.map.baidu.com, yongche.baidu.com, ecom.map.baidu.com, m.baidu.com, www.baidu.com, appwk.baidu.com, tanbi.baidu.com, pan.baidu.com, tiebac.baidu.com, tieba.baidu.com, *.zhihu.com, api.posters.meitu.com, api.meiyan.com, app.zhuanzhuan.com, tianshu.qq.com, h5.qzone.qq.com, api.coolapk.com, richmanrules.ksedt.com, gouche.ksedt.com, muses.ksedt.com, op.ksedt.com, api.ksedt.com, jiaxiao-awd.kakamobi.cn, cheyouquan.kakamobi.com, swallow.kakamobi.cn, monkey.kakamobi.cn, mcbd.maiche.com, jiakao-misc.kakamobi.cn, squirrel.kakamobi.cn, scs.kakamobi.cn
+hostname = %APPEND% ad.12306.cn, mobile.12306.cn, api.alipan.com, member.alipan.com, bizapi.alipan.com, netflow-mtop.cainiao.com, nbcps-mtop.cainiao.com, cn-acs.m.cainiao.com, e2e-mtop.cainiao.com, longquan-mtop.cainiao.com, biz.cyapi.cn, starplucker.cyapi.cn, api.caiyunapp.com, cdn-w.caiyunapp.com, capis.didapinche.com, as.xiaojukeji.com, common.diditaxi.com.cn, conf.diditaxi.com.cn, lion.didialift.com, api.udache.com, ct.xiaojukeji.com, res.xiaojukeji.com, 112.53.55.225, 139.199.240.84, 113.46.225.*, 162.14.157.*, 123.207.209.*, 120.241.142.*, 120.241.143.*, 116.85.*, api.m.jd.com, color.jddj.com, api.m.jd.com, p.kuaidi100.com, circle.seeyouyima.com, circle.xmseeyouyima.com, common.seeyouyima.com, api.pinduoduo.com, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, acs.m.taobao.com, mp.weixin.qq.com, aweme.snssdk.com, api5-normal-m.amemv.com, acs.m.goofish.com, g-acs.m.goofish.com, marketing-aibox.v.mitvos.com, v0-client-lz.rili.cn, client-lz.rili.cn, list-app-m.i4.cn, search-app-m.i4.cn, client.app.coc.10086.cn, mp.weixin.qq.com, sdk.alibaba.com.ailbaba.me, home.mi.com, acs.m.taobao.com, 114.115.217.129, home.umetrip.com, api.gotokeep.com, webcast-open.douyin.com, beta-luna.douyin.com, api.qishui.com, api5-lq.qishui.com, tnc*-*.zijieapi.com, open-cms-api.quark.cn, stars.shuqireader.com, www.123pan.com, api*.soulapp.cn, gateway-mobile-gray.soulapp.cn, post.soulapp.cn, ssp.soulapp.cn, napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com, app-api.smzdm.com, homepage-api.smzdm.com, h5.smzdm.com, haojia-api.smzdm.com, haojia.m.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, s-api.smzdm.com, haojia-cdn.smzdm.com, post.m.smzdm.com, 119.29.29.*, maicai.api.ddxq.mobi, user.api.ddxq.mobi, a.athm.cn, adproxy.autohome.com.cn, apiautoappusc.che168.com, autoapi.autohome.com.cn, cars.app.autohome.com.cn, clientlive.api.autohome.com.cn, club.app.autohome.com.cn, dealer.m.autohome.com.cn, maam.pingan.com.cn, mobile.app.autohome.com.cn, news.app.autohome.com.cn, pcmx.autohome.com.cn, bd-api.kuwo.cn, aiqicha.baidu.com, afd.baidu.com, newclient.map.baidu.com, yongche.baidu.com, ecom.map.baidu.com, m.baidu.com, www.baidu.com, appwk.baidu.com, tanbi.baidu.com, pan.baidu.com, tiebac.baidu.com, tieba.baidu.com, api.posters.meitu.com, api.meiyan.com, app.zhuanzhuan.com, tianshu.qq.com, h5.qzone.qq.com, api.coolapk.com, richmanrules.ksedt.com, gouche.ksedt.com, muses.ksedt.com, op.ksedt.com, api.ksedt.com, jiaxiao-awd.kakamobi.cn, cheyouquan.kakamobi.com, swallow.kakamobi.cn, monkey.kakamobi.cn, mcbd.maiche.com, jiakao-misc.kakamobi.cn, squirrel.kakamobi.cn, scs.kakamobi.cn, m.kookapp.cn, www.kookapp.cn, gql.reddit.com, gql-fed.reddit.com, capi.lkcoffee.com, nex.163.com, interface.music.163.com, c.m.163.com, client.mail.163.com, g1.163.com, support.you.163.com, interface3?.music.163.com, gw.m.163.com, dict.youdao.com, appconf.mail.163.com, dashi.163.com, interface*.music.163.com, m-cloud.zhihu.com, api.zhihu.com, www.zhihu.com, page-info.zhihu.com, zhida.zhihu.com
