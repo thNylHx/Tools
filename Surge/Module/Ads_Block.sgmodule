@@ -1,9 +1,10 @@
-#!name = Block ads | 自用广告拦截规则合集
-#!desc = 名称: 自用广告拦截规则合集
+#!name = Block Ads | 广告拦截规则合集模块
+#!desc = 名称: 广告拦截规则合集模块
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
-#!category = Block ads
-#!tag = 自用广告拦截规则合集
+#!category = Block Ads
+#!tag = 广告拦截规则合集模块
 #!Rule = 9613
+
 
 [Rule]
 DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching

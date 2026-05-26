@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-05-20 09:03:14
+#!date = 2026-05-26 15:37:29
 
 on:
   workflow_dispatch:
@@ -390,12 +390,13 @@ jobs:
 
             line_count=$(wc -l < "$file")
             {
-              echo "#!name = Block ads | 自用广告拦截规则合集"
-              echo "#!desc = 名称: 自用广告拦截规则合集"
+              echo "#!name = Block Ads | 广告拦截规则合集模块"
+              echo "#!desc = 名称: 广告拦截规则合集模块"
               echo "#!author = RuCu6 Keywos fmz200 可莉🅥 QingRex"
-              echo "#!category = Block ads"
-              echo "#!tag = 自用广告拦截规则合集"
+              echo "#!category = Block Ads"
+              echo "#!tag = 广告拦截规则合集模块"
               echo "#!Rule = $line_count"
+              echo ""
               echo ""
               echo "[Rule]"
               awk -F, '{
