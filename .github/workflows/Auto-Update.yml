@@ -99,45 +99,65 @@ jobs:
 
           # 创建目录
           mkdir -p \
+          Ruleset/Temporary \
           Ruleset/Surge/{Block,Media,Other}
 
           # 定义需要下载的文件列表
           declare -A file=(
-            # Block
-            ["Block/Ads_BanAD.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
-            ["Block/Ads_BanProgramAD.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
-            ["Block/Ads_Dlerio.list"]="https://raw.githubusercontent.com/dler-io/Rules/main/Surge/Surge%203/Provider/AdBlock.list"
-            ["Block/Ads_Chinese.list"]="https://raw.githubusercontent.com/geekdada/surge-list/master/domain-set/chinese-filter.txt"
-            ["Block/Ads_Easylistsurge.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easylist_surge.list"
-            ["Block/Ads_Tracking.list"]="https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Tracking.list"
-            ["Block/Ads_AdBlockLoonLite.list"]="https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockloonlite.list"
-            ["Block/Ads_Malicious.list"]="https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Malicious.list"
-            ["Block/Ads_EasyListChina.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easylistchina_surge.list"
-            ["Block/Ads_MyBlockAds.list"]="https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Ruleset/Surge/Block/BlockAds.list"
-            ["Block/Ads_EasyPrivacysurge.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easyprivacy_surge.list"
-            ["Block/Ads_Advertising.list"]="https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Advertising.list"
-            ["Block/Ads_Adblock4limbosurge.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/Surge/rule/Adblock4limbo_surge.list"
-            ["Block/Ads_AWAvenue.list"]="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge-RULE-SET.list"
-            ["Block/Ads_All.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
-            
-            # Media
+            # Temporary
+            ## Block
+            ["Temporary/Ads_BanAD.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
+            ["Temporary/Ads_BanProgramAD.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
+            ["Temporary/Ads_Dlerio.list"]="https://raw.githubusercontent.com/dler-io/Rules/main/Surge/Surge%203/Provider/AdBlock.list"
+            ["Temporary/Ads_Chinese.list"]="https://raw.githubusercontent.com/geekdada/surge-list/master/domain-set/chinese-filter.txt"
+            ["Temporary/Ads_Easylistsurge.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easylist_surge.list"
+            ["Temporary/Ads_Tracking.list"]="https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Tracking.list"
+            ["Temporary/Ads_AdBlockLoonLite.list"]="https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockloonlite.list"
+            ["Temporary/Ads_Malicious.list"]="https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Malicious.list"
+            ["Temporary/Ads_EasyListChina.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easylistchina_surge.list"
+            ["Temporary/Ads_MyBlockAds.list"]="https://raw.githubusercontent.com/Abcd789JK/Tools/refs/heads/main/Ruleset/Surge/Block/BlockAds.list"
+            ["Temporary/Ads_EasyPrivacysurge.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/rule/Surge/easyprivacy_surge.list"
+            ["Temporary/Ads_Advertising.list"]="https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Advertising.list"
+            ["Temporary/Ads_Adblock4limbosurge.list"]="https://raw.githubusercontent.com/limbopro/Adblock4limbo/main/Surge/rule/Adblock4limbo_surge.list"
+            ["Temporary/Ads_AWAvenue.list"]="https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Surge-RULE-SET.list"
+            ["Temporary/Ads_All.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/category-ads-all.list"
             ## YouTube
-            ["Media/YouTubeMusic.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
-            ["Media/YouTube_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
+            ["Temporary/YouTubeMusic.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTubeMusic.list"
+            ["Temporary/YouTube.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
             ## Twitter
-            ["Media/Twitter_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
-            ["Media/Twitter_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
+            ["Temporary/Twitter_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list"
+            ["Temporary/Twitter.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
             ## Facebook & Instagram
-            ["Media/Facebook_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
-            ["Media/Facebook_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
-            ["Media/Instagram.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
+            ["Temporary/Facebook_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.list"
+            ["Temporary/Facebook.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
+            ["Temporary/Instagram.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
             ## Netflix
-            ["Media/Netflix_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
-            ["Media/Netflix_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
+            ["Temporary/Netflix_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.list"
+            ["Temporary/Netflix.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
             ## Telegram
-            ["Media/Telegram_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/telegram.list"
-            ["Media/Telegram_1.list"]="https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
-            ["Media/Telegram_2.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/telegram.list"
+            ["Temporary/Telegram_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/telegram.list"
+            ["Temporary/Telegram_0.list"]="https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Telegram.list"
+            ["Temporary/Telegram_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/telegram.list"
+            ## GFW
+            ["Temporary/GlobalGFW_0.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
+            ["Temporary/GlobalGFW_1.list"]="https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/ruleset/gfw.txt"
+            ["Temporary/GlobalGFW_2.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/gfw.list"
+            ["Temporary/GlobalGFW_3.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
+            ## Google
+            ["Temporary/Google_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
+            ["Temporary/Google.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
+            ["Temporary/Gemini.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google-gemini.list"
+            ## Apple
+            ["Temporary/Apple_0.list"]="https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Apple.list"
+            ["Temporary/Apple_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
+            ## Talkatone
+            ["Temporary/Talkatone_0.list"]="https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Talkatone.list"
+            ["Temporary/Talkatone_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/talkatone.list"
+            ## Openai
+            ["Temporary/Openai_0.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.list"
+            ["Temporary/Openai_1.list"]="https://raw.githubusercontent.com/EAlyce/conf/refs/heads/main/Rule/OpenAI.list"
+
+            # Surge
             ## GlobalMedia
             ["Media/GlobalMedia.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list"
             ["Media/BilibiliHMT.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list"
@@ -147,17 +167,6 @@ jobs:
             ## ChinaMedia
             ["Media/ChinaMedia.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list"
             ["Media/Bilibili.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/bilibili.list"
-
-            # Other
-            ## GFW
-            ["Other/GlobalGFW_1.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
-            ["Other/GlobalGFW_2.list"]="https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/ruleset/gfw.txt"
-            ["Other/GlobalGFW_3.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/gfw.list"
-            ["Other/GlobalGFW_4.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
-            ## Google
-            ["Other/Google_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list"
-            ["Other/Google_1.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
-            ["Other/Gemini.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google-gemini.list"
             ## Microsoft
             ["Other/Line.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/line.list"
             ["Other/GitHub.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/github.list"
@@ -166,16 +175,8 @@ jobs:
             ## Game
             ["Other/Steam.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/steam.list"
             ["Other/Epic.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.list"
-            ## Apple
-            ["Other/Apple_1.list"]="https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Apple.list"
-            ["Other/Apple.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
             ## PayPal
             ["Other/PayPal.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/paypal.list"
-            ## Openai
-            ["Other/Openai.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/openai.list"
-            ## Talkatone
-            ["Other/Talkatone_1.list"]="https://raw.githubusercontent.com/Repcz/Tool/X/Surge/Rules/Talkatone.list"
-            ["Other/Talkatone_2.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/classical/talkatone.list"
             ## China
             ["Other/ChinaASN.list"]="https://raw.githubusercontent.com/missuo/ASN-China/main/ASN.China.list"
             ["Other/China_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.list"
@@ -231,63 +232,68 @@ jobs:
 
             # Block 
             merge_local "Ruleset/Surge/Block/Ads_Block.list" \
-              Ruleset/Surge/Block/Ads_All.list \
-              Ruleset/Surge/Block/Ads_BanAD.list \
-              Ruleset/Surge/Block/Ads_Tracking.list \
-              Ruleset/Surge/Block/Ads_AWAvenue.list \
-              Ruleset/Surge/Block/Ads_Malicious.list \
-              Ruleset/Surge/Block/Ads_MyBlockAds.list \
-              Ruleset/Surge/Block/Ads_Advertising.list \
-              Ruleset/Surge/Block/Ads_BanProgramAD.list \
-              Ruleset/Surge/Block/Ads_AdBlockLoonLite.list
+              Ruleset/Temporary/Ads_All.list \
+              Ruleset/Temporary/Ads_BanAD.list \
+              Ruleset/Temporary/Ads_Tracking.list \
+              Ruleset/Temporary/Ads_AWAvenue.list \
+              Ruleset/Temporary/Ads_Malicious.list \
+              Ruleset/Temporary/Ads_MyBlockAds.list \
+              Ruleset/Temporary/Ads_Advertising.list \
+              Ruleset/Temporary/Ads_BanProgramAD.list \
+              Ruleset/Temporary/Ads_AdBlockLoonLite.list
               
             # 同步广告规则到其他目录
             cp "Ruleset/Surge/Block/Ads_Block.list" "Ruleset/mihomo/Block/Ads_Block.list"
             cp "Ruleset/Surge/Block/Ads_Block.list" "Surge/Module/Ads_Block.sgmodule"
 
+            ## Openai
+            merge_local "Ruleset/Surge/Other/Openai.list" \
+              Ruleset/Temporary/Openai_0.list \
+              Ruleset/Temporary/Openai_1.list
+            
             ## Netflix
             merge_local "Ruleset/Surge/Media/Netflix.list" \
-              Ruleset/Surge/Media/Netflix_1.list \
-              Ruleset/Surge/Media/Netflix_ip.list
+              Ruleset/Temporary/Netflix.list \
+              Ruleset/Temporary/Netflix_ip.list
 
             ## Twitter
             merge_local "Ruleset/Surge/Media/Twitter.list" \
-              Ruleset/Surge/Media/Twitter_1.list \
-              Ruleset/Surge/Media/Twitter_ip.list
+              Ruleset/Temporary/Twitter.list \
+              Ruleset/Temporary/Twitter_ip.list
 
             ## YouTube
             merge_local "Ruleset/Surge/Media/YouTube.list" \
-              Ruleset/Surge/Media/YouTubeMusic.list \
-              Ruleset/Surge/Media/YouTube_1.list
+              Ruleset/Temporary/YouTubeMusic.list \
+              Ruleset/Temporary/YouTube.list
 
             ## Facebook + Instagram
             merge_local "Ruleset/Surge/Media/Facebook.list" \
-              Ruleset/Surge/Media/Facebook_1.list \
-              Ruleset/Surge/Media/Instagram.list \
-              Ruleset/Surge/Media/Facebook_ip.list
+              Ruleset/Temporary/Facebook.list \
+              Ruleset/Temporary/Instagram.list \
+              Ruleset/Temporary/Facebook_ip.list
 
             ## Telegram
             merge_local "Ruleset/Surge/Media/Telegram.list" \
-              Ruleset/Surge/Media/Telegram_1.list \
-              Ruleset/Surge/Media/Telegram_2.list \
-              Ruleset/Surge/Media/Telegram_ip.list
+              Ruleset/Temporary/Telegram_0.list \
+              Ruleset/Temporary/Telegram_1.list \
+              Ruleset/Temporary/Telegram_ip.list
 
             ## Talkatone
             merge_local "Ruleset/Surge/Other/Talkatone.list" \
-              Ruleset/Surge/Other/Talkatone_1.list \
-              Ruleset/Surge/Other/Talkatone_2.list
+              Ruleset/Temporary/Talkatone_0.list \
+              Ruleset/Temporary/Talkatone_1.list
 
             ## Google
             merge_local "Ruleset/Surge/Other/Google.list" \
-              Ruleset/Surge/Other/Google_1.list \
-              Ruleset/Surge/Other/Gemini.list \
-              Ruleset/Surge/Other/Google_ip.list
+              Ruleset/Temporary/Google.list \
+              Ruleset/Temporary/Gemini.list \
+              Ruleset/Temporary/Google_ip.list
 
             ## Global
             merge_local "Ruleset/Surge/Other/Global.list" \
-              Ruleset/Surge/Other/GlobalGFW_1.list \
-              Ruleset/Surge/Other/GlobalGFW_2.list \
-              Ruleset/Surge/Other/GlobalGFW_4.list
+              Ruleset/Temporary/GlobalGFW_0.list \
+              Ruleset/Temporary/GlobalGFW_1.list \
+              Ruleset/Temporary/GlobalGFW_3.list
 
       - name: 对规则进行排序、去重与优化
         shell: bash
