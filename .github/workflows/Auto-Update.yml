@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-05-30 09:20:35
+#!date = 2026-05-30 09:27:19
 
 on:
   workflow_dispatch:
@@ -252,6 +252,11 @@ jobs:
             # 同步广告规则到其他目录
             cp "Ruleset/Surge/Block/Ads_Block.list" "Ruleset/mihomo/Block/Ads_Block.list"
             cp "Ruleset/Surge/Block/Ads_Block.list" "Surge/Module/Ads_Block.sgmodule"
+
+            ## Apple
+            merge_local "Ruleset/Surge/Other/Apple.list" \
+              Ruleset/Surge/Temporary/Apple_0.list \
+              Ruleset/Surge/Temporary/Apple_1.list
 
             ## Openai
             merge_local "Ruleset/Surge/Other/Openai.list" \
