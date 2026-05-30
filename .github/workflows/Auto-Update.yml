@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-05-30 16:27:42
+#!date = 2026-05-30 16:34:57
 
 on:
   workflow_dispatch:
@@ -315,8 +315,8 @@ jobs:
           for file in Ruleset/mihomo/Block/*.list; do
             [[ -f "$file" ]] || continue
 
-            # 删除 mihomo 不支持的规则类型: USER-AGENT、URL-REGEX
-            sed -i -E '/^(URL-REGEX|USER-AGENT),/d' "$file"
+            # 删除 mihomo 不支持的规则类型: USER-AGENT URL-REGEX AND
+            sed -i -E '/^(URL-REGEX|USER-AGENT|AND),/d' "$file"
 
             # DOMAIN-WILDCARD *.domain.com 转换为 DOMAIN-SUFFIX domain.com
             sed -i -E 's/^DOMAIN-WILDCARD,\*\.(.+)/DOMAIN-SUFFIX,\1/' "$file"
