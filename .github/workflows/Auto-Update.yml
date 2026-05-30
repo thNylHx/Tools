@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-05-30 09:37:47
+#!date = 2026-05-30 16:27:42
 
 on:
   workflow_dispatch:
@@ -307,6 +307,24 @@ jobs:
               Ruleset/Surge/Temporary/GlobalGFW_1.list \
               Ruleset/Surge/Temporary/GlobalGFW_3.list
 
+      - name: 处理 mihomo 规则
+        shell: bash
+        working-directory: ${{ github.workspace }}/Tools-repo
+        run: |
+          set -euo pipefail
+          for file in Ruleset/mihomo/Block/*.list; do
+            [[ -f "$file" ]] || continue
+
+            # 删除 mihomo 不支持的规则类型: USER-AGENT、URL-REGEX
+            sed -i -E '/^(URL-REGEX|USER-AGENT),/d' "$file"
+
+            # DOMAIN-WILDCARD *.domain.com 转换为 DOMAIN-SUFFIX domain.com
+            sed -i -E 's/^DOMAIN-WILDCARD,\*\.(.+)/DOMAIN-SUFFIX,\1/' "$file"
+
+            # 删除无法转换的残留 DOMAIN-WILDCARD 行
+            sed -i '/^DOMAIN-WILDCARD,/d' "$file"
+          done
+
       - name: 对规则进行排序、去重与优化
         shell: bash
         working-directory: ${{ github.workspace }}/Tools-repo
@@ -330,6 +348,9 @@ jobs:
               s/, */,/g                             # 修正逗号后多余空格
             ' "$file"
 
+            # 删除指定域名
+            sed -i -e '/DOMAIN,ad.12306.cn/d' "$file"
+
             # 删除 IP-CIDR IP-CIDR6 IP-ASN 规则后的 ,no-resolve
             sed -i -E '/^\s*(IP-CIDR6?|IP-ASN),/s/,no-resolve//g' "$file"
 
@@ -337,17 +358,11 @@ jobs:
             sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^/IP-CIDR,/}' "$file"
             sed -i -E '/^IP-CIDR6,/!{/^([a-fA-F0-9]*:){2,}[a-fA-F0-9]*\/[0-9]+/s/^/IP-CIDR6,/}' "$file"
 
-            # 将以"."开头的行的第一个"."替换为 "DOMAIN-SUFFIX"
+            # 将以"."开头的行的第一个"."替换为 "DOMAIN-SUFFIX 格式"
             sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
 
             # 将除了以 "#" 开头、"空行" 开头之外的行, 在行首添加 "DOMAIN"
             sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^GEOIP,|^AND,|^OR,|^NOT,|^URL-REGEX,|^USER-AGENT,|^PROCESS-NAME,|^DEST-PORT,/b; s/^([^#])/DOMAIN,\1/' "$file"
-
-            # 删除指定域名
-            sed -i -e '/DOMAIN,this_ruleset_is_made_by_sukkaw.ruleset.skk.moe/d' "$file"
-            sed -i -e '/DOMAIN,th1s_rule5et_1s_m4d3_by_5ukk4w_ruleset.skk.moe/d' "$file"
-            sed -i -e '/DOMAIN,this_rule_set_is_made_by_sukkaw.skk.moe/d' "$file"
-            sed -i -e '/DOMAIN,7h1s_rul35et_i5_mad3_by_5ukk4w-ruleset.skk.moe/d' "$file"
           
             # 为 IP-CIDR IP-CIDR6 IP-ASN 添加后缀 ,no-resolve
             sed -i -E '/^\s*(IP-CIDR6?|IP-ASN),/ s/^((IP-CIDR6?|IP-ASN),[^,()]+)/\1,no-resolve/' "$file"
@@ -386,7 +401,7 @@ jobs:
               echo "# 规则名称: ${file_name}"
               echo "# 仓库作者: thNylHx"
               echo "# 仓库地址: https://github.com/thNylHx/Tools"
-              echo "# 规则统计: ${line_count}"
+              echo "# 规则数量: ${line_count}"
               echo ""
               cat "$file"
             } > "$file.tmp" && mv "$file.tmp" "$file"
