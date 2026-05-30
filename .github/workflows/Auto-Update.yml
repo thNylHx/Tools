@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-05-30 09:27:19
+#!date = 2026-05-30 09:36:52
 
 on:
   workflow_dispatch:
@@ -385,6 +385,9 @@ jobs:
             {
               echo "# 规则名称: ${file_name}"
               echo "# 规则统计: ${line_count}"
+              echo "# 仓库作者: thNylHx"
+              echo "# 仓库地址: https://github.com/thNylHx/Tools"
+              echo "# 规则来源: 上游规则同步"
               echo ""
               cat "$file"
             } > "$file.tmp" && mv "$file.tmp" "$file"
