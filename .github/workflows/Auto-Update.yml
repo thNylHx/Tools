@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-05-30 09:16:13
+#!date = 2026-05-30 09:20:35
 
 on:
   workflow_dispatch:
@@ -176,6 +176,7 @@ jobs:
             ["Other/Epic.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/epicgames.list"
             ## PayPal
             ["Other/PayPal.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/paypal.list"
+            ["Other/Gemini.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google-gemini.list"
             ## Instagram
             ["Media/Instagram.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
             ## China
