@@ -1,7 +1,7 @@
 # 规则名称: Ads_Block
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则数量: 8816
+# 规则数量: 8799
 
 DOMAIN,118.89.204.198
 DOMAIN,1500020991.vodplayer.wxamedia.com
@@ -8802,20 +8802,3 @@ IP-CIDR6,2402:db40:5100:1011::5/128,no-resolve
 IP-CIDR6,2408:8711:10:10::20/128,no-resolve
 IP-CIDR6,2409:8702:4860:10::4d/128,no-resolve
 IP-CIDR6,240e:928:1400:10::25/128,no-resolve
-AND,((DEST-PORT,18000),(PROTOCOL,STUN))
-AND,((DOMAIN,api.pinduoduo.com),(PROTOCOL,QUIC))
-AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com))
-AND,((DOMAIN-KEYWORD,adash),(DOMAIN-SUFFIX,ut.taobao.com))
-AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,-normal.zijieapi.com))
-AND,((IP-ASN,45090,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP))
-AND,((IP-ASN,55990,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP))
-AND,((IP-ASN,63646,no-resolve),(DEST-PORT,25641),(PROTOCOL,TCP))
-AND,((IP-CIDR,101.126.58.201/32,no-resolve),(DEST-PORT,6443))
-AND,((IP-CIDR,110.249.199.75/32,no-resolve),(DEST-PORT,6443))
-AND,((IP-CIDR,111.225.147.191/32,no-resolve),(DEST-PORT,6443))
-AND,((IP-CIDR,111.63.61.101/32,no-resolve),(DEST-PORT,6443))
-AND,((IP-CIDR,220.243.141.0/32,no-resolve),(DEST-PORT,6443))
-AND,((OR,((DOMAIN-SUFFIX,bytegecko.com),(DOMAIN-SUFFIX,byteeffecttos.com))),(DOMAIN-KEYWORD,ncdn))
-AND,((PROTOCOL,QUIC),(DOMAIN-SUFFIX,xiaohongshu.com,extended-matching))
-AND,((URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/d(\d)?"),(USER-AGENT,"*com.xunmeng.pinduoduo*"))
-AND,((URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]\/d(\d)?\?"),(USER-AGENT,"*com.xunmeng.pinduoduo*"))
