@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-05-26 15:37:29
+#!date = 2026-05-30 09:09:46
 
 on:
   workflow_dispatch:
@@ -99,8 +99,7 @@ jobs:
 
           # 创建目录
           mkdir -p \
-          Ruleset/Temporary \
-          Ruleset/Surge/{Block,Media,Other}
+          Ruleset/Surge/{Block,Media,Other,Temporary}
 
           # 定义需要下载的文件列表
           declare -A file=(
@@ -232,15 +231,15 @@ jobs:
 
             # Block 
             merge_local "Ruleset/Surge/Block/Ads_Block.list" \
-              Ruleset/Temporary/Ads_All.list \
-              Ruleset/Temporary/Ads_BanAD.list \
-              Ruleset/Temporary/Ads_Tracking.list \
-              Ruleset/Temporary/Ads_AWAvenue.list \
-              Ruleset/Temporary/Ads_Malicious.list \
-              Ruleset/Temporary/Ads_MyBlockAds.list \
-              Ruleset/Temporary/Ads_Advertising.list \
-              Ruleset/Temporary/Ads_BanProgramAD.list \
-              Ruleset/Temporary/Ads_AdBlockLoonLite.list
+              Ruleset/Surge/Temporary/Ads_All.list \
+              Ruleset/Surge/Temporary/Ads_BanAD.list \
+              Ruleset/Surge/Temporary/Ads_Tracking.list \
+              Ruleset/Surge/Temporary/Ads_AWAvenue.list \
+              Ruleset/Surge/Temporary/Ads_Malicious.list \
+              Ruleset/Surge/Temporary/Ads_MyBlockAds.list \
+              Ruleset/Surge/Temporary/Ads_Advertising.list \
+              Ruleset/Surge/Temporary/Ads_BanProgramAD.list \
+              Ruleset/Surge/Temporary/Ads_AdBlockLoonLite.list
               
             # 同步广告规则到其他目录
             cp "Ruleset/Surge/Block/Ads_Block.list" "Ruleset/mihomo/Block/Ads_Block.list"
@@ -248,52 +247,52 @@ jobs:
 
             ## Openai
             merge_local "Ruleset/Surge/Other/Openai.list" \
-              Ruleset/Temporary/Openai_0.list \
-              Ruleset/Temporary/Openai_1.list
+              Ruleset/Surge/Temporary/Openai_0.list \
+              Ruleset/Surge/Temporary/Openai_1.list
             
             ## Netflix
             merge_local "Ruleset/Surge/Media/Netflix.list" \
-              Ruleset/Temporary/Netflix.list \
-              Ruleset/Temporary/Netflix_ip.list
+              Ruleset/Surge/Temporary/Netflix.list \
+              Ruleset/Surge/Temporary/Netflix_ip.list
 
             ## Twitter
             merge_local "Ruleset/Surge/Media/Twitter.list" \
-              Ruleset/Temporary/Twitter.list \
-              Ruleset/Temporary/Twitter_ip.list
+              Ruleset/Surge/Temporary/Twitter.list \
+              Ruleset/Surge/Temporary/Twitter_ip.list
 
             ## YouTube
             merge_local "Ruleset/Surge/Media/YouTube.list" \
-              Ruleset/Temporary/YouTubeMusic.list \
-              Ruleset/Temporary/YouTube.list
+              Ruleset/Surge/Temporary/YouTubeMusic.list \
+              Ruleset/Surge/Temporary/YouTube.list
 
             ## Facebook + Instagram
             merge_local "Ruleset/Surge/Media/Facebook.list" \
-              Ruleset/Temporary/Facebook.list \
-              Ruleset/Temporary/Instagram.list \
-              Ruleset/Temporary/Facebook_ip.list
+              Ruleset/Surge/Temporary/Facebook.list \
+              Ruleset/Surge/Temporary/Instagram.list \
+              Ruleset/Surge/Temporary/Facebook_ip.list
 
             ## Telegram
             merge_local "Ruleset/Surge/Media/Telegram.list" \
-              Ruleset/Temporary/Telegram_0.list \
-              Ruleset/Temporary/Telegram_1.list \
-              Ruleset/Temporary/Telegram_ip.list
+              Ruleset/Surge/Temporary/Telegram_0.list \
+              Ruleset/Surge/Temporary/Telegram_1.list \
+              Ruleset/Surge/Temporary/Telegram_ip.list
 
             ## Talkatone
             merge_local "Ruleset/Surge/Other/Talkatone.list" \
-              Ruleset/Temporary/Talkatone_0.list \
-              Ruleset/Temporary/Talkatone_1.list
+              Ruleset/Surge/Temporary/Talkatone_0.list \
+              Ruleset/Surge/Temporary/Talkatone_1.list
 
             ## Google
             merge_local "Ruleset/Surge/Other/Google.list" \
-              Ruleset/Temporary/Google.list \
-              Ruleset/Temporary/Gemini.list \
-              Ruleset/Temporary/Google_ip.list
+              Ruleset/Surge/Temporary/Google.list \
+              Ruleset/Surge/Temporary/Gemini.list \
+              Ruleset/Surge/Temporary/Google_ip.list
 
             ## Global
             merge_local "Ruleset/Surge/Other/Global.list" \
-              Ruleset/Temporary/GlobalGFW_0.list \
-              Ruleset/Temporary/GlobalGFW_1.list \
-              Ruleset/Temporary/GlobalGFW_3.list
+              Ruleset/Surge/Temporary/GlobalGFW_0.list \
+              Ruleset/Surge/Temporary/GlobalGFW_1.list \
+              Ruleset/Surge/Temporary/GlobalGFW_3.list
 
       - name: 对规则进行排序、去重与优化
         shell: bash
