@@ -1,7 +1,7 @@
 # 规则名称: Ads_Block
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则统计: 8879
+# 规则数量: 8816
 
 DOMAIN,118.89.204.198
 DOMAIN,1500020991.vodplayer.wxamedia.com
@@ -39,7 +39,6 @@ DOMAIN,ad-sdk-config.youdao.com
 DOMAIN,ad-splash-tracking.hktvmall.com
 DOMAIN,ad-splash.hktvmall.com
 DOMAIN,ad-stat.ksosoft.com
-DOMAIN,ad.12306.cn
 DOMAIN,ad.21cn.com
 DOMAIN,ad.360in.com
 DOMAIN,ad.51wnl-cq.com
@@ -8803,68 +8802,6 @@ IP-CIDR6,2402:db40:5100:1011::5/128,no-resolve
 IP-CIDR6,2408:8711:10:10::20/128,no-resolve
 IP-CIDR6,2409:8702:4860:10::4d/128,no-resolve
 IP-CIDR6,240e:928:1400:10::25/128,no-resolve
-URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\/v?[0-9]+)?\/(?:sign_)?(?:(?:d|ss)[46]?|resolve)\?"
-URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?):\d+\/httpdns\/"
-URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"
-URL-REGEX,"^http:\/\/103\.37\.155\.60\/fetch"
-URL-REGEX,"^http:\/\/103\.41\.167\.237\/v2\/resolv"
-URL-REGEX,"^http:\/\/103\.44\.58\.64\/md\?"
-URL-REGEX,"^http:\/\/[\d\.:]*\/?(defaultts\.tc|vmind\.qqvideo\.tc|finderpdd\.video)\.qq\.com\/\w+"
-URL-REGEX,"^http:\/\/[\d\.]+:8000\/v1\/resource\/\w{32}-1-SPLASH"
-URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\](?:\/v?[0-9]+)?\/(?:sign_)?(?:(?:d|ss)[46]?|resolve)\?"
-URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]:\d+\/httpdns\/"
-URL-REGEX,"^http:\/\/\w{32}\.jddebug\.com\/diagnose\?"
-URL-REGEX,"^http:\/\/apd-\w+\.v\.smtcdns\.com\/(defaultts|omts|vmind\.qqvideo)\.tc\.qq\.com\/\w+"
-URL-REGEX,"^http:\/\/apd-vlive\.apdcdn\.tc\.qq\.com\/vmind\.qqvideo\.tc\.qq\.com\/\w+"
-URL-REGEX,"^http:\/\/api\.weibo\.cn\/\d+\/httpdns\/config"
-URL-REGEX,"^http:\/\/api\.weibo\.cn\/httpdns\/config"
-URL-REGEX,"^http:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns"
-URL-REGEX,"^http:\/\/cdn\.wup\.huya\.com\/launch\/queryHttpDns$"
-URL-REGEX,"^http:\/\/go\.babytree\.com\/go_pregnancy\/api\/(index_activity\/get_app_index_activity|sign\/sign_h_5)\?"
-URL-REGEX,"^http:\/\/go\.babytree\.com\/go_search\/api\/mobile_search_new\/get_multi_search_default_keywords\?"
-URL-REGEX,"^http:\/\/linkmicschedule\.douyucdn\.cn\/im_schedule\/im_gate_list"
-URL-REGEX,"^http:\/\/log\.stat\.kugou\.com\/mobile\/ad\.html"
-URL-REGEX,"^http:\/\/m\.meitun\.com\/newapi\/router\/topic\/hometptf\/feedRecommend"
-URL-REGEX,"^http:\/\/p\.kuaidi100\.com\/advertisement\/"
-URL-REGEX,"^http:\/\/p\.kuaidi100\.com\/mobile\/mobileapi\.do"
-URL-REGEX,"^http:\/\/pic08\.babytreeimg\.com\/knowledge\/2022\/0923\/\w+"
-URL-REGEX,"^http:\/\/plough\.babytree\.com\/plough\.do"
-URL-REGEX,"^http:\/\/rich\.kuwo\.cn\/AdService\/"
-URL-REGEX,"^http:\/\/rich\.kuwo\.cn\/EcomResourceServer\/"
-URL-REGEX,"^http:\/\/searchrecterm\.kuwo\.cn\/recterm\.s"
-URL-REGEX,"^http:\/\/upos-sz-static\.bilivideo\.com\/ssaxcode\/\w{2}\/\w{2}\/\w{32}-1-SPLASH"
-URL-REGEX,"^http:\/\/vip\d\.kuwo\.cn\/vip\/v\d\/sysinfo\?op=getRePayAndDoPayBox"
-URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/album\/adBar\/"
-URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/newMenuList\/menuListInfo"
-URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/pasterAdvert\/"
-URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/app\/startup\/config"
-URL-REGEX,"^http:\/\/wapi\.kuwo\.cn\/openapi\/v\d\/user\/freeMode\/"
-URL-REGEX,"^http:\/\/xmc\.ximalaya\.com\/xmlymain-login-web\/login\/"
-URL-REGEX,"^http:\/\/y\.gtimg\.cn\/music\/common\/upload\/t_k_main_page_banner\/"
-URL-REGEX,"^http?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/native"
-URL-REGEX,"^https:\/\/a\.line\.me\/cs\/v\d\/oa$"
-URL-REGEX,"^https:\/\/a\.line\.me\/er\/l.*\/v\d\/event\/image"
-URL-REGEX,"^https:\/\/a\.line\.me\/er\/lads\/v\d\/ei\?"
-URL-REGEX,"^https:\/\/a\.line\.me\/lass\/api\/v\d\/ads$"
-URL-REGEX,"^https:\/\/a\.line\.me\/oa\/v\d\/e$"
-URL-REGEX,"^https:\/\/crs-event\.line\.me\/v\d\/imp"
-URL-REGEX,"^https:\/\/d\.line-scdn\.net\/lcp-prod-photo\/20.+\.(jpg|jpeg|png)"
-URL-REGEX,"^https:\/\/ec-bot-obs\.line-scdn\.net\/0h[0-9a-zA-Z_-]{50}[0-9a-zA-Z_-]*"
-URL-REGEX,"^https:\/\/obs\.line-scdn\.net\/0h.+\/(o|m)\d+x\d+$"
-URL-REGEX,"^https:\/\/obs\.line-scdn\.net\/0h.+\/\d+p\.mp4$"
-URL-REGEX,"^https:\/\/obs\.line-scdn\.net\/0hGH\d"
-URL-REGEX,"^https:\/\/obs\.line-scdn\.net\/0h[a-zA-Z0-9_-]{50}[a-zA-Z0-9_-]*"
-URL-REGEX,"^https:\/\/obs\.line-scdn\.net\/r\/linecrs\/.+\/m180x180$"
-URL-REGEX,"^https:\/\/scdn\.line-apps\.com\/lan\/document\/pageEvent\/line\/ios\/"
-URL-REGEX,"^https:\/\/scdn\.line-apps\.com\/lan\/image\/line\/bannerImageEvent\/"
-URL-REGEX,"^https:\/\/sch\.line\.me\/api\/v\d\/ads$"
-URL-REGEX,"^https:\/\/uts-front\.line-apps\.com\/event$"
-URL-REGEX,"^https:\/\/uts-front\.line-apps\.com\/settings$"
-URL-REGEX,"^https:\/\/w\.line\.me\/adp\/api\/ad\/v\d\/"
-URL-REGEX,"^https:\/\/web-mmap-pay\.line-apps\.com\/tw\/liff\/campaign\/v\d\/aggregate\/ad\/banner\/"
-USER-AGENT,"Httpdns*"
-USER-AGENT,"Httpsdns*"
-USER-AGENT,AVOS*
 AND,((DEST-PORT,18000),(PROTOCOL,STUN))
 AND,((DOMAIN,api.pinduoduo.com),(PROTOCOL,QUIC))
 AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com))

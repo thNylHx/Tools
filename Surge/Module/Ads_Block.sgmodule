@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 8879
+#!Rule = 8878
 
 
 [Rule]
@@ -43,7 +43,6 @@ DOMAIN,ad-sdk-config.youdao.com,REJECT,extended-matching,pre-matching
 DOMAIN,ad-splash-tracking.hktvmall.com,REJECT,extended-matching,pre-matching
 DOMAIN,ad-splash.hktvmall.com,REJECT,extended-matching,pre-matching
 DOMAIN,ad-stat.ksosoft.com,REJECT,extended-matching,pre-matching
-DOMAIN,ad.12306.cn,REJECT,extended-matching,pre-matching
 DOMAIN,ad.21cn.com,REJECT,extended-matching,pre-matching
 DOMAIN,ad.360in.com,REJECT,extended-matching,pre-matching
 DOMAIN,ad.51wnl-cq.com,REJECT,extended-matching,pre-matching
