@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 8743
+#!Rule = 8744
 
 
 [Rule]
@@ -5140,6 +5140,7 @@ DOMAIN-SUFFIX,kumihua.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,kunpeng-sc.csdnimg.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,kunpeng.csdn.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,kunyu.csdn.net,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,kurogames-ads.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,kushou.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,kuurza.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,kuxkddg.cn,REJECT,extended-matching,pre-matching
