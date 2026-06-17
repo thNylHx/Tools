@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 8541
+#!Rule = 8540
 
 
 [Rule]
@@ -2389,7 +2389,6 @@ DOMAIN-SUFFIX,adshmct.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adshmmsg.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adshow.it168.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adshownew.it168.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,adsit.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adslot.uc.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adslvfile.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,adslvseed.qq.com,REJECT,extended-matching,pre-matching
