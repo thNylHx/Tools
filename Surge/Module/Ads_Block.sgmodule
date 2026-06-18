@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 8638
+#!Rule = 8639
 
 
 [Rule]
@@ -6633,6 +6633,7 @@ DOMAIN-SUFFIX,salmonads.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,samba.tv,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,same.chinadaily.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,same.eastmoney.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,samsungadhub.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,samsungads.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sanalytics.sydneyuniversity.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sandbox-elq.keysight.com.cn,REJECT,extended-matching,pre-matching
