@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: 检查当前仓库
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: thNylHx/Tools
           path: Tools-repo
