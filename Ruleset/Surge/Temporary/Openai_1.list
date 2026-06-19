@@ -1,7 +1,7 @@
 # 规则名称: Openai_1
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则数量: 161
+# 规则数量: 173
 
 DOMAIN,7h1s_rul35et_i5_mad3_by_5ukk4w-ruleset.skk.moe
 DOMAIN,ai.google.dev
@@ -10,6 +10,9 @@ DOMAIN,aisandbox-pa.googleapis.com
 DOMAIN,aistudio.google.com
 DOMAIN,alkalicore-pa.clients6.google.com
 DOMAIN,alkalimakersuite-pa.clients6.google.com
+DOMAIN,anthropic-com.ghost.io
+DOMAIN,anthropic.auth0.com
+DOMAIN,anthropic.com.cdn.cloudflare.net
 DOMAIN,antigravity-unleash.goog
 DOMAIN,antigravity.google
 DOMAIN,api-iam.intercom.io
@@ -23,6 +26,7 @@ DOMAIN,apple-relay.fastly-edge.com
 DOMAIN,assets.msn.com
 DOMAIN,bard.google.com
 DOMAIN,browser-intake-datadoghq.com
+DOMAIN,browser-intake-us5-datadoghq.com
 DOMAIN,cdn.usefathom.com
 DOMAIN,chat.openai.com.cdn.cloudflare.net
 DOMAIN,copilot.microsoft.com
@@ -52,6 +56,7 @@ DOMAIN,production-openaicom-storage.azureedge.net
 DOMAIN,r.bing.com
 DOMAIN,robinfrontend-pa.googleapis.com
 DOMAIN,self.events.data.microsoft.com
+DOMAIN,servd-anthropic-website.b-cdn.net
 DOMAIN,services.bingapis.com
 DOMAIN,static.cloudflareinsights.com
 DOMAIN,sydney.bing.com
@@ -80,8 +85,12 @@ DOMAIN-SUFFIX,chatgpt.com
 DOMAIN-SUFFIX,chatgpt.livekit.cloud
 DOMAIN-SUFFIX,cici.com
 DOMAIN-SUFFIX,ciciai.com
+DOMAIN-SUFFIX,clau.de
 DOMAIN-SUFFIX,claude.ai
 DOMAIN-SUFFIX,claude.com
+DOMAIN-SUFFIX,claudemcpclient.com
+DOMAIN-SUFFIX,claudemcpcontent.com
+DOMAIN-SUFFIX,claudeusercontent.com
 DOMAIN-SUFFIX,client-api.arkoselabs.com
 DOMAIN-SUFFIX,clientstream.launchdarkly.com
 DOMAIN-SUFFIX,clipdrop.co
@@ -160,7 +169,10 @@ DOMAIN-SUFFIX,workos.imgix.net
 DOMAIN-SUFFIX,x.ai
 DOMAIN-SUFFIX,zed.dev
 IP-CIDR,129.146.3.78/32,no-resolve
+IP-CIDR,160.79.104.0/21,no-resolve
 IP-CIDR,24.199.123.28/32,no-resolve
 IP-CIDR,64.23.132.171/32,no-resolve
+IP-CIDR6,2607:6BC0::/32,no-resolve
 IP-ASN,14061,no-resolve
 IP-ASN,20473,no-resolve
+IP-ASN,399358,no-resolve
