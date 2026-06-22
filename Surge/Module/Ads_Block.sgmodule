@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 8639
+#!Rule = 8638
 
 
 [Rule]
@@ -1744,6 +1744,7 @@ DOMAIN-SUFFIX,7gg.cc,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,7moor.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,7s7bvoungt.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,7s8z7w24u.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,7xi9g1.com1.z0.glb.clouddn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,801.tianya.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,801.tianyaui.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,803.tianya.cn,REJECT,extended-matching,pre-matching
@@ -1972,7 +1973,6 @@ DOMAIN-SUFFIX,ad.mazc.org,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.mh.163.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.mi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.mobile.youku.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,ad.moonton.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.nvdvr.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.open.api.jihuoniao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.ourgame.com,REJECT,extended-matching,pre-matching
@@ -2680,7 +2680,6 @@ DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao1.com.w.cdngslb.com,REJECT,extended
 DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao2.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao3.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao4.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,api-ad-adapter-mb.wps.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api-ad-adapter.wps.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api-ad-callback.falconnet.app,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api-ad-product.huxiu.com,REJECT,extended-matching,pre-matching
@@ -6618,7 +6617,6 @@ DOMAIN-SUFFIX,s.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,s.bdstatic.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,s.btime.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,s.c-ctrip.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,s.img.mix.sina.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,s.lenovo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,s.mindbox.ru,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,s.p.youku.com,REJECT,extended-matching,pre-matching
@@ -8365,6 +8363,7 @@ DOMAIN-SUFFIX,zhihu.xmcimg.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zhiziyun.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zhjfad.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zhongchouyan.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,zhongkaowu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zhongsijiacheng.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zhuanfakong.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zhugeapi.com,REJECT,extended-matching,pre-matching
