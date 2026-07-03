@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 8646
+#!Rule = 8647
 
 
 [Rule]
@@ -1028,6 +1028,7 @@ DOMAIN,open.kuaishouzt.com,REJECT,extended-matching,pre-matching
 DOMAIN,open.kwaizt.com,REJECT,extended-matching,pre-matching
 DOMAIN,open.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN,openadapi.fancydsp.com,REJECT,extended-matching,pre-matching
+DOMAIN,openai.qualtrics.com,REJECT,extended-matching,pre-matching
 DOMAIN,optimus-ads.amap.com,REJECT,extended-matching,pre-matching
 DOMAIN,optimus-ads.amap.com.w.alikunlun.com,REJECT,extended-matching,pre-matching
 DOMAIN,orbit.jd.com,REJECT,extended-matching,pre-matching
