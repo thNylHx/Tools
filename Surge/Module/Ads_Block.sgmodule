@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 8647
+#!Rule = 8655
 
 
 [Rule]
@@ -1986,6 +1986,7 @@ DOMAIN-SUFFIX,ad.qingting.fm,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.qun.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.qyer.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ad.report.jihuoniao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.richmob.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.shunchangzhixing.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.sina.com.cn,REJECT,extended-matching,pre-matching
@@ -2239,6 +2240,7 @@ DOMAIN-SUFFIX,ads-img-al.xhscdn.com.w.cdngslb.com,REJECT,extended-matching,pre-m
 DOMAIN-SUFFIX,ads-img-bak.xhscdn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-img-qc.xhscdn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-marketing-vivofs.vivo.com.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ads-monitoring.shziyi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-pixiv.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-twitter.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-union.jd.com,REJECT,extended-matching,pre-matching
@@ -3391,6 +3393,7 @@ DOMAIN-SUFFIX,cname-asia-comonrt-stsdk.vivoglobal.com,REJECT,extended-matching,p
 DOMAIN-SUFFIX,cname-asia-st-exappupgrade.vivoglobal.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cname-in-apport-stsdk.vivoglobal.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cname-in-bom01-nginxpool03.vivoglobal.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,cname-in-ctdbonrt-stsdk.vivoglobal.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cname-sin01-stsdk09.vivoglobal.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cnlogs.umengcloud.com,REJECT,extended-matching,pre-matching
@@ -3692,6 +3695,7 @@ DOMAIN-SUFFIX,diskclean.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,disp.titan.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,dispatcher.upmc.uc.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,disqusads.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,djs.baomihua.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,dkeyn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,dl-vip.bav.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,dl-vip.pcfaster.baidu.co.th,REJECT,extended-matching,pre-matching
@@ -4102,6 +4106,7 @@ DOMAIN-SUFFIX,fingerprint-upload.hellobike.com,REJECT,extended-matching,pre-matc
 DOMAIN-SUFFIX,fintechpi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,fireluck.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,first-hufu.oss-cn-shanghai.aliyuncs.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,fiu07050kl.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,fiwyjar.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,fjctlnn.top,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,fjlqqc.com,REJECT,extended-matching,pre-matching
@@ -5417,6 +5422,7 @@ DOMAIN-SUFFIX,manyou.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,maoamao.myshoplaza.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mapi.m.jd.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,maplehaze.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,mariahcarey.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,market.duowan.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,marketgid.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,marketing.alibaba.com,REJECT,extended-matching,pre-matching
@@ -5883,6 +5889,7 @@ DOMAIN-SUFFIX,nylalobghyhirgh.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,o.027eat.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,o.if.qidian.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,o.lenovo.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,o2o-ad-dev.oss-cn-shanghai.aliyuncs.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,o2o.api.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,o2omobi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,o333o.com,REJECT,extended-matching,pre-matching
@@ -7046,6 +7053,7 @@ DOMAIN-SUFFIX,stat.y.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,stat.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,stat.youpin.mi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,stat.zol.com.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,stat2.pixpin.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,stat6.y.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,statchannel.store,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,statchannel.top,REJECT,extended-matching,pre-matching
@@ -7758,6 +7766,7 @@ DOMAIN-SUFFIX,uwgnpkd.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,uwnvcxb.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,uxcnhsf.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,uxip.meizu.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,uxjw.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,uyfv.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,uyunad.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,v-vay.com,REJECT,extended-matching,pre-matching
@@ -7791,7 +7800,6 @@ DOMAIN-SUFFIX,v6-reading-ad.qznovelvod.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,v84tz11w7.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,v9-reading-ad.qznovelvod.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,v95-se-zjwztc-reading-ad.qznovelvod.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,v96-reading-ad.qznovelvod.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,v96-sz-daily-reading-ad.qznovelvod.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,va.huya.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,va3yq7si6w.com,REJECT,extended-matching,pre-matching
