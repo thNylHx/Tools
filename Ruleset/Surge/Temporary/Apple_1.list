@@ -1,7 +1,7 @@
 # 规则名称: Apple_1
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则数量: 1784
+# 规则数量: 1786
 
 DOMAIN,a1.mzstatic.com
 DOMAIN,a2.mzstatic.com
@@ -86,8 +86,10 @@ DOMAIN,devstreaming-cdn.apple.com
 DOMAIN,discussionschinese.apple.com
 DOMAIN,download.developer.apple.com
 DOMAIN,downloaddispatch.itunes.apple.com
+DOMAIN,entitlements-edge.itunes.apple.com
 DOMAIN,experiments.apple.com
 DOMAIN,fides-pol.apple.com
+DOMAIN,fpinit.itunes.apple.com
 DOMAIN,gs-loc-cn.apple.com
 DOMAIN,gs-loc.apple.com
 DOMAIN,gsp10-ssl-cn.ls.apple.com
@@ -118,7 +120,6 @@ DOMAIN,images.apple.com.edgekey.net.globalredir.akadns.net
 DOMAIN,inappcheck-cn.itunes-apple.com.akadns.net
 DOMAIN,inappcheck-lb.itunes-apple.com.akadns.net
 DOMAIN,inappcheck.itunes.apple.com
-DOMAIN,ingest.apple-studies.com
 DOMAIN,init-kt.apple.com
 DOMAIN,init-p01md-lb.push-apple.com.akadns.net
 DOMAIN,init-p01md.apple.com
@@ -346,6 +347,7 @@ DOMAIN-SUFFIX,apple-pay.wang
 DOMAIN-SUFFIX,apple-store.cn
 DOMAIN-SUFFIX,apple-store.net
 DOMAIN-SUFFIX,apple-store.wang
+DOMAIN-SUFFIX,apple-studies.com
 DOMAIN-SUFFIX,apple-usa.net
 DOMAIN-SUFFIX,apple-watch.com.ru
 DOMAIN-SUFFIX,apple.ae
