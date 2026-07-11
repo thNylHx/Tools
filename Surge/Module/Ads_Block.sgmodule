@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 8813
+#!Rule = 8811
 
 
 [Rule]
@@ -3322,7 +3322,6 @@ DOMAIN-SUFFIX,celtra.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cengqinglin.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ceshi127722.obs.cn-north-4.myhuaweicloud.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cfg.imtt.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,cfgc.flysleep.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cfgc.zztfly.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cfts1tifqr.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cgicol.amap.com,REJECT,extended-matching,pre-matching
@@ -5288,7 +5287,6 @@ DOMAIN-SUFFIX,log-api.pangolin-sdk-toutiao-b.com.bytedns1.com,REJECT,extended-ma
 DOMAIN-SUFFIX,log-api.pangolin-sdk-toutiao.com.bytedns1.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log-api.pangolin-sdk-toutiao.com.queniuyk.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log-api.pangolin-sdk-toutiao.com.w.cdngslb.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,log-auth.flysleep.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log-auth.zztfly.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log-dra.platform.hihonorcloud.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log-drcn.platform.hihonorcloud.com,REJECT,extended-matching,pre-matching
