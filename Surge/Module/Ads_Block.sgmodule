@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 8828
+#!Rule = 8832
 
 
 [Rule]
@@ -4324,6 +4324,7 @@ DOMAIN-SUFFIX,geo2.adobe.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,geofence.sys.miui.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gepush.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,getmyip.top,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,getsentry.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,getui.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,getui.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,getui.net,REJECT,extended-matching,pre-matching
@@ -6893,9 +6894,12 @@ DOMAIN-SUFFIX,sensors.yodo1api.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sensorsdata.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sensorsdata.glowapp.vip,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sentiance.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,sentry-cdn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sentry.d.mi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sentry.d.xiaomi.net,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,sentry.dev,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sentry.eks.hoyoverse.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,sentry.io,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sentry.music.163.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,seordl.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,serconsole.vicp.cc,REJECT,extended-matching,pre-matching
