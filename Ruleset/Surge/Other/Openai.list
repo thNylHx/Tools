@@ -1,7 +1,7 @@
 # 规则名称: Openai
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则数量: 132
+# 规则数量: 134
 
 DOMAIN,7h1s_rul35et_i5_mad3_by_5ukk4w-ruleset.skk.moe
 DOMAIN,ai.google.dev
@@ -41,6 +41,7 @@ DOMAIN-SUFFIX,aistudio.google.com
 DOMAIN-SUFFIX,algolia.net
 DOMAIN-SUFFIX,android.chat.openai.com
 DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,api.revenuecat.com
 DOMAIN-SUFFIX,api.statsig.com
 DOMAIN-SUFFIX,app.launchdarkly.com
 DOMAIN-SUFFIX,auth.openai.com
@@ -67,7 +68,6 @@ DOMAIN-SUFFIX,clipdrop.co
 DOMAIN-SUFFIX,cloudcode-pa.googleapis.com
 DOMAIN-SUFFIX,crixet.com
 DOMAIN-SUFFIX,ct.sendgrid.net
-DOMAIN-SUFFIX,datadog.pool.ntp.org
 DOMAIN-SUFFIX,deepmind.com
 DOMAIN-SUFFIX,deepmind.google
 DOMAIN-SUFFIX,desktop.chat.openai.com
@@ -112,6 +112,7 @@ DOMAIN-SUFFIX,openaicom.imgix.net
 DOMAIN-SUFFIX,openart.ai
 DOMAIN-SUFFIX,perplexity.ai
 DOMAIN-SUFFIX,poe.com
+DOMAIN-SUFFIX,pool.ntp.org
 DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
 DOMAIN-SUFFIX,prodregistryv2.org
 DOMAIN-SUFFIX,rum.browser-intake-datadoghq.com
@@ -133,5 +134,6 @@ IP-CIDR,160.79.104.0/21,no-resolve
 IP-CIDR,24.199.123.28/32,no-resolve
 IP-CIDR,64.23.132.171/32,no-resolve
 IP-CIDR6,2607:6BC0::/32,no-resolve
+IP-ASN,13335,no-resolve
 IP-ASN,20473,no-resolve
 IP-ASN,399358,no-resolve
