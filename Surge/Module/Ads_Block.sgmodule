@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 8902
+#!Rule = 8899
 
 
 [Rule]
@@ -3886,7 +3886,6 @@ DOMAIN-SUFFIX,doubleverify.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,doudouguo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,doumob.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,dove.xueqiu.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,down.54nb.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,down.fwqlt.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,down.nishuoa.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,download.2345.cn,REJECT,extended-matching,pre-matching
@@ -4606,7 +4605,6 @@ DOMAIN-SUFFIX,hc.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hc.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hcbmq.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hd2.3g.qq.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,hdggdhjdhjdgdjjjgcjggjgj-dpt5xisw7bfs.edgeone.dev,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hdns.ksyun.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hdswgc.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hdtu.oss-cn-beijing.aliyuncs.com,REJECT,extended-matching,pre-matching
@@ -4697,7 +4695,6 @@ DOMAIN-SUFFIX,hpplay.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hq-tracking.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hs-analytics.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hs.178yc.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,hseda.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hsrgnac.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hsych.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,htrace.wetvinfo.com,REJECT,extended-matching,pre-matching
@@ -8080,7 +8077,6 @@ DOMAIN-SUFFIX,viglink.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,vigyn4gpx.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,vihppjk.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,virusinfo-cloudscan-cn.heytapmobi.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,visevisa-3049940309494994030.mos.ap-southeast-2.sufybkt.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,visit.oschina.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,viva.api.xiaoying.co,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,vk-analytics.ru,REJECT,extended-matching,pre-matching
@@ -8300,6 +8296,7 @@ DOMAIN-SUFFIX,www.dualspace.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.fanwish.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.fm120.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.histar.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,www.hseda.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.huabian.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.jmine.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.kuaizitech.com,REJECT,extended-matching,pre-matching

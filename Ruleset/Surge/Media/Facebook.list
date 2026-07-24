@@ -1,7 +1,7 @@
 # 规则名称: Facebook
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则数量: 590
+# 规则数量: 592
 
 DOMAIN,fbcdn-a.akamaihd.net
 DOMAIN-SUFFIX,aboutfacebook.com
@@ -569,10 +569,11 @@ IP-CIDR6,2a03:2887:ff22::/47,no-resolve
 IP-CIDR6,2a03:2887:ff27::/48,no-resolve
 IP-CIDR6,2a03:2887:ff28::/46,no-resolve
 IP-CIDR6,2a03:2887:ff2e::/47,no-resolve
+IP-CIDR6,2a03:2887:ff30::/48,no-resolve
 IP-CIDR6,2a03:2887:ff33::/48,no-resolve
 IP-CIDR6,2a03:2887:ff37::/48,no-resolve
 IP-CIDR6,2a03:2887:ff38::/46,no-resolve
-IP-CIDR6,2a03:2887:ff3e::/47,no-resolve
+IP-CIDR6,2a03:2887:ff3f::/48,no-resolve
 IP-CIDR6,2a03:2887:ff40::/46,no-resolve
 IP-CIDR6,2a03:2887:ff44::/47,no-resolve
 IP-CIDR6,2a03:2887:ff48::/46,no-resolve
@@ -589,6 +590,7 @@ IP-CIDR6,2a03:2887:ff68::/46,no-resolve
 IP-CIDR6,2a03:2887:ff6f::/48,no-resolve
 IP-CIDR6,2a03:2887:ff70::/46,no-resolve
 IP-CIDR6,2c0f:ef78:10::/47,no-resolve
+IP-CIDR6,2c0f:ef78:12::/48,no-resolve
 IP-CIDR6,2c0f:ef78:3::/48,no-resolve
 IP-CIDR6,2c0f:ef78:5::/48,no-resolve
 IP-CIDR6,2c0f:ef78:9::/48,no-resolve
