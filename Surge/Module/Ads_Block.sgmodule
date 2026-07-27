@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 8913
+#!Rule = 8914
 
 
 [Rule]
@@ -162,6 +162,7 @@ DOMAIN,ads-shopping.shouqianba.com,REJECT,extended-matching,pre-matching
 DOMAIN,ads-video-al.xhscdn.com,REJECT,extended-matching,pre-matching
 DOMAIN,ads-video-qc.xhscdn.com,REJECT,extended-matching,pre-matching
 DOMAIN,ads.95516.com,REJECT,extended-matching,pre-matching
+DOMAIN,ads.adfunlink.com,REJECT,extended-matching,pre-matching
 DOMAIN,ads.aplus.pptv.com,REJECT,extended-matching,pre-matching
 DOMAIN,ads.aplusapi.pptv.com,REJECT,extended-matching,pre-matching
 DOMAIN,ads.auctions.yahoo.com,REJECT,extended-matching,pre-matching
@@ -268,6 +269,7 @@ DOMAIN,adtago.s3.amazonaws.com,REJECT,extended-matching,pre-matching
 DOMAIN,adtech.yahooinc.com,REJECT,extended-matching,pre-matching
 DOMAIN,adtrack.e.kuaishou.com,REJECT,extended-matching,pre-matching
 DOMAIN,adtrack.quark.cn,REJECT,extended-matching,pre-matching
+DOMAIN,adtracker.adfunlink.com,REJECT,extended-matching,pre-matching
 DOMAIN,adtracker.medproad.com,REJECT,extended-matching,pre-matching
 DOMAIN,adui.tg.meitu.com,REJECT,extended-matching,pre-matching
 DOMAIN,adv-adlog.variflight.com,REJECT,extended-matching,pre-matching
@@ -788,7 +790,6 @@ DOMAIN,im-x.jd.com,REJECT,extended-matching,pre-matching
 DOMAIN,image-ad.sm.cn,REJECT,extended-matching,pre-matching
 DOMAIN,image.hpplay.cn,REJECT,extended-matching,pre-matching
 DOMAIN,images.outbrainimg.com,REJECT,extended-matching,pre-matching
-DOMAIN,images.pinduoduo.com,REJECT,extended-matching,pre-matching
 DOMAIN,imdns.hpplay.cn,REJECT,extended-matching,pre-matching
 DOMAIN,img-c.heytapimage.com,REJECT,extended-matching,pre-matching
 DOMAIN,img-x.jd.com,REJECT,extended-matching,pre-matching
