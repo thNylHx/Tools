@@ -1,7 +1,7 @@
 # 规则名称: Google
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则数量: 8796
+# 规则数量: 8830
 
 DOMAIN,2mdn-cn.net
 DOMAIN,2mdn.net
@@ -3574,7 +3574,6 @@ IP-CIDR,185.142.144.0/23,no-resolve
 IP-CIDR,185.142.146.0/24,no-resolve
 IP-CIDR,185.145.247.0/24,no-resolve
 IP-CIDR,185.146.174.0/23,no-resolve
-IP-CIDR,185.16.98.0/24,no-resolve
 IP-CIDR,185.162.80.0/22,no-resolve
 IP-CIDR,185.168.204.0/24,no-resolve
 IP-CIDR,185.177.172.0/22,no-resolve
@@ -4766,8 +4765,43 @@ IP-CIDR6,2605:a601:81b5:4000::/50,no-resolve
 IP-CIDR6,2605:a601:81b5:8000::/49,no-resolve
 IP-CIDR6,2605:a601:81b5::/51,no-resolve
 IP-CIDR6,2605:a601:81b6::/47,no-resolve
-IP-CIDR6,2605:a601:81b8::/45,no-resolve
-IP-CIDR6,2605:a601:81c0::/46,no-resolve
+IP-CIDR6,2605:a601:81b8::/46,no-resolve
+IP-CIDR6,2605:a601:81bc::/47,no-resolve
+IP-CIDR6,2605:a601:81be::/48,no-resolve
+IP-CIDR6,2605:a601:81bf:4000::/51,no-resolve
+IP-CIDR6,2605:a601:81bf:6000::/53,no-resolve
+IP-CIDR6,2605:a601:81bf:6800::/56,no-resolve
+IP-CIDR6,2605:a601:81bf:6901::/64,no-resolve
+IP-CIDR6,2605:a601:81bf:6902::/63,no-resolve
+IP-CIDR6,2605:a601:81bf:6904::/62,no-resolve
+IP-CIDR6,2605:a601:81bf:6908::/61,no-resolve
+IP-CIDR6,2605:a601:81bf:6910::/60,no-resolve
+IP-CIDR6,2605:a601:81bf:6920::/59,no-resolve
+IP-CIDR6,2605:a601:81bf:6940::/58,no-resolve
+IP-CIDR6,2605:a601:81bf:6980::/57,no-resolve
+IP-CIDR6,2605:a601:81bf:6a00::/55,no-resolve
+IP-CIDR6,2605:a601:81bf:6c00::/54,no-resolve
+IP-CIDR6,2605:a601:81bf:7000::/52,no-resolve
+IP-CIDR6,2605:a601:81bf:8000::/49,no-resolve
+IP-CIDR6,2605:a601:81bf::/50,no-resolve
+IP-CIDR6,2605:a601:81c0::/47,no-resolve
+IP-CIDR6,2605:a601:81c2::/48,no-resolve
+IP-CIDR6,2605:a601:81c3:8000::/50,no-resolve
+IP-CIDR6,2605:a601:81c3::/49,no-resolve
+IP-CIDR6,2605:a601:81c3:c000::/52,no-resolve
+IP-CIDR6,2605:a601:81c3:d000::/53,no-resolve
+IP-CIDR6,2605:a601:81c3:d800::/55,no-resolve
+IP-CIDR6,2605:a601:81c3:da00::/56,no-resolve
+IP-CIDR6,2605:a601:81c3:db01::/64,no-resolve
+IP-CIDR6,2605:a601:81c3:db02::/63,no-resolve
+IP-CIDR6,2605:a601:81c3:db04::/62,no-resolve
+IP-CIDR6,2605:a601:81c3:db08::/61,no-resolve
+IP-CIDR6,2605:a601:81c3:db10::/60,no-resolve
+IP-CIDR6,2605:a601:81c3:db20::/59,no-resolve
+IP-CIDR6,2605:a601:81c3:db40::/58,no-resolve
+IP-CIDR6,2605:a601:81c3:db80::/57,no-resolve
+IP-CIDR6,2605:a601:81c3:dc00::/54,no-resolve
+IP-CIDR6,2605:a601:81c3:e000::/51,no-resolve
 IP-CIDR6,2605:a601:81c4::/47,no-resolve
 IP-CIDR6,2605:a601:81c6:4000::/51,no-resolve
 IP-CIDR6,2605:a601:81c6:6000::/54,no-resolve
