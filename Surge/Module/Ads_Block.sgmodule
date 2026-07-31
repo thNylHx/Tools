@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 8873
+#!Rule = 8874
 
 
 [Rule]
@@ -6236,6 +6236,7 @@ DOMAIN-SUFFIX,paime.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,paimgcdn-feed.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,panda.kdnet.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pandora.mi.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,pangle.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pangle.io,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pangolin-dsp-toutiao-b.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pangolin-dsp-toutiao.com,REJECT,extended-matching,pre-matching
