@@ -3,11 +3,10 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 8879
+#!Rule = 8883
 
 
 [Rule]
-DOMAIN,118.89.204.198,REJECT,extended-matching,pre-matching
 DOMAIN,1500020991.vodplayer.wxamedia.com,REJECT,extended-matching,pre-matching
 DOMAIN,1500022744.vodplayer.wxamedia.com,REJECT,extended-matching,pre-matching
 DOMAIN,1500026601.vodplayer.wxamedia.com,REJECT,extended-matching,pre-matching
@@ -1729,6 +1728,7 @@ DOMAIN-SUFFIX,5hffr1p22j.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,5ipifco2tf.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,5mgrgsc.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,5mm.zxfw5.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,5pub.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,5qzone.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,5rocks.io,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,5tmobi.cn,REJECT,extended-matching,pre-matching
@@ -1966,6 +1966,7 @@ DOMAIN-SUFFIX,ad.api.3g.tudou.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.api.3g.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.api.mobile.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.api.moji.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ad.baihemob.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.bandao.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.browser.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ad.bwton.com,REJECT,extended-matching,pre-matching
@@ -2270,7 +2271,6 @@ DOMAIN-SUFFIX,ads-dre.platform.hihonorcloud.com,REJECT,extended-matching,pre-mat
 DOMAIN-SUFFIX,ads-drru.platform.hihonorcloud.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-gdl.imovideo.ru,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-i1.xhscdn.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,ads-i1.xhscdn.com.cdn.dnsv1.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-i10.xhscdn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-i2.xhscdn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-i2.xhscdn.com.w.cdngslb.com,REJECT,extended-matching,pre-matching
@@ -2695,7 +2695,6 @@ DOMAIN-SUFFIX,analytics.xdiarys.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analytics.yahoo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analytics.yicai.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analytics.yinxiang.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,analytics1.xdiarys.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,analyze.lemurbrowser.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,andmlb.kshwtj.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,android.bugly.tencent.com,REJECT,extended-matching,pre-matching
@@ -4527,6 +4526,7 @@ DOMAIN-SUFFIX,guzsjdl.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gvideo.qpic.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gw5.push.mcp.weibo.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gw7jpuouik.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,gwrtdp-tn690bfadt.tclclouds.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gxgbvmg.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gxhzv.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gxtvu.com.cn,REJECT,extended-matching,pre-matching
@@ -4618,6 +4618,7 @@ DOMAIN-SUFFIX,histats.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hitslink.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hivecn.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hivedata.cc,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,hjgen.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hjpqt.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hk-datareceiver.aki-game.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,hkkeafj.cn,REJECT,extended-matching,pre-matching
@@ -5880,6 +5881,7 @@ DOMAIN-SUFFIX,mssdk3-normal-zjg.zijieapi.com,REJECT,extended-matching,pre-matchi
 DOMAIN-SUFFIX,mssdk5-normal-hl.zijieapi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mssdk5-normal-lf.zijieapi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mssdk5-normal-lq.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,msstatic.com.gslb.kuiniuca.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mstat.tpns.sh.tencent.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mstatik.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,msz3.destinia.cn,REJECT,extended-matching,pre-matching
@@ -8003,6 +8005,7 @@ DOMAIN-SUFFIX,v3.jiathis.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,v5-bd-daily-reading-ad.qznovelvod.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,v5-ex-reading-ad.qznovelvod.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,v5-reading-ad.qznovelvod.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,v5-se-bjtc-reading-ad.qznovelvod.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,v5-se-gddgtc-reading-ad.qznovelvod.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,v5-se-sjy-daily-reading-ad.qznovelvod.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,v6-adashx.ut.amap.com,REJECT,extended-matching,pre-matching
@@ -8579,7 +8582,9 @@ DOMAIN-SUFFIX,zedo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zeemlight.myshoplaza.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zegarkirepliki.pl,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zelamtron-pl.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,zeldrunek-pl.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zelorprime-ai.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,zelorprimeai.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zeltix-ai.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zemanta.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,zestads.com,REJECT,extended-matching,pre-matching
@@ -8868,7 +8873,6 @@ URL-REGEX,"^https:\/\/w\.line\.me\/adp\/api\/ad\/v\d\/",REJECT,extended-matching
 URL-REGEX,"^https:\/\/web-mmap-pay\.line-apps\.com\/tw\/liff\/campaign\/v\d\/aggregate\/ad\/banner\/",REJECT,extended-matching,pre-matching
 USER-AGENT,"Httpdns*",REJECT,extended-matching,pre-matching
 USER-AGENT,"Httpsdns*",REJECT,extended-matching,pre-matching
-USER-AGENT,AVOS*,REJECT,extended-matching,pre-matching
 AND,((DEST-PORT,18000),(PROTOCOL,STUN)),REJECT,extended-matching,pre-matching
 AND,((DOMAIN,api.pinduoduo.com),(PROTOCOL,QUIC)),REJECT,extended-matching,pre-matching
 AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com)),REJECT,extended-matching,pre-matching
