@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 8821
+#!Rule = 8817
 
 
 [Rule]
@@ -1747,6 +1747,7 @@ DOMAIN-SUFFIX,7gg.cc,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,7moor.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,7s7bvoungt.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,7s8z7w24u.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,7xi9g1.com1.z0.glb.clouddn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,801.tianya.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,801.tianyaui.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,803.tianya.cn,REJECT,extended-matching,pre-matching
@@ -3503,7 +3504,6 @@ DOMAIN-SUFFIX,conv.youdao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,conyz.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,coocaatv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cooguo.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,cookies.joneslanglasalle.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,coolguang.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,coolkaba.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,coreldrawchina.com,REJECT,extended-matching,pre-matching
@@ -5320,7 +5320,6 @@ DOMAIN-SUFFIX,log.hunantv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.iflytek.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.ireader.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.jd.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,log.jtexpress.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.kuwo.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.m.sm.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,log.mix.sina.com.cn,REJECT,extended-matching,pre-matching
@@ -7340,7 +7339,6 @@ DOMAIN-SUFFIX,t.uc.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,t.zhipin.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,t1.a.market.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,t101.cn,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,t17.market.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,t2.xiaohongshu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,t28goe.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,t9x2gu6it3.com,REJECT,extended-matching,pre-matching
@@ -8096,8 +8094,6 @@ DOMAIN-SUFFIX,webcert.cnmstl.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,webcollector-rtm.agora.io,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,webcollects.kugou.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,webdissector.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,weblogger-wss.coolccloud.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,weblogger-wss.coolgcloud.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,webmail-myaccount-secure-micrsoftnotifications-dpob324t4jqd.zh-cn.edgeone.cool,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,websd8.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,webstat.kuwo.cn,REJECT,extended-matching,pre-matching
