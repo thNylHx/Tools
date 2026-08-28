@@ -1,7 +1,7 @@
 # 规则名称: Facebook
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则数量: 592
+# 规则数量: 593
 
 DOMAIN,fbcdn-a.akamaihd.net
 DOMAIN-SUFFIX,aboutfacebook.com
@@ -478,6 +478,7 @@ IP-CIDR,102.132.115.0/24,no-resolve
 IP-CIDR,102.132.116.0/23,no-resolve
 IP-CIDR,102.132.119.0/24,no-resolve
 IP-CIDR,102.132.120.0/23,no-resolve
+IP-CIDR,102.132.123.0/24,no-resolve
 IP-CIDR,102.132.125.0/24,no-resolve
 IP-CIDR,102.132.126.0/24,no-resolve
 IP-CIDR,102.132.96.0/20,no-resolve
