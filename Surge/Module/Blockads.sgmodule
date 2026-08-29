@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截模块
-#!date = 2026-08-04 09:24:52
+#!date = 2026-08-29 15:49:38
 
 
 [Rule]
@@ -40,6 +40,8 @@ DOMAIN,ddfs-public.ddimg.mobi,REJECT,extended-matching,pre-matching
 DOMAIN,rttrack.ddxq.mobi,REJECT,extended-matching,pre-matching
 
 # ======= E ======= #
+# e充电
+DOMAIN,adash-evone.echargenet.com,REJECT,extended-matching,pre-matching
 
 # ======= F ======= #
 # 番茄小说
@@ -93,6 +95,27 @@ URL-REGEX,"^http:\/\/\w{32}\.jddebug\.com\/diagnose\?",REJECT,pre-matching,exten
 DOMAIN,kad.gotokeep.com,REJECT,pre-matching,extended-matching
 
 # ======= L ======= #
+# Line
+URL-REGEX,"^https:\/\/a\.line\.me\/er\/lads\/v\d\/ei\?",REJECT-TINYGIF
+URL-REGEX,"^https:\/\/a\.line\.me\/er\/l.*\/v\d\/event\/image",REJECT-TINYGIF
+URL-REGEX,"^https:\/\/a\.line\.me\/lass\/api\/v\d\/ads$",REJECT-DROP
+URL-REGEX,"^https:\/\/a\.line\.me\/oa\/v\d\/e$",REJECT-DROP
+URL-REGEX,"^https:\/\/a\.line\.me\/cs\/v\d\/oa$",REJECT-DROP
+URL-REGEX,"^https:\/\/w\.line\.me\/adp\/api\/ad\/v\d\/",REJECT-DROP
+URL-REGEX,"^https:\/\/crs-event\.line\.me\/v\d\/imp",REJECT-DROP
+URL-REGEX,"^https:\/\/sch\.line\.me\/api\/v\d\/ads$",REJECT-DROP
+URL-REGEX,"^https:\/\/uts-front\.line-apps\.com\/event$",REJECT-DROP
+URL-REGEX,"^https:\/\/uts-front\.line-apps\.com\/settings$",REJECT-DROP
+URL-REGEX,"^https:\/\/obs\.line-scdn\.net\/0h[a-zA-Z0-9_-]{50}[a-zA-Z0-9_-]*",REJECT-DROP
+URL-REGEX,"^https:\/\/obs\.line-scdn\.net\/0h.+\/(o|m)\d+x\d+$",REJECT-DROP
+URL-REGEX,"^https:\/\/obs\.line-scdn\.net\/0hGH\d",REJECT-DROP
+URL-REGEX,"^https:\/\/obs\.line-scdn\.net\/0h.+\/\d+p\.mp4$",REJECT-DROP
+URL-REGEX,"^https:\/\/obs\.line-scdn\.net\/r\/linecrs\/.+\/m180x180$",REJECT-TINYGIF
+URL-REGEX,"^https:\/\/ec-bot-obs\.line-scdn\.net\/0h[0-9a-zA-Z_-]{50}[0-9a-zA-Z_-]*",REJECT-TINYGIF
+URL-REGEX,"^https:\/\/d\.line-scdn\.net\/lcp-prod-photo\/20.+\.(jpg|jpeg|png)",REJECT-TINYGIF
+URL-REGEX,"^https:\/\/web-mmap-pay\.line-apps\.com\/tw\/liff\/campaign\/v\d\/aggregate\/ad\/banner\/",REJECT-TINYGIF
+URL-REGEX,"^https:\/\/scdn\.line-apps\.com\/lan\/image\/line\/bannerImageEvent\/",REJECT-DROP
+URL-REGEX,"^https:\/\/scdn\.line-apps\.com\/lan\/document\/pageEvent\/line\/ios\/",REJECT-DROP
 
 # ======= M ======= #
 # 美柚
@@ -176,8 +199,11 @@ DOMAIN,ut.taobao.com,REJECT,pre-matching,extended-matching
 # ======= V ======= #
 
 # ======= W ======= #
-# 微信公众号
-DOMAIN-SUFFIX,wxs.qq.com,REJECT,pre-matching,extended-matching
+# 微信
+DOMAIN,wxa.wxs.qq.com,REJECT,pre-matching,extended-matching
+DOMAIN,wximg.wxs.qq.com,REJECT,pre-matching,extended-matching
+DOMAIN,wxsmw.wxs.qq.com,REJECT,pre-matching,extended-matching
+# DOMAIN-SUFFIX,wxs.qq.com,REJECT,pre-matching,extended-matching
 # 微信小程序
 DOMAIN,wxsnsdy.wxs.qq.com,REJECT,pre-matching,extended-matching
 DOMAIN,wxsmsdy.video.qq.com,REJECT,pre-matching,extended-matching
@@ -216,9 +242,6 @@ URL-REGEX,"^http?:\/\/(discardrp|startup)\.umetrip\.com\/gateway\/api\/umetrip\/
 # ======= other ======= #
 # 广告平台拦截
 DOMAIN-KEYWORD,adstrategy,REJECT,pre-matching,extended-matching
-AND,((DOMAIN-KEYWORD,tnc),(OR,((DOMAIN-SUFFIX,capcutapi.com),(DOMAIN-SUFFIX,zijieapi.com),(DOMAIN-SUFFIX,isnssdk.com),(DOMAIN-SUFFIX,toutiaoapi.com),(DOMAIN-SUFFIX,bytedance.com),(DOMAIN-SUFFIX,snssdk.com),(DOMAIN-SUFFIX,sgsnssdk.com)))),DIRECT
-AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com)),REJECT,pre-matching,extended-matching
-AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,-normal.zijieapi.com)),REJECT,pre-matching,extended-matching
 DOMAIN,lf-ad-ies.bytecdn.cn,REJECT,pre-matching,extended-matching
 DOMAIN,dig.bdurl.net,REJECT,pre-matching,extended-matching
 DOMAIN,extlog.snssdk.com,REJECT,pre-matching,extended-matching
@@ -272,12 +295,7 @@ DOMAIN-SUFFIX,popadshop.com,REJECT,pre-matching,extended-matching
 DOMAIN-SUFFIX,admobile.vip,REJECT,pre-matching,extended-matching
 DOMAIN-SUFFIX,yksdks.com,REJECT,pre-matching,extended-matching
 DOMAIN-SUFFIX,dutils.com,REJECT,pre-matching,extended-matching
-DOMAIN,init.sms.mob.com,DIRECT
-DOMAIN,sdkapi.sms.mob.com,DIRECT
-DOMAIN,code.sms.mob.com,DIRECT
 DOMAIN-SUFFIX,mob.com,REJECT,pre-matching,extended-matching
-DOMAIN,smartop-sdkapi.jiguang.cn,DIRECT
-DOMAIN,sdk.verification.jiguang.cn,DIRECT
 DOMAIN-SUFFIX,jiguang.cn,REJECT,pre-matching,extended-matching
 DOMAIN-SUFFIX,jpush.cn,REJECT,pre-matching,extended-matching
 DOMAIN-SUFFIX,jpush.io,REJECT,pre-matching,extended-matching
@@ -337,7 +355,7 @@ DOMAIN-SUFFIX,gdt.qq.com,REJECT,pre-matching,extended-matching
 DOMAIN-SUFFIX,l.qq.com,REJECT,pre-matching,extended-matching
 DOMAIN-SUFFIX,imtmp.net,REJECT,pre-matching,extended-matching
 DOMAIN-SUFFIX,ugdtimg.com,REJECT,pre-matching,extended-matching
-IP-CIDR,47.110.187.87/32,REJECT,no-resolve,pre-matching
+IP-CIDR,47.110.187.87/32,REJECT,pre-matching,extended-matching,no-resolve
 DOMAIN-SUFFIX,opadlink.com,REJECT,pre-matching,extended-matching
 DOMAIN-SUFFIX,staevent.work,REJECT,pre-matching,extended-matching
 DOMAIN-SUFFIX,openinstall.online,REJECT,pre-matching,extended-matching
@@ -476,6 +494,7 @@ DOMAIN-SUFFIX,66mobi.com,REJECT,pre-matching,extended-matching
 DOMAIN-SUFFIX,xdplt.com,REJECT,pre-matching,extended-matching
 DOMAIN,ads.cup.com.cn,REJECT,pre-matching,extended-matching
 DOMAIN-SUFFIX,adjust.com,REJECT,pre-matching,extended-matching
+DOMAIN-SUFFIX,adjust.io,REJECT,pre-matching,extended-matching
 DOMAIN-SUFFIX,adjust.net.in,REJECT,pre-matching,extended-matching
 DOMAIN,app-analytics-services.com,REJECT,pre-matching,extended-matching
 DOMAIN,odm.app-ads-services.com,REJECT,pre-matching,extended-matching
@@ -558,6 +577,14 @@ DOMAIN-SUFFIX,doubleverify.com,REJECT,pre-matching,extended-matching
 DOMAIN-SUFFIX,tobidad.cn,REJECT,pre-matching,extended-matching
 DOMAIN-SUFFIX,tobidad.com,REJECT,pre-matching,extended-matching
 DOMAIN,ep7.facebook.com,REJECT,pre-matching,extended-matching
+AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com)),REJECT,pre-matching,extended-matching
+AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,-normal.zijieapi.com)),REJECT,pre-matching,extended-matching
+DOMAIN,init.sms.mob.com,DIRECT
+DOMAIN,sdkapi.sms.mob.com,DIRECT
+DOMAIN,code.sms.mob.com,DIRECT
+DOMAIN,smartop-sdkapi.jiguang.cn,DIRECT
+DOMAIN,sdk.verification.jiguang.cn,DIRECT
+AND,((DOMAIN-KEYWORD,tnc),(OR,((DOMAIN-SUFFIX,capcutapi.com),(DOMAIN-SUFFIX,zijieapi.com),(DOMAIN-SUFFIX,isnssdk.com),(DOMAIN-SUFFIX,toutiaoapi.com),(DOMAIN-SUFFIX,bytedance.com),(DOMAIN-SUFFIX,snssdk.com),(DOMAIN-SUFFIX,sgsnssdk.com)))),DIRECT
 # HTTPDNS拦截
 DOMAIN-KEYWORD,httpdns,REJECT,pre-matching,extended-matching
 DOMAIN-KEYWORD,httpsdns,REJECT,pre-matching,extended-matching
@@ -758,6 +785,21 @@ DOMAIN,httpdns.zybang.com,REJECT,pre-matching,extended-matching
 # ======= K ======= #
 
 # ======= L ======= #
+# Line
+^https:\/\/gw\.line\.naver\.jp\/ext\/lgfp\/lad\/v\d$ - reject
+^https:\/\/gw\.line\.naver\.jp\/lass\/api\/v\d\/ads$ - reject
+^https:\/\/gw\.line\.naver\.jp\/tr\/event$ - reject
+^https:\/\/legy\.line-apps\.com:443\/ext\/lgfp\/lad\/v\d$ - reject
+^https:\/\/legy\.line-apps\.com:443\/ext\/smartch\/banner\/sch\/v\d$ - reject
+^https:\/\/legy\.line-apps\.com\/line\.gcs\.GcsModuleService\/GetModulesByModuleIds$ - reject
+^https:\/\/legy\.line-apps\.com:443\/tr\/event$ - reject
+^https:\/\/lan\.line\.me\/v\d\/line\/ios - reject
+^https:\/\/buy\.line\.me\/api\/graphql\?variables - reject
+^https:\/\/nelo2-col\.linecorp\.com\/_store$ - reject
+^https:\/\/cix\.line-apps\.com\/R\d\? - reject
+^https:\/\/ad\.line-scdn\.net\/0h - reject
+^https:\/\/static\.line-scdn\.net\/ad-sdk\/ - reject
+^https:\/\/scdn\.line-apps\.com\/appresources\/moretab\/list\.json - reject
 
 # ======= M ======= #
 # 美柚
@@ -839,6 +881,8 @@ DOMAIN,httpdns.zybang.com,REJECT,pre-matching,extended-matching
 # ======= Z ======= #
 # 中国移动开屏
 ^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/(init\/startInit|emotionMarket) - reject
+# 航旅纵横
+^https:\/\/oss\.umetrip\.com\/fs\/advert\/polite - reject
 
 # ======= other ======= #
 # 广告平台拦截
@@ -856,6 +900,23 @@ DOMAIN,httpdns.zybang.com,REJECT,pre-matching,extended-matching
 # 12306
 http-response-jq ^https:\/\/ad\.12306\.cn\/ad\/ser\/getAdList$ 'delpaths([["materialsList"]])'
 http-response-jq ^https:\/\/ad\.12306\.cn\/ad\/ser\/getAdList$ 'delpaths([["advertParam"]])'
+# 5EPlay
+http-response-jq ^https:\/\/app\.5eplay\.com\/api\/app\/dync_config\? 'delpaths([["data","function_configs","startup_ad_switch"]])'
+http-response-jq ^https:\/\/app\.5eplay\.com\/api\/app\/dync_config\? 'delpaths([["data","function_configs","startup_ad_timeout"]])'
+http-response-jq ^https:\/\/app\.5eplay\.com\/api\/app\/dync_config\? 'delpaths([["data","function_configs","startup_ad_day_max"]])'
+http-response-jq ^https:\/\/app\.5eplay\.com\/api\/app\/dync_config\? 'delpaths([["data","function_configs","app_bar_guide_width"]])'
+http-response-jq ^https:\/\/app\.5eplay\.com\/api\/app\/dync_config\? 'delpaths([["data","function_configs","app_bar_guide_height"]])'
+http-response-jq ^https:\/\/app\.5eplay\.com\/api\/app\/dync_config\? 'delpaths([["data","function_configs","app_bar_guide_url"]])'
+http-response-jq ^https:\/\/app\.5eplay\.com\/api\/app\/dync_config\? 'delpaths([["data","function_configs","app_bar_guide_time"]])'
+http-response-jq ^https:\/\/app\.5eplay\.com\/api\/app\/dync_config\? 'delpaths([["data","function_configs","home_tab_event_tag"]])'
+http-response-jq ^https:\/\/app\.5eplay\.com\/api\/app\/dync_config\? 'delpaths([["data","function_configs","home_tab_event_tag_ext"]])'
+http-response-jq ^https:\/\/app\.5eplay\.com\/api\/app\/dync_config\? 'delpaths([["data","function_configs","home_tab_player_tag"]])'
+http-response-jq ^https:\/\/app\.5eplay\.com\/api\/app\/dync_config\? 'delpaths([["data","function_configs","home_tab_player_tag_ext"]])'
+http-response-jq ^https:\/\/app\.5eplay\.com\/api\/app\/dync_config\? 'delpaths([["data","function_configs","task_center_entrance"]])'
+http-response-jq ^https:\/\/app\.5eplay\.com\/api\/app\/dync_config\? 'delpaths([["data","function_configs","store_go"]])'
+http-response-jq ^https:\/\/app\.5eplay\.com\/api\/app\/dync_config\? 'delpaths([["data","function_configs","wall_closed"]])'
+http-response-jq ^https:\/\/app\.5eplay\.com\/api\/index\/tab_v\d\?category_id=tab_1&page=\d$ 'delpaths([["data","float_advertise"]])'
+http-response-jq ^https:\/\/ya-api-app\.5eplay\.com\/v\d\/search\/config$ 'delpaths([["data","placeholder"]])'
 
 # ======= A ======= #
 
@@ -2051,6 +2112,8 @@ http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmyprofilev3$ 
 # ======= 0 ======= #
 # 123云盘
 ^https:\/\/www\.123pan\.com\/api\/config\/get data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+# 5EPlay
+^https:\/\/ya-api-app\.5eplay\.com\/v\d\/search\/kwd_top$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= A ======= #
 # 阿里云盘
@@ -2157,6 +2220,13 @@ http-response-jq ^https:\/\/app\.zhuanzhuan\.com\/zz\/transfer\/getmyprofilev3$ 
 ^https:\/\/maicai\.api\.ddxq\.mobi\/guide-service\/userLike\/flowData$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= E ======= #
+# e充电
+^https:\/\/aserver-evone\.echargenet\.com\/orange\/datacenter\/snapshot-meta\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api-evone\.echargenet\.com\/gw\/evone\.echargeapi\.open\.ad\.getadmaterials\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api-evone\.echargenet\.com\/gw\/evone\.appsns\.open\.efriend\.topic\.listrecommenttopic\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api-evone\.echargenet\.com\/gw\/evone\.appsns\.open\.efriend\.post\.listapppost\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api-evone\.echargenet\.com\/gw\/evone\.appsns\.open\.merchant\.merchant\.list\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+^https:\/\/api-evone\.echargenet\.com\/gw\/evone\.appsns\.open\.merchant\.news\.pagelistapp\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 # ======= F ======= #
 # 凤凰新闻
@@ -2525,4 +2595,4 @@ Soul = type=http-response, pattern=^https:\/\/(?:api-\w+|chat-live|post)\.soulap
 
 
 [MITM]
-hostname = %APPEND% ad.12306.cn, mobile.12306.cn, api.alipan.com, member.alipan.com, bizapi.alipan.com, netflow-mtop.cainiao.com, nbcps-mtop.cainiao.com, cn-acs.m.cainiao.com, e2e-mtop.cainiao.com, longquan-mtop.cainiao.com, biz.cyapi.cn, starplucker.cyapi.cn, api.caiyunapp.com, cdn-w.caiyunapp.com, capis.didapinche.com, as.xiaojukeji.com, common.diditaxi.com.cn, conf.diditaxi.com.cn, lion.didialift.com, api.udache.com, ct.xiaojukeji.com, res.xiaojukeji.com, 112.53.55.225, 139.199.240.84, 113.46.225.*, 162.14.157.*, 123.207.209.*, 120.241.142.*, 120.241.143.*, 116.85.*, api.m.jd.com, color.jddj.com, api.m.jd.com, p.kuaidi100.com, circle.seeyouyima.com, circle.xmseeyouyima.com, common.seeyouyima.com, api.pinduoduo.com, m.pinduoduo.net, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, acs.m.taobao.com, mp.weixin.qq.com, aweme.snssdk.com, api5-normal-m.amemv.com, acs.m.goofish.com, g-acs.m.goofish.com, marketing-aibox.v.mitvos.com, v0-client-lz.rili.cn, client-lz.rili.cn, list-app-m.i4.cn, search-app-m.i4.cn, client.app.coc.10086.cn, mp.weixin.qq.com, sdk.alibaba.com.ailbaba.me, home.mi.com, acs.m.taobao.com, 114.115.217.129, home.umetrip.com, api.gotokeep.com, webcast-open.douyin.com, beta-luna.douyin.com, api.qishui.com, api5-lq.qishui.com, tnc*-*.zijieapi.com, open-cms-api.quark.cn, stars.shuqireader.com, www.123pan.com, api*.soulapp.cn, gateway-mobile-gray.soulapp.cn, post.soulapp.cn, ssp.soulapp.cn, napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com, app-api.smzdm.com, homepage-api.smzdm.com, h5.smzdm.com, haojia-api.smzdm.com, haojia.m.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, s-api.smzdm.com, haojia-cdn.smzdm.com, post.m.smzdm.com, 119.29.29.*, maicai.api.ddxq.mobi, user.api.ddxq.mobi, a.athm.cn, adproxy.autohome.com.cn, apiautoappusc.che168.com, autoapi.autohome.com.cn, cars.app.autohome.com.cn, clientlive.api.autohome.com.cn, club.app.autohome.com.cn, dealer.m.autohome.com.cn, maam.pingan.com.cn, mobile.app.autohome.com.cn, news.app.autohome.com.cn, pcmx.autohome.com.cn, bd-api.kuwo.cn, aiqicha.baidu.com, afd.baidu.com, newclient.map.baidu.com, yongche.baidu.com, ecom.map.baidu.com, m.baidu.com, www.baidu.com, appwk.baidu.com, tanbi.baidu.com, pan.baidu.com, tiebac.baidu.com, tieba.baidu.com, api.posters.meitu.com, api.meiyan.com, app.zhuanzhuan.com, tianshu.qq.com, h5.qzone.qq.com, api.coolapk.com, richmanrules.ksedt.com, gouche.ksedt.com, muses.ksedt.com, op.ksedt.com, api.ksedt.com, jiaxiao-awd.kakamobi.cn, cheyouquan.kakamobi.com, swallow.kakamobi.cn, monkey.kakamobi.cn, mcbd.maiche.com, jiakao-misc.kakamobi.cn, squirrel.kakamobi.cn, scs.kakamobi.cn, m.kookapp.cn, www.kookapp.cn, gql.reddit.com, gql-fed.reddit.com, capi.lkcoffee.com, nex.163.com, interface.music.163.com, c.m.163.com, client.mail.163.com, g1.163.com, support.you.163.com, interface3?.music.163.com, gw.m.163.com, dict.youdao.com, appconf.mail.163.com, dashi.163.com, interface*.music.163.com, m-cloud.zhihu.com, api.zhihu.com, www.zhihu.com, page-info.zhihu.com, zhida.zhihu.com, appconf.mail.163.com, msglb.91160.com, ucdc2-upaas.uc.cn, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, fanyi-app.baidu.com, api.chelaile.net.cn, web.chelaile.net.cn, cdn.web.chelaile.net.cn, image3.chelaile.net.cn, forumapi.yoloho.com, dataapi.yoloho.com, shop18476221.m.youzan.com, nine.ifeng.com, config.nine.ifeng.com, user.iclient.ifeng.com, comment.ifeng.com
+hostname = %APPEND% ad.12306.cn, mobile.12306.cn, api.alipan.com, member.alipan.com, bizapi.alipan.com, netflow-mtop.cainiao.com, nbcps-mtop.cainiao.com, cn-acs.m.cainiao.com, e2e-mtop.cainiao.com, longquan-mtop.cainiao.com, biz.cyapi.cn, starplucker.cyapi.cn, api.caiyunapp.com, cdn-w.caiyunapp.com, capis.didapinche.com, as.xiaojukeji.com, common.diditaxi.com.cn, conf.diditaxi.com.cn, lion.didialift.com, api.udache.com, ct.xiaojukeji.com, res.xiaojukeji.com, 112.53.55.225, 139.199.240.84, 113.46.225.*, 162.14.157.*, 123.207.209.*, 120.241.142.*, 120.241.143.*, 116.85.*, api.m.jd.com, color.jddj.com, api.m.jd.com, p.kuaidi100.com, circle.seeyouyima.com, circle.xmseeyouyima.com, common.seeyouyima.com, api.pinduoduo.com, m.pinduoduo.net, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, acs.m.taobao.com, mp.weixin.qq.com, aweme.snssdk.com, api5-normal-m.amemv.com, acs.m.goofish.com, g-acs.m.goofish.com, marketing-aibox.v.mitvos.com, v0-client-lz.rili.cn, client-lz.rili.cn, list-app-m.i4.cn, search-app-m.i4.cn, client.app.coc.10086.cn, mp.weixin.qq.com, sdk.alibaba.com.ailbaba.me, home.mi.com, acs.m.taobao.com, 114.115.217.129, home.umetrip.com, api.gotokeep.com, webcast-open.douyin.com, beta-luna.douyin.com, api.qishui.com, api5-lq.qishui.com, tnc*-*.zijieapi.com, open-cms-api.quark.cn, stars.shuqireader.com, www.123pan.com, api*.soulapp.cn, gateway-mobile-gray.soulapp.cn, post.soulapp.cn, ssp.soulapp.cn, napi.ithome.com, api.zuihuimai.com, dat.ruanmei.com, app-api.smzdm.com, homepage-api.smzdm.com, h5.smzdm.com, haojia-api.smzdm.com, haojia.m.smzdm.com, user-api.smzdm.com, article-api.smzdm.com, s-api.smzdm.com, haojia-cdn.smzdm.com, post.m.smzdm.com, 119.29.29.*, maicai.api.ddxq.mobi, user.api.ddxq.mobi, a.athm.cn, adproxy.autohome.com.cn, apiautoappusc.che168.com, autoapi.autohome.com.cn, cars.app.autohome.com.cn, clientlive.api.autohome.com.cn, club.app.autohome.com.cn, dealer.m.autohome.com.cn, maam.pingan.com.cn, mobile.app.autohome.com.cn, news.app.autohome.com.cn, pcmx.autohome.com.cn, bd-api.kuwo.cn, aiqicha.baidu.com, afd.baidu.com, newclient.map.baidu.com, yongche.baidu.com, ecom.map.baidu.com, m.baidu.com, www.baidu.com, appwk.baidu.com, tanbi.baidu.com, pan.baidu.com, tiebac.baidu.com, tieba.baidu.com, api.posters.meitu.com, api.meiyan.com, app.zhuanzhuan.com, tianshu.qq.com, h5.qzone.qq.com, api.coolapk.com, richmanrules.ksedt.com, gouche.ksedt.com, muses.ksedt.com, op.ksedt.com, api.ksedt.com, jiaxiao-awd.kakamobi.cn, cheyouquan.kakamobi.com, swallow.kakamobi.cn, monkey.kakamobi.cn, mcbd.maiche.com, jiakao-misc.kakamobi.cn, squirrel.kakamobi.cn, scs.kakamobi.cn, m.kookapp.cn, www.kookapp.cn, gql.reddit.com, gql-fed.reddit.com, capi.lkcoffee.com, nex.163.com, interface.music.163.com, c.m.163.com, client.mail.163.com, g1.163.com, support.you.163.com, interface3?.music.163.com, gw.m.163.com, dict.youdao.com, appconf.mail.163.com, dashi.163.com, interface*.music.163.com, m-cloud.zhihu.com, api.zhihu.com, www.zhihu.com, page-info.zhihu.com, zhida.zhihu.com, appconf.mail.163.com, msglb.91160.com, ucdc2-upaas.uc.cn, video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com, fanyi-app.baidu.com, api.chelaile.net.cn, web.chelaile.net.cn, cdn.web.chelaile.net.cn, image3.chelaile.net.cn, forumapi.yoloho.com, dataapi.yoloho.com, shop18476221.m.youzan.com, nine.ifeng.com, config.nine.ifeng.com, user.iclient.ifeng.com, comment.ifeng.com, app.5eplay.com, ya-api-app.5eplay.com, aserver-evone.echargenet.com, api-evone.echargenet.com, a.line.me, ad.line-scdn.net, w.line.me, gw.line.naver.jp, lan.line.me, buy.line.me, crs-event.line.me, obs.line-scdn.net, d.line-scdn.net, scdn.line-apps.com, sch.line.me, static.line-scdn.net, nelo2-col.linecorp.com, uts-front.line-apps.com, cix.line-apps.com, legy.line-apps.com, ec-bot-obs.line-scdn.net, oss.umetrip.com, wxa.wxs.qq.com,wximg.wxs.qq.com,wxsmw.wxs.qq.com

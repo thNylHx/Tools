@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截
-#!date = 2026-05-26 08:33:42
+#!date = 2026-08-29 15:49:38
 
 [Rule]
 # 爱奇艺
@@ -30,6 +30,10 @@ DOMAIN,vip.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,da.mgtv.com,REJECT,extended-matching,pre-matching
 
 # 腾讯视频
+DOMAIN,ad.tencentvideo.com,REJECT,extended-matching,pre-matching
+DOMAIN,adstats.tencentvideo.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,gdtimg.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ugdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,adsmind.gdtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,info4.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
@@ -181,7 +185,7 @@ http-response-jq ^https:\/\/push\.m\.youku\.com\/collect-api\/get_push_interval_
 
 [Script]
 # 腾讯视频
-腾讯视频 = type=http-request, pattern=^https?:\/\/vv\.video\.qq\.com\/getvinfo, script-path=https://kelee.one/Resource/JavaScript/CommonScript/replace-body.js, requires-body=true, argument="&sppreviewtype=\d(.*)&spsrt=\d->&sppreviewtype=0$1&spsrt=0"
+# 腾讯视频 = type=http-request, pattern=^https?:\/\/vv\.video\.qq\.com\/getvinfo, script-path=https://kelee.one/Resource/JavaScript/CommonScript/replace-body.js, requires-body=true, argument="&sppreviewtype=\d(.*)&spsrt=\d->&sppreviewtype=0$1&spsrt=0"
 
 
 [MITM]
