@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 9137
+#!Rule = 9157
 
 
 [Rule]
@@ -2808,12 +2808,17 @@ DOMAIN-SUFFIX,api-id.theme.heytapmobi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api-launcher-eu.hismarttv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api-launcher-na.hismarttv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api-push.meizu.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,api-secure.amplitude.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,api-secure.eu.amplitude.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api-sentry.ws.126.net,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,api-sr.amplitude.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,api-sr.eu.amplitude.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api-z.weidian.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api-zhibo.qtfm.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.52youtu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.accelerator.intl.miui.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.afdback.ppsimg.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,api.amplitude.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.antibanads.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.applicationinsights.azure.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.aurogon.intl.miui.com,REJECT,extended-matching,pre-matching
@@ -2828,6 +2833,7 @@ DOMAIN-SUFFIX,api.d.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.device.xiaomi.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.dewmobile.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.e-toys.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,api.eu.amplitude.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.firwinds.site,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.g.micloud.xiaomi.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,api.hdtv.letv.com,REJECT,extended-matching,pre-matching
@@ -3019,6 +3025,8 @@ DOMAIN-SUFFIX,asimgs.pplive.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,aspect-upush.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,aspwg.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,assets.ps.easou.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,assistant-api.amplitude.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,assistant-api.eu.amplitude.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,assp.sohu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,asyn.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,at-af.outfit7.com,REJECT,extended-matching,pre-matching
@@ -3373,7 +3381,9 @@ DOMAIN-SUFFIX,cdn-exp-sg-recommend.pt.xiaomi.com,REJECT,extended-matching,pre-ma
 DOMAIN-SUFFIX,cdn-new-ad.wtzw.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn-plugin-sync-upgrade-juui.hismarttv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn.7nsc.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,cdn.amplitude.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn.banclip.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,cdn.eu.amplitude.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn.exp.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn.fds.api.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn.haocaa.com,REJECT,extended-matching,pre-matching
@@ -4108,6 +4118,8 @@ DOMAIN-SUFFIX,ems.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ename.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,enappstat.xbext.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,engage.3m.com.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,engagement-static.amplitude.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,engagement-static.eu.amplitude.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,engine.dcad01.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,enrichgw.10010.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,enstat.xbext.com,REJECT,extended-matching,pre-matching
@@ -4576,6 +4588,8 @@ DOMAIN-SUFFIX,grs.dbankcloud.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,grs.dbankcloud.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,grs.hicloud.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,grs.hihonorcloud.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,gs.amplitude.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,gs.eu.amplitude.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gscatk.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gscxs.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,gslive.edm.globalsources.com,REJECT,extended-matching,pre-matching
@@ -5322,6 +5336,8 @@ DOMAIN-SUFFIX,l.ykimg.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,l.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,l17-dev-all-sentry-ghost-sgp.bilibiligame.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,l3j3glzp6g.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,lab.amplitude.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,lab.eu.amplitude.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ladsp.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,lady177.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,laomaotao.net,REJECT,extended-matching,pre-matching
@@ -6790,6 +6806,8 @@ DOMAIN-SUFFIX,redirect.simba.taobao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,redirectpopads.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,redlk.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,referee.xiaohongshu.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,regionconfig.amplitude.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,regionconfig.eu.amplitude.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,register.xmpush.global.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,reke.at.sohu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,reklamstore.com,REJECT,extended-matching,pre-matching
@@ -7355,6 +7373,8 @@ DOMAIN-SUFFIX,spotxcdn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,spotxchange.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,springserve.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,sprout-ad.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,sr-client-cfg.amplitude.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,sr-client-cfg.eu.amplitude.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,srbzw.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,src.leju.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,srd.simba.taobao.com,REJECT,extended-matching,pre-matching
