@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 9029
+#!Rule = 9022
 
 
 [Rule]
@@ -3417,7 +3417,6 @@ DOMAIN-SUFFIX,cdn.banclip.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn.eu.amplitude.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn.exp.xiaomi.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn.fds.api.xiaomi.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,cdn.file6.goodid.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn.haocaa.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn.iads.unitychina.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cdn.jiuzhilan.com,REJECT,extended-matching,pre-matching
@@ -3631,8 +3630,6 @@ DOMAIN-SUFFIX,coocent.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cooguo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,coolguang.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,coolkaba.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,copyright-claim-review-request-form.edgeone.dev,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,copyright-policy-troubleshooting-request-form.edgeone.dev,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,coral-task.uc.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,coreldrawchina.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,coremetrics.com,REJECT,extended-matching,pre-matching
@@ -3766,7 +3763,6 @@ DOMAIN-SUFFIX,d5.sina.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,d5092moci.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,d6.sina.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,d7.sina.com.cn,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,d7522e2c-c5f7-4dc8-b83f-9f9dacd15c4d.edgeone.dev,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,d7ytrv7yxa.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,d8.sina.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,d9.sina.com.cn,REJECT,extended-matching,pre-matching
@@ -3975,7 +3971,6 @@ DOMAIN-SUFFIX,dove.xueqiu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,down.54nb.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,down.fwqlt.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,down.nishuoa.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,down.qqfarmer.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,download.2345.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,download.56.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,download.bav.baidu.com,REJECT,extended-matching,pre-matching
@@ -7904,7 +7899,6 @@ DOMAIN-SUFFIX,trk.gardnerdenver.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,trk.irco.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,trk.miltonroy.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,trk.thomas-pump.cn,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,troubleshoot-copyright-policy-violations.edgeone.dev,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,trustutn.org,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,trvdp.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ts166.net,REJECT,extended-matching,pre-matching
@@ -8514,7 +8508,6 @@ DOMAIN-SUFFIX,xls.go.sohu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,xlviirdr.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,xmaterial.tu.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,xmindchina.net,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,xminesserversaqwq.edgeone.dev,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,xml-v4.paddlewaver.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,xmlsxar.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,xmlwizard.com,REJECT,extended-matching,pre-matching
