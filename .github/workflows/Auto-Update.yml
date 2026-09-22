@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-05-30 16:34:57
+#!date = 2026-09-22 08:15:01
 
 on:
   workflow_dispatch:
@@ -305,6 +305,7 @@ jobs:
             merge_local "Ruleset/Surge/Other/Global.list" \
               Ruleset/Surge/Temporary/GlobalGFW_0.list \
               Ruleset/Surge/Temporary/GlobalGFW_1.list \
+              Ruleset/Surge/Temporary/GlobalGFW_2.list \
               Ruleset/Surge/Temporary/GlobalGFW_3.list
 
       - name: 处理 mihomo 规则
