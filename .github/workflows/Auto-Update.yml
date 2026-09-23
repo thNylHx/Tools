@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-09-22 08:15:01
+#!date = 2026-09-23 10:08:05
 
 on:
   workflow_dispatch:
@@ -40,11 +40,13 @@ jobs:
             ["geosite/Openai.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs"
             ["geosite/PayPal.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs"
             ["geosite/Apple.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
+            ["geosite/Apple@cn.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple@cn.mrs"
             ["geosite/Global.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
             ["geosite/GlobalGFW.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"
             ["geosite/Google.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
             ["geosite/YouTube.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
             ["geosite/Steam.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
+            ["geosite/Steam@cn.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam@cn.mrs"
             ["geosite/Epic.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/epicgames.mrs"
             ["geosite/Facebook.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs"
             ["geosite/Instagram.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs"
@@ -54,6 +56,7 @@ jobs:
             ["geosite/GitHub.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
             ["geosite/OneDrive.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs"
             ["geosite/Microsoft.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
+            ["geosite/Microsoft@cn.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft@cn.mrs"
             ["geosite/Tiktok.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"
             ["geosite/Bilibili.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs"
             ["geosite/Disney.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs"
@@ -359,12 +362,13 @@ jobs:
             sed -i -E '/^IP-CIDR,/!{/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+/s/^/IP-CIDR,/}' "$file"
             sed -i -E '/^IP-CIDR6,/!{/^([a-fA-F0-9]*:){2,}[a-fA-F0-9]*\/[0-9]+/s/^/IP-CIDR6,/}' "$file"
 
-            # 将以"."开头的行的第一个"."替换为 "DOMAIN-SUFFIX 格式"
-            sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
+            # 将以 ".", "*." 或 "+." 开头的域名转换为 DOMAIN-SUFFIX 格式
+            sed -i -E '/^(\+|\*|\.)/s/^(\+|\*|\.)\.?/DOMAIN-SUFFIX,/' "$file"
+            # sed -i -E 's/^(\+|\*|\.)\.?/DOMAIN-SUFFIX,/' "$file"
 
             # 将除了以 "#" 开头、"空行" 开头之外的行, 在行首添加 "DOMAIN"
             sed -i -E '/^\s*$/b; /^\s*[#;]/b; /^DOMAIN,|^DOMAIN-SUFFIX,|^DOMAIN-KEYWORD,|^DOMAIN-WILDCARD,|^IP-CIDR,|^IP-CIDR6,|^IP-ASN,|^GEOIP,|^AND,|^OR,|^NOT,|^URL-REGEX,|^USER-AGENT,|^PROCESS-NAME,|^DEST-PORT,/b; s/^([^#])/DOMAIN,\1/' "$file"
-          
+
             # 为 IP-CIDR IP-CIDR6 IP-ASN 添加后缀 ,no-resolve
             sed -i -E '/^\s*(IP-CIDR6?|IP-ASN),/ s/^((IP-CIDR6?|IP-ASN),[^,()]+)/\1,no-resolve/' "$file"
 
