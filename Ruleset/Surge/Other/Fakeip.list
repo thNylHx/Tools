@@ -1,80 +1,69 @@
-#连通性探测 / 工具
-cable.auth.com
-network-test.debian.org
-detectportal.firefox.com
-resolver1.opendns.com
-global.turn.twilio.com
-global.stun.twilio.com
-injections.adguard.org
-local.adguard.org
-proxy.golang.org
-shark007.net
-#NTP
-time-ios.apple.com
-+.pool.ntp.org
-time.*.com
-time.*.gov
-time.*.apple.com
-time1.*.com
-time2.*.com
-time3.*.com
-time4.*.com
-time5.*.com
-time6.*.com
-time7.*.com
-ntp.*.com
-ntp1.*.com
-ntp2.*.com
-ntp3.*.com
-ntp4.*.com
-ntp5.*.com
-ntp6.*.com
-ntp7.*.com
-#STUN
-+.stun.*.*
-+.stun.*.*.*
-+.stun.*.*.*.*
-+.stun.*.*.*.*.*
-stun.*.*
-stun.*.*.*
-#JOOX 音乐
-api-jooxtt.sanook.com
-api.joox.com
-joox.com
-#Win10 本地连接检测
-+.msftconnecttest.com
-+.msftncsi.com
-#Nintendo Switch
-+.srv.nintendo.net
-+.cdn.nintendo.net
-*.n.n.srv.nintendo.net
-#Sony PlayStation
-+.stun.playstation.net
-#Microsoft Xbox
-xnotify.xboxlive.com
-xbox.*.*.microsoft.com
-*.*.xboxlive.com
-xbox.*.microsoft.com
-#Wotgame
-+.battle.net
-+.wargaming.net
-#Steam
-+.steamcontent.com
-#FinalFantasy XIV 国际服
-*.square-enix.com
-*.finalfantasyxiv.com
-*.ffxiv.com
-#Linksys Router
-heartbeat.belkin.com
-*.linksys.com
-*.linksyssmartwifi.com
-#Google
-lens.l.google.com
-stun.l.google.com
-na.b.g-tun.com
-#Netflix
-+.nflxvideo.net
-#Disney Plus
-+.media.dssott.com
-#Wifi Calling
-+.pub.3gppnetwork.org
+# 规则名称: Fakeip
+# 仓库作者: thNylHx
+# 仓库地址: https://github.com/thNylHx/Tools
+# 规则数量: 64
+
+DOMAIN,*.*.xboxlive.com
+DOMAIN,*.ffxiv.com
+DOMAIN,*.finalfantasyxiv.com
+DOMAIN,*.linksys.com
+DOMAIN,*.linksyssmartwifi.com
+DOMAIN,*.n.n.srv.nintendo.net
+DOMAIN,*.square-enix.com
+DOMAIN,+.battle.net
+DOMAIN,+.cdn.nintendo.net
+DOMAIN,+.media.dssott.com
+DOMAIN,+.msftconnecttest.com
+DOMAIN,+.msftncsi.com
+DOMAIN,+.nflxvideo.net
+DOMAIN,+.pool.ntp.org
+DOMAIN,+.pub.3gppnetwork.org
+DOMAIN,+.srv.nintendo.net
+DOMAIN,+.steamcontent.com
+DOMAIN,+.stun.*.*
+DOMAIN,+.stun.*.*.*
+DOMAIN,+.stun.*.*.*.*
+DOMAIN,+.stun.*.*.*.*.*
+DOMAIN,+.stun.playstation.net
+DOMAIN,+.wargaming.net
+DOMAIN,api-jooxtt.sanook.com
+DOMAIN,api.joox.com
+DOMAIN,cable.auth.com
+DOMAIN,detectportal.firefox.com
+DOMAIN,global.stun.twilio.com
+DOMAIN,global.turn.twilio.com
+DOMAIN,heartbeat.belkin.com
+DOMAIN,injections.adguard.org
+DOMAIN,joox.com
+DOMAIN,lens.l.google.com
+DOMAIN,local.adguard.org
+DOMAIN,na.b.g-tun.com
+DOMAIN,network-test.debian.org
+DOMAIN,ntp.*.com
+DOMAIN,ntp1.*.com
+DOMAIN,ntp2.*.com
+DOMAIN,ntp3.*.com
+DOMAIN,ntp4.*.com
+DOMAIN,ntp5.*.com
+DOMAIN,ntp6.*.com
+DOMAIN,ntp7.*.com
+DOMAIN,proxy.golang.org
+DOMAIN,resolver1.opendns.com
+DOMAIN,shark007.net
+DOMAIN,stun.*.*
+DOMAIN,stun.*.*.*
+DOMAIN,stun.l.google.com
+DOMAIN,time-ios.apple.com
+DOMAIN,time.*.apple.com
+DOMAIN,time.*.com
+DOMAIN,time.*.gov
+DOMAIN,time1.*.com
+DOMAIN,time2.*.com
+DOMAIN,time3.*.com
+DOMAIN,time4.*.com
+DOMAIN,time5.*.com
+DOMAIN,time6.*.com
+DOMAIN,time7.*.com
+DOMAIN,xbox.*.*.microsoft.com
+DOMAIN,xbox.*.microsoft.com
+DOMAIN,xnotify.xboxlive.com
