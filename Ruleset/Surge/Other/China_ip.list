@@ -1,7 +1,7 @@
 # 规则名称: China_ip
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则数量: 9612
+# 规则数量: 9621
 
 IP-CIDR,1.0.1.0/24,no-resolve
 IP-CIDR,1.0.2.0/23,no-resolve
@@ -2793,6 +2793,7 @@ IP-CIDR,123.49.232.0/22,no-resolve
 IP-CIDR,123.49.236.0/24,no-resolve
 IP-CIDR,123.49.240.0/24,no-resolve
 IP-CIDR,123.49.242.0/23,no-resolve
+IP-CIDR,123.49.245.0/24,no-resolve
 IP-CIDR,123.49.248.0/21,no-resolve
 IP-CIDR,123.50.160.0/19,no-resolve
 IP-CIDR,123.52.0.0/14,no-resolve
@@ -3289,6 +3290,7 @@ IP-CIDR,163.228.0.0/16,no-resolve
 IP-CIDR,163.244.246.0/24,no-resolve
 IP-CIDR,163.47.4.0/22,no-resolve
 IP-CIDR,163.52.108.0/23,no-resolve
+IP-CIDR,163.52.246.0/23,no-resolve
 IP-CIDR,163.52.28.0/23,no-resolve
 IP-CIDR,163.52.76.0/23,no-resolve
 IP-CIDR,163.53.0.0/20,no-resolve
@@ -7154,6 +7156,7 @@ IP-CIDR6,2402:73e0::/32,no-resolve
 IP-CIDR6,2402:7540::/32,no-resolve
 IP-CIDR6,2402:75c0::/32,no-resolve
 IP-CIDR6,2402:7740::/32,no-resolve
+IP-CIDR6,2402:7820::/32,no-resolve
 IP-CIDR6,2402:7d00::/32,no-resolve
 IP-CIDR6,2402:7d80::/32,no-resolve
 IP-CIDR6,2402:8180::/32,no-resolve
@@ -7452,7 +7455,6 @@ IP-CIDR6,2403:6380:200::/39,no-resolve
 IP-CIDR6,2403:6380:4000::/34,no-resolve
 IP-CIDR6,2403:6380:400::/38,no-resolve
 IP-CIDR6,2403:6380:41::/48,no-resolve
-IP-CIDR6,2403:6380:43::/48,no-resolve
 IP-CIDR6,2403:6380:44::/46,no-resolve
 IP-CIDR6,2403:6380:48::/45,no-resolve
 IP-CIDR6,2403:6380:50::/44,no-resolve
@@ -7955,7 +7957,8 @@ IP-CIDR6,2405:84c0:7000::/36,no-resolve
 IP-CIDR6,2405:84c0:8000::/48,no-resolve
 IP-CIDR6,2405:84c0:8002::/48,no-resolve
 IP-CIDR6,2405:84c0:8006::/48,no-resolve
-IP-CIDR6,2405:84c0:8008::/45,no-resolve
+IP-CIDR6,2405:84c0:800a::/47,no-resolve
+IP-CIDR6,2405:84c0:800c::/46,no-resolve
 IP-CIDR6,2405:84c0:8010::/48,no-resolve
 IP-CIDR6,2405:84c0:8019::/48,no-resolve
 IP-CIDR6,2405:84c0:801c::/46,no-resolve
@@ -8260,15 +8263,21 @@ IP-CIDR6,2406:840:1801::/48,no-resolve
 IP-CIDR6,2406:840:1802::/47,no-resolve
 IP-CIDR6,2406:840:1804::/46,no-resolve
 IP-CIDR6,2406:840:1808::/45,no-resolve
-IP-CIDR6,2406:840:180::/41,no-resolve
 IP-CIDR6,2406:840:1810::/44,no-resolve
+IP-CIDR6,2406:840:181::/48,no-resolve
 IP-CIDR6,2406:840:1820::/43,no-resolve
+IP-CIDR6,2406:840:182::/47,no-resolve
 IP-CIDR6,2406:840:1840::/42,no-resolve
+IP-CIDR6,2406:840:184::/46,no-resolve
 IP-CIDR6,2406:840:1880::/41,no-resolve
+IP-CIDR6,2406:840:188::/45,no-resolve
 IP-CIDR6,2406:840:18::/45,no-resolve
 IP-CIDR6,2406:840:1900::/40,no-resolve
+IP-CIDR6,2406:840:190::/44,no-resolve
 IP-CIDR6,2406:840:1a00::/39,no-resolve
+IP-CIDR6,2406:840:1a0::/43,no-resolve
 IP-CIDR6,2406:840:1c00::/38,no-resolve
+IP-CIDR6,2406:840:1c0::/42,no-resolve
 IP-CIDR6,2406:840:2000::/39,no-resolve
 IP-CIDR6,2406:840:201::/48,no-resolve
 IP-CIDR6,2406:840:202::/47,no-resolve
@@ -8550,6 +8559,7 @@ IP-CIDR6,2406:840:98::/45,no-resolve
 IP-CIDR6,2406:840:9900::/42,no-resolve
 IP-CIDR6,2406:840:9940::/43,no-resolve
 IP-CIDR6,2406:840:9960::/47,no-resolve
+IP-CIDR6,2406:840:9963::/48,no-resolve
 IP-CIDR6,2406:840:9965::/48,no-resolve
 IP-CIDR6,2406:840:9968::/46,no-resolve
 IP-CIDR6,2406:840:996d::/48,no-resolve
@@ -8962,7 +8972,6 @@ IP-CIDR6,2406:840:fee0::/45,no-resolve
 IP-CIDR6,2406:840:fee8::/46,no-resolve
 IP-CIDR6,2406:840:feec::/48,no-resolve
 IP-CIDR6,2406:840:feee::/47,no-resolve
-IP-CIDR6,2406:840:fef1::/48,no-resolve
 IP-CIDR6,2406:840:ff00::/40,no-resolve
 IP-CIDR6,2406:8480::/32,no-resolve
 IP-CIDR6,2406:8500::/32,no-resolve
