@@ -1,7 +1,7 @@
 # 规则名称: Google
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则数量: 9574
+# 规则数量: 9589
 
 DOMAIN,2mdn-cn.net
 DOMAIN,2mdn.net
@@ -3611,7 +3611,6 @@ IP-CIDR,152.132.248.0/22,no-resolve
 IP-CIDR,152.133.248.0/22,no-resolve
 IP-CIDR,152.238.0.0/16,no-resolve
 IP-CIDR,152.239.128.0/17,no-resolve
-IP-CIDR,152.38.158.0/24,no-resolve
 IP-CIDR,152.65.207.0/24,no-resolve
 IP-CIDR,152.65.208.0/22,no-resolve
 IP-CIDR,152.65.213.0/24,no-resolve
@@ -3954,7 +3953,6 @@ IP-CIDR,208.94.216.0/24,no-resolve
 IP-CIDR,208.94.223.0/24,no-resolve
 IP-CIDR,209.107.177.0/24,no-resolve
 IP-CIDR,209.107.179.0/24,no-resolve
-IP-CIDR,209.119.80.0/23,no-resolve
 IP-CIDR,209.133.224.0/20,no-resolve
 IP-CIDR,209.133.240.0/21,no-resolve
 IP-CIDR,209.133.248.0/23,no-resolve
@@ -9330,7 +9328,24 @@ IP-CIDR6,2605:a601:aada:4000::/50,no-resolve
 IP-CIDR6,2605:a601:aada:8000::/49,no-resolve
 IP-CIDR6,2605:a601:aada::/51,no-resolve
 IP-CIDR6,2605:a601:aadb::/48,no-resolve
-IP-CIDR6,2605:a601:aadc::/46,no-resolve
+IP-CIDR6,2605:a601:aadc::/47,no-resolve
+IP-CIDR6,2605:a601:aade:4000::/52,no-resolve
+IP-CIDR6,2605:a601:aade:5000::/53,no-resolve
+IP-CIDR6,2605:a601:aade:5800::/54,no-resolve
+IP-CIDR6,2605:a601:aade:5c00::/55,no-resolve
+IP-CIDR6,2605:a601:aade:5e00::/64,no-resolve
+IP-CIDR6,2605:a601:aade:5e02::/63,no-resolve
+IP-CIDR6,2605:a601:aade:5e04::/62,no-resolve
+IP-CIDR6,2605:a601:aade:5e08::/61,no-resolve
+IP-CIDR6,2605:a601:aade:5e10::/60,no-resolve
+IP-CIDR6,2605:a601:aade:5e20::/59,no-resolve
+IP-CIDR6,2605:a601:aade:5e40::/58,no-resolve
+IP-CIDR6,2605:a601:aade:5e80::/57,no-resolve
+IP-CIDR6,2605:a601:aade:5f00::/56,no-resolve
+IP-CIDR6,2605:a601:aade:6000::/51,no-resolve
+IP-CIDR6,2605:a601:aade:8000::/49,no-resolve
+IP-CIDR6,2605:a601:aade::/50,no-resolve
+IP-CIDR6,2605:a601:aadf::/48,no-resolve
 IP-CIDR6,2605:a601:aae0::/45,no-resolve
 IP-CIDR6,2605:a601:aae8::/46,no-resolve
 IP-CIDR6,2605:a601:aaec:4000::/51,no-resolve
