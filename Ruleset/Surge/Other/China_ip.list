@@ -1,7 +1,7 @@
 # 规则名称: China_ip
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则数量: 10008
+# 规则数量: 10009
 
 IP-CIDR,1.0.1.0/24,no-resolve
 IP-CIDR,1.0.2.0/23,no-resolve
@@ -2184,7 +2184,8 @@ IP-CIDR,114.112.24.0/21,no-resolve
 IP-CIDR,114.112.240.0/23,no-resolve
 IP-CIDR,114.112.245.0/24,no-resolve
 IP-CIDR,114.112.247.0/24,no-resolve
-IP-CIDR,114.112.248.0/22,no-resolve
+IP-CIDR,114.112.248.0/23,no-resolve
+IP-CIDR,114.112.251.0/24,no-resolve
 IP-CIDR,114.112.252.0/23,no-resolve
 IP-CIDR,114.112.32.0/19,no-resolve
 IP-CIDR,114.112.4.0/22,no-resolve
@@ -3267,7 +3268,6 @@ IP-CIDR,163.177.0.0/16,no-resolve
 IP-CIDR,163.179.0.0/16,no-resolve
 IP-CIDR,163.204.0.0/16,no-resolve
 IP-CIDR,163.223.124.0/23,no-resolve
-IP-CIDR,163.223.217.0/24,no-resolve
 IP-CIDR,163.223.222.0/23,no-resolve
 IP-CIDR,163.223.28.0/23,no-resolve
 IP-CIDR,163.223.32.0/23,no-resolve
@@ -8847,7 +8847,7 @@ IP-CIDR6,2406:840:9101::/48,no-resolve
 IP-CIDR6,2406:840:9103::/48,no-resolve
 IP-CIDR6,2406:840:9104::/46,no-resolve
 IP-CIDR6,2406:840:9108::/45,no-resolve
-IP-CIDR6,2406:840:9112::/47,no-resolve
+IP-CIDR6,2406:840:9113::/48,no-resolve
 IP-CIDR6,2406:840:9114::/46,no-resolve
 IP-CIDR6,2406:840:9118::/45,no-resolve
 IP-CIDR6,2406:840:9120::/43,no-resolve
@@ -9589,6 +9589,7 @@ IP-CIDR6,2408:4014::/31,no-resolve
 IP-CIDR6,2408:4016:1000::/36,no-resolve
 IP-CIDR6,2408:4016:100::/40,no-resolve
 IP-CIDR6,2408:4016:10::/44,no-resolve
+IP-CIDR6,2408:4016:1::/48,no-resolve
 IP-CIDR6,2408:4016:2000::/35,no-resolve
 IP-CIDR6,2408:4016:200::/39,no-resolve
 IP-CIDR6,2408:4016:20::/43,no-resolve
