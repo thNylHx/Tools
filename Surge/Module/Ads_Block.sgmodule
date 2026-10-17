@@ -3,7 +3,7 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 12066
+#!Rule = 12061
 
 
 [Rule]
@@ -4124,14 +4124,12 @@ DOMAIN-SUFFIX,bloggerads.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bls-log.bj.baidubce.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bluekai.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,blzgeuuz.icu,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,bm.alimama.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bm.h576.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bm1wk259np.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bm3xyw6am.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bm6c3pthv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bmg8t99nhf.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bmjs.xzw.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,bmvip.alimama.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bmzzojmzu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bn067lnkrb.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,bncqucpia.com,REJECT,extended-matching,pre-matching
@@ -4307,7 +4305,6 @@ DOMAIN-SUFFIX,cartx.cloud,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,casalemedia.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,casee.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,catfront.dianping.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,cb.alimama.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cb.baidu.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cb.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,cb07whvmx.com,REJECT,extended-matching,pre-matching
@@ -7933,6 +7930,7 @@ DOMAIN-SUFFIX,myecat1.ieasyclick.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,myecat1.ieasytest.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,myes.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,myfuture.futureelectronics.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,mygeek.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,myhug.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,myiqvn5w3.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,mzb60mu3z7.com,REJECT,extended-matching,pre-matching
@@ -8528,7 +8526,6 @@ DOMAIN-SUFFIX,pics.xgo-img.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pictela.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,picture.duokan.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pig.pupuapi.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,pikacn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pimlog.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,pindao.huoban.taobao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ping.pinyin.sogou.com,REJECT,extended-matching,pre-matching
@@ -10397,7 +10394,6 @@ DOMAIN-SUFFIX,tracking.miui.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tracking.nesox.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tracking.t.mercedes-benz.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tracking.tdk.cn,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,tracking.xueqiu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,trackingio.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,trackingprd.hwwt8.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tracklog.58.com,REJECT,extended-matching,pre-matching
@@ -11089,6 +11085,7 @@ DOMAIN-SUFFIX,wedolook.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wefk2dgegr.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,weh5lofraa.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,weiakbtck.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,weidianyuedu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,weishi.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wenku-cms.bj.bcebos.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,wenxue.youzhicn.com,REJECT,extended-matching,pre-matching
@@ -11219,7 +11216,6 @@ DOMAIN-SUFFIX,www-google-analytics.l.google.com,REJECT,extended-matching,pre-mat
 DOMAIN-SUFFIX,www-googletagmanager.l.google.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.31d.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.56.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,www.advenueplatform.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.alpen-leicht.de,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.appdriver.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.cc4008001935.cn,REJECT,extended-matching,pre-matching
@@ -11227,7 +11223,6 @@ DOMAIN-SUFFIX,www.claiks.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.costext.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.destinationurl.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.fhserve.com,REJECT,extended-matching,pre-matching
-DOMAIN-SUFFIX,www.google1308.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.jmine.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.q4ee.top,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,www.top-banners.com,REJECT,extended-matching,pre-matching
