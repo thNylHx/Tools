@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-10-18 11:34:44
+#!date = 2026-10-18 11:43:12
 
 on:
   workflow_dispatch:
@@ -406,20 +406,55 @@ jobs:
             # 去重
             awk '!seen[tolower($0)]++' "$file" > temp && mv temp "$file"
 
-            # 添加/更新头部信息
-            file_name=$(basename "$file" .list)
-            line_count=$(wc -l < "$file")
+            # 保留旧更新时间；只有规则内容改变时才更新。
+            file_name=$(basename "$file")
+            old_time=""
+            old_rules=""
+
+            if [[ -f "$file" ]]; then
+              old_time=$(sed -n 's/^# 更新时间: //p' "$file" | head -n 1)
+            fi
+
+            line_count=$(wc -l < "$file" | tr -d ' ')
+
+            # 生成不含元数据头部的规则内容快照。
+            sed -i '/^# 规则名称:/d; /^# 仓库作者:/d; /^# 仓库地址:/d; /^# 规则数量:/d; /^# 更新时间:/d; /^[[:space:]]*$/d' "$file"
+
+            current_hash=$(sha256sum "$file" | cut -d' ' -f1)
+
+            # 上一步处理后，文件内容是当前规范化后的规则。
+            # 利用 Git HEAD 中的规则内容进行比较。
+            if git cat-file -e "HEAD:$file" 2>/dev/null; then
+              git show "HEAD:$file" |
+                sed '/^# 规则名称:/d; /^# 仓库作者:/d; /^# 仓库地址:/d; /^# 规则数量:/d; /^# 更新时间:/d; /^[[:space:]]*$/d' \
+                > "$tmp"
+
+              old_hash=$(sha256sum "$tmp" | cut -d' ' -f1)
+            else
+              old_hash=""
+            fi
+
+            if [[ -n "$old_hash" && "$current_hash" == "$old_hash" ]]; then
+              update_time="${old_time:-$(TZ=Asia/Hong_Kong date '+%Y-%m-%d %H:%M:%S')}"
+            else
+              update_time=$(TZ=Asia/Hong_Kong date '+%Y-%m-%d %H:%M:%S')
+            fi
+
+            line_count=$(wc -l < "$file" | tr -d ' ')
 
             {
-              echo "# 规则名称: ${file_name}"
+              echo "# 规则名称: ${file_name%.list}"
               echo "# 仓库作者: thNylHx"
               echo "# 仓库地址: https://github.com/thNylHx/Tools"
               echo "# 规则数量: ${line_count}"
-              echo ""
+              echo "# 更新时间: ${update_time}"
+              echo
               cat "$file"
-            } > "$file.tmp" && mv "$file.tmp" "$file"
+            } > "$tmp"
 
-            echo "完成: $file"
+            mv "$tmp" "$file"
+
+            echo "完成：$file"
           done
 
       - name: 写入规则到 Surge 广告模块
