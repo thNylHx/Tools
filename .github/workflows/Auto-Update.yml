@@ -1,6 +1,6 @@
 name: 拉取上游规则和模块
 
-#!date = 2026-10-18 11:17:02
+#!date = 2026-10-18 11:21:19
 
 on:
   workflow_dispatch:
@@ -408,26 +408,7 @@ jobs:
 
             # 添加/更新头部信息
             file_name=$(basename "$file" .list)
-
-            # 提取原始规则内容（排除头部元信息和空行）
-            sed -E '/^# (规则名称|仓库作者|仓库地址|规则数量|更新时间):/d; /^$/d' \
-              "$file.before" > "$file.original"
-
-            # 当前规则内容
-            cp "$file" "$file.current"
-
-            # 判断规则内容是否发生实际变化
-            if ! cmp -s "$file.original" "$file.current"; then
-              update_time=$(date '+%Y-%m-%d %H:%M:%S')
-            else
-              update_time=$(sed -n 's/^# 更新时间: *//p' "$file.before" | head -n 1)
-
-              # 如果旧文件没有更新时间，则首次补充
-              if [[ -z "$update_time" ]]; then
-                update_time=$(date '+%Y-%m-%d %H:%M:%S')
-              fi
-            fi
-
+            update_time=$(date '+%Y-%m-%d %H:%M:%S')
             line_count=$(wc -l < "$file")
 
             {
@@ -438,16 +419,7 @@ jobs:
               echo "# 更新时间: ${update_time}"
               echo ""
               cat "$file"
-            } > "$file.tmp"
-
-            # 仅在最终文件确实变化时才覆盖
-            if ! cmp -s "$file.tmp" "$file"; then
-              mv "$file.tmp" "$file"
-            else
-              rm -f "$file.tmp"
-            fi
-
-            rm -f "$file.before" "$file.original" "$file.current"
+            } > "$file.tmp" && mv "$file.tmp" "$file"
 
             echo "完成: $file"
           done
