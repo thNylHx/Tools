@@ -55,7 +55,8 @@ jobs:
           count=0
           while IFS= read -r -d '' f; do
             # 读取上次写入的时间戳（首次运行时为空）
-            ts="$(sed -n '/^# 更新时间:/{s/^# 更新时间:[[:space:]]*//;p;q;}' "$f")"
+            # 末尾的时区缩写（HKT/GMT/CST 等）一并剥除，旧格式下次运行时自动迁移
+            ts="$(sed -nE '/^# 更新时间:/{s/^# 更新时间:[[:space:]]*//;s/[[:space:]]+[A-Z]{2,4}$//;p;q;}' "$f")"
             # 计算正文字节指纹：剔除全部 # 注释行与空行，只对规则主体取 hash
             hash="$(awk '!/^[[:space:]]*#/ && !/^[[:space:]]*$/' "$f" | sha256sum | cut -d' ' -f1)"
             printf '%s\t%s\t%s\n' "$f" "$ts" "$hash" >> "$snapshot"
@@ -465,7 +466,8 @@ jobs:
           body="$(mktemp)"
           trap 'rm -f "$body"' EXIT
 
-          # 输入已是清洗后的纯规则列表，此处只负责补 REJECT 动作，不再重复排序
+          # 输入已是规则列表（头部含 # 注释行），此处剥掉注释与空行，
+          # 只对真正的规则补 REJECT 动作，避免注释泄漏进 sgmodule
           sed -E 's/,no-resolve//g' "$src" | awk -F, '
             /^[[:space:]]*#/  { next }
             /^[[:space:]]*$/  { next }
