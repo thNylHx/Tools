@@ -467,6 +467,8 @@ jobs:
 
           # 输入已是清洗后的纯规则列表，此处只负责补 REJECT 动作，不再重复排序
           sed -E 's/,no-resolve//g' "$src" | awk -F, '
+            /^[[:space:]]*#/  { next }
+            /^[[:space:]]*$/  { next }
             $1 ~ /^(DOMAIN|DOMAIN-SUFFIX|DOMAIN-KEYWORD|URL-REGEX|USER-AGENT|AND)$/ {
               print $0 ",REJECT,extended-matching,pre-matching"; next
             }
