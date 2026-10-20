@@ -34,7 +34,7 @@ jobs:
 
     steps:
       - name: 检出上游仓库
-        uses: actions/checkout@v7
+        uses: actions/checkout@v6
         with:
           repository: thNylHx/Tools
           ref: main
@@ -463,6 +463,14 @@ jobs:
           out="Surge/Module/Ads_Block.sgmodule"
           [[ -s "$src" ]] || { echo "::error::缺少已清洗的 $src"; exit 1; }
 
+          # 模块正文是源 list 的纯函数，因此直接继承 list 的时间戳：
+          # 源规则有变化时 list 已刷新，正文没变时这里自然保持原值
+          updated="$(sed -nE '/^# 更新时间:/{s/^# 更新时间:[[:space:]]*//;s/[[:space:]]+[A-Z]{2,4}$//;p;q;}' "$src")"
+          if [[ -z "$updated" ]]; then
+            echo "::error::$src 缺少 # 更新时间: 字段，请检查上一步是否写入"
+            exit 1
+          fi
+
           body="$(mktemp)"
           trap 'rm -f "$body"' EXIT
 
@@ -488,6 +496,7 @@ jobs:
             echo "#!category = Block Ads"
             echo "#!tag = 广告拦截规则合集模块"
             echo "#!Rule = ${rule_count}"
+            echo "#!updated = ${updated}"
             echo ""
             echo ""
             echo "[Rule]"
