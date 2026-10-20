@@ -346,7 +346,7 @@ jobs:
           export LC_ALL=C
 
           # 本次运行统一时间戳：同一轮所有文件共用，避免相互相差几秒
-          run_ts="$(date +'%Y-%m-%d %H:%M:%S %Z')"
+          run_ts="$(date +'%Y-%m-%d %H:%M:%S')"
           # 上一步生成的基线快照（路径 -> 旧时间戳 / 旧正文指纹）
           snapshot="${SNAPSHOT:?未找到快照文件，请检查上一步是否执行}"
           echo "本次运行时间戳: ${run_ts}"
@@ -551,7 +551,7 @@ jobs:
             echo "__EOF__"
           } >> "$GITHUB_ENV"
 
-          git commit -m "Auto Update Ruleset $(date +'%Y-%m-%d %H:%M:%S %Z')"
+          git commit -m "Auto Update Ruleset $(date +'%Y-%m-%d %H:%M:%S')"
 
           # 先提交再 rebase：工作区已干净，无需 --autostash，冲突概率大幅降低
           pushed=0
@@ -575,7 +575,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          echo "time=$(date +'%Y-%m-%d %H:%M:%S %Z')" >> "$GITHUB_ENV"
+          echo "time=$(date +'%Y-%m-%d %H:%M:%S')" >> "$GITHUB_ENV"
 
           if [[ "${changed:-false}" == "true" ]]; then
             {
