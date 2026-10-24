@@ -1,8 +1,8 @@
 # 规则名称: Private_ip
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则数量: 18
-# 更新时间: 2026-10-20 16:27:06
+# 规则数量: 28
+# 更新时间: 2026-10-24 12:48:54
 
 IP-CIDR,0.0.0.0/8,no-resolve
 IP-CIDR,10.0.0.0/8,no-resolve
@@ -13,11 +13,21 @@ IP-CIDR,172.16.0.0/12,no-resolve
 IP-CIDR,192.0.0.0/24,no-resolve
 IP-CIDR,192.0.2.0/24,no-resolve
 IP-CIDR,192.168.0.0/16,no-resolve
+IP-CIDR,192.31.196.0/24,no-resolve
+IP-CIDR,192.52.193.0/24,no-resolve
 IP-CIDR,192.88.99.0/24,no-resolve
 IP-CIDR,198.18.0.0/15,no-resolve
 IP-CIDR,198.51.100.0/24,no-resolve
 IP-CIDR,203.0.113.0/24,no-resolve
 IP-CIDR,224.0.0.0/3,no-resolve
+IP-CIDR6,100::/64,no-resolve
+IP-CIDR6,2001::/23,no-resolve
+IP-CIDR6,2001:db8::/32,no-resolve
+IP-CIDR6,2620:4f:8000::/48,no-resolve
+IP-CIDR6,3fff::/20,no-resolve
+IP-CIDR6,5f00::/16,no-resolve
+IP-CIDR6,64:ff9b:1::/48,no-resolve
+IP-CIDR6,64:ff9b::/96,no-resolve
 IP-CIDR6,::/127,no-resolve
 IP-CIDR6,fc00::/7,no-resolve
 IP-CIDR6,fe80::/10,no-resolve
