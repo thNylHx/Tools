@@ -1,0 +1,47 @@
+#!name=网易云音乐去广告
+#!desc=过滤网易云音乐广告，并允许自定义界面。
+#!author=RuCu6[https://github.com/RuCu6], Keywos[https://github.com/Keywos]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/NeteaseCloudMusic.png
+#!openUrl=https://apps.apple.com/app/id590338362
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+#!arguments=MY:false,DT:false,FX:false,PRGG:false,PRRK:false,PRDRD:false,PRSCVPT:false,PRST:false,PRRR:false,HMPR:false,PRMST:false,PRCN:false
+#!arguments-desc=MY: [隐藏底栏]漫游标签\n可选值: false, true\n\nDT: [隐藏底部]笔记标签\n可选值: false, true\n\nFX: [隐藏底部]发现标签\n可选值: false, true\n\nPRGG: [隐藏首页]问候语\n可选值: false, true\n\nPRRK: [隐藏首页]排行榜\n可选值: false, true\n\nPRDRD: [隐藏首页]每日推荐\n可选值: false, true\n\nPRSCVPT: [隐藏首页]推荐歌单\n可选值: false, true\n\nPRST: [隐藏首页]最近常听\n可选值: false, true\n\nPRRR: [隐藏首页]雷达歌单\n可选值: false, true\n\nHMPR: [隐藏首页]音乐合伙人\n可选值: false, true\n\nPRMST: [隐藏首页]推荐专属歌单\n可选值: false, true\n\nPRCN: [隐藏首页]你的专属歌单\n可选值: false, true
+
+[Rule]
+DOMAIN,iadmat.nosdn.127.net,REJECT
+DOMAIN,iadmatapk.nosdn.127.net,REJECT
+DOMAIN,iadmusicmat.music.126.net,REJECT
+DOMAIN,iadmusicmatvideo.music.126.net,REJECT
+DOMAIN,ipv4.music.163.com,REJECT
+DOMAIN,ipv6.music.163.com,REJECT
+
+[Map Local]
+(?i)^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:delivery\/(batch-)?deliver|moment\/tab\/info\/|side-bar\/mini-program\/music-service\/account|yunbei\/account\/entrance\/) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:community\/friends\/fans-group\/artist\/group\/|mine\/applet\/redpoint|music\/songshare\/text\/recommend\/|resniche\/position\/play\/new\/|resniche\/tspopup\/show|resource\/comments?\/musiciansaid\/|user\/sub\/artist) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:ios\/version|mlivestream\/entrance\/playpage\/|link\/position\/show\/strategy|link\/scene\/show\/resource|v1\/content\/exposure\/comment\/banner\/) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https?:\/\/interface\d?\.music\.163\.com\/w?eapi\/(?:activity\/bonus\/playpage\/time\/query|resource-exposure\/|search\/(?:chart\/|rcmd\/keyword\/|specialkeyword\/)) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/interface\d\.music\.163\.com\/eapi\/my\/podcast\/tab\/recommend data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[Script]
+评论区、热推、有话想说、分享一下、歌曲下的祝福等小提示 = type=http-response, pattern=(?i)^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:batch|v2\/resource\/comment\/floor\/get), script-path=https://kelee.one/Resource/JavaScript/NeteaseCloudMusic/NeteaseCloudMusic_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=20
+
+推荐、home、主页 = type=http-response, pattern=(?i)^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:homepage\/block\/page|link\/page\/rcmd\/(?:block\/resource\/multi\/refresh|resource\/show)), script-path=https://kelee.one/Resource/JavaScript/NeteaseCloudMusic/NeteaseCloudMusic_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=20, argument=PRGG="{{{PRGG}}}"&PRRK="{{{PRRK}}}"&PRDRD="{{{PRDRD}}}"&PRSCVPT="{{{PRSCVPT}}}"&PRST="{{{PRST}}}"&PRRR="{{{PRRR}}}"&HMPR="{{{HMPR}}}"&PRMST="{{{PRMST}}}"&PRCN="{{{PRCN}}}"
+
+底部选项卡 = type=http-response, pattern=(?i)^https?:\/\/interface\d?\.music\.163\.com\/eapi\/link\/home\/framework\/tab, script-path=https://kelee.one/Resource/JavaScript/NeteaseCloudMusic/NeteaseCloudMusic_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=20, argument=MY="{{{MY}}}"&DT="{{{DT}}}"&FX="{{{FX}}}"
+
+发现页 = type=http-response, pattern=(?i)^https?:\/\/interface\d?\.music\.163\.com\/eapi\/link\/page\/discovery\/resource\/show, script-path=https://kelee.one/Resource/JavaScript/NeteaseCloudMusic/NeteaseCloudMusic_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=20
+
+我的页面 = type=http-response, pattern=(?i)^https?:\/\/interface\d?\.music\.163\.com\/eapi\/link\/position\/show\/resource, script-path=https://kelee.one/Resource/JavaScript/NeteaseCloudMusic/NeteaseCloudMusic_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=20
+
+显示未关注你的人 = type=http-response, pattern=(?i)^https?:\/\/interface\d?\.music\.163\.com\/eapi\/user\/follow\/users\/mixed\/get, script-path=https://kelee.one/Resource/JavaScript/NeteaseCloudMusic/NeteaseCloudMusic_remove_ads.js, requires-body=true, binary-body-mode=true, timeout=20
+
+[MITM]
+hostname = %APPEND% interface*.music.163.com
+

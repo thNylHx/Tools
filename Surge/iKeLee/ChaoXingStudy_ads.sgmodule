@@ -1,0 +1,27 @@
+#!name=学习通去广告
+#!desc=移除开屏广告、横幅推广，精简校园补给站频道。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/ChaoXingStudy.png
+#!openUrl=https://apps.apple.com/app/id977946724
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Body Rewrite]
+http-response-jq (?i)^https:\/\/learn\.chaoxing\.com\/apis\/service\/appConfig\? 'delpaths([["data","ad"]])'
+http-response-jq (?i)^https:\/\/apps\.chaoxing\.com\/apis\/home\/getHpXsqy\.jspx\? '.data.list |= map(select(.pid == 4 or .pid == 44)) | .data.list_xsqy |= map(select(.pid == 4 or .pid == 44)) | .data.list_xysqbj |= map(select(.pid == 4 or .pid == 44)) | .data.lanmu |= map(select(.id == 4 or .id == 44))'
+http-response-jq (?i)^https:\/\/apps\.chaoxing\.com\/apis\/home\/getHpXsqy\.jspx\? 'delpaths([["data","list_timeapp"]])'
+
+[Map Local]
+(?i)^https:\/\/home-yd\.chaoxing\.com\/apis\/data\/getAdsRecommend\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/home-yd\.chaoxing\.com\/apis\/banner\/getConfigInfoForXsqy\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/groupyd2\.chaoxing\.com\/apis\/activity\/getActivitys_attention\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/appswh\.chaoxing\.com\/apis\/activity\/getNoteTopicList\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% learn.chaoxing.com, home-yd.chaoxing.com, apps.chaoxing.com, groupyd2.chaoxing.com, appswh.chaoxing.com
+

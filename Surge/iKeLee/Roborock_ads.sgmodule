@@ -1,0 +1,23 @@
+#!name=Roborock去广告
+#!desc=移除横幅、活动推广、机器人图标，精简服务中心。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Roborock.png
+#!openUrl=https://apps.apple.com/app/id1462875428
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Body Rewrite]
+http-response-jq (?i)^https:\/\/api\.roborock\.com\/v2\/h5\.page\.item\.info\?(?:[^#?&]+&)*id=4115$ '.data |= map(select(.title == "常用功能"))'
+
+[Map Local]
+(?i)^https:\/\/cniot\.roborock\.com\/api\/v1\/activity\/banner\/list$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/cniot\.roborock\.com\/api\/v1\/activity\/latest$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/cniot\.roborock\.com\/api\/v1\/app\/theme\/device\/icon\? data-type=text data="" status-code=404
+
+[MITM]
+hostname = %APPEND% cniot.roborock.com, api.roborock.com
+

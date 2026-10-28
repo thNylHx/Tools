@@ -1,0 +1,22 @@
+#!name=OKOK去广告
+#!desc=移除开屏广告、横幅广告，精简首页，拦截优惠购页面。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/OKOK.png
+#!openUrl=https://apps.apple.com/app/id999308991
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Map Local]
+(?i)^https:\/\/api\.chips-cloud\.com\/v\d\/home\/collection\/smartv\d\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.chips-cloud\.com\/v\d\/communityManage\/list\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.chips-cloud\.com\/v\d\/good\/list\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/shop171777386\.m\.youzan\.com\/v2\/showcase\/homepage\? data-type=text data="" status-code=404
+
+[MITM]
+hostname = %APPEND% api.chips-cloud.com, shop171777386.m.youzan.com
+

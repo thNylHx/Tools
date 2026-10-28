@@ -1,0 +1,25 @@
+#!name=好轻去广告
+#!desc=移除开屏广告、弹窗广告、横幅推广、商品推广，精简我的页面。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/YunmaiScale.png
+#!openUrl=https://apps.apple.com/app/id889565307
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Body Rewrite]
+http-response-jq (?i)^https:\/\/apisvr\.iyunmai\.com\/api\/ios\/apps\/get-online-parameter-list\.json\? '.data.rows |= map(select(.name | IN("AC_startTime","AC_endTime","AC_enable","AC_url","AC_challenge_tip","AC_challenge_tip_id","AC_pt_tip","AC_pt_tip_id","AC_pt_go_tmall_jd","month7_activity","AC_xmas_isOpen","home_show_info","new_user_credit_exchange_info","AC_share_recommendUrl","AC_share_recommendUrl_2","AC_share_recommendUrl_3") | not))'
+
+[Map Local]
+(?i)^https:\/\/yunmai\.sfo-tx-beijing-02\.saas\.sensorsdata\.cn\/api\/v2\/sfo\/user_popup_configs\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/restapi\.iyunmai\.com\/ad-api\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/apisvr\.iyunmai\.com\/api\/ios\/first-page-module\/center_menu\.json\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/restapi\.iyunmai\.com\/api\/ios\/ad\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% yunmai.sfo-tx-beijing-02.saas.sensorsdata.cn, apisvr.iyunmai.com, restapi.iyunmai.com
+

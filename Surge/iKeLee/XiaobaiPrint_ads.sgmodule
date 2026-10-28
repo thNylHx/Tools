@@ -1,0 +1,28 @@
+#!name=小白智慧打印去广告
+#!desc=移除开屏广告、首页推广金刚位、热门内容推荐、横幅广告、搜索填充词、搜索发现，精简我的页面。账户页面错误是已知问题，无需反馈。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/XiaobaiPrint.png
+#!openUrl=https://apps.apple.com/app/id1505946846
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Rule]
+DOMAIN,ad.lovefree.cc,REJECT
+DOMAIN-SUFFIX,adwanji.com,REJECT
+
+[Body Rewrite]
+http-response-jq (?i)^https:\/\/epbox\.gongfudou\.com\/graphql$ 'delpaths([["data","mallConsumables"]])'
+http-response-jq (?i)^https:\/\/epbox\.gongfudou\.com\/graphql$ 'delpaths([["data","currentUser","goodsCoupons"]])'
+http-response-jq (?i)^https:\/\/epbox\.gongfudou\.com\/graphql$ 'if .data.systemConfig.searchHotTags? then del(.data.systemConfig) else . end'
+http-response-jq (?i)^https:\/\/epbox\.gongfudou\.com\/graphql$ 'if (.data.page.__typename=="Page" and .data.page.name=="场景化改版 2024") then .data.page.firstTabDetail.floors|=map(select(.numType=="row")) else . end'
+
+[Map Local]
+(?i)^https:\/\/epbox\.gongfudou\.com\/big_data\/v\d\/banners\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/epbox\.gongfudou\.com\/big_data\/v\d\/canvas\/query_actions\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% epbox.gongfudou.com
+

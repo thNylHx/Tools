@@ -1,0 +1,30 @@
+#!name=虎嗅去广告
+#!desc=移除广告配置、信息流直播预约横幅、相关文章推荐、48小时热文推荐，精简搜索页面。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Huxiu.png
+#!openUrl=https://apps.apple.com/app/id557509598
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Rule]
+DOMAIN,api-ad-product.huxiu.com,REJECT
+
+[Body Rewrite]
+http-response-jq (?i)^https:\/\/api-ms-feed\.huxiu\.com\/v1\/media\/recommend$ 'delpaths([["data","live"]])'
+
+[Map Local]
+(?i)^https:\/\/api-ms-config\.huxiu\.com\/v1\/adConfig$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-web-feed\.huxiu\.com\/v1\/index\/recommendContentsNew$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-search\.huxiu\.com\/api\/searchIndex$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-article\.huxiu\.com\/v2\/article\/getTextArticleRelated$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-web-moment\.huxiu\.com\/v3\/moment\/getDetailRecdArticle$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% api-ms-config.huxiu.com, api-web-feed.huxiu.com, api-search.huxiu.com, api-article.huxiu.com, api-web-moment.huxiu.com, api-ms-feed.huxiu.com
+

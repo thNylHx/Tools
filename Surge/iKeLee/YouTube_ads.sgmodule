@@ -1,0 +1,23 @@
+#!name=YouTube去广告
+#!desc=移除YouTube视频、瀑布流、搜索和Shorts中的广告，移除底栏的Shorts按钮和上传按钮，增加画中画及字幕翻译功能。移除YouTube Music底栏的上传、选段和升级按钮，增加歌词翻译，支持二者的后台播放。此插件需要启用MitM over HTTP/2和QUIC回退保护。支持Premium订阅用户使用，不支持tvOS设备。
+#!author=Maasea[https://github.com/Maasea], VirgilClyne[https://github.com/VirgilClyne], Choler[https://github.com/Choler], DivineEngine[https://github.com/DivineEngine], app2smile[https://github.com/app2smile]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/YouTube.png
+#!openUrl=https://apps.apple.com/app/id544007664
+#!category=去广告
+#!system_version=15
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+#!arguments=blockUpload:false,blockShorts:false,blockImmersive:false,captionLang:"zh-Hans",debug:false
+#!arguments-desc=blockUpload: 隐藏上传按钮\n用于隐藏YouTube底栏的上传按钮\n可选值: false, true\n\nblockShorts: 隐藏Shorts按钮\n用于隐藏YouTube底栏的Shorts按钮\n可选值: false, true\n\nblockImmersive: 隐藏选段按钮\n用于隐藏YouTube Music底栏的选段按钮\n可选值: false, true\n\ncaptionLang: 字幕翻译语言\n需要把YouTube字幕翻译翻译为何种语言\n可选值: zh-Hans, zh-Hant, ja, ko, en, off\n\ndebug: 启用调试模式\n此插件的调试模式\n可选值: false, true
+
+[Script]
+YouTube去广告 = type=http-response, pattern=(?i)^https:\/\/youtubei\.googleapis\.com\/(youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch|log_event|config))(\?(.*))?$, script-path=https://kelee.one/Resource/JavaScript/YouTube/YouTube_remove_ads/YouTube_remove_ads_response.js, requires-body=true, binary-body-mode=true, argument=blockUpload="{{{blockUpload}}}"&blockShorts="{{{blockShorts}}}"&blockImmersive="{{{blockImmersive}}}"&captionLang="{{{captionLang}}}"&debug="{{{debug}}}"
+
+请求初始化 = type=http-request, pattern=(?i)^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&ack.*, script-path=https://kelee.one/Resource/JavaScript/YouTube/YouTube_remove_ads/YouTube_remove_ads_request.js, requires-body=true, binary-body-mode=true, argument=captionLang="{{{captionLang}}}"
+
+请求日志事件 = type=http-request, pattern=(?i)^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/log_event, script-path=https://kelee.one/Resource/JavaScript/YouTube/YouTube_remove_ads/YouTube_remove_ads_request.js, requires-body=true, binary-body-mode=true, argument=blockUpload="{{{blockUpload}}}"&blockShorts="{{{blockShorts}}}"&blockImmersive="{{{blockImmersive}}}"&captionLang="{{{captionLang}}}"&debug="{{{debug}}}"
+
+[MITM]
+hostname = %APPEND% *.googlevideo.com, youtubei.googleapis.com
+

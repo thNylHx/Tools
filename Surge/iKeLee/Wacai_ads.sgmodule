@@ -1,0 +1,22 @@
+#!name=挖财记账去广告
+#!desc=移除开屏广告、横幅广告，顶部推广、活动配置。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Wacai.png
+#!openUrl=https://apps.apple.com/app/id1544045905
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Map Local]
+(?i)^https:\/\/jz\.wacaijizhang\.com\/sensor\/config\/iOS\.conf\? data-type=text data="{\"v\":\"v2\",\"configs\":{\"disableSDK\":true,\"disableDebugMode\":true,\"supportTransportEncrypt\":false}}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/jz\.wacaijizhang\.com\/api\/banners\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/jz\.wacaijizhang\.com\/api\/resource\/universal\/fetch$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/jz\.wacaijizhang\.com\/activity\/ data-type=text data="" status-code=404
+
+[MITM]
+hostname = %APPEND% jz.wacaijizhang.com
+
