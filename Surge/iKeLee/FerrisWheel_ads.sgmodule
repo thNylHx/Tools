@@ -1,0 +1,24 @@
+#!name=摩天轮去广告
+#!desc=移除开屏广告、弹窗，精简底栏。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/FerrisWheel.png
+#!openUrl=https://apps.apple.com/app/id1054861613
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Map Local]
+(?i)^https:\/\/appapi\.motianlun\.cn\/showapi\/pub\/site\/\d+\/app\/loading\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/appapi\.motianlun\.cn\/showapi\/pub\/site\/\d+\/banner\/app\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/appapi\.motianlun\.cn\/userdataapi\/pub\/v\d\/top\/keywords\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/appapi\.motianlun\.cn\/buyerapi\/buyer\/v\d\/search\/index\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/appapi\.motianlun\.cn\/showapi\/site\/\d+\/transfer\/recentShows\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% appapi.motianlun.cn
+

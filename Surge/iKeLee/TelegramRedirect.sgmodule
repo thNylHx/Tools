@@ -1,0 +1,15 @@
+#!name=Telegram重定向
+#!desc=适用于安装了多个不同Telegram客户端的用户，用于在指定客户端中打开公开或私有群组及频道的Telegram短链。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Telegram.png
+#!openUrl=https://apps.apple.com/app/id1127750481
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+#!arguments=app:"tg"
+#!arguments-desc=app: 客户端\n指定跳转的客户端\n可选值: tg, sg, turrit, ime, ng, lingo
+
+[MITM]
+hostname = %APPEND% t.me
+

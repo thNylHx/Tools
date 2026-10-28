@@ -1,0 +1,19 @@
+#!name=网易大神去广告
+#!desc=移除开屏广告，精简大量冗余的配置文件，精简我的页面。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/NetEaseGodlike.png
+#!openUrl=https://apps.apple.com/app/id1359055423
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Map Local]
+(?i)^https:\/\/god\.gameyw\.netease\.com\/v\d\/ad data-type=text data="" status-code=404
+
+[Script]
+网易大神去广告 = type=http-response, pattern=(?i)^https:\/\/app-conf\.ds\.163\.com\/v1\/app\/base\/conf\/static\/start-config\?(?:[^#?&]+&)*os=ios, script-path=https://kelee.one/Resource/JavaScript/NetEaseGodlike/NetEaseGodlike_remove_ads.js, requires-body=true, timeout=10
+
+[MITM]
+hostname = %APPEND% god.gameyw.netease.com, app-conf.ds.163.com
+

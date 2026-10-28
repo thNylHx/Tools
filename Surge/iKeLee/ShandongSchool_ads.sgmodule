@@ -1,0 +1,43 @@
+#!name=闪动校园去广告
+#!desc=精简首页和底部导航
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/ShandongSchool.png
+#!openUrl=https://apps.apple.com/app/id1540537249
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Body Rewrite]
+http-response-jq (?i)^https:\/\/api\.huachenjie\.com\/run-front\/home\/homePage\/config$ '.data.functionEntries |= map(select(.name == "运动" or .name == "空间")) | del(.data.seaview)'
+http-response-jq (?i)^https:\/\/api\.huachenjie\.com\/run-front\/api\/user\/cs\/index$ 'delpaths([["data","bannerList"]])'
+http-response-jq (?i)^https:\/\/api\.huachenjie\.com\/run-front\/common\/bottom-bar\/redDot$ 'delpaths([["data","inspiration"]])'
+
+[Map Local]
+(?i)^https:\/\/api\.huachenjie\.com\/run-front\/ad\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.huachenjie\.com\/run-front\/api\/union\/ad\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.huachenjie\.com\/run-front\/home\/getAdPopup$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.huachenjie\.com\/run-front\/street\/listRecommendBanner$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.huachenjie\.com\/run-front\/street\/listThemeBanner$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.huachenjie\.com\/run-front\/api\/home\/activityEntry$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.huachenjie\.com\/run-front\/home\/promoSlots\/config$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.huachenjie\.com\/run-front\/api\/channel\/subject\/hotspot\/rank$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.huachenjie\.com\/run-front\/api\/jackpot\/award\/home$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.huachenjie\.com\/run-front\/api\/jackpot\/award\/lotteryPage$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.huachenjie\.com\/run-front\/api\/jackpot\/award\/list$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.huachenjie\.com\/run-front\/api\/mall\/goods\/recommend\/pagePointsGoodsList$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% api.huachenjie.com
+

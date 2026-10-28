@@ -1,0 +1,31 @@
+#!name=小象超市去广告
+#!desc=移除开屏广告、应用内弹窗、猜你想买、横幅推广和悬浮窗。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/iMaiCai.png
+#!openUrl=https://apps.apple.com/app/id1444411068
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Map Local]
+(?i)^https:\/\/mall\.meituan\.com\/api\/c\/homepage\/splash data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/mall\.meituan\.com\/api\/c\/homepage\/bubble\/operate\/info data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/mall\.meituan\.com\/api\/c\/jigsaw\/code\/category-banner-\d+\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/mall\.meituan\.com\/api\/c\/poi\/\d+\/order\/recommend\/v\d data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/mall\.meituan\.com\/api\/c\/banner\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/mall\.meituan\.com\/api\/c\/poi\/\d+\/personal\/recommend data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/businessapi\.ksedt\.com\/signupindex\/jxlist data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[Script]
+移除下发广告 = type=http-response, pattern=(?i)^https:\/\/portal-portm\.meituan\.com\/horn_ios\/mergeRequest, script-path=https://kelee.one/Resource/JavaScript/iMaiCai/iMaiCai_remove_ads.js, requires-body=true
+
+[MITM]
+hostname = %APPEND% portal-portm.meituan.com, mall.meituan.com, businessapi.ksedt.com
+

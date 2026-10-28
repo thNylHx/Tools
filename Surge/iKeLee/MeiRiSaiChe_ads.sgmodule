@@ -1,0 +1,18 @@
+#!name=每日赛车去广告
+#!desc=移除开屏广告、信息流广告。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/MeiRiSaiChe.png
+#!openUrl=https://apps.apple.com/app/id1590997618
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Body Rewrite]
+http-response-jq (?i)^https:\/\/api\.romielf\.com\/index\/indexv\d\? 'if ((getpath(["data"]) // {}) | has("advertisement")) then (setpath(["data","advertisement"]; "[]")) else . end'
+http-response-jq (?i)^https:\/\/api\.romielf\.com\/index\/indexv\d\? 'if ((getpath(["data"]) // {}) | has("listadvertising")) then (setpath(["data","listadvertising"]; "[]")) else . end'
+http-response-jq (?i)^https:\/\/api\.romielf\.com\/index\/indexv\d\? '.data.list |= map(select(.type == 1))'
+
+[MITM]
+hostname = %APPEND% api.romielf.com
+

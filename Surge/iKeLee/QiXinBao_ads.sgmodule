@@ -1,0 +1,34 @@
+#!name=启信宝去广告
+#!desc=移除开屏广告、应用内弹窗、首页轮播图、悬浮部件和个性化推荐信息流。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/QiXinBao.png
+#!openUrl=https://apps.apple.com/app/id1030675668
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Map Local]
+(?i)^https:\/\/appc\.qixin\.com\/v4\/general\/getSearchPlaceholderRedirect$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/appc-v6\.qixin\.com\/v4\/general\/getAppFloatAd$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/appc-v6\.qixin\.com\/v4\/general\/getAppBanners$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/appc-v6\.qixin\.com\/v4\/user\/getUserActivitys$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/appc-v6\.qixin\.com\/v4\/enterprise\/homePageRecommend\/recommendCard\d+ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/appc-v6\.qixin\.com\/v4\/user\/getRecommendPersons$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/appc-v6\.qixin\.com\/v4\/enterprise\/getRecommendEnts$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/appc-v6\.qixin\.com\/v4\/enterprise\/getRecommendation$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/appc-v6\.qixin\.com\/v4\/general\/getAppBottomBanners$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/qxb-minicode-pic-osscache\.qixin\.com\/web\/ data-type=text data="" status-code=404
+
+[MITM]
+hostname = %APPEND% appc.qixin.com, appc-v6.qixin.com, qxb-minicode-pic-osscache.qixin.com
+

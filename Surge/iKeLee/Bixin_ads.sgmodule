@@ -1,0 +1,51 @@
+#!name=比心去广告
+#!desc=移除弹窗广告、悬浮广告、横幅广告、轮播图广告，精简搜索页及我的页面。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Bixin.png
+#!openUrl=https://apps.apple.com/app/id1286964732
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Body Rewrite]
+http-response-jq (?i)^https:\/\/api\.hibixin\.com\/biggie\/home\/v\d\/query\/biggie$ '.result.list |= map(select(has("bannerList") and .bannerList == null))'
+http-response-jq (?i)^https:\/\/api\.hibixin\.com\/resource\/v\d\/common\/tab$ '.result |= map(select(.type != "activityCenter"))'
+
+[Map Local]
+(?i)^https:\/\/web\.hibixin\.com\/user-recall\/signModal$ data-type=text data="" status-code=404
+
+(?i)^https:\/\/api\.hibixin\.com\/config\/v\d\/common\/popup$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/gateway\.hibixin\.com\/resource\/v\d\/rec\/card\/query$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.hibixin\.com\/msg\/user\/friends\/trends\/top$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/gateway\.xxqapp\.cn\/live\/pendant\/index\/items$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.xxqapp\.cn\/banner\/list\/\d$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.hibixin\.com\/content\/v\d\/home\/page\/list$ data-type=text data="{\"code\":\"8000\",\"msg\":\"SUCCESS\",\"success\":true}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.hibixin\.com\/resource\/v\d\/discovery\/entrance\/activity$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/gateway\.hibixin\.com\/config\/search\/qryConfigPart$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/gateway\.xxqapp\.cn\/live\/flow\/pendant\/meta$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/web-bxyuer\.bixin\.cn\/yuer-ads\? data-type=text data="" status-code=404
+
+(?i)^https:\/\/gateway\.bxyuer\.com\/official\/room\/tab\/pop$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/gateway\.xxqapp\.cn\/living\/room\/fetch\/recommend-follow-list$ data-type=text data="{\"code\":\"8000\",\"msg\":\"SUCCESS\",\"success\":true}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.hibixin\.com\/biggie\/query\/skill\/detail\/relateRecommendBiggieV\d$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[Script]
+精简首页标签 = type=http-response, pattern=(?i)^https:\/\/gateway\.hibixin\.com\/resource\/v\d\/common\/tab\/query$, script-path=https://kelee.one/Resource/JavaScript/Bixin/common_tab.js, requires-body=true
+
+精简我的页面 = type=http-response, pattern=(?i)^https:\/\/gateway\.hibixin\.com\/resource\/v\d\/my\/page$, script-path=https://kelee.one/Resource/JavaScript/Bixin/my_page.js, requires-body=true
+
+[MITM]
+hostname = %APPEND% web.hibixin.com, api.hibixin.com, gateway.hibixin.com, gateway.xxqapp.cn, api.xxqapp.cn, web-bxyuer.bixin.cn, gateway.bxyuer.com
+

@@ -1,0 +1,27 @@
+#!name=多屏互动去广告
+#!desc=移除开屏广告、横幅推广、搜索填充词，移除广告下发。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/TCLnScreen.png
+#!openUrl=https://apps.apple.com/app/id1127750481
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Body Rewrite]
+http-response-jq (?i)^https:\/\/tcast-o\.api\.leiniao\.com\/tcast\/v\d\/config\/function\? '.data |= map(select(.module == "tools"))'
+
+[Map Local]
+(?i)^https:\/\/tcast-o\.api\.leiniao\.com\/tcast\/ads\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/tcast-o\.api\.leiniao\.com\/tcast\/v\d\/selection\/banner$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/tcast-o\.api\.leiniao\.com\/tcast\/v\d\/searchrank$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/tcast-o\.api\.leiniao\.com\/tcast\/v\d\/selection\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/tcast-o\.api\.leiniao\.com\/tcast\/message\/v\d\/activity\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% tcast-o.api.leiniao.com
+

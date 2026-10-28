@@ -1,0 +1,35 @@
+#!name=华尔街见闻去广告
+#!desc=移除开屏广告、文末广告、信息流广告，精简底栏。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/FinanceNews.png
+#!openUrl=https://apps.apple.com/app/id738227477
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-02 13:57:49
+
+[Body Rewrite]
+http-response-jq (?i)^https:\/\/api-one-wscn\.awtmt\.com\/apiv1\/kvconfig\/items\/tabbarconfig1$ '.data.items |= [.[] | select(.key == "news" or .key == "live")]'
+http-response-jq (?i)^https:\/\/api-one-wscn\.awtmt\.com\/apiv1\/content\/articles\/ 'delpaths([["data","recommend_vip_img_uri"]])'
+http-response-jq (?i)^https:\/\/api-one-wscn\.awtmt\.com\/\/apiv1\/kvconfig\/items\/membersrights$ 'delpaths([["data","vip_article"]])'
+
+[Map Local]
+(?i)^https:\/\/api-one-wscn\.awtmt\.com\/apiv1\/advertising\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-one-wscn\.awtmt\.com\/apiv1\/kvconfig\/items\/search_keywords_wscnvip$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-one-wscn\.awtmt\.com\/apiv1\/search\/hotsearch\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-one-wscn\.awtmt\.com\/apiv1\/content\/articles\/hot\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/wallstreetcn\.com\/app-faas\/coupon\/user\/search\/popup$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-one-wscn\.awtmt\.com\/apiv1\/content\/lives\/relateddata\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-one-wscn\.awtmt\.com\/apiv1\/content\/articles\/relateddata\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-one-wscn\.awtmt\.com\/apiv1\/content\/carousel\/information-flow\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% api-one-wscn.awtmt.com
+

@@ -1,0 +1,13 @@
+#!name=快捷搜索
+#!desc=为Safari提供快速切换搜索引擎的能力，在插件列表中点击此插件上的链接查看使用方法。
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Safari.png
+#!openUrl=https://github.com/luestr/ProxyResource/blob/main/Resource/Markdown/QuickSearch/README.md
+#!category=去广告
+#!loon_version=3.5.1(998)
+#!homepage=https://hub.kelee.one
+#!date=2026-10-16 11:03:37
+
+[MITM]
+hostname = %APPEND% duckduckgo.com
+
