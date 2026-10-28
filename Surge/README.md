@@ -2,4 +2,4 @@
 
 ## 模块来源 
 
-- [@QingRex](https://github.com/QingRex/LoonKissSurge.git) （LoonKissSurge 项目）
+- [@iKeLee](https://hub.kelee.one/) （ Loon ）
