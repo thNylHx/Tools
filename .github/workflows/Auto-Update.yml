@@ -1,6 +1,10 @@
-# ---------- 拉取上游规则和模块 ----------
+# ----------------------------------------
+# name   : Auto-Update.yml
 # desc   : 定时拉取上游 mihomo / Surge 规则与模块，清洗后提交并推送
-# date   : 2026-10-22 20:54:35
+# date   : 2026-10-28 14:36:28
+# author : ChatGPT DeepSeek JK789
+# ver    : 0.1.0
+# ----------------------------------------
 
 name: 拉取上游规则和模块
 
@@ -38,14 +42,16 @@ env:
 jobs:
   git-surge:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    # 95 个文件、并发 8，单文件 curl max-time 90s + retry 3 最坏约 6 分钟，
+    # 12 轮最坏约 74 分钟；取 45 分钟覆盖常规退化场景，同时避免 job 被强杀后通知步骤拿不到 env
+    timeout-minutes: 45
 
     steps:
       - name: 检出上游仓库
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
-          repository: thNylHx/Tools
-          ref: main
+          repository: ${{ env.UPSTREAM_REPO }}
+          ref: ${{ env.UPSTREAM_BRANCH }}
           path: Tools-repo
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 1
@@ -132,7 +138,7 @@ jobs:
               ["Ruleset/mihomo/geoip/Facebook.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.mrs"
               ["Ruleset/mihomo/geoip/Google.mrs"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
 
-              # ---------- Surge / Temporary（原始分片，合并后不对外发布） ----------
+              # ---------- Surge / Temporary（原始分片） ----------
               ["Ruleset/Surge/Temporary/Ads_BanAD.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
               ["Ruleset/Surge/Temporary/Ads_BanProgramAD.list"]="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
               ["Ruleset/Surge/Temporary/Ads_Dlerio.list"]="https://raw.githubusercontent.com/dler-io/Rules/main/Surge/Surge%203/Provider/AdBlock.list"
@@ -371,14 +377,17 @@ jobs:
               esac
 
               # 1. 删除注释、空行、行内注释、reject 后缀、无效规则，并去除首尾空白
+              # URL-REGEX 的正则值本身可能含 "//" 与 ", "，跳过空白规范化以免破坏表达式
               sed -i -E '
                   /^DOMAIN-REGEX,/d
                   /^[[:space:]]*[#;]/d
                   /^[[:space:]]*\/\//d
                   /^[[:space:]]*$/d
-                  s|[[:space:]]+//.*||
+                  /^URL-REGEX,/!{
+                      s|[[:space:]]+//.*||
+                      s/,[[:space:]]*/,/g
+                  }
                   s/,reject(,[^,]+)*$//I
-                  s/,[[:space:]]*/,/g
                   s/^[[:space:]]+//
                   s/[[:space:]]+$//
               ' "$file"
@@ -479,22 +488,46 @@ jobs:
               exit 1
           fi
 
-          body="$(mktemp)"
-          trap 'rm -f "$body"' EXIT
+          workdir="$(mktemp -d)"
+          trap 'rm -rf "$workdir"' EXIT
+          body="$workdir/body"
+          dropped="$workdir/dropped"
+          : > "$dropped"
 
           # 输入已是规则列表（头部含 # 注释行），此处剥掉注释与空行，
-          # 只对真正的规则补 REJECT 动作，避免注释泄漏进 sgmodule
+          # 再按 Surge 官方参数表补策略，避免生成无策略的非法规则行：
+          #   extended-matching：仅域类型与 URL-REGEX 支持
+          #   pre-matching     ：域类型、IP 类型、逻辑规则、DEST-PORT 等支持
+          #   no-resolve       ：仅 IP 类型支持
+          # 无法确认参数的类型记录下来后跳过，宁可少一条也不输出无法解析的行
+          # 路径通过环境变量传入，避免 awk -v 解释其中的反斜杠转义
+          export dropped
           sed -E 's/,no-resolve//g' "$src" | awk -F, '
               /^[[:space:]]*#/  { next }
               /^[[:space:]]*$/  { next }
-              $1 ~ /^(DOMAIN|DOMAIN-SUFFIX|DOMAIN-KEYWORD|URL-REGEX|USER-AGENT|AND)$/ {
+              $1 ~ /^(DOMAIN|DOMAIN-SUFFIX|DOMAIN-KEYWORD|DOMAIN-WILDCARD)$/ {
                   print $0 ",REJECT,extended-matching,pre-matching"; next
               }
-              $1 ~ /^(IP-CIDR6?|IP-ASN)$/ {
-                  print $0 ",REJECT,no-resolve,extended-matching,pre-matching"; next
+              $1 == "URL-REGEX" {
+                  print $0 ",REJECT,extended-matching"; next
               }
-              { print $0 }
+              $1 ~ /^(IP-CIDR6?|GEOIP|IP-ASN)$/ {
+                  print $0 ",REJECT,no-resolve,pre-matching"; next
+              }
+              $1 ~ /^(AND|OR|NOT|DEST-PORT|SRC-IP|SUBNET)$/ {
+                  print $0 ",REJECT,pre-matching"; next
+              }
+              $1 ~ /^(USER-AGENT|PROCESS-NAME)$/ {
+                  print $0 ",REJECT"; next
+              }
+              { print $0 >> ENVIRON["dropped"]; next }
           ' > "$body"
+
+          dropped_count="$(wc -l < "$dropped" | tr -d ' ')"
+          if [[ "$dropped_count" -gt 0 ]]; then
+              echo "::warning::有 ${dropped_count} 条规则的类型无法确认 Surge 参数，已跳过"
+              awk 'NR<=10' "$dropped"
+          fi
 
           rule_count="$(wc -l < "$body" | tr -d ' ')"
           {
@@ -514,24 +547,24 @@ jobs:
 
           echo "已生成 $out（${rule_count} 条规则）"
 
-      - name: 同步 LoonKissSurge 模块
-        working-directory: ${{ github.workspace }}
-        run: |
-          set -euo pipefail
+    #   - name: 同步 LoonKissSurge 模块
+    #     working-directory: ${{ github.workspace }}
+    #     run: |
+    #       set -euo pipefail
 
-          repo_dir="${{ github.workspace }}/LoonKissSurge"
-          target_dir="${{ github.workspace }}/Tools-repo/Surge/QingRex"
+    #       repo_dir="${{ github.workspace }}/LoonKissSurge"
+    #       target_dir="${{ github.workspace }}/Tools-repo/Surge/QingRex"
 
-          rm -rf "$repo_dir"
-          git clone --depth=1 --single-branch \
-              "https://github.com/QingRex/LoonKissSurge.git" "$repo_dir"
+    #       rm -rf "$repo_dir"
+    #       git clone --depth=1 --single-branch \
+    #           "https://github.com/QingRex/LoonKissSurge.git" "$repo_dir"
 
-          [[ -d "$repo_dir/Surge" ]] || { echo "::error::上游缺少 Surge 目录"; exit 1; }
+    #       [[ -d "$repo_dir/Surge" ]] || { echo "::error::上游缺少 Surge 目录"; exit 1; }
 
-          rm -rf "$target_dir"
-          mkdir -p "$target_dir"
-          cp -r "$repo_dir/Surge/." "$target_dir/"
-          echo "已同步 LoonKissSurge -> Surge/QingRex"
+    #       rm -rf "$target_dir"
+    #       mkdir -p "$target_dir"
+    #       cp -r "$repo_dir/Surge/." "$target_dir/"
+    #       echo "已同步 LoonKissSurge -> Surge/QingRex"
 
       - name: 提交并推送更新
         working-directory: ${{ github.workspace }}/Tools-repo
@@ -577,6 +610,9 @@ jobs:
           # 先提交再 rebase：工作区已干净，无需 --autostash，冲突概率大幅降低
           pushed=0
           for attempt in 1 2 3; do
+              # 上一次 pull --rebase 若因冲突中断，仓库会停在 rebase 中间态，
+              # 后续 pull 会直接失败，因此每次重试前先清理未完成的 rebase
+              git rebase --abort >/dev/null 2>&1 || true
               if git pull --rebase origin "${UPSTREAM_BRANCH}" \
                     && git push origin "HEAD:${UPSTREAM_BRANCH}"; then
                   pushed=1
