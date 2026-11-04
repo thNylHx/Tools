@@ -1,9 +1,9 @@
 # ----------------------------------------
 # name   : Auto-Update.yml
 # desc   : 定时拉取上游 mihomo / Surge 规则与模块，清洗后提交并推送
-# date   : 2026-10-28 14:36:28
-# author : ChatGPT DeepSeek JK789
-# ver    : 0.1.0
+# date   : 2026-11-04 19:03:37
+# author : ChatGPT JK789
+# ver    : 0.1.2
 # ----------------------------------------
 
 name: 拉取上游规则和模块
@@ -22,8 +22,9 @@ permissions:
   actions: write
 
 # 防止定时任务与手动触发并发导致 push 冲突
+# 与 Fork.yml 共用同一 group：两个工作流写同一分支，必须互斥，否则只能依赖推送重试兜底
 concurrency:
-  group: auto-update-rules
+  group: ruleset-sync
   cancel-in-progress: false
 
 # ---------- 运行环境 ----------
@@ -36,6 +37,7 @@ env:
   TZ: Asia/Hong_Kong
   UPSTREAM_REPO: thNylHx/Tools
   UPSTREAM_BRANCH: main
+  # 环境变量只能是字符串，供 xargs -P 使用，转换为整数由 xargs 自行处理
   DOWNLOAD_PARALLEL: '8'
 
 # ---------- 任务 ----------
@@ -43,12 +45,14 @@ jobs:
   git-surge:
     runs-on: ubuntu-24.04
     # 95 个文件、并发 8，单文件 curl max-time 90s + retry 3 最坏约 6 分钟，
-    # 12 轮最坏约 74 分钟；取 45 分钟覆盖常规退化场景，同时避免 job 被强杀后通知步骤拿不到 env
-    timeout-minutes: 45
+    # 12 轮最坏约 74 分钟。timeout 必须大于该最坏值：job 超时被强杀时，
+    # if: always() 的后续步骤不会执行，通知与清理都会丢失。
+    timeout-minutes: 90
 
     steps:
       - name: 检出上游仓库
-        uses: actions/checkout@v7
+        # 固定到 v7.0.1 的完整 Commit SHA，避免 tag 被移动导致执行未审查的代码。
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           repository: ${{ env.UPSTREAM_REPO }}
           ref: ${{ env.UPSTREAM_BRANCH }}
@@ -60,7 +64,7 @@ jobs:
       - name: 快照既有规则的时间戳与内容指纹
         working-directory: ${{ github.workspace }}/Tools-repo
         run: |
-          set -euo pipefail
+          set -Eeuo pipefail
           export LC_ALL=C
 
           snapshot="${RUNNER_TEMP}/ruleset-snapshot.tsv"
@@ -83,7 +87,7 @@ jobs:
       - name: 下载上游规则（mihomo + Surge，并行）
         working-directory: ${{ github.workspace }}/Tools-repo
         run: |
-          set -euo pipefail
+          set -Eeuo pipefail
 
           # 目录必须在这里一次性建全，避免后续 cp 因目录缺失失败
           mkdir -p \
@@ -240,23 +244,33 @@ jobs:
           export -f fetch_one
 
           echo "开始并发下载（并行度 ${DOWNLOAD_PARALLEL}）..."
-          # xargs 在有失败项时返回 123，这里用 || true 吞掉，改为按日志统计
+          # xargs 在有失败项时返回 123，这里用 || true 吞掉，改为按日志统计。
+          # 单引号是必要的：$1 由子 bash 自行展开，外层 shell 不得提前插值。
+          # shellcheck disable=SC2016
           xargs -r -d '\n' -P "${DOWNLOAD_PARALLEL}" -n 1 \
               bash -c 'fetch_one "$1"' _ < "$manifest" || true
 
           failures=$(wc -l < "$fail_log" | tr -d ' ')
+          total=$(wc -l < "$manifest" | tr -d ' ')
+          # 必须在可能的 exit 之前写入：否则中止时通知只能拿到默认值 0，掩盖真实失败数。
+          echo "failures=${failures}" >> "$GITHUB_ENV"
           if [[ "$failures" -gt 0 ]]; then
-              echo "::warning::共有 ${failures} 个上游文件下载失败，继续执行"
+              echo "::warning::共有 ${failures}/${total} 个上游文件下载失败，继续执行"
               cat "$fail_log"
           else
-              echo "全部上游规则下载成功"
+              echo "全部上游规则下载成功（共 ${total} 个）"
           fi
-          echo "failures=${failures}" >> "$GITHUB_ENV"
+          # 全部失败时必须中止：后续步骤会用旧文件或空文件重建规则，
+          # 继续执行可能把既有规则清空后推送，造成规则丢失。
+          if [[ "$failures" -ge "$total" ]]; then
+              echo "::error::全部 ${total} 个上游文件下载失败，中止以避免覆盖既有规则"
+              exit 1
+          fi
 
       - name: 合并 Surge 规则分片
         working-directory: ${{ github.workspace }}/Tools-repo
         run: |
-          set -euo pipefail
+          set -Eeuo pipefail
 
           merge_local() {
               local output="$1"
@@ -334,7 +348,7 @@ jobs:
       - name: 转换 mihomo 不支持的规则类型
         working-directory: ${{ github.workspace }}/Tools-repo
         run: |
-          set -euo pipefail
+          set -Eeuo pipefail
 
           # 从清洗前的 Surge 广告规则派生 mihomo 版本
           cp -f "Ruleset/Surge/Block/Ads_Block.list" "Ruleset/mihomo/Block/Ads_Block.list"
@@ -355,7 +369,7 @@ jobs:
       - name: 规范化、排序、去重
         working-directory: ${{ github.workspace }}/Tools-repo
         run: |
-          set -euo pipefail
+          set -Eeuo pipefail
           shopt -s globstar
           # 固定 locale，保证排序结果跨 runner 一致，避免无意义 diff
           export LC_ALL=C
@@ -369,7 +383,8 @@ jobs:
           for file in Ruleset/Surge/**/*.list Ruleset/mihomo/Block/*.list; do
               [[ -f "$file" ]] || continue
 
-              # 排除 FakeIP 规则
+              # Fakeip 规则由上游手工维护，不在本工作流的下载列表中。
+              # 这里必须跳过：否则会被下方的清洗规则改写并重新加头部。
               case "$file" in
                   Ruleset/Surge/Other/Fakeip.list|Ruleset/Surge/Other/Fakeip@cn.list)
                       continue
@@ -386,6 +401,7 @@ jobs:
                   /^URL-REGEX,/!{
                       s|[[:space:]]+//.*||
                       s/,[[:space:]]*/,/g
+                      s/[[:space:]]+,/,/g
                   }
                   s/,reject(,[^,]+)*$//I
                   s/^[[:space:]]+//
@@ -474,16 +490,15 @@ jobs:
       - name: 生成 Surge 广告模块
         working-directory: ${{ github.workspace }}/Tools-repo
         run: |
-          set -euo pipefail
+          set -Eeuo pipefail
 
           src="Ruleset/Surge/Block/Ads_Block.list"
           out="Surge/Module/Ads_Block.sgmodule"
           [[ -s "$src" ]] || { echo "::error::缺少已清洗的 $src"; exit 1; }
 
-          # 模块正文是源 list 的纯函数，因此直接继承 list 的时间戳：
-          # 源规则有变化时 list 已刷新，正文没变时这里自然保持原值
-          updated="$(sed -nE '/^# 更新时间:/{s/^# 更新时间:[[:space:]]*//;s/[[:space:]]+[A-Z]{2,4}$//;p;q;}' "$src")"
-          if [[ -z "$updated" ]]; then
+          # 源 list 的时间戳用作模块时间戳的基线；缺失说明上一步没有写入头部。
+          src_updated="$(sed -nE '/^# 更新时间:/{s/^# 更新时间:[[:space:]]*//;s/[[:space:]]+[A-Z]{2,4}$//;p;q;}' "$src")"
+          if [[ -z "$src_updated" ]]; then
               echo "::error::$src 缺少 # 更新时间: 字段，请检查上一步是否写入"
               exit 1
           fi
@@ -529,6 +544,20 @@ jobs:
               awk 'NR<=10' "$dropped"
           fi
 
+          # #!updated 表示模块内容最后一次变化的时间：正文与旧模块一致时沿用旧值，
+          # 避免仅因重新生成就产生无意义的头部 diff；正文变化时使用本次运行时间。
+          new_body_hash="$(sha256sum "$body" | cut -d' ' -f1)"
+          updated=""
+          if [[ -f "$out" ]]; then
+              old_body_hash="$(sed -n '/^\[Rule\]$/,$p' "$out" | tail -n +2 | sha256sum | cut -d' ' -f1)"
+              if [[ "$old_body_hash" == "$new_body_hash" ]]; then
+                  updated="$(sed -nE 's/^#!updated = //p' "$out" | head -n 1)"
+              fi
+          fi
+          if [[ -z "$updated" ]]; then
+              updated="$(date +'%Y-%m-%d %H:%M:%S')"
+          fi
+
           rule_count="$(wc -l < "$body" | tr -d ' ')"
           {
               echo "#!name = Block Ads | 广告拦截规则合集模块"
@@ -547,34 +576,23 @@ jobs:
 
           echo "已生成 $out（${rule_count} 条规则）"
 
-    #   - name: 同步 LoonKissSurge 模块
-    #     working-directory: ${{ github.workspace }}
-    #     run: |
-    #       set -euo pipefail
-
-    #       repo_dir="${{ github.workspace }}/LoonKissSurge"
-    #       target_dir="${{ github.workspace }}/Tools-repo/Surge/QingRex"
-
-    #       rm -rf "$repo_dir"
-    #       git clone --depth=1 --single-branch \
-    #           "https://github.com/QingRex/LoonKissSurge.git" "$repo_dir"
-
-    #       [[ -d "$repo_dir/Surge" ]] || { echo "::error::上游缺少 Surge 目录"; exit 1; }
-
-    #       rm -rf "$target_dir"
-    #       mkdir -p "$target_dir"
-    #       cp -r "$repo_dir/Surge/." "$target_dir/"
-    #       echo "已同步 LoonKissSurge -> Surge/QingRex"
-
       - name: 提交并推送更新
         working-directory: ${{ github.workspace }}/Tools-repo
         run: |
-          set -euo pipefail
+          set -Eeuo pipefail
 
-          git config --local user.name "GitHub Actions"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          # 统一使用项目规定的 GitHub Actions Bot 身份（含 App 数字前缀）。
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add -A
+          # 清理中断运行可能残留的中间文件，避免被下面的 add 误提交。
+          find Ruleset Surge -type f \
+              \( -name '*.part' -o -name '*.sorted' -o -name '*.dedup' -o -name '*.tmp' \) \
+              -delete 2>/dev/null || true
+
+          # 只暂存本工作流产出的目录（Ruleset、Surge），避免把仓库内其他无关变更一并提交。
+          # 新增输出目录时必须同步修改这里的路径。
+          git add -A -- Ruleset Surge
 
           if git diff --cached --quiet; then
               echo "规则文件无变更，跳过提交"
@@ -594,9 +612,11 @@ jobs:
           added="$(git diff --cached --name-status | awk '$1=="A"' | wc -l | tr -d ' ')"
           modified="$(git diff --cached --name-status | awk '$1=="M"' | wc -l | tr -d ' ')"
           deleted="$(git diff --cached --name-status | awk '$1=="D"' | wc -l | tr -d ' ')"
-          echo "added=${added}"       >> "$GITHUB_ENV"
-          echo "modified=${modified}" >> "$GITHUB_ENV"
-          echo "deleted=${deleted}"   >> "$GITHUB_ENV"
+          {
+              echo "added=${added}"
+              echo "modified=${modified}"
+              echo "deleted=${deleted}"
+          } >> "$GITHUB_ENV"
 
           # 用 awk 取前 20 行，避免 head 提前关闭管道触发 SIGPIPE
           {
@@ -630,7 +650,7 @@ jobs:
 
       - name: 设置时间与变更信息
         run: |
-          set -euo pipefail
+          set -Eeuo pipefail
 
           echo "time=$(date +'%Y-%m-%d %H:%M:%S')" >> "$GITHUB_ENV"
 
@@ -652,7 +672,9 @@ jobs:
 
       - name: 发送 Telegram 通知
         if: always()
-        uses: appleboy/telegram-action@master
+        # 固定到 v1.1.1 的完整 Commit SHA：该 Action 持有 TELEGRAM_TOKEN，
+        # 跟随 @master 等于把凭据交给可被上游随时改写的内容。
+        uses: appleboy/telegram-action@214f06cfa3d3a588c1472116889437e7c6fd29b1
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
@@ -661,7 +683,7 @@ jobs:
             📢 <b>GitHub Actions 自动化任务通知</b>
 
             ✉️ 标题: Surge 上游规则模块拉取
-            📦 仓库: 梨花香
+            📦 仓库: ${{ github.repository }}
             ⏰ 时间: ${{ env.time || 'N/A' }}
 
             🎯 状态: ${{ job.status == 'success' && '恭喜你! 任务成功' || '很遗憾! 任务失败' }}
@@ -672,7 +694,11 @@ jobs:
 
       - name: 清理旧工作流运行记录
         if: always()
-        uses: Mattraks/delete-workflow-runs@main
+        # 固定到 v2.1.0 的完整 Commit SHA：该 Action 持有 actions:write，
+        # 跟随 @main 等于把删除权限交给可被上游随时改写的内容。
+        uses: Mattraks/delete-workflow-runs@b3018382ca039b53d238908238bd35d1fb14f8ee
         with:
-          retain_days: 0
+          # 保留 7 天运行记录用于回溯失败原因；设为 0 会删除全部历史，
+          # 只剩 keep_minimum_runs 兜底，排查问题时无据可查。
+          retain_days: 7
           keep_minimum_runs: 3
