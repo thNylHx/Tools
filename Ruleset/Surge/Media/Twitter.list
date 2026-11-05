@@ -1,8 +1,8 @@
 # 规则名称: Twitter
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则数量: 43
-# 更新时间: 2026-10-20 16:27:06
+# 规则数量: 44
+# 更新时间: 2026-11-05 15:03:11
 
 DOMAIN-SUFFIX,ads-twitter.com
 DOMAIN-SUFFIX,cms-twdigitalassets.com
@@ -29,6 +29,7 @@ DOMAIN-SUFFIX,twvid.com
 DOMAIN-SUFFIX,vine.co
 DOMAIN-SUFFIX,x.com
 IP-CIDR,103.252.112.0/22,no-resolve
+IP-CIDR,104.244.41.0/24,no-resolve
 IP-CIDR,104.244.42.0/24,no-resolve
 IP-CIDR,104.244.44.0/22,no-resolve
 IP-CIDR,185.45.4.0/22,no-resolve

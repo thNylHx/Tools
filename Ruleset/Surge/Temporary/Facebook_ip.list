@@ -1,8 +1,8 @@
 # 规则名称: Facebook_ip
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则数量: 119
-# 更新时间: 2026-10-29 14:03:03
+# 规则数量: 123
+# 更新时间: 2026-11-05 15:03:11
 
 IP-CIDR,102.132.112.0/24,no-resolve
 IP-CIDR,102.132.115.0/24,no-resolve
@@ -41,10 +41,11 @@ IP-CIDR,157.240.134.0/24,no-resolve
 IP-CIDR,157.240.136.0/23,no-resolve
 IP-CIDR,157.240.139.0/24,no-resolve
 IP-CIDR,157.240.140.0/24,no-resolve
+IP-CIDR,157.240.143.0/24,no-resolve
 IP-CIDR,157.240.144.0/24,no-resolve
-IP-CIDR,157.240.156.0/23,no-resolve
-IP-CIDR,157.240.158.0/24,no-resolve
+IP-CIDR,157.240.156.0/22,no-resolve
 IP-CIDR,157.240.169.0/24,no-resolve
+IP-CIDR,157.240.170.0/24,no-resolve
 IP-CIDR,157.240.175.0/24,no-resolve
 IP-CIDR,157.240.177.0/24,no-resolve
 IP-CIDR,157.240.179.0/24,no-resolve
@@ -115,10 +116,13 @@ IP-CIDR6,2a03:2887:ff5f::/48,no-resolve
 IP-CIDR6,2a03:2887:ff60::/48,no-resolve
 IP-CIDR6,2a03:2887:ff62::/47,no-resolve
 IP-CIDR6,2a03:2887:ff64::/46,no-resolve
-IP-CIDR6,2a03:2887:ff68::/46,no-resolve
+IP-CIDR6,2a03:2887:ff68::/47,no-resolve
+IP-CIDR6,2a03:2887:ff6a::/48,no-resolve
+IP-CIDR6,2a03:2887:ff6c::/48,no-resolve
 IP-CIDR6,2a03:2887:ff6f::/48,no-resolve
 IP-CIDR6,2a03:2887:ff70::/46,no-resolve
 IP-CIDR6,2c0f:ef78:10::/47,no-resolve
+IP-CIDR6,2c0f:ef78:12::/48,no-resolve
 IP-CIDR6,2c0f:ef78:3::/48,no-resolve
 IP-CIDR6,2c0f:ef78:5::/48,no-resolve
 IP-CIDR6,2c0f:ef78:9::/48,no-resolve
