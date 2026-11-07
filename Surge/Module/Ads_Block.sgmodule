@@ -3,8 +3,8 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 12309
-#!updated = 2026-10-29 14:03:03
+#!Rule = 12312
+#!updated = 2026-11-07 14:15:45
 
 
 [Rule]
@@ -3056,6 +3056,7 @@ DOMAIN-SUFFIX,adrta.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-acc.qqbrowser.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-adnet-drcn.cloud.honor.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-api-o.api.leiniao.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ads-api-t.my7v.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-api.duolingo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-api.vivo.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-dra.platform.hihonorcloud.com,REJECT,extended-matching,pre-matching
@@ -3078,6 +3079,7 @@ DOMAIN-SUFFIX,ads-leona-s1.xhscdn.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-marketing-vivofs.vivo.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-monitoring.papegames.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-monitoring.shziyi.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ads-o.res.leiniao.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-pixiv.net,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-shopping.shouqianba.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ads-splash-i1.xhscdn.com,REJECT,extended-matching,pre-matching
@@ -6720,6 +6722,7 @@ DOMAIN-SUFFIX,iscrv.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,isdspeed.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,ishop789.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,iskyworker.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,isms-o.api.my7v.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,istreamsche.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,itm1yqknq.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,its-dori.tumblr.com,REJECT,extended-matching,pre-matching
