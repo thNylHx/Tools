@@ -676,7 +676,7 @@ jobs:
         # 固定到 v1.1.1 的完整 Commit SHA：该 Action 持有 TELEGRAM_TOKEN，
         # 跟随可变分支等于把凭据交给可被上游随时改写的内容。
         # 行尾版本注释供 Dependabot 识别与更新。
-        uses: appleboy/telegram-action@214f06cfa3d3a588c1472116889437e7c6fd29b1 # v1.1.1
+        uses: appleboy/telegram-action@68ac04bda0e0f4755e24649161566b4b6732cc83 # v1.1.2
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
