@@ -8,6 +8,16 @@
 #!homepage=https://hub.kelee.one
 #!date=2026-10-02 13:57:49
 
+[URL Rewrite]
+(?i)(^https:\/\/c\.pc\.qq\.com\/middlem\.html\?(?:[^#?&]+&)*pfurl=)(http.*)(&pfuin=.*) $2 307
+(?i)(^https:\/\/c\.pc\.qq\.com\/middlect\.html\?(?:[^#?&]+&)*pfuin=.*&pfurl=)(http.*)(&gjsublevel=.*) $2 307
+(?i)(^https:\/\/c\.pc\.qq\.com\/middlect\.html\?(?:[^#?&]+&)*iscontinue=.*pfurl=)(http.*)(&pfuin=.*) $2 307
+(?i)(^https:\/\/pingtas\.qq\.com\/webview\/pingd\?(?:[^#?&]+&)*dm=c\.pc\.qq\.com&pvi=\d+&si=s\d+&url=\/middlem\.html\?(?:[^#?&]+&)*pfurl%3d)(http.*)(%26pfuin%3d.*%26pfuin%3d.*) $2 307
+(?i)(^https:\/\/cgi\.connect\.qq\.com\/qqconnectopen\/get_urlinfoForQQV2\?(?:[^#?&]+&)*url=)(http.*) $2 307
+(?i)(^https:\/\/c\.pc\.qq\.com\/index\.html\?(?:[^#?&]+&)*pfurl=)(http.*)(&pfuin=.*) $2 307
+(?i)(^https:\/\/c\.pc\.qq\.com\/ios\.html\?(?:[^#?&]+&)*url=)(http.*)(&level=.*) $2 307
+(?i)(^https:\/\/pingtas\.qq\.com\/webview\/pingd\?(?:[^#?&]+&)*dm=c\.pc\.qq\.com&pvi=\d+&si=s\d+&url=\/ios\.html\?(?:[^#?&]+&)*url%3d)(http.*)(%26level.*%26level.*) $2 307
+
 [MITM]
 hostname = %APPEND% pingtas.qq.com, c.pc.qq.com, cgi.connect.qq.com
 

@@ -19,11 +19,15 @@ DOMAIN,ipv4.music.163.com,REJECT
 DOMAIN,ipv6.music.163.com,REJECT
 
 [Map Local]
+(?i)^https?:\/\/interface\d?\.music\.163\.com\/e?api\/(ocpc\/)?ad\/ data-type=text data="" status-code=200 header="Content-Type:text/plain"
+
 (?i)^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:delivery\/(batch-)?deliver|moment\/tab\/info\/|side-bar\/mini-program\/music-service\/account|yunbei\/account\/entrance\/) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 (?i)^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:community\/friends\/fans-group\/artist\/group\/|mine\/applet\/redpoint|music\/songshare\/text\/recommend\/|resniche\/position\/play\/new\/|resniche\/tspopup\/show|resource\/comments?\/musiciansaid\/|user\/sub\/artist) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
 (?i)^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:ios\/version|mlivestream\/entrance\/playpage\/|link\/position\/show\/strategy|link\/scene\/show\/resource|v1\/content\/exposure\/comment\/banner\/) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https?:\/\/interface\d?\.music\.163.com\/w?e?api\/search\/default data-type=text data="" status-code=200 header="Content-Type:text/plain"
 
 (?i)^https?:\/\/interface\d?\.music\.163\.com\/w?eapi\/(?:activity\/bonus\/playpage\/time\/query|resource-exposure\/|search\/(?:chart\/|rcmd\/keyword\/|specialkeyword\/)) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 

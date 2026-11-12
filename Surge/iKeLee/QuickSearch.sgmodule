@@ -8,6 +8,16 @@
 #!homepage=https://hub.kelee.one
 #!date=2026-10-16 11:03:37
 
+[URL Rewrite]
+(?i)^https:\/\/duckduckgo\.com\/\?(?:[^#?&]+&)*q=bd\+([^&]+).+ https://www.baidu.com/s?wd=$1 307
+(?i)^https:\/\/duckduckgo\.com\/\?(?:[^#?&]+&)*q=bdimg\+([^&]+).+ https://image.baidu.com/search/index?tn=baiduimage&word=$1 307
+(?i)^https:\/\/duckduckgo\.com\/\?(?:[^#?&]+&)*q=gimg\+([^&]+).+ https://www.google.com/search?&tbm=isch&q=$1 307
+(?i)^https:\/\/duckduckgo\.com\/\?(?:[^#?&]+&)*q=b\+([^&]+).+ https://www.bing.com/search?q=$1 307
+(?i)^https:\/\/duckduckgo\.com\/\?(?:[^#?&]+&)*q=wk\+([^&]+).+ https://zh.wikipedia.org/wiki/$1 307
+(?i)^https:\/\/duckduckgo\.com\/\?(?:[^#?&]+&)*q=qm\+([^&]+).+ https://www.qimai.cn/search/index/country/cn/search/$1 307
+(?i)^https:\/\/duckduckgo\.com\/\?(?:[^#?&]+&)*q=gh\+([^&]+).+ https://github.com/search?q=$1 307
+(?i)^https:\/\/duckduckgo\.com\/\?(?:[^#?&]+&)*q=(?!(?:bd|bdimg|gimg|b|wk|qm|gh)\+)([^&]+).+ https://www.google.com/search?q=$1 307
+
 [MITM]
 hostname = %APPEND% duckduckgo.com
 

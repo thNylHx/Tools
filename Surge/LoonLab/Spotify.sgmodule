@@ -10,6 +10,9 @@
 #!arguments=tab:false,useractivity:true
 #!arguments-desc=tab: 移除底栏创建按钮\n此开关控制是否移除底栏创建按钮\n可选值: false, true\n\nuseractivity: 启用Apple设备接力\n此开关控制是否使用Apple设备接力\n可选值: true, false
 
+[URL Rewrite]
+(?i)^https:\/\/(?:\w+-spclient|spclient\.wg)\.spotify\.com(?::443)?\/artistview\/v1\/artist\/(.*)&platform=iphone https://spclient.wg.spotify.com/artistview/v1/artist/$1&platform=ipad header
+
 [Map Local]
 (?i)^https:\/\/(?:\w+-spclient|spclient\.wg)\.spotify\.com(?::443)?\/pendragon\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 

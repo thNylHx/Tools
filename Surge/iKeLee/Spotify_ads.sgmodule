@@ -13,6 +13,9 @@
 [Rule]
 AND,((DOMAIN-SUFFIX,spotify.com),(PROTOCOL,QUIC)),REJECT
 
+[URL Rewrite]
+(?i)^https:\/\/(?:\w+-spclient|spclient\.wg)\.spotify\.com(?::443)?\/artistview\/v1\/artist\/(.*)&platform=iphone https://spclient.wg.spotify.com/artistview/v1/artist/$1&platform=ipad header
+
 [Map Local]
 (?i)^https:\/\/(?:\w+-spclient|spclient\.wg)\.spotify\.com(?::443)?\/pendragon\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 

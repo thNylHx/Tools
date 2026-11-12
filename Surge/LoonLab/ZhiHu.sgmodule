@@ -21,6 +21,9 @@ IP-CIDR,118.89.204.198/32,REJECT,no-resolve
 IP-CIDR,182.61.194.7/32,REJECT,no-resolve
 IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,REJECT,no-resolve
 
+[URL Rewrite]
+(?i)^https:\/\/link\.zhihu\.com\/\?(?:[^#?&]+&)*target=(?:https?)?(?:%3A|:)?(?:\/\/|%2F%2F)?(.*) http://$1 302
+
 [Body Rewrite]
 http-response-jq (?i)^https:\/\/m-cloud\.zhihu\.com\/api\/cloud\/zhihu\/config\/all\? 'def drop_keys: {"km_httpdns_new_config_tars":true,"preFetchHttpDns":true,"httpdns_detector_use_concurrent":true,"httpdns_use_memory_cache":true,"httpdns_new_config_tars":true,"coreNetworkConf_useTars":true,"km_coreNetworkConf_useTars":true,"sugarQuicConfig":true,"quic_dns_detect_enable":true,"quicMixAB":true,"quic_downgrade_enable":true,"quic_priority_strategy":true,"quic_check_health_enable":true,"tquic_configuration":true,"networkExprimentList":true,"tars_ab_list":true,"zaSetExtraRequestHeader":true}; .data.configs |= map(select((drop_keys[.configKey] // false) | not) | if (.configValue | type) == "object" then del(.configValue.delayHttpdns, .configValue.dnsParser, .configValue.HTTPDNS) else . end)'
 http-response-jq (?i)^https:\/\/api\.zhihu\.com\/root\/tab\/v\d(?:\?.+)?$ '.tab_list |= map(select(.tab_type == "follow" or .tab_type == "recommend" or .tab_type == "hot" or .tab_type == "ring_tab"))'

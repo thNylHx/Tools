@@ -8,6 +8,9 @@
 #!homepage=https://loonlab.103516.xyz/Plugin/
 #!date=2026-11-02 21:00
 
+[URL Rewrite]
+(?i)(^https?:\/\/s\d+\.bfengbf\.com\/video)(.+)_z5q\.ts $1$2.ts 307
+
 [Script]
 [CMS]黑木耳 = type=http-response, pattern=(?i)^https?:\/\/m3u8\.(hmrvideo|heimuertv)\.com\/play\/(.+).m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true, timeout=30
 
