@@ -1,0 +1,24 @@
+#!name=Sub-Store
+#!desc=高级订阅管理工具。使用前请在本插件的详情页面为[PROXY]项分配代理策略。定时任务默认为每天23点55分，可在插件设置中自定义。定时任务指定时将订阅/文件上传到私有Gist。在前端，叫做'同步'或'同步配置'。
+#!author=Peng-YM[https://github.com/Peng-YM]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/Sub-Store.png
+#!openUrl=https://sub.store/
+#!category=功能增强
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+#!arguments=cron:"55 23 * * *",sync_success_notify:true,cors:"https://sub-store.vercel.app, http://substore.stash, https://substore.stash"
+#!arguments-desc=cron: 定时参数\n输入符合CRON表达式的参数\n\nsync_success_notify: 同步成功通知\n同步配置全部成功时是否发送完成通知\n可选值: true, false\n\ncors: CORS允许来源\n允许浏览器跨域访问Sub-Store后端的origin.多个用, 连接，设为*可恢复旧行为。
+
+[Script]
+CORS允许来源 = type=cron, cronexp="cors = input, https://sub-store.vercel.app,", script-path=http://substore.stash, timeout=120, wake-system=1
+
+[Sub-Store] Core = type=http-request, pattern=(?i)^https?:\/\/sub\.store\/((download)|api\/(preview|sync|(utils\/node-info))), script-path=https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store-1.min.js, requires-body=true, timeout=900, argument=cors="{{{cors}}}"
+
+[Sub-Store] Simple = type=http-request, pattern=(?i)^https?:\/\/sub\.store, script-path=https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store-0.min.js, requires-body=true, timeout=900, argument=cors="{{{cors}}}"
+
+[Sub-Store] Sync = type=cron, cronexp="{{{cron}}}", script-path=https://github.com/sub-store-org/Sub-Store/releases/latest/download/cron-sync-artifacts.min.js, timeout=900, argument=sync_success_notify="{{{sync_success_notify}}}"&cors="{{{cors}}}"
+
+[MITM]
+hostname = %APPEND% sub.store
+

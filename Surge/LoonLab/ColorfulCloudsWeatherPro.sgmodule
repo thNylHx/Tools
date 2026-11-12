@@ -1,0 +1,32 @@
+#!name=彩云天气Pro
+#!desc=过滤彩云天气广告，解锁SVIP功能。\nApp版本低于7.20.2。
+#!author=RuCu6[https://github.com/RuCu6], 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/ColorfulCloudsWeatherPro.png
+#!openUrl=https://apps.apple.com/app/id1067198688
+#!category=去广告, 解锁会员
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Rule]
+DOMAIN,abyss.cyapi.cn,REJECT
+DOMAIN,ad.cyapi.cn,REJECT
+DOMAIN,gather.colorfulclouds.net,REJECT
+
+[Map Local]
+(?i)^https:\/\/biz\.cyapi\.cn\/(p\/v1\/entries|p\/v1\/trial_card\/info|v2\/product) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/starplucker\.cyapi\.cn\/v3\/(config\/cypage\/\w+\/conditions|notification\/message_center|operation\/homefeatures) data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[Script]
+[彩云天气Pro]会员Crack = type=http-request, pattern=(?i)^https:\/\/wrapper\.cyapi\.cn\/v1\/(nafp\/origin_images|satellite)\?, script-path=https://loon.103516.xyz/Script/ColorfulCloudsWeatherPro/ColorfulCloudsWeatherPro.js
+
+[彩云天气Pro]底部菜单栏 = type=http-response, pattern=(?i)^https:\/\/api\.caiyunapp\.com\/v1\/activity\?, script-path=https://loon.103516.xyz/Script/ColorfulCloudsWeatherPro/ColorfulCloudsWeatherPro.js, requires-body=true
+
+[彩云天气Pro]我的页面 = type=http-response, pattern=(?i)^https:\/\/biz\.cyapi\.cn\/(api\/v1\/user_detail|p\/v1\/vip_info|v2\/user), script-path=https://loon.103516.xyz/Script/ColorfulCloudsWeatherPro/ColorfulCloudsWeatherPro.js, requires-body=true
+
+[彩云天气Pro]活动推广 = type=http-response, pattern=(?i)^https:\/\/wrapper\.cyapi\.cn\/v1\/activity\?, script-path=https://loon.103516.xyz/Script/ColorfulCloudsWeatherPro/ColorfulCloudsWeatherPro.js, requires-body=true
+
+[MITM]
+hostname = %APPEND% api.caiyunapp.com, *.cyapi.cn
+

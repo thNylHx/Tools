@@ -1,0 +1,19 @@
+#!name=TestFlight Monitor
+#!desc=1.自动监控TestFlight，手动填写应用APP_ID，一旦有空余名额会自动通知，点击通知即可跳转加入；\n2.自动加入TestFlight，需先获取账号令牌[添加主机名testflight.apple.com]，一旦有空余名额会自动加入。
+#!author=fmz200[https://github.com/fmz200], DecoAri[https://github.com/DecoAri], xream[https://github.com/xream]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/TestFlight-04.png
+#!openUrl=https://apps.apple.com/app/id899247664
+#!category=功能增强, 定时任务
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+#!arguments=CaptureAccountToken:#,RunJoin:#,RunMonitor:#,JoinCron:"0 0/3 * * * ?",MonitorCron:"0 * * * * ?"
+#!arguments-desc=CaptureAccountToken: 捕获账号令牌\n是否捕获账户令牌\n可选值: 留空启用, # 禁用\n\nRunJoin: TestFlight自动加入\n是否开启TestFlight自动加入\n可选值: 留空启用, # 禁用\n\nRunMonitor: TestFlight自动监控\n是否开启TestFlight自动监控\n可选值: 留空启用, # 禁用\n\nJoinCron: 加入TestFlight定时参数\n输入Cron表达式来定时运行加入TestFlight\n\nMonitorCron: 监控TestFlight定时参数\n输入Cron表达式来定时运行监控TestFlight
+
+[Script]
+{{{CaptureAccountToken}}}获取账号令牌 = type=http-request, pattern=(?i)^https?:\/\/testflight\.apple\.com\/v3\/accounts\/.*\/apps$, script-path=https://loon.103516.xyz/Script/TestFlight/AutoJoinTFKeys.js
+
+{{{RunJoin}}}TestFlight自动加入 = type=cron, cronexp="{{{JoinCron}}}", script-path=https://loon.103516.xyz/Script/TestFlight/AutoJoinTF.js, timeout=600
+
+{{{RunMonitor}}}TestFlight自动监控 = type=cron, cronexp="{{{MonitorCron}}}", script-path=https://loon.103516.xyz/Script/TestFlight/AutoMonitorTF.js, timeout=30
+

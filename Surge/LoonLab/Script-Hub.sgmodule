@@ -1,0 +1,25 @@
+#!name=Script Hub
+#!desc=重写 & 规则集转换，使用前请在本插件的详情页面为[PROXY]项分配代理策略。
+#!author=xream[https://github.com/xream], Keywos[https://github.com/Keywos], CKYB[https://github.com/CKYB], 小白脸
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/Script-Hub-Dark.png
+#!openUrl=http://10.0.0.140:9101/
+#!category=功能增强
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[General]
+force-http-engine-hosts = %APPEND% script.hub, *.script.hub
+
+[Script]
+[Script Hub]前端 = type=http-request, pattern=(?i)^https?:\/\/script\.hub\/($|edit\/|reload), script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/script-hub.beta.js, timeout=300
+
+[Script Hub]重写转换 = type=http-request, pattern=(?i)^https?:\/\/script\.hub\/file\/_start_\/.+type=(?:qx-rewrite|surge-module|shadowrocket-module|loon-plugin|all-module), script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/Rewrite-Parser.beta.js, timeout=300
+
+[Script Hub]规则集转换 = type=http-request, pattern=(?i)^https?:\/\/script\.hub\/file\/_start_\/.+type=rule-set, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/rule-parser.beta.js, timeout=300
+
+[Script Hub]脚本转换 = type=http-request, pattern=(?i)^https?:\/\/script\.hub\/convert\/, script-path=https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/script-converter.beta.js, timeout=300
+
+[MITM]
+hostname = %APPEND% script.hub, *.script.hub
+

@@ -1,0 +1,17 @@
+#!name=PandaTV
+#!desc=绕过PandaTV直播源防盗检测，恢复正常播放。
+#!author=sooyaaabo[https://github.com/sooyaaabo]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/PandaTV-02.png
+#!openUrl=https://5721004.xyz/player/pandatv.html
+#!category=功能增强
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Header Rewrite]
+http-request (?i)^https?:\/\/[^\/:?#]*\.live-video\.net[^\/:?#]*(?=[:\/?#]|$) header-del "Origin"
+http-request (?i)^https?:\/\/[^\/:?#]*\.live-video\.net[^\/:?#]*(?=[:\/?#]|$) header-add "Origin" "https://www.pandalive.co.kr"
+
+[MITM]
+hostname = %APPEND% live-video.net, *.live-video.net
+

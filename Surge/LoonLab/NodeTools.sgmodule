@@ -1,0 +1,18 @@
+#!name=节点检测工具 𝕂
+#!desc=节点网速测试、节点解锁状况、节点风险查询、节点入口落地查询
+#!author=KOP-XIAO[https://github.com/KOP-XIAO], xream[https://github.com/xream], Keywos[https://github.com/Keywos], dcpengx[https://github.com/dcpengx], 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/Other/Netisp.png
+#!category=功能增强
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Script]
+节点网速测试 𝕂 = type=generic, script-path=https://loon.103516.xyz/Script/NodeTools/NodeSpeedtest.js, timeout=10
+
+节点解锁查询 𝕂 = type=generic, script-path=https://loon.103516.xyz/Script/NodeTools/NodeUnlockDetection.js, timeout=20
+
+节点风险查询 𝕂 = type=generic, script-path=https://loon.103516.xyz/Script/NodeTools/NodeLocation.js, timeout=10
+
+入口落地查询 𝕂 = type=generic, script-path=https://raw.githubusercontent.com/Keywos/rule/master/script/netisp/js/loon.js
+

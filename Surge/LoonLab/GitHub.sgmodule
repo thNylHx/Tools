@@ -1,0 +1,22 @@
+#!name=GitHub
+#!desc=解决GitHub 429请求频繁问题
+#!author=Yuheng0101[https://github.com/Yuheng0101], sooyaaabo[https://github.com/sooyaaabo]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/GitHub-01.png
+#!openUrl=https://github.com/
+#!category=功能增强
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Header Rewrite]
+http-request (?i)^https:\/\/.*\.githubusercontent\.com\/ header-del "Accept-Language"
+http-request (?i)^https:\/\/.*\.githubusercontent\.com\/ header-add "Accept-Language" "en-us"
+http-request (?i)^https:\/\/github\.com\/ header-del "Accept-Language"
+http-request (?i)^https:\/\/github\.com\/ header-add "Accept-Language" "en-us"
+
+[Script]
+[GitHub]将Raw请求自动重定向到CDN = type=http-request, pattern=(?i)^https?:\/\/raw\.githubusercontent\.com\/.+, script-path=https://loon.103516.xyz/Script/GitHub/GitRawAutoCDN.js, timeout=5
+
+[MITM]
+hostname = %APPEND% github.com, *.githubusercontent.com
+

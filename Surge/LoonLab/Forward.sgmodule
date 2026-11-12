@@ -1,0 +1,13 @@
+#!name=Forward
+#!desc=解锁Forward Pro，适用于1.3.13及以下版本。
+#!author=Yu9191[https://github.com/Yu9191]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/Forward.png
+#!openUrl=https://apps.apple.com/app/id6503940939
+#!category=解锁会员
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[MITM]
+hostname = %APPEND% fluxapi.vvebo.vip
+

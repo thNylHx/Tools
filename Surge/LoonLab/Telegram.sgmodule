@@ -1,0 +1,18 @@
+#!name=Telegram
+#!desc=Telegram外部链接跳转，可选目标客户端为Telegram、Swiftgram、Nagram、Turrit、iMe、Nicegram、Lingogram，默认选择Telegram跳转至官方客户端。
+#!author=sooyaaabo[https://github.com/sooyaaabo]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/Telegram-01.png
+#!openUrl=https://apps.apple.com/app/id686449807
+#!category=功能增强
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+#!arguments=tgapp:"Telegram"
+#!arguments-desc=tgapp: 跳转至对应客户端\n可选值: Telegram, Swiftgram, Nagram, Turrit, iMe, Nicegram, Lingogram
+
+[Script]
+[Telegram]t.me重定向 = type=http-response, pattern=(?i)^https?:\/\/(t\.me|telegram\.(me|dog))\/(.+), script-path=https://loon.103516.xyz/Script/Telegram/Telegram.redirect.js, argument=tgapp="{{{tgapp}}}"
+
+[MITM]
+hostname = %APPEND% t.me, telegram.me, telegram.dog
+

@@ -1,0 +1,14 @@
+#!name=AppleOS Monitor
+#!desc=定时监控Apple系统的版本更新。\n可自定义选择需要监控的设备系统。\n可输入多个OS版本，不填则默认所有OS版本，以逗号分隔。\n可选择版本类型，默认为all即所有版本。\n可填入Bark Group分组名称，默认为空值，无分组。\n可填入Bark Key使用Bark推送通知，不填则默认使用Loon推送通知。
+#!author=sooyaaabo[https://github.com/sooyaaabo]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/iBetame.png
+#!category=功能增强, 定时任务
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+#!arguments=RunCron:"",enable_ios:true,enable_ipados:true,enable_macos:true,enable_tvos:true,enable_visionos:true,enable_watchos:true,system:"",version:"all",bark_key:"",bark_group:"",bark_sound:"system"
+#!arguments-desc=RunCron: 定时参数\n输入Cron表达式以启用定时运行\n\nenable_ios: iOS\n是否开启iOS更新监控\n可选值: true, false\n\nenable_ipados: iPadOS\n是否开启iPadOS更新监控\n可选值: true, false\n\nenable_macos: macOS\n是否开启macOS更新监控\n可选值: true, false\n\nenable_tvos: tvOS\n是否开启tvOS更新监控\n可选值: true, false\n\nenable_visionos: visionOS\n是否开启visionOS更新监控\n可选值: true, false\n\nenable_watchos: watchOS\n是否开启watchOS更新监控\n可选值: true, false\n\nsystem: 系统版本\n输入需要监测的系统版本\n\nversion: 版本类型\n输入需要监测的版本类型\n可选值: all, official, beta\n\nbark_key: Bark Key\n输入Bark Key以启用Bark通知\n\nbark_group: Bark Group\n输入Bark Group设置消息推送分组\n\nbark_sound: Bark Sound\n选择需要的Bark通知音效\n可选值: system, alarm, anticipate, bell, birdsong, bloom, calypso, chime, choo, descent, electronic, fanfare, glass, gotosleep, healthnotification, horn, ladder, mailsent, minuet, multiwayinvitation, newmail, newsflash, noir, paymentsuccess, shake, sherwoodforest, silence, spell, suspense, telegraph, tiptoes, typewriters, update
+
+[Script]
+[AppleOS Monitor]版本监控Task = type=cron, cronexp="{{{RunCron}}}", script-path=https://loon.103516.xyz/Script/AppleOS/AppleOSMonitor.js, argument=enable_ios="{{{enable_ios}}}"&enable_ipados="{{{enable_ipados}}}"&enable_macos="{{{enable_macos}}}"&enable_tvos="{{{enable_tvos}}}"&enable_visionos="{{{enable_visionos}}}"&enable_watchos="{{{enable_watchos}}}"&system="{{{system}}}"&version="{{{version}}}"&bark_key="{{{bark_key}}}"&bark_group="{{{bark_group}}}"&bark_sound="{{{bark_sound}}}"
+

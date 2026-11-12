@@ -1,0 +1,18 @@
+#!name=IPA Manager
+#!desc=下载IPA文件实现降级应用安装、已购下架应用安装。\n本插件依赖Scripting App且需解锁Pro权限。
+#!author=githubdulong[https://github.com/githubdulong]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/iAppStore-03.png
+#!openUrl=https://apps.apple.com/app/id6479691128
+#!category=功能增强
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Script]
+[IPA Manager]应用接口 = type=http-request, pattern=(?i)^https:\/\/apple-api\.com, script-path=https://loon.103516.xyz/Script/IPAManager/AppleStoreAPI.js, requires-body=true
+
+[IPA Manager]应用安装 = type=http-request, pattern=(?i)^https:\/\/xiaobai\.app, script-path=https://loon.103516.xyz/Script/IPAManager/InstallApp.js
+
+[MITM]
+hostname = %APPEND% apple-api.com, xiaobai.app
+

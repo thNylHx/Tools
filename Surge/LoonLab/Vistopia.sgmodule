@@ -1,0 +1,28 @@
+#!name=看理想
+#!desc=过滤看理想部分广告，解锁会员广告及无限畅听，暂不支持数字图书馆。\n视频解析：进入视频课程详情页，点击右上角分享并复制链接，在浏览器中打开，进入播放面板后点击任意一集即可自动解析。
+#!author=ios151[https://github.com/ios151], Aioneas[https://github.com/Aioneas]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/Vistopia.png
+#!openUrl=https://apps.apple.com/app/id1342118033
+#!category=去广告, 解锁会员
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Script]
+[看理想]移除首页推广 = type=http-response, pattern=(?i)^https?:\/\/api\.vistopia\.com\.cn\/api\/v2\/home\/header-new(\?|$), script-path=https://raw.githubusercontent.com/Aioneas/Surge/main/Script/klx_no_ads.js, requires-body=true
+
+[看理想]移除广告配置 = type=http-response, pattern=(?i)^https?:\/\/api\.vistopia\.com\.cn\/api\/v2\/other\/config(\?|$), script-path=https://raw.githubusercontent.com/Aioneas/Surge/main/Script/klx_no_ads.js, requires-body=true
+
+[看理想]VIP解锁 = type=http-response, pattern=(?i)^https?:\/\/api\.vistopia\.com\.cn\/api\/v2\/(reader\/(section-detail|detail)|user\/home|vip\/buy-list|services\/play-token(?!\?(?:[^#?&]+&)*library_article_id=)), script-path=https://raw.githubusercontent.com/Aioneas/Surge/8918cca082e16cf42f7b72cd52f20e036724e719/Script/klx_app_video_compat.js, requires-body=true, timeout=15
+
+[看理想]移除会员页购买区 = type=http-response, pattern=(?i)^https?:\/\/shop\.vistopia\.com\.cn\/vip_rights(?:\?|$), script-path=https://raw.githubusercontent.com/Aioneas/Surge/b29d585e7953968337272a9e0f74a83676602e56/Script/klx_vip_page_hide_purchase.js, requires-body=true
+
+[看理想]下载链路修正 = type=http-response, pattern=(?i)^https?:\/\/api\.vistopia\.com\.cn\/api\/v2\/(services\/articles-play-token(\?|$)|content\/batch(\?|$)), script-path=https://raw.githubusercontent.com/Aioneas/Surge/main/Script/klx_app_download_unlock.js?v=20260814g, requires-body=true
+
+[看理想]目录解锁 = type=http-response, pattern=(?i)^https?:\/\/api\.vistopia\.com\.cn\/api\/v2\/content\/(content-show\/\d+|article_list(\?|$)), script-path=https://raw.githubusercontent.com/Aioneas/Surge/main/Script/klx_app_catalog_unlock.js, requires-body=true
+
+[看理想]移除推广昵称 = type=http-response, pattern=(?i)^https?:\/\/api\.vistopia\.com\.cn\/api\/v2\/user\/profile(\?|$), script-path=https://raw.githubusercontent.com/Aioneas/Surge/main/Script/klx_profile_clean.js, requires-body=true
+
+[MITM]
+hostname = %APPEND% api.vistopia.com.cn, shop.vistopia.com.cn
+

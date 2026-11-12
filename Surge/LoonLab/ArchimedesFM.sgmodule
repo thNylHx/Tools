@@ -1,0 +1,19 @@
+#!name=阿基米德
+#!desc=过滤阿基米德广告
+#!author=mist-whisper[https://github.com/mist-whisper]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/ArchimedesFM.png
+#!openUrl=https://apps.apple.com/app/id920700920
+#!category=去广告
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Body Rewrite]
+http-response-jq (?i)^https?:\/\/a\.ajmide\.com\/v2\/get_init_config\.php(\?.*)?$ 'if (.data?.loading_img? and (.data.loading_img|type=="array") and (.data.loading_img|length>0)) then (.data.loading_img=[(.data.loading_img[0] | .imgpath="https://upload-qn.ajmide.com/__splash_pixel.png")]) else . end'
+http-response-jq (?i)^https?:\/\/(a\.ajmide\.com\/(v33\/get_search_keywords\.php|v8\/get_bar_img\.php)|s\.ajmide\.com\/v1\/get_search_home\.php)(\?.*)?$ 'if (.data? and ((.data|has("hotImg")) or (.data|has("hotKeywords")) or (.data|has("hotPrograms")) or (.data|has("boCaiList")) or (.data|has("adInfo")))) then (del(.data.hotImg) | .data.hotKeywords=[] | .data.hotPrograms=[] | .data.boCaiList=[] | .data.adInfo=[]) elif (.data? and (.data|has("search_bar_banner"))) then del(.data.search_bar_banner) elif (.data? and (.data|has("list"))) then (.data.list=[]) else . end'
+http-response-jq (?i)^https?:\/\/a\.ajmide\.com\/v30\/index_tab\.php(\?.*)?$ 'if (.data|type=="array") then (.data = ([.data[] | select(((.tab_id|tostring)=="2") or (.tab_name=="听广播"))] | map(.position="1" | .fixed="1"))) else . end'
+http-response-jq (?i)^https?:\/\/a\.ajmide\.com\/(v28\/get_radio_station\.php|v21\/get_live_bocai\.php|index\.php\?(?:[^#?&]+&)*r=program(%2F|\/)radio-station-top-list)(\?.*)?$ 'if (.data? and (.data|type=="object") and (.data|has("radioList"))) then (.data={radioList:.data.radioList}) elif (.data? and (.data|type=="object") and (.data|has("img_path"))) then (.data.img_path="" | .data.schema="" | .data.title="" | .data.resource_id="" | .data.topicId=0) elif (.data? and (.data|type=="array")) then (.data=[]) else . end'
+
+[MITM]
+hostname = %APPEND% a.ajmide.com, s.ajmide.com, upload-qn.ajmide.com
+

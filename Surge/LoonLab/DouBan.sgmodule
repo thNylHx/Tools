@@ -1,0 +1,20 @@
+#!name=豆瓣
+#!desc=过滤豆瓣广告，仅去除开屏广告
+#!author=ishowshu[https://github.com/ishowshu], fmz200[https://github.com/fmz200]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/DouBan.png
+#!openUrl=https://apps.apple.com/app/id907002334
+#!category=去广告
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Map Local]
+(?i)^https:\/\/storage\.360buyimg\.com\/material-video\/video\/[a-f0-9]{32}\.mp4$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/img\d+\.360buyimg\.com\/pop\/jfs\/t\d+\/\d+\/\d+\/\d+\/\d+\/[A-Za-z0-9]{10,40}\/[A-Za-z0-9]{10,40}\.jpg$ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api\.douban\.com\/v2\/app_ads data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% *.360buyimg.com, api.douban.com
+

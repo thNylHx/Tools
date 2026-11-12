@@ -1,0 +1,20 @@
+#!name=GLaDOS
+#!desc=GLaDOS每日签到。访问网页登录账号，进入账户页面后，手动刷新一次网页自动获取保存Cookie。Cookie存在有效期，失效后需重新获取。
+#!author=curtinp118[https://github.com/curtinp118]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/Airport/GLaDOS-01.png
+#!openUrl=https://glados.cloud/
+#!category=定时任务
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+#!arguments=Cookie-GLaDOS:"",Task-GLaDOS:"",Cron-GLaDOS:"0 0 9 * * *"
+#!arguments-desc=Cookie-GLaDOS: [GLaDOS]每日签到Cookie\n获取[GLaDOS]每日签到Cookie\n可选值: 留空启用, # 禁用\n\nTask-GLaDOS: [GLaDOS]每日签到Task\n定时运行[GLaDOS]每日签到Task\n可选值: 留空启用, # 禁用\n\nCron-GLaDOS: [GLaDOS]定时参数Cron\n输入Cron表达式来定时运行[GLaDOS]每日签到Task
+
+[Script]
+{{{Cookie-GLaDOS}}}[GLaDOS]每日签到Cookie = type=http-request, pattern=(?i)^https:\/\/glados\.(?:cloud|network|one|space|vip)\/console\/account$, script-path=https://loon.103516.xyz/Script/GLaDOS/GLaDOS.checkin.js
+
+{{{Task-GLaDOS}}}[GLaDOS]每日签到Task = type=cron, cronexp="{{{Cron-GLaDOS}}}", script-path=https://loon.103516.xyz/Script/GLaDOS/GLaDOS.checkin.js
+
+[MITM]
+hostname = %APPEND% glados.cloud, glados.network, glados.one, glados.space, glados.vip
+

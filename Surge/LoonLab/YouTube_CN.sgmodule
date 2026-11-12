@@ -1,0 +1,47 @@
+#!name=YouTube
+#!desc=移除YouTube应用中的广告，包括首页信息流、搜索、Shorts和播放器广告；支持可选的后台播放、隐藏Shorts栏目及底部栏按钮、手动或远程频道屏蔽列表，以及将字幕翻译为简体中文或美式英语。日志工具默认仅记录媒体响应头，完整采样可能增加延迟。\n该插件基于devchristian1337的YouTube插件汉化。
+#!author=devchristian1337[https://github.com/devchristian1337]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/YouTube.png
+#!openUrl=https://apps.apple.com/app/id544007664
+#!category=去广告, 功能增强
+#!system_version=15
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-10 23:00
+#!arguments=background_playback:false,playback_region:"original",translation_enabled:#,translation_target:"zh-CN",hide_home_shorts:false,hide_shorts_everywhere:false,hide_shorts_tab:false,hide_create_button:false,blocked_channels:"",blocked_channels_url:"",blocked_channels_update:#,log_enabled:#,quality_research:false,media_capture_mode:"headers",log_level:"info",capture_budget:"32"
+#!arguments-desc=background_playback: 后台播放\n切换应用或锁定屏幕后, 普通视频仍可继续播放音频。直播和受限内容仍由YouTube自行决定是否允许后台播放。\n可选值: false, true\n\nplayback_region: 播放请求地区\noriginal表示保持当前地区。此选项仅修改播放请求中的客户端gl参数, 不会改变出口IP, 也不影响广告拦截。\n可选值: original, CN, HK, TW, US, JP, KR, SG, GB, DE, RU\n\ntranslation_enabled: 字幕翻译\n将现有字幕翻译为所选目标语言。关闭时保留原始字幕请求。\n可选值: 留空启用, # 禁用\n\ntranslation_target: 字幕目标语言\n仅转换现有字幕轨道（简体中文zh-CN或美式英语en-US）。没有字幕的视频无法翻译。不会修改音轨、标题和简介。\n可选值: zh-CN, en-US\n\nhide_home_shorts: 隐藏首页 Shorts\n移除首页信息流中的Shorts栏目。其他页面不受影响, 底部Shorts标签页由独立开关控制。\n可选值: false, true\n\nhide_shorts_everywhere: 隐藏所有页面的Shorts栏目\n移除应用所有信息流中的Shorts栏目, 包括搜索结果、订阅页面和频道页面中使用与首页相同栏目布局的内容。包含首页Shorts栏目, 因此无需同时开启首页隐藏开关。单条Shorts搜索结果和Shorts标签页仍会保留。\n可选值: false, true\n\nhide_shorts_tab: 隐藏Shorts标签页\n移除应用底部栏中的Shorts按钮。仍可通过信息流和频道访问Shorts。应用会缓存底部栏约一小时, 重启应用后才能看到更改。\n可选值: false, true\n\nhide_create_button: 隐藏创建按钮\n移除应用底部栏中的创建（+）按钮。仍可通过其他入口上传内容。应用会缓存底部栏约一小时, 重启应用后才能看到更改。\n可选值: false, true\n\nblocked_channels: 屏蔽频道\n填写频道ID、@用户名或完整频道名称, 多个条目之间用空格分隔。建议优先使用频道ID；名称包含空格时请使用用户名或ID。留空则禁用。仅隐藏能够识别出频道所有者的视频。\n\nblocked_channels_url: 远程频道屏蔽列表地址\n填写公开的HTTPS纯文本直链（例如GitHub Raw）。启用定时更新后, 本地缓存每小时刷新一次。如需立即刷新, 请在开启定时更新的情况下, 从插件脚本列表中手动运行对应脚本。远程列表会与手动列表合并。留空则禁用。\n\nblocked_channels_update: 定时更新频道屏蔽列表\n每小时刷新一次远程频道屏蔽列表。仅在使用远程列表地址时需要开启。关闭后, 定时任务将被禁用, 也无法手动运行, 缓存列表会保持现有内容。\n可选值: 留空启用, # 禁用\n\nlog_enabled: 日志工具\n首次匹配到请求时自动启动, 并通知日志入口。关闭后, 下次API请求会清除日志并停止采样；如需保留日志, 请先下载。完整采样可能增加延迟。\n可选值: 留空启用, # 禁用\n\nquality_research: 画质研究采样\n仅在日志工具开启时生效。记录可识别的画质和格式参数, 并读取较小的媒体POST请求以供比较。不会自动切换画质。\n可选值: false, true\n\nmedia_capture_mode: 媒体采样模式\n仅在日志工具开启时生效, 日志工具关闭后会自动禁用。headers仅记录响应头；full会读取完整响应, 用于开发调试, 但可能增加延迟。\n可选值: headers, full\n\nlog_level: 日志级别\ninfo保留完整脱敏追踪记录；error仅保留错误；debug保留调试级别日志；warn保留警告和错误。\n可选值: info, debug, warn, error\n\ncapture_budget: 日志容量（MB）\n达到容量上限后停止记录, 并保留已有采样数据。导出后请清理日志。\n可选值: 32, 16, 64
+
+[Rule]
+AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP),(DEST-PORT,443)),REJECT
+AND,((DOMAIN,youtubei-att.googleapis.com),(PROTOCOL,UDP),(DEST-PORT,443)),REJECT
+AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,QUIC)),REJECT
+AND,((DOMAIN-SUFFIX,googlevideo.com),(PROTOCOL,UDP),(DEST-PORT,443)),REJECT
+
+[Header Rewrite]
+http-response (?i)^https:\/\/(?:[\w-]+\.)*googlevideo\.com(?::443)?\/ header-del "Alt-Svc"
+http-response (?i)^https:\/\/(?:[\w-]+\.)*googlevideo\.com(?::443)?\/ header-add "Alt-Svc" "clear"
+
+[Script]
+{{{blocked_channels_update}}}[YouTube]频道屏蔽列表定时更新 = type=cron, cronexp=0 * * * *, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/YouTube/request.min.js, timeout=10, argument=blocked_channels_url="{{{blocked_channels_url}}}"
+
+{{{translation_enabled}}}[YouTube]字幕目标语言处理 = type=http-request, pattern=(?i)^https:\/\/(?:www\.|m\.)?youtube\.com\/api\/timedtext\?[^#]+$, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/YouTube/request.min.js, timeout=10, argument=translation_enabled="{{{translation_enabled}}}"&translation_target="{{{translation_target}}}"
+
+{{{log_enabled}}}[YouTube]日志记录与导出 = type=http-request, pattern=(?i)^https:\/\/(?:youtubei(?:-att)?\.googleapis\.com|(?:www\.|m\.|music\.)?youtube\.com)\/youtubei\/v1\/(?:browse|next|search|reel\/reel_watch_sequence)(?:\?[^#]*)?$|^https:\/\/[\w-]+\.googlevideo\.com\/videoplayback\?[^#]*$|^http:\/\/youtube-logs\.invalid(?::80)?(?:\/[^#]*)?$|^https:\/\/[\w-]+\.googlevideo\.com\/initplayback(?:\?[^#]*)?$, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/YouTube/request.min.js, timeout=10, argument=log_enabled="{{{log_enabled}}}"&log_level="{{{log_level}}}"&capture_budget="{{{capture_budget}}}"&background_playback="{{{background_playback}}}"&media_capture_mode="{{{media_capture_mode}}}"&quality_research="{{{quality_research}}}"
+
+[YouTube]配置请求处理 = type=http-request, pattern=(?i)^https:\/\/(?:youtubei(?:-att)?\.googleapis\.com|(?:www\.|m\.|music\.)?youtube\.com)\/youtubei\/v1\/log_event(?:\?[^#]*)?$, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/YouTube/request.min.js, requires-body=true, binary-body-mode=true, timeout=10, argument=log_enabled="{{{log_enabled}}}"&log_level="{{{log_level}}}"&capture_budget="{{{capture_budget}}}"&playback_region="{{{playback_region}}}"
+
+{{{log_enabled}}}[YouTube]媒体响应日志 = type=http-response, pattern=(?i)^https:\/\/[\w-]+\.googlevideo\.com\/(?:videoplayback|initplayback)(?:\?[^#]*)?$, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/YouTube/response.min.js, timeout=10, argument=log_enabled="{{{log_enabled}}}"&log_level="{{{log_level}}}"&capture_budget="{{{capture_budget}}}"
+
+[YouTube]Onesie配置缓存 = type=http-response, pattern=(?i)^https:\/\/(?:youtubei(?:-att)?\.googleapis\.com|(?:www\.|m\.)?youtube\.com)\/youtubei\/v1\/(?:config|log_event)(?:\?[^#]*)?$, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/YouTube/response.min.js, requires-body=true, binary-body-mode=true, timeout=10, argument=log_enabled="{{{log_enabled}}}"&log_level="{{{log_level}}}"&capture_budget="{{{capture_budget}}}"
+
+[YouTube]播放请求与广告配置处理 = type=http-request, pattern=(?i)^https:\/\/(?:youtubei(?:-att)?\.googleapis\.com|(?:www\.|m\.|music\.)?youtube\.com)\/youtubei\/v1\/(?:player|get_watch)(?:\?[^#]*)?$|^https:\/\/(?:youtubei(?:-att)?\.googleapis\.com|(?:www\.|m\.|music\.)?youtube\.com)\/youtubei\/v1\/player\/ad_break(?:\?[^#]*)?$, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/YouTube/request.min.js, requires-body=true, binary-body-mode=true, timeout=10, argument=log_enabled="{{{log_enabled}}}"&log_level="{{{log_level}}}"&capture_budget="{{{capture_budget}}}"&playback_region="{{{playback_region}}}"
+
+[YouTube]底部栏Shorts标签页与创建按钮处理 = type=http-response, pattern=(?i)^https:\/\/(?:youtubei(?:-att)?\.googleapis\.com|(?:www\.|m\.)?youtube\.com)\/youtubei\/v1\/guide(?:\?[^#]*)?$, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/YouTube/response.min.js, requires-body=true, binary-body-mode=true, timeout=10, argument=log_enabled="{{{log_enabled}}}"&log_level="{{{log_level}}}"&capture_budget="{{{capture_budget}}}"&hide_shorts_tab="{{{hide_shorts_tab}}}"&hide_create_button="{{{hide_create_button}}}"
+
+[YouTube]信息流广告与Shorts栏目处理 = type=http-response, pattern=(?i)^https:\/\/(?:youtubei(?:-att)?\.googleapis\.com|(?:www\.|m\.|music\.)?youtube\.com)\/youtubei\/v1\/(browse|next|search)(\?[^#]*)?$, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/YouTube/response.min.js, requires-body=true, binary-body-mode=true, timeout=10, argument=log_enabled="{{{log_enabled}}}"&log_level="{{{log_level}}}"&capture_budget="{{{capture_budget}}}"&hide_home_shorts="{{{hide_home_shorts}}}"&hide_shorts_everywhere="{{{hide_shorts_everywhere}}}"&blocked_channels="{{{blocked_channels}}}"&blocked_channels_url="{{{blocked_channels_url}}}"
+
+[YouTube]播放响应与后台播放处理 = type=http-response, pattern=(?i)^https:\/\/(?:youtubei(?:-att)?\.googleapis\.com|(?:www\.|m\.|music\.)?youtube\.com)\/youtubei\/v1\/(player|get_watch)(\?[^#]*)?$|^https:\/\/(?:youtubei(?:-att)?\.googleapis\.com|(?:www\.|m\.|music\.)?youtube\.com)\/youtubei\/v1\/reel\/reel_watch_sequence(?:\?[^#]*)?$, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/YouTube/response.min.js, requires-body=true, binary-body-mode=true, timeout=10, argument=log_enabled="{{{log_enabled}}}"&log_level="{{{log_level}}}"&capture_budget="{{{capture_budget}}}"&background_playback="{{{background_playback}}}"&quality_research="{{{quality_research}}}"
+
+[MITM]
+hostname = %APPEND% youtubei.googleapis.com, youtubei-att.googleapis.com, youtube.com, www.youtube.com, m.youtube.com, music.youtube.com, *.googlevideo.com
+

@@ -1,0 +1,16 @@
+#!name=Reddit
+#!desc=过滤应用内推广，阻止NSFW提示。
+#!author=xream[https://github.com/xream], 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/Reddit.png
+#!openUrl=https://apps.apple.com/app/id1064216828
+#!category=去广告
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Body Rewrite]
+http-response-jq (?i)^https?:\/\/gql(-fed)?\.reddit\.com 'jq-path=https://kelee.one/Resource/JQLang/Reddit/Reddit_remove_ads.jq'
+
+[MITM]
+hostname = %APPEND% gql.reddit.com, gql-fed.reddit.com
+

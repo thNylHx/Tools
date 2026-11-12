@@ -1,0 +1,27 @@
+#!name=小蚕惠生活
+#!desc=过滤小蚕惠生活广告
+#!author=Sliverkiss[https://github.com/Sliverkiss], 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/XiaoCan.png
+#!openUrl=https://apps.apple.com/app/id1618414236
+#!category=去广告
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Header Rewrite]
+http-request (?i)^https:\/\/gw\.xiaocantech\.com\/rpc header-replace-regex "methodname" ".*(GetBannerList|IsShowOrderAwardPopup|UserLifeShopList|BrandBannerList|GetPromotionGlobalCfg)" "null"
+
+[Map Local]
+(?i)^https:\/\/web2\.realtech-inc\.com\/oss\/xc-app-assets\/configs\/common\/theme\.json data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/web\.xinyifm\.cn\/oss\/xc-app-assets\/configs\/common\/index_activity\.json data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/web2\.realtech-inc\.com\/oss\/xc-app-assets\/configs\/common\/links\.json data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/sdk\.1rtb\.net\/sdk\/req_ad\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/gw\.xiaocantech\.com\/g\/pa data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% gw.xiaocantech.com, web2.realtech-inc.com, sdk.1rtb.net
+

@@ -1,0 +1,82 @@
+#!name=美团
+#!desc=过滤美团广告，需卸载重装。
+#!author=ZenmoFeiShi[https://github.com/ZenmoFeiShi]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/MeiTuan.png
+#!openUrl=https://apps.apple.com/app/id423084029
+#!category=去广告
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Rule]
+DOMAIN,shark-mt.meituan.com,REJECT
+DOMAIN,shark-default.meituan.com,REJECT
+DOMAIN,shark-dp.meituan.com,REJECT
+DOMAIN,shark-ps.meituan.com,REJECT
+DOMAIN,shark-wm.sankuai.com,REJECT
+DOMAIN,shark.dianping.com,REJECT
+DOMAIN-WILDCARD,mquic-*.meituan.com,REJECT
+DOMAIN,httpdnsmultiapi.meituan.com,REJECT
+DOMAIN,httpdnsmultiapivip.meituan.com,REJECT
+DOMAIN,httpdns.meituan.com,REJECT
+DOMAIN,httpdnsvip.meituan.com,REJECT
+DOMAIN,dnspod.meituan.httpdns.qcloud.com,REJECT
+DOMAIN,dnspod.meituan.httpdns.start.qcloud.com,REJECT
+IP-CIDR,202.90.108.13/32,REJECT,no-resolve
+IP-CIDR,202.90.110.46/32,REJECT,no-resolve
+IP-CIDR,202.90.108.69/32,REJECT,no-resolve
+IP-CIDR,202.90.110.45/32,REJECT,no-resolve
+IP-CIDR,202.90.108.68/32,REJECT,no-resolve
+IP-CIDR,202.90.110.48/32,REJECT,no-resolve
+IP-CIDR,202.90.108.67/32,REJECT,no-resolve
+IP-CIDR,202.90.110.36/32,REJECT,no-resolve
+IP-CIDR,202.90.108.54/32,REJECT,no-resolve
+IP-CIDR,202.90.108.55/32,REJECT,no-resolve
+IP-CIDR,203.76.217.51/32,REJECT,no-resolve
+IP-CIDR,203.76.217.53/32,REJECT,no-resolve
+IP-CIDR,203.76.217.241/32,REJECT,no-resolve
+IP-CIDR,203.76.217.243/32,REJECT,no-resolve
+IP-CIDR,103.202.146.30/32,REJECT,no-resolve
+IP-CIDR,103.202.146.49/32,REJECT,no-resolve
+IP-CIDR,101.50.8.64/32,REJECT,no-resolve
+IP-CIDR,103.63.160.64/32,REJECT,no-resolve
+IP-CIDR,103.63.160.69/32,REJECT,no-resolve
+IP-CIDR,103.37.155.77/32,REJECT,no-resolve
+IP-CIDR,103.37.155.60/32,REJECT,no-resolve
+IP-CIDR,111.230.0.200/32,REJECT,no-resolve
+IP-CIDR,139.9.47.231/32,REJECT,no-resolve
+IP-CIDR,121.37.4.167/32,REJECT,no-resolve
+IP-CIDR,119.29.126.219/32,REJECT,no-resolve
+IP-CIDR,106.55.217.56/32,REJECT,no-resolve
+IP-CIDR,103.37.152.224/32,REJECT,no-resolve
+IP-CIDR,119.29.48.215/32,REJECT,no-resolve
+IP-CIDR,42.193.128.160/32,REJECT,no-resolve
+IP-CIDR6,2405:1480:3000:303b::303b/128,REJECT,no-resolve
+IP-CIDR6,2405:1480:1000:3::1e/128,REJECT,no-resolve
+IP-CIDR6,2405:1480:1000:4::15/128,REJECT,no-resolve
+IP-CIDR6,2402:4e00:40:40::2:373/128,REJECT,no-resolve
+URL-REGEX,"^http:\/\/103\.37\.155\.60\/fetch",REJECT
+
+[Map Local]
+(?i)^https?:\/\/(httpdns|httpdnsvip|httpdnsmultiapi|httpdnsmultiapivip)\.meituan\.com\/ data-type=text data="" status-code=200
+
+[Script]
+[美团]精简底部Tab栏 = type=http-response, pattern=(?i)^https?:\/\/apimobile\.meituan\.com\/aggroup\/indexTab, script-path=https://loon.103516.xyz/Script/MeiTuan/MeiTuan.js, requires-body=true, timeout=60
+
+[美团]移除信息流广告 = type=http-response, pattern=(?i)^https?:\/\/feedguess\.meituan\.com\/lycoris\/scene\/(gwc_feed1_2265|personalcenter_2154)(\?|$), script-path=https://loon.103516.xyz/Script/MeiTuan/MeiTuan.js, requires-body=true, timeout=60
+
+[美团]精简我的页面 = type=http-response, pattern=(?i)^https?:\/\/mt-personalcenter\.meituan\.com\/usercenter\/display, script-path=https://loon.103516.xyz/Script/MeiTuan/MeiTuan.js, requires-body=true, timeout=60
+
+[美团]移除搜索默认词与热词 = type=http-response, pattern=(?i)^https?:\/\/apimobile\.meituan\.com\/group\/v1\/deal\/searchpage\/defaultword, script-path=https://loon.103516.xyz/Script/MeiTuan/MeiTuan.js, requires-body=true, timeout=60
+
+[美团]移除热搜推荐 = type=http-response, pattern=(?i)^https?:\/\/apimobile\.meituan\.com\/group\/v1\/deal\/searchpage\/hotword\/city\/divide\/hotrecommend\/, script-path=https://loon.103516.xyz/Script/MeiTuan/MeiTuan.js, requires-body=true, timeout=60
+
+[美团]移除AI角标 = type=http-response, pattern=(?i)^https?:\/\/assistify\.meituan\.com\/assistant\/getAppClientHornConfig, script-path=https://loon.103516.xyz/Script/MeiTuan/MeiTuan.js, requires-body=true, timeout=60
+
+[美团]移除购物车横幅 = type=http-response, pattern=(?i)^https?:\/\/mop\.meituan\.com\/mop\/entry\/shoppingCartEntry, script-path=https://loon.103516.xyz/Script/MeiTuan/MeiTuan.js, requires-body=true, timeout=60
+
+[美团]移除开屏广告 = type=http-response, pattern=(?i)^https?:\/\/mop\.meituan\.com\/api\/entryModule\/startupPicture, script-path=https://loon.103516.xyz/Script/MeiTuan/MeiTuan.js, requires-body=true, timeout=60
+
+[MITM]
+hostname = %APPEND% apimobile.meituan.com, feedguess.meituan.com, mop.meituan.com, mt-personalcenter.meituan.com, assistify.meituan.com, httpdns.meituan.com, httpdnsmultiapi.meituan.com
+

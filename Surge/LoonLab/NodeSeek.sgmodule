@@ -1,0 +1,23 @@
+#!name=NodeSeek & DeepFlood
+#!desc=NodeSeek、DeepFlood每日签到。\n登录账号进入个人页面以获取Cookie，成功后关闭Cookie脚本。\n支持设置签到鸡腿奖励模式，默认为固定5个鸡腿。
+#!author=sooyaaabo[https://github.com/sooyaaabo]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/NodeSeek.png
+#!category=定时任务
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+#!arguments=Cookie-NodeSeek:"",Task-NodeSeek:"",Cron-NodeSeek:"0 0 1 * * *",Mode-NodeSeek:"default",Cookie-DeepFlood:"",Task-DeepFlood:"",Cron-DeepFlood:"0 0 1 * * *",Mode-DeepFlood:"default"
+#!arguments-desc=Cookie-NodeSeek: [NodeSeek]每日签到Cookie\n获取[NodeSeek]每日签到Cookie\n可选值: 留空启用, # 禁用\n\nTask-NodeSeek: [NodeSeek]每日签到Task\n定时运行[NodeSeek]每日签到Task\n可选值: 留空启用, # 禁用\n\nCron-NodeSeek: [NodeSeek]定时参数Cron\n输入Cron表达式来定时运行[NodeSeek]每日签到Task\n\nMode-NodeSeek: [NodeSeek]奖励模式Mode\n选择[NodeSeek]签到鸡腿奖励模式\n可选值: default, random\n\nCookie-DeepFlood: [DeepFlood]每日签到Cookie\n获取[DeepFlood]每日签到Cookie\n可选值: 留空启用, # 禁用\n\nTask-DeepFlood: [DeepFlood]每日签到Task\n定时运行[DeepFlood]每日签到Task\n可选值: 留空启用, # 禁用\n\nCron-DeepFlood: [DeepFlood]定时参数Cron\n输入Cron表达式来定时运行[DeepFlood]每日签到Task\n\nMode-DeepFlood: [DeepFlood]奖励模式Mode\n选择[DeepFlood]签到鸡腿奖励模式\n可选值: default, random
+
+[Script]
+{{{Cookie-NodeSeek}}}[NodeSeek]获取Cookie = type=http-request, pattern=(?i)^https:\/\/www\.nodeseek\.com\/api\/account\/getInfo\/\d+\?(?:[^#?&]+&)*readme=1$, script-path=https://loon.103516.xyz/Script/NodeSeek/NodeSeek.checkin.js
+
+{{{Task-NodeSeek}}}[NodeSeek]定时签到 = type=cron, cronexp="{{{Cron-NodeSeek}}}", script-path=https://loon.103516.xyz/Script/NodeSeek/NodeSeek.checkin.js, argument=Mode-NodeSeek="{{{Mode-NodeSeek}}}"
+
+{{{Cookie-DeepFlood}}}[DeepFlood]获取Cookie = type=http-request, pattern=(?i)^https:\/\/www\.deepflood\.com\/api\/account\/getInfo\/\d+\?(?:[^#?&]+&)*readme=1$, script-path=https://loon.103516.xyz/Script/NodeSeek/DeepFlood.checkin.js
+
+{{{Task-DeepFlood}}}[DeepFlood]定时签到 = type=cron, cronexp="{{{Cron-DeepFlood}}}", script-path=https://loon.103516.xyz/Script/NodeSeek/DeepFlood.checkin.js, argument=Mode-DeepFlood="{{{Mode-DeepFlood}}}"
+
+[MITM]
+hostname = %APPEND% www.nodeseek.com, www.deepflood.com
+

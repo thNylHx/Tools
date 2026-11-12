@@ -1,0 +1,43 @@
+#!name=Spotify
+#!desc=移除Spotify广告并解锁部分高级功能。音质无法设置为“极高（Very High）”。可选功能：隐藏正在播放页面的发现推荐信息流、设置页面的会员信息及AI DJ入口。启用插件后，请重新登录以应用完整配置。\n该插件基于devchristian1337的Spotify插件汉化。
+#!author=devchristian1337[https://github.com/devchristian1337]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/Spotify.png
+#!openUrl=https://apps.apple.com/app/id324684580
+#!category=去广告, 会员解锁
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-10 23:00
+#!arguments=spot_remote_config:#,hide_discovery_feed:true,hide_membership_info:true,hide_ai_dj:true
+#!arguments-desc=spot_remote_config: Protobuf远程配置修改\n另一种Protobuf修补方案，用于修改bootstrap/customize响应中由服务器下发的功能标志。关闭时（推荐）将使用本地配置覆盖方案：根据应用版本（9.1.76及更新版本，或更早版本）匹配对应的高级会员配置快照。两种方案只会运行其中一种，不会同时运行。\n可选值: 留空启用, # 禁用\n\nhide_discovery_feed: 隐藏发现推荐\n隐藏正在播放页面中显示的发现推荐信息流\n可选值: true, false\n\nhide_membership_info: 隐藏会员信息\n隐藏设置页面中的会员信息（仅影响显示）\n可选值: true, false\n\nhide_ai_dj: 隐藏AI DJ\n屏蔽AI DJ入口，使其不在应用中显示\n可选值: true, false
+
+[Rule]
+AND,((DOMAIN-SUFFIX,spotify.com),(PROTOCOL,QUIC)),REJECT
+DOMAIN,aet.spotify.com,REJECT
+
+[Header Rewrite]
+http-request (?i)^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/user-customization-service\/v1\/customize header-del "if-none-match"
+http-request (?i)^https:\/\/(?:spclient\.wg|[\w-]+-spclient)\.spotify\.com(?::443)?\/(?:remote-config-resolver\/v\d+\/configuration|nebula\/v\d+\/configuration\/attributes)(?:\?[^#]*)?$ header-del "if-none-match"
+
+[Map Local]
+(?i)^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com(:443)?\/pendragon data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/(?:spclient\.wg|[\w-]+-spclient)\.spotify\.com(?::443)?\/(?:ads\/|ad-logic\/|[^?#]*\/ad-on-app-open|premium-marketing\/upsellOffer) data-type=text data="" status-code=404
+
+[Script]
+[Spotify]GABO请求处理 = type=http-request, pattern=(?i)^https:\/\/(.*-spclient\.spotify\.com(:443)?|spclient\.wg\.spotify\.com)\/gabo-receiver-service, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/Spotify/spot-gabo.js, timeout=10
+
+[Spotify]搜索广告处理 = type=http-response, pattern=(?i)^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/browsita\/v.\/browse, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/Spotify/spot-NoSearchAd.js, requires-body=true, binary-body-mode=true, timeout=10
+
+[Spotify]首页广告处理 = type=http-response, pattern=(?i)^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/casita\/v.\/home\/, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/Spotify/spot-NoHomeAd.js, requires-body=true, binary-body-mode=true, timeout=10
+
+[Spotify]滚动信息流广告处理 = type=http-response, pattern=(?i)^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/scrollsita\/v.\/scroll\/spotify, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/Spotify/spot-NoScrollAd.js, requires-body=true, binary-body-mode=true, timeout=10
+
+{{{spot_remote_config}}}[Spotify]Protobuf远程配置 = type=http-response, pattern=(?i)^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)(\?.*)?$, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/Spotify/spot-proto-eevee.js, requires-body=true, binary-body-mode=true, timeout=10
+
+[Spotify]Protobuf本地配置 = type=http-response, pattern=(?i)^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)(\?.*)?$, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/Spotify/spot-proto-ev3.js, requires-body=true, binary-body-mode=true, timeout=10
+
+[Spotify]Protobuf版本9.1.98及以上的配置与属性） = type=http-response, pattern=(?i)^https:\/\/(?:spclient\.wg|[\w-]+-spclient)\.spotify\.com(?::443)?\/(?:remote-config-resolver\/v\d+\/configuration|nebula\/v\d+\/configuration\/attributes)(?:\?[^#]*)?$, script-path=https://raw.githubusercontent.com/devchristian1337/loon-plugins/main/Scripts/Spotify/spot-proto-ev3.js, requires-body=true, binary-body-mode=true, timeout=10
+
+[MITM]
+hostname = %APPEND% spclient.wg.spotify.com, *spclient.spotify.com
+

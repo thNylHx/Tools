@@ -1,0 +1,54 @@
+#!name=CMS Adblocker
+#!desc=过滤CMS资源插入式广告
+#!author=Yswag[https://github.com/Yswag]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/CMSPlayer.png
+#!openUrl=https://apps.apple.com/app/id6450680262
+#!category=去广告
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Script]
+[CMS]黑木耳 = type=http-response, pattern=(?i)^https?:\/\/m3u8\.(hmrvideo|heimuertv)\.com\/play\/(.+).m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true, timeout=30
+
+[CMS]量子资源 = type=http-response, pattern=(?i)^https?:\/\/((?:v\.lzcdn|v\.cdnlz|vip.*\.lz[-]?cdn)\d+\.com)\/.+\/hls\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]非凡资源 = type=http-response, pattern=(?i)^https?:\/\/(super|svipsvip|vip)\.ffzy[A-Za-z0-9-]+\.com\/.+\/hls\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]暴风影视 = type=http-response, pattern=(?i)^https?:\/\/c\d+\.rrcdnbf\d+\.com\/video\/(.+)\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]快看资源 = type=http-response, pattern=(?i)^https?:\/\/vip\.kuaikan-(cdn|play)\d+\.com\/.+\/hls\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]ikun资源 = type=http-response, pattern=(?i)^https:\/\/bfikuncdn\.com\/.+\/hls\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]魔都动漫 = type=http-response, pattern=(?i)^https:\/\/play\.modujx\d+\.com\/.+\/hls\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]360资源 = type=http-response, pattern=(?i)^https:\/\/vod\.lyhuicheng\.com\/.+\/hls\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]U酷资源 = type=http-response, pattern=(?i)^https:\/\/ukzy\.ukubf\d+\.com\/.+\/hls\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]樱花资源 = type=http-response, pattern=(?i)^https:\/\/.+\.wgslsw\.com\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]乐视资源 = type=http-response, pattern=(?i)^https:\/\/leshiyuncdn\.36s\.top\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]飞刀资源 = type=http-response, pattern=(?i)^https:\/\/.+\.feidaozy\.com\/.+\/hls\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]奧斯卡资源 = type=http-response, pattern=(?i)^https:\/\/askzycdn\.com\/.+\/hls\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]91麻豆 = type=http-response, pattern=(?i)^https:\/\/.+\.97img\.com\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]番号资源 = type=http-response, pattern=(?i)^https:\/\/.+\.bfbfhao\.com\/.+\/hls\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]草榴资源 = type=http-response, pattern=(?i)^https:\/\/player\.cl9987\.com:188\/.+\/hls\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]易看资源 = type=http-response, pattern=(?i)^https:\/\/v\.ykv3\.com\/.+\/hls\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]鲨鱼资源 = type=http-response, pattern=(?i)^https:\/\/.+\.3sybf\.com\/.+\/hls\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]奶香香 = type=http-response, pattern=(?i)^https:\/\/bfnxxcdn\.com\/.+\/hls\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[CMS]黄瓜资源 = type=http-response, pattern=(?i)^https:\/\/player\.huangguam3u\.com\/.+\/hls\/.+\.m3u8, script-path=https://raw.githubusercontent.com/Yswag/for-own-use/main/js/cmsAdblock.js, requires-body=true
+
+[MITM]
+hostname = %APPEND% m3u8.heimuertv.com, m3u8.hmrvideo.com, v.cdnlz*.com, v.lzcdn*.com, vip*.lz-cdn*.com, vip.lzcdn*.com, *.ffzy*.com, *.rrcdnbf*.com, vip.kuaikan*.com, bfikuncdn.com, play.modujx*.com, vod.lyhuicheng.com, ukzy.ukubf*.com, *.wgslsw.com, askzycdn.com, t0.97img.com, *.bfbfhao.com, player.cl9987.com:188, v.ykv3.com, *.3sybf.com, bfnxxcdn.com, player.huangguam3u.com, leshiyuncdn.36s.top, cs1.feidaozy.com
+

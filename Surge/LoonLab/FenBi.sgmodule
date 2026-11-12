@@ -1,0 +1,47 @@
+#!name=粉笔
+#!desc=过滤粉笔广告
+#!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md], sooyaaabo[https://github.com/sooyaaabo]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/FenBi.png
+#!openUrl=https://apps.apple.com/app/id584660358
+#!category=去广告
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Body Rewrite]
+http-response-jq (?i)^https:\/\/hera-webapp\.fenbi\.com\/(?:iphone|ipad)\/recommend\/info\? 'delpaths([["data","rollingBanner"]])'
+http-response-jq (?i)^https:\/\/ke\.fenbi\.com\/(?:iphone|ipad)\/v3\/apps\/config\? 'delpaths([["data","bottomIconInfos","position","iconDefaultUrl"]])'
+http-response-jq (?i)^https:\/\/ke\.fenbi\.com\/(?:iphone|ipad)\/v3\/apps\/config\? 'delpaths([["data","bottomIconInfos","position","iconSelectedUrl"]])'
+http-response-jq (?i)^https:\/\/ke\.fenbi\.com\/(?:iphone|ipad)\/v3\/apps\/config\? 'delpaths([["data","bottomIconInfos","position","nightModeIconDefaultUrl"]])'
+http-response-jq (?i)^https:\/\/ke\.fenbi\.com\/(?:iphone|ipad)\/v3\/apps\/config\? 'delpaths([["data","bottomIconInfos","position","nightModeIconSelectedUrl"]])'
+
+[Map Local]
+(?i)^https:\/\/keapi\.fenbi\.com\/app\/(?:iphone|ipad)\/position_resource\/get_banners\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/market-api\.fenbi\.com\/(?:iphone|ipad)\/v1\/assistant\/info\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/keapi\.fenbi\.com\/app\/(?:iphone|ipad)\/\w+\/reddot\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/ke\.fenbi\.com\/(?:iphone|ipad)\/v3\/timetable\/today_with_public_episodes\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/hera-webapp\.fenbi\.com\/(?:iphone|ipad)\/topic\/hotquery\/list\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/hera-webapp\.fenbi\.com\/(?:iphone|ipad)\/explore\/consts\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/hera-webapp\.fenbi\.com\/(?:iphone|ipad)\/announcement\/hotquery\/list\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/ke\.fenbi\.com\/(?:iphone|ipad)\/v3\/user_member\/entry\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/market-api\.fenbi\.com\/(?:iphone|ipad)\/v1\/assistant\/my\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/ke\.fenbi\.com\/(?:iphone|ipad)\/v3\/remind\/instant\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/keapi\.fenbi\.com\/ai\/(?:iphone|ipad)\/exercise_remark\/get_questions_remark\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/keapi\.fenbi\.com\/app\/(?:iphone|ipad)\/position_resource\/get_tiku_banners\? data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/keapi\.fenbi\.com\/ai\/(?:iphone|ipad)\/entry\? data-type=text data="{\"msg\":\"\",\"data\":null,\"code\":404}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% keapi.fenbi.com, market-api.fenbi.com, ke.fenbi.com, hera-webapp.fenbi.com
+

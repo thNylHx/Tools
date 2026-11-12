@@ -1,0 +1,108 @@
+#!name=Soul
+#!desc=Soul全面净化
+#!author=ZenmoFeiShi[https://github.com/ZenmoFeiShi], ishowshu[https://github.com/ishowshu], RuCu6[https://github.com/RuCu6], 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/Soul.png
+#!openUrl=https://apps.apple.com/app/id1032287195
+#!category=去广告
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+#!arguments=vist:"",chatPri:"",picRead:""
+#!arguments-desc=vist: 主页访问数量提示\ntrue: 开启; false: 关闭;\n可选值: 留空启用, # 禁用\n\nchatPri: 私聊免礼\ntrue: 开启; false: 关闭;\n可选值: 留空启用, # 禁用\n\npicRead: 阅后即焚\ntrue: 开启; false: 关闭;\n可选值: 留空启用, # 禁用
+
+[Rule]
+DOMAIN-SUFFIX,soulapp.cn,DIRECT
+IP-CIDR,8.210.3.170/32,DIRECT,no-resolve
+IP-CIDR,47.75.72.47/32,DIRECT,no-resolve
+IP-CIDR,13.127.149.196/32,DIRECT,no-resolve
+IP-CIDR,52.194.158.59/32,DIRECT,no-resolve
+IP-CIDR,47.56.131.76/32,DIRECT,no-resolve
+IP-CIDR,47.75.72.47/32,DIRECT,no-resolve
+IP-CIDR,3.0.163.78/32,DIRECT,no-resolve
+DOMAIN,ad-h5-cdn.soulapp.cn,REJECT
+DOMAIN,ad-h5-station-cdn.soulapp.cn,REJECT
+DOMAIN,ad-r.soulapp.cn,REJECT
+DOMAIN,soul-ad.soulapp.cn,REJECT
+DOMAIN,ssp.soulapp.cn,REJECT
+DOMAIN,ssp.1rtb.com,REJECT
+DOMAIN,impdsp.meituan.com,REJECT
+DOMAIN,ssp.maplehaze.cn,REJECT
+IP-CIDR,47.97.215.55/32,REJECT,no-resolve
+IP-CIDR,47.99.42.29/32,REJECT,no-resolve
+IP-CIDR,47.110.187.87/32,REJECT,no-resolve
+IP-CIDR,47.243.147.125/32,REJECT,no-resolve
+IP-CIDR,120.27.235.201/32,REJECT,no-resolve
+IP-CIDR,121.196.197.147/32,REJECT,no-resolve
+
+[Body Rewrite]
+http-response-jq (?i)^https:\/\/(?:api-\w+|gateway-mobile-gray|post)\.soulapp\.cn\/(?:furion\/position\/content|hot\/soul\/rank|mobile\/app\/version\/queryIos|official\/scene\/module|teenager\/config|v2\/post\/gift\/list|v\d\/post\/homepage\/guide\/card) 'delpaths([["data"]])'
+http-response-jq (?i)^https:\/\/chat-live\.soulapp\.cn\/live\/queryFollowRoomList '.data.recUserFeedList = []'
+http-response-jq (?i)^https:\/\/chat-live\.soulapp\.cn\/square\/relation\/guideUserList '.data.userDTOList = []'
+http-response-jq (?i)^https:\/\/api-user\.soulapp\.cn\/v6\/planet\/config '.data.showRedMind = false | .data.showLuckyBag = false | .data.coreCards |= map(select(.type != 27))'
+http-response-jq (?i)^https:\/\/chat-live\.soulapp\.cn\/chatroom\/chatClassifyRoomList '.data.positionContentRespList = []'
+http-response-jq (?i)^https:\/\/post\.soulapp\.cn\/homepage\/tabs\/v2 '.data.selectedTagPool = {} | .data.headTabDTOList |= map(select(.tabCode != "STAR_TRAILS"))'
+http-response-jq (?i)^https:\/\/chat-live\.soulapp\.cn\/chatroom\/getRoomTagInfo '.data.res |= map(.iconConfig = null)'
+
+[Map Local]
+(?i)^https:\/\/chat-live\.soulapp\.cn\/live\/planet\/recListV2 data-type=text data="" status-code=200
+
+(?i)^https:\/\/ssp\.soulapp\.cn\/api\/q data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/47\.110\.187\.87\/winterfell\/(?:v2\/)?getIpByDomain data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/post\.soulapp\.cn\/v\d\/post\/homepage\/guide\/card data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-account\.soulapp\.cn\/teenager\/config data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-a\.soulapp\.cn\/official\/scene\/module data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-user\.soulapp\.cn\/furion\/position\/content data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-chat\.soulapp\.cn\/addressBook\/showBubblingEnter data-type=text data="" status-code=404
+
+(?i)^https:\/\/api-chat\.soulapp\.cn\/chat\/interact\/getEmojiList data-type=text data="" status-code=404
+
+(?i)^https:\/\/increase-openapi\.soulapp\.cn\/increase\/fission\/getHomePageRedIcon data-type=text data="" status-code=404
+
+(?i)^https:\/\/api-chat\.soulapp\.cn\/similar\/post\/intersect\/trigger data-type=text data="" status-code=404
+
+(?i)^https:\/\/api-chat\.soulapp\.cn\/chat\/guide\/defaultWord data-type=text data="" status-code=404
+
+(?i)^https:\/\/api-chat\.soulapp\.cn\/chat\/emoji\/recommend data-type=text data="" status-code=404
+
+(?i)^https:\/\/api-a\.soulapp\.cn\/shara\/app\/url data-type=text data="" status-code=404
+
+(?i)^https:\/\/api-chat\.soulapp\.cn\/chat\/quick\/menu data-type=text data="" status-code=404
+
+(?i)^https:\/\/api-chat\.soulapp\.cn\/chat\/session\/quickButtonCheck data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/chat-live\.soulapp\.cn\/live\/config\/rec-feedback data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/post\.soulapp\.cn\/post\/relationUser\/chatRooms data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/increase-openapi\.soulapp\.cn\/increase\/dusting\/getAddressBookDustings data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/chat-live\.soulapp\.cn\/live\/queryRelevantList data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-user\.soulapp\.cn\/user\/desc\/getUserPersonalDesc data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/post\.soulapp\.cn\/v1\/post\/homepage\/ai\/assistant\/guide data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-chat\.soulapp\.cn\/chatList\/limitAvatar\/entrance data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/api-chat\.soulapp\.cn\/chatList\/top\/recommendList data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/activity\.soulapp\.cn\/commercial\/room\/resources data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/chat-live\.soulapp\.cn\/official\/scene\/module data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[Script]
+{{{vist}}}[Soul]个人主页数量提示 = type=http-response, pattern=(?i)^https:\/\/api-user\.soulapp\.cn\/user\/homepage\/metrics, script-path=https://raw.githubusercontent.com/ishowshu/qx/main/script/soul.js, requires-body=true
+
+{{{chatPri}}}[Soul]去除私聊限制 = type=http-response, pattern=(?i)^https:\/\/api-chat\.soulapp\.cn\/chat\/limitInfo, script-path=https://raw.githubusercontent.com/ishowshu/qx/main/script/soul.js, requires-body=true
+
+{{{picRead}}}[Soul]私聊阅后即焚 = type=http-response, pattern=(?i)^https:\/\/api-chat\.soulapp\.cn\/snapchat\/url, script-path=https://raw.githubusercontent.com/ishowshu/qx/main/script/soul.js, requires-body=true
+
+[MITM]
+hostname = %APPEND% ssp.soulapp.cn, increase-openapi.soulapp.cn, post.soulapp.cn, api-account.soulapp.cn, api-a.soulapp.cn, gateway-mobile-gray.soulapp.cn, api-user.soulapp.cn, chat-live.soulapp.cn, api-chat.soulapp.cn, activity.soulapp.cn, 47.110.187.87, 47.75.72.47, 47.96.7.91, 47.96.11.46, 47.96.20.45, 47.97.215.55, 47.98.54.106, 47.98.137.249, 47.99.42.29, 114.215.255.94, 116.62.28.7, 116.62.47.28, 118.31.7.235, 118.31.112.221, 120.27.235.201, 120.55.55.115, 120.55.62.124, 121.196.197.147, 121.196.203.183
+

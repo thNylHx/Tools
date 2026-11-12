@@ -1,0 +1,21 @@
+#!name=Spotify
+#!desc=过滤Spotify广告，修改插件自定义配置项需要重新登陆方可生效。适用于9.1.14及以下版本。
+#!author=001ProMax[https://github.com/001ProMax], 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/Spotify.png
+#!openUrl=https://apps.apple.com/app/id324684580
+#!category=去广告
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+#!arguments=tab:false,useractivity:true
+#!arguments-desc=tab: 移除底栏创建按钮\n此开关控制是否移除底栏创建按钮\n可选值: false, true\n\nuseractivity: 启用Apple设备接力\n此开关控制是否使用Apple设备接力\n可选值: true, false
+
+[Map Local]
+(?i)^https:\/\/(?:\w+-spclient|spclient\.wg)\.spotify\.com(?::443)?\/pendragon\/ data-type=text data="{}" status-code=200 header="Content-Type:application/json"
+
+[Script]
+[Spotify]Protobuf = type=http-response, pattern=(?i)^https:\/\/(?:\w+-spclient|spclient\.wg)\.spotify\.com(?::443)?\/(?:bootstrap|user-customization-service), script-path=https://raw.githubusercontent.com/001ProMax/Surge/main/Script/Spotify.Crack.Dev.js, requires-body=true, binary-body-mode=true, timeout=5, argument=tab="{{{tab}}}"&useractivity="{{{useractivity}}}"
+
+[MITM]
+hostname = %APPEND% *-spclient.spotify.com, spclient.wg.spotify.com
+

@@ -1,0 +1,21 @@
+#!name=铁路12306
+#!desc=过滤铁路12306广告
+#!author=RuCu6[https://github.com/RuCu6], kokoryh[https://github.com/kokoryh]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/Railway12306.png
+#!openUrl=https://apps.apple.com/app/id564818797
+#!category=去广告
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Rule]
+DOMAIN,ad.12306.cn,DIRECT
+
+[Script]
+[铁路12306]移除开屏广告 = type=http-request, pattern=(?i)^https:\/\/ad\.12306\.cn\/ad\/ser\/getAdList$, script-path=https://raw.githubusercontent.com/kokoryh/Sparkle/master/dist/12306.js, requires-body=true
+
+[铁路12306]移除应用内广告 = type=http-request, pattern=(?i)^https:\/\/mobile\.12306\.cn\/otsmobile\/app\/mgs\/mgw\.htm$, script-path=https://raw.githubusercontent.com/kokoryh/Sparkle/master/dist/12306.js
+
+[MITM]
+hostname = %APPEND% ad.12306.cn, mobile.12306.cn
+

@@ -1,0 +1,13 @@
+#!name=IPPure
+#!desc=通过IPPure接口检测IP质量。
+#!author=sooyaaabo[https://github.com/sooyaaabo]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/IPPure.png
+#!openUrl=https://ippure.com/
+#!category=功能增强
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Script]
+IPPure = type=generic, script-path=https://loon.103516.xyz/Script/IPPure/IPPure.js, timeout=10
+

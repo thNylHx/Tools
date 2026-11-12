@@ -1,0 +1,20 @@
+#!name=X（Twitter）
+#!desc=过滤网页版X（Twitter）广告，支持自定义标签。\n所有标签：政治, 股票, 商业, 科学, AI, 加密, 新闻, 金融, 软件, 体育, 科技, 艺术, 电影与电视, 游戏, 橄榄球, 动漫, 旅行, 美食, 棒球, 篮球, 美妆, 拳击, 足球, 职业, 汽车, 宠物, 名人, 音乐, 乡村音乐, 舞蹈, 恋爱, 设计, 教育, 电音, 创业公司, 电子竞技, 家庭, 时尚, 流行音乐, 高尔夫, 韩流音乐, 表情包, 健康, 摔跤, 赛车, 摩托车, 自然, 曲棍球, 奥运会, 照片, 播客, 房地产, 机器人, 摇滚, 橄榄球, 购物, 冰雪运动, 太空, 网球, 首页, 板球, F1, 骑行, J-Pop, 音乐会, 嘻哈, 爵士乐, 犯罪, 选举, 生物技术, 心理健康, 数字艺术
+#!author=fmz200[https://github.com/fmz200], sooyaaabo[https://github.com/sooyaaabo]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/X-01.png
+#!openUrl=https://apps.apple.com/app/id333903271
+#!category=去广告
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+#!arguments=pinned_tags:""
+#!arguments-desc=pinned_tags: X_Web Tags\n输入自定义首页顶部标签
+
+[Script]
+[X_Web]去除广告 = type=http-response, pattern=(?i)^https?:\/\/x\.com\/i\/api\/graphql\/[^\/]+\/(HomeTimeline|HomeLatestTimeline|TweetDetail), script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/X/X_ads.js, requires-body=true
+
+[X_Web]自定义首页顶部标签 = type=http-response, pattern=(?i)^https?:\/\/x\.com\/i\/api\/graphql\/[^\/]+\/PinnedTimelines\?, script-path=https://loon.103516.xyz/Script/X_Web/XWeb.enhance.js, requires-body=true, argument=pinned_tags="{{{pinned_tags}}}"
+
+[MITM]
+hostname = %APPEND% x.com
+

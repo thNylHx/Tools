@@ -1,0 +1,28 @@
+#!name=腾讯视频
+#!desc=不负好时光 [不负好广告]
+#!author=ZenmoFeiShi[https://github.com/ZenmoFeiShi]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/TencentVideo.png
+#!openUrl=https://apps.apple.com/app/id458318329
+#!category=去广告
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-03 22:00
+
+[Rule]
+DOMAIN,iacc.stgw.qq.com,REJECT
+DOMAIN,tacc.video.qq.com,REJECT
+
+[Script]
+[腾讯视频]请求体处理 = type=http-request, pattern=(?i)^https?:\/\/i\.video\.qq\.com\/(?:\?.*)?$, script-path=https://loon.103516.xyz/Script/TencentVideo/TencentVideo.js, requires-body=true, binary-body-mode=true, timeout=10
+
+[腾讯视频]响应体处理 = type=http-response, pattern=(?i)^https?:\/\/i\.video\.qq\.com\/(?:\?.*)?$, script-path=https://loon.103516.xyz/Script/TencentVideo/TencentVideo.js, requires-body=true, binary-body-mode=true, timeout=10
+
+[腾讯视频]JCE处理 = type=http-response, pattern=(?i)^https?:\/\/iacc\.qq\.com\/(?:\?.*)?$, script-path=https://loon.103516.xyz/Script/TencentVideo/TencentVideo.js, requires-body=true, binary-body-mode=true, timeout=10
+
+[腾讯视频]配置处理 = type=http-response, pattern=(?i)^https?:\/\/config\.ab\.qq\.com\/tab\/GetTabRemoteConfig(?:\?.*)?$, script-path=https://loon.103516.xyz/Script/TencentVideo/TencentVideo.js, requires-body=true, binary-body-mode=true, timeout=10
+
+[腾讯视频]配置处理 = type=http-response, pattern=(?i)^https:\/\/rdelivery\.qq\.com\/v1\/sdkconfig\/get(?:\?.*)?$, script-path=https://loon.103516.xyz/Script/TencentVideo/TencentVideo.js, requires-body=true, timeout=10
+
+[MITM]
+hostname = %APPEND% i.video.qq.com, iacc.qq.com, config.ab.qq.com, rdelivery.qq.com
+

@@ -1,0 +1,23 @@
+#!name=超格教育
+#!desc=过滤超格教育广告
+#!author=sooyaaabo[https://github.com/sooyaaabo]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/ChaoGeJiaoYu.png
+#!openUrl=https://apps.apple.com/app/id1367434722
+#!category=去广告
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Body Rewrite]
+http-response-jq (?i)^https:\/\/mapi\.chaogejiaoyu\.com\/api\/user\/checkToken(?:\?|$) '.data.has_ad_page_list = [] | .data.startup.show_promotion = 0 | .data.startup.promotion_url = "" | .data.startup.home_top_menu_list |= map(select(.type != "ad_btn"))'
+
+[Map Local]
+(?i)^https:\/\/mapi\.chaogejiaoyu\.com\/api\/ad\/getPageAdList(?:\?|$) data-type=text data="{\"status\":0,\"message\":\"success\",\"data\":{\"ad_list\":[]}}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/mapi\.chaogejiaoyu\.com\/api\/outline\/getAppBanner\?(?:[^#]*&)?adv_flag=1(?:&|$) data-type=text data="{\"status\":0,\"message\":\"success\",\"data\":[]}" status-code=200 header="Content-Type:application/json"
+
+(?i)^https:\/\/mapi\.chaogejiaoyu\.com\/api\/course\/getOpenCourseColumnInfo(?:\?|$) data-type=text data="{\"status\":0,\"message\":\"success\",\"data\":{}}" status-code=200 header="Content-Type:application/json"
+
+[MITM]
+hostname = %APPEND% mapi.chaogejiaoyu.com
+

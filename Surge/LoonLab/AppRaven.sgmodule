@@ -1,0 +1,16 @@
+#!name=AppRaven
+#!desc=AppRaven解锁会员
+#!author=Yu9191[https://github.com/Yu9191]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/AppRaven.png
+#!openUrl=https://apps.apple.com/app/id1490607195
+#!category=解锁会员
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-02 21:00
+
+[Script]
+[AppRaven]会员Crack = type=http-response, pattern=(?i)^https:\/\/appraven\.net\/appraven\/graphql, script-path=https://loon.103516.xyz/Script/AppRaven/AppRaven.js, requires-body=true
+
+[MITM]
+hostname = %APPEND% appraven.net
+
