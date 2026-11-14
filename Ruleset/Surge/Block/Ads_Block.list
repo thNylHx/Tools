@@ -1,8 +1,8 @@
 # 规则名称: Ads_Block
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则数量: 12312
-# 更新时间: 2026-11-07 14:15:41
+# 规则数量: 12321
+# 更新时间: 2026-11-15 02:19:25
 
 DOMAIN,1500020991.vodplayer.wxamedia.com
 DOMAIN,1500022744.vodplayer.wxamedia.com
@@ -151,23 +151,22 @@ DOMAIN,adpai.thepaper.cn
 DOMAIN,adproxy.autohome.com.cn
 DOMAIN,adreq.vivo.com.cn
 DOMAIN,ads-api-o.api.leiniao.com
-DOMAIN,ads-api.tiktok.com
 DOMAIN,ads-api.twitter.com
 DOMAIN,ads-cloud.rovio.com
 DOMAIN,ads-d.viber.com
 DOMAIN,ads-gate.wildberries.ru
 DOMAIN,ads-img-al.xhscdn.com
+DOMAIN,ads-img-bak.xhscdn.com
 DOMAIN,ads-img-qc.xhscdn.com
 DOMAIN,ads-img.mozilla.org
 DOMAIN,ads-integration.rustore.ru
-DOMAIN,ads-jp.tiktok.com
 DOMAIN,ads-marketing-vivofs.vivo.com.cn
 DOMAIN,ads-media.wildberries.ru
 DOMAIN,ads-sdk-api.ranfenghd.com
-DOMAIN,ads-sg.tiktok.com
 DOMAIN,ads-shopping.shouqianba.com
 DOMAIN,ads-video-al.xhscdn.com
 DOMAIN,ads-video-qc.xhscdn.com
+DOMAIN,ads-vp5.xhscdn.com
 DOMAIN,ads.95516.com
 DOMAIN,ads.adfunlink.com
 DOMAIN,ads.aplus.pptv.com
@@ -203,7 +202,6 @@ DOMAIN,ads.service.kugou.com
 DOMAIN,ads.snapchat.com
 DOMAIN,ads.storm8.com
 DOMAIN,ads.superawesome.tv
-DOMAIN,ads.tiktok.com
 DOMAIN,ads.v3mh.com
 DOMAIN,ads.viber.com
 DOMAIN,ads.vk.com
@@ -268,7 +266,6 @@ DOMAIN,adsmind.tc.qq.com
 DOMAIN,adsmind.ugdtimg.com
 DOMAIN,adsmoloco.com
 DOMAIN,adsp.xunlei.com
-DOMAIN,adspecs.yahoo.com
 DOMAIN,adsstatic.vivo.com.cn
 DOMAIN,adstat.izuiyou.com
 DOMAIN,adstats.tencentmusic.com
@@ -277,9 +274,7 @@ DOMAIN,adstore-1252524079.file.myqcloud.com
 DOMAIN,adstore-index-1252524079.file.myqcloud.com
 DOMAIN,adstrategy.biz.weibo.com
 DOMAIN,adstudio-assets.scdn.co
-DOMAIN,adstudio.spotify.com
 DOMAIN,adtago.s3.amazonaws.com
-DOMAIN,adtech.yahooinc.com
 DOMAIN,adtrack.e.kuaishou.com
 DOMAIN,adtrack.quark.cn
 DOMAIN,adtracker.adfunlink.com
@@ -304,12 +299,7 @@ DOMAIN,advert-media-api.wildberries.ru
 DOMAIN,advert.mafengwo.cn
 DOMAIN,advertise.baicizhan.com
 DOMAIN,advertise.baicizhan.org
-DOMAIN,advertising-api-eu.amazon.com
-DOMAIN,advertising-api-fe.amazon.com
-DOMAIN,advertising-api.amazon.com
 DOMAIN,advertising.apple.com
-DOMAIN,advertising.yahoo.com
-DOMAIN,advertising.yandex.ru
 DOMAIN,advice-ads.s3.amazonaws.com
 DOMAIN,adview.cn
 DOMAIN,advk.vk.ru
@@ -450,6 +440,7 @@ DOMAIN,apilog-web.acfun.cn
 DOMAIN,apiyd.my91app.com
 DOMAIN,apm-a.pinduoduo.com
 DOMAIN,apm.pinduoduo.com
+DOMAIN,apmplus.volces.com
 DOMAIN,app-ad.variflight.com
 DOMAIN,app-analytics-services.com
 DOMAIN,app-measurement.com
@@ -499,7 +490,6 @@ DOMAIN,beizi.biz
 DOMAIN,bes-mtj.baidu.com
 DOMAIN,bgg.baidu.com
 DOMAIN,bianxian.com
-DOMAIN,bingads.microsoft.com
 DOMAIN,biz.weibo.com
 DOMAIN,bj-td-menta-01-callback.advlion.com
 DOMAIN,bj.ad.track.66mobi.com
@@ -566,6 +556,7 @@ DOMAIN,click.liftoff.io
 DOMAIN,click.oneplus.cn
 DOMAIN,click.rustore.ru
 DOMAIN,click4.chinaliftoff.io
+DOMAIN,client-upload.cn-shanghai.log.aliyuncs.com
 DOMAIN,clog.miguvideo.com
 DOMAIN,cloooud.com
 DOMAIN,cn-api.anythinktech.com
@@ -589,7 +580,6 @@ DOMAIN,crashlyticsreports-pa.googleapis.com
 DOMAIN,credits.bz.mgtv.com
 DOMAIN,credits2.bz.mgtv.com
 DOMAIN,credits3.bz.mgtv.com
-DOMAIN,csjplatform.com
 DOMAIN,cwx.lianwangtech.com
 DOMAIN,d.applovin.com
 DOMAIN,d.applvn.com
@@ -634,6 +624,7 @@ DOMAIN,dsp-x.jd.com
 DOMAIN,dsp.fcbox.com
 DOMAIN,dsp.toutiao.com
 DOMAIN,dsplog-adnet.vivo.com.cn
+DOMAIN,du-app.cn-hangzhou.log.aliyuncs.com
 DOMAIN,dualstack-logs.amap.com
 DOMAIN,duclick.baidu.com
 DOMAIN,dxp.baidu.com
@@ -650,6 +641,7 @@ DOMAIN,encounter.bz.mgtv.com
 DOMAIN,engine.dcad01.com
 DOMAIN,entry.baidu.com
 DOMAIN,ep7.facebook.com
+DOMAIN,errnewlog.umeng.com
 DOMAIN,error-tracking.megamarket.tech
 DOMAIN,et-eus.w.inmobi.com
 DOMAIN,et.tanx.com
@@ -671,6 +663,7 @@ DOMAIN,firebaselogging-pa.googleapis.com
 DOMAIN,flash.sec.miui.com
 DOMAIN,floor.bz.mgtv.com
 DOMAIN,flurry.com
+DOMAIN,fp-it.fengkongcloud.com
 DOMAIN,free-aos-cdn-image.amap.com
 DOMAIN,frontend-perf-service.e.kuaishou.com
 DOMAIN,fundingchoicesmessages.google.com
@@ -879,6 +872,7 @@ DOMAIN,launcher.smart-tv.cn
 DOMAIN,launcherimg.smart-tv.cn
 DOMAIN,layer.bz.mgtv.com
 DOMAIN,lf-ad-ies.bytecdn.cn
+DOMAIN,lf-event-manager.oceanengine.com
 DOMAIN,lf-normal-gr-sourcecdn.bytegecko.com
 DOMAIN,lf-webcast-gr-sourcecdn.bytegecko.com
 DOMAIN,lf3-ad-union-sdk.pglstatp-toutiao.com
@@ -901,6 +895,7 @@ DOMAIN,log-api-mn.huxiu.com
 DOMAIN,log-api.huxiu.com
 DOMAIN,log-api.pangolin-sdk-toutiao-b.com
 DOMAIN,log-api.pangolin-sdk-toutiao.com
+DOMAIN,log-auth.zztfly.com
 DOMAIN,log-report.com
 DOMAIN,log-sdk.gifshow.com
 DOMAIN,log-sdk.ksapisrv.com
@@ -1281,6 +1276,8 @@ DOMAIN,service.changhong.upgrade2.huan.tv
 DOMAIN,service.vmos.cn
 DOMAIN,sf16-static.i18n-pglstatp.com
 DOMAIN,sf3-fe-tos.pglstatp-toutiao.com
+DOMAIN,shihuo-new.log.shihuocdn.cn
+DOMAIN,shihuo.log.shihuocdn.cn
 DOMAIN,shouji.sogou.com
 DOMAIN,sigmob.com
 DOMAIN,sin3-ib.adnxs.com
@@ -1451,10 +1448,9 @@ DOMAIN,umini.shujupie.com
 DOMAIN,union-httpdns.gslb.yy.com
 DOMAIN,union-mlog.bigda.com
 DOMAIN,union-record.oss-cn-zhangjiakou.aliyuncs.com
-DOMAIN,union.baidu.cn
-DOMAIN,union.baidu.com
 DOMAIN,union.macoms.la
 DOMAIN,unityads.unity3d.com
+DOMAIN,upc.zztfly.com
 DOMAIN,update.avlyun.sec.miui.com
 DOMAIN,update.lejiao.tv
 DOMAIN,update0.aiclk.com
@@ -12153,6 +12149,7 @@ IP-CIDR,103.44.59.54/32,no-resolve
 IP-CIDR,106.39.206.21/32,no-resolve
 IP-CIDR,106.39.206.25/32,no-resolve
 IP-CIDR,106.39.206.70/32,no-resolve
+IP-CIDR,111.20.26.186/32,no-resolve
 IP-CIDR,111.206.147.156/32,no-resolve
 IP-CIDR,111.206.147.210/32,no-resolve
 IP-CIDR,111.206.148.27/32,no-resolve
@@ -12161,11 +12158,14 @@ IP-CIDR,111.31.201.194/32,no-resolve
 IP-CIDR,111.31.241.140/32,no-resolve
 IP-CIDR,111.31.241.76/32,no-resolve
 IP-CIDR,111.63.147.158/32,no-resolve
+IP-CIDR,112.84.130.73/32,no-resolve
 IP-CIDR,115.236.121.195/32,no-resolve
 IP-CIDR,115.236.121.51/32,no-resolve
 IP-CIDR,116.128.177.249/32,no-resolve
 IP-CIDR,116.130.224.150/32,no-resolve
 IP-CIDR,116.130.224.205/32,no-resolve
+IP-CIDR,116.142.251.100/32,no-resolve
+IP-CIDR,116.177.251.215/32,no-resolve
 IP-CIDR,116.211.198.237/32,no-resolve
 IP-CIDR,117.177.248.17/32,no-resolve
 IP-CIDR,117.177.248.41/32,no-resolve
@@ -12174,6 +12174,7 @@ IP-CIDR,118.89.204.198/32,no-resolve
 IP-CIDR,119.29.29.98/32,no-resolve
 IP-CIDR,119.29.29.99/32,no-resolve
 IP-CIDR,120.27.235.201/32,no-resolve
+IP-CIDR,120.77.173.114/32,no-resolve
 IP-CIDR,121.196.197.147/32,no-resolve
 IP-CIDR,122.229.29.89/32,no-resolve
 IP-CIDR,122.229.8.47/32,no-resolve
@@ -12181,16 +12182,23 @@ IP-CIDR,123.151.48.171/32,no-resolve
 IP-CIDR,123.151.48.193/32,no-resolve
 IP-CIDR,123.151.48.208/32,no-resolve
 IP-CIDR,123.151.54.50/32,no-resolve
+IP-CIDR,123.56.23.22/32,no-resolve
 IP-CIDR,124.192.153.42/32,no-resolve
+IP-CIDR,14.29.101.160/32,no-resolve
+IP-CIDR,14.29.101.168/32,no-resolve
+IP-CIDR,14.29.101.169/32,no-resolve
 IP-CIDR,180.153.202.85/32,no-resolve
 IP-CIDR,180.76.76.200/32,no-resolve
+IP-CIDR,182.254.116.116/32,no-resolve
 IP-CIDR,182.61.194.7/32,no-resolve
 IP-CIDR,183.192.196.31/32,no-resolve
 IP-CIDR,186.76.76.200/32,no-resolve
 IP-CIDR,203.107.1.0/24,no-resolve
 IP-CIDR,203.107.1.1/24,no-resolve
 IP-CIDR,203.205.129.102/32,no-resolve
+IP-CIDR,203.205.137.89/32,no-resolve
 IP-CIDR,203.205.234.132/32,no-resolve
+IP-CIDR,218.77.192.51/32,no-resolve
 IP-CIDR,220.196.159.73/32,no-resolve
 IP-CIDR,223.87.176.139/32,no-resolve
 IP-CIDR,223.87.176.176/32,no-resolve
@@ -12204,6 +12212,7 @@ IP-CIDR,223.87.182.101/32,no-resolve
 IP-CIDR,223.87.182.102/32,no-resolve
 IP-CIDR,223.87.182.11/32,no-resolve
 IP-CIDR,223.87.182.52/32,no-resolve
+IP-CIDR,38.190.225.166/32,no-resolve
 IP-CIDR,39.156.140.245/32,no-resolve
 IP-CIDR,39.156.140.30/32,no-resolve
 IP-CIDR,39.156.140.47/32,no-resolve
