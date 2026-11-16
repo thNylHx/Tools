@@ -3,8 +3,8 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 12321
-#!updated = 2026-11-15 02:19:30
+#!Rule = 12335
+#!updated = 2026-11-17 06:22:27
 
 
 [Rule]
@@ -323,6 +323,7 @@ DOMAIN,adx-saas.advlion.com,REJECT,extended-matching,pre-matching
 DOMAIN,adx-strategy-api-cn.statisticslinks.com,REJECT,extended-matching,pre-matching
 DOMAIN,adx.ads.heytapmobi.com,REJECT,extended-matching,pre-matching
 DOMAIN,adx.ads.oppomobile.com,REJECT,extended-matching,pre-matching
+DOMAIN,adx.anythinktech.com,REJECT,extended-matching,pre-matching
 DOMAIN,adx.appsdk.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN,adx.hupu.com,REJECT,extended-matching,pre-matching
 DOMAIN,adx.op.cp18.ott.cibntv.net,REJECT,extended-matching,pre-matching
@@ -350,6 +351,7 @@ DOMAIN,alicoccdncnc-xn.inter.71edge.com,REJECT,extended-matching,pre-matching
 DOMAIN,alicoccdnct-xn.inter.71edge.com,REJECT,extended-matching,pre-matching
 DOMAIN,alltbcsp2p.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,alog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,alogsus.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,alogus.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,als.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,alt-r.my.com,REJECT,extended-matching,pre-matching
@@ -381,6 +383,7 @@ DOMAIN,analytics.wildberries.ru,REJECT,extended-matching,pre-matching
 DOMAIN,analytics.woozooo.com,REJECT,extended-matching,pre-matching
 DOMAIN,analyticsengine.s3.amazonaws.com,REJECT,extended-matching,pre-matching
 DOMAIN,analyze.lemurbrowser.com,REJECT,extended-matching,pre-matching
+DOMAIN,android.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,andrqd.play.aiseet.atianqi.com,REJECT,extended-matching,pre-matching
 DOMAIN,ap.dongdianqiu.com,REJECT,extended-matching,pre-matching
 DOMAIN,ap.dongqiudi.com,REJECT,extended-matching,pre-matching
@@ -494,6 +497,7 @@ DOMAIN,beizi.biz,REJECT,extended-matching,pre-matching
 DOMAIN,bes-mtj.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,bgg.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,bianxian.com,REJECT,extended-matching,pre-matching
+DOMAIN,bid.shanghailingye.cn,REJECT,extended-matching,pre-matching
 DOMAIN,biz.weibo.com,REJECT,extended-matching,pre-matching
 DOMAIN,bj-td-menta-01-callback.advlion.com,REJECT,extended-matching,pre-matching
 DOMAIN,bj.ad.track.66mobi.com,REJECT,extended-matching,pre-matching
@@ -563,7 +567,10 @@ DOMAIN,click4.chinaliftoff.io,REJECT,extended-matching,pre-matching
 DOMAIN,client-upload.cn-shanghai.log.aliyuncs.com,REJECT,extended-matching,pre-matching
 DOMAIN,clog.miguvideo.com,REJECT,extended-matching,pre-matching
 DOMAIN,cloooud.com,REJECT,extended-matching,pre-matching
+DOMAIN,cn-api-sec.anythinktech.com,REJECT,extended-matching,pre-matching
 DOMAIN,cn-api.anythinktech.com,REJECT,extended-matching,pre-matching
+DOMAIN,cn-da.anythinktech.com,REJECT,extended-matching,pre-matching
+DOMAIN,cn-tk.anythinktech.com,REJECT,extended-matching,pre-matching
 DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,cnlogs.umengcloud.com,REJECT,extended-matching,pre-matching
 DOMAIN,cnzz.com,REJECT,extended-matching,pre-matching
@@ -588,6 +595,7 @@ DOMAIN,cwx.lianwangtech.com,REJECT,extended-matching,pre-matching
 DOMAIN,d.applovin.com,REJECT,extended-matching,pre-matching
 DOMAIN,d.applvn.com,REJECT,extended-matching,pre-matching
 DOMAIN,da.anythinktech.com,REJECT,extended-matching,pre-matching
+DOMAIN,da.statisticslinks.com,REJECT,extended-matching,pre-matching
 DOMAIN,data-sdk-uuid-log.d.meituan.net,REJECT,extended-matching,pre-matching
 DOMAIN,data.ads.oppomobile.com,REJECT,extended-matching,pre-matching
 DOMAIN,data.chsmarttv.com,REJECT,extended-matching,pre-matching
@@ -645,7 +653,10 @@ DOMAIN,encounter.bz.mgtv.com,REJECT,extended-matching,pre-matching
 DOMAIN,engine.dcad01.com,REJECT,extended-matching,pre-matching
 DOMAIN,entry.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,ep7.facebook.com,REJECT,extended-matching,pre-matching
+DOMAIN,errlog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,errlogos.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,errnewlog.umeng.com,REJECT,extended-matching,pre-matching
+DOMAIN,errnewlogos.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,error-tracking.megamarket.tech,REJECT,extended-matching,pre-matching
 DOMAIN,et-eus.w.inmobi.com,REJECT,extended-matching,pre-matching
 DOMAIN,et.tanx.com,REJECT,extended-matching,pre-matching
@@ -1299,6 +1310,7 @@ DOMAIN,splashimgbssdl.yun.kugou.com,REJECT,extended-matching,pre-matching
 DOMAIN,splashimgretrybssdl.cloud.kugou.com,REJECT,extended-matching,pre-matching
 DOMAIN,splashqqlive.gtimg.com,REJECT,extended-matching,pre-matching
 DOMAIN,srch-telemeter10.g.smailru.net,REJECT,extended-matching,pre-matching
+DOMAIN,ssapi.anythinktech.com,REJECT,extended-matching,pre-matching
 DOMAIN,ssp.cloooud.com,REJECT,extended-matching,pre-matching
 DOMAIN,stacks.vk-portal.net,REJECT,extended-matching,pre-matching
 DOMAIN,staging-notify.sec.miui.com,REJECT,extended-matching,pre-matching
@@ -1371,6 +1383,7 @@ DOMAIN,titan.pinduoduo.com,REJECT,extended-matching,pre-matching
 DOMAIN,tj.b.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,tj.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,tk.anythinktech.com,REJECT,extended-matching,pre-matching
+DOMAIN,tk.statisticslinks.com,REJECT,extended-matching,pre-matching
 DOMAIN,tmead.y.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,tmeadbak.y.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,tmeadcomm.y.qq.com,REJECT,extended-matching,pre-matching
@@ -1390,6 +1403,7 @@ DOMAIN,tnc3-alisc1.toutiaoapi.com,REJECT,extended-matching,pre-matching
 DOMAIN,tnc3-bjlgy.bytedance.com,REJECT,extended-matching,pre-matching
 DOMAIN,tnc3-bjlgy.snssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN,tnc3-bjlgy.toutiaoapi.com,REJECT,extended-matching,pre-matching
+DOMAIN,tobapplog.ctobsnssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN,toblog.ctobsnssdk.com,REJECT,extended-matching,pre-matching
 DOMAIN,token.safebrowsing.apple,REJECT,extended-matching,pre-matching
 DOMAIN,toots-a.akamaihd.net,REJECT,extended-matching,pre-matching
