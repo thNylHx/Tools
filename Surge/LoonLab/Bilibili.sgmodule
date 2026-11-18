@@ -6,7 +6,7 @@
 #!category=去广告
 #!loon_version=3.5.3(1014)
 #!homepage=https://loonlab.103516.xyz/Plugin/
-#!date=2026-11-07 23:00
+#!date=2026-11-18 19:00
 #!arguments=displayUpList:"auto",purifyComment:true,optimizeRequest:"",sponsorBlock:"",logLevel:"error"
 #!arguments-desc=displayUpList: [动态]中[最常访问]的显示方式\nauto: 仅当列表中存在直播状态时显示; show: 始终显示; hide: 始终隐藏;\n可选值: auto, show, hide\n\npurifyComment: [评论区]过滤置顶评论广告\ntrue: 开启; false: 关闭;\n可选值: true, false\n\noptimizeRequest: [评论区]优化加载异常\ntrue: 开启; false: 关闭;\n可选值: 留空启用, # 禁用\n\nsponsorBlock: [空降助手]跳过视频内插播广告\ntrue: 开启; false: 关闭;\n可选值: 留空启用, # 禁用\n\nlogLevel: 日志等级\n选择日志输出等级\n可选值: error, warn, info, debug, off
 
@@ -67,9 +67,9 @@ http-response-jq (?i)^https:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo\? '.d
 [Script]
 {{{sponsorBlock}}}[哔哩哔哩]空降助手 = type=http-request, pattern=(?i)^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(community\.service\.dm\.v1\.DM\/DmSegMobile|app\.view(unite)?\.v1\.View\/ViewProgress)$, script-path=https://raw.githubusercontent.com/kokoryh/Sparkle/master/dist/bilibili.protobuf.request.js, requires-body=true, binary-body-mode=true, timeout=10, argument=logLevel="{{{logLevel}}}"
 
-{{{optimizeRequest}}}[哔哩哔哩]ProtoBuf Request = type=http-request, pattern=(?i)^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(app\.viewunite\.v1\.View\/View|main\.community\.reply\.v1\.Reply\/MainList)$, script-path=https://raw.githubusercontent.com/kokoryh/Sparkle/master/dist/bilibili.protobuf.request.js, requires-body=true, binary-body-mode=true, timeout=10, argument=purifyComment="{{{purifyComment}}}"&logLevel="{{{logLevel}}}"
+{{{optimizeRequest}}}[哔哩哔哩]Request = type=http-request, pattern=(?i)^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(app\.viewunite\.v1\.View\/View|main\.community\.reply\.v1\.Reply\/MainList)$, script-path=https://raw.githubusercontent.com/kokoryh/Sparkle/master/dist/bilibili.protobuf.request.js, requires-body=true, binary-body-mode=true, timeout=10, argument=purifyComment="{{{purifyComment}}}"&logLevel="{{{logLevel}}}"
 
-[哔哩哔哩]ProtoBuf Response = type=http-response, pattern=(?i)^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(app\.(show\.v1\.Popular\/Index|dynamic\.v2\.Dynamic\/DynAll|view(unite)?\.v1\.View\/(View|ViewProgress|RelatesFeed|AIRelateAsync)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|community\.service\.dm\.v1\.DM\/DmView|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$, script-path=https://raw.githubusercontent.com/kokoryh/Sparkle/master/dist/bilibili.protobuf.response.js, requires-body=true, binary-body-mode=true, argument=displayUpList="{{{displayUpList}}}"&purifyComment="{{{purifyComment}}}"&sponsorBlock="{{{sponsorBlock}}}"&logLevel="{{{logLevel}}}"
+[哔哩哔哩]ProtoBuf = type=http-response, pattern=(?i)^https:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.(app\.(show\.v1\.Popular\/Index|dynamic\.v2\.Dynamic\/DynAll|view(unite)?\.v1\.View\/(View|ViewProgress|RelatesFeed|AIRelateAsync)|playurl\.v1\.PlayURL\/PlayView|playerunite\.v1\.Player\/PlayViewUnite)|polymer\.app\.search\.v1\.Search\/SearchAll|community\.service\.dm\.v1\.DM\/DmView|main\.community\.reply\.v1\.Reply\/MainList|pgc\.gateway\.player\.v2\.PlayURL\/PlayView)$, script-path=https://raw.githubusercontent.com/kokoryh/Sparkle/master/dist/bilibili.protobuf.response.js, requires-body=true, binary-body-mode=true, argument=displayUpList="{{{displayUpList}}}"&purifyComment="{{{purifyComment}}}"&sponsorBlock="{{{sponsorBlock}}}"&logLevel="{{{logLevel}}}"
 
 [哔哩哔哩]WebPage = type=http-response, pattern=(?i)^https:\/\/www\.bilibili\.com\/blackboard\/era\/[^?]+\.html\?, script-path=https://raw.githubusercontent.com/kokoryh/Sparkle/master/dist/webpage.bilibili.js, requires-body=true
 
