@@ -3,8 +3,8 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 12335
-#!updated = 2026-11-17 06:22:27
+#!Rule = 12336
+#!updated = 2026-11-19 15:40:27
 
 
 [Rule]
@@ -10361,6 +10361,7 @@ DOMAIN-SUFFIX,telemetry.pod8.prod.avatar.ext.hp.com,REJECT,extended-matching,pre
 DOMAIN-SUFFIX,telemetry.pod9.prod.avatar.ext.hp.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tellapart.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,temp.163.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,tencentads.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tencentapigw.com,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tend.io,REJECT,extended-matching,pre-matching
 DOMAIN-SUFFIX,tepusi888.cn,REJECT,extended-matching,pre-matching
