@@ -1,0 +1,20 @@
+#!name=九号出行
+#!desc=九号出行每日签到。首次使用需进入「我的-签到中心」，手动签到一次以获取凭证。获取成功后，可关闭获取凭证脚本。
+#!author=sooyaaabo[https://github.com/sooyaaabo]
+#!icon=https://raw.githubusercontent.com/sooyaaabo/IconLibrary/main/App/Ninebot-03.png
+#!openUrl=https://apps.apple.com/app/id1458698038
+#!category=功能增强
+#!loon_version=3.5.3(1014)
+#!homepage=https://loonlab.103516.xyz/Plugin/
+#!date=2026-11-19 19:00
+#!arguments=Cookie-Ninebot:"",Task-Ninebot:"",Cron-Ninebot:"0 0 8 * * *"
+#!arguments-desc=Cookie-Ninebot: [九号出行]获取凭证\n获取[九号出行]账户凭证\n可选值: 留空启用, # 禁用\n\nTask-Ninebot: [九号出行]签到任务\n定时运行[九号出行]签到任务\n可选值: 留空启用, # 禁用\n\nCron-Ninebot: [九号出行]定时参数Cron\n输入Cron表达式来定时运行[九号出行]签到任务
+
+[Script]
+{{{Cookie-Ninebot}}}[九号出行]获取凭证 = type=http-request, pattern=^https:\/\/cn-cbu-gateway\.ninebot\.com\/app-api\/api\/user-sign\/v2\/my-page\/status(?:\?|$), script-path=https://loon.103516.xyz/Script/Ninebot/Ninebot.checkin.js
+
+{{{Task-Ninebot}}}[九号出行]签到任务 = type=cron, cronexp="{{{Cron-Ninebot}}}", script-path=https://loon.103516.xyz/Script/Ninebot/Ninebot.checkin.js
+
+[MITM]
+hostname = %APPEND% cn-cbu-gateway.ninebot.com
+
