@@ -11,6 +11,12 @@
 [Rule]
 DOMAIN,iacc.stgw.qq.com,REJECT
 DOMAIN,tacc.video.qq.com,REJECT
+DOMAIN,ad.tencentvideo.com,REJECT
+DOMAIN,adstats.tencentvideo.com,REJECT
+DOMAIN-SUFFIX,ugdtimg.com,REJECT
+DOMAIN-SUFFIX,gdtimg.com,REJECT
+DOMAIN,info4.video.qq.com,REJECT
+DOMAIN,info6.video.qq.com,REJECT
 
 [Script]
 [腾讯视频]请求体处理 = type=http-request, pattern=(?i)^https?:\/\/i\.video\.qq\.com\/(?:\?.*)?$, script-path=https://loon.103516.xyz/Script/TencentVideo/TencentVideo.js, requires-body=true, binary-body-mode=true, timeout=10

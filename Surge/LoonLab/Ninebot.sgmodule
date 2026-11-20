@@ -6,14 +6,14 @@
 #!category=功能增强
 #!loon_version=3.5.3(1014)
 #!homepage=https://loonlab.103516.xyz/Plugin/
-#!date=2026-11-19 19:00
+#!date=2026-11-20 00:00
 #!arguments=Cookie-Ninebot:"",Task-Ninebot:"",Cron-Ninebot:"0 0 8 * * *"
 #!arguments-desc=Cookie-Ninebot: [九号出行]获取凭证\n获取[九号出行]账户凭证\n可选值: 留空启用, # 禁用\n\nTask-Ninebot: [九号出行]签到任务\n定时运行[九号出行]签到任务\n可选值: 留空启用, # 禁用\n\nCron-Ninebot: [九号出行]定时参数Cron\n输入Cron表达式来定时运行[九号出行]签到任务
 
 [Script]
-{{{Cookie-Ninebot}}}[九号出行]获取凭证 = type=http-request, pattern=^https:\/\/cn-cbu-gateway\.ninebot\.com\/app-api\/api\/user-sign\/v2\/my-page\/status(?:\?|$), script-path=https://loon.103516.xyz/Script/Ninebot/Ninebot.checkin.js
+{{{Cookie-Ninebot}}}[九号出行]获取凭证 = type=http-request, pattern=^https:\/\/cn-cbu-gateway\.ninebot\.com\/app-api\/api\/user-sign\/v2\/my-page\/status(?:\?|$), script-path=https://loon.103516.xyz/Script/Ninebot/Ninebot.checkin.js, timeout=10
 
-{{{Task-Ninebot}}}[九号出行]签到任务 = type=cron, cronexp="{{{Cron-Ninebot}}}", script-path=https://loon.103516.xyz/Script/Ninebot/Ninebot.checkin.js
+{{{Task-Ninebot}}}[九号出行]签到任务 = type=cron, cronexp="{{{Cron-Ninebot}}}", script-path=https://loon.103516.xyz/Script/Ninebot/Ninebot.checkin.js, timeout=120
 
 [MITM]
 hostname = %APPEND% cn-cbu-gateway.ninebot.com
