@@ -3,15 +3,14 @@
 #!author = RuCu6 Keywos fmz200 可莉🅥 QingRex
 #!category = Block Ads
 #!tag = 广告拦截规则合集模块
-#!Rule = 12336
-#!updated = 2026-11-19 15:40:27
+#!Rule = 12354
+#!updated = 2026-11-22 03:32:24
 
 
 [Rule]
 DOMAIN,1500020991.vodplayer.wxamedia.com,REJECT,extended-matching,pre-matching
 DOMAIN,1500022744.vodplayer.wxamedia.com,REJECT,extended-matching,pre-matching
 DOMAIN,1500026601.vodplayer.wxamedia.com,REJECT,extended-matching,pre-matching
-DOMAIN,180.76.76.200,REJECT,extended-matching,pre-matching
 DOMAIN,1l-hit.mail.ru,REJECT,extended-matching,pre-matching
 DOMAIN,1l-hit.vkplay.ru,REJECT,extended-matching,pre-matching
 DOMAIN,8le8le.com,REJECT,extended-matching,pre-matching
@@ -574,6 +573,7 @@ DOMAIN,cn-tk.anythinktech.com,REJECT,extended-matching,pre-matching
 DOMAIN,cnlogs.umeng.com,REJECT,extended-matching,pre-matching
 DOMAIN,cnlogs.umengcloud.com,REJECT,extended-matching,pre-matching
 DOMAIN,cnzz.com,REJECT,extended-matching,pre-matching
+DOMAIN,code.sms.mob.com,DIRECT,REJECT,extended-matching,pre-matching
 DOMAIN,collect.kugou.com,REJECT,extended-matching,pre-matching
 DOMAIN,commdata.v.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,commercial.shouji.360.cn,REJECT,extended-matching,pre-matching
@@ -841,6 +841,7 @@ DOMAIN,in.treasuredata.com,REJECT,extended-matching,pre-matching
 DOMAIN,info4.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,info6.video.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,informer.yandex.ru,REJECT,extended-matching,pre-matching
+DOMAIN,init.sms.mob.com,DIRECT,REJECT,extended-matching,pre-matching
 DOMAIN,init.supersonicads.com,REJECT,extended-matching,pre-matching
 DOMAIN,inner-hw.huazirc.com,REJECT,extended-matching,pre-matching
 DOMAIN,ios.bugly.qq.com,REJECT,extended-matching,pre-matching
@@ -1142,6 +1143,7 @@ DOMAIN,policy.video.ptqy.gitv.tv,REJECT,extended-matching,pre-matching
 DOMAIN,popup-api.b612kaji.com,REJECT,extended-matching,pre-matching
 DOMAIN,pos.baidu.com,REJECT,extended-matching,pre-matching
 DOMAIN,pre-acs.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,pre-xpis-xcdn.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN,pro.bugly.qq.com,REJECT,extended-matching,pre-matching
 DOMAIN,prod-mediate-events.applovin.com,REJECT,extended-matching,pre-matching
 DOMAIN,prodvizhenie-adv.ozon.ru,REJECT,extended-matching,pre-matching
@@ -1249,8 +1251,10 @@ DOMAIN,sdk.hzzfcm.com,REJECT,extended-matching,pre-matching
 DOMAIN,sdk.markmedia.com.cn,REJECT,extended-matching,pre-matching
 DOMAIN,sdk.mobads.adwangmai.com,REJECT,extended-matching,pre-matching
 DOMAIN,sdk.ssp.admobile.top,REJECT,extended-matching,pre-matching
+DOMAIN,sdk.verification.jiguang.cn,DIRECT,REJECT,extended-matching,pre-matching
 DOMAIN,sdk.zhangyuyidong.cn,REJECT,extended-matching,pre-matching
 DOMAIN,sdkapi.cloooud.com,REJECT,extended-matching,pre-matching
+DOMAIN,sdkapi.sms.mob.com,DIRECT,REJECT,extended-matching,pre-matching
 DOMAIN,sdkapp.uve.weibo.com,REJECT,extended-matching,pre-matching
 DOMAIN,sdkauth.hpplay.cn,REJECT,extended-matching,pre-matching
 DOMAIN,sdkconf.avlyun.com,REJECT,extended-matching,pre-matching
@@ -1301,6 +1305,7 @@ DOMAIN,sl.hpplay.cn,REJECT,extended-matching,pre-matching
 DOMAIN,slb-p2p.vcloud.ks-live.com,REJECT,extended-matching,pre-matching
 DOMAIN,smad.ms.zhangyue.net,REJECT,extended-matching,pre-matching
 DOMAIN,smartad.10010.com,REJECT,extended-matching,pre-matching
+DOMAIN,smartop-sdkapi.jiguang.cn,DIRECT,REJECT,extended-matching,pre-matching
 DOMAIN,smetrics.samsung.com,REJECT,extended-matching,pre-matching
 DOMAIN,sms.ads.oppomobile.com,REJECT,extended-matching,pre-matching
 DOMAIN,sngmta.qq.com,REJECT,extended-matching,pre-matching
@@ -1571,6 +1576,9 @@ DOMAIN,xiaomi-dtv.m.cn.miaozhen.com,REJECT,extended-matching,pre-matching
 DOMAIN,xlog.jd.com,REJECT,extended-matching,pre-matching
 DOMAIN,xlviiirdr.com,REJECT,extended-matching,pre-matching
 DOMAIN,xlviirdr.com,REJECT,extended-matching,pre-matching
+DOMAIN,xpis-mob-xcdn.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,xpis-tel-xcdn.youku.com,REJECT,extended-matching,pre-matching
+DOMAIN,xpis-xcdn.youku.com,REJECT,extended-matching,pre-matching
 DOMAIN,xray.mail.ru,REJECT,extended-matching,pre-matching
 DOMAIN,xycdn.com,REJECT,extended-matching,pre-matching
 DOMAIN,yk-ssp-ad.cp31.ott.cibntv.net,REJECT,extended-matching,pre-matching
@@ -12142,7 +12150,6 @@ DOMAIN-KEYWORD,iflyad.bj.openstorage.cn,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,omgmta,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,omgmtaw,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,omniture,REJECT,extended-matching,pre-matching
-DOMAIN-KEYWORD,openx,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,pangolin,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,panplayable-toutiao,REJECT,extended-matching,pre-matching
 DOMAIN-KEYWORD,partnerad,REJECT,extended-matching,pre-matching
@@ -12186,6 +12193,8 @@ IP-CIDR,116.130.224.205/32,REJECT,no-resolve,pre-matching
 IP-CIDR,116.142.251.100/32,REJECT,no-resolve,pre-matching
 IP-CIDR,116.177.251.215/32,REJECT,no-resolve,pre-matching
 IP-CIDR,116.211.198.237/32,REJECT,no-resolve,pre-matching
+IP-CIDR,116.85.2.41/32,REJECT,no-resolve,pre-matching
+IP-CIDR,116.85.3.39/32,REJECT,no-resolve,pre-matching
 IP-CIDR,117.177.248.17/32,REJECT,no-resolve,pre-matching
 IP-CIDR,117.177.248.41/32,REJECT,no-resolve,pre-matching
 IP-CIDR,117.185.247.73/32,REJECT,no-resolve,pre-matching
@@ -12201,8 +12210,10 @@ IP-CIDR,123.151.48.171/32,REJECT,no-resolve,pre-matching
 IP-CIDR,123.151.48.193/32,REJECT,no-resolve,pre-matching
 IP-CIDR,123.151.48.208/32,REJECT,no-resolve,pre-matching
 IP-CIDR,123.151.54.50/32,REJECT,no-resolve,pre-matching
+IP-CIDR,123.207.209.142/32,REJECT,no-resolve,pre-matching
 IP-CIDR,123.56.23.22/32,REJECT,no-resolve,pre-matching
 IP-CIDR,124.192.153.42/32,REJECT,no-resolve,pre-matching
+IP-CIDR,139.199.240.84/32,REJECT,no-resolve,pre-matching
 IP-CIDR,14.29.101.160/32,REJECT,no-resolve,pre-matching
 IP-CIDR,14.29.101.168/32,REJECT,no-resolve,pre-matching
 IP-CIDR,14.29.101.169/32,REJECT,no-resolve,pre-matching
@@ -12269,14 +12280,18 @@ IP-CIDR6,240e:928:1400:10::25/128,REJECT,no-resolve,pre-matching
 URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\/v?[0-9]+)?\/(?:sign_)?(?:(?:d|ss)[46]?|resolve)\?",REJECT,extended-matching
 URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?):\d+\/httpdns\/",REJECT,extended-matching
 URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/v\d\/resolv\?",REJECT,extended-matching
-URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch",REJECT,extended-matching
 URL-REGEX,"^http:\/\/103\.37\.155\.60\/fetch",REJECT,extended-matching
 URL-REGEX,"^http:\/\/103\.44\.58\.64\/md\?",REJECT,extended-matching
+URL-REGEX,"^http:\/\/47\.246\.103\.10\/amdc\/mobileDispatch",REJECT,extended-matching
+URL-REGEX,"^http:\/\/47\.246\.103\.9\/amdc\/mobileDispatch",REJECT,extended-matching
+URL-REGEX,"^http:\/\/59\.82\.113\.10\/amdc\/mobileDispatch",REJECT,extended-matching
+URL-REGEX,"^http:\/\/59\.82\.113\.219\/amdc\/mobileDispatch",REJECT,extended-matching
 URL-REGEX,"^http:\/\/[\d\.:]*\/?(defaultts\.tc|vmind\.qqvideo\.tc|finderpdd\.video)\.qq\.com\/\w+",REJECT,extended-matching
 URL-REGEX,"^http:\/\/[\d\.]+:8000\/v1\/resource\/\w{32}-1-SPLASH",REJECT,extended-matching
 URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\](?:\/v?[0-9]+)?\/(?:sign_)?(?:(?:d|ss)[46]?|resolve)\?",REJECT,extended-matching
 URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]:\d+\/httpdns\/",REJECT,extended-matching
 URL-REGEX,"^http:\/\/\w{32}\.jddebug\.com\/diagnose\?",REJECT,extended-matching
+URL-REGEX,"^http:\/\/amdc\.m\.taobao\.com\/amdc\/mobileDispatch",REJECT,extended-matching
 URL-REGEX,"^http:\/\/apd-\w+\.v\.smtcdns\.com\/(defaultts|omts|vmind\.qqvideo)\.tc\.qq\.com\/\w+",REJECT,extended-matching
 URL-REGEX,"^http:\/\/apd-vlive\.apdcdn\.tc\.qq\.com\/vmind\.qqvideo\.tc\.qq\.com\/\w+",REJECT,extended-matching
 URL-REGEX,"^http:\/\/api\.weibo\.cn\/\d+\/httpdns\/config",REJECT,extended-matching
@@ -12332,6 +12347,7 @@ AND,((DOMAIN,api.pinduoduo.com),(PROTOCOL,QUIC)),REJECT,pre-matching
 AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com)),REJECT,pre-matching
 AND,((DOMAIN-KEYWORD,adash),(DOMAIN-SUFFIX,ut.taobao.com)),REJECT,pre-matching
 AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,-normal.zijieapi.com)),REJECT,pre-matching
+AND,((DOMAIN-KEYWORD,tnc),(OR,((DOMAIN-SUFFIX,capcutapi.com),(DOMAIN-SUFFIX,zijieapi.com),(DOMAIN-SUFFIX,isnssdk.com),(DOMAIN-SUFFIX,toutiaoapi.com),(DOMAIN-SUFFIX,bytedance.com),(DOMAIN-SUFFIX,snssdk.com),(DOMAIN-SUFFIX,sgsnssdk.com)))),DIRECT,REJECT,pre-matching
 AND,((IP-ASN,45090),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT,pre-matching
 AND,((IP-ASN,55990),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT,pre-matching
 AND,((IP-ASN,63646),(DEST-PORT,25641),(PROTOCOL,TCP)),REJECT,pre-matching
@@ -12343,4 +12359,6 @@ AND,((IP-CIDR,220.243.141.0/32),(DEST-PORT,6443)),REJECT,pre-matching
 AND,((OR,((DOMAIN-SUFFIX,bytegecko.com),(DOMAIN-SUFFIX,byteeffecttos.com))),(DOMAIN-KEYWORD,ncdn)),REJECT,pre-matching
 AND,((PROTOCOL,QUIC),(DOMAIN-SUFFIX,xiaohongshu.com,extended-matching)),REJECT,pre-matching
 AND,((URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/d(\d)?"),(USER-AGENT,"*com.xunmeng.pinduoduo*")),REJECT,pre-matching
+AND,((URL-REGEX,"^http:\/\/119\.28\.28\.90\/d\?"),(USER-AGENT,"%E5%98%80%E5%97%92%E5%87%BA%E8%A1%8C*")),DIRECT,REJECT,pre-matching
+AND,((URL-REGEX,"^http:\/\/119\.29\.29\.90\/d\?"),(USER-AGENT,"%E5%98%80%E5%97%92%E5%87%BA%E8%A1%8C*")),DIRECT,REJECT,pre-matching
 AND,((URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]\/d(\d)?\?"),(USER-AGENT,"*com.xunmeng.pinduoduo*")),REJECT,pre-matching

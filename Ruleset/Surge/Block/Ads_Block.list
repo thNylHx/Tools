@@ -1,13 +1,12 @@
 # 规则名称: Ads_Block
 # 仓库作者: thNylHx
 # 仓库地址: https://github.com/thNylHx/Tools
-# 规则数量: 12336
-# 更新时间: 2026-11-19 15:40:24
+# 规则数量: 12354
+# 更新时间: 2026-11-22 03:32:20
 
 DOMAIN,1500020991.vodplayer.wxamedia.com
 DOMAIN,1500022744.vodplayer.wxamedia.com
 DOMAIN,1500026601.vodplayer.wxamedia.com
-DOMAIN,180.76.76.200
 DOMAIN,1l-hit.mail.ru
 DOMAIN,1l-hit.vkplay.ru
 DOMAIN,8le8le.com
@@ -570,6 +569,7 @@ DOMAIN,cn-tk.anythinktech.com
 DOMAIN,cnlogs.umeng.com
 DOMAIN,cnlogs.umengcloud.com
 DOMAIN,cnzz.com
+DOMAIN,code.sms.mob.com,DIRECT
 DOMAIN,collect.kugou.com
 DOMAIN,commdata.v.qq.com
 DOMAIN,commercial.shouji.360.cn
@@ -837,6 +837,7 @@ DOMAIN,in.treasuredata.com
 DOMAIN,info4.video.qq.com
 DOMAIN,info6.video.qq.com
 DOMAIN,informer.yandex.ru
+DOMAIN,init.sms.mob.com,DIRECT
 DOMAIN,init.supersonicads.com
 DOMAIN,inner-hw.huazirc.com
 DOMAIN,ios.bugly.qq.com
@@ -1138,6 +1139,7 @@ DOMAIN,policy.video.ptqy.gitv.tv
 DOMAIN,popup-api.b612kaji.com
 DOMAIN,pos.baidu.com
 DOMAIN,pre-acs.youku.com
+DOMAIN,pre-xpis-xcdn.youku.com
 DOMAIN,pro.bugly.qq.com
 DOMAIN,prod-mediate-events.applovin.com
 DOMAIN,prodvizhenie-adv.ozon.ru
@@ -1245,8 +1247,10 @@ DOMAIN,sdk.hzzfcm.com
 DOMAIN,sdk.markmedia.com.cn
 DOMAIN,sdk.mobads.adwangmai.com
 DOMAIN,sdk.ssp.admobile.top
+DOMAIN,sdk.verification.jiguang.cn,DIRECT
 DOMAIN,sdk.zhangyuyidong.cn
 DOMAIN,sdkapi.cloooud.com
+DOMAIN,sdkapi.sms.mob.com,DIRECT
 DOMAIN,sdkapp.uve.weibo.com
 DOMAIN,sdkauth.hpplay.cn
 DOMAIN,sdkconf.avlyun.com
@@ -1297,6 +1301,7 @@ DOMAIN,sl.hpplay.cn
 DOMAIN,slb-p2p.vcloud.ks-live.com
 DOMAIN,smad.ms.zhangyue.net
 DOMAIN,smartad.10010.com
+DOMAIN,smartop-sdkapi.jiguang.cn,DIRECT
 DOMAIN,smetrics.samsung.com
 DOMAIN,sms.ads.oppomobile.com
 DOMAIN,sngmta.qq.com
@@ -1567,6 +1572,9 @@ DOMAIN,xiaomi-dtv.m.cn.miaozhen.com
 DOMAIN,xlog.jd.com
 DOMAIN,xlviiirdr.com
 DOMAIN,xlviirdr.com
+DOMAIN,xpis-mob-xcdn.youku.com
+DOMAIN,xpis-tel-xcdn.youku.com
+DOMAIN,xpis-xcdn.youku.com
 DOMAIN,xray.mail.ru
 DOMAIN,xycdn.com
 DOMAIN,yk-ssp-ad.cp31.ott.cibntv.net
@@ -12138,7 +12146,6 @@ DOMAIN-KEYWORD,iflyad.bj.openstorage.cn
 DOMAIN-KEYWORD,omgmta
 DOMAIN-KEYWORD,omgmtaw
 DOMAIN-KEYWORD,omniture
-DOMAIN-KEYWORD,openx
 DOMAIN-KEYWORD,pangolin
 DOMAIN-KEYWORD,panplayable-toutiao
 DOMAIN-KEYWORD,partnerad
@@ -12182,6 +12189,8 @@ IP-CIDR,116.130.224.205/32,no-resolve
 IP-CIDR,116.142.251.100/32,no-resolve
 IP-CIDR,116.177.251.215/32,no-resolve
 IP-CIDR,116.211.198.237/32,no-resolve
+IP-CIDR,116.85.2.41/32,no-resolve
+IP-CIDR,116.85.3.39/32,no-resolve
 IP-CIDR,117.177.248.17/32,no-resolve
 IP-CIDR,117.177.248.41/32,no-resolve
 IP-CIDR,117.185.247.73/32,no-resolve
@@ -12197,8 +12206,10 @@ IP-CIDR,123.151.48.171/32,no-resolve
 IP-CIDR,123.151.48.193/32,no-resolve
 IP-CIDR,123.151.48.208/32,no-resolve
 IP-CIDR,123.151.54.50/32,no-resolve
+IP-CIDR,123.207.209.142/32,no-resolve
 IP-CIDR,123.56.23.22/32,no-resolve
 IP-CIDR,124.192.153.42/32,no-resolve
+IP-CIDR,139.199.240.84/32,no-resolve
 IP-CIDR,14.29.101.160/32,no-resolve
 IP-CIDR,14.29.101.168/32,no-resolve
 IP-CIDR,14.29.101.169/32,no-resolve
@@ -12265,14 +12276,18 @@ IP-CIDR6,240e:928:1400:10::25/128,no-resolve
 URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\/v?[0-9]+)?\/(?:sign_)?(?:(?:d|ss)[46]?|resolve)\?"
 URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?):\d+\/httpdns\/"
 URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/v\d\/resolv\?"
-URL-REGEX,"^http:\/\/.+\/amdc\/mobileDispatch"
 URL-REGEX,"^http:\/\/103\.37\.155\.60\/fetch"
 URL-REGEX,"^http:\/\/103\.44\.58\.64\/md\?"
+URL-REGEX,"^http:\/\/47\.246\.103\.10\/amdc\/mobileDispatch"
+URL-REGEX,"^http:\/\/47\.246\.103\.9\/amdc\/mobileDispatch"
+URL-REGEX,"^http:\/\/59\.82\.113\.10\/amdc\/mobileDispatch"
+URL-REGEX,"^http:\/\/59\.82\.113\.219\/amdc\/mobileDispatch"
 URL-REGEX,"^http:\/\/[\d\.:]*\/?(defaultts\.tc|vmind\.qqvideo\.tc|finderpdd\.video)\.qq\.com\/\w+"
 URL-REGEX,"^http:\/\/[\d\.]+:8000\/v1\/resource\/\w{32}-1-SPLASH"
 URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\](?:\/v?[0-9]+)?\/(?:sign_)?(?:(?:d|ss)[46]?|resolve)\?"
 URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]:\d+\/httpdns\/"
 URL-REGEX,"^http:\/\/\w{32}\.jddebug\.com\/diagnose\?"
+URL-REGEX,"^http:\/\/amdc\.m\.taobao\.com\/amdc\/mobileDispatch"
 URL-REGEX,"^http:\/\/apd-\w+\.v\.smtcdns\.com\/(defaultts|omts|vmind\.qqvideo)\.tc\.qq\.com\/\w+"
 URL-REGEX,"^http:\/\/apd-vlive\.apdcdn\.tc\.qq\.com\/vmind\.qqvideo\.tc\.qq\.com\/\w+"
 URL-REGEX,"^http:\/\/api\.weibo\.cn\/\d+\/httpdns\/config"
@@ -12328,6 +12343,7 @@ AND,((DOMAIN,api.pinduoduo.com),(PROTOCOL,QUIC))
 AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com))
 AND,((DOMAIN-KEYWORD,adash),(DOMAIN-SUFFIX,ut.taobao.com))
 AND,((DOMAIN-KEYWORD,ads),(DOMAIN-KEYWORD,-normal.zijieapi.com))
+AND,((DOMAIN-KEYWORD,tnc),(OR,((DOMAIN-SUFFIX,capcutapi.com),(DOMAIN-SUFFIX,zijieapi.com),(DOMAIN-SUFFIX,isnssdk.com),(DOMAIN-SUFFIX,toutiaoapi.com),(DOMAIN-SUFFIX,bytedance.com),(DOMAIN-SUFFIX,snssdk.com),(DOMAIN-SUFFIX,sgsnssdk.com)))),DIRECT
 AND,((IP-ASN,45090),(DEST-PORT,25641),(PROTOCOL,TCP))
 AND,((IP-ASN,55990),(DEST-PORT,25641),(PROTOCOL,TCP))
 AND,((IP-ASN,63646),(DEST-PORT,25641),(PROTOCOL,TCP))
@@ -12339,4 +12355,6 @@ AND,((IP-CIDR,220.243.141.0/32),(DEST-PORT,6443))
 AND,((OR,((DOMAIN-SUFFIX,bytegecko.com),(DOMAIN-SUFFIX,byteeffecttos.com))),(DOMAIN-KEYWORD,ncdn))
 AND,((PROTOCOL,QUIC),(DOMAIN-SUFFIX,xiaohongshu.com,extended-matching))
 AND,((URL-REGEX,"^http:\/\/((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/d(\d)?"),(USER-AGENT,"*com.xunmeng.pinduoduo*"))
+AND,((URL-REGEX,"^http:\/\/119\.28\.28\.90\/d\?"),(USER-AGENT,"%E5%98%80%E5%97%92%E5%87%BA%E8%A1%8C*")),DIRECT
+AND,((URL-REGEX,"^http:\/\/119\.29\.29\.90\/d\?"),(USER-AGENT,"%E5%98%80%E5%97%92%E5%87%BA%E8%A1%8C*")),DIRECT
 AND,((URL-REGEX,"^http:\/\/\[[0-9a-fA-F:]+\]\/d(\d)?\?"),(USER-AGENT,"*com.xunmeng.pinduoduo*"))
