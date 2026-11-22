@@ -6,7 +6,7 @@
 #!category=去广告, 功能增强
 #!loon_version=3.5.3(1014)
 #!homepage=https://loonlab.103516.xyz/Plugin/
-#!date=2026-11-02 21:00
+#!date=2026-11-22 21:00
 #!arguments=Manmanbuy-Cookie:"",JDPrice-TitleEmbed:#,JDPrice-DetailNotify:#,JDPrice-DetailEmbed-Table:"",JDPrice-DetailEmbed-Line:#
 #!arguments-desc=Manmanbuy-Cookie: [京东比价]获取慢慢买Cookie\n首次使用请先打开【慢慢买】APP，提示【获取ck成功🎉】即可正常比价。\n可选值: 留空启用, # 禁用\n\nJDPrice-TitleEmbed: [京东比价]标题嵌入版\n点击商品标题即可直接查看嵌入式历史价格\n可选值: 留空启用, # 禁用\n\nJDPrice-DetailNotify: [京东比价]详情通知版\n点击商品详情页通过弹窗通知查看历史价格\n可选值: 留空启用, # 禁用\n\nJDPrice-DetailEmbed-Table: [京东比价]详情嵌入版（表格图）\n点击商品详情页即可直接查看嵌入式历史价格\n可选值: 留空启用, # 禁用\n\nJDPrice-DetailEmbed-Line: [京东比价]详情嵌入版（折线图）\n点击商品详情页即可直接查看嵌入式历史价格\n可选值: 留空启用, # 禁用
 
@@ -22,7 +22,7 @@ http-response-jq (?i)^https:\/\/api\.m\.jd\.com\/client\.action\?(?:[^#?&]+&)*fu
 http-response-jq (?i)^https:\/\/api\.m\.jd\.com\/client\.action\?(?:[^#?&]+&)*functionId=cart 'delpaths([["emptyCartRecommendFloor"]])'
 
 [Map Local]
-(?i)^https?:\/\/m\.360buyimg\.com\/mobilecms\/s1125x2436_jfs data-type=text data="" status-code=200
+(?i)^https?:\/\/m9?\.360buyimg\.com\/mobilecms\/s1125x2436_jfs data-type=text data="" status-code=200
 
 (?i)^https?:\/\/api\.m\.jd\.com\/\?(?:[^#?&]+&)*loginType=11 data-type=text data="{}" status-code=200 header="Content-Type:application/json"
 
@@ -46,5 +46,5 @@ http-response-jq (?i)^https:\/\/api\.m\.jd\.com\/client\.action\?(?:[^#?&]+&)*fu
 {{{JDPrice-DetailEmbed-Line}}}[京东比价]详情嵌入版（折线图） = type=http-response, pattern=(?i)^https?:\/\/in\.m\.jd\.com\/product\/graphext\/\d+\.html, script-path=https://loon.103516.xyz/Script/JingDong/JingDong.price.js, requires-body=true, timeout=60
 
 [MITM]
-hostname = %APPEND% api.m.jd.com, in.m.jd.com, apapia-sqk-weblogic.manmanbuy.com, m.360buyimg.com
+hostname = %APPEND% api.m.jd.com, in.m.jd.com, apapia-sqk-weblogic.manmanbuy.com, m.360buyimg.com, m9.360buyimg.com
 
