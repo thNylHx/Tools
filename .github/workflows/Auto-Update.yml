@@ -1,9 +1,9 @@
 # ----------------------------------------
 # name   : Auto-Update.yml
 # desc   : 定时拉取上游 mihomo / Surge 规则与模块，清洗后提交并推送
-# date   : 2026-11-23 18:35:33
+# date   : 2026-11-26 20:17:36
 # author : ChatGPT JK789
-# ver    : 0.1.4
+# ver    : 0.1.8
 # ----------------------------------------
 
 name: 拉取上游规则和模块
@@ -215,7 +215,7 @@ jobs:
               ["Ruleset/Surge/Other/Private_ip.list"]="https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list"
           )
 
-          # 生成 "目标路径 <TAB> URL" 清单，交给 xargs 并发下载
+          # 生成 “目标路径 <TAB> URL” 清单，交给 xargs 并发下载
           workdir="$(mktemp -d)"
           trap 'rm -rf "$workdir"' EXIT
           fail_log="$workdir/failures.log"
@@ -259,7 +259,7 @@ jobs:
           export -f fetch_one
 
           # 关键源白名单：这些文件参与 Ads_Block 合并，任一失败都会让合并结果缩水，
-          # 因此不允许"部分失败继续"，必须立即中止。按目标路径判定，与 manifest 第一列一致。
+          # 因此不允许“部分失败继续”，必须立即中止。按目标路径判定，与 manifest 第一列一致。
           critical_dests=(
               Ruleset/Surge/Temporary/Ads_All.list
               Ruleset/Surge/Temporary/Ads_BanAD.list
@@ -272,7 +272,7 @@ jobs:
               Ruleset/Surge/Temporary/Ads_Tracking.list
           )
 
-          echo "开始并发下载（并行度 ${DOWNLOAD_PARALLEL}）..."
+          echo "开始并发下载（并行度 ${DOWNLOAD_PARALLEL}）……"
           # xargs 在有失败项时返回 123，这里用 || true 吞掉，改为按日志统计。
           # 单引号是必要的：$1 由子 bash 自行展开，外层 shell 不得提前插值。
           # shellcheck disable=SC2016
@@ -296,7 +296,7 @@ jobs:
               exit 1
           fi
           # 关键源失败必须中止：合并后的 Ads_Block 会缺少来源而缩水，
-          # 这是"部分失败继续"策略下最危险的情况。
+          # 这是“部分失败继续”策略下最危险的情况。
           critical_hit=""
           for dest in "${critical_dests[@]}"; do
               if awk -F'\t' -v d="$dest" '$1==d{found=1} END{exit !found}' "$fail_log"; then
@@ -322,11 +322,11 @@ jobs:
               : > "$output"
               for file in "$@"; do
                   if [[ -s "$file" ]]; then
-                      echo "  合并: $file"
+                      echo "  合并：$file"
                       cat "$file" >> "$output"
                       echo "" >> "$output"
                   else
-                      echo "  缺失: $file"
+                      echo "  缺失：$file"
                   fi
               done
           }
@@ -420,7 +420,7 @@ jobs:
           run_ts="$(date +'%Y-%m-%d %H:%M:%S')"
           # 上一步生成的基线快照（路径 -> 旧时间戳 / 旧正文指纹）
           snapshot="${SNAPSHOT:?未找到快照文件，请检查上一步是否执行}"
-          echo "本次运行时间戳: ${run_ts}"
+          echo "本次运行时间戳：${run_ts}"
 
           for file in Ruleset/Surge/**/*.list Ruleset/mihomo/Block/*.list; do
               [[ -f "$file" ]] || continue
@@ -466,7 +466,7 @@ jobs:
               sed -i -E '/^[+*]\./s/^[+*]\./DOMAIN-SUFFIX,/' "$file"
               sed -i '/^\./s/^\./DOMAIN-SUFFIX,/' "$file"
 
-              # 6. 兜底：仅对"看起来像域名"的行补 DOMAIN, 前缀
+              # 6. 兜底：仅对“看起来像域名”的行补 DOMAIN, 前缀
               sed -i -E '/^[A-Za-z0-9_*.-]+(:[0-9]+)?$/s/^/DOMAIN,/' "$file"
 
               # 7. 丢弃既无逗号、又不像域名/IP 的残留行（YAML 头、payload: 等）
@@ -538,7 +538,7 @@ jobs:
               } > "$file.tmp"
               mv -f "$file.tmp" "$file"
 
-              echo "完成: $file (${line_count} 条, 更新于 ${updated})"
+              echo "完成：$file（${line_count} 条，更新于 ${updated}）"
           done
 
       - name: 生成 Surge 广告模块
@@ -708,13 +708,21 @@ jobs:
 
           echo "time=$(date +'%Y-%m-%d %H:%M:%S')" >> "$GITHUB_ENV"
 
+          # 计算运行耗时（秒）：从运行开始到当前，含排队时间；epoch 相减与时区无关，解析异常时兜底为 0
+          start_epoch="$(date -d "${{ github.run_started_at }}" +%s 2>/dev/null || echo "")"
+          if [[ -n "${start_epoch}" ]]; then
+              elapsed=$(( $(date +%s) - start_epoch ))
+              if (( elapsed < 0 )); then elapsed=0; fi
+          else
+              elapsed=0
+          fi
+          echo "elapsed=${elapsed}" >> "$GITHUB_ENV"
+
           if [[ "${changed:-false}" == "true" ]]; then
               {
                   echo "diff_text<<__EOF__"
                   echo "📈 <b>变更详细</b>"
-                  echo "➕ 新增: ${added:-0}"
-                  echo "✏️ 修改: ${modified:-0}"
-                  echo "❌ 删除: ${deleted:-0}"
+                  echo "✏️ 更新：${modified:-0}"
                   echo ""
                   echo "📂 <b>变更文件</b>"
                   echo "<pre>${files:-}</pre>"
@@ -737,13 +745,14 @@ jobs:
           message: |
             📢 <b>GitHub Actions 自动化任务通知</b>
 
-            ✉️ 标题: Surge 上游规则模块拉取
-            📦 仓库: ${{ github.repository }}
-            ⏰ 时间: ${{ env.time || 'N/A' }}
+            ✉️ 标题：Surge 上游规则模块拉取
+            📦 仓库：${{ github.repository }}
+            ⏰ 时间：${{ env.time || 'N/A' }}
+            ⏱️ 耗时：${{ env.elapsed || '0' }}秒
 
-            🎯 状态: ${{ job.status == 'success' && '恭喜你! 任务成功' || '很遗憾! 任务失败' }}
-            📊 更新: ${{ env.changed == 'true' && '本次有更新' || (env.changed == 'false' && '本次无更新' || '未执行到提交阶段') }}
-            ⚠️ 下载失败: ${{ env.failures || '0' }} 个
+            🎯 状态：${{ job.status == 'success' && '恭喜你！任务成功' || '很遗憾！任务失败' }}
+            📊 更新：${{ env.changed == 'true' && '本次有更新' || (env.changed == 'false' && '本次无更新' || '未执行到提交阶段') }}
+            ⚠️ 下载失败：${{ env.failures || '0' }} 个
 
             ${{ env.diff_text }}
 
